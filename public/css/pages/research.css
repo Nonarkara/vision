@@ -1,0 +1,21 @@
+/* /research — a timeline of papers. Only what vision.css lacks. */
+
+.era h2, #here h2, #open h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }
+.cite-rule { margin: 16px 0 0; max-width: 46ch; }
+
+/* One row per paper: the year in the margin, the work beside it. No rules, only space. */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(28px, 3vw, 44px); }
+.timeline > li { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 4px 24px; margin: 0; max-width: 72ch; }
+.timeline .year { font-size: var(--body); font-weight: 600; line-height: 1.3; }
+.timeline h3 { margin: 0 0 4px; }
+.timeline cite { font-style: normal; }
+.timeline .micro { margin: 0 0 8px; }
+.timeline p:last-child { margin-bottom: 0; }
+@media (max-width: 520px) { .timeline > li { grid-template-columns: 1fr; } }
+
+/* "Used here": a quiet tag, never Peach Red — that colour is only for what the machine sees. */
+.used { display: inline-block; margin-left: 8px; padding: 2px 8px; background: var(--field); color: var(--field-text); white-space: nowrap; }
+.field-quiet .used { background: var(--olive); color: var(--naples); }
+
+.questions { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.questions h3 { margin-top: 0; }

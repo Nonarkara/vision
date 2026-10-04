@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/research.css?v={{v}}">
+<title>Research · งานวิจัย — Vision</title>
+<meta name="description" content="Sixty years of teaching machines to see: the papers that mattered, from Roberts's blocks world to Segment Anything, the ones this site runs on, and the questions computer vision still cannot answer.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">06 · งานวิจัย</span><span class="en" lang="en">06 · Research</span></span>
+      <h1><span class="th" lang="th">หกสิบปี<br>ของการสอนเครื่อง<br>ให้มองเห็น</span><span class="en" lang="en">Sixty years<br>of teaching<br>machines to see</span></h1>
+    </div>
+    <div>
+      <p class="lede th" lang="th">จากภาพถ่ายบล็อกไม้ในปี 1963 ถึงแบบจำลองที่ตัดขอบอะไรก็ได้ที่คุณชี้ นี่คืองานวิจัยที่เปลี่ยนวิธีคิด งานที่เว็บนี้ใช้อยู่จริง และคำถามที่ยังไม่มีใครตอบได้</p>
+      <p class="lede en" lang="en">From a photograph of blocks in 1963 to a model that outlines anything you point at: the papers that changed the thinking, the ones this site actually runs, and the questions nobody has answered yet.</p>
+      <p class="micro cite-rule"><span class="th" lang="th">ทุกงานในหน้านี้มีอยู่จริง เราอ้างผู้เขียน ปี และที่ตีพิมพ์ ถ้าไม่แน่ใจในรายละเอียดใด เราตัดทิ้ง ชื่องานคงไว้เป็นภาษาอังกฤษตามต้นฉบับ</span><span class="en" lang="en">Every work on this page is real. We give authors, year and venue; where we were not sure of a detail, we left it out.</span></p>
+    </div>
+  </section>
+
+  <section class="chapter era" id="by-hand" aria-labelledby="era1-h">
+    <header><span class="chapter-no">01 · 1959–1998</span><h2 id="era1-h"><span class="th" lang="th">กฎที่คนเขียนเอง</span><span class="en" lang="en">Rules written by hand</span></h2>
+      <p class="micro"><span class="th" lang="th">คนบอกเครื่องว่าขอบคืออะไร รูปร่างคืออะไร แล้วหวังว่าโลกจะเรียบง่ายพอ</span><span class="en" lang="en">People told the machine what an edge is and what a shape is, and hoped the world would be simple enough.</span></p></header>
+    <div class="chapter-body">
+      <ol class="timeline">
+        <li><span class="year num">1959</span><div>
+          <h3><cite lang="en">Receptive fields of single neurones in the cat's striate cortex</cite></h3>
+          <p class="micro">David H. Hubel, Torsten N. Wiesel · The Journal of Physiology</p>
+          <p class="th" lang="th">เซลล์ประสาทในสมองส่วนการมองเห็นของแมวตอบสนองต่อขอบที่เอียงบางมุม ความคิดที่ว่าตัวตรวจจับง่าย ๆ ซ้อนกันเป็นตัวตรวจจับที่ซับซ้อนขึ้น กลายเป็นภาพตั้งต้นของคอมพิวเตอร์วิทัศน์ และต่อมาคือโครงข่ายคอนโวลูชัน</p>
+          <p class="en" lang="en">Neurons in a cat's visual cortex fire for edges at particular angles. Simple detectors stacked into more complex ones became the founding picture of machine vision — and, later, of convolutional networks.</p>
+        </div></li>
+        <li><span class="year num">1963</span><div>
+          <h3><cite lang="en">Machine Perception of Three-Dimensional Solids</cite></h3>
+          <p class="micro">Lawrence G. Roberts · PhD thesis, MIT</p>
+          <p class="th" lang="th">“โลกของบล็อก” จากภาพถ่ายทรงเรขาคณิตง่าย ๆ หาขอบ จับคู่กับรูปทรงสามมิติที่รู้จัก แล้วสร้างฉากกลับขึ้นมา ได้ผลเพราะโลกในภาพมีแต่บล็อก</p>
+          <p class="en" lang="en">The blocks world. From a photograph of simple solids, find the edges, match them to known 3D shapes, rebuild the scene. It worked because the world in the picture was made of blocks.</p>
+        </div></li>
+        <li><span class="year num">1966</span><div>
+          <h3><cite lang="en">The Summer Vision Project</cite></h3>
+          <p class="micro">Seymour Papert · MIT AI Memo 100</p>
+          <p class="th" lang="th">แผนให้นักศึกษาช่วงปิดภาคฤดูร้อนสร้างส่วนสำคัญของระบบการมองเห็นให้เสร็จ คนจำงานนี้ได้เพราะมันประเมินความยากต่ำไปมาก ปัญหานี้ยังไม่จบจนทุกวันนี้</p>
+          <p class="en" lang="en">A plan for summer students to build a significant part of a visual system. It is remembered for how badly it underestimated the problem, which is still open.</p>
+        </div></li>
+        <li><span class="year num">1979</span><div>
+          <h3><cite lang="en">A Threshold Selection Method from Gray-Level Histograms</cite></h3>
+          <p class="micro">Nobuyuki Otsu · IEEE Transactions on Systems, Man, and Cybernetics <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
+          <p class="th" lang="th">เลือกค่าขีดแบ่งที่แยกพิกเซลมืดกับสว่างได้ขาดที่สุด ยังเป็นปุ่ม “อัตโนมัติ” ในเครื่องมือนับไม่ถ้วน รวมถึง<a href="/everyday#bench">เครื่องมือของเรา</a></p>
+          <p class="en" lang="en">Choose the threshold that best separates dark pixels from light. Still the “auto” button in countless tools, including <a href="/everyday#bench">ours</a>.</p>
+        </div></li>
+        <li><span class="year num">1980</span><div>
+          <h3><cite lang="en">Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position</cite></h3>
+          <p class="micro">Kunihiko Fukushima · Biological Cybernetics</p>
+          <p class="th" lang="th">ชั้นของเซลล์แบบง่ายและแบบซับซ้อนตามแนวคิดของ Hubel กับ Wiesel ที่จำรูปแบบได้ไม่ว่าจะอยู่ตรงไหนของภาพ คือโครงสร้างของโครงข่ายคอนโวลูชัน ก่อนจะมีวิธีฝึกที่ดี</p>
+          <p class="en" lang="en">Layers of simple and complex cells, after Hubel and Wiesel, that recognise a pattern wherever it appears. The shape of a convolutional network, before there was a good way to train one.</p>
+        </div></li>
+        <li><span class="year num">1982</span><div>
+          <h3><cite lang="en">Vision: A Computational Investigation into the Human Representation and Processing of Visual Information</cite></h3>
+          <p class="micro">David Marr · W. H. Freeman (book, published after his death in 1980)</p>
+          <p class="th" lang="th">มองการมองเห็นเป็นสามระดับ: คำนวณอะไรและเพื่ออะไร คำนวณอย่างไร และบนฮาร์ดแวร์แบบไหน การเห็นคือการสร้างคำอธิบาย จากขอบ สู่ภาพร่าง สู่รูปทรงสามมิติ เป็นกรอบคิดที่นักวิจัยทั้งรุ่นใช้ถกเถียง</p>
+          <p class="en" lang="en">Vision at three levels: what is computed and why, how, and in what hardware. Seeing as building descriptions — from edges, to a sketch, to 3D shape. The framework a generation of researchers argued with.</p>
+        </div></li>
+        <li><span class="year num">1986</span><div>
+          <h3><cite lang="en">A Computational Approach to Edge Detection</cite></h3>
+          <p class="micro">John Canny · IEEE Transactions on Pattern Analysis and Machine Intelligence</p>
+          <p class="th" lang="th">ตัวหาขอบที่ออกแบบจากเป้าหมายที่ประกาศไว้ชัด: เจอขอบจริง วางตำแหน่งแม่น และทำเครื่องหมายขอบละครั้งเดียว เลนส์ “ขอบ” ของเราใช้ตัวดำเนินการ Sobel ที่เก่ากว่าและง่ายกว่า ส่วนของ Canny คือสิ่งที่ใช้เมื่อความแม่นสำคัญ</p>
+          <p class="en" lang="en">Edge detection derived from stated goals: find real edges, place them accurately, mark each one once. Our Edges lens uses the older, simpler Sobel operator; Canny's is what you reach for when it matters.</p>
+        </div></li>
+        <li><span class="year num">1989</span><div>
+          <h3><cite lang="en">Backpropagation Applied to Handwritten Zip Code Recognition</cite></h3>
+          <p class="micro">Yann LeCun et al. · Neural Computation</p>
+          <p class="th" lang="th">โครงข่ายคอนโวลูชันที่ฝึกทั้งระบบด้วย backpropagation อ่านรหัสไปรษณีย์ลายมือบนจดหมาย ต่อมา LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998) ถูกนำไปใช้อ่านเช็คจริง</p>
+          <p class="en" lang="en">A convolutional network trained end to end with backpropagation, reading handwritten zip codes on mail. Its successor, LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998), went on to read real cheques.</p>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter era field-quiet" id="features" aria-labelledby="era2-h">
+    <header><span class="chapter-no">02 · 1999–2011</span><h2 id="era2-h"><span class="th" lang="th">ลักษณะที่คนออกแบบ</span><span class="en" lang="en">Features designed by hand</span></h2>
+      <p class="micro"><span class="th" lang="th">คนออกแบบว่าจะวัดอะไร เครื่องเรียนว่าจะตัดสินอย่างไร และชุดข้อมูลเริ่มใหญ่ขึ้น</span><span class="en" lang="en">People designed what to measure; machines learned how to decide; datasets grew.</span></p></header>
+    <div class="chapter-body">
+      <ol class="timeline">
+        <li><span class="year num">2001</span><div>
+          <h3><cite lang="en">Rapid Object Detection using a Boosted Cascade of Simple Features</cite></h3>
+          <p class="micro">Paul Viola, Michael Jones · CVPR</p>
+          <p class="th" lang="th">ทดสอบสี่เหลี่ยมมืดสว่างเล็ก ๆ นับพันแบบ คำนวณเร็วด้วย “ภาพปริพันธ์” แล้วเรียงต่อกันจนภาพส่วนใหญ่ถูกตัดทิ้งในไม่กี่ขั้น ทำให้กล้องถ่ายรูปทั่วไปหาใบหน้าได้ นี่คือการตรวจว่า “มีใบหน้า” ไม่ใช่การจำว่าเป็นใคร</p>
+          <p class="en" lang="en">Thousands of tiny light-and-dark rectangle tests, made fast by an “integral image” and chained so most of the picture is rejected in a few steps. It put face detection into consumer cameras. Detection — that a face is there — not recognition of whose.</p>
+        </div></li>
+        <li><span class="year num">2004</span><div>
+          <h3><cite lang="en">Distinctive Image Features from Scale-Invariant Keypoints</cite></h3>
+          <p class="micro">David G. Lowe · International Journal of Computer Vision (first presented at ICCV 1999)</p>
+          <p class="th" lang="th">SIFT: หาจุดที่ยังจำได้แม้ภาพจะถูกย่อ หมุน หรือเปลี่ยนแสง แล้วอธิบายแต่ละจุดด้วยฮิสโทแกรมทิศทางของความชัน การต่อภาพพาโนรามาและการจับคู่วัตถุอาศัยวิธีนี้อยู่นับสิบปี</p>
+          <p class="en" lang="en">SIFT: find points that stay recognisable when the picture is scaled, rotated or relit, and describe each with a histogram of gradient directions. Panorama stitching and object matching ran on it for a decade.</p>
+        </div></li>
+        <li><span class="year num">2005</span><div>
+          <h3><cite lang="en">Histograms of Oriented Gradients for Human Detection</cite></h3>
+          <p class="micro">Navneet Dalal, Bill Triggs · CVPR</p>
+          <p class="th" lang="th">HOG: อธิบายหน้าต่างภาพด้วยทิศทางของขอบ แล้วให้ตัวจำแนกเชิงเส้นตัดสินว่า “คนหรือไม่ใช่” เป็นตัวตรวจจับคนเดินถนนมาตรฐานอยู่หลายปี</p>
+          <p class="en" lang="en">HOG: describe a window by which way its edges point, then let a linear classifier decide “person or not”. The standard pedestrian detector for years.</p>
+        </div></li>
+        <li><span class="year num">2009</span><div>
+          <h3><cite lang="en">ImageNet: A Large-Scale Hierarchical Image Database</cite></h3>
+          <p class="micro">Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, Li Fei-Fei · CVPR <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
+          <p class="th" lang="th">ภาพหลายล้านภาพ จัดหมวดตามโครงสร้างคำของ WordNet โดยแรงงานออนไลน์ การแข่งขัน 1,000 หมวดของมันกลายเป็นสนามที่เปลี่ยนทั้งวงการ MobileNetV2 ของเราเรียนรู้การมองจากชุดนี้</p>
+          <p class="en" lang="en">Millions of photos sorted into WordNet's categories by crowd workers. Its 1,000-class challenge became the race that changed the field. Our MobileNetV2 learned to see from it.</p>
+        </div></li>
+        <li><span class="year num">2010</span><div>
+          <h3><cite lang="en">The PASCAL Visual Object Classes (VOC) Challenge</cite></h3>
+          <p class="micro">Mark Everingham, Luc Van Gool, Christopher K. I. Williams, John Winn, Andrew Zisserman · International Journal of Computer Vision</p>
+          <p class="th" lang="th">วัตถุยี่สิบประเภท กรอบที่คนวาดเอง และวิธีให้คะแนนตัวตรวจจับที่ทุกคนยอมรับ ทำให้ “การตรวจจับ” วัดผลเทียบกันได้</p>
+          <p class="en" lang="en">Twenty object classes, boxes drawn by hand, and an agreed way to score detectors: the benchmark that made detection measurable.</p>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter era" id="learned" aria-labelledby="era3-h">
+    <header><span class="chapter-no">03 · 2012–2018</span><h2 id="era3-h"><span class="th" lang="th">ลักษณะที่เครื่องเรียนเอง</span><span class="en" lang="en">Features learned</span></h2>
+      <p class="micro"><span class="th" lang="th">ข้อมูลมากพอ การ์ดจอแรงพอ และเครื่องเริ่มออกแบบสิ่งที่ตัวเองวัดเอง</span><span class="en" lang="en">Enough data, enough graphics cards, and the machine began designing its own measurements.</span></p></header>
+    <div class="chapter-body">
+      <ol class="timeline">
+        <li><span class="year num">2012</span><div>
+          <h3><cite lang="en">ImageNet Classification with Deep Convolutional Neural Networks</cite></h3>
+          <p class="micro">Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton · NeurIPS (then NIPS)</p>
+          <p class="th" lang="th">AlexNet: โครงข่ายคอนโวลูชันลึกที่ฝึกบนการ์ดจอสองใบ ชนะการแข่งขัน ImageNet แบบทิ้งห่าง ภายในไม่กี่ปี ระบบการมองเห็นเกือบทั้งหมดเปลี่ยนมาให้เครื่องเรียนลักษณะเอง</p>
+          <p class="en" lang="en">AlexNet: a deep convolutional network trained on two graphics cards won the ImageNet challenge by a wide margin. Within a few years nearly every vision system learned its features instead of having them designed.</p>
+        </div></li>
+        <li><span class="year num">2014</span><div>
+          <h3><cite lang="en">Rich Feature Hierarchies for Accurate Object Detection and Semantic Segmentation</cite></h3>
+          <p class="micro">Ross Girshick, Jeff Donahue, Trevor Darrell, Jitendra Malik · CVPR</p>
+          <p class="th" lang="th">R-CNN: เสนอบริเวณที่น่าสนใจ ส่งแต่ละบริเวณเข้าโครงข่าย แล้วจำแนก ช้า แต่พิสูจน์ว่าลักษณะที่เรียนเองชนะในงานตรวจจับด้วย</p>
+          <p class="en" lang="en">R-CNN: propose regions, run a network on each, classify. Slow — but it showed learned features win at detection too.</p>
+        </div></li>
+        <li><span class="year num">2014</span><div>
+          <h3><cite lang="en">Microsoft COCO: Common Objects in Context</cite></h3>
+          <p class="micro">Tsung-Yi Lin et al. · ECCV <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
+          <p class="th" lang="th">ภาพชีวิตประจำวันที่มีวัตถุหลายชิ้น แต่ละชิ้นถูกวาดขอบด้วยมือ ใน 80 ประเภท ตัวตรวจจับของเราฝึกจากชุดนี้ มันจึงรู้จัก “คน” “รถยนต์” “มอเตอร์ไซค์” และ “เรือ” แต่ไม่รู้จัก “ตุ๊กตุ๊ก”</p>
+          <p class="en" lang="en">Everyday scenes with many objects, each outlined by hand, in 80 categories. Our detector was trained on it, which is why it knows “person”, “car”, “motorcycle” and “boat” — and not “tuk-tuk”.</p>
+        </div></li>
+        <li><span class="year num">2015</span><div>
+          <h3><cite lang="en">Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks</cite></h3>
+          <p class="micro">Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun · NeurIPS (then NIPS)</p>
+          <p class="th" lang="th">ให้โครงข่ายเสนอบริเวณเอง ตัวตรวจจับสองขั้นที่แม่นยำ และเป็นมาตรฐานอ้างอิงอยู่หลายปี</p>
+          <p class="en" lang="en">The network proposes its own regions. Accurate two-stage detection, and the reference point for years.</p>
+        </div></li>
+        <li><span class="year num">2015</span><div>
+          <h3><cite lang="en">U-Net: Convolutional Networks for Biomedical Image Segmentation</cite></h3>
+          <p class="micro">Olaf Ronneberger, Philipp Fischer, Thomas Brox · MICCAI</p>
+          <p class="th" lang="th">ติดป้ายทุกพิกเซลจากภาพฝึกไม่กี่ภาพ เป็นรูปแบบเบื้องหลังงานแบ่งส่วนภาพทางการแพทย์จำนวนมากนับจากนั้น</p>
+          <p class="en" lang="en">Label every pixel, from few training images: the shape behind much of medical image segmentation since.</p>
+        </div></li>
+        <li><span class="year num">2016</span><div>
+          <h3><cite lang="en">Deep Residual Learning for Image Recognition</cite></h3>
+          <p class="micro">Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun · CVPR</p>
+          <p class="th" lang="th">ResNet: ให้แต่ละบล็อกเรียนแค่ “ส่วนที่ต้องแก้” จากข้อมูลที่เข้ามา แล้วโครงข่ายร้อยกว่าชั้นก็ฝึกได้ ทางลัดแบบนี้อยู่ทุกที่ในปัจจุบัน รวมถึงใน MobileNetV2</p>
+          <p class="en" lang="en">ResNet: let each block learn only a correction to its input, and networks of over a hundred layers train. Skip connections are now everywhere — including inside MobileNetV2.</p>
+        </div></li>
+        <li><span class="year num">2016</span><div>
+          <h3><cite lang="en">SSD: Single Shot MultiBox Detector</cite></h3>
+          <p class="micro">Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu, Alexander C. Berg · ECCV <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
+          <p class="th" lang="th">มองครั้งเดียว: ตารางกรอบตั้งต้นหลายขนาด แต่ละกรอบได้คะแนนทุกประเภท ไม่มีขั้นเสนอบริเวณแยก จึงเร็ว เป็นส่วนหัวของตัวตรวจจับของเรา</p>
+          <p class="en" lang="en">One look: a grid of default boxes at several scales, each scored for every class. No separate proposal step, so it is fast. The head of our detector.</p>
+        </div></li>
+        <li><span class="year num">2016</span><div>
+          <h3><cite lang="en">You Only Look Once: Unified, Real-Time Object Detection</cite></h3>
+          <p class="micro">Joseph Redmon, Santosh Divvala, Ross Girshick, Ali Farhadi · CVPR</p>
+          <p class="th" lang="th">YOLO: มองการตรวจจับเป็นการคำนวณครั้งเดียวจากพิกเซลไปเป็นกรอบและประเภท ทันเวลาจริง ตระกูล YOLO ยังพัฒนาต่อมาอีกหลายรุ่นโดยหลายทีม</p>
+          <p class="en" lang="en">YOLO: detection as a single pass from pixels to boxes and classes, in real time. The YOLO family has continued through many versions and many authors since.</p>
+        </div></li>
+        <li><span class="year num">2017</span><div>
+          <h3><cite lang="en">Mask R-CNN</cite></h3>
+          <p class="micro">Kaiming He, Georgia Gkioxari, Piotr Dollár, Ross Girshick · ICCV</p>
+          <p class="th" lang="th">เพิ่มกิ่งที่วาดขอบวัตถุแต่ละชิ้นทีละพิกเซล: การแบ่งส่วนรายวัตถุ</p>
+          <p class="en" lang="en">Add a branch that outlines each object, pixel by pixel: instance segmentation.</p>
+        </div></li>
+        <li><span class="year num">2018</span><div>
+          <h3><cite lang="en">MobileNetV2: Inverted Residuals and Linear Bottlenecks</cite></h3>
+          <p class="micro">Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, Liang-Chieh Chen · CVPR <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
+          <p class="th" lang="th">โครงข่ายที่ออกแบบมาเพื่อโทรศัพท์ คอนโวลูชันราคาถูกแบบ depthwise กับคอขวดที่บาง คือเหตุผลที่เว็บนี้รันตัวตรวจจับในเบราว์เซอร์ของคุณได้ งานเดียวกันนี้ยังเสนอ SSDLite ส่วนหัว SSD แบบเบาที่ตัวตรวจจับของเราใช้</p>
+          <p class="en" lang="en">A network designed for phones: cheap depthwise convolutions and thin bottlenecks. It is why this site can run a detector in your browser. The same paper introduces SSDLite, the lighter SSD head our detector uses.</p>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter era field-quiet" id="foundation" aria-labelledby="era4-h">
+    <header><span class="chapter-no">04 · 2021–</span><h2 id="era4-h"><span class="th" lang="th">แบบจำลองเดียว หลายงาน</span><span class="en" lang="en">One model, many tasks</span></h2>
+      <p class="micro"><span class="th" lang="th">ข้อมูลระดับอินเทอร์เน็ต และแบบจำลองที่ถูกถามเรื่องที่ไม่เคยถูกสอนได้</span><span class="en" lang="en">Internet-scale data, and models that can be asked about things nobody taught them.</span></p></header>
+    <div class="chapter-body">
+      <ol class="timeline">
+        <li><span class="year num">2021</span><div>
+          <h3><cite lang="en">An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</cite></h3>
+          <p class="micro">Alexey Dosovitskiy et al. · ICLR</p>
+          <p class="th" lang="th">ViT: ตัดภาพเป็นชิ้นสี่เหลี่ยม ปฏิบัติต่อแต่ละชิ้นเหมือนคำ แล้วใช้ทรานส์ฟอร์มเมอร์ ไม่มีคอนโวลูชันเลย และเมื่อข้อมูลมากพอก็ทำได้เทียบเท่าหรือดีกว่า</p>
+          <p class="en" lang="en">ViT: cut the picture into patches, treat them like words, use a transformer. No convolutions at all — and given enough data, it matches or beats them.</p>
+        </div></li>
+        <li><span class="year num">2021</span><div>
+          <h3><cite lang="en">Learning Transferable Visual Models From Natural Language Supervision</cite></h3>
+          <p class="micro">Alec Radford et al. · ICML</p>
+          <p class="th" lang="th">CLIP: เรียนจากคู่ภาพกับคำบรรยายจากเว็บหลายร้อยล้านคู่ ถามถึงหมวดที่ไม่เคยมีใครสอนได้ และรับเอาทุกอย่างที่เว็บพูดถึงโลกมาด้วย</p>
+          <p class="en" lang="en">CLIP: learn from hundreds of millions of image–caption pairs from the web. It can be asked about categories nobody trained it on — and it inherits whatever the web says about the world.</p>
+        </div></li>
+        <li><span class="year num">2023</span><div>
+          <h3><cite lang="en">Segment Anything</cite></h3>
+          <p class="micro">Alexander Kirillov et al. · ICCV</p>
+          <p class="th" lang="th">SAM: แบบจำลองที่วาดขอบวัตถุอะไรก็ได้ที่คุณชี้ ฝึกจากขอบวัตถุกว่าพันล้านชิ้น ซึ่งส่วนหนึ่งมันช่วยสร้างขึ้นเอง</p>
+          <p class="en" lang="en">SAM: a model that outlines any object you point at, trained on over a billion masks — many of which it helped produce.</p>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="chapter" id="here" aria-labelledby="here-h">
+    <header><span class="chapter-no">05</span><h2 id="here-h"><span class="th" lang="th">สิ่งที่เว็บนี้ใช้</span><span class="en" lang="en">What this site runs</span></h2></header>
+    <div class="chapter-body">
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th><span class="th" lang="th">ที่ไหน</span><span class="en" lang="en">Where</span></th><th><span class="th" lang="th">วิธี</span><span class="en" lang="en">Method</span></th><th><span class="th" lang="th">งานต้นทาง</span><span class="en" lang="en">From</span></th><th><span class="th" lang="th">ฝึกจาก</span><span class="en" lang="en">Trained on</span></th></tr></thead>
+          <tbody>
+            <tr><td><span class="th" lang="th">เลนส์ “สิ่งของ” และการนับรถ นับคน</span><span class="en" lang="en">The Objects lens; every count of cars and people</span></td><td>SSDLite + MobileNetV2</td><td>Liu et al. 2016; Sandler et al. 2018</td><td>COCO (Lin et al. 2014)</td></tr>
+            <tr><td><span class="th" lang="th">ลายนิ้วมือตัวเลขใน<a href="/train">ห้องฝึก</a></span><span class="en" lang="en">Fingerprints in <a href="/train">the training room</a></span></td><td>MobileNetV2 1.0 · 224</td><td>Sandler et al. 2018</td><td>ImageNet (Deng et al. 2009)</td></tr>
+            <tr><td><span class="th" lang="th">เลนส์ “ขอบ”</span><span class="en" lang="en">The Edges lens</span></td><td><span class="th" lang="th">ตัวดำเนินการ Sobel</span><span class="en" lang="en">Sobel operator</span></td><td><span class="th" lang="th">Sobel และ Feldman, 1968</span><span class="en" lang="en">Sobel and Feldman, 1968</span></td><td>—</td></tr>
+            <tr><td><span class="th" lang="th">ค่าขีดแบ่งอัตโนมัติ</span><span class="en" lang="en">Automatic threshold</span></td><td><span class="th" lang="th">วิธีของ Otsu</span><span class="en" lang="en">Otsu's method</span></td><td>Otsu 1979</td><td>—</td></tr>
+            <tr><td><span class="th" lang="th">เลนส์ “ขยับ”</span><span class="en" lang="en">The Motion lens</span></td><td><span class="th" lang="th">ลบภาพต่อภาพ</span><span class="en" lang="en">Frame differencing</span></td><td><span class="th" lang="th">เทคนิคพื้นฐาน</span><span class="en" lang="en">A classic technique</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="prose th" lang="th">ชุดข้อมูลทั้งสองไม่ได้ถ่ายในประเทศไทย ภาพใน COCO มาจาก Flickr ถนนไทย รถไทย และฝนเมืองร้อนจึงไม่ใช่สิ่งที่แบบจำลองเห็นบ่อยที่สุดตอนฝึก นี่คือเหตุผลหนึ่งที่เราแสดงความมั่นใจทุกครั้ง ดูขนาดไฟล์และที่มาของน้ำหนักได้ที่<a href="/system#models">หน้าระบบ</a></p>
+      <p class="prose en" lang="en">Neither dataset was photographed in Thailand; COCO's pictures come from Flickr. Thai roads, Thai vehicles and tropical rain are not what these models saw most while training — one reason we always show their confidence. Sizes and the source of the weights are on <a href="/system#models">the system page</a>.</p>
+    </div>
+  </section>
+
+  <section class="chapter field-ink" id="open" aria-labelledby="open-h">
+    <header><span class="chapter-no">06</span><h2 id="open-h"><span class="th" lang="th">สิ่งที่เรายังตอบไม่ได้</span><span class="en" lang="en">What we still cannot answer</span></h2></header>
+    <div class="chapter-body questions">
+      <div class="prose">
+        <h3><span class="th" lang="th">ความทนทาน</span><span class="en" lang="en">Robustness</span></h3>
+        <p class="th" lang="th">โครงข่ายที่ชนะคนในชุดทดสอบ อาจพังเพราะฝน ภาพเบลอ หรือสติกเกอร์แผ่นเดียว การเปลี่ยนพิกเซลเพียงเล็กน้อยจนตามองไม่เห็นก็พลิกคำตอบได้ (Szegedy et al., ICLR 2014; Goodfellow, Shlens, Szegedy, ICLR 2015) สัญญาณรบกวน ความเบลอ หมอก และการบีบอัดภาพยังทำให้ความแม่นยำลดลงมาก (Hendrycks, Dietterich, ICLR 2019) และโครงข่ายที่ฝึกบน ImageNet พึ่งพื้นผิวมากกว่ารูปร่าง (Geirhos et al., ICLR 2019) ลองดูตัวตรวจจับของเรากับกล้องตอนฝนตกกลางคืน</p>
+        <p class="en" lang="en">Networks that beat people on a test set can fail on rain, blur or a single sticker. Pixel changes too small to see can flip an answer (Szegedy et al., ICLR 2014; Goodfellow, Shlens, Szegedy, ICLR 2015). Noise, blur, fog and compression still cost a lot of accuracy (Hendrycks and Dietterich, ICLR 2019). And ImageNet-trained networks lean on texture more than shape (Geirhos et al., ICLR 2019). Watch our detector on a rainy camera at night.</p>
+      </div>
+      <div class="prose">
+        <h3><span class="th" lang="th">อคติ</span><span class="en" lang="en">Bias</span></h3>
+        <p class="th" lang="th">แบบจำลองรู้จักโลกเท่าที่ข้อมูลแสดงให้มันเห็น Buolamwini กับ Gebru พบว่าระบบจำแนกเพศเชิงพาณิชย์แม่นยำน้อยกว่ามากกับผู้หญิงผิวเข้มเมื่อเทียบกับผู้ชายผิวขาว (Gender Shades, FAT* 2018) ชุดข้อมูลก็พกการตัดสินใจของคนสร้างมาด้วย หมวด “คน” ของ ImageNet ต้องถูกกรองใหม่หลายปีต่อมา (Yang et al., FAT* 2020)</p>
+        <p class="en" lang="en">A model knows the world its data showed it. Buolamwini and Gebru found commercial gender classifiers far less accurate for darker-skinned women than for lighter-skinned men (Gender Shades, FAT* 2018). Datasets carry their makers' choices: ImageNet's “person” categories had to be filtered years later (Yang et al., FAT* 2020).</p>
+      </div>
+      <div class="prose">
+        <h3><span class="th" lang="th">ความเป็นส่วนตัว</span><span class="en" lang="en">Privacy</span></h3>
+        <p class="th" lang="th">กล้องในที่สาธารณะเห็นคนที่ไม่ได้ยินยอมให้ศึกษา มีเทคนิคช่วยอยู่ เช่น เบลอภาพ นับโดยไม่เก็บ หรือประมวลผลบนเครื่องของผู้ใช้ แต่ยังไม่มีข้อตกลงร่วมกันว่า “มีประโยชน์” จบตรงไหนและ “การสอดแนม” เริ่มตรงไหน และกฎหมายแต่ละประเทศก็ต่างกัน คำตอบของเราอยู่ในการออกแบบ: นับ ไม่ระบุตัว ประมวลผลบนเครื่องคุณ และไม่เก็บอะไร ดู<a href="/system">ระบบ</a>และ<a href="/legal">ข้อกฎหมาย</a></p>
+        <p class="en" lang="en">Cameras in public places see people who never agreed to be studied. Techniques help — blurring, counting without storing, running on the user's device — but there is no agreement on where useful ends and surveillance begins, and laws differ by country. Our answer is in the design: count, never identify; process on your device; keep nothing. See <a href="/system">the system</a> and <a href="/legal">the fine print</a>.</p>
+      </div>
+      <div class="prose">
+        <h3><span class="th" lang="th">พลังงาน</span><span class="en" lang="en">Energy</span></h3>
+        <p class="th" lang="th">การฝึกแบบจำลองที่ใหญ่ที่สุดใช้การคำนวณมหาศาล และแนวโน้มคือใช้มากขึ้นเรื่อย ๆ (Schwartz, Dodge, Smith, Etzioni, “Green AI”, Communications of the ACM, 2020; Strubell, Ganesh, McCallum, ACL 2019 สำหรับแบบจำลองภาษา) ทางหนึ่งคือใช้แบบจำลองเล็กบนเครื่องที่คุณมีอยู่แล้ว ตัวตรวจจับของเราหนักราว 18 MB และรันบนชิปกราฟิกของอุปกรณ์คุณเมื่อทำได้</p>
+        <p class="en" lang="en">Training the largest models takes enormous computation, and the trend has been to use more (Schwartz, Dodge, Smith, Etzioni, “Green AI”, Communications of the ACM, 2020; Strubell, Ganesh, McCallum, ACL 2019, for language models). One answer is small models on devices people already own: our detector is about 18 MB and runs on your device's graphics chip when it can.</p>
+      </div>
+      <div class="prose">
+        <h3><span class="th" lang="th">การวัดผล</span><span class="en" lang="en">Evaluation</span></h3>
+        <p class="th" lang="th">คะแนนบนชุดทดสอบที่มีชื่อเสียงไม่เท่ากับการใช้งานได้จริง เมื่อสร้างชุดทดสอบ ImageNet ใหม่ด้วยวิธีเดิม ความแม่นยำของแบบจำลองที่ทดสอบลดลงหลายจุด (Recht, Roelofs, Schmidt, Shankar, ICML 2019) และชุดทดสอบเองก็มีป้ายผิด (Northcutt, Athalye, Mueller, NeurIPS 2021 Datasets and Benchmarks) เราจึงแสดงความมั่นใจทุกคำตอบ และไม่เคยถือว่า “ตรวจไม่พบ” คือ “ไม่มี”</p>
+        <p class="en" lang="en">A score on a famous test set is not the same as working in the world. Rebuilding ImageNet's test set the same way lowered the accuracy of the models tested by several points (Recht, Roelofs, Schmidt, Shankar, ICML 2019), and test sets contain wrong labels too (Northcutt, Athalye, Mueller, NeurIPS 2021 Datasets and Benchmarks). So we show confidence on every answer, and never treat “not detected” as “not there”.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/research.js?v={{v}}"></script>
+</body>
+</html>

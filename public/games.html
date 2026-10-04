@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/games.css?v={{v}}">
+<title>Games: you vs the machine · เกม: คนกับเครื่อง — Vision</title>
+<meta name="description" content="Three games against a real object detector: out-count it on a public camera, out-guess it from the fewest pixels, and use your own camera to fool it. Everything runs in your browser.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 04 · เกม</span><span class="en" lang="en">Room 04 · Games</span></span>
+      <h1><span class="th" lang="th">นับให้เก่งกว่า<br>ทายให้ไวกว่า<br>หลอกให้ได้</span><span class="en" lang="en">Out-count it.<br>Out-guess it.<br>Fool it.</span></h1>
+    </div>
+    <div>
+      <p class="lede th" lang="th">สามเกมกับเครื่องตรวจจับวัตถุตัวจริง ตัวเดียวกับที่ใช้ทั้งเว็บนี้ ไม่มีฝ่ายไหนเป็นเฉลย คุณจะเห็นว่าเครื่องเก่งตรงไหน พลาดตรงไหน และพลาดเพราะอะไร</p>
+      <p class="lede en" lang="en">Three games against a real object detector — the same one used across this site. Neither side is the answer key. You will see where the machine is good, where it slips, and why.</p>
+      <p class="micro games-privacy"><span class="th" lang="th">ทุกอย่างคำนวณในเบราว์เซอร์นี้ ภาพจากกล้องหรือรูปของคุณไม่ถูกส่งหรือบันทึกไว้ที่ไหน คะแนนสูงสุดเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span><span class="en" lang="en">Everything computes in this browser. Your camera and photos are never sent or saved anywhere. Best scores stay in this browser only.</span></p>
+    </div>
+  </header>
+
+  <!-- ── Game 1: Count race ─────────────────────────────────────────── -->
+  <section class="chapter" id="count" aria-labelledby="count-title">
+    <header>
+      <span class="chapter-no">01</span>
+      <h2 id="count-title"><span class="th" lang="th">แข่งนับ</span><span class="en" lang="en">Count race</span></h2>
+      <ol class="game-rules">
+        <li><span class="th" lang="th">ภาพหนึ่งภาพจะหยุดนิ่ง นับยานพาหนะ (หรือคน) ด้วยปุ่ม + และ − ภายใน 15 วินาที</span><span class="en" lang="en">A frame freezes. Count the vehicles (or people) with + and − within 15 seconds.</span></li>
+        <li><span class="th" lang="th">แล้วกรอบของเครื่องจะปรากฏ พร้อมความมั่นใจของแต่ละกรอบ</span><span class="en" lang="en">Then the machine's boxes appear, each with its confidence.</span></li>
+        <li><span class="th" lang="th">คุณเป็นกรรมการ ดูอีกครั้งให้ดีแล้วตัดสินว่าใครใกล้ความจริงกว่า ห้ารอบต่อหนึ่งเกม</span><span class="en" lang="en">You referee: look again carefully and decide who was closer. Five rounds a match.</span></li>
+      </ol>
+      <p class="game-score num" data-count-score aria-live="polite"></p>
+      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ตัวเลขของเครื่องขึ้นกับเกณฑ์ความมั่นใจที่เราเลือก และเครื่องก็ไม่ใช่เฉลย</span><span class="en" lang="en">A machine's count depends on the confidence threshold we choose — and the machine is not the answer key either.</span></p>
+    </header>
+    <div class="chapter-body">
+      <div class="bench" data-count>
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">คุณ ปะทะ เครื่อง</span><span class="en" lang="en">You vs the machine</span></span>
+          <span class="num clock" data-count-clock>15.0 s</span>
+        </div>
+        <div class="bench-view">
+          <canvas data-count-canvas role="img" aria-label="A frozen camera frame for counting"></canvas>
+          <div class="bench-state" data-count-state></div>
+        </div>
+        <div class="controls game-choice" role="group" aria-label="What to count">
+          <button class="btn" type="button" data-count-target="vehicles" aria-pressed="true"><span class="th" lang="th">นับยานพาหนะ</span><span class="en" lang="en">Count vehicles</span></button>
+          <button class="btn" type="button" data-count-target="people" aria-pressed="false"><span class="th" lang="th">นับคน</span><span class="en" lang="en">Count people</span></button>
+        </div>
+        <div class="tally" role="group" aria-label="Your count">
+          <button class="btn" type="button" data-count-minus aria-label="Minus one">−</button>
+          <output class="tally-n num" data-count-you aria-live="polite">0</output>
+          <button class="btn" type="button" data-count-plus aria-label="Plus one">+</button>
+          <button class="btn" type="button" data-count-lock><span class="th" lang="th">นับเสร็จ</span><span class="en" lang="en">Done</span></button>
+        </div>
+        <div class="slider" data-count-slider hidden>
+          <label for="count-thr"><span class="th" lang="th">เกณฑ์ความมั่นใจของเครื่อง</span><span class="en" lang="en">Machine's confidence threshold</span></label>
+          <output class="num" for="count-thr" data-count-thr-out>40%</output>
+          <input id="count-thr" type="range" min="10" max="90" step="5" value="40" data-count-thr>
+        </div>
+        <p class="readout game-say" data-count-say aria-live="polite"></p>
+        <div class="controls game-choice" data-count-judge role="group" aria-label="Who was closer" hidden>
+          <button class="btn" type="button" data-judge="you"><span class="th" lang="th">ฉันใกล้กว่า</span><span class="en" lang="en">I was closer</span></button>
+          <button class="btn" type="button" data-judge="machine"><span class="th" lang="th">เครื่องใกล้กว่า</span><span class="en" lang="en">The machine was closer</span></button>
+          <button class="btn" type="button" data-judge="draw"><span class="th" lang="th">เสมอ / บอกไม่ได้</span><span class="en" lang="en">Tie / can't tell</span></button>
+        </div>
+        <div class="controls">
+          <button class="btn primary game-go" type="button" data-count-go><span class="th" lang="th">เริ่มเกม</span><span class="en" lang="en">Start</span></button>
+        </div>
+        <div class="bench-caption specimen-line" data-specimen>
+          <span><span class="who" data-specimen-name><span class="th" lang="th">ยังไม่ได้เปิดกล้อง</span><span class="en" lang="en">No camera open yet</span></span><br><span data-specimen-meta></span></span>
+          <span class="controls">
+            <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
+            <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
+            <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span></button>
+            <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
+          </span>
+        </div>
+      </div>
+      <p class="note"><span class="th" lang="th">กล้องสาธารณะ: เราข้ามภาพที่เครื่องไม่เห็นอะไรเลย เพื่อให้ทุกรอบมีของให้นับ นั่นแปลว่าคุณจะไม่ได้เห็นภาพที่เครื่องพลาดหมดทุกคัน ซึ่งก็มีอยู่จริง กล้องของคุณและรูปของคุณใช้ภาพที่หยุดไว้ตรง ๆ ไม่ข้าม</span><span class="en" lang="en">Public cameras: we skip frames where the machine sees nothing at all, so every round has something to count. That means you never see the frames where it missed every single vehicle — and those exist. Your camera and photos use the frozen frame as it is, no skipping.</span></p>
+    </div>
+  </section>
+
+  <!-- ── Game 2: Fewest pixels ──────────────────────────────────────── -->
+  <section class="chapter field-quiet" id="pixels" aria-labelledby="pixels-title">
+    <header>
+      <span class="chapter-no">02</span>
+      <h2 id="pixels-title"><span class="th" lang="th">พิกเซลน้อยที่สุด</span><span class="en" lang="en">Fewest pixels</span></h2>
+      <ol class="game-rules">
+        <li><span class="th" lang="th">ภาพเริ่มจากบล็อกใหญ่มาก แต่ละขั้นบล็อกจะเล็กลงและภาพจะชัดขึ้น</span><span class="en" lang="en">The picture starts as huge blocks. Each step the blocks shrink and it gets sharper.</span></li>
+        <li><span class="th" lang="th">คุณทายได้ครั้งเดียว ว่าในภาพมีอะไร หรือกด “ขอดูชัดขึ้น” เครื่องก็ทายครั้งเดียวเหมือนกัน และจะทายเมื่อมั่นใจถึง 50%</span><span class="en" lang="en">You get one guess at what is in it — or press “sharper”. The machine also gets one guess, and commits when it is 50% sure.</span></li>
+        <li><span class="th" lang="th">ใครทายถูกตอนภาพหยาบกว่า คนนั้นชนะรอบ ห้ารอบต่อหนึ่งเกม</span><span class="en" lang="en">Whoever is right at the coarser picture wins the round. Five rounds a match.</span></li>
+      </ol>
+      <p class="game-score num" data-pix-score aria-live="polite"></p>
+      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ความละเอียดคือข้อมูล คนใช้บริบทเดาจากภาพหยาบได้ ส่วนเครื่องถูกฝึกจากภาพที่ชัด และพลาดง่ายเมื่อภาพไม่เหมือนที่เคยเห็น</span><span class="en" lang="en">Resolution is information. People use context to guess from a coarse picture; the machine was trained on sharp photos and slips when a picture looks unlike what it has seen.</span></p>
+    </header>
+    <div class="chapter-body">
+      <div class="bench" data-pix>
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">ภาพหยาบ</span><span class="en" lang="en">Coarse picture</span></span>
+          <span class="num" data-pix-level></span>
+        </div>
+        <div class="bench-view">
+          <canvas data-pix-canvas role="img" aria-label="A camera frame shown as large blocks"></canvas>
+          <div class="bench-state" data-pix-state></div>
+        </div>
+        <div class="controls pix-options" data-pix-options role="group" aria-label="Your guess"></div>
+        <div class="controls">
+          <button class="btn" type="button" data-pix-pass hidden><span class="th" lang="th">ขอดูชัดขึ้น →</span><span class="en" lang="en">Sharper →</span></button>
+          <button class="btn primary game-go" type="button" data-pix-go><span class="th" lang="th">เริ่มเกม</span><span class="en" lang="en">Start</span></button>
+          <button class="btn" type="button" data-pix-void hidden><span class="th" lang="th">เฉลยผิด ยกเลิกรอบนี้</span><span class="en" lang="en">The key is wrong — void round</span></button>
+        </div>
+        <p class="readout game-say" data-pix-say aria-live="polite"></p>
+        <div class="table-wrap pix-log" data-pix-log></div>
+        <div class="bench-caption specimen-line" data-specimen>
+          <span><span class="who" data-specimen-name><span class="th" lang="th">ยังไม่ได้เปิดกล้อง</span><span class="en" lang="en">No camera open yet</span></span><br><span data-specimen-meta></span></span>
+          <span class="controls">
+            <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
+            <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
+            <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span></button>
+            <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
+          </span>
+        </div>
+      </div>
+      <p class="note"><span class="th" lang="th">เฉลยของแต่ละรอบมาจากการอ่านภาพที่ชัดเต็มที่ของเครื่องเอง (สิ่งที่มันมั่นใจที่สุด อย่างน้อย 50%) ซึ่งอาจผิดได้ ถ้าภาพสุดท้ายแสดงว่าเฉลยผิด กด “เฉลยผิด” แล้วรอบนั้นจะไม่นับ</span><span class="en" lang="en">Each round's key is the machine's own reading of the full, sharp picture (its most confident find, at least 50%). That can be wrong. If the final picture shows it is, press “the key is wrong” and the round will not count.</span></p>
+    </div>
+  </section>
+
+  <!-- ── Game 3: Fool the machine ───────────────────────────────────── -->
+  <section class="chapter field-ink" id="fool" aria-labelledby="fool-title">
+    <header>
+      <span class="chapter-no">03</span>
+      <h2 id="fool-title"><span class="th" lang="th">หลอกตาเครื่อง</span><span class="en" lang="en">Fool the machine</span></h2>
+      <ol class="game-rules">
+        <li><span class="th" lang="th">เปิดกล้องของคุณ (หรือเลือกรูป) แล้วเลือกโจทย์หนึ่งข้อ</span><span class="en" lang="en">Open your camera (or choose a photo) and pick a challenge.</span></li>
+        <li><span class="th" lang="th">ทำให้เครื่องเห็นสิ่งที่ไม่มี หรือมองไม่เห็นสิ่งที่มี แล้วกด “เก็บภาพ”</span><span class="en" lang="en">Make it see what is not there, or miss what is — then press “Capture”.</span></li>
+        <li><span class="th" lang="th">มีแต่คุณที่รู้ว่าอะไรอยู่หน้ากล้องจริง ๆ คุณจึงเป็นคนตัดสินว่า “หลอกสำเร็จ”</span><span class="en" lang="en">Only you know what is really in front of the camera, so you decide when it was fooled.</span></li>
+      </ol>
+      <p class="game-score num" data-fool-score aria-live="polite"></p>
+      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">เครื่องจับรูปแบบของพิกเซล ไม่ได้เข้าใจสิ่งของ “ไม่เห็น” จึงไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">The machine matches patterns of pixels; it does not understand things. So “not detected” never means “not there”.</span></p>
+    </header>
+    <div class="chapter-body">
+      <div class="bench" data-fool>
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">ตาของเครื่อง · สด</span><span class="en" lang="en">The machine's eye · live</span></span>
+          <span class="num" data-fool-ms></span>
+        </div>
+        <div class="bench-view">
+          <canvas data-fool-canvas role="img" aria-label="Your camera, with the boxes the detector draws"></canvas>
+          <div class="bench-state" data-fool-state></div>
+        </div>
+        <div class="slider">
+          <label for="fool-thr"><span class="th" lang="th">แสดงเฉพาะที่เครื่องมั่นใจอย่างน้อย</span><span class="en" lang="en">Show only what it is at least this sure of</span></label>
+          <output class="num" for="fool-thr" data-fool-thr-out>40%</output>
+          <input id="fool-thr" type="range" min="10" max="90" step="5" value="40" data-fool-thr>
+        </div>
+        <p class="readout game-say" data-fool-say aria-live="polite"></p>
+        <div class="controls">
+          <button class="btn primary game-go" type="button" data-fool-go>● <span class="th" lang="th">เปิดกล้องของฉันแล้วเริ่ม</span><span class="en" lang="en">Open my camera and start</span></button>
+          <button class="btn" type="button" data-fool-capture disabled><span class="th" lang="th">เก็บภาพ</span><span class="en" lang="en">Capture</span></button>
+        </div>
+        <div class="bench-caption specimen-line" data-specimen>
+          <span><span class="who" data-specimen-name><span class="th" lang="th">ยังไม่ได้เปิดกล้อง</span><span class="en" lang="en">No camera open yet</span></span><br><span data-specimen-meta></span></span>
+          <span class="controls">
+            <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
+            <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span></button>
+            <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
+            <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
+          </span>
+        </div>
+        <p class="bench-caption"><span class="th" lang="th">ภาพจากกล้องของคุณอยู่ในเครื่องนี้เท่านั้น ภาพที่เก็บไว้อยู่ในหน่วยความจำของแท็บนี้ และหายไปเมื่อคุณออกจากหน้า ไม่มีการอัปโหลด</span><span class="en" lang="en">Your camera's picture stays on this device. Captures live in this tab's memory and vanish when you leave. Nothing is uploaded.</span></p>
+      </div>
+
+      <div class="challenges">
+        <h3><span class="th" lang="th">โจทย์</span><span class="en" lang="en">Challenges</span></h3>
+        <div class="challenge-list" data-fool-challenges role="group" aria-label="Challenges"></div>
+      </div>
+
+      <div>
+        <h3><span class="th" lang="th">ภาพที่เก็บไว้</span><span class="en" lang="en">Captures</span></h3>
+        <div class="tiles fool-gallery" data-fool-gallery></div>
+        <p class="micro" data-fool-empty><span class="th" lang="th">ยังไม่มีภาพ กด “เก็บภาพ” ตอนที่คิดว่าหลอกเครื่องได้</span><span class="en" lang="en">Nothing yet. Press “Capture” when you think you have fooled it.</span></p>
+      </div>
+
+      <div class="prose">
+        <h3><span class="th" lang="th">ทำไมเครื่องถึงถูกหลอกได้</span><span class="en" lang="en">Why a machine can be fooled</span></h3>
+        <p class="th" lang="th">เครื่องตรวจจับไม่ได้รู้ว่า “ถ้วย” คืออะไร มันเรียนรู้ว่ารูปแบบของสี ขอบ และพื้นผิวแบบไหน มักมาพร้อมคำว่า “ถ้วย” ในภาพตัวอย่างนับแสนภาพ ถ้าคุณหันถ้วยในมุมที่ภาพตัวอย่างแทบไม่มี มันก็หาไม่เจอ ถ้าคุณโชว์รูปสุนัขบนจอ มันก็เห็นสุนัข เพราะพิกเซลเหมือนสุนัขจริง ๆ — และนั่นอาจไม่ใช่ความผิดของมันด้วยซ้ำ</p>
+        <p class="en" lang="en">A detector does not know what a “cup” is. It has learned which patterns of colour, edge and texture tend to come with the word “cup” across hundreds of thousands of example photos. Turn the cup to an angle those photos rarely showed and it loses it. Show it a dog on a screen and it sees a dog, because the pixels really are dog-like — arguably not even a mistake.</p>
+        <p class="th" lang="th">นักวิจัยพบสิ่งที่แปลกกว่านั้น: <strong>ภาพหลอกเชิงปฏิปักษ์</strong> (adversarial examples) คือการเปลี่ยนพิกเซลนิดเดียวจนคนมองไม่ออก แต่ทำให้โครงข่ายเปลี่ยนคำตอบไปเลย (Szegedy และคณะ 2014; Goodfellow, Shlens และ Szegedy 2015) และสติกเกอร์ไม่กี่แผ่นบนป้ายหยุดจริงก็ทำให้ระบบอ่านป้ายผิดได้ (Eykholt และคณะ 2018) สิ่งที่คุณทำกับกล้องตอนนี้เป็นแบบหยาบ ๆ ของเรื่องเดียวกัน</p>
+        <p class="en" lang="en">Researchers found something stranger: <strong>adversarial examples</strong> — changes to a few pixels too small for a person to notice that flip a network's answer completely (Szegedy et al., 2014; Goodfellow, Shlens &amp; Szegedy, 2015). A few stickers on a real stop sign were enough to make a classifier misread it (Eykholt et al., 2018). What you are doing with your camera is the rough, hands-on version of the same thing.</p>
+        <p class="th" lang="th">บทเรียนสำหรับเมือง: ถ้าระบบนับรถหรือนับคนรายงานว่า “ไม่มี” มันแปลว่า “ไม่พบอะไรที่มั่นใจเกินเกณฑ์” เท่านั้น ไม่ใช่ว่าถนนว่างจริง</p>
+        <p class="en" lang="en">The lesson for a city: when a system that counts cars or people reports “none”, it means “found nothing above the threshold” — not that the street is empty.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/games.js?v={{v}}"></script>
+</body>
+</html>

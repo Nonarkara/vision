@@ -1,0 +1,15 @@
+/* /everyday — eight cases and one bench. Only what vision.css lacks. */
+
+/* Case titles live in the narrow chapter column; display size would break words mid-way. */
+.case h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }
+.case .chapter-body { align-content: start; }
+.case .prose h3 { margin-top: 0; }
+.case .steps { margin: 0; }
+.case .steps strong { font-family: var(--mono); font-size: var(--micro); }
+.case .steps [lang="th"] strong, .case .steps strong [lang="th"] { font-family: var(--thai); }
+
+/* The bench: the readout carries several lines; keep the box steady so the page does not jump. */
+[data-bench] .readout { min-height: 5.2em; }
+[data-bench] .specimen-bar { position: static; padding: 8px 16px; }
+[data-bench] .controls .btn { flex: 1 1 auto; }
+#bench .cta { margin-top: 0; }

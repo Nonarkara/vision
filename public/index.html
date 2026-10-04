@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<title>Vision — How a computer sees · คอมพิวเตอร์มองเห็นอย่างไร</title>
+<meta name="description" content="A public classroom for computer vision, built on Thailand's open cameras. Learn, train your own model, play — in Thai and English. Everything runs in your browser.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="opening" aria-labelledby="title">
+    <div class="opening-text">
+      <div>
+        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์ · กล้องจริง ถนนจริง</span><span class="en" lang="en">A computer-vision classroom · real cameras, real roads</span></span>
+        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์<br>มองเห็น<br>อย่างไร</span><span class="en" lang="en">How a<br>computer<br>sees</span></h1>
+      </div>
+      <div>
+        <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
+        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
+        <div class="cta">
+          <a class="btn primary big" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
+          <button class="btn big" type="button" data-mine><span class="th" lang="th">กล้องของคุณ</span><span class="en" lang="en">Your camera</span></button>
+        </div>
+        <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+      </div>
+    </div>
+
+    <div class="opening-stage bench" aria-label="The machine's eye">
+      <div class="bench-caption">
+        <span class="label"><span class="th" lang="th">ตาของเครื่อง</span><span class="en" lang="en">The machine's eye</span></span>
+        <span class="num" data-clock></span>
+      </div>
+      <div class="bench-view stage-view">
+        <canvas data-eye role="img" aria-label="A live public camera, shown through the selected lens"></canvas>
+        <div class="bench-state" data-eye-state>…</div>
+      </div>
+      <div class="controls lens-steps" role="group" aria-label="Lenses">
+        <button class="btn" type="button" data-lens="picture" aria-pressed="true"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span></button>
+        <button class="btn" type="button" data-lens="numbers" aria-pressed="false"><span class="num">2</span> <span class="th" lang="th">ตัวเลข</span><span class="en" lang="en">Numbers</span></button>
+        <button class="btn" type="button" data-lens="edges" aria-pressed="false"><span class="num">3</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></button>
+        <button class="btn" type="button" data-lens="motion" aria-pressed="false"><span class="num">4</span> <span class="th" lang="th">ขยับ</span><span class="en" lang="en">Motion</span></button>
+        <button class="btn" type="button" data-lens="objects" aria-pressed="false"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span></button>
+      </div>
+      <p class="readout lens-say" data-lens-say aria-live="polite"></p>
+      <div class="bench-caption specimen-line" data-specimen>
+        <span><span class="who" data-specimen-name>…</span><br><span data-specimen-meta></span></span>
+        <span class="controls">
+          <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
+          <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
+          <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span></button>
+          <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
+          <button class="btn" type="button" data-fullscreen aria-label="Full screen" title="Full screen">⛶</button>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="figures field-quiet" aria-label="The system today">
+    <div class="figure"><span class="n" data-fig="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ จาก 7 แหล่ง</span><span class="en" lang="en">cameras listed, from 7 sources</span></span></div>
+    <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">กล้องที่เครื่องอ่านพิกเซลได้</span><span class="en" lang="en">cameras a machine can read</span></span></div>
+    <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">สตรีมที่ต้นทางรายงานว่าสด</span><span class="en" lang="en">streams reported live upstream</span></span></div>
+    <div class="figure"><span class="n">0</span><span class="micro"><span class="th" lang="th">ภาพที่เราเก็บไว้</span><span class="en" lang="en">pictures we keep</span></span></div>
+  </section>
+
+  <section class="story-teaser" aria-labelledby="story-title">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow label"><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Why this exists</span></span>
+        <h2 id="story-title"><span class="th" lang="th">กล้องเต็มเมือง แต่ไม่มีใครดูอยู่</span><span class="en" lang="en">Cameras everywhere. Eyes nowhere.</span></h2>
+        <figure class="teaser-shot">
+          <img src="/img/ioc/shenzhen.jpg" alt="A control room in Shenzhen: a wall of CCTV feeds above a row of empty chairs" width="1600" height="1200" loading="lazy">
+          <figcaption class="micro"><span class="th" lang="th">เซินเจิ้น · จอเต็มผนัง เก้าอี้ว่างทั้งแถว</span><span class="en" lang="en">Shenzhen · full wall, empty chairs</span></figcaption>
+        </figure>
+      </div>
+      <div>
+        <p class="lede th" lang="th">ในห้องควบคุมของเมืองหลายแห่ง ดร.นน อัครประเสริฐกุล เห็นผนังจอนับร้อยกับเจ้าหน้าที่ที่สัปหงก เล่นมือถือ หรือลุกไปพัก แล้วถามว่า เราจะรู้ได้อย่างไรว่าคนไม่ได้พลาดอะไรไป คำถามนั้นพาเขาไปเรียนคอมพิวเตอร์วิทัศน์กับ ดร.ศุภกร สิทธิไชย และสร้างห้องเรียนนี้ด้วยกัน</p>
+        <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to learn computer vision from Dr Supakorn Siddhichai, and to build this classroom with him.</p>
+        <p class="cta"><a class="btn big" href="/story"><span class="th" lang="th">อ่านเรื่องเล่า →</span><span class="en" lang="en">Read the story →</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="rooms-title">
+    <div class="page-head">
+      <h2 id="rooms-title"><span class="th" lang="th">แปดห้อง</span><span class="en" lang="en">Eight rooms</span></h2>
+      <p class="lede th" lang="th">เดินตามลำดับก็ได้ กระโดดไปห้องที่สนใจก็ได้ ทุกห้องใช้กล้องจริง</p>
+      <p class="lede en" lang="en">Walk them in order or jump to the one you want. Every room runs on real cameras.</p>
+    </div>
+    <ol class="index">
+      <li><a href="/learn"><span class="num">01</span><span class="title"><span class="th" lang="th">เรียนรู้ว่ามันมองอย่างไร</span><span class="en" lang="en">Learn how it looks</span></span><span class="desc"><span class="th" lang="th">แปดบท ตั้งแต่ “ภาพคือตัวเลข” จนถึง “สิ่งที่มันทำไม่ได้” ทุกบทมีเครื่องมือให้ลองกับกล้องสด</span><span class="en" lang="en">Eight chapters, from “a picture is numbers” to “what it cannot do”, each with a live instrument.</span></span></a></li>
+      <li><a href="/cameras"><span class="num">02</span><span class="title"><span class="th" lang="th">กล้องทุกตัว</span><span class="en" lang="en">Every camera</span></span><span class="desc"><span class="th" lang="th">แผนที่กล้องทั้งหมด เลือกกล้องไหนก็ได้ให้เครื่องวิเคราะห์ หรือนับรถทั้งประเทศพร้อมกัน</span><span class="en" lang="en">A map of them all. Point the machine at any one, or run a census across the country.</span></span></a></li>
+      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span></span><span class="desc"><span class="th" lang="th">สอนด้วยตัวอย่างไม่กี่ภาพ ฝึกเสร็จในไม่กี่วินาที แล้วปล่อยให้มันตัดสินกล้องทั้งประเทศ</span><span class="en" lang="en">Teach it with a few examples, train in seconds, then let it judge cameras across the country.</span></span></a></li>
+      <li><a href="/games"><span class="num">04</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง ทายภาพจากพิกเซลน้อยที่สุด และหาทางหลอกตาเครื่อง</span><span class="en" lang="en">Out-count it, out-guess it from the fewest pixels, and find ways to fool it.</span></span></a></li>
+      <li><a href="/everyday"><span class="num">05</span><span class="title"><span class="th" lang="th">ในชีวิตประจำวัน</span><span class="en" lang="en">In everyday life</span></span><span class="desc"><span class="th" lang="th">ปลดล็อกมือถือ สแกน QR ตรวจเอกซเรย์ รถช่วยเลี้ยว ทำงานอย่างไร และอะไรผิดพลาดได้</span><span class="en" lang="en">Phone unlock, QR codes, X-rays, lane keeping — how each works and what can go wrong.</span></span></a></li>
+      <li><a href="/research"><span class="num">06</span><span class="title"><span class="th" lang="th">งานวิจัย</span><span class="en" lang="en">Research</span></span><span class="desc"><span class="th" lang="th">หกสิบปีของการสอนให้เครื่องมอง งานวิจัยสำคัญ และคำถามที่เรายังตอบไม่ได้</span><span class="en" lang="en">Sixty years of teaching machines to see, the papers that mattered, and what we still cannot answer.</span></span></a></li>
+      <li><a href="/system"><span class="num">07</span><span class="title"><span class="th" lang="th">ระบบทำงานอย่างไร</span><span class="en" lang="en">How the system works</span></span><span class="desc"><span class="th" lang="th">แผนผังทั้งระบบ ภาพเดินทางอย่างไร โมเดลมาจากไหน และอะไรที่เราตั้งใจไม่ทำ</span><span class="en" lang="en">The whole design: how a picture travels, where models come from, and what we chose not to build.</span></span></a></li>
+      <li><a href="/legal"><span class="num">08</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span></span><span class="desc"><span class="th" lang="th">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล กล้องเป็นของใคร สิ่งที่ห้ามทำ และการขอถอดกล้อง</span><span class="en" lang="en">Thai data-protection law, who owns the cameras, what you must not do, and takedowns.</span></span></a></li>
+    </ol>
+  </section>
+
+  <section class="field-ink promises" aria-labelledby="promise-title">
+    <div class="page-head">
+      <h2 id="promise-title"><span class="th" lang="th">สามข้อที่เราไม่ต่อรอง</span><span class="en" lang="en">Three things we do not bend</span></h2>
+    </div>
+    <ol class="promise-list">
+      <li><span class="num">i</span><strong><span class="th" lang="th">ทำงานในเครื่องของคุณ</span><span class="en" lang="en">It runs on your device</span></strong><span class="th" lang="th">โมเดลทุกตัวคำนวณในเบราว์เซอร์ของคุณ กล้องของคุณและรูปของคุณไม่ถูกส่งออกไปไหน</span><span class="en" lang="en">Every model computes in your browser. Your camera and your photos never leave your device.</span></li>
+      <li><span class="num">ii</span><strong><span class="th" lang="th">ไม่ระบุตัวบุคคล</span><span class="en" lang="en">It never identifies anyone</span></strong><span class="th" lang="th">ระบบนับว่ามี “คน” ได้ แต่ไม่จดจำใบหน้า ไม่อ่านทะเบียนรถ และไม่เก็บภาพ</span><span class="en" lang="en">It can count that a “person” is there. It does not recognise faces, read number plates, or keep pictures.</span></li>
+      <li><span class="num">iii</span><strong><span class="th" lang="th">บอกความมั่นใจเสมอ</span><span class="en" lang="en">It always shows its confidence</span></strong><span class="th" lang="th">ทุกคำตอบของเครื่องมาพร้อมตัวเลขความมั่นใจ และ “ไม่เห็น” ไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">Every answer carries a confidence number — and “not detected” never means “not there”.</span></li>
+    </ol>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/home.js?v={{v}}"></script>
+</body>
+</html>

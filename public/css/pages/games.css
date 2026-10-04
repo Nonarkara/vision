@@ -1,0 +1,43 @@
+/* /games — only what vision.css does not already have. */
+
+.games-privacy { margin: 16px 0 0; max-width: 46ch; }
+
+/* Rules, score and lesson sit in the chapter's narrow left column, so the title steps down a size. */
+.chapter > header h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); overflow-wrap: normal; }
+.game-rules { margin: 0; padding-left: 1.2em; font-size: var(--micro); max-width: 40ch; }
+.game-rules li { margin-bottom: 0.5em; }
+.game-score { margin: 0; padding: 10px 12px; background: var(--black); color: var(--white); font-size: var(--micro); min-height: var(--target); }
+.game-score:empty { display: none; }
+.teaches { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: var(--micro); max-width: 40ch; }
+.field-quiet .note { background: var(--naples); color: var(--olive); }
+
+/* Bench parts. */
+.bench p.bench-caption { margin: 0; }
+.game-say { margin: 0; color: var(--naples); font-family: var(--sans); line-height: 1.55; min-height: 4.8em; }
+html[data-lang="th"] .game-say { font-family: var(--thai); }
+.game-choice .btn { flex: 1 1 0; min-width: 0; padding: 0 8px; }
+.game-go { flex: 1 1 auto; }
+.clock { color: var(--white); }
+
+.tally { display: grid; grid-template-columns: var(--target) minmax(0, 1fr) var(--target) auto; gap: 2px; background: var(--black); }
+.tally .btn { font-size: var(--body); }
+.tally-n { display: flex; align-items: center; justify-content: center; min-height: 56px; background: var(--black-1); color: var(--white); font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem); font-weight: 600; }
+
+.pix-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pix-options:empty { display: none; }
+.pix-options .btn { min-width: 0; padding: 8px; }
+.pix-log:empty { display: none; }
+.pix-log .table td, .pix-log .table th { padding: 8px 12px; }
+
+/* Fool the machine: challenges and the in-memory gallery. */
+.challenges h3, .chapter-body > div > h3 { margin-top: 0; }
+.challenge-list { display: grid; gap: 2px; }
+.challenge.btn { justify-content: flex-start; align-items: baseline; gap: 12px; padding: 12px 16px; text-align: left; letter-spacing: 0; font-family: var(--sans); }
+html[data-lang="th"] .challenge.btn { font-family: var(--thai); }
+.challenge .num { flex: none; min-width: 3.5ch; }
+.challenge-text { min-width: 0; }
+.fool-gallery:empty { display: none; }
+.fool-gallery .tile { margin: 0; }
+.fool-gallery .tile-view canvas { object-fit: contain; }
+/* Your pick is yours, not a machine finding: it gets the room's colour, not Peach Red. */
+.pix-options .btn[aria-pressed="true"] { background: var(--naples); color: var(--olive); opacity: 1; }

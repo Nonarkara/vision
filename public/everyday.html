@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/everyday.css?v={{v}}">
+<title>In everyday life · ในชีวิตประจำวัน — Vision</title>
+<meta name="description" content="Phone unlock, QR codes, document scanning, X-rays, lane keeping, self-checkout, crop apps and traffic cameras — how each works, step by step, and what can go wrong. Try the first step on your own camera.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">05 · ในชีวิตประจำวัน</span><span class="en" lang="en">05 · In everyday life</span></span>
+      <h1><span class="th" lang="th">คอมพิวเตอร์วิทัศน์<br>ที่คุณใช้อยู่ทุกวัน</span><span class="en" lang="en">The vision<br>you already<br>use</span></h1>
+    </div>
+    <p class="lede th" lang="th">ทุกอย่างในหน้านี้ทำสี่อย่างเหมือนกัน: ได้ภาพมา หาส่วนที่สำคัญ แปลงเป็นตัวเลข แล้วตัดสินใจ เราเปิดดูข้างในทีละอย่าง และดูว่าแต่ละอย่างพลาดได้ตรงไหน</p>
+    <p class="lede en" lang="en">Every one of these makes the same four moves: get a picture, find what matters, turn it into numbers, decide. Here is each one opened up — and where each one fails.</p>
+  </section>
+
+  <nav aria-label="Cases">
+    <ol class="index">
+      <li><a href="#unlock"><span class="num">01</span><span class="title"><span class="th" lang="th">ปลดล็อกด้วยใบหน้า</span><span class="en" lang="en">Face unlock</span></span><span class="desc"><span class="th" lang="th">เกณฑ์ตัวเดียวที่ตัดสินว่าใช่คุณหรือไม่</span><span class="en" lang="en">One threshold decides whether it is you.</span></span></a></li>
+      <li><a href="#qr"><span class="num">02</span><span class="title">QR code</span><span class="desc"><span class="th" lang="th">อ่านได้สมบูรณ์แบบ แม้ปลายทางจะเป็นของมิจฉาชีพ</span><span class="en" lang="en">Read perfectly, even when the payee is a fraud.</span></span></a></li>
+      <li><a href="#scan"><span class="num">03</span><span class="title"><span class="th" lang="th">สแกนเอกสาร</span><span class="en" lang="en">Scanning a document</span></span><span class="desc"><span class="th" lang="th">หากระดาษให้เจอ ดึงให้แบน แล้วจึงอ่าน และทำไมภาษาไทยยาก</span><span class="en" lang="en">Find the paper, flatten it, read it — and why Thai is hard.</span></span></a></li>
+      <li><a href="#xray"><span class="num">04</span><span class="title"><span class="th" lang="th">ภาพเอกซเรย์</span><span class="en" lang="en">Chest X-rays</span></span><span class="desc"><span class="th" lang="th">เครื่องคัดภาพให้แพทย์ และทางลัดที่มันแอบเรียน</span><span class="en" lang="en">Sorting for the doctor, and the shortcuts it learns.</span></span></a></li>
+      <li><a href="#lane"><span class="num">05</span><span class="title"><span class="th" lang="th">รถช่วยรักษาช่องทาง</span><span class="en" lang="en">Lane keeping</span></span><span class="desc"><span class="th" lang="th">มันมองหาเส้น ไม่ได้มองโลก</span><span class="en" lang="en">It looks for lines, not for the world.</span></span></a></li>
+      <li><a href="#checkout"><span class="num">06</span><span class="title"><span class="th" lang="th">ชำระเงินด้วยตัวเอง</span><span class="en" lang="en">Self-checkout</span></span><span class="desc"><span class="th" lang="th">มะนาวหรือส้มลูกเล็ก ลายนิ้วมือตัวเลขที่ใกล้ที่สุด</span><span class="en" lang="en">Lime or small orange: the nearest fingerprint of numbers.</span></span></a></li>
+      <li><a href="#crops"><span class="num">07</span><span class="title"><span class="th" lang="th">แอปตรวจโรคพืช</span><span class="en" lang="en">Crop disease apps</span></span><span class="desc"><span class="th" lang="th">ตอบได้แค่โรคที่เคยเห็น</span><span class="en" lang="en">It can only name what it was shown.</span></span></a></li>
+      <li><a href="#traffic"><span class="num">08</span><span class="title"><span class="th" lang="th">กล้องจราจรและกล้องน้ำ</span><span class="en" lang="en">Traffic and flood cameras</span></span><span class="desc"><span class="th" lang="th">นับรถได้ อ่านป้ายทะเบียนได้ เราเลือกทำแค่อย่างแรก</span><span class="en" lang="en">It can count cars or read plates. We chose only the first.</span></span></a></li>
+      <li><a href="#bench"><span class="num">09</span><span class="title"><span class="th" lang="th">ลองขั้นแรกด้วยกล้องของคุณ</span><span class="en" lang="en">Try step one on your camera</span></span><span class="desc"><span class="th" lang="th">มืดหรือสว่าง แบบเครื่องอ่าน QR และหากระดาษ แบบเครื่องสแกน</span><span class="en" lang="en">Light or dark, like a QR reader; find the paper, like a scanner.</span></span></a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter case" id="unlock" aria-labelledby="unlock-h">
+    <header><span class="chapter-no">01</span><h2 id="unlock-h"><span class="th" lang="th">ปลดล็อกด้วยใบหน้า</span><span class="en" lang="en">Face unlock</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">เมื่อคุณยกโทรศัพท์ขึ้น กล้องหน้าจะถ่ายภาพใบหน้า บางรุ่นมีตัวฉายแสงอินฟราเรดที่ยิงจุดเล็ก ๆ นับพันจุดซึ่งตามองไม่เห็น เพื่อวัดความลึกของใบหน้าด้วย โครงข่ายประสาทเทียมแปลงภาพนั้นเป็นชุดตัวเลข แล้วโทรศัพท์เทียบกับชุดตัวเลขที่บันทึกไว้ตอนคุณตั้งค่าครั้งแรก ในโทรศัพท์ที่ออกแบบมาดี ตัวเลขชุดนั้นเก็บอยู่ในส่วนที่ป้องกันไว้ของเครื่อง และไม่ถูกส่งออกไปไหน</p>
+        <p class="en" lang="en">When you raise your phone, the front camera takes a picture of your face. Some phones also have an infrared projector that paints thousands of invisible dots to measure its depth. A neural network turns the picture into a list of numbers, and the phone compares that list with the one it made when you set it up. On a well-designed phone, the stored list lives in a protected part of the device and never leaves it.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">มอง</span><span class="en" lang="en">Look</span></strong><br><span class="th" lang="th">กล้องถ่ายใบหน้า บางรุ่นวัดความลึกด้วยอินฟราเรด</span><span class="en" lang="en">Camera captures the face; some phones add infrared depth</span></li>
+        <li><strong><span class="th" lang="th">หา</span><span class="en" lang="en">Find</span></strong><br><span class="th" lang="th">หาตำแหน่งใบหน้า ตา จมูก และปาก</span><span class="en" lang="en">Locate the face: eyes, nose, mouth</span></li>
+        <li><strong><span class="th" lang="th">แปลงเป็นตัวเลข</span><span class="en" lang="en">Numbers</span></strong><br><span class="th" lang="th">โครงข่ายแปลงใบหน้าเป็นชุดตัวเลข</span><span class="en" lang="en">A network turns the face into a list of numbers</span></li>
+        <li><strong><span class="th" lang="th">ตัดสิน</span><span class="en" lang="en">Decide</span></strong><br><span class="th" lang="th">ใกล้กับชุดที่บันทึกไว้พอไหม ถ้าใช่ก็ปลดล็อก ถ้าไม่ก็ขอรหัส</span><span class="en" lang="en">Close enough to the stored list? Unlock. If not, ask for the PIN</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>มันคือเกณฑ์ ไม่ใช่ความแน่นอน ตั้งเข้มไปก็ไม่ยอมรับคุณตอนแสงน้อย ตั้งหลวมไปพี่น้องของคุณก็เข้าได้ ผู้ผลิตโทรศัพท์บางรายเตือนเองว่าฝาแฝดและญาติที่หน้าคล้ายกันอาจปลดล็อกเครื่องของกันและกันได้</li>
+          <li>โทรศัพท์ที่ใช้แค่กล้องธรรมดาโดยไม่วัดความลึก ถูกหลอกด้วยรูปถ่ายได้ง่ายกว่า โทรศัพท์ Android บางรุ่นจึงจัดการปลดล็อกด้วยใบหน้าแบบนี้เป็นแค่ความสะดวก และแอปธนาคารจะไม่ยอมรับ</li>
+          <li>หน้ากาก แว่นหนา หนวดที่เพิ่งไว้ ตัวเลขก็เปลี่ยนตาม ระบบที่ดีจะค่อย ๆ ปรับชุดที่บันทึกไว้ตามหน้าคุณที่เปลี่ยนไป</li>
+          <li>เว็บนี้ไม่ทำแบบนี้เลย การจดจำใบหน้าของคนใดคนหนึ่งคือสิ่งที่เรา<a href="/system#not-built">ตั้งใจไม่สร้าง</a></li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>It is a threshold, not a certainty. Set it strict and it refuses you in bad light; set it loose and a sibling gets in. Some phone makers warn that twins and close relatives may unlock each other's phones.</li>
+          <li>Phones that use only an ordinary camera, with no depth, are easier to fool with a photo. That is why some Android phones treat that kind of face unlock as a convenience, and banking apps will not accept it.</li>
+          <li>A mask, heavy glasses, a new beard: the numbers move. Good systems slowly update the stored list as your face changes.</li>
+          <li>This site never does any of this. Recognising a particular face is exactly what we <a href="/system#not-built">chose not to build</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="qr" aria-labelledby="qr-h">
+    <header><span class="chapter-no">02</span><h2 id="qr-h">QR code</h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">QR code ออกแบบมาให้เครื่องอ่านโดยเฉพาะ สี่เหลี่ยมใหญ่สามมุมบอกเครื่องว่า “ฉันอยู่ตรงนี้ และด้านนี้คือด้านบน” ส่วนช่องขาวดำเล็ก ๆ ระหว่างนั้นคือข้อมูลทีละบิต เครื่องไม่ต้องเข้าใจอะไรเลย แค่ต้องแยกให้ออกว่าช่องไหนมืด ช่องไหนสว่าง ซึ่งก็คือ<a href="#bench">เครื่องมือท้ายหน้านี้</a>นั่นเอง</p>
+        <p class="en" lang="en">A QR code is built for machines. Three big squares in the corners say “here I am, and this way up”; the small black and white modules between them are bits. The reader does not need to understand anything. It only needs to tell dark from light — which is exactly <a href="#bench">the instrument at the bottom of this page</a>.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">มืดหรือสว่าง</span><span class="en" lang="en">Light or dark</span></strong><br><span class="th" lang="th">แปลงเป็นภาพเทา แล้วตัดสินทุกพิกเซลเป็น 0 หรือ 1</span><span class="en" lang="en">Go gray, then make every pixel a 0 or a 1</span></li>
+        <li><strong><span class="th" lang="th">หาสามมุม</span><span class="en" lang="en">Find the corners</span></strong><br><span class="th" lang="th">หาสี่เหลี่ยมสามมุมจากลายแถบสัดส่วน 1:1:3:1:1</span><span class="en" lang="en">Spot the three corner squares by their 1:1:3:1:1 stripes</span></li>
+        <li><strong><span class="th" lang="th">อ่านตาราง</span><span class="en" lang="en">Read the grid</span></strong><br><span class="th" lang="th">ดึงตารางให้ตรง แล้วอ่านแต่ละช่องเป็นบิต</span><span class="en" lang="en">Straighten the grid and read each module as a bit</span></li>
+        <li><strong><span class="th" lang="th">ตรวจแล้วทำตาม</span><span class="en" lang="en">Check, then act</span></strong><br><span class="th" lang="th">แก้บิตที่เสีย ถ้าผ่านจึงเปิดลิงก์หรือหน้าจ่ายเงิน</span><span class="en" lang="en">Repair damaged bits; if they check out, open the link or the payment</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>แสงสะท้อน รอยพับ แสงน้อย ขั้นแยกมืดกับสว่างจะพังก่อนเสมอ QR code จึงมีบิตสำรองไว้ซ่อมส่วนที่เสียหาย ระดับสูงสุดซ่อมได้ราว 30% ของโค้ด</li>
+          <li>ความผิดพลาดที่อันตรายจริงไม่ใช่การอ่านผิด สติกเกอร์ที่แปะทับ QR ของร้านถูกอ่านได้อย่างสมบูรณ์แบบ แล้วพาเงินของคุณไปที่อื่น เครื่องตรวจได้แค่ว่าบิตครบ ไม่ได้ตรวจว่าผู้รับเงินสุจริต ก่อนจ่ายผ่านพร้อมเพย์หรือแอปธนาคาร ให้อ่านชื่อผู้รับที่แอปแสดงทุกครั้ง</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Glare, a crease, low light: the light-or-dark step fails first. So QR codes carry spare bits to repair damage — at the highest level, about 30% of the code.</li>
+          <li>The dangerous failure is not a misread. A sticker pasted over a shop's real code is read perfectly — and sends your money somewhere else. The machine checks that the bits are intact, not that the payee is honest. Before paying by PromptPay or any banking app, read the name the app shows you.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="scan" aria-labelledby="scan-h">
+    <header><span class="chapter-no">03</span><h2 id="scan-h"><span class="th" lang="th">สแกนเอกสาร</span><span class="en" lang="en">Scanning a document</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">แอปธนาคารที่ให้ถ่ายบัตรประชาชน แอปที่แปลงรูปถ่ายหน้าหนังสือเป็นข้อความ หรือปุ่มสแกนในแอปจดโน้ต ล้วนเริ่มแบบเดียวกัน คือหากระดาษให้เจอ ดึงให้แบน แล้วจึงอ่าน การอ่านตัวอักษร หรือ OCR เป็นส่วนที่คนสังเกตเห็น แต่ทุกอย่างพังได้ตั้งแต่ขั้นหากระดาษ</p>
+        <p class="en" lang="en">A banking app that photographs your ID card, an app that turns a photo of a page into text, the scan button in a notes app: all start the same way. Find the sheet of paper, flatten it, then read it. Reading — optical character recognition, OCR — is the part people notice. Finding the paper is where it can all go wrong first.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">หากระดาษ</span><span class="en" lang="en">Find the paper</span></strong><br><span class="th" lang="th">หาขอบ และรูปสี่เหลี่ยมที่ใหญ่ที่สุด</span><span class="en" lang="en">Edges, and the biggest four-cornered shape</span></li>
+        <li><strong><span class="th" lang="th">ดึงให้แบน</span><span class="en" lang="en">Flatten</span></strong><br><span class="th" lang="th">ยืดสี่มุมให้เป็นสี่เหลี่ยมผืนผ้า</span><span class="en" lang="en">Stretch the four corners into a rectangle</span></li>
+        <li><strong><span class="th" lang="th">แยกส่วน</span><span class="en" lang="en">Split</span></strong><br><span class="th" lang="th">ทำภาพให้คม แล้วแยกเป็นบรรทัด คำ และตัวอักษร</span><span class="en" lang="en">Clean up; split into lines, words and characters</span></li>
+        <li><strong><span class="th" lang="th">อ่าน</span><span class="en" lang="en">Read</span></strong><br><span class="th" lang="th">จำตัวอักษร แล้วให้แบบจำลองภาษาเลือกคำที่น่าจะถูกที่สุด</span><span class="en" lang="en">Recognise each piece; a language model picks the likeliest reading</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>ภาษาไทยยากสำหรับ OCR ในแบบของมันเอง สระและวรรณยุกต์อยู่ทั้งเหนือและใต้บรรทัด และเราเขียนคำติดกันโดยไม่เว้นวรรค เครื่องจึงต้องเดาว่าคำหนึ่งจบตรงไหน ด กับ ต หรือ บ กับ ป ต่างกันแค่ไม่กี่พิกเซล</li>
+          <li>กระดาษขาวบนโต๊ะขาวไม่มีขอบให้หา กระดาษในเงามืดก็เช่นกัน ลองทั้งสองแบบได้ใน<a href="#bench">เครื่องมือข้างล่าง</a></li>
+          <li>ตัวเลขคือความผิดพลาดที่แพงที่สุด เลข 3 ที่ถูกอ่านเป็น 8 ในเลขบัญชีดูมั่นใจไม่ต่างจากตัวที่ถูก แอปที่ดีจะให้คุณตรวจอีกครั้ง และคุณควรตรวจจริง ๆ</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Thai is hard for OCR in its own ways. Vowels and tone marks sit above and below the line, and words run together without spaces, so the reader has to guess where one word ends. ด and ต, บ and ป differ by a few pixels.</li>
+          <li>A white page on a white desk has no edge to find. Neither does a page in shadow. Try both in <a href="#bench">the bench below</a>.</li>
+          <li>Numbers are the costly mistakes: a 3 read as an 8 in an account number looks exactly as confident as a right one. Good apps ask you to check. Check.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="xray" aria-labelledby="xray-h">
+    <header><span class="chapter-no">04</span><h2 id="xray-h"><span class="th" lang="th">ภาพเอกซเรย์ปอด</span><span class="en" lang="en">Chest X-rays</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">โรงพยาบาลในหลายประเทศเริ่มใช้ซอฟต์แวร์อ่านภาพเอกซเรย์ปอด เพื่อคัดภาพที่อาจมีร่องรอยของโรค เช่น วัณโรค หรือก้อนในปอด ให้รังสีแพทย์ดูก่อน โครงข่ายนี้ฝึกจากภาพเอกซเรย์จำนวนมากที่แพทย์ติดป้ายไว้แล้ว มันไม่รู้จักกายวิภาค มันรู้แค่ว่ารูปแบบแบบไหนมักมาคู่กับป้ายแบบไหน</p>
+        <p class="en" lang="en">Hospitals in many countries now run software that reads chest X-rays and flags the ones that may show signs of disease — tuberculosis, a lung nodule — so a radiologist sees the worrying ones first. The network was trained on many X-rays that doctors had already labelled. It does not know anatomy. It knows which patterns came with which labels.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">ปรับมาตรฐาน</span><span class="en" lang="en">Standardise</span></strong><br><span class="th" lang="th">ขนาด ความเข้ม และทิศทางของภาพ</span><span class="en" lang="en">Size, contrast, which way up</span></li>
+        <li><strong><span class="th" lang="th">ดึงลักษณะ</span><span class="en" lang="en">Features</span></strong><br><span class="th" lang="th">โครงข่ายคอนโวลูชันแปลงภาพเป็นตัวเลข</span><span class="en" lang="en">A convolutional network turns it into numbers</span></li>
+        <li><strong><span class="th" lang="th">ให้คะแนน</span><span class="en" lang="en">Score</span></strong><br><span class="th" lang="th">คะแนนต่อความผิดปกติ มักมีแผนที่บอกว่ามันดูตรงไหน</span><span class="en" lang="en">A score per finding, often with a map of where it looked</span></li>
+        <li><strong><span class="th" lang="th">ส่งต่อ</span><span class="en" lang="en">Flag</span></strong><br><span class="th" lang="th">ส่งให้แพทย์ดู แพทย์เป็นผู้ตัดสิน</span><span class="en" lang="en">Put it in front of a doctor, who decides</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>ทางลัด โครงข่ายอาจเรียนรู้ว่าภาพมาจากโรงพยาบาลไหนหรือเครื่องไหน แทนที่จะดูปอด เพราะโรงพยาบาลที่รับผู้ป่วยหนักกว่ามักใช้เครื่องต่างรุ่นและมีตัวอักษรที่มุมภาพต่างกัน Zech และคณะแสดงให้เห็นว่าแบบจำลองตรวจปอดอักเสบบอกได้ว่าภาพมาจากโรงพยาบาลไหน และทำงานได้ไม่ดีเท่าเดิมเสมอไปเมื่อใช้ที่โรงพยาบาลอื่น (PLOS Medicine, 2018)</li>
+          <li>“ปกติ” แปลว่า “ไม่พบสิ่งที่มันถูกฝึกให้หา” โรคหายากที่ไม่อยู่ในป้ายตอนฝึก มันมองไม่เห็นเลย</li>
+          <li>ฝึกกับประชากรกลุ่มหนึ่ง แล้วไปใช้กับอีกกลุ่ม อายุ รูปร่าง และโรคที่พบบ่อยต่างกันไปในแต่ละประเทศ</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Shortcuts. A network can learn which hospital or which machine an X-ray came from — a hospital that sees sicker patients may have a different scanner and different text in the corner — and score that instead of the lungs. Zech and colleagues showed pneumonia models could tell which hospital an image came from, and did not always perform as well at other hospitals (PLOS Medicine, 2018).</li>
+          <li>“Normal” means “nothing it was trained to find”. A rare disease missing from the training labels is invisible to it.</li>
+          <li>Trained on one population, used on another: age, body size and the mix of diseases differ from country to country.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="lane" aria-labelledby="lane-h">
+    <header><span class="chapter-no">05</span><h2 id="lane-h"><span class="th" lang="th">รถช่วยรักษาช่องทาง</span><span class="en" lang="en">Lane keeping</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">กล้องหลังกระจกหน้ามองถนนตลอดเวลา ซอฟต์แวร์หาเส้นแบ่งช่องจราจร คำนวณว่ารถอยู่ตรงไหนระหว่างเส้น และถ้ารถเบี่ยงออกโดยไม่เปิดไฟเลี้ยว ก็จะส่งเสียงเตือนหรือช่วยหมุนพวงมาลัยกลับเบา ๆ นี่คือระบบช่วยขับ คุณยังเป็นคนขับ และรถที่ดีจะบอกเมื่อระบบส่งการควบคุมคืนให้คุณ</p>
+        <p class="en" lang="en">A camera behind the windscreen watches the road. Software finds the lane markings, works out where the car sits between them, and if you drift without signalling it beeps or gently turns the wheel back. It is driver assistance: you are still the driver, and a good car tells you when the system hands control back.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">มอง</span><span class="en" lang="en">Look</span></strong><br><span class="th" lang="th">ภาพจากกล้องหน้ารถ หลายภาพต่อวินาที</span><span class="en" lang="en">Frames from a forward camera, many a second</span></li>
+        <li><strong><span class="th" lang="th">หาเส้น</span><span class="en" lang="en">Find lines</span></strong><br><span class="th" lang="th">จากขอบภาพ หรือให้โครงข่ายระบายพิกเซลที่เป็นเส้น</span><span class="en" lang="en">From edges, or a network that paints lane pixels</span></li>
+        <li><strong><span class="th" lang="th">วัดตำแหน่ง</span><span class="en" lang="en">Measure</span></strong><br><span class="th" lang="th">ลากเส้นให้พอดี แล้วประเมินว่ารถเยื้องและเอียงแค่ไหน</span><span class="en" lang="en">Fit lines or curves; estimate offset and heading</span></li>
+        <li><strong><span class="th" lang="th">ตัดสิน</span><span class="en" lang="en">Decide</span></strong><br><span class="th" lang="th">ถ้ารถเบี่ยง ก็เตือน หรือช่วยหมุนพวงมาลัย</span><span class="en" lang="en">Drifting? Warn, or nudge the steering</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>สีเส้นจาง ฝนตกตอนกลางคืน แดดยามเย็นส่องตรงหน้า เส้นเก่าที่ยังเห็นหลังซ่อมถนน ขั้นหาขอบเห็นทั้งหมดนี้ หรือไม่เห็นอะไรเลย ลองดูได้ด้วย<a href="/">เลนส์ “ขอบ” ที่หน้าแรก</a></li>
+          <li>ถนนไทยมีโจทย์ของตัวเอง ช่องทางที่อยู่ ๆ ก็หายไป มอเตอร์ไซค์ในช่องว่าง และเส้นที่ไม่เคยถูกทาเลย เมื่อระบบหาเส้นไม่เจอมันจะหยุดทำงาน และรถที่ดีจะบอกคุณ</li>
+          <li>มันมองหาเส้น ไม่ได้มองโลก มันไม่รู้ว่าช่องทางข้างหน้ามีน้ำท่วมอยู่</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Faded paint, rain at night, low sun dead ahead, old markings still visible after road works: the edge step sees all of these, or none of them. Try <a href="/">the Edges lens on the home page</a>.</li>
+          <li>Thai roads add their own: lanes that stop being lanes, motorcycles in the gap, markings that were never painted. When the system loses the lines it switches off, and a good car tells you so.</li>
+          <li>It looks for lines, not for the world. It does not know that the lane ahead is flooded.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="checkout" aria-labelledby="checkout-h">
+    <header><span class="chapter-no">06</span><h2 id="checkout-h"><span class="th" lang="th">ชำระเงินด้วยตัวเอง</span><span class="en" lang="en">Self-checkout</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">ตู้ชำระเงินด้วยตัวเองและตาชั่งในซูเปอร์มาร์เก็ตบางแห่งมีกล้องอยู่เหนือถาด เมื่อคุณวางผลไม้ที่ไม่มีบาร์โค้ด มันจะเสนอว่าน่าจะเป็นอะไร เบื้องหลังคือกลวิธีเดียวกับ<a href="/train">ห้องฝึกของเรา</a> ภาพถูกแปลงเป็น “ลายนิ้วมือ” ที่เป็นตัวเลข แล้วเครื่องหาสินค้าที่ลายนิ้วมือใกล้ที่สุด</p>
+        <p class="en" lang="en">Some self-checkouts and shop scales have a camera above the tray. Put down loose fruit with no barcode and it suggests what it might be. Underneath is the same trick as <a href="/train">our training room</a>: the picture becomes a fingerprint of numbers, and the machine looks for the products whose fingerprints are nearest.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">มอง</span><span class="en" lang="en">Look</span></strong><br><span class="th" lang="th">กล้องเหนือถาดชั่ง</span><span class="en" lang="en">A camera over the tray</span></li>
+        <li><strong><span class="th" lang="th">ตัดพื้นหลัง</span><span class="en" lang="en">Separate</span></strong><br><span class="th" lang="th">ไม่สนใจถาด เหลือแต่สินค้า</span><span class="en" lang="en">Ignore the tray; keep only the item</span></li>
+        <li><strong><span class="th" lang="th">ลายนิ้วมือ</span><span class="en" lang="en">Fingerprint</span></strong><br><span class="th" lang="th">โครงข่ายแปลงสินค้าเป็นชุดตัวเลข</span><span class="en" lang="en">A network turns the item into numbers</span></li>
+        <li><strong><span class="th" lang="th">เสนอ</span><span class="en" lang="en">Suggest</span></strong><br><span class="th" lang="th">แสดงสินค้าที่ใกล้ที่สุดสองสามอย่าง ให้คุณเลือก</span><span class="en" lang="en">Show the nearest few products; you choose</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>ของที่หน้าตาคล้ายกัน มะนาวกับส้มเขียวลูกเล็ก มะม่วงสองสายพันธุ์ เครื่องจึงเสนอหลายตัวเลือกแล้วให้คุณเลือกเอง</li>
+          <li>ถุงพลาสติก มือที่ติดเข้ามาในภาพ สินค้าใหม่ที่ร้านลืมเพิ่ม ลายนิ้วมือที่ “ใกล้ที่สุด” ก็ยังเป็นคำตอบ แม้ว่ามันจะอยู่ไกลมากก็ตาม</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Lookalikes: limes and small green oranges, two kinds of mango. That is why it offers choices and lets you pick.</li>
+          <li>A plastic bag, a hand in the picture, a new product the shop forgot to add: the nearest fingerprint is still the answer, even when it is far away.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="crops" aria-labelledby="crops-h">
+    <header><span class="chapter-no">07</span><h2 id="crops-h"><span class="th" lang="th">แอปตรวจโรคพืช</span><span class="en" lang="en">Crop disease apps</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">ถ่ายรูปใบที่เป็นโรค แล้วแอปก็บอกชื่อโรค แอปเหล่านี้จัดกลุ่มภาพเทียบกับโรคที่มันเคยถูกฝึกมา ช่วยให้เกษตรกรตั้งคำถามที่ถูกได้เร็วขึ้น แต่ก็ผิดได้อย่างมั่นใจเช่นกัน</p>
+        <p class="en" lang="en">Photograph a sick leaf, get the name of a disease. These apps classify the photo against the diseases they were trained on. They can help a farmer ask the right question sooner. They can also be confidently wrong.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">ถ่าย</span><span class="en" lang="en">Photograph</span></strong><br><span class="th" lang="th">รูปใบไม้หนึ่งใบหรือหลายใบ</span><span class="en" lang="en">One leaf, or several</span></li>
+        <li><strong><span class="th" lang="th">หา</span><span class="en" lang="en">Find</span></strong><br><span class="th" lang="th">หาตัวใบ และจุดที่ผิดปกติ</span><span class="en" lang="en">Find the leaf and the damaged patches</span></li>
+        <li><strong><span class="th" lang="th">ให้คะแนน</span><span class="en" lang="en">Score</span></strong><br><span class="th" lang="th">โครงข่ายให้คะแนนทุกโรคที่มันรู้จัก</span><span class="en" lang="en">A network scores every disease it knows</span></li>
+        <li><strong><span class="th" lang="th">ตอบ</span><span class="en" lang="en">Answer</span></strong><br><span class="th" lang="th">แสดงคำตอบอันดับแรก ซึ่งควรมาพร้อมความมั่นใจ</span><span class="en" lang="en">Show the top answer — ideally with its confidence</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>แบบจำลองรุ่นแรก ๆ หลายตัวฝึกจากรูปใบไม้ที่ถ่ายทีละใบบนพื้นเรียบ รูปจากแปลงจริงที่มีหลายใบ แดดจัด และดิน เป็นภาพคนละแบบ ความแม่นยำจึงลดลงได้มาก</li>
+          <li>มันบอกได้แค่ชื่อโรคที่เคยถูกสอน อาการขาดธาตุอาหาร หรือแมลงที่มันไม่เคยเห็น จะถูกเรียกด้วยชื่อของสิ่งที่มันเคยเห็นแทน</li>
+          <li>พืชและสายพันธุ์ไทยอาจมีน้อยในชุดข้อมูลฝึก ถามได้เสมอว่าแอปนี้ฝึกจากอะไร</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Many early models were trained on leaves photographed one at a time on plain backgrounds. A field photo — many leaves, harsh sun, soil — is a different picture, and accuracy can drop sharply.</li>
+          <li>It can only name diseases it was taught. A nutrient shortage or a pest it never saw gets the name of something it did see.</li>
+          <li>Thai crops and Thai varieties may be rare in the training data. It is always fair to ask what an app was trained on.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="traffic" aria-labelledby="traffic-h">
+    <header><span class="chapter-no">08</span><h2 id="traffic-h"><span class="th" lang="th">กล้องจราจรและกล้องน้ำ</span><span class="en" lang="en">Traffic and flood cameras</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">กล้องบนเว็บนี้ติดตั้งไว้ให้คนดูถนนและระดับน้ำ หน่วยงานต่าง ๆ ยังใช้ซอฟต์แวร์กับกล้องแบบนี้ เช่น นับรถเพื่อปรับจังหวะไฟจราจร หารถที่จอดเสีย หรือวัดระดับน้ำเทียบกับเสาวัด กล้องตรวจจับการกระทำผิดไปไกลกว่านั้น คืออ่านป้ายทะเบียน เรานับ แต่ไม่อ่านป้ายทะเบียน</p>
+        <p class="en" lang="en">The cameras on this site were installed so people can watch roads and water. Agencies also run software on cameras like these: counting vehicles to time traffic lights, spotting stalled cars, reading water against a marked gauge. Enforcement cameras go further and read number plates. We count; we never read plates.</p>
+      </div>
+      <ol class="steps" aria-label="Pipeline">
+        <li><strong><span class="th" lang="th">มอง</span><span class="en" lang="en">Look</span></strong><br><span class="th" lang="th">กล้องติดตั้งตายตัว มุมเดิมทั้งวัน</span><span class="en" lang="en">A fixed camera, the same view all day</span></li>
+        <li><strong><span class="th" lang="th">ตรวจจับ</span><span class="en" lang="en">Detect</span></strong><br><span class="th" lang="th">หารถในภาพ (เว็บนี้ใช้ SSDLite MobileNetV2)</span><span class="en" lang="en">Find vehicles (here: SSDLite MobileNetV2)</span></li>
+        <li><strong><span class="th" lang="th">ติดตาม</span><span class="en" lang="en">Follow</span></strong><br><span class="th" lang="th">ตามรถแต่ละคันข้ามภาพ เพื่อไม่ให้นับซ้ำ</span><span class="en" lang="en">Follow each one across frames so it counts once</span></li>
+        <li><strong><span class="th" lang="th">นับแล้วส่งต่อ</span><span class="en" lang="en">Count, then act</span></strong><br><span class="th" lang="th">รายงานจราจร ตั้งเวลาไฟ หรือแจ้งเตือน</span><span class="en" lang="en">Traffic report, signal timing, an alert</span></li>
+      </ol>
+      <div class="prose">
+        <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
+        <ul class="th" lang="th">
+          <li>ฝนตอนกลางคืนทำให้ไฟหน้ารถเป็นเส้นยาว รถเมล์หนึ่งคันบังมอเตอร์ไซค์ได้สามคัน “ตรวจไม่พบ” ไม่ได้แปลว่า “ไม่มี”</li>
+          <li>กล้องที่หยุดส่งภาพ สำหรับโปรแกรมที่ไม่รอบคอบ ดูเหมือนถนนว่าง ของเราจะบอกว่า “ไม่มีภาพ” ไม่ใช่ “ไม่มีรถ”</li>
+          <li>จะนับใครเป็นเรื่องที่คนเลือก ตัวตรวจจับเดียวกับที่นับรถใช้ตามคนก็ได้ สิ่งที่ห้ามไม่ให้ทำคือกติกาของมนุษย์ อ่าน<a href="/legal">กติกาของเรา</a> หรือดูมันทำงานจริงที่<a href="/cameras">หน้ากล้อง</a></li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>Night rain turns headlights into long streaks; one bus hides three motorcycles. “Not detected” never means “not there”.</li>
+          <li>To a careless program, a camera that stops sending looks like an empty road. Ours says “no picture”, not “no cars”.</li>
+          <li>Who gets counted is a human choice. The detector that counts cars could follow a person; what stops it is rules made by people. Read <a href="/legal">ours</a>, or watch it work on <a href="/cameras">the cameras</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter case" id="bench" aria-labelledby="bench-h">
+    <header><span class="chapter-no">09</span><h2 id="bench-h"><span class="th" lang="th">ลองขั้นแรกด้วยตัวเอง</span><span class="en" lang="en">Try step one yourself</span></h2></header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">สองเรื่องข้างบนเริ่มต้นด้วยการตัดสินทุกพิกเซลว่ามืดหรือสว่าง ยก QR code หน้าหนังสือ หรือกระดาษสักแผ่นขึ้นหน้ากล้อง แล้วดูเครื่องทำแบบเดียวกัน</p>
+        <p class="en" lang="en">Two of the cases above begin by deciding, for every pixel, light or dark. Hold up a QR code, a page of a book or a sheet of paper, and watch the machine do it.</p>
+        <p class="th" lang="th"><strong>มืดหรือสว่าง</strong> คือสิ่งแรกที่เครื่องอ่าน QR ทำ ปุ่มอัตโนมัติเลือกค่าขีดแบ่งด้วยวิธีของ Otsu (1979) คือค่าที่แบ่งพิกเซลเป็นสองกลุ่มได้ขาดที่สุด เลื่อนเองก็ได้ แล้วดูว่า QR หายไปเมื่อไร</p>
+        <p class="en" lang="en"><strong>Light or dark</strong> is what a QR reader does first. Auto picks the threshold by Otsu's method (1979): the value that splits the pixels into two groups most cleanly. Slide it yourself and see when the code falls apart.</p>
+        <p class="th" lang="th"><strong>หากระดาษ</strong> คือสิ่งแรกที่เครื่องสแกนทำ บริเวณสว่างที่ใหญ่ที่สุดจะได้กรอบพร้อมตัวเลขสองตัว คือกินพื้นที่กี่เปอร์เซ็นต์ของภาพ และเต็มกรอบของตัวเองแค่ไหน กระดาษแบนที่มองตรง ๆ จะเต็มกรอบเกือบหมด ตัวเลขเหล่านี้เป็นการวัด ไม่ใช่ความมั่นใจของแบบจำลองที่ฝึกมา ผนังขาวก็หลอกมันได้</p>
+        <p class="en" lang="en"><strong>Find the paper</strong> is what a scanner does first. The largest light region gets a box and two numbers: how much of the frame it covers, and how fully it fills its own box. A flat sheet seen straight on fills nearly all of it. These are measurements, not a trained model's confidence — and a white wall will fool them.</p>
+        <div class="cta">
+          <button class="btn primary big" type="button" data-mine>● <span class="th" lang="th">ใช้กล้องของฉัน</span><span class="en" lang="en">Use my camera</span></button>
+        </div>
+        <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน ถ้าไม่มีกล้อง เครื่องจะใช้กล้องสาธารณะแทน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere. Without a camera, the bench uses a public one instead.</span></p>
+      </div>
+      <div class="bench" data-bench aria-label="Light-or-dark bench">
+        <div data-bar></div>
+        <div class="bench-view">
+          <canvas data-view role="img" aria-label="The picture, reduced to light and dark by the machine"></canvas>
+          <div class="bench-state" data-state>…</div>
+        </div>
+        <div class="controls" role="group" aria-label="Step">
+          <button class="btn" type="button" data-mode="threshold" aria-pressed="true"><span class="th" lang="th">มืดหรือสว่าง</span><span class="en" lang="en">Light or dark</span></button>
+          <button class="btn" type="button" data-mode="page" aria-pressed="false"><span class="th" lang="th">หากระดาษ</span><span class="en" lang="en">Find the paper</span></button>
+          <button class="btn" type="button" data-auto aria-pressed="true"><span class="th" lang="th">อัตโนมัติ (Otsu)</span><span class="en" lang="en">Auto (Otsu)</span></button>
+        </div>
+        <div class="slider">
+          <label for="everyday-t"><span class="th" lang="th">ค่าขีดแบ่ง (0 ดำ – 255 ขาว)</span><span class="en" lang="en">Threshold (0 black – 255 white)</span></label>
+          <output for="everyday-t" data-t-out>128</output>
+          <input type="range" id="everyday-t" min="0" max="255" value="128" data-t>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/everyday.js?v={{v}}"></script>
+</body>
+</html>

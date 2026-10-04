@@ -1,0 +1,6 @@
+logs/
+data/cameras.json
+data/*.tmp
+node_modules/
+.DS_Store
+.claude/

@@ -1,0 +1,6 @@
+tunnel: a2d2948a-6dab-4641-b2df-47703f7918ec
+credentials-file: /Users/axiom/.cloudflared/a2d2948a-6dab-4641-b2df-47703f7918ec.json
+ingress:
+  - hostname: vision.nonarkara.org
+    service: http://127.0.0.1:8430
+  - service: http_status:404

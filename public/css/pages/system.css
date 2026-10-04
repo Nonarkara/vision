@@ -1,0 +1,22 @@
+/* /system — diagrams, rules and a live status block. Only what vision.css lacks. */
+
+.sys h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }
+.sys .prose h3:first-child { margin-top: 0; }
+.sys code { font-family: var(--mono); font-size: 0.875em; overflow-wrap: anywhere; }
+
+/* Flow diagrams are drawn 400 units wide so their 13px labels stay readable on a phone. */
+.diagram.flow { max-width: 520px; }
+.diagram .dash { stroke-dasharray: 5 5; }
+
+/* Live status: the figures strip, inside a chapter. */
+.status-figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 2px; }
+.status-figures .figure { padding: 16px 16px 20px; background: var(--black); color: var(--white); }
+.status-controls { background: transparent; align-items: center; gap: 16px; }
+.field-ink .table tbody tr:nth-child(odd) { background: var(--black-2); }
+.field-ink .table th { background: var(--black); color: var(--white); }
+
+/* What we chose not to build: a numbered list, each refusal with its reason. */
+.refusals { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--gap); counter-reset: refusal; }
+.refusals li { display: flex; flex-direction: column; gap: 8px; max-width: 40ch; margin: 0; counter-increment: refusal; }
+.refusals li::before { content: counter(refusal, decimal-leading-zero); font-family: var(--mono); font-size: var(--micro); }
+.refusals strong { font-size: var(--body); }

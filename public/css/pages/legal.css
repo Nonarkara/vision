@@ -1,0 +1,14 @@
+/* /legal — plain terms. Only what vision.css lacks. */
+
+.terms h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }
+.terms .prose h3:first-child { margin-top: 0; }
+.updated { margin: 16px 0 0; }
+
+/* The summary reuses the home page's promise list, inside a chapter. */
+.short-list { padding: 0; }
+
+/* Rules: numbered, one per line of thought. */
+.rules { margin: 0; padding-left: 1.4em; max-width: 62ch; display: grid; gap: 0.9em; }
+.rules li::marker { font-family: var(--mono); font-size: var(--micro); }
+
+.contact .btn { max-width: 100%; overflow-wrap: anywhere; text-align: center; }

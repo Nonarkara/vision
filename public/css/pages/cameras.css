@@ -1,0 +1,102 @@
+/* /cameras — the map, the list, the bench and the census.
+ * Only what vision.css does not already have. Squares, solid fields, no borders. */
+
+/* Kind swatches: the same squares the map draws. Bright = a machine can read it. */
+.sw { display: inline-block; width: 10px; height: 10px; margin-right: 8px; vertical-align: 0; flex: none; }
+.sw-video { background: var(--naples); width: 12px; height: 12px; }
+.sw-still { background: var(--naples); opacity: 0.85; }
+.sw-view { background: transparent; outline: 1px solid var(--gray); outline-offset: -1px; }
+.sw-off { background: var(--gray); opacity: 0.45; width: 7px; height: 7px; }
+.sw-picked { background: var(--signal); }
+/* On paper, the bright squares need ink around them to be seen at all. */
+.kinds .sw-video, .kinds .sw-still, .cam-list .sw-video, .cam-list .sw-still { outline: 1px solid var(--text); outline-offset: 0; }
+.kinds .sw-view, .cam-list .sw-view { outline-color: var(--text); }
+.kinds .sw-off, .cam-list .sw-off { background: var(--text); }
+
+/* A. Four kinds */
+.kinds { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--gap); }
+.kinds dt { font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; }
+.kinds dd { margin: 0; font-size: var(--micro); max-width: 46ch; }
+
+/* B. The map and the list */
+.atlas { padding: clamp(48px, 7vw, 112px) 0 0; }
+.atlas-head { display: grid; gap: 12px; padding: 0 var(--gutter) var(--gap); }
+.atlas-head h2 { margin-bottom: 0.2em; }
+.atlas-head .chapter-no { font-family: var(--mono); font-size: var(--micro); }
+.atlas-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 0; align-items: start; }
+@media (max-width: 1000px) { .atlas-grid { grid-template-columns: 1fr; } }
+
+
+.map-view { position: relative; height: min(76vh, 820px); min-height: 420px; background: var(--black); }
+.map-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: pan-y; }
+@media (max-width: 1000px) { .map-view { height: min(118vw, 720px); min-height: 380px; } }
+.map-tools { align-items: center; }
+.map-tools .btn { font-size: var(--body); }
+.map-tools .btn:last-of-type { font-size: var(--micro); }
+.map-zoom { padding: 0 12px; font-size: var(--micro); color: var(--gray); }
+.legend { list-style: none; margin: 0; padding: 12px 16px 0; display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--gray); }
+.legend li { display: flex; align-items: center; }
+.map-hint { margin: 0; padding: 8px 16px 0; color: var(--gray); }
+.picked { display: flex; flex-direction: column; gap: 4px; font-family: var(--sans); min-height: 7.5em; }
+html[data-lang="th"] .picked { font-family: var(--thai); }
+.picked .micro { color: var(--gray); }
+.picked-name { font-size: var(--body); font-weight: 600; }
+.picked-why { color: var(--naples) !important; }
+.picked-actions { margin-top: 8px; background: transparent; }
+
+.atlas-side { min-width: 0; padding: 0 var(--gutter) var(--gap); }
+.filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 16px; padding: 0 0 16px; align-items: end; }
+.filters label { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.filters-q { grid-column: 1 / -1; }
+.filters .btn { justify-self: start; }
+@media (min-width: 1300px) { .filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; } .filters-q { grid-column: auto; } }
+.list-count { margin: 0 0 8px; }
+
+.cam-list { list-style: none; margin: 0; padding: 0; }
+.cam-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 16px; align-items: center; padding: 10px 12px; margin: 0;
+}
+.cam-row:nth-child(odd) { background: color-mix(in srgb, var(--gray) 35%, transparent); }
+.cam-row.is-picked { background: var(--field); color: var(--field-text); }
+.cam-row.is-picked .sw-video, .cam-row.is-picked .sw-still { outline-color: var(--field-text); }
+.cam-name { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cam-pick {
+  background: transparent; border: 0; padding: 0; margin: 0; cursor: pointer; text-align: left;
+  font-weight: 600; font-size: var(--micro); line-height: 1.4; min-height: var(--target);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.22em;
+}
+.cam-pick:hover { text-decoration-thickness: 2px; }
+.cam-loc { opacity: 0.8; }
+.cam-kind { display: flex; align-items: baseline; }
+.cam-kind .sw { align-self: center; }
+.cam-actions { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
+.cam-actions .btn { padding: 0 12px; }
+@media (max-width: 700px) {
+  .cam-row { grid-template-columns: minmax(0, 1fr); }
+  .cam-actions { justify-content: flex-start; }
+}
+.pager { background: transparent; align-items: center; margin-top: 16px; }
+.pager-at { padding: 0 16px; font-size: var(--micro); }
+
+/* C. The bench */
+.cam-bench-wrap { gap: 0; }
+.cam-bench-wrap .specimen-bar { padding: 8px 16px; }
+/* On a phone the bar is tall; sticking it would cover the picture it describes. */
+@media (max-width: 760px) { .cam-bench-wrap .specimen-bar { position: static; } }
+
+/* D. The census */
+.census { gap: 16px; }
+.census-controls { background: transparent; align-items: flex-end; gap: 2px; }
+.census-n { display: flex; flex-direction: column; gap: 6px; margin-right: 14px; }
+.census-n .field-input { width: 6rem; }
+.census-status { padding: 12px 0; min-height: 4.5em; }
+.census-result { display: grid; gap: 24px; }
+.census-mean { color: var(--gray); }
+.census-total { background: var(--black); }
+.census-total .micro { color: var(--gray); }
+.census .tile-meta { display: flex; flex-direction: column; gap: 4px; }
+.census-src { color: var(--gray); }
+.census-found { color: var(--white); }
+.census-caveat { max-width: 80ch; }
+.census-caveat p { margin: 0; }

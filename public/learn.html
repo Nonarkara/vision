@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/learn.css?v={{v}}">
+<title>Learn — How a computer sees, in eight chapters · เรียนรู้ว่าเครื่องมองอย่างไร</title>
+<meta name="description" content="Eight short chapters, from 'a picture is numbers' to 'what it cannot do', each with a live instrument you can point at a Thai public camera, your own webcam or a photo. In Thai and English; everything runs in your browser.">
+</head>
+<body>
+<!--#nav-->
+<main id="main" class="learn">
+
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span></span>
+      <h1><span class="th" lang="th">เครื่องมองอย่างไร<br>ทีละขั้น</span><span class="en" lang="en">How it looks,<br>step by step</span></h1>
+    </div>
+    <div>
+      <p class="lede th" lang="th">ทุกบทศึกษาภาพเดียวกัน เลือกได้จากแถบสีดำด้านล่าง จะเป็นกล้องสาธารณะ กล้องของคุณเอง หรือรูปของคุณก็ได้ เปลี่ยนเมื่อไรก็ได้ เครื่องมือทุกบทจะเปลี่ยนตาม</p>
+      <p class="lede en" lang="en">Every chapter studies the same picture, chosen in the black bar below: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p>
+      <div class="cta">
+        <button class="btn primary" type="button" data-learn-mine>● <span class="th" lang="th">ใช้กล้องของฉันทั้งหน้า</span><span class="en" lang="en">Use my camera for the whole page</span></button>
+      </div>
+      <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+    </div>
+  </header>
+
+  <div data-specimen-slot></div>
+
+  <nav class="learn-toc" aria-label="Chapters">
+    <a href="#numbers"><span class="num">01</span> <span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></a>
+    <a href="#colour"><span class="num">02</span> <span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span></a>
+    <a href="#threshold"><span class="num">03</span> <span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span></a>
+    <a href="#convolution"><span class="num">04</span> <span class="th" lang="th">หน้าต่างเล็ก ๆ</span><span class="en" lang="en">A sliding window</span></a>
+    <a href="#edges"><span class="num">05</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></a>
+    <a href="#motion"><span class="num">06</span> <span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span></a>
+    <a href="#detector"><span class="num">07</span> <span class="th" lang="th">โครงข่ายที่ฝึกแล้ว</span><span class="en" lang="en">A trained network</span></a>
+    <a href="#limits"><span class="num">08</span> <span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></a>
+  </nav>
+
+  <!-- 01 -->
+  <section class="chapter" id="numbers" data-chapter="numbers" aria-labelledby="numbers-title">
+    <header>
+      <span class="chapter-no">01 / 08</span>
+      <h2 id="numbers-title"><span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่าพิกเซล คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
+        <p class="en" lang="en">A picture on a screen is made of tiny squares called pixels. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
+        <p class="th" lang="th">เลื่อนแถบให้เหลือช่องน้อยลง แล้วตัวเลขจะปรากฏในช่อง ภาพจากกล้องจริงหนึ่งภาพมีตัวเลขแบบนี้หลายล้านตัว ทุกอย่างที่เหลือในหน้านี้คือการคิดเลขกับตารางนี้</p>
+        <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="slider">
+          <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
+          <output for="cols" data-cols-out></output>
+          <input id="cols" type="range" min="6" max="96" step="1" value="16" data-cols>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="chapter field-quiet" id="colour" data-chapter="colour" aria-labelledby="colour-title">
+    <header>
+      <span class="chapter-no">02 / 08</span>
+      <h2 id="colour-title"><span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">ภาพสีเก็บตัวเลขสามตัวต่อหนึ่งพิกเซล คือ แดง เขียว และน้ำเงิน (R G B) แต่ละตัวมีค่า 0 ถึง 255 จอของคุณผสมแสงสามสีนี้เข้าด้วยกัน ตาเราจึงเห็นเป็นสีเดียว</p>
+        <p class="en" lang="en">A colour picture stores three numbers per pixel: red, green and blue (R G B), each from 0 to 255. Your screen mixes those three lights, and your eye sees one colour.</p>
+        <p class="th" lang="th">ดูทีละช่องสีแล้วจะเห็นว่าท้องฟ้าสว่างในช่องน้ำเงิน ต้นไม้สว่างในช่องเขียว ไฟท้ายรถสว่างในช่องแดง เครื่องใช้ความต่างแบบนี้แยกสิ่งต่าง ๆ ออกจากกันได้ ก่อนจะรู้ด้วยซ้ำว่าสิ่งนั้นคืออะไร</p>
+        <p class="en" lang="en">Look at one channel at a time: sky is bright in blue, trees in green, tail-lights in red. A machine can use differences like these to tell things apart before it knows what anything is.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ถือของสีแดงไว้หน้ากล้องของคุณ แล้วดูว่ามันสว่างในช่องไหน</span><span class="en" lang="en">Hold something red up to your camera. Which channel lights up?</span></p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ภาพแยกเป็นช่องแดง เขียว น้ำเงิน · The picture split into red, green and blue"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="controls" role="group" aria-label="Channel">
+          <button class="btn" type="button" data-channel="grid" aria-pressed="true"><span class="th" lang="th">ทั้งสี่</span><span class="en" lang="en">All four</span></button>
+          <button class="btn" type="button" data-channel="r" aria-pressed="false"><span class="th" lang="th">แดง</span><span class="en" lang="en">Red</span> R</button>
+          <button class="btn" type="button" data-channel="g" aria-pressed="false"><span class="th" lang="th">เขียว</span><span class="en" lang="en">Green</span> G</button>
+          <button class="btn" type="button" data-channel="b" aria-pressed="false"><span class="th" lang="th">น้ำเงิน</span><span class="en" lang="en">Blue</span> B</button>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="chapter" id="threshold" data-chapter="threshold" aria-labelledby="threshold-title">
+    <header>
+      <span class="chapter-no">03 / 08</span>
+      <h2 id="threshold-title"><span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">วิธีที่ง่ายที่สุดในการแยกสิ่งของออกจากพื้นหลัง คือเลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่ง พิกเซลที่สว่างกว่าเส้นนี้นับเป็น “สว่าง” ที่เหลือนับเป็น “มืด” วิธีนี้เรียกว่าการตัดด้วยค่าขีดแบ่ง (thresholding)</p>
+        <p class="en" lang="en">The simplest way to separate something from its background: pick one number as a line. Pixels brighter than the line count as “light”, the rest as “dark”. This is called thresholding.</p>
+        <p class="th" lang="th">กราฟใต้ภาพคือฮิสโตแกรม นับว่ามีพิกเซลกี่จุดในแต่ละระดับความสว่าง ปุ่ม “อัตโนมัติ” ใช้วิธีของโอตสึ (Otsu, 1979) หาเส้นแบ่งที่แยกพิกเซลเป็นสองกลุ่มได้ชัดที่สุด เครื่องสแกนเอกสารยังใช้หลักนี้อยู่ทุกวันนี้</p>
+        <p class="en" lang="en">The chart under the picture is a histogram: how many pixels sit at each brightness. “Automatic” uses Otsu's method (Otsu, 1979) to find the line that splits the pixels most cleanly into two groups. Document scanners still work this way.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ส่องกล้องไปที่กระดาษที่มีตัวหนังสือ แล้วกด “อัตโนมัติ”</span><span class="en" lang="en">Point your camera at a page of writing and press “Automatic”.</span></p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ภาพขาวดำตามเส้นแบ่ง · The picture as light or dark"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="hist-view"><canvas data-hist role="img" aria-label="ฮิสโตแกรมความสว่าง · Brightness histogram"></canvas></div>
+        <div class="slider">
+          <label for="level"><span class="th" lang="th">เส้นแบ่ง (0–255)</span><span class="en" lang="en">The line (0–255)</span></label>
+          <output for="level" data-level-out></output>
+          <input id="level" type="range" min="0" max="255" step="1" value="128" data-level>
+        </div>
+        <div class="controls">
+          <button class="btn" type="button" data-otsu aria-pressed="false"><span class="th" lang="th">อัตโนมัติ (โอตสึ)</span><span class="en" lang="en">Automatic (Otsu)</span></button>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="chapter field-quiet" id="convolution" data-chapter="convolution" aria-labelledby="convolution-title">
+    <header>
+      <span class="chapter-no">04 / 08</span>
+      <h2 id="convolution-title"><span class="th" lang="th">หน้าต่างเล็ก ๆ ที่เลื่อนไป</span><span class="en" lang="en">Sliding a small window</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">วางหน้าต่างขนาด 3×3 ช่องลงบนภาพ เอาตัวเลขเก้าตัวใต้หน้าต่างคูณกับตัวเลขเก้าตัวของ “เคอร์เนล” แล้วบวกกันทั้งหมด ได้พิกเซลใหม่หนึ่งจุด จากนั้นเลื่อนไปหนึ่งช่องแล้วทำซ้ำจนทั่วภาพ ขั้นตอนนี้เรียกว่าคอนโวลูชัน (convolution)</p>
+        <p class="en" lang="en">Lay a 3×3 window on the picture. Multiply the nine numbers under it by the nine numbers of a “kernel”, and add them all up: that is one new pixel. Slide one step and repeat, across the whole picture. This is called convolution.</p>
+        <p class="th" lang="th">เปลี่ยนตัวเลขเก้าตัว ผลก็เปลี่ยน ภาพอาจเบลอ คมขึ้น หรือเหลือแต่ขอบ แตะที่ภาพเพื่อย้ายหน้าต่าง แล้วดูการคำนวณจริงด้านล่าง</p>
+        <p class="en" lang="en">Change the nine numbers and the result changes: blur, sharpen, or nothing but edges. Tap the picture to move the window and watch the real arithmetic below it.</p>
+        <p class="th" lang="th">นี่คือเมล็ดพันธุ์ของโครงข่ายประสาทเทียมแบบคอนโวลูชัน (CNN) ต่างกันเพียงว่าไม่มีใครเลือกตัวเลขให้ CNN มันเรียนรู้ตัวเลขเองจากภาพตัวอย่าง และซ้อนหน้าต่างแบบนี้หลายพันอันเป็นชั้น ๆ (LeCun และคณะ, 1998; Krizhevsky และคณะ, 2012)</p>
+        <p class="en" lang="en">This is the seed of convolutional neural networks (CNNs). The only difference: nobody chooses a CNN's numbers. It learns them from example pictures, and stacks thousands of such windows in layers (LeCun et al., 1998; Krizhevsky et al., 2012).</p>
+      </div>
+      <div class="bench">
+        <div class="bench-view tap"><canvas data-view role="img" aria-label="ภาพหลังผ่านเคอร์เนล แตะเพื่อย้ายหน้าต่าง · The picture after the kernel; tap to move the window"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="controls" role="group" aria-label="Kernel">
+          <button class="btn" type="button" data-kernel="identity" aria-pressed="true"><span class="th" lang="th">เหมือนเดิม</span><span class="en" lang="en">Identity</span></button>
+          <button class="btn" type="button" data-kernel="blur" aria-pressed="false"><span class="th" lang="th">เบลอ</span><span class="en" lang="en">Blur</span></button>
+          <button class="btn" type="button" data-kernel="sharpen" aria-pressed="false"><span class="th" lang="th">คมขึ้น</span><span class="en" lang="en">Sharpen</span></button>
+          <button class="btn" type="button" data-kernel="edges" aria-pressed="false"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></button>
+          <button class="btn" type="button" data-kernel="vertical" aria-pressed="false"><span class="th" lang="th">เส้นตั้ง</span><span class="en" lang="en">Vertical</span></button>
+          <button class="btn" type="button" data-kernel="horizontal" aria-pressed="false"><span class="th" lang="th">เส้นนอน</span><span class="en" lang="en">Horizontal</span></button>
+          <button class="btn" type="button" data-kernel="emboss" aria-pressed="false"><span class="th" lang="th">นูน</span><span class="en" lang="en">Emboss</span></button>
+        </div>
+        <div class="kmath" aria-live="off">
+          <figure><figcaption class="label"><span class="th" lang="th">ใต้หน้าต่าง</span><span class="en" lang="en">Under the window</span></figcaption><div class="kgrid num" data-patch></div></figure>
+          <span class="kop" aria-hidden="true">×</span>
+          <figure><figcaption class="label"><span class="th" lang="th">เคอร์เนล</span><span class="en" lang="en">Kernel</span></figcaption><div class="kgrid num" data-kernel-grid></div></figure>
+          <span class="kop" aria-hidden="true">=</span>
+          <figure><figcaption class="label"><span class="th" lang="th">พิกเซลใหม่</span><span class="en" lang="en">New pixel</span></figcaption><div class="kout num" data-kresult>—</div></figure>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="chapter" id="edges" data-chapter="edges" aria-labelledby="edges-title">
+    <header>
+      <span class="chapter-no">05 / 08</span>
+      <h2 id="edges-title"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">ขอบคือตรงที่ความสว่างเปลี่ยนเร็ว เช่น ตรงที่ตัวรถตัดกับพื้นถนน ตัวกรองโซเบล (Sobel) ใช้หน้าต่างสองแบบจากบทที่แล้ว แบบหนึ่งหาการเปลี่ยนจากซ้ายไปขวา อีกแบบหาจากบนลงล่าง แล้วรวมกันเป็นความแรงของขอบ</p>
+        <p class="en" lang="en">An edge is where brightness changes fast, like where a car meets the road. The Sobel filter uses two windows from the last chapter, one for left-to-right change and one for top-to-bottom, and combines them into edge strength.</p>
+        <p class="th" lang="th">ยิ่งสว่างยิ่งเป็นขอบที่ชัด เพิ่มความไวเพื่อดูขอบจาง ๆ เครื่องยังไม่รู้ว่าเส้นเหล่านี้คืออะไร แต่รูปร่างเริ่มโผล่ขึ้นมาแล้ว ชั้นแรก ๆ ของ CNN ที่ฝึกเสร็จแล้วมักเรียนรู้ตัวกรองที่หน้าตาคล้ายแบบนี้ขึ้นมาเอง</p>
+        <p class="en" lang="en">Brighter means a stronger edge. Raise the gain to see faint ones. The machine still has no idea what any line is, but shape is starting to appear. The first layers of a trained CNN often end up learning filters much like this on their own.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ใช้กล้องของคุณแล้วขยับมือช้า ๆ ขอบนิ้วชัดแค่ไหนเมื่อพื้นหลังสว่างหรือมืด</span><span class="en" lang="en">Use your camera and move a hand slowly. How clear are your fingers against a light or a dark background?</span></p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ความแรงของขอบ · Edge strength"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="slider">
+          <label for="gain"><span class="th" lang="th">ความไว</span><span class="en" lang="en">Gain</span></label>
+          <output for="gain" data-gain-out></output>
+          <input id="gain" type="range" min="0.5" max="5" step="0.25" value="1.5" data-gain>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="chapter field-quiet" id="motion" data-chapter="motion" aria-labelledby="motion-title">
+    <header>
+      <span class="chapter-no">06 / 08</span>
+      <h2 id="motion-title"><span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">เอาภาพตอนนี้ลบด้วยภาพเมื่อครู่ ช่องที่ตัวเลขเปลี่ยนมากกว่าค่าที่ตั้งไว้คือสิ่งที่ขยับ สีส้มคือสิ่งที่เครื่องสังเกตเห็น กรอบคือกลุ่มพิกเซลที่อยู่ติดกัน</p>
+        <p class="en" lang="en">Subtract the picture from a moment ago from the picture now. Squares whose number changed by more than the setting are things that moved. Orange marks what the machine noticed; boxes group pixels that touch.</p>
+        <p class="th" lang="th">ตั้งค่าต่ำเกินไป เครื่องจะจับได้แม้แต่ใบไม้ไหวหรือสัญญาณรบกวนของกล้อง ตั้งสูงเกินไป มันจะพลาดรถที่สีคล้ายถนน ไม่มีค่าไหนถูกต้องเสมอ</p>
+        <p class="en" lang="en">Set it too low and it catches swaying leaves and camera noise. Too high and it misses a car the same colour as the road. No setting is always right.</p>
+        <p class="th" lang="th">กล้องบางตัวส่งภาพนิ่งทุกราว 20 วินาที ไม่ใช่วิดีโอ เครื่องจึงเห็นความเปลี่ยนแปลงได้เฉพาะตอนที่ภาพใหม่มาถึง และในยี่สิบวินาที รถทั้งคันอาจผ่านมาแล้วก็ผ่านไป</p>
+        <p class="en" lang="en">Some cameras send a still picture about every 20 seconds, not video. The machine can only see change when the next picture arrives — and in twenty seconds a whole car can come and go.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">เปิดกล้องของคุณ อยู่นิ่ง ๆ แล้วโบกมือ</span><span class="en" lang="en">Open your camera, keep still, then wave.</span></p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="สิ่งที่เปลี่ยนระหว่างสองภาพ · What changed between two pictures"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="slider">
+          <label for="delta"><span class="th" lang="th">ต้องเปลี่ยนอย่างน้อย (จาก 255)</span><span class="en" lang="en">Minimum change (out of 255)</span></label>
+          <output for="delta" data-delta-out></output>
+          <input id="delta" type="range" min="4" max="80" step="1" value="22" data-delta>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="chapter" id="detector" data-chapter="detector" aria-labelledby="detector-title">
+    <header>
+      <span class="chapter-no">07 / 08</span>
+      <h2 id="detector-title"><span class="th" lang="th">โครงข่ายที่ฝึกแล้วลองเดา</span><span class="en" lang="en">A trained network guesses</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">ทุกอย่างก่อนหน้านี้ทำตามกฎที่คนเขียนไว้ บทนี้ต่างออกไป โครงข่ายประสาทเทียมชื่อ SSDLite-MobileNetV2 เรียนรู้ว่า “รถยนต์” “คน” หรือ “เรือ” หน้าตาเป็นอย่างไร จากภาพที่มีคนติดป้ายไว้กว่าแสนภาพในชุดข้อมูล COCO (Lin และคณะ, 2014) มันดูภาพเพียงครั้งเดียว แล้วเสนอกรอบหลายพันกรอบ แต่ละกรอบมีคะแนน</p>
+        <p class="en" lang="en">Everything so far followed rules a person wrote. This is different. A neural network called SSDLite-MobileNetV2 learned what “car”, “person” and “boat” look like from over a hundred thousand labelled photos in the COCO dataset (Lin et al., 2014). It looks at the picture once and proposes thousands of boxes, each with a score.</p>
+        <p class="th" lang="th">คะแนนคือความมั่นใจของตัวมันเอง ไม่ใช่ความจริง เลื่อนแถบเพื่อเลือกว่ามันต้องมั่นใจแค่ไหนถึงจะพูด ตั้งต่ำไปจะเห็นของที่ไม่มีอยู่จริง ตั้งสูงไปจะพลาดของที่มีอยู่ ทุกระบบจริงต้องเลือกจุดแลกเปลี่ยนนี้</p>
+        <p class="en" lang="en">The score is its own confidence, not the truth. Slide to choose how sure it must be before it speaks. Too low and it sees things that are not there; too high and it misses things that are. Every real system has to choose this trade-off.</p>
+        <p class="th" lang="th">โมเดลมีขนาดราว 17 MB โหลดครั้งเดียวเมื่อคุณกดปุ่ม และคำนวณในเบราว์เซอร์นี้ ไม่มีภาพถูกส่งออกไปไหน</p>
+        <p class="en" lang="en">The model is about 17 MB, loaded once when you press the button, and computes in this browser. No picture is sent anywhere.</p>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="กรอบที่โครงข่ายพบพร้อมความมั่นใจ · Boxes the network found, with confidence"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="controls">
+          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span></button>
+        </div>
+        <div class="slider">
+          <label for="min"><span class="th" lang="th">แสดงเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Show only when at least this sure</span></label>
+          <output for="min" data-min-out></output>
+          <input id="min" type="range" min="10" max="95" step="5" value="50" data-min>
+        </div>
+        <p class="readout" data-readout></p>
+        <div class="bars score-list" data-list></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="chapter field-quiet" id="limits" data-chapter="limits" aria-labelledby="limits-title">
+    <header>
+      <span class="chapter-no">08 / 08</span>
+      <h2 id="limits-title"><span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></h2>
+    </header>
+    <div class="chapter-body split">
+      <div class="prose">
+        <p class="th" lang="th">เลื่อนแถบเพื่อลดจำนวนพิกเซล นี่คือสิ่งที่เครื่องได้รับเมื่อรถอยู่ไกล กล้องราคาถูก หรือภาพถูกบีบอัดมาก เมื่อพิกเซลน้อยลง สิ่งที่มันเห็นก็หายไปทีละอย่าง ทั้งที่รถยังจอดอยู่ตรงนั้น</p>
+        <p class="en" lang="en">Slide to take pixels away. This is what the machine gets when a car is far off, the camera is cheap, or the picture is squeezed hard. As pixels go, its findings vanish one by one — while the car is still standing right there.</p>
+        <ul class="th limits" lang="th">
+          <li><strong>มันรู้เฉพาะสิ่งที่เคยถูกสอน</strong> COCO มี 80 ประเภท ภาพส่วนใหญ่มาจากเว็บ Flickr ไม่มีตุ๊กตุ๊ก ไม่มีสองแถว ไม่มีรถเข็นขายของ มันจะเรียกตุ๊กตุ๊กว่า “รถยนต์” หรือ “รถจักรยานยนต์” หรือไม่เห็นเลย ข้อมูลฝึกที่เอียง ทำให้เครื่องเอียงตาม</li>
+          <li><strong>กลางคืน ฝน หมอก แสงสะท้อน เลนส์สกปรก</strong> ทุกอย่างนี้เปลี่ยนตัวเลขทุกตัวในภาพ เมื่อสภาพต่างจากภาพที่มันเคยเห็นตอนฝึก มันจะพลาดมากขึ้น</li>
+          <li><strong>“ไม่เห็น” ไม่ได้แปลว่า “ไม่มี”</strong> อย่าถือว่าผลว่างเปล่าเป็นหลักฐานว่าถนนว่าง</li>
+          <li><strong>มั่นใจไม่ได้แปลว่าถูก</strong> 90% คือคะแนนที่มันให้ตัวเอง ไม่ใช่โอกาสถูก 90 ใน 100</li>
+          <li><strong>มันบอกได้ว่า “คน” แต่ไม่บอกว่าเป็นใคร</strong> เราไม่จดจำใบหน้าและไม่อ่านป้ายทะเบียน ไม่ว่ากล้องไหน งานวิจัยพบว่าระบบวิเคราะห์ใบหน้าเชิงพาณิชย์ผิดพลาดกับคนบางกลุ่มมากกว่ากลุ่มอื่นอย่างชัดเจน (Buolamwini และ Gebru, 2018) และภายใต้ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ใบหน้าที่ระบุตัวคนได้คือข้อมูลส่วนบุคคล</li>
+        </ul>
+        <ul class="en limits" lang="en">
+          <li><strong>It only knows what it was taught.</strong> COCO has 80 kinds of thing, mostly from photos on Flickr. No tuk-tuk, no songthaew, no street-food cart. It will call a tuk-tuk a “car” or a “motorcycle”, or see nothing. Lopsided training data makes a lopsided machine.</li>
+          <li><strong>Night, rain, fog, glare, a dirty lens.</strong> Each changes every number in the picture. When conditions differ from the pictures it trained on, it misses more.</li>
+          <li><strong>“Not detected” does not mean “not there”.</strong> Never treat an empty result as proof that the road is empty.</li>
+          <li><strong>Confident is not correct.</strong> 90% is the score it gives itself, not a 90-in-100 chance of being right.</li>
+          <li><strong>It can say “person”, never who.</strong> We do not recognise faces or read number plates, on any camera. Research has shown commercial face-analysis systems making far more mistakes for some groups of people than others (Buolamwini &amp; Gebru, 2018), and under Thailand's Personal Data Protection Act (2019) a face that identifies someone is personal data.</li>
+        </ul>
+      </div>
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ภาพที่ลดพิกเซล และสิ่งที่โครงข่ายยังเห็น · The picture with fewer pixels, and what the network still finds"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="controls">
+          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span></button>
+        </div>
+        <div class="slider">
+          <label for="res"><span class="th" lang="th">จำนวนพิกเซลตามแนวนอน</span><span class="en" lang="en">Pixels across</span></label>
+          <output for="res" data-res-out></output>
+          <input id="res" type="range" min="0" max="100" step="1" value="100" data-res>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="field-ink learn-next" aria-labelledby="next-title">
+    <div class="page-head">
+      <h2 id="next-title"><span class="th" lang="th">ต่อจากนี้</span><span class="en" lang="en">Where next</span></h2>
+      <p class="lede th" lang="th">คุณเห็นแล้วว่าเครื่องมองอย่างไร ลองสอนมันเอง หรือหาทางหลอกตามัน</p>
+      <p class="lede en" lang="en">You have seen how it looks. Now teach one yourself, or find ways to fool it.</p>
+    </div>
+    <ol class="index">
+      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span></span><span class="desc"><span class="th" lang="th">สอนด้วยตัวอย่างไม่กี่ภาพจากกล้องของคุณ ฝึกเสร็จในไม่กี่วินาที</span><span class="en" lang="en">Teach it with a few examples from your camera; training takes seconds.</span></span></a></li>
+      <li><a href="/games"><span class="num">04</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง และทายภาพจากพิกเซลน้อยที่สุด</span><span class="en" lang="en">Out-count it, and out-guess it from the fewest pixels.</span></span></a></li>
+      <li><a href="/legal"><span class="num">08</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span></span><span class="desc"><span class="th" lang="th">ทำไมเราไม่ระบุตัวบุคคล และกล้องเป็นของใคร</span><span class="en" lang="en">Why we never identify anyone, and who owns the cameras.</span></span></a></li>
+    </ol>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/learn.js?v={{v}}"></script>
+</body>
+</html>

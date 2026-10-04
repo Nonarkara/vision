@@ -1,0 +1,73 @@
+/* /train — only what vision.css does not already provide. */
+
+/* Transfer learning, in one band */
+.idea { padding: clamp(32px, 5vw, 64px) var(--gutter); display: grid; gap: 24px; }
+.idea-title { font-size: clamp(1.75rem, 2.4vw + 0.8rem, 3rem); }
+.idea .steps { margin: 0; }
+.idea .prose { margin: 0; }
+
+/* The room: camera on the left, classes on the right */
+.room { padding: clamp(40px, 6vw, 96px) var(--gutter); }
+.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 70ch; }
+.room-head .prose { margin: 0; }
+.room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
+
+.room-bench .controls .btn { flex: 1 1 auto; }
+.live { display: grid; gap: 2px; padding: 0 0 2px; }
+.live-head { display: block; padding: 12px 16px 6px; color: var(--gray); }
+.live-head .micro { text-transform: none; letter-spacing: 0; }
+.live-say { color: var(--naples); }
+.bench-note { margin: 0; padding: 4px 16px 16px; color: var(--gray); }
+
+.room-classes { display: grid; gap: 2px; min-width: 0; }
+.preset { display: grid; gap: 6px; padding: 0 0 16px; }
+.klasses { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.klass { display: grid; gap: 2px; padding: 12px 12px 2px; min-width: 0; }
+.klass-head { display: grid; grid-template-columns: var(--target) minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.klass-glyph { display: flex; align-items: center; justify-content: center; min-height: var(--target); font-size: 1.25rem; }
+.klass-name { min-width: 0; }
+.klass-count { font-size: var(--micro); padding: 0 4px; white-space: nowrap; }
+.klass-actions { background: transparent; }
+.klass-actions .btn { flex: 1 1 auto; padding: 0 12px; }
+.klass-hold { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+
+/* Thumbnail strip: scrolls inside itself, never the page */
+.shots { display: flex; gap: 2px; overflow-x: auto; min-height: 52px; padding: 2px 0 10px; scrollbar-width: thin; }
+.shot { position: relative; flex: none; width: 64px; height: 48px; padding: 0; border: 0; background: var(--black); cursor: pointer; }
+.shot canvas { width: 100%; height: 100%; object-fit: cover; }
+.shot:hover::after, .shot:focus-visible::after {
+  content: "×"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--black) 70%, transparent); color: var(--white); font-family: var(--mono);
+}
+.shots-empty { align-self: center; color: var(--gray); }
+.room-more { background: transparent; padding-top: 2px; }
+.tips { margin: 12px 0 0; max-width: 60ch; }
+.room-classes .note { margin: 14px 0 0; }
+
+/* Two learners side by side */
+.learners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); }
+@media (max-width: 900px) { .learners { grid-template-columns: 1fr; } }
+.learner { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.learner h3 { margin: 0; }
+.learner p { margin: 0; }
+.learner .bench-caption { min-height: 0; padding-bottom: 0; }
+.loo { font-size: var(--body); color: var(--naples); }
+.curve-view { aspect-ratio: 16 / 10; }
+
+/* The map */
+.map-view { aspect-ratio: 16 / 9; max-height: 70vh; }
+.map .bench-caption { justify-content: flex-start; }
+.map [data-legend] { color: var(--white); font-family: var(--mono); white-space: pre-wrap; }
+.map-caption { padding-top: 0; max-width: none; }
+
+/* Judge */
+.judge-bench .controls .btn { flex: 1 1 auto; }
+.judge-out { display: grid; gap: var(--gap); }
+.verdict h3 { margin: 0 0 10px; }
+.judge-owner { display: block; color: var(--gray); margin-top: 4px; }
+.judge-owner a { color: var(--white); }
+
+/* Keep */
+.keep { background: transparent; }
+.keep-say { padding-left: 0; }

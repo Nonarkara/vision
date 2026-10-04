@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/story.css?v={{v}}">
+<title>The story · เรื่องเล่า — Vision</title>
+<meta name="description" content="Why this classroom exists: city control rooms full of cameras and nobody watching them, the question that led Dr Non Arkaraprasertkul to computer vision, and how he built this with Dr Supakorn Siddhichai.">
+</head>
+<body class="story">
+<!--#nav-->
+<main id="main">
+
+  <section class="hero" aria-labelledby="title">
+    <img class="hero-shot" src="/img/ioc/nakhon-si-thammarat.jpg" alt="A city operations centre in Nakhon Si Thammarat: a wall of CCTV feeds, and a man explaining it to visitors" width="1200" height="1200">
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="rec" aria-hidden="true"><span class="rec-dot">●</span> REC <span class="num" data-rec-clock></span></div>
+    <div class="hero-text">
+      <span class="eyebrow label"><span class="th" lang="th">เรื่องเล่า · ที่มาของห้องเรียนนี้</span><span class="en" lang="en">The story · why this exists</span></span>
+      <h1><span class="th" lang="th">กล้องเต็มเมือง<br><em>ตา</em>ไม่มีสักคู่</span><span class="en" lang="en">Cameras<br>everywhere.<br><em>Eyes</em> nowhere.</span></h1>
+      <p class="hero-lede th" lang="th">ห้องควบคุมของเมืองมีกล้องเป็นร้อย มีจอเต็มผนัง และมีคนดูอยู่… ในทางทฤษฎี</p>
+      <p class="hero-lede en" lang="en">City control rooms have hundreds of cameras, a wall of screens, and someone watching them. In theory.</p>
+    </div>
+    <p class="hero-cap micro"><span class="th" lang="th">CAM 01 · ศูนย์ปฏิบัติการ เทศบาลนครนครศรีธรรมราช</span><span class="en" lang="en">CAM 01 · Nakhon Si Thammarat Municipality operations centre</span></p>
+  </section>
+
+  <section class="chapter" id="wall" aria-labelledby="wall-h">
+    <header>
+      <span class="chapter-no">01</span>
+      <h2 id="wall-h"><span class="th" lang="th">ผนังจอ</span><span class="en" lang="en">The wall</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p class="big th" lang="th">งานเมืองอัจฉริยะพา ดร.นน อัครประเสริฐกุล ไปเยือนศูนย์ปฏิบัติการเมือง (IOC) มาแล้วหลายแห่ง ทั้งในไทยและต่างประเทศ ทุกแห่งหน้าตาเหมือนกันอย่างน่าขัน: ผนังจอยักษ์ ภาพจากกล้องนับร้อย และเจ้าหน้าที่ไม่กี่คน</p>
+      <p class="big en" lang="en">Smart-city work took Dr Non Arkaraprasertkul through city operations centres — IOCs — at home and abroad. They all looked suspiciously alike: a giant wall of screens, hundreds of camera feeds, and a handful of operators.</p>
+      <p class="th" lang="th">แล้วฉากที่เห็นซ้ำแล้วซ้ำเล่าก็เหมือนกันด้วย คนหนึ่งสัปหงก คนหนึ่งก้มหน้าพิมพ์ไลน์ คนหนึ่งลุกไปพักแล้วพักยาว กล้องทำงานครบทุกตัว ภาพมาครบทุกวินาที <strong>แต่ไม่มีใครดูอยู่จริง ๆ</strong></p>
+      <p class="en" lang="en">And the scene repeated too. One operator dozing. One thumbing a phone. One on a break that quietly became a long break. Every camera worked. Every second of footage arrived. <strong>Nobody was actually watching.</strong></p>
+      <p class="th" lang="th">นี่ไม่ใช่การแซะเจ้าหน้าที่ นี่คือชีววิทยา งานวิจัยเรื่องการเฝ้าระวังตั้งแต่ Mackworth (1948) พบว่าความสามารถในการจับเหตุที่นาน ๆ เกิดสักครั้ง ลดลงตั้งแต่ครึ่งชั่วโมงแรก ไม่มีมนุษย์คนไหนจ้องจอสามสิบจอได้ทั้งกะ และไม่ควรมีใครต้องทำ</p>
+      <p class="en" lang="en">This is not a dig at operators. It's biology. Vigilance research since Mackworth (1948) has found that our ability to catch rare events drops within the first half hour. No human can stare at thirty screens for a whole shift — and no one should have to.</p>
+    </div>
+  </section>
+
+  <section class="exhibits field-black" aria-labelledby="exhibits-h">
+    <div class="exhibits-head">
+      <h2 id="exhibits-h"><span class="th" lang="th">หลักฐาน<br>หกห้อง</span><span class="en" lang="en">Six rooms.<br>Exhibits A–F.</span></h2>
+      <div>
+        <p class="th" lang="th">ภาพจากการไปเยือนจริงของ ดร.นน สังเกตจำนวนจอ แล้วนับเก้าอี้ที่มีคนนั่ง</p>
+        <p class="en" lang="en">From Dr Non's own visits. Count the screens. Then count the chairs with someone in them.</p>
+        <div class="controls">
+          <button class="btn primary" type="button" data-ask><span class="th" lang="th">ให้เครื่องนับจอกับคน</span><span class="en" lang="en">Ask the machine to count</span></button>
+        </div>
+        <p class="readout" data-ask-say aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="shots" data-shots>
+      <figure class="shot" data-shot="shenzhen">
+        <div class="shot-frame"><img src="/img/ioc/shenzhen.jpg" alt="Shenzhen: a wall of CCTV feeds above a row of empty desks and chairs" width="1600" height="1200" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">A · ● REC</span><span class="shot-osd num">22.69869°N 113.77036°E · 2024-09-09 12:27</span></div>
+        <figcaption><span class="th" lang="th">ศูนย์นิทรรศการเซินเจิ้น · จอเต็มผนัง เก้าอี้ว่างทั้งแถว</span><span class="en" lang="en">Shenzhen Exhibition Center · full wall, empty row</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="los-angeles">
+        <div class="shot-frame"><img src="/img/ioc/los-angeles.jpg" alt="Los Angeles transit control room: a video wall, desks and empty chairs, two visitors" width="1280" height="960" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">B · ● REC</span></div>
+        <figcaption><span class="th" lang="th">ลอสแอนเจลิส · ศูนย์ควบคุมระบบขนส่ง</span><span class="en" lang="en">Los Angeles · transit operations</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="patong">
+        <div class="shot-frame"><img src="/img/ioc/patong.jpg" alt="Patong, Phuket: visitors in front of a wall of road camera feeds" width="1600" height="900" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">C · ● REC</span><span class="shot-osd num">7.89826°N 98.30489°E · 2022-09-22 10:21</span></div>
+        <figcaption><span class="th" lang="th">เทศบาลเมืองป่าตอง ภูเก็ต</span><span class="en" lang="en">Patong, Phuket Municipality</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="rawai">
+        <div class="shot-frame"><img src="/img/ioc/rawai.jpg" alt="Rawai, Phuket: smart city officers in front of a CCTV wall" width="1477" height="1108" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">D · ● REC</span></div>
+        <figcaption><span class="th" lang="th">เทศบาลตำบลราไวย์ ภูเก็ต</span><span class="en" lang="en">Rawai, Phuket Municipality</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="new-taipei">
+        <div class="shot-frame"><img src="/img/ioc/new-taipei.jpg" alt="New Taipei City: four people facing a large digital city map on a dark video wall" width="1600" height="1067" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">E · ● REC</span><span class="shot-osd num">2023-09-25 10:18</span></div>
+        <figcaption><span class="th" lang="th">นครนิวไทเป</span><span class="en" lang="en">New Taipei City</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+      <figure class="shot" data-shot="nakhon-si-thammarat">
+        <div class="shot-frame"><img src="/img/ioc/nakhon-si-thammarat.jpg" alt="Nakhon Si Thammarat: a man gestures in front of a grid of CCTV feeds" width="1200" height="1200" loading="lazy"><canvas aria-hidden="true"></canvas><span class="shot-tag">F · ● REC</span></div>
+        <figcaption><span class="th" lang="th">เทศบาลนครนครศรีธรรมราช</span><span class="en" lang="en">Nakhon Si Thammarat Municipality</span><span class="shot-count num" data-count></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="question" aria-label="The question">
+    <p class="th" lang="th">“เราจะรู้ได้อย่างไร<br>ว่าคน<em>ไม่ได้พลาด</em><br>อะไรไป”</p>
+    <p class="en" lang="en">“How do we know<br>the humans <em>didn't miss</em><br>anything?”</p>
+  </section>
+
+  <section class="chapter field-black" id="try" aria-labelledby="try-h">
+    <header>
+      <span class="chapter-no">02</span>
+      <h2 id="try-h"><span class="th" lang="th">ลองนั่งเก้าอี้ตัวนั้น</span><span class="en" lang="en">Sit in the chair</span></h2>
+      <p class="micro"><span class="th" lang="th">กล้องสาธารณะจริงหกตัว เครื่องดูทุกจอพร้อมกัน แล้วชี้ว่าจอไหนมีอะไรเปลี่ยน</span><span class="en" lang="en">Six real public cameras. The machine watches every screen at once and points to the one where something changed.</span></p>
+    </header>
+    <div class="chapter-body">
+      <div class="controls wall-controls">
+        <button class="btn primary" type="button" data-wall-start><span class="th" lang="th">เปิดผนังจอ</span><span class="en" lang="en">Light up the wall</span></button>
+        <button class="btn" type="button" data-wall-watch aria-pressed="false" disabled><span class="th" lang="th">ให้เครื่องช่วยดู</span><span class="en" lang="en">Let the machine watch</span></button>
+        <button class="btn" type="button" data-wall-mine disabled>● <span class="th" lang="th">เอากล้องของฉันขึ้นผนัง</span><span class="en" lang="en">Put my camera on the wall</span></button>
+      </div>
+      <div class="tiles wall" data-wall aria-live="off"></div>
+      <p class="readout" data-wall-say aria-live="polite"></p>
+      <p class="micro wall-note"><span class="th" lang="th">ภาพนิ่งจากกล้องส่วนใหญ่มาใหม่ทุก ~20 วินาที เครื่องจึงเห็นการเปลี่ยนแปลงเมื่อภาพถัดไปมาถึง กล้องของคุณอยู่ในเครื่องนี้เท่านั้น ไม่ถูกส่งไปไหน เครื่องไม่รู้ว่าใครเป็นใคร มันรู้แค่ว่าพิกเซลเปลี่ยน</span><span class="en" lang="en">Most cameras send a still every ~20 seconds, so the machine sees a change when the next one arrives. Your camera stays on this device; nothing is sent anywhere. The machine does not know who anyone is — only that pixels changed.</span></p>
+    </div>
+  </section>
+
+  <section class="chapter" id="idea" aria-labelledby="idea-h">
+    <header>
+      <span class="chapter-no">03</span>
+      <h2 id="idea-h"><span class="th" lang="th">ความเข้าใจแรก</span><span class="en" lang="en">A first understanding</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p class="big th" lang="th">นั่นคือครั้งแรกที่ ดร.นน เข้าใจว่าคอมพิวเตอร์วิทัศน์ควรเป็นอะไร ไม่ใช่หุ่นยนต์มาแย่งงาน ไม่ใช่ระบบที่รู้ว่าใครเป็นใคร แต่คือ <strong>ตาที่ไม่กะพริบ</strong> ที่ดูทุกจอพร้อมกัน แล้วสะกิดคนว่า “จอนี้ ตอนนี้”</p>
+      <p class="big en" lang="en">That's when Dr Non first understood what computer vision ought to be. Not a robot taking the job. Not a system that knows who anyone is. <strong>An eye that doesn't blink</strong> — watching every screen at once and tapping the human on the shoulder: “this one, now.”</p>
+      <p class="th" lang="th">คนยังเป็นคนตัดสินใจ เครื่องแค่ทำให้คนไม่ต้องจ้องจอว่างเก้าสิบเก้าจอ เพื่อจะได้เห็นจอที่หนึ่งร้อยที่สำคัญ และทุกครั้งที่สะกิด เครื่องต้องบอกด้วยว่ามั่นใจแค่ไหน เพราะเครื่องก็หลับในได้ แค่หลับในคนละแบบ</p>
+      <p class="en" lang="en">The person still decides. The machine just spares them ninety-nine empty screens so they catch the hundredth that matters. And every tap comes with a confidence number — because machines doze off too. Just differently.</p>
+    </div>
+  </section>
+
+  <section class="chapter field-quiet" id="teacher" aria-labelledby="teacher-h">
+    <header>
+      <span class="chapter-no">04</span>
+      <h2 id="teacher-h"><span class="th" lang="th">แล้วก็มีครู</span><span class="en" lang="en">Then came a teacher</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p class="big th" lang="th">ความเข้าใจแรกยังไม่ใช่ความรู้ ความรู้มาเมื่อ ดร.นน ได้รู้จัก ดร.ศุภกร สิทธิไชย ผู้จบปริญญาเอกด้านคอมพิวเตอร์วิทัศน์จาก Imperial College London ปัจจุบันเป็นรักษาการผู้อำนวยการใหญ่ สำนักงานส่งเสริมเศรษฐกิจดิจิทัล (ดีป้า) ที่ ดร.นน ทำงานอยู่</p>
+      <p class="big en" lang="en">A first understanding is not yet knowledge. That arrived when Dr Non got to know Dr Supakorn Siddhichai — PhD in computer vision from Imperial College London, now acting CEO of depa, the Digital Economy Promotion Agency, where Dr Non works.</p>
+      <p class="th" lang="th">ดร.นน เรียนจาก ดร.ศุภกร ว่าเครื่องเห็นอะไรจริง ๆ ตั้งแต่ตัวเลขในพิกเซล ขอบ การเคลื่อนไหว ไปจนถึงโครงข่ายประสาทเทียมที่เดาพร้อมบอกความมั่นใจ แล้วทั้งสองก็สร้างระบบนี้ด้วยกัน บนกล้องสาธารณะจริงของประเทศไทย ห้องเรียนนี้เรียงตามทางที่ ดร.นน เดินมา เพื่อให้นักเรียน เจ้าหน้าที่ IOC และผู้บริหารเมือง เข้าใจแบบเดียวกัน</p>
+      <p class="en" lang="en">Dr Non learned from Dr Supakorn what a machine actually sees — numbers in pixels, edges, motion, networks that guess and say how sure they are — and together they built this system on Thailand's real public cameras. The classroom follows the path Dr Non walked, so that a student, an IOC operator and a city executive can all arrive at the same understanding.</p>
+      <p><a class="btn primary big" href="/learn"><span class="th" lang="th">เดินตามทางเดียวกัน →</span><span class="en" lang="en">Walk the same path →</span></a></p>
+    </div>
+  </section>
+
+  <section class="chapter" id="creators" aria-labelledby="creators-h">
+    <header>
+      <span class="chapter-no">05</span>
+      <h2 id="creators-h"><span class="th" lang="th">ผู้สร้าง</span><span class="en" lang="en">The makers</span></h2>
+    </header>
+    <div class="chapter-body creators">
+      <article class="creator" aria-labelledby="non-h">
+        <img class="portrait" src="/img/non.jpg" alt="ดร.นน อัครประเสริฐกุล · Dr Non Arkaraprasertkul" width="480" height="480">
+        <div>
+          <span class="label"><span class="th" lang="th">ผู้สร้าง</span><span class="en" lang="en">Creator</span></span>
+          <h3 id="non-h"><span class="th" lang="th">ดร.นน อัครประเสริฐกุล</span><span class="en" lang="en">Dr Non Arkaraprasertkul</span></h3>
+          <p class="role"><span class="th" lang="th">ผู้เชี่ยวชาญอาวุโส ฝ่ายส่งเสริมเมืองอัจฉริยะ สำนักงานส่งเสริมเศรษฐกิจดิจิทัล (depa)</span><span class="en" lang="en">Senior Expert, Smart City Promotion Department · Digital Economy Promotion Agency (depa)</span></p>
+          <p class="th" lang="th">ผู้ริเริ่มและดูแลโครงการ <a href="https://flood.nonarkara.org/">FloodDash</a> — ระบบเฝ้าระวังน้ำท่วมเรียลไทม์สำหรับประเทศไทย เพื่อให้ทุกจังหวัดเข้าถึงข้อมูลสถานการณ์น้ำจากแหล่งข้อมูลภาครัฐได้อย่างโปร่งใส ผ่านสำนักงานเมืองอัจฉริยะประเทศไทย ผนังกล้องของ FloodDash คือสิ่งที่ห้องเรียนนี้ใช้</p>
+          <p class="en" lang="en">Initiator and steward of <a href="https://flood.nonarkara.org/">FloodDash</a> — a real-time, openly-sourced flood watch built so every Thai province can read the same situation picture from official public data, delivered under the Smart City Thailand Office (depa). FloodDash's camera wall is what this classroom runs on.</p>
+        </div>
+      </article>
+      <article class="creator" aria-labelledby="sup-h">
+        <div class="monogram" aria-hidden="true">SS</div>
+        <div>
+          <span class="label"><span class="th" lang="th">ร่วมสร้าง · คอมพิวเตอร์วิทัศน์</span><span class="en" lang="en">Co-creator · computer vision</span></span>
+          <h3 id="sup-h"><span class="th" lang="th">ดร.ศุภกร สิทธิไชย</span><span class="en" lang="en">Dr Supakorn Siddhichai</span></h3>
+          <p class="role"><span class="th" lang="th">รักษาการผู้อำนวยการใหญ่ สำนักงานส่งเสริมเศรษฐกิจดิจิทัล (depa)</span><span class="en" lang="en">Acting CEO · Digital Economy Promotion Agency (depa)</span></p>
+          <p class="th" lang="th">ปริญญาเอกด้านคอมพิวเตอร์วิทัศน์ จาก Imperial College London ผู้ที่ ดร.นน เรียนคอมพิวเตอร์วิทัศน์ด้วย และร่วมสร้างระบบนี้</p>
+          <p class="en" lang="en">PhD in computer vision, Imperial College London. The person Dr Non learned computer vision from — and built this system with.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/story.js?v={{v}}"></script>
+</body>
+</html>
