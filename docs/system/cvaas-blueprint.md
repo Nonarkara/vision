@@ -10,7 +10,7 @@
 
 | Capability a service needs | Proven here | Where |
 |---|---|---|
-| Ingest many heterogeneous public camera sources | 7 sources, ~3,900 cameras, classified by access | [`server/catalog.js`](../../server/catalog.js) |
+| Ingest many heterogeneous public camera sources | 7 sources, ~4,000 cameras, classified by access | [`server/catalog.js`](../../server/catalog.js) |
 | Read frames politely and safely | memory-only relay, allow-lists, breaker, limits | [`server/relay.js`](../../server/relay.js) · [relay.md](relay.md) |
 | Run detection without a GPU server | SSDLite on WebGL in any browser | [`public/js/ml/detector.js`](../../public/js/ml/detector.js) |
 | Custom models from a few examples, in seconds | MobileNetV2 embeddings + k-NN / softmax layer | [/train](https://vision.nonarkara.org/train) · [07](../07-transfer-learning.md) |

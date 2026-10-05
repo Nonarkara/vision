@@ -13,11 +13,11 @@ This handbook is for three kinds of reader:
 | **A student or developer** learning computer vision | [01](01-pictures-are-numbers.md) + [`examples/`](../examples/) | run each lesson's example beside its chapter |
 | **Building something like this** (a city, an agency, a company) | [System architecture](system/architecture.md) | [relay](system/relay.md) → [runtime](system/browser-runtime.md) → [CV-as-a-service blueprint](system/cvaas-blueprint.md) |
 
-Every number in these pages was produced by code in this repository. Every figure was drawn by it too — run `node examples/build-figures.mjs` and they are rebuilt from scratch. Nothing here is a screenshot of a real camera: the scenes are synthetic, so they have an answer key and contain no people.
+Every number in these pages was produced by code in this repository. Every PNG figure was drawn by it too — run `node examples/build-figures.mjs` and they are rebuilt from scratch (the five `docs/img/*.svg` diagrams are hand-drawn). Nothing here is a screenshot of a real camera: the scenes are synthetic, so they have an answer key and contain no people.
 
 ## The course · บทเรียน
 
-Each chapter matches a room on the site and a runnable example. Each ends with a Thai summary and a few questions to check yourself.
+Each chapter matches a room on the site. Seven of the eight have a runnable example (chapter 05's lesson is /learn itself); each ends with a Thai summary and a few questions to check yourself.
 
 | # | Chapter | What you will be able to explain | Site | Run |
 |---|---|---|---|---|
@@ -26,7 +26,7 @@ Each chapter matches a room on the site and a runnable example. Each ends with a
 | 03 | [Convolution and edges](03-convolution-and-edges.md) · หน้าต่างเลื่อนและขอบ | the 3×3 window that every neural network is built from; Sobel | /learn ch. 4–5 | `node examples/03-convolution.mjs` |
 | 04 | [Motion](04-motion.md) · การเคลื่อนไหว | frame differencing, thresholds against noise, connected regions | /learn ch. 6 · [/story](https://vision.nonarkara.org/story) | `node examples/04-motion.mjs` |
 | 05 | [Neural networks](05-neural-networks.md) · โครงข่ายประสาทเทียม | learned kernels, layers, MobileNetV2, what "1,280 numbers" means | /learn ch. 7 | — |
-| 06 | [Object detection](06-object-detection.md) · การหาวัตถุ | SSD, class scores, IoU, non-maximum suppression, precision vs recall | /learn ch. 7–8 · [/games](https://vision.nonarkara.org/games) | `node examples/05-detection-nms.mjs` · `06-precision-recall.mjs` |
+| 06 | [Object detection](06-object-detection.md) · การหาวัตถุ | SSD, class scores, IoU, non-maximum suppression, precision vs recall | /learn ch. 7–8 · [/games](https://vision.nonarkara.org/games) | `node examples/05-detection-nms.mjs` · `node examples/06-precision-recall.mjs` |
 | 07 | [Teaching a machine](07-transfer-learning.md) · สอนเครื่องด้วยตัวเอง | transfer learning, k-NN, a trained layer, loss, PCA, shortcut learning | [/train](https://vision.nonarkara.org/train) | `node examples/07-transfer-learning.mjs` |
 | 08 | [Limits and ethics](08-limits-and-ethics.md) · ข้อจำกัดและจริยธรรม | why "not detected" ≠ "not there", bias, privacy, Thai PDPA | /learn ch. 8 · [/legal](https://vision.nonarkara.org/legal) | `node examples/08-catalogue.mjs` |
 
@@ -57,7 +57,7 @@ cd vision
 node examples/01-pixels.mjs          # Node 22+, no install, no packages
 ```
 
-Each example prints its working in the terminal (as text art, tables and charts) and writes pictures to `examples/out/`. They import the **same** functions the website runs — `public/js/cv/ops.js` and `public/js/ml/learner.js` — so what you learn here is what runs there. See [`examples/README.md`](../examples/README.md).
+Each example prints its working in the terminal (as text art, tables and charts) and writes pictures to `examples/out/`. Six of the eight import the **same** functions the website runs — `public/js/cv/ops.js` and `public/js/ml/learner.js` — so what you learn here is what runs there; `05` and `06` simulate detection on synthetic scenes and `08` reads the live catalogue. See [`examples/README.md`](../examples/README.md).
 
 ---
 

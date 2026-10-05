@@ -39,11 +39,12 @@ The tunnel routes to `127.0.0.1`, **not** `localhost`: cloudflared may resolve `
 
 ```bash
 npm run dev            # http://localhost:8431, reads cameras from FloodDash on :8340
-npm test               # unit tests (catalogue, relay, http, CV ops, learner, sources, layer, fullscreen)
-npm run check          # tests + scripts/check-site.mjs
+npm test               # unit tests: catalogue + store, relay, http, routes, CV ops,
+                       #   learner, sources, demo scenes, layer races, handbook numbers
+npm run check          # tests + scripts/check-site.mjs + scripts/check-docs.mjs
 ```
 
-`check-site.mjs` boots the real request handler on an ephemeral port (no FloodDash needed) and verifies: every page assembles; every local link and asset resolves; every module import points at a real file; every JS file parses; nothing the CSP would block (inline script, `style=""`) or a placeholder slipped into a page; every model shard listed in a manifest exists.
+`check-docs.mjs` walks the handbook resolving every relative link and every GitHub-style heading anchor, and rejects `;` inside mermaid `sequenceDiagram` lines (GitHub cannot render those). `check-site.mjs` boots the real request handler on an ephemeral port (no FloodDash needed) and verifies: every page assembles; every local link and asset resolves; every module import points at a real file; every JS file parses; nothing the CSP would block (inline script, `style=""`) or a placeholder slipped into a page; every model shard listed in a manifest exists.
 
 Webcam features need a secure context: `localhost` or https.
 
@@ -64,16 +65,16 @@ curl -sS https://vision.nonarkara.org/api/health | python3 -m json.tool
 
 ## 4. Health
 
-`GET /api/health` (live example, 5 Oct 2026):
+`GET /api/health` — shape of the response; `version` and the counts change on every deploy and refresh:
 
 ```json
 {
   "ok": true,
-  "version": "1.1.4",
+  "version": "1.2.0",
   "uptime_s": 14395,
-  "catalogue": { "origin": "flooddash", "loadedAt": "2026-10-05T03:48:21.789Z",
-                 "upstreamAt": "2026-10-05T03:48:21.667Z",
-                 "video": 53, "still": 2578, "view": 829, "off": 477, "total": 3937 },
+  "catalogue": { "origin": "flooddash", "loadedAt": "2026-10-05T09:31:12.257Z",
+                 "upstreamAt": "2026-10-05T09:29:02.059Z",
+                 "video": 53, "still": 2675, "view": 857, "off": 477, "total": 4062 },
   "relay": { "cached_frames": 0, "inflight": 0, "waiting": 0, "checked_cameras": 0,
              "last_ok": 0, "last_failed": 0, "resting_hosts": [] },
   "memory_mb": 21
@@ -84,7 +85,7 @@ curl -sS https://vision.nonarkara.org/api/health | python3 -m json.tool
 |---|---|---|
 | `catalogue.origin` | `flooddash` | `disk` for more than ~30 min → FloodDash's aggregate is failing |
 | `catalogue.upstreamAt` | within the last ~10 min | hours old |
-| `catalogue.video` | ~50 | 0 → the iTIC hosts are down, or FloodDash's health probe marks everything down |
+| `catalogue.video` | ~50 (50–60) | 0 → the iTIC hosts are down, or FloodDash's health probe marks everything down |
 | `relay.resting_hosts` | `[]` | a host stays listed → that owner's server is failing; nothing to fix on our side |
 | `relay.last_failed` vs `last_ok` | mostly ok | mostly failed → check one URL by hand (below) |
 | `memory_mb` | 20–80 | climbing steadily → a leak; restart and report |

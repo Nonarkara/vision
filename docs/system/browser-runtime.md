@@ -117,7 +117,7 @@ Caching policy (`cacheControl()` in `http.js`):
 
 - **Paint only what is seen.** `runLens()` and `runBench()` pause when the canvas scrolls off screen (`IntersectionObserver`) or the tab is hidden.
 - **Cap the rate.** Lenses paint at ≤ 12–15 fps; the detector re-reads a moving picture every ~0.7 s; a still is re-analysed only when a new frame arrives.
-- **Analyse small.** Motion at 192 px wide, classical lenses at 320, the detector at 640 (squashed to 300 inside), the embedder at 224.
+- **Analyse small.** Motion at 192 px wide, classical lenses at 360, the detector at 640 (squashed to 300 inside), the embedder at 224.
 - **One queue per model.** The training room sends every embedding — click, held record button, live preview, judge run — through one queue (`train/eye.js`), so they never fight over the GPU; repeat callers skip a beat instead of piling up.
 - **Don't repaint the unchanged.** A still under unchanged settings is painted once; eight benches on /learn cost roughly what the visible one costs.
 

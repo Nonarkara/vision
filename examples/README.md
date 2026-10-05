@@ -1,6 +1,6 @@
 # Examples · ตัวอย่างที่รันได้
 
-Eight lessons you can run with nothing but Node 22. No `npm install`, no packages, no GPU. Each one imports the **same functions the website runs** — [`public/js/cv/ops.js`](../public/js/cv/ops.js) and [`public/js/ml/learner.js`](../public/js/ml/learner.js) — prints its working in the terminal, and writes pictures to `examples/out/`.
+Eight lessons you can run with nothing but Node 22. No `npm install`, no packages, no GPU. Six of them import the **same functions the website runs** — [`public/js/cv/ops.js`](../public/js/cv/ops.js) and [`public/js/ml/learner.js`](../public/js/ml/learner.js) — and all eight print their working in the terminal and write pictures to `examples/out/`. Lessons 05 and 06 simulate detection on a synthetic scene rather than importing `detector.js`, and 08 reads the live catalogue; each header says which.
 
 ```bash
 node examples/01-pixels.mjs
@@ -32,7 +32,7 @@ The pictures here are drawn by [`shared/scene.mjs`](shared/scene.mjs): a road, a
 node examples/build-figures.mjs      # writes docs/img/*.png from lessons 01–05 and 07
 ```
 
-Every PNG in `docs/img/` is the output of these scripts. The SVG diagrams (`pipeline`, `convolution`, `mobilenet`, `transfer`, `trust-boundary`) are hand-drawn, with numbers taken from the lessons and the papers they cite.
+Every PNG in `docs/img/` is the output of these scripts. The five SVG diagrams (`pipeline`, `convolution`, `mobilenet`, `transfer`, `trust-boundary`) are hand-drawn, with numbers taken from the lessons and the papers they cite — `npm run figures` rewrites the PNGs only.
 
 ## Keeping the docs honest
 

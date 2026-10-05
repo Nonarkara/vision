@@ -1,6 +1,8 @@
 # API reference · เอกสาร API
 
-Three endpoints, all `GET`, no keys, no accounts. They exist to serve the site; you may read them for learning, politely. Responses below are real, captured on 5 October 2026.
+Three endpoints, all `GET`, no keys, no accounts. They exist to serve the site; you may read them for learning, politely.
+
+The blocks below are **shape**, not a fact: `version` changes on every deploy and `counts` move every time the catalogue refreshes (tens of cameras a day come and go). Read them for the structure, then run the `curl` above the block for today's numbers.
 
 [← Handbook](../README.md) · Code: [`server/index.js`](../../server/index.js)
 
@@ -16,11 +18,11 @@ curl -sS --compressed https://vision.nonarkara.org/api/cameras | python3 -m json
 
 ```json
 {
-  "version": "1.1.4",
-  "loadedAt": "2026-10-05T03:58:21.611Z",
+  "version": "1.2.0",
+  "loadedAt": "2026-10-05T09:31:12.257Z",
   "upstreamAt": "2026-10-05T03:58:21.4Z",
   "origin": "flooddash",
-  "counts": { "video": 53, "still": 2578, "view": 825, "off": 477, "total": 3933 },
+  "counts": { "video": 53, "still": 2675, "view": 857, "off": 477, "total": 4062 },
   "sources": [
     { "id": "gistda", "th": "GISTDA · BMA / ทล. / iTIC", "en": "GISTDA · BMA / DOH / iTIC", "count": 956, "status": "live" }
   ],
@@ -99,9 +101,9 @@ curl -sS https://vision.nonarkara.org/api/health | python3 -m json.tool
 
 ```json
 {
-  "ok": true, "version": "1.1.4", "uptime_s": 14395,
+  "ok": true, "version": "1.2.0", "uptime_s": 14395,
   "catalogue": { "origin": "flooddash", "loadedAt": "…", "upstreamAt": "…",
-                 "video": 53, "still": 2578, "view": 829, "off": 477, "total": 3937 },
+                 "video": 53, "still": 2675, "view": 857, "off": 477, "total": 4062 },
   "relay": { "cached_frames": 0, "inflight": 0, "waiting": 0, "checked_cameras": 0,
              "last_ok": 0, "last_failed": 0, "resting_hosts": [] },
   "memory_mb": 21

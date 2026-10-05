@@ -1,5 +1,5 @@
 // Chapters 7–8: a trained network, and where it breaks. One detector serves
-// both benches and loads only when someone presses the button — 17 MB is a
+// both benches and loads only when someone presses the button — 18 MB is a
 // real cost on a phone, and nobody should pay it just for scrolling past.
 
 import { t, lang, onLang } from '../core/i18n.js'
@@ -40,7 +40,7 @@ function modelButton(chapter, onChange) {
     btn.disabled = model.status === 'loading'
     btn.textContent = model.status === 'loading' ? `${t('กำลังโหลดโครงข่าย', 'Loading the network')} ${Math.round(model.p * 100)}%`
       : model.status === 'error' ? t('โหลดไม่สำเร็จ · ลองอีกครั้ง', 'Could not load · try again')
-        : t('▶ โหลดโครงข่ายประสาทเทียม (≈17 MB ครั้งเดียว)', '▶ Load the neural network (≈17 MB, once)')
+        : t('▶ โหลดโครงข่ายประสาทเทียม (18 MB ครั้งเดียว)', '▶ Load the neural network (18 MB, once)')
     onChange()
   }
   btn.addEventListener('click', ensureModel)

@@ -79,11 +79,11 @@ export const STILL_HOSTS = [/^cctv\.maholan\.net$/, /^www\.thaiclouderp\.com$/, 
 
 The host lists were **measured**, not assumed: on 4 October 2026 every candidate host was probed with an `Origin: https://vision.nonarkara.org` header and its `Access-Control-Allow-Origin` response recorded. Only the two iTIC hosts and ipcamlive answered `*` for video; the still hosts answered without CORS (so they need the relay); Pak Kret's host timed out from this machine (it stays listed, and the relay's circuit breaker protects it).
 
-Counts on 5 October 2026: **53 video · 2,578 still · 825 view · 477 off · 3,933 total.** Run `node examples/08-catalogue.mjs` for today's.
+A morning's sample: **53 video · ~2,675 still · ~857 view · 477 off · ~4,060 total** (5 Oct 2026). These drift by tens a day — `node examples/08-catalogue.mjs` prints today's, and `GET /api/health` carries them live.
 
 ### The catalogue record
 
-Slim on purpose — a full list is ~3,900 rows and every page loads it:
+Slim on purpose — a full list is ~4,000 rows and every page loads it:
 
 ```json
 {
@@ -146,7 +146,7 @@ sequenceDiagram
 | | |
 |---|---|
 | Catalogue refresh | every 10 min; 60 s timeout; disk fallback |
-| Catalogue response | ~3,900 rows, gzip; built once per minute |
+| Catalogue response | ~4,000 rows, gzip; built once per minute |
 | Relay frame life | 30 s in memory, max 240 frames, max 4 MB each |
 | Relay politeness | ≤ 4 upstream fetches at once, ≤ 2 per host, 9 s timeout |
 | Detector | 18 MB · input squashed to 300 × 300 · 1,917 anchors · 90 classes |

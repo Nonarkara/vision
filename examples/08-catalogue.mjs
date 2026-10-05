@@ -33,7 +33,7 @@ for (const [k, why] of Object.entries(KIND)) {
 }
 const readable = (data.counts.video ?? 0) + (data.counts.still ?? 0)
 console.log(`\n${((100 * readable) / cams.length).toFixed(0)}% of listed cameras are machine-readable IN PRINCIPLE. In practice fewer: on`)
-console.log('4 Oct 2026 only 22 of 40 sampled cctv.maholan.net stills answered (the rest 502).')
+console.log('one sample, only 22 of 40 cctv.maholan.net stills answered (the rest 502).')
 console.log('"still" means a URL exists; the relay finds out whether it works when someone looks.')
 console.log('That share — not model accuracy — is the first limit on what a city-scale vision')
 console.log('system can see.')
