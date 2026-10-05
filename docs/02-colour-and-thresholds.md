@@ -42,7 +42,7 @@ export function threshold(gray, t) {
 }
 ```
 
-It is still everywhere: scanning documents (ink vs paper — see [Ekkasarn](https://scan.nonarkara.org) for a real Thai OCR pipeline), reading QR codes, counting cells under a microscope, finding a bright licence plate in a dark frame.
+It is still everywhere: scanning documents (ink vs paper — see [Ekkasarn](https://scan.nonarkara.org) for a real Thai OCR pipeline — OCR being optical character recognition, turning a photo of text into text a computer can read), reading QR codes, counting cells under a microscope, finding a bright licence plate in a dark frame.
 
 ## 3. Otsu's method: let the data choose *t*
 
@@ -115,7 +115,7 @@ White is bright in all three channels, so its brightness is high (~220). Red is 
 
 <details><summary>3. Write a rule that finds the water patch. What else would it catch?</summary>
 
-Something like "brightness > 150 and B − R > 30 and below the horizon". On a real camera it would also catch a blue car, a wet reflective road under blue sky, and blue tarpaulin. FloodDash's water heuristic (credited in `ops.readFrame`) is deliberately labelled "consistent with standing water", never "flood".
+Something like "brightness > 150 and B − R > 30 and below the horizon". On a real camera it would also catch a blue car, a wet reflective road under blue sky, and blue tarpaulin. FloodDash's water heuristic — FloodDash is the separate flood site by the same author that builds this site's camera list; the heuristic is credited in `ops.readFrame` — is deliberately labelled "consistent with standing water", never "flood".
 </details>
 
 ---

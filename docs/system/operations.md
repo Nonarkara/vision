@@ -22,7 +22,7 @@ flowchart LR
   S --> T --> CF --> U
 ```
 
-**Why a separate runtime folder?** The workspace lives on an external USB volume. launchd starts services at login, sometimes before that volume is mounted, and a service pointing at an absent path crash-loops. The runtime copy on the internal disk always exists; the deploy script refreshes it.
+**Why a separate runtime folder?** The workspace lives on an external USB volume. launchd — the Mac's built-in service manager, the thing that starts programs at login — starts services at login, sometimes before that volume is mounted, and a service pointing at an absent path crash-loops. The runtime copy on the internal disk always exists; the deploy script refreshes it.
 
 | Thing | Where |
 |---|---|
@@ -44,7 +44,7 @@ npm test               # unit tests: catalogue + store, relay, http, routes, CV 
 npm run check          # tests + scripts/check-site.mjs + scripts/check-docs.mjs
 ```
 
-`check-docs.mjs` walks the handbook resolving every relative link and every GitHub-style heading anchor, and rejects `;` inside mermaid `sequenceDiagram` lines (GitHub cannot render those). `check-site.mjs` boots the real request handler on an ephemeral port (no FloodDash needed) and verifies: every page assembles; every local link and asset resolves; every module import points at a real file; every JS file parses; nothing the CSP would block (inline script, `style=""`) or a placeholder slipped into a page; every model shard listed in a manifest exists.
+`check-docs.mjs` walks the handbook resolving every relative link and every GitHub-style heading anchor, and rejects `;` inside mermaid `sequenceDiagram` lines (GitHub cannot render those). `check-site.mjs` boots the real request handler on an ephemeral port (no FloodDash needed) and verifies a list of things: every page assembles; every local link and asset resolves; every module import points at a real file; every JS file parses. It also checks that nothing the CSP would block (an inline script, a `style=""` attribute) or any unfinished placeholder slipped into a page, and that every model shard listed in a manifest exists.
 
 Webcam features need a secure context: `localhost` or https.
 

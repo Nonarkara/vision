@@ -1,6 +1,6 @@
 # Glossary · อภิธานศัพท์
 
-Every term used in the handbook, in English and Thai, with the chapter where it is explained. Thai renderings follow common Thai usage in computing; where Thai speakers usually keep the English word, we do too.
+The terms this handbook uses, in English and Thai, with the chapter where each one is explained. If you meet a word you do not know, it should be here. Thai renderings follow common Thai usage in computing; where Thai speakers usually keep the English word, we do too.
 
 [← Handbook](../README.md)
 
@@ -11,17 +11,21 @@ Every term used in the handbook, in English and Thai, with the chapter where it 
 | **RGB** | อาร์จีบี (แดง เขียว น้ำเงิน) | the three colour channels a screen and most cameras use | 01 |
 | **channel** | ช่องสี | one of the colour layers (R, G or B) of a picture | 01 |
 | **brightness / luma** | ความสว่าง | one number per pixel: 0.299R + 0.587G + 0.114B | 01 |
+| **model** | โมเดล | a trained file of numbers that turns a picture into an answer | 01, 05 |
 | **grayscale** | ภาพขาวดำ (ระดับเทา) | a picture reduced to brightness only | 02 |
 | **histogram** | ฮิสโทแกรม | a count of how many pixels have each brightness | 02 |
 | **threshold** | เกณฑ์ / ค่าแบ่ง | one number dividing "on" from "off" | 02 |
 | **Otsu's method** | วิธีของโอตสึ | choosing the threshold that best separates two groups | 02 |
 | **colour space** | ปริภูมิสี | a way of describing colour with numbers (RGB, HSV, Lab…) | 02 |
+| **OCR** | การอ่านตัวอักษรจากภาพ | turning a photograph of text into text a computer can read | 02 |
 | **convolution** | คอนโวลูชัน | sliding a small window of weights over a picture, multiply-and-add at each spot | 03 |
 | **kernel / filter** | เคอร์เนล / ตัวกรอง | the small grid of weights used in a convolution | 03 |
 | **edge** | ขอบ | where brightness changes sharply | 03 |
 | **Sobel operator** | ตัวดำเนินการโซเบล | a pair of 3×3 kernels measuring horizontal and vertical change | 03 |
 | **blur** | การเบลอ | averaging neighbours; removes noise and detail | 03 |
 | **noise** | สัญญาณรบกวน | random variation in pixel values from the sensor | 03, 04 |
+| **stride** | สไตรด์ | how far the window jumps between two steps; 2 = half size | 03 |
+| **batch normalisation** | การปรับมาตรฐานแบตช์ | rescaling a layer's numbers so they stay in a similar range | 03 |
 | **frame** | เฟรม / ภาพหนึ่งภาพ | one picture in a video | 04 |
 | **frame differencing** | การลบภาพต่อเนื่อง | subtracting the previous frame to find what changed | 04 |
 | **dilation** | การขยายพื้นที่ | growing marked pixels so broken shapes join | 04 |
@@ -33,6 +37,8 @@ Every term used in the handbook, in English and Thai, with the chapter where it 
 | **CNN (convolutional neural network)** | โครงข่ายประสาทเทียมแบบคอนโวลูชัน | a neural network built from learned convolutions | 05 |
 | **layer** | ชั้น | one stage of a network, transforming the previous stage's output | 05 |
 | **weight / parameter** | น้ำหนัก / พารามิเตอร์ | one learned number inside a network | 05 |
+| **bias (network)** | ไบแอส | an extra number added on its own, so answers can shift up or down | 05, 07 |
+| **class** | กลุ่ม / คลาส | one of the categories a model may choose between (car, bus, person) | 05, 06 |
 | **training** | การฝึก | adjusting weights to make fewer mistakes on labelled examples | 05, 07 |
 | **label** | ป้ายกำกับ | the right answer attached to a training example | 05 |
 | **loss** | ค่าความสูญเสีย | a number measuring how wrong the network was | 05, 07 |
@@ -45,12 +51,14 @@ Every term used in the handbook, in English and Thai, with the chapter where it 
 | **backbone** | โครงข่ายฐาน | a network reused to produce features for another task | 05, 06 |
 | **depthwise separable convolution** | คอนโวลูชันแบบแยกความลึก | a cheaper convolution: space and channels handled in separate steps | 05 |
 | **ImageNet** | อิมเมจเน็ต | 14 million labelled photos; its 1,000-class subset trained MobileNetV2 | 05 |
+| **top-1 / top-5 accuracy** | ความแม่นท็อป 1 / 5 | the right label was the best guess / appeared among the top five | 05 |
 | **COCO** | โคโค่ | a detection dataset with 80 object categories; trained our detector | 06 |
 | **classification** | การจำแนก | one label for a whole picture | 05, 06 |
 | **object detection** | การตรวจจับวัตถุ | finding what is where: boxes with labels and scores | 06 |
 | **segmentation** | การแบ่งส่วนภาพ | a label for every pixel | 06 |
 | **anchor box** | กล่องอ้างอิง | a preset box the detector adjusts to fit objects; SSDLite has 1,917 | 06 |
 | **confidence score** | คะแนนความมั่นใจ | how strongly a pattern resembled a class — not the chance of being right | 05, 06 |
+| **sigmoid** | ซิกมอยด์ | a curve that squeezes any score into a value between 0 and 1 | 06 |
 | **IoU (intersection over union)** | อัตราส่วนพื้นที่ทับซ้อน | overlap area ÷ combined area of two boxes | 06 |
 | **non-maximum suppression (NMS)** | การกำจัดกล่องซ้ำ | keeping the best of overlapping boxes, dropping the rest | 06 |
 | **precision** | ความแม่นยำ (ของสิ่งที่ตอบ) | of the answers given, the share that were right | 06 |
@@ -59,29 +67,42 @@ Every term used in the handbook, in English and Thai, with the chapter where it 
 | **false negative / miss** | ผลลบลวง / พลาด | the machine missed something that is there | 06, 08 |
 | **mAP (mean average precision)** | ค่าเฉลี่ยความแม่นยำ | the standard single-number score for detectors | 06 |
 | **transfer learning** | การเรียนรู้แบบถ่ายโอน | reusing a trained network and teaching only the last step | 07 |
+| **JSON** | เจสัน | the plain-text format programs use to exchange data | 07 |
 | **k-nearest neighbours (k-NN)** | เพื่อนบ้านใกล้สุด k ตัว | labelling by a vote of the most similar examples | 07 |
 | **cosine similarity** | ความคล้ายโคไซน์ | how closely two embeddings point the same way (1 = same) | 07 |
+| **dot product** | จุดผลคูณ | multiply numbers sitting in matching places, then add them up | 07 |
 | **softmax** | ซอฟต์แมกซ์ | turning scores into probabilities that sum to 1 | 07 |
 | **leave-one-out** | การทดสอบแบบเว้นหนึ่ง | testing each example by predicting it from all the others | 07 |
 | **PCA (principal component analysis)** | การวิเคราะห์องค์ประกอบหลัก | squeezing many numbers into a few, keeping the most variation | 07 |
 | **overfitting** | การจำแทนการเข้าใจ | doing well on training examples, badly on new ones | 07 |
+| **accuracy** | ความถูกต้อง | the share of answers that were right | 07, 08 |
 | **shortcut learning** | การเรียนทางลัด | learning an easy, wrong difference (e.g. "dark = river") | 07 |
 | **active learning** | การเรียนรู้เชิงรุก | asking a person to label the cases the model is least sure of | 07 |
 | **drift** | การเลื่อนไหลของข้อมูล | accuracy decaying as the world or the camera changes | 07, 08 |
 | **adversarial example** | ตัวอย่างหลอกลวง | an input crafted to fool a model | 05, 08 |
-| **bias** | อคติ | errors falling unevenly on some groups or places | 08 |
+| **bias (fairness)** | อคติ | errors falling unevenly on some groups or places — not the network term above | 08 |
 | **human in the loop** | ให้คนร่วมตัดสินใจ | a person reviews the machine's findings before action | 08 |
 | **personal data** | ข้อมูลส่วนบุคคล | information identifying a person directly or indirectly (PDPA s.6) | 08 |
 | **biometric data** | ข้อมูลชีวภาพ | body-derived identifiers such as faces; sensitive under PDPA s.26 | 08 |
 | **CORS** | คอร์ส (การอนุญาตข้ามโดเมน) | a site's permission for other pages to read its content | sys |
 | **tainted canvas** | แคนวาสปนเปื้อน | a canvas holding unpermitted pixels, which JavaScript may not read | sys |
 | **HLS** | เอชแอลเอส | HTTP Live Streaming: video sent as small files listed in a playlist | sys |
+| **m3u8** | เอ็มสามยูเอต | the playlist file that lists where HLS video chunks live | sys |
 | **relay** | ตัวส่งต่อ | our server passing a still frame through memory, same-origin | sys |
+| **catalogue** | รายชื่อกล้อง | the list of cameras this site knows, refreshed about every 10 minutes | sys |
+| **FloodDash** | ฟลัชแดช | the separate flood site that builds the camera list and checks the feeds | sys |
 | **circuit breaker** | ตัวตัดวงจร | pausing requests to a host that keeps failing | sys |
 | **rate limit** | การจำกัดอัตรา | a cap on requests per client per minute | sys |
 | **CSP (Content-Security-Policy)** | นโยบายความปลอดภัยเนื้อหา | browser rules limiting where a page may load code and media from | sys |
+| **API** | เอพีไอ | the documented web addresses a program may call, and the answers they give | sys |
+| **endpoint** | เอนด์พอยต์ | one such web address | sys |
 | **WebGL** | เว็บจีแอล | the browser's access to the graphics card; TF.js computes with it | sys |
 | **tensor** | เทนเซอร์ | a block of numbers with a shape, e.g. 1 × 300 × 300 × 3 | sys |
+| **TF.js (TensorFlow.js)** | ทีเอฟดอตเจเอส | the library that runs neural networks inside your browser | sys |
+| **shard** | ชาร์ด | one piece of a large model file, split off so it downloads faster | sys |
 | **edge inference** | การประมวลผลที่ปลายทาง | running models where the camera is, sending only results | sys |
+| **inference** | การอนุมาน | running a trained network on one picture to get an answer | sys |
+| **lat / lng** | ละติจูด / ลองจิจูด | latitude and longitude: a position on the map | sys |
+| **launchd** | แลวด์ | the Mac's built-in service that starts programs and restarts them | sys |
 
 *"sys" = the [system](../system/architecture.md) pages.*

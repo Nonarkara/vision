@@ -13,7 +13,7 @@ Chapters 01–04 used rules a person wrote: a brightness formula, a threshold, S
 The change that reshaped the field around 2012 was to keep the *structure* — sliding windows, stacked — and let the numbers be **learned**:
 
 1. Start with random numbers in every kernel.
-2. Show the network a labelled picture ("this is a car"). It outputs a score for every class.
+2. Show the network a labelled picture ("this is a car"). It outputs a score for every class — a class being one of the categories it may choose between (a car, a bus, a person; ImageNet has 1,000).
 3. Measure how wrong it was (the **loss**).
 4. Work out, for every one of its millions of numbers, which direction would have made it slightly less wrong (**backpropagation** computes this; Rumelhart, Hinton & Williams, 1986).
 5. Move every number a tiny step in that direction (**gradient descent**).
@@ -60,7 +60,7 @@ A normal convolution layer mixes space and channels at once: every output channe
 1. **Depthwise:** one 3×3 kernel *per input channel* (space only).
 2. **Pointwise:** a 1×1 convolution mixing channels (channels only).
 
-For a 3×3 kernel this costs roughly **8–9× less arithmetic** for a small loss in accuracy. MobileNetV2 adds *inverted residuals* (expand channels ×6, filter, compress, and add the input back) and *linear bottlenecks* (no ReLU on the compressed layer, which would destroy information). That is how 3.4 million weights get to 72% on ImageNet — AlexNet (2012) used about 60 million to reach a lower accuracy.
+For a 3×3 kernel this costs roughly **8–9× less arithmetic** for a small loss in accuracy. MobileNetV2 adds *inverted residuals* (expand channels ×6, filter, compress, and add the input back) and *linear bottlenecks* (no ReLU — the clamp-at-zero activation — on the compressed layer, which would destroy the information). That is how 3.4 million weights get to 72% on ImageNet — AlexNet (2012) used about 60 million to reach a lower accuracy.
 
 ## 4. How the detector reuses the same network
 
@@ -69,7 +69,7 @@ Object detection (chapter 06) uses MobileNetV2 again, as a **backbone**: the sam
 ## 5. What "the network knows" — and does not
 
 - **It knows statistics of its training photos**, not the world. ImageNet is mostly well-lit, centred, Western, consumer photography. A night-time Thai CCTV frame, shot from a pole, compressed, and wet, is far from that.
-- **Confidence is not correctness.** A softmax score of 0.9 means "this pattern resembled class X most among the classes I have", not "90% chance of being right". Networks can be confidently wrong, especially on inputs unlike their training data. (Calibration is its own research field.)
+- **Confidence is not correctness.** A softmax score (raw scores squeezed into probabilities that add up to 1) of 0.9 means "this pattern resembled class X most among the classes I have", not "90% chance of being right". Networks can be confidently wrong, especially on inputs unlike their training data. (Calibration is its own research field.)
 - **Small changes can flip answers.** Carefully chosen, nearly invisible pixel changes ("adversarial examples"; Goodfellow et al., 2014), or a printed sticker ("adversarial patch"; Brown et al., 2017) can make a network see what is not there. The "fool the machine" game on [/games](https://vision.nonarkara.org/games) lets you find gentler versions with your own camera.
 - **It cannot say "I don't know"** unless designed to. A classifier always picks among its classes.
 
@@ -82,7 +82,7 @@ Object detection (chapter 06) uses MobileNetV2 again, as a **backbone**: the sam
 | 1980 | Fukushima's Neocognitron: layered, convolution-like, self-organising |
 | 1986 | Backpropagation popularised (Rumelhart, Hinton & Williams) |
 | 1998 | LeCun et al.: convolutional networks read handwritten cheques |
-| 2009 | ImageNet: 14 million labelled images (Deng et al.) |
+| 2009 | ImageNet: 14 million labelled images (Deng et al.); MobileNetV2 was trained on the 1,000-class, 1.28 million slice of them |
 | 2012 | AlexNet wins ImageNet: top-5 error 15.3% vs 26.2% for the runner-up |
 | 2015 | ResNet: 152 layers via residual connections (He et al.) |
 | 2017–18 | MobileNets, MobileNetV2: deep vision fits on a phone |

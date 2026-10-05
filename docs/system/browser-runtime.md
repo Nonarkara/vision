@@ -98,12 +98,12 @@ so the plain assignment succeeds and the `eval` path is never reached. One line,
 
 ## 4. Models: hosting and caching
 
-| Model | Folder | Size | Shards |
+| Model | Folder | Size | Pieces |
 |---|---|---|---|
 | SSDLite MobileNetV2 (COCO) | `/models/ssdlite_mobilenet_v2/` | 18 MB | 5 × ~4 MB `.bin` |
 | MobileNetV2 1.0 / 224 (ImageNet) | `/models/mobilenet_v2_1.0_224/` | 14 MB | 4 × ~4 MB `.bin` |
 
-Both came from the TensorFlow.js model zoo (`storage.googleapis.com/tfjs-models/savedmodel/…`, Apache-2.0) and are **self-hosted**, so loading a model reveals nothing to a third party. The shard files were renamed to end in **`.bin`** and the manifests updated, because Cloudflare's edge caches by file extension and does not cache extension-less files — without the rename, every visitor would pull 32 MB through the tunnel from one Mac.
+Both came from the TensorFlow.js model zoo (`storage.googleapis.com/tfjs-models/savedmodel/…`, Apache-2.0) and are **self-hosted**, so loading a model reveals nothing to a third party. A large model file is split into pieces, each called a **shard**, so several download at once. Those shard files were renamed to end in **`.bin`** and the manifests updated, because Cloudflare's edge caches by file extension and does not cache extension-less files — without the rename, every visitor would pull 32 MB through the tunnel from one Mac.
 
 Caching policy (`cacheControl()` in `http.js`):
 

@@ -1,8 +1,8 @@
 # API reference · เอกสาร API
 
-Three endpoints, all `GET`, no keys, no accounts. They exist to serve the site; you may read them for learning, politely.
+Three **endpoints** — web addresses a program may ask for data — all `GET`, no keys, no accounts. Together they are this site's **API**: the documented set of addresses it answers, and the answers it gives. They exist to serve the site; you may read them for learning, politely.
 
-The blocks below are **shape**, not a fact: `version` changes on every deploy and `counts` move every time the catalogue refreshes (tens of cameras a day come and go). Read them for the structure, then run the `curl` above the block for today's numbers.
+The blocks below are **shape**, not a fact: `version` changes on every deploy and `counts` move every time the catalogue refreshes (tens of cameras a day come and go). Read them for the structure, then run the `curl` printed with each block below for today's numbers.
 
 [← Handbook](../README.md) · Code: [`server/index.js`](../../server/index.js)
 
@@ -149,4 +149,4 @@ What /train downloads (format `vision.nonarkara.org/train-layer`, version 1):
 }
 ```
 
-To use it elsewhere: compute a MobileNetV2 1.0/224 average-pool embedding of a frame (inputs scaled to 0–1, bilinear resize to 224 × 224), then `score_c = b[c] + Σ W[c·1280 + i] · x[i]` and a softmax. Note the site's learner L2-normalises embeddings before training — do the same to the input. Exact code: `createLayer().predict` in [`learner.js`](../../public/js/ml/learner.js).
+To use it elsewhere: run MobileNetV2 1.0/224 on a frame (inputs scaled to 0–1, resized to 224 × 224) and take its average-pool output — the 1,280-number fingerprint. Then apply `score_c = b[c] + Σ W[c·1280 + i] · x[i]`, which reads *multiply each weight by its matching input and add them up, for class c*, and finish with a softmax (squeeze the scores into probabilities that sum to 1). Note the site's learner L2-normalises embeddings before training — do the same to the input. Exact code: `createLayer().predict` in [`learner.js`](../../public/js/ml/learner.js).

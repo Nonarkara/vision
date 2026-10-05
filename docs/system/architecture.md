@@ -44,7 +44,7 @@ Four parts, one machine (a Mac running launchd), one tunnel:
 
 | Decision | Rejected alternative | Why |
 |---|---|---|
-| **Inference in the browser** (TF.js) | a GPU server analysing every camera | no server ever holds an analysed picture; cost scales with visitors' devices, not ours; a webcam frame never needs to leave the device; and it teaches — people watch the computation happen |
+| **Inference in the browser** — inference is running a trained network on one picture to get an answer; TF.js is the library that does it inside your browser | a GPU server analysing every camera | no server ever holds an analysed picture; cost scales with visitors' devices, not ours; a webcam frame never needs to leave the device; and it teaches — people watch the computation happen |
 | **Read FloodDash's aggregate** | scrape the 7 sources ourselves | one aggregator, one set of politeness rules and one place to fix a broken source; FloodDash already health-probes streams |
 | **Classify cameras by pixel access** (video/still/view/off) | show every camera the same way | a browser may only read pixels when the owner allows it (CORS); pretending otherwise produces broken instruments or silent failures |
 | **Relay stills in memory only** | proxy and cache to disk / CDN | stills are useful for CV but most hosts lack CORS; memory with a 30 s life is the least we can hold to make them readable |
@@ -95,7 +95,7 @@ Slim on purpose — a full list is ~4,000 rows and every page loads it:
   "lat": 13.72539,
   "lng": 100.5426,
   "k": "video",
-  "v": "https://camera1.iticfoundation.org/hls/10.8.0.15_8552.m3u8",
+  "v": "https://camera1.iticfoundation.org/hls/10.8.0.15_8552.m3u8",   // .m3u8 = the playlist file listing HLS chunks
   "w": "https://floodcheck.gistda.or.th/"
 }
 ```

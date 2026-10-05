@@ -23,7 +23,7 @@ Why this works: the features a network learns on one large task are useful for m
 2. **Add examples** — click, or hold to record, from your webcam, a public camera or a photo. Up to 100 per class. Click a thumbnail to throw a bad example away.
 3. **Watch it learn** — a nearest-neighbour learner answers immediately; a trained layer runs 200 passes with a live loss curve; a 2-D map shows your examples as clouds.
 4. **Judge the country** — freeze what you taught and run it on 24 public cameras it has never seen, one at a time, politely. Answers below 70% are marked *unsure*.
-5. **Keep it** — download the trained layer as a small JSON file (format `vision.nonarkara.org/train-layer`), load it again later.
+5. **Keep it** — download the trained layer as a small JSON file (JSON is the plain-text format programs use to exchange data; format `vision.nonarkara.org/train-layer`), load it again later.
 
 Nothing is uploaded at any step. Examples live in the tab's memory and vanish on reload — by design, and the page says so.
 
@@ -31,7 +31,7 @@ There is deliberately **no "me / not me" preset**: this site does not teach anyo
 
 ## 3. Learner one: nearest neighbours (no training at all)
 
-Remember every example's 1,280 numbers. For a new frame, find the *k* most similar examples and let them vote (the site uses *k* = 5). Similarity is the **cosine**: after scaling every fingerprint to length 1, the dot product — 1 means "points the same way", 0 means "unrelated".
+Remember every example's 1,280 numbers. For a new frame, find the *k* most similar examples and let them vote (the site uses *k* = 5). Similarity is the **cosine**: after scaling every fingerprint to length 1, the **dot product** — multiply the numbers sitting in matching places, then add them up. 1 means "points the same way", 0 means "unrelated".
 
 ```js
 // public/js/ml/learner.js (abridged)
@@ -90,6 +90,8 @@ loss      = −log p_(correct class)               0 when certain and right; lar
 each pass: W ← W − step × ∂loss/∂W                 (Adam chooses the step per weight; Kingma & Ba, 2014)
 ```
 
+Read the symbols: `Σ_i` means *add up over all 1,280 inputs*; `W[c, i]` is the weight joining input *i* to class *c*; `b_c` is that class's bias (the extra shift-only number from chapter 03); and `∂loss/∂W` is the slope that says which way each weight must move to make the loss smaller.
+
 `createLayer()` in `learner.js` implements exactly this in ~70 lines of plain JavaScript — no TensorFlow. The site runs 200 passes, at most two per animation frame, so you can *watch* the curve fall (the readout reports the real arithmetic time separately; it is milliseconds).
 
 ```
@@ -112,7 +114,7 @@ Why does it start at **0.693**? That is −log(0.5): with random small weights t
 
 ## 5. The map: 1,280 numbers squeezed to 2
 
-People cannot see in 1,280 dimensions. **Principal component analysis** (PCA) finds the two directions along which the examples differ most and projects onto them. `pca2()` uses the Gram-matrix trick — with N examples of D numbers and N ≪ D, work with the N×N matrix of dot products instead of the D×D covariance; same leading directions, far less arithmetic.
+People cannot see in 1,280 dimensions. **Principal component analysis** (PCA) finds the two directions along which the examples differ most and projects onto them. `pca2()` uses the Gram-matrix trick. With N examples of D numbers — and N ≪ D, meaning far fewer examples than numbers — it works with the N×N matrix of dot products instead of the much larger D×D covariance matrix. Same leading directions, far less arithmetic.
 
 ![PCA map: two clouds, and a new example (Peach Red) landing in the river cloud](img/07-pca.png)
 

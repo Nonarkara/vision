@@ -111,7 +111,7 @@ A **convolutional neural network** (CNN) keeps the sliding window and makes the 
 | Stacked | rarely | 50+ layers, each convolving the last one's output |
 | What they find | edges, blur | edges → textures → parts → objects |
 
-Remarkably, when researchers look inside trained networks, the **first layer's learned kernels look like edge detectors** — the network rediscovers Sobel-like filters on its own, because edges are the most useful first thing to know about a picture (Zeiler & Fergus, 2014; also Hubel & Wiesel's 1959 finding that the cat visual cortex has cells that respond to oriented edges).
+Remarkably, when researchers look inside trained networks, the **first layer's learned kernels look like edge detectors** — the network rediscovers Sobel-like filters on its own. Edges are simply the most useful first thing to know about a picture (Zeiler & Fergus, 2014; and Hubel & Wiesel's 1959 finding that the cat visual cortex has cells that respond to oriented edges).
 
 ## Check yourself
 
@@ -127,7 +127,7 @@ Noise makes neighbouring pixels differ slightly at random, which edge kernels re
 
 <details><summary>3. A 3×3 kernel has 9 weights. A CNN layer with 32 kernels over a colour (3-channel) input — how many weights?</summary>
 
-Each kernel spans all input channels: 3 × 3 × 3 = 27 weights, plus 1 bias, for each of 32 kernels: 32 × 28 = 896. MobileNetV2's first layer has exactly this shape — 32 filters, 3×3, stride 2 — though it uses batch normalisation in place of the bias (864 kernel weights, plus normalisation parameters).
+Each kernel spans all input channels: 3 × 3 × 3 = 27 weights, plus 1 bias (an extra number added on its own, so the answer can shift up or down), for each of 32 kernels: 32 × 28 = 896. MobileNetV2's first layer has exactly this shape — 32 filters, 3×3, stride 2 (the window jumps two pixels each step, so the output comes out half as wide) — though it uses batch normalisation (rescaling each layer's numbers so they stay in a similar range) in place of the bias: 864 kernel weights, plus normalisation parameters.
 </details>
 
 ---

@@ -34,7 +34,7 @@ Each chapter matches a room on the site. Seven of the eight have a runnable exam
 
 | Page | For |
 |---|---|
-| [Architecture](system/architecture.md) | the whole design on one page: sources → catalogue → relay → browser; every decision and its reason |
+| [Architecture](system/architecture.md) | the whole design on one page: sources → catalogue (the list of cameras) → relay → browser; every decision and its reason |
 | [The frame relay](system/relay.md) | the one server component that touches imagery: threat model, rules, the code that enforces them |
 | [The browser runtime](system/browser-runtime.md) | TF.js, WebGL, CSP without `eval`, model hosting and caching, how frames reach a model |
 | [Operations](system/operations.md) | launchd, the Cloudflare tunnel, deploy, health checks, a runbook for when things break |
@@ -45,8 +45,8 @@ Each chapter matches a room on the site. Seven of the eight have a runnable exam
 | Page | |
 |---|---|
 | [Models](reference/models.md) | model cards: what each network is, what it was trained on, what it gets wrong, licences |
-| [API](reference/api.md) | every endpoint with real requests and responses |
-| [Glossary · อภิธานศัพท์](reference/glossary.md) | 77 terms in Thai and English |
+| [API](reference/api.md) | every endpoint (one web address you may ask for data) with real requests and responses |
+| [Glossary · อภิธานศัพท์](reference/glossary.md) | about 100 terms in Thai and English, with the chapter that explains each |
 | [Reading list](reference/reading-list.md) | the papers behind each chapter, every link checked |
 
 ## How to use the examples

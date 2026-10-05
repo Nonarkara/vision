@@ -95,7 +95,7 @@ The site's `ops.pixelate(img, block)` is 20 lines; read it in [`ops.js`](../publ
 
 ## 6. Why this matters beyond the classroom
 
-- **Storage and bandwidth.** 155 million numbers a second per camera is why cameras compress (H.264/H.265), why analysis runs on small frames (the site's motion lens works at 192 pixels wide; the detector at 640), and why a city cannot "just record everything in full".
+- **Storage and bandwidth.** 155 million numbers a second, per camera. Three things follow. Cameras compress (H.264/H.265). Analysis runs on small frames (the site's motion lens works at 192 pixels wide; the detector at 640). And a city cannot "just record everything in full".
 - **Privacy is a resolution question.** A face 8 pixels tall cannot be recognised by anyone; a face 120 pixels tall can. How a system is configured — resolution, zoom, placement — decides what it *can* know, long before any AI is involved.
 - **Every later step inherits these numbers.** Noise, compression blocks, glare and darkness are in the table before any model sees it. No model can recover information that was never recorded.
 

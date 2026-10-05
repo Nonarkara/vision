@@ -33,7 +33,7 @@ flowchart LR
   G --> H["≈ 0–50 boxes<br/>'car 71%'"]
 ```
 
-**SSD** — *Single Shot MultiBox Detector* (Liu et al., 2016) — places a fixed set of **anchor boxes** of several sizes and shapes on grids of several resolutions, and for each anchor predicts (a) how to nudge the box to fit an object and (b) a score per class. One look ("single shot"), no separate region-proposal stage — which is why it is fast enough for a browser. **SSDLite** (Sandler et al., 2018) replaces SSD's normal convolutions with the cheaper depthwise separable ones from chapter 05: 4.3 million weights and about 0.8 billion multiply-adds, at 22.1 COCO mAP in the paper.
+**SSD** — *Single Shot MultiBox Detector* (Liu et al., 2016) — places a fixed set of **anchor boxes** of several sizes and shapes on grids of several resolutions, and for each anchor predicts (a) how to nudge the box to fit an object and (b) a score per class. One look ("single shot"), no separate region-proposal stage — which is why it is fast enough for a browser. **SSDLite** (Sandler et al., 2018) replaces SSD's normal convolutions with the cheaper depthwise separable ones from chapter 05: 4.3 million weights and about 0.8 billion multiply-adds, at 22.1 COCO mAP — one number standing in for a whole detector, unpacked in §4 — in the paper.
 
 ### The 300 × 300 squeeze, and why far-away things vanish
 
