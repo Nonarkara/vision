@@ -5,7 +5,7 @@
 
 import { createLayer } from '../ml/learner.js'
 import { EMBED_SIZE } from '../ml/embedder.js'
-import { fitCanvas, clear, NAPLES, GRAY } from '../cv/draw.js'
+import { fitCanvas, clear, canvasScale, NAPLES, GRAY } from '../cv/draw.js'
 import { t } from '../core/i18n.js'
 
 export const EPOCHS = 200
@@ -58,7 +58,7 @@ export function drawCurve(canvas, history, epochs = EPOCHS) {
   const ctx = fitCanvas(canvas)
   clear(ctx)
   const W = canvas.width, H = canvas.height
-  const dpr = W / Math.max(1, canvas.clientWidth)
+  const dpr = canvasScale(canvas)
   const pad = { l: 40 * dpr, r: 84 * dpr, t: 16 * dpr, b: 28 * dpr }
   const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b
   const yMax = Math.max(1, ...history.map((h) => h.loss))
@@ -148,23 +148,45 @@ const isName = (s) => typeof s === 'string' && s.length > 0 && s.length <= 32
 /**
  * Read a layer file chosen by the visitor. The file is untrusted input, so
  * every field is checked before any of it is used. Returns { layer, names }
- * or throws an Error whose message is a short reason.
+ * or throws an Error whose `.code` names the problem, so the page can say it
+ * in whichever language the visitor is reading.
  */
+const REASONS = [
+  ['json', 'ไฟล์นี้ไม่ใช่ JSON', 'this file is not JSON'],
+  ['format', 'ไฟล์นี้ไม่ใช่ไฟล์ชั้นของหน้านี้', 'not a layer file from this page'],
+  ['shape', 'รูปทรงไม่ถูกต้อง — ต้องมี 1,280 ตัวเลขและ 2–4 กลุ่ม', 'wrong shape — expected 1,280 numbers and 2–4 classes'],
+  ['weights', 'ค่าน้ำหนักในไฟล์เสียหาย', 'the weights in the file are damaged'],
+  ['biases', 'ค่า bias ในไฟล์เสียหาย', 'the biases in the file are damaged'],
+  ['names', 'รายชื่อกลุ่มในไฟล์เสียหาย', 'the class names in the file are damaged'],
+  ['big', 'ไฟล์ใหญ่เกินไป', 'the file is too large'],
+]
+export function fileReason(err) {
+  const found = REASONS.find(([code]) => code === err?.code)
+  if (found) return t(found[1], found[2])
+  return String(err?.message ?? err)
+}
+
 export function parseLayerFile(text) {
   let d
-  try { d = JSON.parse(text) } catch { throw new Error('not JSON') }
-  if (d?.format !== FORMAT || d.version !== 1) throw new Error('not a layer file from this page')
+  try { d = JSON.parse(text) } catch { throw fail('json') }
+  if (d?.format !== FORMAT || d.version !== 1) throw fail('format')
   const { dim, classes, W, b, names } = d
-  if (dim !== EMBED_SIZE || !Number.isInteger(classes) || classes < 2 || classes > 4) throw new Error('wrong shape')
-  if (!Array.isArray(W) || W.length !== dim * classes || !W.every(isNum)) throw new Error('bad weights')
-  if (!Array.isArray(b) || b.length !== classes || !b.every(isNum)) throw new Error('bad biases')
-  if (!Array.isArray(names) || names.length !== classes) throw new Error('bad names')
+  if (dim !== EMBED_SIZE || !Number.isInteger(classes) || classes < 2 || classes > 4) throw fail('shape')
+  if (!Array.isArray(W) || W.length !== dim * classes || !W.every(isNum)) throw fail('weights')
+  if (!Array.isArray(b) || b.length !== classes || !b.every(isNum)) throw fail('biases')
+  if (!Array.isArray(names) || names.length !== classes) throw fail('names')
   const pairs = names.map((p) => (Array.isArray(p) && p.length === 2 && p.every(isName) ? [p[0], p[1]] : null))
-  if (pairs.includes(null)) throw new Error('bad names')
+  if (pairs.includes(null)) throw fail('names')
   return {
     layer: layerFromWeights({ dim, classes, W, b }),
     names: pairs,
     examples: Number.isInteger(d.examples) ? d.examples : null,
     epochs: Number.isInteger(d.epochs) ? d.epochs : null,
   }
+}
+
+function fail(code) {
+  const err = new Error(code)
+  err.code = code
+  return err
 }

@@ -7,7 +7,7 @@
 // land apart here, and the page says so under the picture.
 
 import { pca2 } from '../ml/learner.js'
-import { fitCanvas, clear, SIGNAL, NAPLES, GRAY, BLACK } from '../cv/draw.js'
+import { fitCanvas, clear, canvasScale, SIGNAL, NAPLES, GRAY, BLACK } from '../cv/draw.js'
 import { t } from '../core/i18n.js'
 
 const WHITE = '#f7f5ef'
@@ -43,7 +43,7 @@ export function createMap(canvas) {
     const ctx = fitCanvas(canvas)
     clear(ctx)
     const W = canvas.width, H = canvas.height
-    const dpr = W / Math.max(1, canvas.clientWidth)
+    const dpr = canvasScale(canvas)
     ctx.font = `${Math.round(11 * dpr)}px "JetBrains Mono", "IBM Plex Sans Thai", monospace`
     ctx.textBaseline = 'top'
     if (!proj) {

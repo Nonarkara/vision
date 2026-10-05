@@ -21,18 +21,6 @@
     </div>
   </section>
 
-  <section class="idea field-quiet" aria-labelledby="idea-title">
-    <h2 id="idea-title" class="idea-title"><span class="th" lang="th">การเรียนรู้แบบถ่ายโอน</span><span class="en" lang="en">Transfer learning</span></h2>
-    <ol class="steps">
-      <li><span class="th" lang="th">ภาพหนึ่งเฟรมจากกล้อง</span><span class="en" lang="en">One frame from the camera</span></li>
-      <li><span class="th" lang="th">MobileNetV2 — แช่แข็งไว้ ไม่ได้ฝึกใหม่</span><span class="en" lang="en">MobileNetV2 — frozen, never retrained</span></li>
-      <li><span class="th" lang="th">ตัวเลข 1,280 ตัว ลายนิ้วมือของภาพ</span><span class="en" lang="en">1,280 numbers: the picture's fingerprint</span></li>
-      <li><span class="th" lang="th">การตัดสินใจของคุณ — ส่วนเดียวที่เรียนรู้</span><span class="en" lang="en">Your decision — the only part that learns</span></li>
-    </ol>
-    <p class="prose th" lang="th">โครงข่ายนี้ถูกฝึกมาแล้วกับภาพจาก ImageNet กว่าล้านภาพ (Sandler และคณะ, 2018) ระหว่างทาง ชั้นต่าง ๆ ของมันเรียนรู้ที่จะเห็นขอบ ลวดลาย พื้นผิว และส่วนประกอบของสิ่งของ เราขอยืมความรู้นั้นมาทั้งก้อน แล้วฝึกเพียงชั้นสุดท้ายเล็ก ๆ ที่มีน้ำหนักแค่กลุ่มละ 1,280 ตัวบวกอีกหนึ่ง ตัวอย่างไม่กี่สิบภาพจึงพอ และฝึกเสร็จในไม่กี่วินาทีแม้บนโทรศัพท์</p>
-    <p class="prose en" lang="en">The network was already trained on more than a million ImageNet photos (Sandler et al., 2018). Along the way its layers learned to pick out edges, textures, patterns and parts of things. We borrow all of that as it is and train only a small last layer: 1,280 weights per class, plus one. That is why a few dozen examples are enough, and why training takes seconds, even on a phone.</p>
-  </section>
-
   <div data-specimen-slot></div>
 
   <section class="room" aria-labelledby="room-title">
@@ -41,16 +29,22 @@
       <h2 id="room-title"><span class="th" lang="th">ให้มันดูตัวอย่าง</span><span class="en" lang="en">Show it examples</span></h2>
       <p class="prose th" lang="th">ตั้งชื่อกลุ่ม 2–4 กลุ่ม แล้วกด “เพิ่มตัวอย่าง” หรือ “กดค้างเพื่ออัด” ขณะที่กล้องเห็นสิ่งนั้น กล้องของคุณเองเหมาะที่สุด ลองยกมือ วางแก้ว หรือเดินออกจากเฟรม หรือจะใช้กล้องถนนสอนเรื่องรถแน่นกับถนนโล่งก็ได้</p>
       <p class="prose en" lang="en">Name 2–4 classes, then press “Add example” or “Hold to record” while the camera shows that thing. Your own camera works best: raise a hand, put down a cup, step out of frame. Or use a road camera to teach busy versus empty.</p>
+      <ol class="howto" data-howto data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
+        <li data-step="examples"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละอย่างน้อยหนึ่งภาพ</span><span class="en" lang="en">Add an example to every class</span></li>
+        <li data-step="guess"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ดูมันเริ่มเดาจากภาพสด</span><span class="en" lang="en">Watch it start guessing from the live picture</span></li>
+        <li data-step="train"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">กด “ฝึก” แล้วดูเส้นค่าผิดพลาดลดลง</span><span class="en" lang="en">Press Train and watch the loss fall</span></li>
+        <li data-step="judge"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ส่งไปตัดสินกล้องสาธารณะ 24 ตัว</span><span class="en" lang="en">Send it to judge 24 public cameras</span></li>
+      </ol>
     </header>
 
     <div class="room-grid">
-      <div class="bench room-bench" aria-label="What the machine sees now">
+      <div class="bench room-bench" data-aria-th="สิ่งที่เครื่องเห็นตอนนี้" data-aria-en="What the machine sees now">
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">ภาพที่เครื่องเห็นตอนนี้</span><span class="en" lang="en">What it sees now</span></span>
           <span class="num" data-model-state></span>
         </div>
         <div class="bench-view">
-          <canvas data-view role="img" aria-label="The current picture: your camera, a public camera or your photo"></canvas>
+          <canvas data-view role="img" data-aria-th="ภาพปัจจุบัน: กล้องของคุณ กล้องสาธารณะ หรือรูปถ่าย" data-aria-en="The current picture: your camera, a public camera or your photo"></canvas>
           <div class="bench-state" data-view-state>…</div>
         </div>
         <div class="controls">
@@ -72,14 +66,28 @@
           <label class="label" for="preset"><span class="th" lang="th">เริ่มจากชุด</span><span class="en" lang="en">Start from</span></label>
           <select id="preset" class="field-input" data-preset></select>
         </div>
-        <ol class="klasses" data-classes aria-label="Classes"></ol>
+        <ol class="klasses" data-classes data-aria-th="กลุ่มทั้งหมด" data-aria-en="Classes"></ol>
         <div class="controls room-more">
           <button class="btn" type="button" data-add-class>+ <span class="th" lang="th">เพิ่มกลุ่ม</span><span class="en" lang="en">Add a class</span></button>
+          <button class="btn" type="button" data-demo><span class="th" lang="th">✦ ไม่มีกล้อง? ดูตัวอย่างที่หน้านี้วาดให้</span><span class="en" lang="en">✦ No camera? Load examples this page draws</span></button>
         </div>
+        <p class="micro"><span class="th" lang="th">ปุ่มนี้วาดภาพถนนจำลอง “รถแน่น / ถนนโล่ง” ขึ้นมาเอง 16 ภาพ — ไม่ใช่ภาพถ่าย ไม่ได้ใช้กล้อง และไม่มีอะไรออกจากเครื่องคุณ ใช้ดูให้ทุกชิ้นส่วนของหน้านี้ทำงานได้ในคลิกเดียว</span><span class="en" lang="en">This button draws 16 synthetic “busy / empty road” frames itself — not photographs, not from a camera, and nothing leaves your device. It exists so every instrument on this page can move in one click.</span></p>
         <p class="note"><strong><span class="th" lang="th">อยู่ในแท็บนี้เท่านั้น</span><span class="en" lang="en">This tab only.</span></strong> <span class="th" lang="th">ตัวอย่างทั้งหมดอยู่ในหน่วยความจำของแท็บนี้ ไม่ได้บันทึกและไม่ได้ส่งไปไหน โหลดหน้าใหม่เมื่อไรก็หายหมด ภาพจากกล้องของคุณประมวลผลในเครื่องนี้เท่านั้น</span><span class="en" lang="en">Your examples live in this tab's memory — not saved, not sent anywhere. Reload the page and they are gone. Your camera's picture is processed on this device only.</span></p>
         <p class="micro tips"><span class="th" lang="th">เริ่มที่กลุ่มละ 10–20 ภาพ และให้ตัวอย่างหลากหลาย ทั้งมุม ระยะ และแสง ถ้าทุกภาพของ “ยกมือ” คุณใส่เสื้อแดง เครื่องอาจเรียนรู้เสื้อแดงแทนมือ</span><span class="en" lang="en">Start with 10–20 per class and vary them: angle, distance, light. If you wear a red shirt in every “hand up” example, it may learn the shirt instead of the hand.</span></p>
       </div>
     </div>
+  </section>
+
+  <section class="idea field-quiet" aria-labelledby="idea-title">
+    <h2 id="idea-title" class="idea-title"><span class="th" lang="th">การเรียนรู้แบบถ่ายโอน</span><span class="en" lang="en">Transfer learning</span></h2>
+    <ol class="steps">
+      <li><span class="th" lang="th">ภาพหนึ่งเฟรมจากกล้อง</span><span class="en" lang="en">One frame from the camera</span></li>
+      <li><span class="th" lang="th">MobileNetV2 — แช่แข็งไว้ ไม่ได้ฝึกใหม่</span><span class="en" lang="en">MobileNetV2 — frozen, never retrained</span></li>
+      <li><span class="th" lang="th">ตัวเลข 1,280 ตัว ลายนิ้วมือของภาพ</span><span class="en" lang="en">1,280 numbers: the picture's fingerprint</span></li>
+      <li><span class="th" lang="th">การตัดสินใจของคุณ — ส่วนเดียวที่เรียนรู้</span><span class="en" lang="en">Your decision — the only part that learns</span></li>
+    </ol>
+    <p class="prose th" lang="th">โครงข่ายนี้ถูกฝึกมาแล้วกับภาพจาก ImageNet กว่าล้านภาพ (Sandler และคณะ, 2018) ระหว่างทาง ชั้นต่าง ๆ ของมันเรียนรู้ที่จะเห็นขอบ ลวดลาย พื้นผิว และส่วนประกอบของสิ่งของ เราขอยืมความรู้นั้นมาทั้งก้อน แล้วฝึกเพียงชั้นสุดท้ายเล็ก ๆ ที่มีน้ำหนักแค่กลุ่มละ 1,280 ตัวบวกอีกหนึ่ง ตัวอย่างไม่กี่สิบภาพจึงพอ และฝึกเสร็จในไม่กี่วินาทีแม้บนโทรศัพท์</p>
+    <p class="prose en" lang="en">The network was already trained on more than a million ImageNet photos (Sandler et al., 2018). Along the way its layers learned to pick out edges, textures, patterns and parts of things. We borrow all of that as it is and train only a small last layer: 1,280 weights per class, plus one. That is why a few dozen examples are enough, and why training takes seconds, even on a phone.</p>
   </section>
 
   <section class="chapter field-quiet" aria-labelledby="learn-title">
@@ -96,6 +104,7 @@
           <div class="bench">
             <span class="label bench-caption"><span class="th" lang="th">ทดสอบแบบเว้นทีละภาพ</span><span class="en" lang="en">Leave-one-out test</span></span>
             <p class="readout loo" data-loo>—</p>
+            <p class="loo-grade" data-loo-grade hidden></p>
           </div>
           <p class="micro"><span class="th" lang="th">ซ่อนตัวอย่างไว้หนึ่งภาพ ให้ภาพที่เหลือทายว่าเป็นกลุ่มไหน ทำแบบนี้ทีละภาพจนครบ สัดส่วนที่ทายถูกคือการเดาที่ซื่อตรงกว่าว่ามันจะทำได้ดีแค่ไหนกับภาพที่ไม่เคยเห็น แต่ก็ยังเป็นภาพแบบเดียวกับที่คุณถ่ายเท่านั้น</span><span class="en" lang="en">Hide one example, let the rest label it, and repeat for every example. The share it gets right is a fairer guess at how it will do on pictures it has not seen — though still only pictures like the ones you took.</span></p>
         </article>
@@ -105,7 +114,7 @@
           <p class="th" lang="th">น้ำหนักชั้นเดียว (softmax regression) เริ่มจากค่าสุ่ม แล้วถูกปรับทีละนิดด้วยวิธี Adam (Kingma และ Ba, 2015) จนแยกกลุ่มของคุณออกจากกันได้ กด “ฝึก” แล้วดูเส้นค่าผิดพลาดค่อย ๆ ลดลง ตลอด 200 รอบที่มันไล่ดูตัวอย่างทั้งหมด</p>
           <p class="en" lang="en">One layer of weights (softmax regression) starts random and is nudged, pass after pass, by Adam (Kingma &amp; Ba, 2015) until it separates your classes. Press Train and watch the loss fall — 200 passes over every example.</p>
           <div class="bench">
-            <div class="bench-view curve-view"><canvas data-curve role="img" aria-label="Training curve: loss and accuracy per pass"></canvas></div>
+            <div class="bench-view curve-view"><canvas data-curve role="img" data-aria-th="เส้นฝึก: ค่าผิดพลาดและความแม่นในแต่ละรอบ" data-aria-en="Training curve: loss and accuracy per pass"></canvas></div>
             <div class="controls">
               <button class="btn primary" type="button" data-train disabled>▶ <span class="th" lang="th">ฝึก</span><span class="en" lang="en">Train</span></button>
             </div>
@@ -116,7 +125,7 @@
       </div>
 
       <figure class="bench map">
-        <div class="bench-view map-view"><canvas data-map role="img" aria-label="Map of your examples in two dimensions, with the current picture"></canvas></div>
+        <div class="bench-view map-view"><canvas data-map role="img" data-aria-th="แผนที่ตัวอย่างของคุณในสองมิติ พร้อมภาพปัจจุบัน" data-aria-en="Map of your examples in two dimensions, with the current picture"></canvas></div>
         <div class="bench-caption"><span data-legend></span></div>
         <figcaption class="bench-caption map-caption"><span class="th" lang="th">ตัวเลข 1,280 ตัวของตัวอย่างแต่ละภาพถูกบีบเหลือ 2 ตัวด้วยการวิเคราะห์องค์ประกอบหลัก (PCA) รูปทรงบอกกลุ่ม วงสีส้มคือภาพตอนนี้ เส้นบางชี้ไปยังเพื่อนบ้านที่กำลังโหวต นี่เป็นเพียงเงา จุดที่ใกล้กันใน 1,280 มิติอาจดูห่างกันบนแผนที่นี้</span><span class="en" lang="en">Each example's 1,280 numbers squeezed to 2 by principal component analysis (PCA). Shapes mark classes; the orange ring is the picture now; thin lines run to the neighbours currently voting. It is only a shadow — points close in 1,280 dimensions can look far apart here.</span></figcaption>
       </figure>
@@ -134,10 +143,28 @@
         <p class="en" lang="en">Send what you taught out to 24 public cameras it has never seen. We ask one camera at a time, with a pause between, because every frame is a request to someone else's server. Teach it “hand up”, show it a road, and it will still answer. That is the lesson: a model has no “none of these” unless you teach it one.</p>
         <p class="micro"><span class="th" lang="th">ป้ายสีส้มคือคำตอบที่มั่นใจตั้งแต่ 70% ขึ้นไป ต่ำกว่านั้นเราเขียนว่า “ไม่แน่ใจ”</span><span class="en" lang="en">An orange tag means 70% or more for one class; below that we write “unsure”.</span></p>
       </div>
+
+      <aside class="challenge field-quiet" aria-labelledby="challenge-title">
+        <span class="label"><span class="th" lang="th">เกมต่อไป</span><span class="en" lang="en">Next game</span></span>
+        <h3 id="challenge-title"><span class="th" lang="th">ล่าทางลัด: แก้วอยู่ซ้ายหรือขวา?</span><span class="en" lang="en">Hunt the shortcut: is the cup on the left or the right?</span></h3>
+        <ol class="steps">
+          <li><span class="th" lang="th">กดปุ่มนี้เพื่อตั้งกลุ่ม “มีแก้ว / ไม่มีแก้ว” ให้</span><span class="en" lang="en">Press the button — it sets up Cup / No cup for you</span></li>
+          <li><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละ 10 ภาพ โดยถือแก้วไว้ “ซ้ายมือ” เท่านั้น อย่าขยับอย่างอื่นเลย</span><span class="en" lang="en">Add 10 examples of each, always holding the cup on the LEFT. Move nothing else</span></li>
+          <li><span class="th" lang="th">กด “ฝึก” ให้เสร็จ แล้วย้ายแก้วไป “ขวามือ” แล้วดูแถบคะแนน</span><span class="en" lang="en">Press Train, then slide the cup to the RIGHT and watch the bars</span></li>
+          <li><span class="th" lang="th">ถ้าคะแนนร่วงหรือสลับข้าง เครื่องเรียนรู้ “ข้างซ้าย” ไม่ใช่ “แก้ว”</span><span class="en" lang="en">If the score collapses or flips, it learned “left side”, not “cup”</span></li>
+        </ol>
+        <p class="micro"><span class="th" lang="th">นี่คือบทเรียนที่สำคัญที่สุดในวิชานี้ (บทที่ 7) การให้คะแนน 100% กับตัวอย่างของตัวเองไม่ได้หมายความว่ามันเข้าใจสิ่งที่คุณตั้งใจสอน และทางแก้ไม่ใช่โมเดลที่ใหญ่ขึ้น แต่คือตัวอย่างที่หลากหลายในสิ่งที่ไม่ควรสำคัญ</span><span class="en" lang="en">This is the most important lesson in the handbook (chapter 7). A perfect score on its own examples does not mean it understood what you meant to teach — and the cure is not a bigger model, but examples that vary the things that should not matter.</span></p>
+        <div class="controls">
+          <button class="btn primary" type="button" data-challenge><span class="th" lang="th">▶ เริ่มเกมนี้</span><span class="en" lang="en">▶ Start this game</span></button>
+        </div>
+        <p class="readout challenge-say" data-challenge-say aria-live="polite"></p>
+      </aside>
+
       <div class="bench judge-bench">
-        <div class="controls" role="group" aria-label="Judge with">
+        <div class="controls" role="group" data-aria-th="ตัดสินด้วยวิธีใด" data-aria-en="Judge with">
           <button class="btn" type="button" data-judge-mode="layer" aria-pressed="true"><span class="th" lang="th">ใช้ชั้นที่ฝึกแล้ว</span><span class="en" lang="en">Use the trained layer</span></button>
           <button class="btn" type="button" data-judge-mode="knn" aria-pressed="false"><span class="th" lang="th">ใช้เพื่อนบ้านใกล้สุด</span><span class="en" lang="en">Use nearest neighbours</span></button>
+          <button class="btn" type="button" data-judge-mode="both" aria-pressed="false"><span class="th" lang="th">ทั้งสองวิธีเทียบกัน</span><span class="en" lang="en">Race both</span></button>
         </div>
         <div class="controls">
           <button class="btn primary" type="button" data-judge-start>▶ <span class="th" lang="th">ตัดสิน 24 กล้อง</span><span class="en" lang="en">Judge 24 cameras</span></button>

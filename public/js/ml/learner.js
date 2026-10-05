@@ -169,3 +169,27 @@ export function leaveOneOut(samples, classes, k = 5) {
   }
   return ok / samples.length
 }
+
+/**
+ * The same number, computed a chunk at a time. Four classes of a hundred
+ * examples is ~200 million multiply-adds; run in one go that is a visible
+ * half-second freeze right after you let go of "hold to record". Yielding
+ * every `chunk` examples keeps each slice under a frame.
+ *
+ * Resolves null when `token.cancelled` became true — a newer set of examples
+ * arrived and this answer is no longer wanted.
+ */
+export async function leaveOneOutAsync(samples, classes, k = 5, { chunk = 24, token = {} } = {}) {
+  if (samples.length < 2) return null
+  let ok = 0
+  for (let i = 0; i < samples.length; i++) {
+    const rest = samples.filter((_, j) => j !== i)
+    const { probs } = knnPredict(rest, samples[i].x, classes, k)
+    if (probs.indexOf(Math.max(...probs)) === samples[i].y) ok++
+    if (i % chunk === chunk - 1) {
+      await new Promise((r) => setTimeout(r, 0))
+      if (token.cancelled) return null
+    }
+  }
+  return ok / samples.length
+}

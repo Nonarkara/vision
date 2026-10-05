@@ -19,10 +19,12 @@ for (const dir of ['server', 'public']) {
   })
 }
 fs.copyFileSync(path.join(root, 'package.json'), path.join(runtime, 'package.json'))
-// Preserve production's fresher catalogue if it has one.
+// Preserve production's fresher catalogue if it has one. The workspace copy
+// is gitignored, so a fresh clone simply has none to give.
 fs.mkdirSync(path.join(runtime, 'data'), { recursive: true })
-if (!fs.existsSync(path.join(runtime, 'data', 'cameras.json'))) {
-  fs.copyFileSync(path.join(root, 'data', 'cameras.json'), path.join(runtime, 'data', 'cameras.json'))
+const seedCatalogue = path.join(root, 'data', 'cameras.json')
+if (!fs.existsSync(path.join(runtime, 'data', 'cameras.json')) && fs.existsSync(seedCatalogue)) {
+  fs.copyFileSync(seedCatalogue, path.join(runtime, 'data', 'cameras.json'))
 }
 const plist = path.join(os.homedir(), 'Library', 'LaunchAgents', `${label}.plist`)
 fs.copyFileSync(path.join(root, 'ops', `${label}.plist`), plist)

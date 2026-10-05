@@ -21,8 +21,17 @@ export function fitCanvas(canvas) {
   return ctx
 }
 
-/** Where an ImageData of size (iw, ih) lands when fitted into (w, h). */
-export function containRect(iw, ih, w, h) {
+/**
+ * Backing-store pixels per CSS pixel, for sizing strokes and type.
+ * A canvas with no laid-out box yet would give NaN or Infinity here, and
+ * every font string computed from it would be silently dropped — so clamp.
+ */
+export function canvasScale(canvas) {
+  const s = canvas.width / Math.max(1, canvas.clientWidth)
+  return Number.isFinite(s) && s > 0 ? s : 1
+}
+
+/** Where an ImageData of size (iw, ih) lands when fitted into (w, h). */export function containRect(iw, ih, w, h) {
   const s = Math.min(w / iw, h / ih)
   return { x: (w - iw * s) / 2, y: (h - ih * s) / 2, w: iw * s, h: ih * s }
 }

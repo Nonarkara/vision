@@ -429,6 +429,21 @@ figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
 }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
+/* Confirm box: the page's own yes/no, because the browser's confirm() speaks
+   whichever language the browser happens to be set to. */
+.confirm-scrim {
+  position: fixed; inset: 0; z-index: 70; display: grid; place-items: center;
+  padding: 24px; background: color-mix(in srgb, var(--black) 72%, transparent);
+}
+.confirm-box {
+  display: grid; gap: 18px; width: min(92vw, 460px); padding: 24px;
+  background: var(--black); color: var(--white);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+.confirm-box p { margin: 0; font-size: var(--body); }
+.confirm-box .controls { background: transparent; }
+.confirm-box .controls .btn { flex: 1 1 auto; }
+
 .reveal { animation: reveal 240ms var(--ease) both; }
 @keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 

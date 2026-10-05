@@ -14,6 +14,9 @@
 @media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
 
 .room-bench .controls .btn { flex: 1 1 auto; }
+/* The 14 MB download, as a bar you can watch rather than a number you must read. */
+.loadbar { display: block; height: 6px; margin: 0 16px; background: var(--black-3); }
+.loadbar-fill { display: block; height: 100%; width: 0; background: var(--signal); transition: width 120ms linear; }
 .live { display: grid; gap: 2px; padding: 0 0 2px; }
 .live-head { display: block; padding: 12px 16px 6px; color: var(--gray); }
 .live-head .micro { text-transform: none; letter-spacing: 0; }
@@ -67,6 +70,43 @@
 .verdict h3 { margin: 0 0 10px; }
 .judge-owner { display: block; color: var(--gray); margin-top: 4px; }
 .judge-owner a { color: var(--white); }
+
+/* The four-step checklist in the room head: it ticks itself off as you go. */
+.howto { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 2px; max-width: 62ch; }
+.howto li {
+  display: grid; grid-template-columns: var(--target) minmax(0, 1fr); align-items: center;
+  gap: 10px; padding: 7px 12px; background: var(--black); color: var(--gray);
+  font-family: var(--mono); font-size: var(--micro);
+}
+.howto-tick {
+  width: 18px; height: 18px; border: 2px solid var(--gray); display: block;
+  position: relative; justify-self: center;
+}
+.howto li[data-done] { color: var(--white); }
+.howto li[data-done] .howto-tick { border-color: var(--signal); background: var(--signal); }
+.howto li[data-done] .howto-tick::after {
+  content: ""; position: absolute; left: 4px; top: 0; width: 5px; height: 10px;
+  border: solid var(--black); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+
+/* Leave-one-out grade: a plain-language verdict next to the number. */
+.loo-grade { margin: 0; padding: 0 16px 14px; font-family: var(--mono); font-size: var(--micro); color: var(--gray); }
+.loo-grade.good { color: var(--signal); }
+.loo-grade.ok { color: var(--naples); }
+.loo-grade.bad { color: var(--red, var(--naples)); }
+
+/* Shortcut-learning game */
+.challenge { display: grid; gap: 14px; padding: clamp(24px, 3vw, 40px) var(--gutter); align-content: start; }
+.challenge h3 { margin: 0; font-size: clamp(1.35rem, 1.4vw + 0.9rem, 2rem); }
+.challenge .steps { margin: 0; }
+.challenge .controls { background: transparent; }
+.challenge-say { margin: 0; color: var(--naples); }
+.challenge[data-active] { outline: 2px solid var(--signal); outline-offset: -2px; }
+
+/* Racing both learners: the two verdicts on one tile. */
+.tile-alt { display: block; margin-top: 4px; color: var(--gray); }
+.tile-alt.agree { color: var(--white); }
+.tile-alt.differs { color: var(--naples); }
 
 /* Keep */
 .keep { background: transparent; }
