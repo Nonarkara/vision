@@ -126,7 +126,7 @@ sequenceDiagram
     C-->>V: image/jpeg ≤ 4 MB
     V-->>B: frame (kept in RAM 30 s, never on disk)
   end
-  Note over B: lenses + models run here;<br/>nothing is sent back
+  Note over B: lenses + models run here,<br/>nothing is sent back
 ```
 
 ### Rules the code enforces

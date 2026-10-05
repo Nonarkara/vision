@@ -2,6 +2,7 @@
 // files, and #anchors computed the way GitHub computes heading ids. External
 // links are not fetched here (they were checked by hand; see
 // docs/reference/reading-list.md), so this stays fast and offline.
+// Also lints Mermaid sequence diagrams for ';', which breaks them on GitHub.
 //
 //   node scripts/check-docs.mjs
 
@@ -47,8 +48,17 @@ function anchorsOf(file) {
 }
 
 for (const file of markdownFiles(ROOT)) {
-  const text = fs.readFileSync(file, 'utf8').replace(/```[\s\S]*?```/g, '')
+  const raw = fs.readFileSync(file, 'utf8')
+  const text = raw.replace(/```[\s\S]*?```/g, '')
   const rel = path.relative(ROOT, file)
+  // Mermaid treats ';' as a statement end, so one inside a sequence-diagram
+  // message or note silently breaks the whole diagram on GitHub.
+  for (const m of raw.matchAll(/```mermaid\n([\s\S]*?)```/g)) {
+    if (!/^\s*sequenceDiagram/.test(m[1])) continue
+    m[1].split('\n').forEach((line, i) => {
+      if (line.includes(';')) problems.push(`${rel}: mermaid sequence line ${i + 1} contains ';' — "${line.trim()}"`)
+    })
+  }
   for (const m of text.matchAll(/!?\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g)) {
     const target = m[1]
     if (/^(https?:|mailto:)/.test(target)) continue
@@ -63,7 +73,7 @@ for (const file of markdownFiles(ROOT)) {
 
 if (problems.length) {
   console.error(problems.join('\n'))
-  console.error(`\n✗ ${problems.length} broken documentation link(s)`)
+  console.error(`\n✗ ${problems.length} documentation problem(s)`)
   process.exit(1)
 }
-console.log('✓ documentation links and anchors resolve')
+console.log('✓ documentation links and anchors resolve; mermaid sequence diagrams are free of \';\'')

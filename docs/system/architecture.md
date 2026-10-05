@@ -126,7 +126,7 @@ sequenceDiagram
   Note over B: lenses paint at ≤ 15 fps while visible
   B->>V: GET /models/ssdlite_mobilenet_v2/* (only when a model is asked for)
   V-->>B: 18 MB, cached a year at the edge
-  Note over B: detection runs on the GPU via WebGL; results stay here
+  Note over B: detection runs on the GPU via WebGL — results stay here
 ```
 
 ## 5. How it degrades
