@@ -32,7 +32,7 @@
       <a class="tagid-source" href="https://nttagid.com/home" target="_blank" rel="noopener"><span class="th" lang="th">เว็บไซต์โครงการ ↗</span><span class="en" lang="en">Project website ↗</span></a>
     </header>
     <div class="chapter-body">
-<p class=" th" lang="th">NT TAG ID อธิบายระบบที่รวมการวัดลักษณะภาพแบบดั้งเดิมกับการเรียนรู้เชิงลึก แปลงภาพเป็นรูปแบบตัวเลข แล้วใช้จับคู่บุคคลข้ามกล้อง ระบบนี้ทำให้เห็นว่าการตรวจพบใบหน้า การติดตาม และการระบุตัวบุคคล เป็นคนละโจทย์กัน</p><p class=" en" lang="en">NT TAG ID describes a system combining classical image features with deep learning, encoding images as numerical patterns for matching people across cameras. It brings three different research tasks into view: detecting a face, following a track, and matching an identity.</p>
+<p class=" th" lang="th">NT TAG ID อธิบายระบบที่รวมการวัดลักษณะภาพแบบดั้งเดิมกับการเรียนรู้เชิงลึก (deep learning: เรียนรู้จากภาพจำนวนมาก แทนที่จะเขียนกฎเอง) แปลงภาพเป็นรูปแบบตัวเลข แล้วใช้จับคู่บุคคลข้ามกล้อง ระบบนี้ทำให้เห็นว่าการตรวจพบใบหน้า การติดตาม และการระบุตัวบุคคล เป็นคนละโจทย์กัน</p><p class=" en" lang="en">NT TAG ID describes a system combining classical image features with deep learning (learning from many examples instead of rules people write), encoding images as numerical patterns for matching people across cameras. It brings three different research tasks into view: detecting a face, following a track, and matching an identity.</p>
       <figure class="tagid-pipeline">
         <figcaption class="label"><span class="th" lang="th">อ่านสถาปัตยกรรมแบบคู่</span><span class="en" lang="en">Reading a dual architecture</span></figcaption>
         <div class="tagid-input"><span class="num">01</span><strong><span class="th" lang="th">ภาพจากกล้อง</span><span class="en" lang="en">Camera frame</span></strong><span class="micro"><span class="th" lang="th">ตรวจหาและจัดแนวบริเวณใบหน้า</span><span class="en" lang="en">Detect and align the face region</span></span></div>
@@ -42,7 +42,7 @@
             <strong><span class="th" lang="th">วัดสิ่งที่คนออกแบบ</span><span class="en" lang="en">Measure designed features</span></strong><p class="micro"><span class="th" lang="th">รูปร่าง ขอบ และพื้นผิวของภาพ</span><span class="en" lang="en">Shape, edges, and image texture</span></p></div>
           <div class="tagid-path"><span class="label"><span class="th" lang="th">เส้นทางเรียนรู้เชิงลึก</span><span class="en" lang="en">Deep stream</span></span>
             <svg class="feature-sketch" viewBox="0 0 320 80" aria-hidden="true"><path class="sketch-faint" d="M28 20L120 12 212 24 292 40M28 60L120 68 212 56 292 40M28 20L120 68 212 24M28 60L120 12 212 56"/><g><circle cx="28" cy="20" r="5"/><circle cx="28" cy="60" r="5"/><circle cx="120" cy="12" r="5"/><circle cx="120" cy="68" r="5"/><circle cx="212" cy="24" r="5"/><circle cx="212" cy="56" r="5"/><circle cx="292" cy="40" r="5"/></g></svg>
-            <strong><span class="th" lang="th">เรียนรู้คำอธิบายจากพิกเซล</span><span class="en" lang="en">Learn a representation from pixels</span></strong><p class="micro"><span class="th" lang="th">โครงข่ายสร้างเวกเตอร์ลักษณะภาพ</span><span class="en" lang="en">A network produces a feature vector</span></p></div>
+            <strong><span class="th" lang="th">เรียนรู้คำอธิบายจากพิกเซล</span><span class="en" lang="en">Learn a representation from pixels</span></strong><p class="micro"><span class="th" lang="th">โครงข่ายสร้างเวกเตอร์ลักษณะภาพ (ชุดตัวเลขที่ใช้แทนภาพหนึ่งภาพ)</span><span class="en" lang="en">A network produces a feature vector (a list of numbers standing for one picture)</span></p></div>
         </div>
         <div class="tagid-output"><span class="num">02 → 03</span><strong><span class="th" lang="th">รวมหลักฐาน → ตัดสินการจับคู่</span><span class="en" lang="en">Combine evidence → decide a match</span></strong><span class="micro"><span class="th" lang="th">การแปลงเป็นตัวเลขยังไม่ใช่คำตอบ ต้องมีวิธีเปรียบเทียบและเกณฑ์ตัดสิน</span><span class="en" lang="en">Encoding is one step; comparison and a decision threshold still matter</span></span></div>
 <p class="tagid-caption micro th" lang="th">ภาพอธิบายที่วาดขึ้นใหม่จากคำอธิบายสถาปัตยกรรมคู่บนเว็บไซต์ NT TAG ID</p><p class="tagid-caption micro en" lang="en">An explanatory drawing based on NT TAG ID’s published dual-architecture description.</p>
@@ -53,8 +53,8 @@
 <p class=" th" lang="th">แผนภาพวิทยานิพนธ์ที่ระบุชื่อ D. Vongkomolshet (2026) วาง HFFL ไว้ในกลุ่มวิธีผสม มีเส้นทางดั้งเดิม เส้นทางโครงข่าย และส่วนผสานที่ปรับตามความมั่นใจและทรัพยากรประมวลผล เปิดแต่ละส่วนเพื่อดูว่าต่อยอดงานใด</p><p class=" en" lang="en">The dissertation diagrams credited to D. Vongkomolshet (2026) position HFFL as a hybrid: a classical stream, a neural stream, and fusion that responds to confidence and computing resources. Open each part to see its research lineage.</p>
         <div class="tagid-modules">
 <details><summary><span class="num">01</span><span class="th" lang="th">ลักษณะที่ออกแบบ</span><span class="en" lang="en">Designed features</span></summary><p class="micro th" lang="th">แผนภาพอ้าง Haar cascade ของ Viola–Jones สำหรับการตรวจหาใบหน้า และ HOG กับ LBP สำหรับคำอธิบายรูปร่างและพื้นผิว การหาใบหน้าเป็นขั้นแรก ไม่ได้บอกว่าเป็นใคร</p><p class="micro en" lang="en">The diagrams cite a Viola–Jones Haar cascade for face detection, with HOG and LBP describing shape and texture. Finding a face is a first step; it does not establish identity.</p></details>
-<details><summary><span class="num">02</span><span class="th" lang="th">ลักษณะที่เรียนรู้</span><span class="en" lang="en">Learned features</span></summary><p class="micro th" lang="th">เส้นทางโครงข่ายอ้าง YOLO สำหรับตรวจหา และ ArcFace สำหรับเวกเตอร์ใบหน้า โดยมีการจัดแนว ความสนใจ และการติดตามต่อเนื่องข้ามเฟรมประกอบอยู่ด้วย</p><p class="micro en" lang="en">The neural path cites YOLO detection and ArcFace face embeddings, alongside alignment, attention, and continuity across video frames.</p></details>
-<details><summary><span class="num">03</span><span class="th" lang="th">ส่วนผสาน AFFO</span><span class="en" lang="en">AFFO fusion</span></summary><p class="micro th" lang="th">แผนภาพเสนอการถ่วงน้ำหนักแบบเปลี่ยนได้ โดยใช้ความมั่นใจ ความไม่แน่นอนแบบ entropy และความพร้อมของ GPU แทนการให้น้ำหนักสองเส้นทางเท่ากันตลอด</p><p class="micro en" lang="en">The diagrams propose changing the streams’ weights using confidence, entropy-based uncertainty, and GPU availability, rather than keeping a fixed mixture.</p></details>
+<details><summary><span class="num">02</span><span class="th" lang="th">ลักษณะที่เรียนรู้</span><span class="en" lang="en">Learned features</span></summary><p class="micro th" lang="th">เส้นทางโครงข่ายอ้าง YOLO สำหรับตรวจหา และ ArcFace สำหรับเวกเตอร์ใบหน้า (ชุดตัวเลขที่ใช้แทนใบหน้าหนึ่งใบ) โดยมีการจัดแนว ความสนใจ (กลไกที่ชั่งน้ำหนักว่าส่วนไหนควรดูก่อน) และการติดตามต่อเนื่องข้ามเฟรมประกอบอยู่ด้วย</p><p class="micro en" lang="en">The neural path cites YOLO detection and ArcFace face embeddings (a list of numbers standing for one face), alongside alignment, attention (a way of weighting which part to look at first), and continuity across video frames.</p></details>
+<details><summary><span class="num">03</span><span class="th" lang="th">ส่วนผสาน AFFO</span><span class="en" lang="en">AFFO fusion</span></summary><p class="micro th" lang="th">แผนภาพเสนอการถ่วงน้ำหนักแบบเปลี่ยนได้ โดยใช้ความมั่นใจ ความไม่แน่นอนแบบ entropy (ยิ่งคำตอบกระจาย ยิ่งไม่แน่ใจ) และความพร้อมของ GPU (การ์ดกราฟิกที่ใช้ประมวลผล) แทนการให้น้ำหนักสองเส้นทางเท่ากันตลอด</p><p class="micro en" lang="en">The diagrams propose changing the streams’ weights using confidence, entropy-based uncertainty (how spread out the scores are), and GPU availability (whether a graphics chip is free), rather than keeping a fixed mixture.</p></details>
 <details><summary><span class="num">04</span><span class="th" lang="th">ส่วนเสริม HFFL-TM</span><span class="en" lang="en">HFFL-TM extension</span></summary><p class="micro th" lang="th">เส้นทางเสริมใช้จุดสังเกตใบหน้า 68 จุด สร้างเมทริกซ์ระยะห่างและรหัสเลขฐานสอง การแยกเป็นสามเหลี่ยมถูกระบุว่าเป็นข้อกำหนดสำหรับงานต่อไป ยังไม่ได้ทำในโค้ด</p><p class="micro en" lang="en">An optional path uses 68 facial landmarks, pairwise distances, and a binary code. Triangle decomposition is explicitly marked as a future specification, not yet implemented.</p></details>
 </div>
 <p class="tagid-caption micro th" lang="th">ที่มา: แผนภาพ “Five Eras of Face Recognition Theory” และ “Direct Contribution Model” ที่ระบุชื่อ D. Vongkomolshet เอกสารเหล่านี้อธิบายงานวิทยานิพนธ์ ไม่ได้ยืนยันว่า HFFL ทุกส่วนเป็นระบบ NT TAG ID ที่เปิดใช้งานอยู่ หรือผ่านการประเมินอิสระแล้ว</p><p class="tagid-caption micro en" lang="en">Source: “Five Eras of Face Recognition Theory” and “Direct Contribution Model” diagrams credited to D. Vongkomolshet. They describe dissertation work; they do not establish that every HFFL component is deployed in NT TAG ID or independently evaluated.</p>
@@ -86,7 +86,7 @@
       </div>
       <div class="tagid-reading prose">
         <h3><span class="th" lang="th">อ่านหลักฐานให้เป็น</span><span class="en" lang="en">How to read the evidence</span></h3>
-<p class=" th" lang="th">คำอธิบายผลิตภัณฑ์บอกว่าระบบตั้งใจทำอะไร ส่วนการประเมินต้องบอกด้วยว่าทดสอบกับใคร ภายใต้แสงและมุมแบบไหน ผิดพลาดในการจับคู่และปฏิเสธเท่าไร และเวลาที่รายงานรวมการตรวจหาและการค้นหาหรือไม่ เราจึงนำเสนอเป็นกรณีศึกษา ไม่ใช้คำกล่าวอ้างความแม่นยำหรือความเร็วแทนผลทดสอบอิสระ</p><p class=" en" lang="en">A product description explains an intended system. Evaluation also needs the test population, lighting and pose, false-match and false-non-match rates, and which processing stages a reported time includes. We present this as a case study, without treating advertised accuracy or speed as independent test results.</p><p class=" th" lang="th">การแทนใบหน้าด้วยตัวเลขไม่ได้ทำให้ความเชื่อมโยงกับบุคคลหายไปเอง หากตัวเลขยังใช้จับคู่คนเดิมได้ ก็ต้องศึกษาความเป็นส่วนตัวของตัวแทนนั้นด้วย ห้องเรียนนี้อธิบายงานระบุตัวบุคคล แต่เครื่องมือของเรายังคงนับสิ่งของโดยไม่ระบุตัวคน</p><p class=" en" lang="en">Encoding a face as numbers does not by itself remove its connection to a person. A representation that matches the same person still needs privacy analysis. This classroom explains identity research; its instruments continue counting objects without identifying people.</p>
+<p class=" th" lang="th">คำอธิบายผลิตภัณฑ์บอกว่าระบบตั้งใจทำอะไร ส่วนการประเมินต้องบอกด้วยว่าทดสอบกับใคร ภายใต้แสงและมุมแบบไหน ผิดพลาดในการจับคู่และปฏิเสธเท่าไร และเวลาที่รายงานรวมการตรวจหาและการค้นหาหรือไม่ เราจึงนำเสนอเป็นกรณีศึกษา และไม่ยกคำกล่าวอ้างเรื่องความแม่นยำหรือความเร็วมาใช้แทนผลทดสอบจากภายนอก</p><p class=" en" lang="en">A product description explains an intended system. Evaluation also needs the details: who was tested, under what light and at what angle, how often the system matched the wrong person or missed the right one, and which steps a reported time actually covers. We therefore present this as a case study, and we do not repeat an advertised accuracy or speed as though it were an independent test result.</p><p class=" th" lang="th">การแทนใบหน้าด้วยตัวเลขไม่ได้ทำให้ความเชื่อมโยงกับบุคคลหายไปเอง หากตัวเลขยังใช้จับคู่คนเดิมได้ ก็ต้องศึกษาความเป็นส่วนตัวของตัวแทนนั้นด้วย ห้องเรียนนี้อธิบายงานระบุตัวบุคคล แต่เครื่องมือของเรายังคงนับสิ่งของโดยไม่ระบุตัวคน</p><p class=" en" lang="en">Encoding a face as numbers does not by itself remove its connection to a person. A representation that matches the same person still needs privacy analysis. This classroom explains identity research; its instruments continue counting objects without identifying people.</p>
       </div>
     </div>
   </section>
@@ -141,8 +141,8 @@
         <li><span class="year num">1989</span><div>
           <h3><cite lang="en">Backpropagation Applied to Handwritten Zip Code Recognition</cite></h3>
           <p class="micro">Yann LeCun et al. · Neural Computation</p>
-          <p class="th" lang="th">โครงข่ายคอนโวลูชันที่ฝึกทั้งระบบด้วย backpropagation อ่านรหัสไปรษณีย์ลายมือบนจดหมาย ต่อมา LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998) ถูกนำไปใช้อ่านเช็คจริง</p>
-          <p class="en" lang="en">A convolutional network trained end to end with backpropagation, reading handwritten zip codes on mail. Its successor, LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998), went on to read real cheques.</p>
+          <p class="th" lang="th">โครงข่ายคอนโวลูชันที่ฝึกทั้งระบบด้วย backpropagation (ย้อนกลับจากข้อผิดพลาดเพื่อปรับตัวเลขทีละนิด) อ่านรหัสไปรษณีย์ลายมือบนจดหมาย ต่อมา LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998) ถูกนำไปใช้อ่านเช็คจริง</p>
+          <p class="en" lang="en">A convolutional network trained end to end with backpropagation (working backwards from the mistake to adjust each number a little), reading handwritten zip codes on mail. Its successor, LeNet-5 (LeCun, Bottou, Bengio, Haffner, Proceedings of the IEEE, 1998), went on to read real cheques.</p>
         </div></li>
       </ol>
     </div>
@@ -156,8 +156,8 @@
         <li><span class="year num">2001</span><div>
           <h3><cite lang="en">Rapid Object Detection using a Boosted Cascade of Simple Features</cite></h3>
           <p class="micro">Paul Viola, Michael Jones · CVPR</p>
-          <p class="th" lang="th">ทดสอบสี่เหลี่ยมมืดสว่างเล็ก ๆ นับพันแบบ คำนวณเร็วด้วย “ภาพปริพันธ์” แล้วเรียงต่อกันจนภาพส่วนใหญ่ถูกตัดทิ้งในไม่กี่ขั้น ทำให้กล้องถ่ายรูปทั่วไปหาใบหน้าได้ นี่คือการตรวจว่า “มีใบหน้า” ไม่ใช่การจำว่าเป็นใคร</p>
-          <p class="en" lang="en">Thousands of tiny light-and-dark rectangle tests, made fast by an “integral image” and chained so most of the picture is rejected in a few steps. It put face detection into consumer cameras. Detection — that a face is there — not recognition of whose.</p>
+          <p class="th" lang="th">ทดสอบสี่เหลี่ยมมืดสว่างเล็ก ๆ นับพันแบบ คำนวณเร็วด้วย “ภาพปริพันธ์” (ภาพที่บวกสะสมไว้ล่วงหน้า ทำให้รวมพื้นที่ส่วนไหนก็ได้ทันที) แล้วเรียงต่อกันจนภาพส่วนใหญ่ถูกตัดทิ้งในไม่กี่ขั้น ทำให้กล้องถ่ายรูปทั่วไปหาใบหน้าได้ นี่คือการตรวจว่า “มีใบหน้า” ไม่ใช่การจำว่าเป็นใคร</p>
+          <p class="en" lang="en">Thousands of tiny light-and-dark rectangle tests, made fast by an “integral image” (a picture pre-added-up, so any region can be summed instantly) and chained so most of the picture is rejected in a few steps. It put face detection into consumer cameras. Detection — that a face is there — not recognition of whose.</p>
         </div></li>
         <li><span class="year num">2004</span><div>
           <h3><cite lang="en">Distinctive Image Features from Scale-Invariant Keypoints</cite></h3>
@@ -168,14 +168,14 @@
         <li><span class="year num">2005</span><div>
           <h3><cite lang="en">Histograms of Oriented Gradients for Human Detection</cite></h3>
           <p class="micro">Navneet Dalal, Bill Triggs · CVPR</p>
-          <p class="th" lang="th">HOG: อธิบายหน้าต่างภาพด้วยทิศทางของขอบ แล้วให้ตัวจำแนกเชิงเส้นตัดสินว่า “คนหรือไม่ใช่” เป็นตัวตรวจจับคนเดินถนนมาตรฐานอยู่หลายปี</p>
-          <p class="en" lang="en">HOG: describe a window by which way its edges point, then let a linear classifier decide “person or not”. The standard pedestrian detector for years.</p>
+          <p class="th" lang="th">HOG: อธิบายหน้าต่างภาพด้วยทิศทางของขอบ แล้วให้ตัวจำแนกเชิงเส้น (กฎง่าย ๆ ที่ชั่งน้ำหนักแล้วตัดสิน) ตัดสินว่า “คนหรือไม่ใช่” เป็นตัวตรวจจับคนเดินถนนมาตรฐานอยู่หลายปี</p>
+          <p class="en" lang="en">HOG: describe a window by which way its edges point, then let a linear classifier (a simple rule that weighs things up and decides) decide “person or not”. The standard pedestrian detector for years.</p>
         </div></li>
         <li><span class="year num">2009</span><div>
           <h3><cite lang="en">ImageNet: A Large-Scale Hierarchical Image Database</cite></h3>
           <p class="micro">Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, Li Fei-Fei · CVPR <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
-          <p class="th" lang="th">ภาพหลายล้านภาพ จัดหมวดตามโครงสร้างคำของ WordNet โดยแรงงานออนไลน์ การแข่งขัน 1,000 หมวดของมันกลายเป็นสนามที่เปลี่ยนทั้งวงการ MobileNetV2 ของเราเรียนรู้การมองจากชุดนี้</p>
-          <p class="en" lang="en">Millions of photos sorted into WordNet's categories by crowd workers. Its 1,000-class challenge became the race that changed the field. Our MobileNetV2 learned to see from it.</p>
+          <p class="th" lang="th">ภาพหลายล้านภาพ จัดหมวดตามโครงสร้างคำของ WordNet (พจนานุกรมอังกฤษที่จัดคำเป็นเครือข่ายความหมาย) โดยแรงงานออนไลน์ การแข่งขัน 1,000 หมวดของมันกลายเป็นสนามที่เปลี่ยนทั้งวงการ MobileNetV2 ของเราเรียนรู้การมองจากชุดนี้</p>
+          <p class="en" lang="en">Millions of photos sorted into WordNet's categories (an English dictionary arranged as a web of word meanings) by crowd workers. Its 1,000-class challenge became the race that changed the field. Our MobileNetV2 learned to see from it.</p>
         </div></li>
         <li><span class="year num">2010</span><div>
           <h3><cite lang="en">The PASCAL Visual Object Classes (VOC) Challenge</cite></h3>
@@ -249,8 +249,8 @@
         <li><span class="year num">2018</span><div>
           <h3><cite lang="en">MobileNetV2: Inverted Residuals and Linear Bottlenecks</cite></h3>
           <p class="micro">Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, Liang-Chieh Chen · CVPR <span class="used label"><span class="th" lang="th">ใช้ในเว็บนี้</span><span class="en" lang="en">Used here</span></span></p>
-          <p class="th" lang="th">โครงข่ายที่ออกแบบมาเพื่อโทรศัพท์ คอนโวลูชันราคาถูกแบบ depthwise กับคอขวดที่บาง คือเหตุผลที่เว็บนี้รันตัวตรวจจับในเบราว์เซอร์ของคุณได้ งานเดียวกันนี้ยังเสนอ SSDLite ส่วนหัว SSD แบบเบาที่ตัวตรวจจับของเราใช้</p>
-          <p class="en" lang="en">A network designed for phones: cheap depthwise convolutions and thin bottlenecks. It is why this site can run a detector in your browser. The same paper introduces SSDLite, the lighter SSD head our detector uses.</p>
+          <p class="th" lang="th">โครงข่ายที่ออกแบบมาเพื่อโทรศัพท์ คอนโวลูชันราคาถูกแบบ depthwise (ทำทีละช่องสี แทนทั้งหมดพร้อมกัน) กับชั้นบาง ๆ ที่บีบตัวเลขให้น้อยลง คือเหตุผลที่เว็บนี้รันตัวตรวจจับในเบราว์เซอร์ของคุณได้ งานเดียวกันนี้ยังเสนอ SSDLite ส่วนหัว SSD แบบเบาที่ตัวตรวจจับของเราใช้</p>
+          <p class="en" lang="en">A network designed for phones: cheap depthwise convolutions (one colour channel at a time, not all at once) and thin bottlenecks (layers that squeeze the numbers down). It is why this site can run a detector in your browser. The same paper introduces SSDLite, the lighter SSD head our detector uses.</p>
         </div></li>
       </ol>
     </div>
@@ -264,8 +264,8 @@
         <li><span class="year num">2021</span><div>
           <h3><cite lang="en">An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</cite></h3>
           <p class="micro">Alexey Dosovitskiy et al. · ICLR</p>
-          <p class="th" lang="th">ViT: ตัดภาพเป็นชิ้นสี่เหลี่ยม ปฏิบัติต่อแต่ละชิ้นเหมือนคำ แล้วใช้ทรานส์ฟอร์มเมอร์ ไม่มีคอนโวลูชันเลย และเมื่อข้อมูลมากพอก็ทำได้เทียบเท่าหรือดีกว่า</p>
-          <p class="en" lang="en">ViT: cut the picture into patches, treat them like words, use a transformer. No convolutions at all — and given enough data, it matches or beats them.</p>
+          <p class="th" lang="th">ViT: ตัดภาพเป็นชิ้นสี่เหลี่ยม ปฏิบัติต่อแต่ละชิ้นเหมือนคำ แล้วใช้ทรานส์ฟอร์มเมอร์ (การออกแบบที่เทียบทุกชิ้นส่วนของภาพกับทุกชิ้นส่วนอื่น) ไม่มีคอนโวลูชันเลย และเมื่อข้อมูลมากพอก็ทำได้เทียบเท่าหรือดีกว่า</p>
+          <p class="en" lang="en">ViT: cut the picture into patches, treat them like words, use a transformer (a design that compares every part of the picture with every other part). No convolutions at all — and given enough data, it matches or beats them.</p>
         </div></li>
         <li><span class="year num">2021</span><div>
           <h3><cite lang="en">Learning Transferable Visual Models From Natural Language Supervision</cite></h3>
