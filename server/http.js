@@ -163,7 +163,7 @@ export function createStatic({ root, version, log = () => {} }) {
     if (pathname.startsWith('/partials/')) return false
     const found = safeResolve(root, pathname)
     if (!found) return false
-    // Source material lives under public/ but is never served (originals carry GPS/EXIF).
+    // Originals live under public/ for the repo; visitors get the resized copies in img/ioc/.
     if (PRIVATE_DIRS.some((d) => found.full.startsWith(path.join(root, d) + path.sep))) return false
     // Page templates are only ever served assembled, under their clean URL.
     if (found.full.endsWith('.html')) return false

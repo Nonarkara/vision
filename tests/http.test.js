@@ -60,7 +60,7 @@ test('static memo is keyed by file, so slash variants do not grow memory, and ra
   assert.equal(statics.serve(req, res(), '/learn.html'), true, 'clean page URL with .html still assembles')
 })
 
-test('original photos (with GPS metadata) are never served', async () => {
+test('full-size original photos are not served; resized copies are', async () => {
   const { createStatic } = await import('../server/http.js')
   const statics = createStatic({ root: PUBLIC, version: 't' })
   const res = { writeHead() {}, end() {} }
