@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 250" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>From light to label: the six stages of computer vision</title>
+  <rect width="960" height="250" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">FROM LIGHT TO LABEL · จากแสงสู่คำตอบ</text>
+  <g font-size="15">
+    <!-- 1 -->
+    <rect x="24" y="56" width="138" height="120" fill="#f7f5ef"/>
+    <text x="36" y="84" font-weight="600" fill="#253122">1 Light</text>
+    <text x="36" y="106" font-size="13" fill="#253122">photons hit</text>
+    <text x="36" y="124" font-size="13" fill="#253122">a sensor</text>
+    <text x="36" y="160" font-size="13" fill="#253122">แสงตกกระทบ</text>
+    <!-- 2 -->
+    <rect x="178" y="56" width="138" height="120" fill="#b6bfc1"/>
+    <text x="190" y="84" font-weight="600" fill="#253122">2 Pixels</text>
+    <text x="190" y="106" font-size="13" fill="#253122">57,600 × 3</text>
+    <text x="190" y="124" font-size="13" fill="#253122">numbers, 0–255</text>
+    <text x="190" y="160" font-size="13" fill="#253122">ตารางตัวเลข</text>
+    <!-- 3 -->
+    <rect x="332" y="56" width="138" height="120" fill="#253122"/>
+    <text x="344" y="84" font-weight="600" fill="#fbe6a0">3 Edges</text>
+    <text x="344" y="106" font-size="13" fill="#fbe6a0">where numbers</text>
+    <text x="344" y="124" font-size="13" fill="#fbe6a0">change sharply</text>
+    <text x="344" y="160" font-size="13" fill="#fbe6a0">ขอบและรูปทรง</text>
+    <!-- 4 -->
+    <rect x="486" y="56" width="138" height="120" fill="#253122"/>
+    <text x="498" y="84" font-weight="600" fill="#fbe6a0">4 Features</text>
+    <text x="498" y="106" font-size="13" fill="#fbe6a0">1,280 numbers</text>
+    <text x="498" y="124" font-size="13" fill="#fbe6a0">"how it looks"</text>
+    <text x="498" y="160" font-size="13" fill="#fbe6a0">ลักษณะเด่น</text>
+    <!-- 5 -->
+    <rect x="640" y="56" width="138" height="120" fill="#101010"/>
+    <text x="652" y="84" font-weight="600" fill="#f7f5ef">5 Decision</text>
+    <text x="652" y="106" font-size="13" fill="#f7f5ef">a score for</text>
+    <text x="652" y="124" font-size="13" fill="#f7f5ef">every class</text>
+    <text x="652" y="160" font-size="13" fill="#f7f5ef">ให้คะแนนทุกคำตอบ</text>
+    <!-- 6 -->
+    <rect x="794" y="56" width="142" height="120" fill="#f15a30"/>
+    <text x="806" y="84" font-weight="600" fill="#101010">6 Answer</text>
+    <text x="806" y="112" font-size="22" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="600" fill="#101010">car 71%</text>
+    <text x="806" y="160" font-size="13" fill="#101010">คำตอบ + ความมั่นใจ</text>
+  </g>
+  <g fill="#253122">
+    <polygon points="176,116 164,110 164,122"/>
+    <polygon points="330,116 318,110 318,122"/>
+    <polygon points="484,116 472,110 472,122"/>
+    <polygon points="638,116 626,110 626,122"/>
+    <polygon points="792,116 780,110 780,122"/>
+  </g>
+  <rect x="24" y="192" width="446" height="4" fill="#b6bfc1"/>
+  <text x="24" y="220" font-size="13" fill="#253122">Classical vision: every rule chosen by a person (docs 01–04)</text>
+  <rect x="486" y="192" width="450" height="4" fill="#f15a30"/>
+  <text x="486" y="220" font-size="13" fill="#253122">Learned vision: rules found from examples (docs 05–07)</text>
+  <text x="24" y="240" font-size="11" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122">Colour: Sanzo Wada, Plate 303 (Palette digital conversion) · vision.nonarkara.org</text>
+</svg>

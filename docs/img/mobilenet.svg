@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>MobileNetV2: the picture shrinks in space and grows in depth, from 224×224×3 to 1,280 numbers</title>
+  <rect width="960" height="330" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">MOBILENETV2 · SMALLER IN SPACE, DEEPER IN MEANING</text>
+  <!-- Each block: height ∝ spatial size, width ∝ log(channels). Shapes: Sandler et al. 2018, Table 2. -->
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="12" text-anchor="middle">
+    <rect x="24" y="60" width="40" height="190" fill="#f7f5ef"/>
+    <text x="44" y="270" fill="#253122">224²×3</text>
+    <rect x="96" y="106" width="52" height="98" fill="#b6bfc1"/>
+    <text x="122" y="270" fill="#253122">112²×32</text>
+    <rect x="178" y="106" width="44" height="98" fill="#b6bfc1"/>
+    <text x="200" y="270" fill="#253122">112²×16</text>
+    <rect x="252" y="130" width="56" height="50" fill="#253122"/>
+    <text x="280" y="270" fill="#253122">56²×24</text>
+    <rect x="338" y="143" width="62" height="24" fill="#253122"/>
+    <text x="369" y="270" fill="#253122">28²×32</text>
+    <rect x="430" y="148" width="70" height="14" fill="#253122"/>
+    <text x="465" y="270" fill="#253122">14²×64</text>
+    <rect x="530" y="148" width="76" height="14" fill="#253122"/>
+    <text x="568" y="270" fill="#253122">14²×96</text>
+    <rect x="636" y="151" width="82" height="8" fill="#101010"/>
+    <text x="677" y="270" fill="#253122">7²×320</text>
+    <rect x="748" y="151" width="96" height="8" fill="#101010"/>
+    <text x="796" y="270" fill="#253122">7²×1280</text>
+    <rect x="874" y="153" width="62" height="4" fill="#f15a30"/>
+    <text x="905" y="270" fill="#253122">1280</text>
+  </g>
+  <g fill="#253122" font-size="13">
+    <text x="24" y="296">early layers: edges, colours</text>
+    <text x="330" y="296">middle: textures, parts</text>
+    <text x="636" y="296">late: object-like patterns</text>
+    <text x="874" y="296" fill="#253122">average</text>
+    <text x="24" y="318" font-size="12">Shapes from Sandler et al. 2018, Table 2 (input 224, width 1.0, 3.4 M weights). "What layers respond to" after Zeiler &amp; Fergus 2014. Not to scale.</text>
+  </g>
+  <g fill="#253122"><polygon points="86,155 70,149 70,161"/><polygon points="172,155 160,149 160,161"/><polygon points="244,155 232,149 232,161"/><polygon points="330,155 318,149 318,161"/><polygon points="422,155 410,149 410,161"/><polygon points="524,155 512,149 512,161"/><polygon points="630,155 618,149 618,161"/><polygon points="740,155 728,149 728,161"/><polygon points="866,155 854,149 854,161"/></g>
+  <text x="905" y="124" font-size="12" text-anchor="middle" fill="#253122">the</text>
+  <text x="905" y="140" font-size="12" text-anchor="middle" fill="#253122">"fingerprint"</text>
+</svg>

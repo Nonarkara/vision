@@ -2,7 +2,7 @@
   "name": "vision",
   "version": "1.1.4",
   "private": true,
-  "description": "vision.nonarkara.org \u2014 a public classroom for computer vision on Thailand's open cameras. TH/EN.",
+  "description": "vision.nonarkara.org — a public classroom for computer vision on Thailand's open cameras. TH/EN.",
   "type": "module",
   "engines": {
     "node": ">=22"
@@ -11,8 +11,9 @@
     "start": "node server/index.js",
     "dev": "PORT=8431 node server/index.js",
     "test": "node --test tests/*.test.js",
-    "check": "node --test tests/*.test.js && node scripts/check-site.mjs",
-    "deploy": "node scripts/deploy-local.mjs"
+    "check": "node --test tests/*.test.js && node scripts/check-site.mjs && node scripts/check-docs.mjs",
+    "deploy": "node scripts/deploy-local.mjs",
+    "figures": "node examples/build-figures.mjs"
   },
   "license": "UNLICENSED"
 }

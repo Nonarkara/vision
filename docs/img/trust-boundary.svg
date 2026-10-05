@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>Where pictures go: owners, our server's memory, and the visitor's browser</title>
+  <rect width="960" height="440" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">WHERE PICTURES GO · ภาพเดินทางอย่างไร</text>
+
+  <!-- Owners -->
+  <rect x="24" y="54" width="250" height="320" fill="#b6bfc1"/>
+  <text x="40" y="82" font-size="16" font-weight="600" fill="#253122">Camera owners</text>
+  <text x="40" y="102" font-size="13" fill="#253122">road agencies, city halls, DWR</text>
+
+  <!-- Browser -->
+  <rect x="656" y="54" width="280" height="320" fill="#101010"/>
+  <text x="672" y="82" font-size="16" font-weight="600" fill="#f7f5ef">Your browser</text>
+  <text x="672" y="102" font-size="13" fill="#f7f5ef">every model runs here</text>
+
+  <!-- Live video goes over the top: the server is not in this path. -->
+  <rect x="40" y="128" width="218" height="40" fill="#f7f5ef"/>
+  <text x="52" y="153" font-size="13" fill="#253122">53 live HLS streams (CORS)</text>
+  <line x1="258" y1="148" x2="664" y2="148" stroke="#253122" stroke-width="3"/>
+  <polygon points="672,148 660,141 660,155" fill="#f15a30"/>
+  <text x="352" y="140" font-size="13" font-weight="600" fill="#253122">direct from the owner — never through us</text>
+  <rect x="680" y="128" width="240" height="40" fill="#f15a30"/>
+  <text x="692" y="153" font-size="13" fill="#101010">lenses · detector · your layer</text>
+
+  <!-- Server: starts below the video line -->
+  <rect x="340" y="184" width="250" height="190" fill="#253122"/>
+  <text x="356" y="208" font-size="16" font-weight="600" fill="#fbe6a0">vision server</text>
+  <text x="356" y="226" font-size="13" fill="#fbe6a0">RAM only · no disk · no model</text>
+
+  <!-- Stills -->
+  <rect x="40" y="240" width="218" height="40" fill="#f7f5ef"/>
+  <text x="52" y="265" font-size="13" fill="#253122">~2,500 still JPEGs (no CORS)</text>
+  <line x1="258" y1="260" x2="356" y2="260" stroke="#253122" stroke-width="3"/>
+  <rect x="362" y="240" width="206" height="40" fill="#fbe6a0"/>
+  <text x="372" y="257" font-size="12" fill="#253122">memory ≤ 30 s · 240 frames max</text>
+  <text x="372" y="273" font-size="12" fill="#253122">allow-listed hosts · no redirects</text>
+  <line x1="568" y1="260" x2="664" y2="260" stroke="#253122" stroke-width="3"/>
+  <polygon points="672,260 660,253 660,267" fill="#f15a30"/>
+  <rect x="680" y="240" width="240" height="40" fill="#303030"/>
+  <text x="692" y="258" font-size="12" fill="#f7f5ef">your webcam / photo</text>
+  <text x="692" y="274" font-size="12" fill="#f7f5ef">↺ never leaves this box</text>
+
+  <!-- Catalogue -->
+  <rect x="362" y="296" width="206" height="40" fill="#fbe6a0"/>
+  <text x="372" y="321" font-size="12" fill="#253122">camera list (JSON, no pictures)</text>
+  <line x1="568" y1="316" x2="664" y2="316" stroke="#253122" stroke-width="3"/>
+  <polygon points="672,316 660,309 660,323" fill="#f15a30"/>
+  <rect x="680" y="296" width="240" height="40" fill="#303030"/>
+  <text x="692" y="314" font-size="12" fill="#f7f5ef">results: boxes, scores, counts</text>
+  <text x="692" y="330" font-size="12" fill="#f7f5ef">↺ never sent back</text>
+
+  <!-- The route that does not exist -->
+  <line x1="656" y1="358" x2="356" y2="358" stroke="#f15a30" stroke-width="3" stroke-dasharray="8 6"/>
+  <text x="372" y="352" font-size="12" fill="#fbe6a0">✕ no upload route exists</text>
+
+  <text x="24" y="404" font-size="14" fill="#253122">The server cannot leak, sell or be subpoenaed for a picture it never kept, or a webcam frame it never received.</text>
+  <text x="24" y="426" font-size="13" fill="#253122">เซิร์ฟเวอร์ไม่มีภาพให้รั่วไหล เพราะไม่เคยเก็บ และไม่เคยได้รับภาพจากกล้องของคุณ</text>
+</svg>
