@@ -111,3 +111,23 @@
 /* Keep */
 .keep { background: transparent; }
 .keep-say { padding-left: 0; }
+
+/* Choose, teach, test: the first screen works without reading the lesson. */
+.training-start { padding: 24px var(--gutter); display: grid; gap: 16px; }
+.training-start h2 { font-size: clamp(1.4rem, 2vw, 2rem); }
+.training-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
+.training-choice { text-align: left; background: var(--black-2); color: var(--white); border: 2px solid transparent; padding: 18px; display: grid; gap: 10px; cursor: pointer; font: inherit; min-width: 0; }
+.training-choice strong { font-size: 1.15rem; }
+.training-choice > span:last-child { font-size: var(--micro); color: var(--gray); }
+.training-choice:hover, .training-choice[aria-pressed="true"] { border-color: var(--naples); }
+.training-choice:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.training-start .prose { margin: 0; }
+.room-bench { scroll-margin-top: 90px; }
+.room-bench .curve-view { aspect-ratio: 3 / 1; max-height: 160px; }
+.demo-test { padding: 12px 16px; }
+.demo-test .micro { margin: 0 0 8px; }
+.training-details > summary { padding: 24px var(--gutter); cursor: pointer; font-size: 1.2rem; min-height: 48px; background: var(--black-2); }
+@media (max-width: 1000px) { .training-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .training-choice { padding: 12px; } .training-choice strong { font-size: 1rem; } }
+
+.training-curve > summary { cursor: pointer; padding: 12px 16px; color: var(--gray); min-height: 44px; }

@@ -26,7 +26,7 @@ export function createClassList(root, { onCapture }) {
       <li class="klass field-ink" data-key="${c.key}">
         <div class="klass-head">
           <span class="klass-glyph num" aria-hidden="true">${store.GLYPHS[i]}</span>
-          <label class="vh" for="${id}">${bi(`ชื่อกลุ่มที่ ${i + 1}`, `Name of class ${i + 1}`)}</label>
+          <label class="vh" for="${id}">${bi(`ชื่อกลุ่มที่ ${i + 1}`, `Name of group ${i + 1}`)}</label>
           <input id="${id}" class="field-input klass-name" type="text" maxlength="32" autocomplete="off" spellcheck="false" value="${esc(store.nameOf(c, lang()))}">
           <span class="klass-count num" data-count></span>
         </div>
@@ -34,9 +34,9 @@ export function createClassList(root, { onCapture }) {
           <button class="btn" type="button" data-act="add">+ ${bi('เพิ่มตัวอย่าง', 'Add example')}</button>
           <button class="btn klass-hold" type="button" data-act="hold" aria-pressed="false">● ${bi('กดค้างเพื่ออัด', 'Hold to record')}</button>
           <button class="btn" type="button" data-act="clear">${bi('ล้าง', 'Clear')}</button>
-          ${count > store.MIN_CLASSES ? `<button class="btn" type="button" data-act="remove" aria-label="${esc(t('ลบกลุ่มนี้', 'Remove this class'))}" title="${esc(t('ลบกลุ่มนี้', 'Remove this class'))}">×</button>` : ''}
+          ${count > store.MIN_CLASSES ? `<button class="btn" type="button" data-act="remove" aria-label="${esc(t('ลบกลุ่มนี้', 'Remove this group'))}" title="${esc(t('ลบกลุ่มนี้', 'Remove this group'))}">×</button>` : ''}
         </div>
-        <div class="shots" data-shots role="list" aria-label="${esc(t('ตัวอย่างในกลุ่มนี้', 'Examples in this class'))}"></div>
+        <div class="shots" data-shots role="list" aria-label="${esc(t('ตัวอย่างในกลุ่มนี้', 'Examples in this group'))}"></div>
       </li>`
   }
 

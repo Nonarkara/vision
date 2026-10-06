@@ -19,7 +19,7 @@ import { createBars } from '../train/bars.js'
 import { trainLayer, drawCurve, EPOCHS, layerFile, download, parseLayerFile, fileReason } from '../train/layer.js'
 import { createMap } from '../train/map.js'
 import { createJudge } from '../train/judge.js'
-import { demoFrames } from '../train/demo.js'
+import { demoFrames, roadScene } from '../train/demo.js'
 
 const K = 5
 const LIVE_MS = 250
@@ -137,6 +137,25 @@ addClassBtn.addEventListener('click', () => store.addClass())
 const presetEl = $('[data-preset]')
 let preset = 'road'
 let presetChosen = false
+let activity = ''
+let testSeed = 90000
+
+async function showTestScene(kind) {
+  const canvas = roadScene(kind, ++testSeed)
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'))
+  if (blob) await specimen.usePhoto(new File([blob], 'drawn-road.png', { type: 'image/png' }))
+}
+
+function paintActivity() {
+  for (const btn of document.querySelectorAll('[data-activity]')) btn.setAttribute('aria-pressed', String(btn.dataset.activity === activity))
+  $('[data-demo-test]').hidden = activity !== 'demo'
+  $('[data-activity-help]').textContent = activity === 'demo'
+    ? t('ภาพวาดเท่านั้น: กดฝึก แล้วลองสลับภาพถนนใต้จอเพื่อดูคำตอบ', 'Drawings only: train it, then switch road pictures below the screen to see its answer.')
+    : activity === 'hand' ? t('ยกมือแล้วเก็บภาพกลุ่ม “ยกมือ” จากนั้นลดมือแล้วเก็บอีกกลุ่ม ฝึกแล้วลองขยับมือดู', 'Raise your hand and add Hand up examples. Lower it and add Hand down examples. Train, then move your hand to test it.')
+    : activity === 'cup' ? t('วางแก้วแล้วเก็บภาพกลุ่ม “มีแก้ว” เอาแก้วออกแล้วเก็บอีกกลุ่ม ฝึกแล้วลองย้ายแก้วดู', 'Show a cup and add Cup examples. Take it away and add No cup examples. Train, then move the cup to test it.')
+    : activity === 'road' ? t('เลือกกล้องถนน เก็บภาพรถแน่นและถนนโล่ง แล้วฝึก ลองเปลี่ยนกล้องเพื่อทดสอบ', 'Choose road cameras. Add busy and empty examples, then train. Switch cameras to test it.')
+    : t('เริ่มที่ “ลองเลย” ได้ทันที หรือเลือกกิจกรรมที่ใช้กล้องของคุณ', 'Start with “Try it without a camera”, or choose a camera activity.')
+}
 
 function setPreset(id) {
   preset = id
@@ -168,6 +187,8 @@ presetEl.addEventListener('change', async () => {
     return
   }
   presetChosen = true
+  activity = want
+  paintActivity()
   if (want !== 'cup') challenge = false
   setPreset(want)
   paintChallenge()
@@ -185,23 +206,26 @@ demoBtn.addEventListener('click', async () => {
   try {
     presetChosen = true
     challenge = false
+    activity = 'demo'
+    paintActivity()
     setPreset('road')
+    await showTestScene('busy')
     if (store.getClasses().length < 2) return          // the set could not be built
     paintChallenge()
     for (let i = 0; i < frames.length; i++) {
-      if (preset !== 'road') break                      // the visitor picked another set mid-run
+      if (preset !== 'road') return                      // the visitor picked another set mid-run
       if (isLoaded()) say(() => t(`กำลังวาดและอ่านตัวอย่าง ${n(i + 1)} / ${n(frames.length)}`, `Drawing and reading example ${i + 1} / ${frames.length}`))
       const { y, canvas } = frames[i]
-      const x = await embed(canvas)
       const key = store.getClasses()[y]?.key
+      const x = await embed(canvas)
       if (!key) break
-      store.addSample(key, { x, thumb: shrink(canvas) })
+      if (!store.addSample(key, { x, thumb: shrink(canvas) })) return
       if (i % 4 === 3) await new Promise((r) => requestAnimationFrame(r))
     }
     paintModel()
-    say(() => t('ตัวอย่างพร้อมแล้ว 16 ภาพ · กด “ฝึก” ดูเส้นค่าผิดพลาด แล้วกด “ตัดสิน 24 กล้อง”', '16 examples ready · press Train to watch the loss, then judge 24 cameras'))
+    say(() => t('ตัวอย่างพร้อมแล้ว กด “ฝึกแล้วลองทาย” แล้วลองสลับภาพถนนใต้จอ', 'Examples ready. Press Train and try it, then switch the road picture below the screen.'))
     toast(t('วาดตัวอย่างให้แล้ว 16 ภาพ — ภาพถนนจำลอง ไม่ใช่ภาพถ่าย', 'Drew 16 examples for you — synthetic road scenes, not photographs'))
-    document.querySelector('[data-train]')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    document.querySelector('.room-bench')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   } catch (err) {
     say(() => isLoaded()
       ? `${t('เตรียมตัวอย่างไม่สำเร็จ', 'Could not prepare the examples')}${err?.message ? ` — ${err.message}` : ''}`
@@ -210,6 +234,31 @@ demoBtn.addEventListener('click', async () => {
     demoBtn.disabled = false
   }
 })
+
+for (const btn of document.querySelectorAll('[data-activity]')) {
+  btn.addEventListener('click', async () => {
+    const want = btn.dataset.activity
+    if (want === 'demo') { demoBtn.click(); return }
+    if (demoBtn.disabled) return
+    if (store.hasSamples() && !(await confirmBox(t('เริ่มกิจกรรมใหม่? ตัวอย่างเดิมจะหายไป', 'Start a new activity? Your current examples will be cleared.'), { ok: t('เริ่มใหม่', 'Start again'), cancel: t('ยกเลิก', 'Cancel') }))) return
+    activity = want
+    presetChosen = true
+    challenge = false
+    setPreset(want)
+    paintActivity()
+    paintChallenge()
+    $('.room-bench').scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (want !== 'road') await specimen.useWebcam()
+    else if (specimen.source?.kind === 'webcam' || specimen.source?.kind === 'photo') await specimen.next()
+  })
+}
+for (const btn of document.querySelectorAll('[data-test-scene]')) {
+  btn.addEventListener('click', async () => {
+    btn.disabled = true
+    try { await showTestScene(btn.dataset.testScene) }
+    finally { btn.disabled = false }
+  })
+}
 
 // ── Two learners ────────────────────────────────────────────────────────
 
@@ -345,16 +394,15 @@ store.onChange((kind) => {
 })
 
 trainBtn.addEventListener('click', async () => {
+  $('.training-curve').open = true
   const data = set
   const classes = store.getClasses().length
   const stamp = samplesStamp
-  let last = { loss: 0, acc: 0 }
   const job = trainLayer(data, classes, {
     onProgress: (p) => {
       history = p.history
-      last = p
       drawCurve(curve, history)
-      trainSay.textContent = `${t('รอบ', 'pass')} ${n(p.epoch)} / ${n(EPOCHS)} · ${t('ค่าผิดพลาด', 'loss')} ${p.loss.toFixed(3)} · ${t('ถูก', 'right')} ${pct(p.acc)}`
+      trainSay.textContent = `${t('รอบ', 'pass')} ${n(p.epoch)} / ${n(EPOCHS)} · ${t('ค่าผิดพลาด', 'mistakes')} ${p.loss.toFixed(3)} · ${t('ถูก', 'right')} ${pct(p.acc)}`
     },
   })
   training = job
@@ -363,17 +411,14 @@ trainBtn.addEventListener('click', async () => {
   if (training !== job) return
   training = null
   if (!result) { paintTrainState(); return }
-  const ms = result.computeMs
   trained = { layer: result.layer, classes, stamp, examples: data.length, epochs: EPOCHS, imported: false }
-  const secs = (ms / 1000).toFixed(2)
-  trainNote = () => t(
-    `${n(EPOCHS)} รอบ · ${n(data.length)} ตัวอย่าง · คำนวณจริง ${secs} วินาที (ภาพเคลื่อนช้าลงให้ดูทัน) · ค่าผิดพลาด ${last.loss.toFixed(3)} · ถูก ${pct(last.acc)} บนตัวอย่างที่ใช้ฝึก`,
-    `${EPOCHS} passes · ${data.length} examples · ${secs} s of arithmetic (drawn slower so you can watch) · loss ${last.loss.toFixed(3)} · ${pct(last.acc)} right on its own examples`)
+  trainNote = () => t('ฝึกเสร็จแล้ว ลองภาพใหม่แล้วดูคำตอบด้านล่าง คะแนนตอนฝึกไม่ใช่คะแนนสอบกับภาพใหม่', 'Ready! Try a new picture and watch the answer below. Doing well on practice pictures does not mean it will get new ones right.')
+  $('.training-curve').open = false
   lastLiveKey = ''
   paintTrainState()
   paintHowto()
   paintChallenge()
-  toast(t(`ฝึกเสร็จใน ${secs} วินาที — ดูเส้นค่าผิดพลาด แล้วกด “ตัดสิน 24 กล้อง”`, `Trained in ${secs} s — read the loss curve, then judge 24 cameras`))
+  toast(t(`พร้อมแล้ว! ลองภาพใหม่แล้วดูคำตอบด้านบน`, `Ready! Try a new picture and watch the answer above.`))
 })
 
 // ── Live prediction: a few looks a second at whatever the source shows ──
@@ -391,7 +436,7 @@ function paintLive() {
   }
   const i = probs.indexOf(Math.max(...probs))
   const c = store.getClasses()[i]
-  const who = lay ? t('ชั้นที่ฝึกแล้ว', 'trained layer') : t('เพื่อนบ้านใกล้สุด', 'nearest neighbours')
+  const who = lay ? t('หลังฝึก', 'after training') : t('ภาพที่คล้ายกัน', 'similar examples')
   el.textContent = c ? `${t('คล้ายที่สุด', 'Looks most like')}: ${label(c, i)} — ${pct(probs[i])} (${who})` : ''
 }
 
@@ -485,7 +530,7 @@ function judgeModels() {
   const viaKnn = store.filledClasses() >= 2 && {
     predict: (x) => knnPredict(frozenSet, x, count, K).probs,
     classes,
-    how: t('เพื่อนบ้านใกล้สุด', 'nearest neighbours'),
+    how: t('ภาพที่คล้ายกัน', 'similar examples'),
   }
   if (judgeMode === 'both') return [viaLayer, viaKnn].filter(Boolean)
   if (judgeMode === 'knn') return [viaKnn || viaLayer].filter(Boolean)
@@ -552,6 +597,7 @@ $('[data-import]').addEventListener('change', async (e) => {
 
 onLang(() => {
   renderPresets()
+  paintActivity()
   paintLabels()
   paintModel()
   paintLoadBar()
@@ -575,3 +621,8 @@ paintModel()
 paintHowto()
 paintChallenge()
 liveTick()
+
+$('.training-details').addEventListener('toggle', () => { if ($('.training-details').open) { map.rebuild(set); map.draw() } })
+paintActivity()
+
+$('.training-curve').addEventListener('toggle', () => { if ($('.training-curve').open) drawCurve(curve, history) })
