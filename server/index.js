@@ -159,6 +159,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const shutdown = (sig) => {
     log('info', 'shutting down', { sig })
     server.close(() => process.exit(0))
+    server.closeIdleConnections?.() // let pooled keep-alive sockets go at once, not after 65s
     setTimeout(() => process.exit(0), 3000).unref()
   }
   process.on('SIGTERM', shutdown)

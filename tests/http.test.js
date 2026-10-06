@@ -1,8 +1,9 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { safeResolve, assemblePage, createLimiter, clientIp, CSP, PAGES } from '../server/http.js'
+import { safeResolve, assemblePage, createLimiter, clientIp, CSP, PAGES, socialMeta } from '../server/http.js'
 
 const PUBLIC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public')
 
@@ -66,4 +67,42 @@ test('full-size original photos are not served; resized copies are', async () =>
   const res = { writeHead() {}, end() {} }
   assert.equal(statics.serve({ method: 'GET', headers: {} }, res, '/CCTV%20photos/Rawai,%20Phuket%20Municipality.jpg'), false)
   assert.equal(statics.serve({ method: 'GET', headers: {} }, res, '/img/ioc/rawai.jpg'), true)
+})
+
+test('a page is compressed only for a client that said it can read gzip', async () => {
+  const { createStatic } = await import('../server/http.js')
+  const statics = createStatic({ root: PUBLIC, version: 't' })
+  const head = (headers) => {
+    let sent
+    const res = { writeHead: (s, h) => { sent = { s, h } }, end() {} }
+    assert.equal(statics.page({ method: 'GET', headers }, res, 'learn'), true)
+    return sent
+  }
+  const gz = head({ 'accept-encoding': 'gzip, deflate, br' })
+  assert.equal(gz.h['Content-Encoding'], 'gzip')
+  const plain = head({ 'accept-encoding': 'identity' })
+  assert.equal(plain.h['Content-Encoding'], undefined)
+  assert.equal(plain.h.Vary, 'Accept-Encoding', 'a cache must still know the answer depends on the client')
+  assert.ok(plain.h['Content-Length'] >= gz.h['Content-Length'])
+})
+
+test('share tags come from the page title, and a 404 stays out of the index', () => {
+  const html = '<html><head><title>A "quoted" title</title><meta name="description" content="One line."></head><body></body></html>'
+  const out = socialMeta(html, '/learn')
+  assert.match(out, /property="og:title" content="A &quot;quoted&quot; title"/)
+  assert.match(out, /property="og:description" content="One line\."/)
+  assert.match(out, /property="og:url" content="https:\/\/vision\.nonarkara\.org\/learn"/)
+  assert.match(out, /rel="canonical" href="https:\/\/vision\.nonarkara\.org\/learn"/)
+  const miss = socialMeta(html, null, 404)
+  assert.match(miss, /content="noindex"/)
+  assert.doesNotMatch(miss, /og:title/)
+})
+
+test('robots points at the sitemap, and the sitemap names exactly the routed pages', () => {
+  const robots = fs.readFileSync(path.join(PUBLIC, 'robots.txt'), 'utf8')
+  assert.match(robots, /Sitemap: https:\/\/vision\.nonarkara\.org\/sitemap\.xml/)
+  const xml = fs.readFileSync(path.join(PUBLIC, 'sitemap.xml'), 'utf8')
+  const locs = new Set([...xml.matchAll(/<loc>https:\/\/vision\.nonarkara\.org([^<]*)<\/loc>/g)].map((m) => m[1] || '/'))
+  for (const route of Object.keys(PAGES)) assert.ok(locs.has(route), `sitemap is missing ${route}`)
+  for (const loc of locs) assert.ok(loc in PAGES, `sitemap names an unrouted path ${loc}`)
 })

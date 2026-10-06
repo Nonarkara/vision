@@ -21,6 +21,7 @@ const TYPES = {
   '.txt': 'text/plain; charset=utf-8',
   '.md': 'text/markdown; charset=utf-8',
   '.webmanifest': 'application/manifest+json',
+  '.xml': 'application/xml; charset=utf-8',
 }
 
 /** Folders under public/ that hold originals for us to process, not for visitors. */
@@ -70,6 +71,8 @@ export function securityHeaders() {
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Permissions-Policy': 'camera=(self), microphone=(), geolocation=(), payment=(), usb=()',
     'Cross-Origin-Opener-Policy': 'same-origin',
+    // https-only site; one year, no subdomains and no preload — easy to walk back.
+    'Strict-Transport-Security': 'max-age=31536000',
   }
 }
 
@@ -108,6 +111,46 @@ function cacheControl(rel) {
   return 'no-cache'
 }
 
+export const SITE = 'https://vision.nonarkara.org'
+
+/** The clean route a page file is served under (index → /), or null for 404. */
+const ROUTE_OF = new Map(Object.entries(PAGES).map(([route, name]) => [name, route]))
+export function routeOf(pageName) { return ROUTE_OF.get(pageName) ?? null }
+
+/** True only when this client told us it can read gzip. */
+export function wantsGzip(req) {
+  return /\bgzip\b/.test(String(req.headers?.['accept-encoding'] ?? ''))
+}
+
+/**
+ * The tags a link preview and a crawler read, built from the page's own
+ * `<title>` and description so they can never drift from what a visitor sees.
+ * Pages that are not a real route (404) are kept out of the index.
+ */
+export function socialMeta(html, route, status = 200) {
+  const attr = (s) => s.replace(/"/g, '&quot;')
+  const tags = []
+  if (status !== 200 || !route) {
+    tags.push('<meta name="robots" content="noindex">')
+  } else {
+    const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim()
+    const desc = html.match(/<meta name="description" content="([^"]+)"/)?.[1]?.trim()
+    if (title) tags.push(`<meta property="og:title" content="${attr(title)}">`)
+    if (desc) tags.push(`<meta property="og:description" content="${attr(desc)}">`)
+    if (title && desc) {
+      tags.push(
+        '<meta property="og:type" content="website">',
+        `<meta property="og:url" content="${SITE}${route}">`,
+        '<meta property="og:site_name" content="Vision">',
+        '<meta name="twitter:card" content="summary">',
+        `<link rel="canonical" href="${SITE}${route}">`,
+      )
+    }
+  }
+  if (!tags.length) return html
+  return html.replace('</head>', `${tags.join('\n')}\n</head>`)
+}
+
 export function createStatic({ root, version, log = () => {} }) {
   const partialDir = path.join(root, 'partials')
   const memo = new Map() // key -> { body, gz, type, etag }
@@ -137,7 +180,7 @@ export function createStatic({ root, version, log = () => {} }) {
   function send(req, res, entry, cc, status = 200) {
     const headers = { 'Content-Type': entry.type, 'Cache-Control': cc, ETag: entry.etag, Vary: 'Accept-Encoding', ...securityHeaders() }
     if (status === 200 && req.headers['if-none-match'] === entry.etag) { res.writeHead(304, headers); return res.end() }
-    const wantsGz = entry.gz && /\bgzip\b/.test(String(req.headers['accept-encoding'] ?? ''))
+    const wantsGz = entry.gz && wantsGzip(req)
     const body = wantsGz ? entry.gz : entry.body
     if (wantsGz) headers['Content-Encoding'] = 'gzip'
     headers['Content-Length'] = body.length
@@ -149,9 +192,11 @@ export function createStatic({ root, version, log = () => {} }) {
   function page(req, res, pageName, status = 200) {
     const found = safeResolve(root, `/${pageName}.html`)
     if (!found) return false
-    const html = assemblePage(fs.readFileSync(found.full, 'utf8'), { partials: partials(), page: pageName, version })
+    const html = socialMeta(assemblePage(fs.readFileSync(found.full, 'utf8'), { partials: partials(), page: pageName, version }), routeOf(pageName), status)
     const body = Buffer.from(html)
-    send(req, res, { body, gz: zlib.gzipSync(body), type: TYPES['.html'], etag: `W/"${zlib.crc32 ? zlib.crc32(body).toString(36) : body.length.toString(36)}-${version}"` }, 'no-cache', status)
+    // Compress only when this client said it can read gzip — never for the rest.
+    const gz = wantsGzip(req) ? zlib.gzipSync(body) : null
+    send(req, res, { body, gz, type: TYPES['.html'], etag: `W/"${zlib.crc32 ? zlib.crc32(body).toString(36) : body.length.toString(36)}-${version}"` }, 'no-cache', status)
     return true
   }
 
@@ -178,12 +223,12 @@ export function createStatic({ root, version, log = () => {} }) {
 /** JSON response, gzipped when the client allows it. */
 export function json(req, res, status, data, extra = {}) {
   const body = Buffer.from(JSON.stringify(data))
-  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...securityHeaders(), ...extra }
+  // Vary always: a cache must not hand a gzipped copy to a client that never asked for one.
+  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Vary: 'Accept-Encoding', ...securityHeaders(), ...extra }
   let out = body
-  if (body.length > 1024 && /\bgzip\b/.test(String(req.headers['accept-encoding'] ?? ''))) {
+  if (body.length > 1024 && wantsGzip(req)) {
     out = zlib.gzipSync(body)
     headers['Content-Encoding'] = 'gzip'
-    headers.Vary = 'Accept-Encoding'
   }
   headers['Content-Length'] = out.length
   res.writeHead(status, headers)

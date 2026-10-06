@@ -49,9 +49,18 @@ for (const route of Object.keys(PAGES)) {
   if (/PLACEHOLDER/.test(html)) fail(route, 'placeholder text left in page')
   if (!/<title>[^<]+<\/title>/.test(html)) fail(route, 'missing <title>')
   if (!/<meta name="description"/.test(html)) fail(route, 'missing meta description')
-  const th = (html.match(/class="th"/g) ?? []).length
-  const en = (html.match(/class="en"/g) ?? []).length
-  if (Math.abs(th - en) > 2) fail(route, `language parity: ${th} Thai vs ${en} English spans`)
+  // Prose only: a diagram may set three English labels against two Thai ones
+  // and still lose nothing, so `<svg>` is not counted here. Exact equality is
+  // the point — one forgotten translation used to pass a tolerance of two.
+  const prose = html.replace(/<svg[\s\S]*?<\/svg>/g, '')
+  const span = (c) => (prose.match(new RegExp(`class="[^"]*\\b${c}\\b[^"]*"`, 'g')) ?? []).length
+  const th = span('th'), en = span('en')
+  if (th !== en) fail(route, `language parity: ${th} Thai vs ${en} English spans — a translation is missing`)
+  const ariaTh = (html.match(/\bdata-aria-th=/g) ?? []).length
+  const ariaEn = (html.match(/\bdata-aria-en=/g) ?? []).length
+  if (ariaTh !== ariaEn) fail(route, `aria parity: ${ariaTh} data-aria-th vs ${ariaEn} data-aria-en`)
+  if (!/property="og:title"/.test(html)) fail(route, 'missing og:title')
+  if (!/rel="canonical"/.test(html)) fail(route, 'missing canonical')
   for (const [, ref] of html.matchAll(/\s(?:src|href)="(\/[^"#]*)/g)) {
     const url = ref.split('?')[0]
     if (url.startsWith('//')) continue
@@ -66,7 +75,29 @@ for (const [route, anchor] of [['/legal', 'takedown'], ['/system', 'credits']]) 
   if (!new RegExp(`id="${anchor}"`).test(html)) fail(route, `missing #${anchor}`)
 }
 
-// 3. Every JS file parses, and every relative import resolves.
+// 3. Every room is reachable from the home page — a page the nav forgot is a page nobody can find.
+{
+  const html = await (await fetch(base + '/')).text()
+  const linked = new Set([...html.matchAll(/\shref="(\/[^"#?]*)/g)].map((m) => m[1]))
+  for (const route of Object.keys(PAGES)) if (!linked.has(route)) fail('/', `room ${route} is not linked from the home page`)
+}
+
+// 4. What a crawler reads first: robots, a sitemap that names every room, and a title it can quote.
+{
+  const robots = await fetch(base + '/robots.txt')
+  if (robots.status !== 200) fail('/robots.txt', `HTTP ${robots.status}`)
+  else if (!robots.headers.get('content-type')?.startsWith('text/plain')) fail('/robots.txt', `content-type ${robots.headers.get('content-type')}`)
+  const sitemap = await fetch(base + '/sitemap.xml')
+  if (sitemap.status !== 200) fail('/sitemap.xml', `HTTP ${sitemap.status}`)
+  else {
+    const xml = await sitemap.text()
+    const locs = new Set([...xml.matchAll(/<loc>https:\/\/vision\.nonarkara\.org([^<]*)<\/loc>/g)].map((m) => m[1] || '/'))
+    for (const route of Object.keys(PAGES)) if (!locs.has(route)) fail('/sitemap.xml', `missing ${route}`)
+    for (const loc of locs) if (!(loc in PAGES)) fail('/sitemap.xml', `unknown route ${loc}`)
+  }
+}
+
+// 5. Every JS file parses, and every relative import resolves.
 for (const file of walk(path.join(PUBLIC, 'js'), '.js')) {
   const rel = path.relative(ROOT, file)
   try { execFileSync(process.execPath, ['--check', file], { stdio: 'pipe' }) } catch (e) { fail(rel, `syntax: ${String(e.stderr).split('\n').slice(0, 4).join(' ')}`) }
@@ -79,7 +110,7 @@ for (const file of walk(path.join(PUBLIC, 'js'), '.js')) {
   }
 }
 
-// 4. Models: every weight shard the manifests name is present.
+// 6. Models: every weight shard the manifests name is present.
 for (const manifest of walk(path.join(PUBLIC, 'models'), 'model.json')) {
   const m = JSON.parse(fs.readFileSync(manifest, 'utf8'))
   for (const group of m.weightsManifest ?? []) for (const p of group.paths) {
@@ -87,7 +118,7 @@ for (const manifest of walk(path.join(PUBLIC, 'models'), 'model.json')) {
   }
 }
 
-// 5. Server basics.
+// 7. Server basics.
 const health = await fetch(base + '/api/health')
 if (health.status !== 200) fail('/api/health', `HTTP ${health.status}`)
 if (!health.headers.get('content-security-policy')) fail('/api/health', 'no CSP header')

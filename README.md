@@ -144,7 +144,7 @@ sequenceDiagram
 npm run dev        # http://localhost:8431 (reads cameras from FloodDash on :8340)
 npm test           # unit tests: catalogue + store, relay, http, routes,
                    # sources, layer races, fullscreen, and the handbook's numbers
-npm run check      # tests + scripts/check-site.mjs (pages, links, imports, CSP hazards, model shards) + scripts/check-docs.mjs (handbook links and anchors)
+npm run check      # tests + scripts/check-site.mjs (pages, links, imports, CSP hazards, language parity, robots and sitemap, model shards) + scripts/check-docs.mjs (handbook links and anchors)
 npm run figures    # regenerate the handbook's figures from examples/
 npm run deploy     # checks, stages the release, restarts the production app
 ```
@@ -165,7 +165,7 @@ No dependencies. Node ≥ 22. Webcam access needs a secure context: `localhost` 
 | `public/CCTV photos/` | original IOC photographs (with EXIF); web copies live in `public/img/ioc/` |
 | `ops/` | launchd services and tunnel routing template |
 | `tests/` | ten `node --test` files: server, relay, CV ops, learner, sources, layer races, and the handbook's quoted numbers |
-| `scripts/` | `check-site.mjs` (pages, links, imports, CSP, model shards) · `check-docs.mjs` (handbook links and anchors) · `deploy-local.mjs` |
+| `scripts/` | `check-site.mjs` (pages, links, imports, CSP, parity, robots/sitemap, model shards) · `check-docs.mjs` (handbook links and anchors) · `deploy-local.mjs` |
 | `data/` | `cameras.json` — the last catalogue FloodDash handed us; gitignored, recreated on first run |
 | `docs/` | the handbook: eight chapters, system design, reference; `docs/img/` figures and diagrams |
 | `examples/` | eight runnable lessons on synthetic scenes; `build-figures.mjs` regenerates `docs/img/*.png` |

@@ -1,2 +1,5 @@
+# vision.nonarkara.org — a public classroom; every page is meant to be read.
 User-agent: *
 Disallow: /api/
+
+Sitemap: https://vision.nonarkara.org/sitemap.xml
