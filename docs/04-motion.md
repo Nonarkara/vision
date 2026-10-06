@@ -102,6 +102,24 @@ Production systems improve each step:
 - **Optical flow** — estimate *where* each pixel moved, not just whether it changed (Lucas–Kanade, 1981; Horn–Schunck, 1981). Gives direction and speed.
 - **Tracking** — link detections across frames into identities-over-time (the "same car" in frame 1 and frame 40), e.g. with a Kalman filter. This is where privacy questions sharpen: tracking an object is one step from tracking a person.
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** ทำให้การเคลื่อนไหวปรากฏด้วยการลบภาพสองภาพ แล้วหาจุดที่เสียงรบกวนเริ่มชนะสัญญาณ / Make motion appear by subtracting two frames — then find where noise starts beating the signal.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 6](/learn) วางกล้องนิ่ง ๆ แล้วดูว่าไม่มีอะไรถูกทำเครื่องหมาย — Open [/learn chapter 6](/learn), hold the camera still, and watch nothing get marked.
+2. โบกมือขึ้นมา แล้วดูบริเวณมือถูกทำเครื่องหมายตาม — Wave a hand and watch the marked region follow it.
+3. ค่อย ๆ ยก "ต้องเปลี่ยนอย่างน้อย" ขึ้นเรื่อย ๆ จนมือหายไป แล้วจดค่าไว้ — Raise *Minimum change* until the hand stops being detected, and note the value.
+4. ทำซ้ำในที่มืด แล้วเทียบกับที่สว่าง — Repeat in a dark spot and compare with a bright one.
+
+**ควรเห็น · You should see**
+
+- ค่าต่ำ ความสั่นเล็ก ๆ ของเซนเซอร์ถูกนับเป็นการเคลื่อนไหว — At a low value the sensor's own jitter counts as motion.
+- ค่ากลาง เห็นเฉพาะมือ ส่วนค่าสูงไม่เห็นอะไรเลย — In the middle only the hand shows; higher and nothing does.
+
+**ถ้าไม่เห็น · If you do not** — ถ้าไม่มีอะไรขึ้นเลย ค่าอาจสูงเกินไป ให้เลื่อนลง หรือเพิ่มแสงให้ฉาก — If nothing appears the value is probably too high: slide it down, or light the scene.
+
 ## Check yourself
 
 <details><summary>1. A white car drives across a white wall. What does frame differencing see?</summary>

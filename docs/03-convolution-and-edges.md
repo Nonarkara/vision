@@ -113,6 +113,24 @@ A **convolutional neural network** (CNN) keeps the sliding window and makes the 
 
 Remarkably, when researchers look inside trained networks, the **first layer's learned kernels look like edge detectors** — the network rediscovers Sobel-like filters on its own. Edges are simply the most useful first thing to know about a picture (Zeiler & Fergus, 2014; and Hubel & Wiesel's 1959 finding that the cat visual cortex has cells that respond to oriented edges).
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** เปลี่ยนหน้าต่าง 3×3 แล้วดูภาพทั้งภาพเปลี่ยนตาม / Change one 3×3 window and watch the whole picture change with it.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 4](/learn) กดเคอร์เนลทีละปุ่ม: เหมือนเดิม เบลอ คมขึ้น ขอบ เส้นตั้ง เส้นนอน — Open [/learn chapter 4](/learn) and press the kernels one by one: Identity, Blur, Sharpen, Edges, Vertical, Horizontal.
+2. สังเกตว่า "เหมือนเดิม" ไม่เปลี่ยนอะไรเลย นั่นคือบททดสอบว่าหน้าต่างทำงานถูกต้อง — Note that Identity changes nothing: the check that the window is doing its job.
+3. เทียบ "ขอบ" กับ "เส้นตั้ง" บนถนนที่มีเส้นจราจร ตัวไหนหายไป — Compare *Edges* with *Vertical* on a road with lane markings: which lines disappear?
+4. เปิด [/learn บท 5](/learn) แล้วเลื่อน "ความไว" ขณะขยับมือช้า ๆ หน้ากล้อง — On [/learn chapter 5](/learn), move *Gain* while sliding a hand slowly in front of the camera.
+
+**ควรเห็น · You should see**
+
+- ภาพ "ขอบ" มืดลงเหลือเส้นบาง ๆ และเปลี่ยนทันทีที่วัตถุขยับ — The *Edges* view goes dark except for thin lines that move the moment you do.
+- "เส้นตั้ง" เก็บเส้นแนวตั้ง แล้วตัดเส้นแนวนอนทิ้ง — *Vertical* keeps vertical lines and drops horizontal ones.
+
+**ถ้าไม่เห็น · If you do not** — ถ้าภาพยังเหมือนเดิมทุกประการ แสดงว่าเลือก "เหมือนเดิม" อยู่ ให้กด "ขอบ" ถ้าทุกอย่างดำ ให้เพิ่ม "ความไว" / If the picture never changes you are still on Identity: press *Edges*. If everything is black, raise *Gain*.
+
 ## Check yourself
 
 <details><summary>1. Apply the "vertical" kernel to a neighbourhood that is 100 everywhere. What is the result? Why?</summary>

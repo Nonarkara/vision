@@ -22,16 +22,9 @@ A road frame contains many things; detection is what a traffic camera needs.
 
 What happens to one frame (all verified against the model graph shipped in this repo):
 
-```mermaid
-flowchart LR
-  A["frame<br/>(drawn at 640 px wide)"] --> B["squashed to 300 × 300<br/>inside the graph"]
-  B --> C["MobileNetV2 backbone<br/>feature grids at 6 scales"]
-  C --> D["SSDLite head<br/>1,917 anchor boxes<br/>× 90 class scores (sigmoid)"]
-  D --> E["best class per box<br/>(our JS)"]
-  E --> F["drop score < minScore"]
-  F --> G["non-max suppression<br/>IoU 0.5 · on the GPU"]
-  G --> H["≈ 0–50 boxes<br/>'car 71%'"]
-```
+![From one frame to a box list: eight steps from pixels to an answer](img/06-pipeline.svg)
+
+*Top row: the frame enters, is squashed to 300 × 300, then read twice — once for features, once for scores. Bottom row: each box takes its best label, weak scores are dropped, overlapping boxes are resolved, and what survives is drawn on screen.*
 
 **SSD** — *Single Shot MultiBox Detector* (Liu et al., 2016) — places a fixed set of **anchor boxes** of several sizes and shapes on grids of several resolutions, and for each anchor predicts (a) how to nudge the box to fit an object and (b) a score per class. One look ("single shot"), no separate region-proposal stage — which is why it is fast enough for a browser. **SSDLite** (Sandler et al., 2018) replaces SSD's normal convolutions with the cheaper depthwise separable ones from chapter 05: 4.3 million weights and about 0.8 billion multiply-adds, at 22.1 COCO mAP — one number standing in for a whole detector, unpacked in §4 — in the paper.
 
@@ -165,6 +158,23 @@ That is the 300 × 300 squeeze from section 2, in numbers.
 - **YOLO** (Redmon et al., 2016): one network, one pass, a grid; the family most used in industry today. (Note for commercial use: several popular modern YOLO implementations are AGPL-licensed. The models on this site are Apache-2.0.)
 - **Transformer detectors** (DETR, 2020) predict a set of boxes directly, no NMS.
 - **Open-vocabulary detectors** (after CLIP, 2021) find objects named in free text, not just 80 fixed classes.
+
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** เห็นพันกว่ากรอบ ถูกกรองเหลือไม่กี่สิบ ด้วยมือคุณเอง / Watch a thousand boxes become a few dozen, with your own hand on the filter.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 7](/learn) โหลดเครือข่าย แล้วเลื่อน "แสดงเมื่อมั่นใจอย่างน้อย" ไปที่ 0% — Open [/learn chapter 7](/learn), load the network, and set *Show only when at least this sure* to 0%.
+2. ดูรถคันเดียวได้กรอบซ้อนกันสองสามอัน แล้วยกเกณฑ์ขึ้นทีละ 10% — One car carries two or three overlapping boxes; raise the bar 10% at a time.
+3. เทียบกับตาคุณเอง: เปิด [/games](/games) นับรถกับเครื่อง แล้วดูว่าใครนับเยอะกว่า — Compare with your own eyes: open [/games](/games), count the cars against the machine, and see who counted more.
+
+**ควรเห็น · You should see**
+
+- เกณฑ์ต่ำ กรอบเยอะและซ้อนกัน หนึ่งรถได้หลายกรอบ — A low bar means many overlapping boxes: several per car.
+- เกณฑ์สูง กรอบซ้อนถูกตัดก่อน แล้วรถคันเล็กหรืออยู่ไกลหายทีหลัง — A high bar clears the overlaps first; small or distant cars vanish after that.
+
+**ถ้าไม่เห็น · If you do not** — ถ้าไม่มีกรอบเลย ยังไม่ได้กดโหลด หรือเกณฑ์สูงเกินไปสำหรับภาพนั้น — If no box appears at all: the network is not loaded yet, or the bar is above everything in the frame.
 
 ## Check yourself
 

@@ -1,0 +1,150 @@
+/* /handbook — long-form reading: the handbook rendered from docs/.
+ * Naples is the reading ground, olive the ink, gray the structure, and the
+ * olive field carries anything the machine (or the terminal) printed.
+ * No borders, no cards: grouping comes from fields, scale and space. */
+
+.handbook .page-head-side .lede { max-width: 46ch; }
+.handbook .page-head h1 { font-size: clamp(2rem, 3.2vw + 1rem, 4rem); }
+
+.handbook .doc {
+  padding: 0 var(--gutter) clamp(24px, 3vw, 48px);
+  font-size: var(--body);
+  line-height: 1.65;
+}
+.handbook .doc > :first-child { margin-top: 0; }
+
+/* Prose is a column; diagrams, tables and code may use the full width. */
+.handbook .doc > h2,
+.handbook .doc > h3,
+.handbook .doc > p,
+.handbook .doc > ul,
+.handbook .doc > ol,
+.handbook .doc > blockquote,
+.handbook .doc > details { max-width: 74ch; }
+
+.handbook .doc h2 {
+  font-family: var(--narrow);
+  font-size: clamp(1.6rem, 1.8vw + 1rem, 2.5rem);
+  line-height: 1.05;
+  margin: clamp(40px, 5vw, 72px) 0 12px;
+  scroll-margin-top: calc(var(--rail-height) + 20px);
+}
+.handbook .doc h3 {
+  font-family: var(--narrow);
+  font-size: clamp(1.15rem, 0.7vw + 1rem, 1.5rem);
+  line-height: 1.2;
+  margin: clamp(28px, 3vw, 40px) 0 8px;
+  scroll-margin-top: calc(var(--rail-height) + 20px);
+}
+.handbook .doc p { margin: 0 0 1.1em; }
+.handbook .doc ul, .handbook .doc ol { margin: 0 0 1.3em; padding-left: 1.3em; }
+.handbook .doc li { margin-bottom: 0.5em; }
+.handbook .doc ol li::marker { font-family: var(--mono); font-size: var(--micro); }
+.handbook .doc ul li::marker { color: var(--signal); font-size: 0.9em; }
+
+.handbook .doc blockquote {
+  background: var(--black);
+  color: var(--naples);
+  padding: clamp(16px, 2vw, 26px);
+  margin: clamp(20px, 2.5vw, 32px) 0;
+  font-size: var(--body);
+}
+.handbook .doc blockquote a { color: var(--naples); }
+.handbook .doc blockquote code { background: var(--black-2); color: var(--naples); }
+
+.handbook .doc hr {
+  border: 0;
+  height: 3px;
+  width: 112px;
+  background: var(--text);
+  margin: clamp(28px, 4vw, 44px) 0;
+}
+
+.handbook .doc figure { margin: clamp(24px, 3vw, 40px) 0; }
+.handbook .doc figure img { background: var(--black); }
+.handbook .doc figcaption { color: color-mix(in srgb, var(--text) 75%, var(--ground)); }
+
+.handbook .doc pre.code {
+  background: var(--black);
+  color: var(--naples);
+  padding: clamp(14px, 1.6vw, 20px) clamp(16px, 2vw, 24px);
+  margin: 20px 0;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: clamp(0.8rem, 0.3vw + 0.72rem, 0.9rem);
+  line-height: 1.55;
+}
+.handbook .doc pre.code code { font: inherit; }
+.handbook .doc pre.code[data-lang]::before {
+  content: attr(data-lang);
+  display: block;
+  margin-bottom: 10px;
+  font-size: var(--micro);
+  color: var(--gray);
+}
+.handbook .doc :not(pre) > code {
+  font-family: var(--mono);
+  font-size: 0.875em;
+  background: color-mix(in srgb, var(--gray) 45%, transparent);
+  padding: 1px 5px;
+}
+
+.handbook .doc .table-wrap { margin: 20px 0; overflow-x: auto; }
+.handbook .doc .table { min-width: 34rem; }
+.handbook .doc .table th, .handbook .doc .table td { font-size: var(--micro); line-height: 1.45; }
+/* On the dark ground the olive header would merge with it: ink instead. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .handbook .doc .table th { background: var(--black); color: var(--white); }
+}
+
+/* Check yourself: one question per field. */
+.handbook .doc details {
+  background: color-mix(in srgb, var(--gray) 40%, transparent);
+  padding: 14px 16px;
+  margin: 10px 0;
+}
+.handbook .doc details summary { cursor: pointer; font-weight: 600; min-height: 24px; }
+.handbook .doc details[open] summary { margin-bottom: 10px; }
+.handbook .doc details p:last-child { margin-bottom: 0; }
+
+/* Contents, in the page head. */
+.handbook .doc-toc {
+  background: color-mix(in srgb, var(--gray) 40%, transparent);
+  padding: 12px 16px;
+  margin: 18px 0 0;
+  font-size: var(--micro);
+  max-width: 46ch;
+}
+.handbook .doc-toc summary { cursor: pointer; font-weight: 600; min-height: 24px; }
+.handbook .doc-toc ol {
+  margin: 10px 0 0;
+  padding-left: 1.5em;
+  columns: 2;
+  column-gap: 28px;
+}
+.handbook .doc-toc li { break-inside: avoid; margin-bottom: 5px; }
+@media (max-width: 900px) { .handbook .doc-toc ol { columns: 1; } }
+
+/* Chapter floor: previous, index, next. */
+.handbook .doc-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: clamp(20px, 3vw, 36px) var(--gutter) clamp(32px, 4vw, 64px);
+  font-family: var(--narrow);
+  font-size: clamp(1.05rem, 0.6vw + 1rem, 1.35rem);
+}
+.handbook .doc-nav a {
+  display: flex;
+  align-items: center;
+  min-height: var(--target);
+  text-decoration: none;
+}
+.handbook .doc-nav a:hover, .handbook .doc-nav a:focus-visible { text-decoration: underline; }
+.handbook .doc-nav .doc-index { margin: 0 auto; }
+
+@media (max-width: 700px) {
+  .handbook .doc .table { min-width: 26rem; }
+  .handbook .doc-nav { justify-content: center; text-align: center; }
+}

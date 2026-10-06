@@ -90,6 +90,24 @@ Object detection (chapter 06) uses MobileNetV2 again, as a **backbone**: the sam
 | 2021 | CLIP: learning from images paired with text (Radford et al.) |
 | 2023 | Segment Anything: one model that outlines anything (Kirillov et al.) |
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** ดูเครื่องมีความมั่นใจและเสียความมั่นใจอย่างไร เมื่อภาพเปลี่ยนเพียงเล็กน้อย / Watch a network gain and lose confidence when the picture changes only a little.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 7](/learn) กด "โหลดโครงข่ายประสาทเทียม" โหลดครั้งเดียว ประมาณ 14 MB แล้วทำงานในเบราว์เซอร์ของคุณ — Open [/learn chapter 7](/learn) and press *Load the neural network*: about 14 MB, once, and it runs in your browser.
+2. ชี้ไปที่วัตถุสามอย่าง จดชื่อและตัวเลขความมั่นใจแต่ละอย่าง — Point at three objects and write down each label and its score.
+3. หาวัตถุหนึ่งที่เครื่องไม่เห็นเลย แล้วขยับกล้องเข้าใกล้ทีละนิด ดูคะแนนเปลี่ยนแค่ไหน — Find one object it misses, then move a little closer and watch the score move.
+4. เลื่อน "แสดงเมื่อมั่นใจอย่างน้อย" จาก 0 ขึ้นเป็น 50% แล้วดูกรอบที่เหลือ — Raise *Show only when at least this sure* from 0 to 50% and see which boxes survive.
+
+**ควรเห็น · You should see**
+
+- คะแนนเปลี่ยนลื่น ๆ ตามระยะและแสง ไม่ใช่ปุ่มเปิดปิด — Scores slide with distance and light; they are not an on/off switch.
+- กรอบที่มั่นใจต่ำหายไปก่อนเสมอ — Low-confidence boxes are always the first to go.
+
+**ถ้าไม่เห็น · If you do not** — ถ้าไม่มีกรอบเลย ให้ตรวจว่ากดโหลดแล้ว และลดเกณฑ์ความมั่นใจลง — If no box ever appears: check that the network loaded, and lower the confidence bar.
+
 ## Check yourself
 
 <details><summary>1. Why does the picture get smaller in width and height but deeper in channels as it passes through MobileNetV2?</summary>

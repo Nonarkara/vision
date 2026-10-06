@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>06 · Object detection · การหาวัตถุ — Handbook · คู่มือ Vision</title>
+<meta name="description" content="In one sentence: a detector guesses thousands of boxes at once, keeps each box's best class and score, removes overlapping duplicates — and the confidence threshold you choose decides which…">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>06 · Object detection · การหาวัตถุ</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-classification-vs-detection" lang="en">1. Classification vs detection</a></li><li><a href="#2-the-detector-on-this-site" lang="en">2. The detector on this site</a></li><li><a href="#3-step-by-step-from-1917-guesses-to-a-few-boxes" lang="en">3. Step by step: from 1,917 guesses to a few boxes</a></li><li><a href="#4-the-confidence-slider-is-a-trade" lang="en">4. The confidence slider is a trade</a></li><li><a href="#5-where-detection-appears-on-the-site" lang="en">5. Where detection appears on the site</a></li><li><a href="#6-beyond-ssd-for-the-curious" lang="en">6. Beyond SSD (for the curious)</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en"><strong>In one sentence:</strong> a detector guesses thousands of boxes at once, keeps each box's best class and score, removes overlapping duplicates — and the confidence threshold you choose decides which mistakes you would rather make.</blockquote>
+<p lang="en"><a href="/handbook/05">← 05</a> · <a href="/handbook">Handbook</a> · Site: <a href="/learn">/learn, chapters 7–8</a> · <a href="/games">/games</a> · <a href="/cameras">/cameras census</a> · Run: <code>node examples/05-detection-nms.mjs</code> · <code>node examples/06-precision-recall.mjs</code></p>
+<hr>
+<h2 id="1-classification-vs-detection" lang="en">1. Classification vs detection</h2>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Task</th><th lang="en">Question</th><th lang="en">Output</th></tr></thead><tbody><tr><td lang="en">Classification (chapter 05)</td><td lang="en"><em>What is this picture of?</em></td><td lang="en">one label for the whole picture</td></tr><tr><td lang="en"><strong>Detection</strong> (this chapter)</td><td lang="en"><em>What is where?</em></td><td lang="en">many boxes, each with a label and a score</td></tr><tr><td lang="en">Segmentation</td><td lang="en"><em>Which pixels belong to what?</em></td><td lang="en">a label per pixel</td></tr></tbody></table></div>
+<p lang="en">A road frame contains many things; detection is what a traffic camera needs.</p>
+<h2 id="2-the-detector-on-this-site" lang="en">2. The detector on this site</h2>
+<p lang="en"><strong>SSDLite + MobileNetV2, trained on COCO</strong> — from the TensorFlow Object Detection model zoo, run by TensorFlow.js in your browser. Weights: 18 MB at <code>/models/ssdlite_mobilenet_v2/</code>. Code: <a href="https://github.com/Nonarkara/vision/blob/main/public/js/ml/detector.js"><code>public/js/ml/detector.js</code></a>.</p>
+<p lang="en">What happens to one frame (all verified against the model graph shipped in this repo):</p>
+<figure><img src="/img/handbook/06-pipeline.svg" alt="From one frame to a box list: eight steps from pixels to an answer" loading="lazy"><figcaption lang="en">Top row: the frame enters, is squashed to 300 × 300, then read twice — once for features, once for scores. Bottom row: each box takes its best label, weak scores are dropped, overlapping boxes are resolved, and what survives is drawn on screen.</figcaption></figure>
+<p lang="en"><strong>SSD</strong> — <em>Single Shot MultiBox Detector</em> (Liu et al., 2016) — places a fixed set of <strong>anchor boxes</strong> of several sizes and shapes on grids of several resolutions, and for each anchor predicts (a) how to nudge the box to fit an object and (b) a score per class. One look ("single shot"), no separate region-proposal stage — which is why it is fast enough for a browser. <strong>SSDLite</strong> (Sandler et al., 2018) replaces SSD's normal convolutions with the cheaper depthwise separable ones from chapter 05: 4.3 million weights and about 0.8 billion multiply-adds, at 22.1 COCO mAP — one number standing in for a whole detector, unpacked in §4 — in the paper.</p>
+<h3 id="the-300--300-squeeze-and-why-far-away-things-vanish" lang="en">The 300 × 300 squeeze, and why far-away things vanish</h3>
+<p lang="en">The graph resizes every input to <strong>300 × 300</strong>, ignoring aspect ratio (the constant is in the weights; read it yourself, it is <code>Preprocessor/map/while/ResizeImage/stack = (300, 300)</code>). For a 16:9 camera frame that means:</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en"></th><th lang="en">Width</th><th lang="en">Height</th></tr></thead><tbody><tr><td lang="en">a 1080p frame</td><td lang="en">1920</td><td lang="en">1080</td></tr><tr><td lang="en">after the squeeze</td><td lang="en">300 (÷ 6.4)</td><td lang="en">300 (÷ 3.6)</td></tr><tr><td lang="en">a car 40 px wide, 24 px tall, far down the road</td><td lang="en"><strong>~6 px</strong></td><td lang="en">~7 px</td></tr></tbody></table></div>
+<p lang="en">Six pixels wide is chapter 01's 32-pixel-block picture: a smudge. <strong>Small, distant objects are the detector's main blind spot</strong>, and the simulation in section 5 shows it in numbers.</p>
+<h2 id="3-step-by-step-from-1917-guesses-to-a-few-boxes" lang="en">3. Step by step: from 1,917 guesses to a few boxes</h2>
+<p lang="en">Run <code>node examples/05-detection-nms.mjs</code>. It uses simulated candidate boxes around the synthetic scene's answer key, so every number can be checked; the steps are the real ones.</p>
+<p lang="en"><strong>Step 1 — best class per box.</strong> Each box gets 90 independent scores:</p>
+<pre class="code" lang="en"><code>  car        ████████████████████████████   0.71
+  truck      █████████                      0.22
+  bus        ██                             0.06
+  motorcycle █                              0.03
+  person     █                              0.02
+  …and 85 more classes, mostly near 0.
+  → this box is reported as "car 71%". The 22% truck opinion is thrown away.</code></pre>
+<p lang="en"><strong>Step 2 — minimum score.</strong> Boxes below <code>minScore</code> are dropped. The site uses 0.3 for live lenses and the census, asks for everything above 0.10 on /learn chapter 7 (the slider then decides what you see), and 0.15 in the games so that "almost saw it" boxes can be shown in gray.</p>
+<p lang="en"><strong>Step 3 — non-maximum suppression (NMS).</strong> A real object attracts many overlapping boxes. Sort by score; keep the best; drop any later box that overlaps a kept box by more than an <strong>IoU</strong> limit (0.5 here and on the site); continue.</p>
+<figure><img src="/img/handbook/05-nms.png" alt="Left: every candidate box. Right: after minimum score and NMS" loading="lazy"></figure>
+<h3 id="iou--intersection-over-union" lang="en">IoU — intersection over union</h3>
+<pre class="code" lang="en"><code>IoU(A, B) = area of overlap ÷ area covered by A or B together</code></pre>
+<pre class="code" lang="en"><code>  same size, shifted  0 px → IoU 1.00
+  same size, shifted  5 px → IoU 0.82
+  same size, shifted 13 px → IoU 0.60
+  same size, shifted 26 px → IoU 0.33
+  same size, shifted 52 px → IoU 0.00</code></pre>
+<p lang="en">The whole of NMS, as written in the example (it mirrors <code>tf.image.nonMaxSuppression</code>):</p>
+<pre class="code" lang="en" data-lang="js"><code>export function nms(boxes, { iouLimit = 0.5, minScore = 0.3, max = 50 } = {}) {
+  const sorted = boxes.filter((b) =&gt; b.score &gt;= minScore).sort((a, b) =&gt; b.score - a.score)
+  const kept = []
+  for (const b of sorted) {
+    if (kept.length &gt;= max) break
+    if (kept.every((k) =&gt; iou(k, b) &lt;= iouLimit)) kept.push(b)
+  }
+  return kept
+}</code></pre>
+<h3 id="what-survives--scored-the-way-benchmarks-score-it" lang="en">What survives — scored the way benchmarks score it</h3>
+<p lang="en">Each real object may be claimed <strong>once</strong>, by the most confident box overlapping it with IoU ≥ 0.5. At <code>minScore = 0.3</code>:</p>
+<pre class="code" lang="en"><code>  motorcycle  90%  correct — the motorcycle at x=150 (IoU 0.67)
+  car         88%  correct — the car at x=190 (IoU 0.58)
+  car         86%  WRONG — sloppy box on the car at x=96 (IoU 0.49 &lt; 0.5)
+  car         62%  WRONG — duplicate; the car at x=190 was already claimed
+  car         52%  correct — the car at x=96 (IoU 0.84)
+  person      34%  WRONG — nothing real there
+  motorcycle  30%  WRONG — duplicate; the motorcycle at x=150 was already claimed
+  → 3 of 3 real vehicles found, 4 wrong box(es)</code></pre>
+<p lang="en">Three lessons in seven lines:</p>
+<ol><li lang="en"><strong>Duplicates survive NMS</strong> when two boxes on one object overlap each other by <em>less</em> than the limit — common for small objects, where a few pixels of jitter is a large fraction of the box. A detector's count of cars is an <em>estimate</em>.</li><li lang="en"><strong>"Sloppy" counts as wrong.</strong> The 86% box really is on the red car, but too loosely (IoU 0.49). Benchmarks draw the line at 0.5; COCO also averages over stricter lines up to 0.95.</li><li lang="en"><strong>The lamp post became a "person" at 34%.</strong> Tall, thin, upright: to a network, a pattern resembling people. Raise <code>minScore</code> to 0.5 and it disappears — along with the correct 30%-and-below boxes on a harder day.</li></ol>
+<h2 id="4-the-confidence-slider-is-a-trade" lang="en">4. The confidence slider is a trade</h2>
+<p lang="en"><code>node examples/06-precision-recall.mjs</code> simulates a detector that, like real ones, is usually more confident about real objects than about false alarms, and worse at small objects. 200 real objects, 280 detector answers:</p>
+<pre class="code" lang="en"><code> threshold   shown   correct   false alarms   missed   precision   recall
+   0.1        229      160          69         40        70%        80%
+   0.3        199      160          39         40        80%        80%
+   0.5        173      150          23         50        87%        75%
+   0.7         99       90           9        110        91%        45%
+   0.9         26       26           0        174       100%        13%</code></pre>
+<ul><li lang="en"><strong>Precision</strong> — of the boxes shown, how many are real? (<em>How often does it lie?</em>)</li><li lang="en"><strong>Recall</strong> — of the real objects, how many were shown? (<em>How often does it miss?</em>)</li></ul>
+<p lang="en">Raise the threshold: fewer lies, more misses. <strong>There is no threshold with neither.</strong> The area under the whole precision–recall curve is <strong>average precision</strong> (here ≈ 74.8%); averaged over classes and IoU limits it is the <strong>mAP</strong> every detection paper reports.</p>
+<p lang="en">And who gets missed, at 0.5:</p>
+<pre class="code" lang="en"><code>small objects: 25 of 67 shown  (37%)
+large objects: 125 of 133 shown  (94%)</code></pre>
+<p lang="en">That is the 300 × 300 squeeze from section 2, in numbers.</p>
+<blockquote lang="en"><strong>Why the site never says "no car".</strong> At any threshold, recall is below 100% — and lowest for small, distant, dark or unusual objects. So "nothing detected above 30%" is a statement about the <em>picture and the model</em>, not about the road. Every place the site reports a detection result, it reports it that way.</blockquote>
+<h2 id="5-where-detection-appears-on-the-site" lang="en">5. Where detection appears on the site</h2>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Room</th><th lang="en">What runs</th><th lang="en">Threshold</th></tr></thead><tbody><tr><td lang="en">Home, lens 5</td><td lang="en">detector on a live camera every ~0.7 s</td><td lang="en">0.3</td></tr><tr><td lang="en">/learn ch. 7</td><td lang="en">detector with a confidence slider; list of everything above 10%</td><td lang="en">slider (0.1 floor)</td></tr><tr><td lang="en">/learn ch. 8</td><td lang="en">the same detector at falling resolution — find where it breaks</td><td lang="en">0.3</td></tr><tr><td lang="en">/cameras census</td><td lang="en">one frame each from 12–48 cameras, 2 at a time, pause between</td><td lang="en">0.3</td></tr><tr><td lang="en">/games count race</td><td lang="en">you vs the detector, counting vehicles or people; you referee</td><td lang="en">your slider; boxes from 0.15 up to it are shown gray</td></tr><tr><td lang="en">/games fewest pixels</td><td lang="en">the detector guesses from a pixelated frame; it commits at ≥ 50%</td><td lang="en">0.5</td></tr><tr><td lang="en">/story</td><td lang="en">counts screens ("tv") and people in six control-room photos</td><td lang="en">—</td></tr></tbody></table></div>
+<h2 id="6-beyond-ssd-for-the-curious" lang="en">6. Beyond SSD (for the curious)</h2>
+<ul><li lang="en"><strong>Two-stage detectors</strong> — R-CNN (Girshick et al., 2014) → Faster R-CNN (Ren et al., 2015): first propose regions, then classify each. More accurate, slower.</li><li lang="en"><strong>YOLO</strong> (Redmon et al., 2016): one network, one pass, a grid; the family most used in industry today. (Note for commercial use: several popular modern YOLO implementations are AGPL-licensed. The models on this site are Apache-2.0.)</li><li lang="en"><strong>Transformer detectors</strong> (DETR, 2020) predict a set of boxes directly, no NMS.</li><li lang="en"><strong>Open-vocabulary detectors</strong> (after CLIP, 2021) find objects named in free text, not just 80 fixed classes.</li></ul>
+<h2 id="try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</h2>
+<p lang="en"><strong>เป้าหมาย · Goal:</strong> เห็นพันกว่ากรอบ ถูกกรองเหลือไม่กี่สิบ ด้วยมือคุณเอง / Watch a thousand boxes become a few dozen, with your own hand on the filter.</p>
+<p lang="th"><strong>ขั้นตอน · Steps</strong></p>
+<ol><li lang="en">เปิด <a href="/learn">/learn บท 7</a> โหลดเครือข่าย แล้วเลื่อน "แสดงเมื่อมั่นใจอย่างน้อย" ไปที่ 0% — Open <a href="/learn">/learn chapter 7</a>, load the network, and set <em>Show only when at least this sure</em> to 0%.</li><li lang="en">ดูรถคันเดียวได้กรอบซ้อนกันสองสามอัน แล้วยกเกณฑ์ขึ้นทีละ 10% — One car carries two or three overlapping boxes; raise the bar 10% at a time.</li><li lang="en">เทียบกับตาคุณเอง: เปิด <a href="/games">/games</a> นับรถกับเครื่อง แล้วดูว่าใครนับเยอะกว่า — Compare with your own eyes: open <a href="/games">/games</a>, count the cars against the machine, and see who counted more.</li></ol>
+<p lang="en"><strong>ควรเห็น · You should see</strong></p>
+<ul><li lang="en">เกณฑ์ต่ำ กรอบเยอะและซ้อนกัน หนึ่งรถได้หลายกรอบ — A low bar means many overlapping boxes: several per car.</li><li lang="en">เกณฑ์สูง กรอบซ้อนถูกตัดก่อน แล้วรถคันเล็กหรืออยู่ไกลหายทีหลัง — A high bar clears the overlaps first; small or distant cars vanish after that.</li></ul>
+<p lang="en"><strong>ถ้าไม่เห็น · If you do not</strong> — ถ้าไม่มีกรอบเลย ยังไม่ได้กดโหลด หรือเกณฑ์สูงเกินไปสำหรับภาพนั้น — If no box appears at all: the network is not loaded yet, or the bar is above everything in the frame.</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<details><summary lang="en">1. Two cars park bumper to bumper; their true boxes overlap with IoU 0.55. What does NMS at 0.5 do?</summary><p lang="en">It keeps the more confident box and suppresses the other — one car disappears. Crowded scenes (parking lots, jams, crowds) are where NMS undercounts; raising the limit helps there but lets more duplicates through elsewhere.</p></details>
+<details><summary lang="en">2. A flood-monitoring system must never miss a submerged car. Should its threshold be high or low? What does that cost?</summary><p lang="en">Low — favour recall. The cost is many false alarms, so a human must review every alert. That is the right design for safety: the machine points, a person decides.</p></details>
+<details><summary lang="en">3. Why is "person 34%" on a lamp post not "a bug"?</summary><p lang="en">Because the detector is doing what it was trained to: scoring how much a region resembles each class. A tall thin upright shape resembles people somewhat. The fix is a threshold suited to the task, more varied training data — and never treating a single detection as fact.</p></details>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th"><strong>การตรวจจับวัตถุ</strong> ตอบว่า "อะไรอยู่ตรงไหน" เครื่องตรวจจับบนเว็บไซต์คือ <strong>SSDLite + MobileNetV2</strong> ฝึกจากชุดข้อมูล COCO (80 ประเภท) ทุกภาพถูกบีบเป็น <strong>300 × 300</strong> ก่อนเข้าโครงข่าย รถที่อยู่ไกลซึ่งกว้าง 40 พิกเซลในภาพ 1080p จึงเหลือแค่ราว 6 พิกเซล นี่คือเหตุผลหลักที่ของเล็กหรือไกลมักหลุด</p>
+<p lang="th">ขั้นตอน: โครงข่ายเดากล่อง <strong>1,917 กล่อง</strong> แต่ละกล่องมีคะแนน 90 ประเภท → เลือกประเภทที่คะแนนสูงสุด → ตัดกล่องที่คะแนนต่ำกว่าเกณฑ์ → <strong>NMS</strong> ลบกล่องที่ทับกันเกิน IoU 0.5 โดยเก็บกล่องที่มั่นใจที่สุดไว้</p>
+<p lang="th"><strong>IoU</strong> คือพื้นที่ทับซ้อนหารด้วยพื้นที่รวม แม้หลัง NMS ก็ยังมีกล่องซ้ำและกล่องหลวม ๆ หลุดมาได้ จำนวนรถที่เครื่องนับได้จึงเป็น "ค่าประมาณ"</p>
+<p lang="th"><strong>แถบความมั่นใจคือการแลกเปลี่ยน</strong>: เกณฑ์สูง = โกหกน้อย (precision สูง) แต่พลาดมาก (recall ต่ำ) เกณฑ์ต่ำ = กลับกัน <strong>ไม่มีค่าไหนที่ไม่ผิดเลย</strong> และสิ่งที่พลาดมากที่สุดคือวัตถุเล็ก (เห็นแค่ 37% เทียบกับวัตถุใหญ่ 94%) เว็บไซต์จึงไม่เคยพูดว่า "ไม่มีรถ" พูดได้แค่ว่า "ไม่พบอะไรที่มั่นใจเกิน 30%"</p>
+<p lang="en"><strong>Next:</strong> <a href="/handbook/07">07 · Teaching a machine →</a></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/05"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/07"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

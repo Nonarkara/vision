@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>From one frame to a box list: the eight steps of the detector</title>
+  <rect width="960" height="430" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE FRAME TO A BOX LIST · จากภาพหนึ่งสู่รายการกรอบ</text>
+  <g font-size="15">
+    <!-- row 1 -->
+    <rect x="24" y="56" width="200" height="120" fill="#b6bfc1"/>
+    <text x="36" y="84" font-weight="600" fill="#253122">1 Frame</text>
+    <text x="36" y="106" font-size="13" fill="#253122">drawn at 640 px wide</text>
+    <text x="36" y="160" font-size="13" fill="#253122">ภาพต้นฉบับ</text>
+
+    <rect x="254" y="56" width="200" height="120" fill="#b6bfc1"/>
+    <text x="266" y="84" font-weight="600" fill="#253122">2 Resized</text>
+    <text x="266" y="106" font-size="13" fill="#253122">squashed to 300 × 300</text>
+    <text x="266" y="160" font-size="13" fill="#253122">ย่อให้เป็นสี่เหลี่ยมจัตุรัส</text>
+
+    <rect x="484" y="56" width="200" height="120" fill="#253122"/>
+    <text x="496" y="84" font-weight="600" fill="#fbe6a0">3 Backbone</text>
+    <text x="496" y="106" font-size="13" fill="#fbe6a0">MobileNetV2: feature grids</text>
+    <text x="496" y="124" font-size="13" fill="#fbe6a0">at 6 scales</text>
+    <text x="496" y="160" font-size="13" fill="#fbe6a0">กริดลักษณะ 6 ระดับ</text>
+
+    <rect x="714" y="56" width="200" height="120" fill="#253122"/>
+    <text x="726" y="84" font-weight="600" fill="#fbe6a0">4 Head</text>
+    <text x="726" y="106" font-size="13" fill="#fbe6a0">1,917 anchor boxes ×</text>
+    <text x="726" y="124" font-size="13" fill="#fbe6a0">90 class scores</text>
+    <text x="726" y="160" font-size="13" fill="#fbe6a0">หัว SSDLite ให้คะแนน</text>
+
+    <!-- row 2 -->
+    <rect x="24" y="246" width="200" height="120" fill="#101010"/>
+    <text x="36" y="274" font-weight="600" fill="#f7f5ef">5 Best class</text>
+    <text x="36" y="296" font-size="13" fill="#f7f5ef">one label per box</text>
+    <text x="36" y="350" font-size="13" fill="#f7f5ef">เลือกคำตอบต่อกรอบ</text>
+
+    <rect x="254" y="246" width="200" height="120" fill="#101010"/>
+    <text x="266" y="274" font-weight="600" fill="#f7f5ef">6 Filter</text>
+    <text x="266" y="296" font-size="13" fill="#f7f5ef">drop score &lt; minScore</text>
+    <text x="266" y="350" font-size="13" fill="#f7f5ef">ทิ้งคะแนนต่ำ ๆ</text>
+
+    <rect x="484" y="246" width="200" height="120" fill="#101010"/>
+    <text x="496" y="274" font-weight="600" fill="#f7f5ef">7 Non-max</text>
+    <text x="496" y="296" font-size="13" fill="#f7f5ef">IoU 0.5 · on the GPU</text>
+    <text x="496" y="350" font-size="13" fill="#f7f5ef">กรอบทับกัน → เก็บอันสูงสุด</text>
+
+    <rect x="714" y="246" width="200" height="120" fill="#f15a30"/>
+    <text x="726" y="274" font-weight="600" fill="#101010">8 Answer</text>
+    <text x="726" y="310" font-size="22" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="600" fill="#101010">car 71%</text>
+    <text x="726" y="350" font-size="13" fill="#101010">≈ 0–50 boxes left</text>
+  </g>
+  <!-- row 1 arrows -->
+  <g fill="#253122">
+    <polygon points="252,116 240,110 240,122"/>
+    <polygon points="482,116 470,110 470,122"/>
+    <polygon points="712,116 700,110 700,122"/>
+    <polygon points="124,252 118,240 130,240"/>
+    <polygon points="252,306 240,300 240,312"/>
+    <polygon points="482,306 470,300 470,312"/>
+    <polygon points="712,306 700,300 700,312"/>
+  </g>
+  <path d="M814 176 V211 H124 V240" fill="none" stroke="#253122" stroke-width="3"/>
+  <rect x="24" y="392" width="446" height="4" fill="#b6bfc1"/>
+  <text x="24" y="416" font-size="13" fill="#253122">In: 1,917 boxes with scores · Out: a few dozen boxes worth showing</text>
+  <rect x="484" y="392" width="430" height="4" fill="#f15a30"/>
+  <text x="484" y="416" font-size="13" fill="#253122">เข้าเป็นพัน กรอบ ออกไม่กี่สิบที่ควรค่าแก่การแสดง</text>
+</svg>

@@ -149,6 +149,24 @@ What /train does is the core of commercial "custom vision" services. What a real
 - **Versioning** — which examples produced which model, so a bad decision can be traced.
 - **Drift monitoring** — cameras get dirty, seasons change; accuracy decays unless measured.
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** สอนเครื่องจำสองกลุ่มด้วยภาพไม่กี่ภาพ แล้วจับทางลัดที่มันใช้ / Teach it two groups with a few pictures, then catch the shortcut it is using.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/train](/train) เพิ่มภาพให้สองกลุ่ม กลุ่มละประมาณ 6 ภาพจากกล้องของคุณ — Open [/train](/train) and add about six pictures to each group from your camera.
+2. กด "ฝึกและลอง" แล้วดูแถบสองอัน: แถบบนเดาได้ทันทีจากตัวอย่างที่คล้ายกัน แถบล่างใช้ได้หลังกดฝึก — Press *Train and try it* and watch the two bars: the top one guesses right away from similar examples, the bottom one only after training.
+3. ถ่ายภาพใหม่ที่ไม่ได้ใส่ตอนฝึก แล้วเทียบคำตอบของทั้งสองแถบ — Take a fresh picture you never added and compare what the two bars say.
+4. ลองสร้างทางลัด: ให้ทุกภาพของกลุ่มแรกมีพื้นหลังหรือแสงเดียวกัน ฝึกใหม่ แล้วย้ายพื้นหลัง — Build a shortcut: give every picture of group one the same background or lighting, retrain, then change the background.
+
+**ควรเห็น · You should see**
+
+- แถบบนทำงานตั้งแต่ยังไม่ได้กดฝึก เพราะมันคือ k-NN กับลายนิ้วมือ 1,280 ตัวเลข — The top bar works before you train: it is k-NN over the same 1,280-number fingerprint.
+- พอตัดทางลัด (ย้ายพื้นหลัง) คะแนนร่วง ทั้งที่วัตถุยังเป็นวัตถุเดิม — Remove the shortcut and the score falls, even though the object never changed.
+
+**ถ้าไม่เห็น · If you do not** — สองกลุ่มเหมือนกันเกินไปหรือภาพน้อยเกินไป ให้เพิ่มภาพ หรือเลือกสิ่งที่ต่างกันชัดกว่า — If both bars sit at 50/50 the groups are too alike or too few: add pictures, or pick things that differ more.
+
 ## Check yourself
 
 <details><summary>1. You teach Busy road / Empty road using one camera at 8 am (busy) and 3 am (empty). What did the model probably learn?</summary>

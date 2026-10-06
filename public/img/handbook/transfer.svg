@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>Transfer learning on /train: a frozen network makes 1,280 numbers; you train only a small layer on top</title>
+  <rect width="960" height="280" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">TRANSFER LEARNING ON /TRAIN · ยืมตาที่ฝึกมาแล้ว สอนแค่การตัดสินใจ</text>
+  <g font-size="15">
+    <rect x="24" y="64" width="150" height="130" fill="#f7f5ef"/>
+    <text x="40" y="94" font-weight="600" fill="#253122">Your example</text>
+    <text x="40" y="118" font-size="13" fill="#253122">a frame from a</text>
+    <text x="40" y="136" font-size="13" fill="#253122">camera, webcam</text>
+    <text x="40" y="154" font-size="13" fill="#253122">or photo</text>
+    <text x="40" y="180" font-size="13" fill="#253122">ตัวอย่างของคุณ</text>
+
+    <rect x="208" y="64" width="290" height="130" fill="#253122"/>
+    <text x="224" y="94" font-weight="600" fill="#fbe6a0">MobileNetV2 — FROZEN</text>
+    <text x="224" y="118" font-size="13" fill="#fbe6a0">3.4 million weights, learned from</text>
+    <text x="224" y="136" font-size="13" fill="#fbe6a0">1.28 million ImageNet photos.</text>
+    <text x="224" y="154" font-size="13" fill="#fbe6a0">Never changes on this site.</text>
+    <text x="224" y="180" font-size="13" fill="#fbe6a0">ส่วนที่ไม่ถูกแก้ไข</text>
+
+    <rect x="532" y="64" width="130" height="130" fill="#b6bfc1"/>
+    <text x="548" y="94" font-weight="600" fill="#253122">1,280</text>
+    <text x="548" y="114" font-weight="600" fill="#253122">numbers</text>
+    <text x="548" y="140" font-size="13" fill="#253122">"how it looks"</text>
+    <text x="548" y="180" font-size="13" fill="#253122">ลายนิ้วมือของภาพ</text>
+
+    <rect x="696" y="64" width="240" height="130" fill="#f15a30"/>
+    <text x="712" y="94" font-weight="600" fill="#101010">YOUR LAYER — TRAINED</text>
+    <text x="712" y="118" font-size="13" fill="#101010">k-NN: just remember, or</text>
+    <text x="712" y="136" font-size="13" fill="#101010">softmax: 1,280 × K + K weights,</text>
+    <text x="712" y="154" font-size="13" fill="#101010">200 passes, a few seconds</text>
+    <text x="712" y="180" font-size="13" fill="#101010">ส่วนที่คุณสอน</text>
+  </g>
+  <g fill="#253122"><polygon points="200,129 180,121 180,137"/><polygon points="524,129 504,121 504,137"/><polygon points="688,129 668,121 668,137"/></g>
+  <text x="24" y="226" font-size="14" fill="#253122">Why it works with ten examples: the hard part — turning pixels into meaningful numbers — was learned once, from a million photos.</text>
+  <text x="24" y="246" font-size="14" fill="#253122">You only teach the last decision. Yosinski et al. (2014) measured how well such features transfer between tasks.</text>
+  <text x="24" y="268" font-size="13" fill="#253122">ทำไมสิบภาพก็พอ: ส่วนที่ยากที่สุดคือการแปลงพิกเซลเป็นตัวเลขที่มีความหมาย ถูกเรียนรู้ไว้แล้วจากภาพนับล้าน คุณสอนแค่ขั้นสุดท้าย</text>
+</svg>

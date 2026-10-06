@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>03 · Convolution and edges · หน้าต่างเลื่อนและขอบ — Handbook · คู่มือ Vision</title>
+<meta name="description" content="In one sentence: slide a 3×3 window of weights over the picture, multiply and add at every position, and you can blur, sharpen or find edges — and a neural network is thousands of such windows…">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>03 · Convolution and edges · หน้าต่างเลื่อนและขอบ</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-one-step-worked-by-hand" lang="en">1. One step, worked by hand</a></li><li><a href="#2-seven-kernels-seven-effects" lang="en">2. Seven kernels, seven effects</a></li><li><a href="#3-sobel-edges-in-every-direction" lang="en">3. Sobel: edges in every direction</a></li><li><a href="#4-the-bridge-to-deep-learning" lang="en">4. The bridge to deep learning</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en"><strong>In one sentence:</strong> slide a 3×3 window of weights over the picture, multiply and add at every position, and you can blur, sharpen or find edges — and a neural network is thousands of such windows whose weights were learned.</blockquote>
+<p lang="en"><a href="/handbook/02">← 02</a> · <a href="/handbook">Handbook</a> · Site: <a href="/learn">/learn, chapters 4–5</a> · Run: <code>node examples/03-convolution.mjs</code></p>
+<hr>
+<h2 id="1-one-step-worked-by-hand" lang="en">1. One step, worked by hand</h2>
+<p lang="en">Take the pixel at (190, 104) — the left edge of the white car — and its eight neighbours. Multiply each by the matching number in a 3×3 <strong>kernel</strong>, then add all nine products:</p>
+<figure><img src="/img/handbook/convolution.svg" alt="One convolution step: neighbourhood × kernel = 588" loading="lazy"></figure>
+<pre class="code" lang="en"><code>neighbourhood (brightness)    ×   kernel "vertical edge"   =   products
+   74  222  225                   -1   0   1                  -74     0   225
+   72  217  218                   -2   0   2                 -144     0   436
+   72  221  217                   -1   0   1                  -72     0   217
+
+sum = 588</code></pre>
+<p lang="en">The kernel computes "right side minus left side" (middle row counted twice). Dark road on the left, bright car on the right: a big positive number — <strong>a strong edge running up and down</strong>. The same kernel on flat road at (110, 170) gives <strong>−14</strong>: no edge. Now slide the window one pixel to the right and repeat — 57,600 times for this picture. That full pass is a <strong>convolution</strong>, and the output is another picture.</p>
+<p lang="en">The site's whole implementation:</p>
+<pre class="code" lang="en" data-lang="js"><code>// public/js/cv/ops.js — every output pixel is the weighted sum of its 3×3 neighbourhood
+export function convolve3(gray, width, height, k) {
+  const out = new Float32Array(gray.length)
+  for (let y = 0; y &lt; height; y++) {
+    const y0 = y &gt; 0 ? y - 1 : 0, y2 = y &lt; height - 1 ? y + 1 : y   // clamp at the border
+    for (let x = 0; x &lt; width; x++) {
+      const x0 = x &gt; 0 ? x - 1 : 0, x2 = x &lt; width - 1 ? x + 1 : x
+      out[y * width + x] =
+        k[0] * gray[y0 * width + x0] + k[1] * gray[y0 * width + x] + k[2] * gray[y0 * width + x2] +
+        k[3] * gray[y  * width + x0] + k[4] * gray[y  * width + x] + k[5] * gray[y  * width + x2] +
+        k[6] * gray[y2 * width + x0] + k[7] * gray[y2 * width + x] + k[8] * gray[y2 * width + x2]
+    }
+  }
+  return out
+}</code></pre>
+<h2 id="2-seven-kernels-seven-effects" lang="en">2. Seven kernels, seven effects</h2>
+<p lang="en">Same picture, same code — only the nine numbers change:</p>
+<pre class="code" lang="en"><code>identity    [    0    0    0 |    0    1    0 |    0    0    0 ]   copy the pixel
+blur        [ 0.11 0.11 0.11 | 0.11 0.11 0.11 | 0.11 0.11 0.11 ]   average the neighbourhood
+sharpen     [    0   -1    0 |   -1    5   -1 |    0   -1    0 ]   exaggerate difference from neighbours
+edges       [   -1   -1   -1 |   -1    8   -1 |   -1   -1   -1 ]   centre minus surroundings (Laplacian-like)
+vertical    [   -1    0    1 |   -2    0    2 |   -1    0    1 ]   Sobel x: left↔right change
+horizontal  [   -1   -2   -1 |    0    0    0 |    1    2    1 ]   Sobel y: top↔bottom change
+emboss      [   -2   -1    0 |   -1    1    1 |    0    1    2 ]   a diagonal "relief" light</code></pre>
+<figure><img src="/img/handbook/03-kernels.png" alt="Top: identity, blur, sharpen, emboss. Bottom: vertical, horizontal, all-direction edges, Sobel magnitude" loading="lazy"><figcaption lang="en">Top row: identity · blur · sharpen · emboss. Bottom row: vertical edges · horizontal edges · "edges" kernel · Sobel magnitude. Edge outputs show their size (a dark→bright and a bright→dark edge both appear white).</figcaption></figure>
+<p lang="en">Notice:</p>
+<ul><li lang="en"><strong>Vertical</strong> finds the lamp post and the car sides but misses the horizon; <strong>horizontal</strong> finds the horizon and car roofs but misses the post. Each kernel sees one direction.</li><li lang="en"><strong>Sharpen</strong> brings out the sensor grain too. Every "enhancement" amplifies noise along with detail.</li><li lang="en">The kernels' numbers <strong>sum to 1</strong> (identity, blur, sharpen) — brightness is preserved — or <strong>to 0</strong> (edge kernels) — flat regions go to zero, so only change survives.</li></ul>
+<p lang="en">On /learn chapter 4 you can switch kernels on a live camera and see the sum for the pixel under your cursor.</p>
+<h2 id="3-sobel-edges-in-every-direction" lang="en">3. Sobel: edges in every direction</h2>
+<p lang="en">Combine the two directional kernels per pixel as the length of a vector:</p>
+<pre class="code" lang="en"><code>edge strength = √( vertical² + horizontal² )</code></pre>
+<figure><img src="/img/handbook/03-sobel-parts.png" alt="Sobel parts: vertical response, horizontal response, combined magnitude" loading="lazy"></figure>
+<p lang="en">That is the <strong>Sobel operator</strong> (Irwin Sobel and Gary Feldman, 1968), still a default in image processing over half a century later. As text, from the example:</p>
+<pre class="code" lang="en"><code>              @   @
+           @  # @
+  @@@@@@@@@@  # @                                                           @
+          @@  * @                                        @         @        @
+              #                   =          =
+              #                =                =
+              #             =                      =
+              #          =                     @@    @
+              %       =                        @         =
+              %    :                   @@                   -</code></pre>
+<p lang="en">Outlines survive; flat regions vanish. The picture has become a drawing.</p>
+<p lang="en">The famous next step, <strong>Canny's edge detector</strong> (1986), blurs first (to fight noise), takes Sobel, thins every edge to one pixel wide, and keeps weak edges only where they connect to strong ones. Edge maps like these powered most of computer vision until about 2012: lane detection, document boundaries, industrial inspection, and the "histogram of oriented gradients" features (Dalal &amp; Triggs, 2005) behind the first good pedestrian detectors.</p>
+<h2 id="4-the-bridge-to-deep-learning" lang="en">4. The bridge to deep learning</h2>
+<p lang="en">Everything above has one property: <strong>a person chose the nine numbers.</strong> Sobel picked −1, 0, 1, −2, 0, 2 by reasoning about derivatives. That works for edges. It does not scale to "wheel", "windscreen", "motorcycle helmet" — nobody can write those kernels by hand.</p>
+<p lang="en">A <strong>convolutional neural network</strong> (CNN) keeps the sliding window and makes the numbers <em>learnable</em>:</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en"></th><th lang="en">Hand-made (this chapter)</th><th lang="en">Learned (chapter 05)</th></tr></thead><tbody><tr><td lang="en">Kernel numbers</td><td lang="en">chosen by a person</td><td lang="en">adjusted by training on labelled examples</td></tr><tr><td lang="en">How many</td><td lang="en">1–7</td><td lang="en">tens of thousands across all layers</td></tr><tr><td lang="en">Stacked</td><td lang="en">rarely</td><td lang="en">50+ layers, each convolving the last one's output</td></tr><tr><td lang="en">What they find</td><td lang="en">edges, blur</td><td lang="en">edges → textures → parts → objects</td></tr></tbody></table></div>
+<p lang="en">Remarkably, when researchers look inside trained networks, the <strong>first layer's learned kernels look like edge detectors</strong> — the network rediscovers Sobel-like filters on its own. Edges are simply the most useful first thing to know about a picture (Zeiler &amp; Fergus, 2014; and Hubel &amp; Wiesel's 1959 finding that the cat visual cortex has cells that respond to oriented edges).</p>
+<h2 id="try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</h2>
+<p lang="en"><strong>เป้าหมาย · Goal:</strong> เปลี่ยนหน้าต่าง 3×3 แล้วดูภาพทั้งภาพเปลี่ยนตาม / Change one 3×3 window and watch the whole picture change with it.</p>
+<p lang="th"><strong>ขั้นตอน · Steps</strong></p>
+<ol><li lang="en">เปิด <a href="/learn">/learn บท 4</a> กดเคอร์เนลทีละปุ่ม: เหมือนเดิม เบลอ คมขึ้น ขอบ เส้นตั้ง เส้นนอน — Open <a href="/learn">/learn chapter 4</a> and press the kernels one by one: Identity, Blur, Sharpen, Edges, Vertical, Horizontal.</li><li lang="th">สังเกตว่า "เหมือนเดิม" ไม่เปลี่ยนอะไรเลย นั่นคือบททดสอบว่าหน้าต่างทำงานถูกต้อง — Note that Identity changes nothing: the check that the window is doing its job.</li><li lang="en">เทียบ "ขอบ" กับ "เส้นตั้ง" บนถนนที่มีเส้นจราจร ตัวไหนหายไป — Compare <em>Edges</em> with <em>Vertical</em> on a road with lane markings: which lines disappear?</li><li lang="en">เปิด <a href="/learn">/learn บท 5</a> แล้วเลื่อน "ความไว" ขณะขยับมือช้า ๆ หน้ากล้อง — On <a href="/learn">/learn chapter 5</a>, move <em>Gain</em> while sliding a hand slowly in front of the camera.</li></ol>
+<p lang="en"><strong>ควรเห็น · You should see</strong></p>
+<ul><li lang="en">ภาพ "ขอบ" มืดลงเหลือเส้นบาง ๆ และเปลี่ยนทันทีที่วัตถุขยับ — The <em>Edges</em> view goes dark except for thin lines that move the moment you do.</li><li lang="en">"เส้นตั้ง" เก็บเส้นแนวตั้ง แล้วตัดเส้นแนวนอนทิ้ง — <em>Vertical</em> keeps vertical lines and drops horizontal ones.</li></ul>
+<p lang="th"><strong>ถ้าไม่เห็น · If you do not</strong> — ถ้าภาพยังเหมือนเดิมทุกประการ แสดงว่าเลือก "เหมือนเดิม" อยู่ ให้กด "ขอบ" ถ้าทุกอย่างดำ ให้เพิ่ม "ความไว" / If the picture never changes you are still on Identity: press <em>Edges</em>. If everything is black, raise <em>Gain</em>.</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<details><summary lang="en">1. Apply the "vertical" kernel to a neighbourhood that is 100 everywhere. What is the result? Why?</summary><p lang="en">0. The kernel's numbers sum to zero, so on a flat region the positive and negative halves cancel. Edge kernels report change, not brightness.</p></details>
+<details><summary lang="en">2. Why does blur reduce the number of false edges?</summary><p lang="en">Noise makes neighbouring pixels differ slightly at random, which edge kernels report as tiny edges. Averaging first (blur) smooths those random differences away, while a real edge — a large, consistent difference — survives. That is why Canny blurs before Sobel.</p></details>
+<details><summary lang="en">3. A 3×3 kernel has 9 weights. A CNN layer with 32 kernels over a colour (3-channel) input — how many weights?</summary><p lang="en">Each kernel spans all input channels: 3 × 3 × 3 = 27 weights, plus 1 bias (an extra number added on its own, so the answer can shift up or down), for each of 32 kernels: 32 × 28 = 896. MobileNetV2's first layer has exactly this shape — 32 filters, 3×3, stride 2 (the window jumps two pixels each step, so the output comes out half as wide) — though it uses batch normalisation (rescaling each layer's numbers so they stay in a similar range) in place of the bias: 864 kernel weights, plus normalisation parameters.</p></details>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th"><strong>คอนโวลูชัน (convolution)</strong> คือการเลื่อน "หน้าต่าง" ขนาด 3×3 ไปทีละพิกเซล ที่แต่ละตำแหน่งให้คูณตัวเลขในภาพกับตัวเลขในหน้าต่าง (เรียกว่า <em>เคอร์เนล</em>) แล้วบวกกันทั้งเก้าตัว ตัวอย่างที่ขอบซ้ายของรถสีขาวได้ผลรวม <strong>588</strong> (ขอบชัดมาก) ส่วนบนถนนเรียบได้ <strong>−14</strong> (ไม่มีขอบ)</p>
+<p lang="th">เปลี่ยนแค่ตัวเลขเก้าตัว ภาพก็เปลี่ยนจากเบลอ เป็นคมชัด เป็นเส้นขอบแนวตั้ง แนวนอน <strong>โซเบล (Sobel, 1968)</strong> รวมสองทิศเป็นความแรงของขอบ ทำให้ภาพกลายเป็นภาพลายเส้น</p>
+<p lang="th">สิ่งสำคัญที่สุด: ในบทนี้ <strong>คนเป็นผู้เลือกตัวเลข</strong> แต่ "ล้อรถ" หรือ "หมวกกันน็อก" ไม่มีใครเขียนเคอร์เนลด้วยมือได้ <strong>โครงข่ายประสาทเทียมแบบคอนโวลูชัน (CNN)</strong> ใช้หน้าต่างเลื่อนแบบเดียวกันนับหมื่นตัว แต่ตัวเลขข้างในได้มาจากการเรียนรู้จากตัวอย่าง และน่าทึ่งที่ชั้นแรกของโครงข่ายที่ฝึกแล้วมักเรียนรู้ตัวตรวจจับขอบขึ้นมาเองคล้ายโซเบล</p>
+<p lang="en"><strong>Next:</strong> <a href="/handbook/04">04 · Motion →</a></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/02"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/04"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

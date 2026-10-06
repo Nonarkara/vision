@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>The Vision handbook · คู่มือ Vision — Handbook · คู่มือ Vision</title>
+<meta name="description" content="How a computer sees — explained with the code that runs vision.nonarkara.org.
+คอมพิวเตอร์มองเห็นอย่างไร อธิบายด้วยโค้ดจริงที่ทำงานอยู่บนเว็บไซต์">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>The Vision handbook · คู่มือ Vision</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#the-course--บทเรียน" lang="en">The course · บทเรียน</a></li><li><a href="#the-system--ระบบ" lang="en">The system · ระบบ</a></li><li><a href="#reference--อ้างอิง" lang="en">Reference · อ้างอิง</a></li><li><a href="#how-to-use-the-examples" lang="en">How to use the examples</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<p lang="en"><strong>How a computer sees — explained with the code that runs <a href="/">vision.nonarkara.org</a>.</strong> คอมพิวเตอร์มองเห็นอย่างไร อธิบายด้วยโค้ดจริงที่ทำงานอยู่บนเว็บไซต์</p>
+<figure><img src="/img/handbook/pipeline.svg" alt="From light to label: six stages" loading="lazy"></figure>
+<p lang="en">This handbook is for three kinds of reader:</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">If you are…</th><th lang="en">Start here</th><th lang="en">Then</th></tr></thead><tbody><tr><td lang="en"><strong>Curious</strong> — no code, just want to understand</td><td lang="en"><a href="/handbook/01">01 Pictures are numbers</a></td><td lang="en">read in order; skip the code blocks</td></tr><tr><td lang="en"><strong>A student or developer</strong> learning computer vision</td><td lang="en"><a href="/handbook/01">01</a> + <a href="https://github.com/Nonarkara/vision/tree/main/examples"><code>examples/</code></a></td><td lang="en">run each lesson's example beside its chapter</td></tr><tr><td lang="en"><strong>Building something like this</strong> (a city, an agency, a company)</td><td lang="en"><a href="/system">System architecture</a></td><td lang="en"><a href="/system">relay</a> → <a href="/system">runtime</a> → <a href="/system">CV-as-a-service blueprint</a></td></tr></tbody></table></div>
+<p lang="en">Every number in these pages was produced by code in this repository. Every PNG figure was drawn by it too — run <code>node examples/build-figures.mjs</code> and they are rebuilt from scratch (the six <code>docs/img/*.svg</code> diagrams are hand-drawn). Nothing here is a screenshot of a real camera: the scenes are synthetic, so they have an answer key and contain no people.</p>
+<h2 id="the-course--บทเรียน" lang="en">The course · บทเรียน</h2>
+<p lang="en">Each chapter matches a room on the site. Seven of the eight have a runnable example (chapter 05's lesson is /learn itself); each ends with a Thai summary and a few questions to check yourself.</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">#</th><th lang="en">Chapter</th><th lang="en">What you will be able to explain</th><th lang="en">Site</th><th lang="en">Run</th></tr></thead><tbody><tr><td lang="en">01</td><td lang="en"><a href="/handbook/01">Pictures are numbers</a> · ภาพคือตัวเลข</td><td lang="en">pixels, resolution, RGB, why a computer "sees" nothing at first</td><td lang="en"><a href="/learn">/learn</a> ch. 1</td><td lang="en"><code>node examples/01-pixels.mjs</code></td></tr><tr><td lang="en">02</td><td lang="en"><a href="/handbook/02">Light, colour and thresholds</a> · สี ความสว่าง และเกณฑ์</td><td lang="en">grayscale, histograms, Otsu's method, why grayscale can erase a red car</td><td lang="en">/learn ch. 2–3</td><td lang="en"><code>node examples/02-threshold.mjs</code></td></tr><tr><td lang="en">03</td><td lang="en"><a href="/handbook/03">Convolution and edges</a> · หน้าต่างเลื่อนและขอบ</td><td lang="en">the 3×3 window that every neural network is built from; Sobel</td><td lang="en">/learn ch. 4–5</td><td lang="en"><code>node examples/03-convolution.mjs</code></td></tr><tr><td lang="en">04</td><td lang="en"><a href="/handbook/04">Motion</a> · การเคลื่อนไหว</td><td lang="en">frame differencing, thresholds against noise, connected regions</td><td lang="en">/learn ch. 6 · <a href="/story">/story</a></td><td lang="en"><code>node examples/04-motion.mjs</code></td></tr><tr><td lang="en">05</td><td lang="en"><a href="/handbook/05">Neural networks</a> · โครงข่ายประสาทเทียม</td><td lang="en">learned kernels, layers, MobileNetV2, what "1,280 numbers" means</td><td lang="en">/learn ch. 7</td><td lang="en">—</td></tr><tr><td lang="en">06</td><td lang="en"><a href="/handbook/06">Object detection</a> · การหาวัตถุ</td><td lang="en">SSD, class scores, IoU, non-maximum suppression, precision vs recall</td><td lang="en">/learn ch. 7–8 · <a href="/games">/games</a></td><td lang="en"><code>node examples/05-detection-nms.mjs</code> · <code>node examples/06-precision-recall.mjs</code></td></tr><tr><td lang="en">07</td><td lang="en"><a href="/handbook/07">Teaching a machine</a> · สอนเครื่องด้วยตัวเอง</td><td lang="en">transfer learning, k-NN, a trained layer, loss, PCA, shortcut learning</td><td lang="en"><a href="/train">/train</a></td><td lang="en"><code>node examples/07-transfer-learning.mjs</code></td></tr><tr><td lang="en">08</td><td lang="en"><a href="/handbook/08">Limits and ethics</a> · ข้อจำกัดและจริยธรรม</td><td lang="en">why "not detected" ≠ "not there", bias, privacy, Thai PDPA</td><td lang="en">/learn ch. 8 · <a href="/legal">/legal</a></td><td lang="en"><code>node examples/08-catalogue.mjs</code></td></tr></tbody></table></div>
+<h2 id="the-system--ระบบ" lang="en">The system · ระบบ</h2>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Page</th><th lang="en">For</th></tr></thead><tbody><tr><td lang="en"><a href="/system">Architecture</a></td><td lang="en">the whole design on one page: sources → catalogue (the list of cameras) → relay → browser; every decision and its reason</td></tr><tr><td lang="en"><a href="/system">The frame relay</a></td><td lang="en">the one server component that touches imagery: threat model, rules, the code that enforces them</td></tr><tr><td lang="en"><a href="/system">The browser runtime</a></td><td lang="en">TF.js, WebGL, CSP without <code>eval</code>, model hosting and caching, how frames reach a model</td></tr><tr><td lang="en"><a href="/system">Operations</a></td><td lang="en">launchd, the Cloudflare tunnel, deploy, health checks, a runbook for when things break</td></tr><tr><td lang="en"><a href="/system">CV as a service — blueprint</a></td><td lang="en"><strong>proposed, not built</strong>: what a commercial version would need, and what it must never become</td></tr></tbody></table></div>
+<h2 id="reference--อ้างอิง" lang="en">Reference · อ้างอิง</h2>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Page</th><th lang="en"></th></tr></thead><tbody><tr><td lang="en"><a href="https://github.com/Nonarkara/vision/blob/main/docs/reference/models.md">Models</a></td><td lang="en">model cards: what each network is, what it was trained on, what it gets wrong, licences</td></tr><tr><td lang="en"><a href="https://github.com/Nonarkara/vision/blob/main/docs/reference/api.md">API</a></td><td lang="en">every endpoint (one web address you may ask for data) with real requests and responses</td></tr><tr><td lang="en"><a href="/handbook/glossary">Glossary · อภิธานศัพท์</a></td><td lang="en">about 100 terms in Thai and English, with the chapter that explains each</td></tr><tr><td lang="en"><a href="/handbook/reading">Reading list</a></td><td lang="en">the papers behind each chapter, every link checked</td></tr></tbody></table></div>
+<h2 id="how-to-use-the-examples" lang="en">How to use the examples</h2>
+<pre class="code" lang="en" data-lang="bash"><code>git clone https://github.com/Nonarkara/vision.git
+cd vision
+node examples/01-pixels.mjs          # Node 22+, no install, no packages</code></pre>
+<p lang="en">Each example prints its working in the terminal (as text art, tables and charts) and writes pictures to <code>examples/out/</code>. Six of the eight import the <strong>same</strong> functions the website runs — <code>public/js/cv/ops.js</code> and <code>public/js/ml/learner.js</code> — so what you learn here is what runs there; <code>05</code> and <code>06</code> simulate detection on synthetic scenes and <code>08</code> reads the live catalogue. See <a href="https://github.com/Nonarkara/vision/blob/main/examples/README.md"><code>examples/README.md</code></a>.</p>
+<hr>
+<p lang="en"><sub>Part of vision.nonarkara.org. Diagrams use Sanzo Wada's Plate 303 as converted in <a href="https://colors.nonarkara.org">Palette</a>. Corrections welcome as <a href="https://github.com/Nonarkara/vision/issues">issues</a>.</sub></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

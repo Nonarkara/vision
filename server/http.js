@@ -41,6 +41,17 @@ export const PAGES = {
   '/system': 'system',
   '/legal': 'legal',
   '/story': 'story',
+  '/handbook': 'handbook',
+  '/handbook/01': 'handbook/01',
+  '/handbook/02': 'handbook/02',
+  '/handbook/03': 'handbook/03',
+  '/handbook/04': 'handbook/04',
+  '/handbook/05': 'handbook/05',
+  '/handbook/06': 'handbook/06',
+  '/handbook/07': 'handbook/07',
+  '/handbook/08': 'handbook/08',
+  '/handbook/glossary': 'handbook/glossary',
+  '/handbook/reading': 'handbook/reading',
 }
 
 /**

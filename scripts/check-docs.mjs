@@ -9,6 +9,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { slug } from './slug.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const problems = []
@@ -20,18 +21,6 @@ function markdownFiles(dir) {
     if (e.isDirectory()) return markdownFiles(p)
     return e.name.endsWith('.md') ? [p] : []
   })
-}
-
-/** GitHub's heading → anchor rule: lowercase, drop punctuation, spaces → hyphens. */
-export function slug(heading) {
-  return heading
-    .trim()
-    .toLowerCase()
-    .replace(/<[^>]+>/g, '')
-    .replace(/[`*_~]/g, '')
-    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/[^\p{L}\p{M}\p{N}\s-]/gu, '')
-    .replace(/\s/g, '-')
 }
 
 function anchorsOf(file) {
@@ -62,6 +51,7 @@ for (const file of markdownFiles(ROOT)) {
   for (const m of text.matchAll(/!?\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g)) {
     const target = m[1]
     if (/^(https?:|mailto:)/.test(target)) continue
+    if (target.startsWith('/')) continue // site routes — validated by check-site against the router
     const [p, anchor] = target.split('#')
     const resolved = p ? path.resolve(path.dirname(file), decodeURI(p)) : file
     if (!fs.existsSync(resolved)) { problems.push(`${rel}: missing ${target}`); continue }

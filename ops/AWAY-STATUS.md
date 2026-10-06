@@ -68,3 +68,16 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Page still read as confusing after 1.3.2; user scoped a copy-and-labels-only pass covering four diagnosed causes: no visual order of operations, two score bars with no stated roles, the mechanism hidden inside a collapsed disclosure, and chapter 02 therefore reading 01 → 03 → 04.
 - Changes: a four-step "How it works" block (choose groups → add pictures → the frozen network makes a 1,280-number fingerprint → press Train) sits between the activity chooser and the room, reusing the existing `.steps` grid; the bars are relabelled "Guesses right away — from similar examples" and "Guesses after you press Train" with one micro line saying which works when; the mechanism disclosure now opens by default with the summary "How the machine learns"; the post-training toast said "above" while the bars sit below the button — corrected to "below" in both languages. No layout moves.
 - Verified: 69 tests, check-site (exact language parity, aria, og, sitemap) and check-docs green; headless render of all ten routes plus a missing path with no console, resource or CSP errors; screenshots at 1280 wide for the new blocks in place, and the map still paints at load because `applyPreset` fires the change that schedules its rebuild.
+
+## 2026-10-07 00:34 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.3.3. App PID 56337 and tunnel PID 13443 running with KeepAlive; app restart corresponds to the documented clarity release at 17:04 UTC. Preserve concurrent changes.
+- Catalogue 4,008 cameras; loaded 17:24:56 UTC, upstream 17:22:32 UTC, about ten and twelve minutes old. All three refreshes since deployment succeeded.
+- No new app warnings since 02:35 UTC. Relay idle, no waiting/inflight requests or resting hosts; memory 20–22 MB. No sustained fault or unfinished implementation owned by this chat.
+- No restart, repair, deployment or extra camera traffic needed; scoped heartbeat continues within the away window.
+
+## 2026-10-07 handbook release 1.4.0 (Asia/Bangkok)
+
+- Shipped the handbook: `docs/*.md` now renders to `/handbook` (index, chapters 01–08, glossary, reading list) via `scripts/build-handbook.mjs`, checked by `npm run check` (`build-handbook --check`) and gated for two-hop reachability from `/`.
+- Added a hand-drawn `docs/img/06-pipeline.svg` (replacing the only mermaid block) and a bilingual *Try it yourself* exercise in all eight chapters; site links added at `/learn`, footer, and sitemap.
+- `npm run check` green: 69/69 tests, 21 pages, 73 local references, docs links resolve. One intermittent test failure observed once (did not recur in five runs); no action taken.

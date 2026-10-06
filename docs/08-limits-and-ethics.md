@@ -103,6 +103,23 @@ For a city, an agency, or anyone being sold "AI cameras":
 7. **How is drift detected** — dirty lenses, new vehicles, seasonal change?
 8. **Can it be switched off per camera**, and can a camera owner or a citizen ask for that?
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** พิสูจน์ด้วยตัวเองว่า "ไม่ถูกตรวจพบ" ไม่เท่ากับ "ไม่มีอยู่" / Prove for yourself that "not detected" is not "not there".
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 8](/learn) โหลดเครือข่าย ชี้หาวัตถุที่เจอได้ก่อน แล้วลด "จำนวนพิกเซลตามแนวนอน" ลงเรื่อย ๆ — Open [/learn chapter 8](/learn), load the network, find an object it detects, then lower *Pixels across* step by step.
+2. แสดงของที่เครือข่ายไม่รู้จัก เช่นของทำมือ ของแปลก ๆ แล้วดูว่าไม่มีกรอบ ไม่มีคำเตือน ไม่มีอะไรบอกว่า "ไม่แน่ใจ" — Show it something it has never learned: no box, no warning, nothing says "unsure".
+3. อ่าน [/legal](/legal) ตอนที่ว่าด้วยการไม่ระบุตัวบุคคล แล้วนึกถึงถนนของคุณเอง: เครื่องมือชุดนี้ถูกฝึกมาจากภาพแบบไหน — Read the part of [/legal](/legal) about never identifying people, then think about your own street: what was this trained on?
+
+**ควรเห็น · You should see**
+
+- กรอบหายไปก่อนที่วัตถุจะหายจากภาพ เพราะข้อมูลถูกทำลายตั้งแต่ก่อนถึงโมเดล — The box disappears before the object leaves the picture: the information was destroyed before the model saw it.
+- โมเดลตอบเฉพาะสิ่งที่เคยเห็นตอนฝึก และไม่รู้ว่าตัวเองไม่รู้ — The model answers only for what it was shown, and does not know that it does not know.
+
+**ถ้าไม่เห็น · If you do not** — ถ้ายังตรวจพบอยู่ที่ความละเอียดต่ำ ให้ลดลงไปอีก ที่ 4 หรือ 2 ช่อง ไม่มีรูปร่างเหลือให้กรอบลอยจับ — If it still detects at low resolution, go lower: at 4 or 2 pixels across there is no shape left for an anchor box to catch.
+
 ## Check yourself
 
 <details><summary>1. A system reports "0 people in the flood zone" at 2 am. What can you conclude?</summary>

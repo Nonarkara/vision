@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
+  <title>One convolution step at the white car's left edge: neighbourhood times kernel, summed, equals 588</title>
+  <rect width="960" height="380" fill="#fbe6a0"/>
+  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE CONVOLUTION STEP · หน้าต่าง 3×3 หนึ่งก้าว</text>
+  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" text-anchor="middle">
+    <!-- neighbourhood: real numbers from examples/03-convolution.mjs at (190,104) -->
+    <text x="114" y="74" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="#253122">brightness around (190, 104)</text>
+    <rect x="24" y="86" width="60" height="60" fill="#4a4a4a"/><text x="54" y="122" fill="#f7f5ef">74</text>
+    <rect x="84" y="86" width="60" height="60" fill="#dedede"/><text x="114" y="122" fill="#101010">222</text>
+    <rect x="144" y="86" width="60" height="60" fill="#e1e1e1"/><text x="174" y="122" fill="#101010">225</text>
+    <rect x="24" y="146" width="60" height="60" fill="#484848"/><text x="54" y="182" fill="#f7f5ef">72</text>
+    <rect x="84" y="146" width="60" height="60" fill="#d9d9d9"/><text x="114" y="182" fill="#101010">217</text>
+    <rect x="144" y="146" width="60" height="60" fill="#dadada"/><text x="174" y="182" fill="#101010">218</text>
+    <rect x="24" y="206" width="60" height="60" fill="#484848"/><text x="54" y="242" fill="#f7f5ef">72</text>
+    <rect x="84" y="206" width="60" height="60" fill="#dddddd"/><text x="114" y="242" fill="#101010">221</text>
+    <rect x="144" y="206" width="60" height="60" fill="#d9d9d9"/><text x="174" y="242" fill="#101010">217</text>
+    <rect x="24" y="86" width="180" height="180" fill="none" stroke="#f15a30" stroke-width="4"/>
+    <text x="114" y="294" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#253122">dark road | bright white car</text>
+
+    <text x="240" y="182" font-size="28" fill="#253122">×</text>
+
+    <!-- kernel -->
+    <text x="366" y="74" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="#253122">kernel "vertical edge" (Sobel)</text>
+    <g fill="#253122">
+      <rect x="276" y="86" width="60" height="60"/><rect x="336" y="86" width="60" height="60" fill="#b6bfc1"/><rect x="396" y="86" width="60" height="60"/>
+      <rect x="276" y="146" width="60" height="60"/><rect x="336" y="146" width="60" height="60" fill="#b6bfc1"/><rect x="396" y="146" width="60" height="60"/>
+      <rect x="276" y="206" width="60" height="60"/><rect x="336" y="206" width="60" height="60" fill="#b6bfc1"/><rect x="396" y="206" width="60" height="60"/>
+    </g>
+    <g fill="#fbe6a0">
+      <text x="306" y="122">−1</text><text x="426" y="122">+1</text>
+      <text x="306" y="182">−2</text><text x="426" y="182">+2</text>
+      <text x="306" y="242">−1</text><text x="426" y="242">+1</text>
+    </g>
+    <g fill="#253122"><text x="366" y="122">0</text><text x="366" y="182">0</text><text x="366" y="242">0</text></g>
+    <text x="366" y="294" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#253122">right minus left, middle row counts double</text>
+
+    <text x="492" y="182" font-size="28" fill="#253122">=</text>
+
+    <!-- products and sum -->
+    <text x="642" y="74" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="#253122">multiply each pair, add all nine</text>
+    <g fill="#253122" font-size="16">
+      <text x="582" y="122">−74</text><text x="642" y="122">0</text><text x="702" y="122">+225</text>
+      <text x="582" y="182">−144</text><text x="642" y="182">0</text><text x="702" y="182">+436</text>
+      <text x="582" y="242">−72</text><text x="642" y="242">0</text><text x="702" y="242">+217</text>
+    </g>
+    <text x="770" y="182" font-size="28" fill="#253122">→</text>
+    <rect x="810" y="136" width="126" height="90" fill="#f15a30"/>
+    <text x="873" y="192" font-size="30" font-weight="600" fill="#101010">588</text>
+    <text x="873" y="252" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#253122">strong edge</text>
+    <text x="873" y="270" font-family="IBM Plex Sans, sans-serif" font-size="13" fill="#253122">(flat road: −14)</text>
+  </g>
+  <text x="24" y="326" font-size="14" fill="#253122">Slide the window one pixel and repeat — 57,600 times for this picture. A neural network does the same</text>
+  <text x="24" y="346" font-size="14" fill="#253122">with thousands of kernels whose numbers were learned from examples instead of chosen by a person.</text>
+  <text x="24" y="368" font-size="13" fill="#253122">เลื่อนหน้าต่างไปทีละช่องแล้วทำซ้ำ โครงข่ายประสาทเทียมทำแบบเดียวกันด้วยหน้าต่างนับพัน ที่ตัวเลขข้างในได้มาจากการเรียนรู้</text>
+</svg>

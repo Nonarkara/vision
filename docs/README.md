@@ -13,7 +13,7 @@ This handbook is for three kinds of reader:
 | **A student or developer** learning computer vision | [01](01-pictures-are-numbers.md) + [`examples/`](../examples/) | run each lesson's example beside its chapter |
 | **Building something like this** (a city, an agency, a company) | [System architecture](system/architecture.md) | [relay](system/relay.md) → [runtime](system/browser-runtime.md) → [CV-as-a-service blueprint](system/cvaas-blueprint.md) |
 
-Every number in these pages was produced by code in this repository. Every PNG figure was drawn by it too — run `node examples/build-figures.mjs` and they are rebuilt from scratch (the five `docs/img/*.svg` diagrams are hand-drawn). Nothing here is a screenshot of a real camera: the scenes are synthetic, so they have an answer key and contain no people.
+Every number in these pages was produced by code in this repository. Every PNG figure was drawn by it too — run `node examples/build-figures.mjs` and they are rebuilt from scratch (the six `docs/img/*.svg` diagrams are hand-drawn). Nothing here is a screenshot of a real camera: the scenes are synthetic, so they have an answer key and contain no people.
 
 ## The course · บทเรียน
 

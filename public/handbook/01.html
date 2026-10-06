@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>01 · Pictures are numbers · ภาพคือตัวเลข — Handbook · คู่มือ Vision</title>
+<meta name="description" content="In one sentence: a camera turns light into a grid of numbers, and everything a computer &quot;sees&quot; starts — and, for a long while, ends — with those numbers.">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>01 · Pictures are numbers · ภาพคือตัวเลข</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-what-a-camera-actually-records" lang="en">1. What a camera actually records</a></li><li><a href="#2-the-numbers-for-real" lang="en">2. The numbers, for real</a></li><li><a href="#3-three-numbers-become-one-brightness" lang="en">3. Three numbers become one: brightness</a></li><li><a href="#4-three-channels" lang="en">4. Three channels</a></li><li><a href="#5-resolution-how-many-numbers-you-keep" lang="en">5. Resolution: how many numbers you keep</a></li><li><a href="#6-why-this-matters-beyond-the-classroom" lang="en">6. Why this matters beyond the classroom</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en"><strong>In one sentence:</strong> a camera turns light into a grid of numbers, and everything a computer "sees" starts — and, for a long while, ends — with those numbers.</blockquote>
+<p lang="en"><a href="/handbook">← Handbook</a> · Site: <a href="/learn">/learn, chapter 1</a> · Run: <code>node examples/01-pixels.mjs</code></p>
+<hr>
+<h2 id="1-what-a-camera-actually-records" lang="en">1. What a camera actually records</h2>
+<p lang="en">A camera sensor is a grid of tiny light meters. Each one counts how much light landed on it during the exposure and stores that as a number. A colour sensor puts a red, green or blue filter over each meter, and software combines neighbours so that every position ends up with <strong>three numbers: red, green, blue</strong>, each from <strong>0 (none) to 255 (as much as the format can hold)</strong>.</p>
+<p lang="en">That grid is a <strong>picture element</strong> grid — <em>pixels</em>. Our synthetic scene is 320 pixels wide and 180 tall:</p>
+<figure><img src="/img/handbook/01-scene.png" alt="The synthetic road scene used throughout this handbook" loading="lazy"></figure>
+<pre class="code" lang="en"><code>320 × 180 = 57,600 pixels
+57,600 × 3 = 172,800 numbers</code></pre>
+<p lang="en">A real 1080p traffic camera frame is 1920 × 1080 × 3 = <strong>6,220,800 numbers</strong>. At 25 frames per second that is over 155 million numbers every second. Computer vision is, first of all, the art of not drowning in them.</p>
+<h2 id="2-the-numbers-for-real" lang="en">2. The numbers, for real</h2>
+<p lang="en">Here is what the example prints for four points in the scene:</p>
+<pre class="code" lang="en"><code>sky          at (160, 10)  R=160 G=187 B=218  →  brightness 182.5
+road         at (120,170)  R= 71 G= 73 B= 78  →  brightness 73.0
+red car      at (100,138)  R=174 G= 40 B= 36  →  brightness 79.6
+water patch  at (249,157)  R=168 G=188 B=212  →  brightness 184.8</code></pre>
+<p lang="en">And here is a 16 × 8 window at the red car's top-left corner, as brightness:</p>
+<pre class="code" lang="en"><code>  75  75  68  71  74  70  71  72  70  69  71  71  70  69  73  69
+  75  71  71  70  73  75  69  70  76  74  74  69  70  73  74  73
+  69  71  73  70  70  71  73  69  70  73  74  68  73  74  71  74
+  72  71  75  83  81  79  84  82  79  82  81  84  79  83  84  82
+  74  70  70  79  81  86  81  85  80  86  81  78  84  80  86  80
+  70  71  70  82  80  84  85  80  80  80  80  86  47  46  52  49
+  72  76  73  80  85  84  83  85  79  82  81  85  52  50  52  52
+  76  73  71  82  85  82  83  84  79  82  83  81  50  52  47  49</code></pre>
+<p lang="en">Read it slowly. Road (~70) on the top and left. The car body (~80) begins on row 4. The windscreen (~50) appears bottom right. <strong>Nowhere in this table is the word "car".</strong> A person looking at the picture sees a car instantly; the computer has only this. Every technique in this handbook is a way to get from a table like this one to a word like "car" — and to say how sure it is.</p>
+<blockquote lang="en"><strong>Try it on the site.</strong> On <a href="/learn">/learn</a>, chapter 1 shows a live camera as this grid of numbers. Slide the control to the left: the squares grow, and once they are big enough each one prints its own brightness. The readout tells you how many numbers the grid holds against the full picture.</blockquote>
+<h2 id="3-three-numbers-become-one-brightness" lang="en">3. Three numbers become one: brightness</h2>
+<p lang="en">Many methods work on brightness alone. The usual formula (ITU-R BT.601, also what ffmpeg uses) weights green most, because human eyes are most sensitive to green:</p>
+<pre class="code" lang="en"><code>brightness = 0.299 × R + 0.587 × G + 0.114 × B</code></pre>
+<p lang="en">Worked for the red car pixel: <code>0.299 × 174 + 0.587 × 40 + 0.114 × 36 = 52.0 + 23.5 + 4.1 = 79.6</code>.</p>
+<figure><img src="/img/handbook/01-gray.png" alt="The scene in colour and in brightness only" loading="lazy"></figure>
+<p lang="en">The code is one line in <a href="https://github.com/Nonarkara/vision/blob/main/public/js/cv/ops.js"><code>public/js/cv/ops.js</code></a>:</p>
+<pre class="code" lang="en" data-lang="js"><code>export const luma = (r, g, b) =&gt; 0.299 * r + 0.587 * g + 0.114 * b</code></pre>
+<p lang="en">Hold on to this: <strong>a red car (79.6) and the road (73.0) are almost the same brightness.</strong> Chapter 02 shows what that costs.</p>
+<h2 id="4-three-channels" lang="en">4. Three channels</h2>
+<p lang="en">The same picture split into its red, green and blue channels (each shown in its own colour; the other two set to zero):</p>
+<figure><img src="/img/handbook/01-channels.png" alt="Red, green and blue channels" loading="lazy"></figure>
+<p lang="en">The red car is bright only in the red channel. The sky is bright in all three, brightest in blue. The grass is brightest in green. A colour is a <em>relationship</em> between three numbers, not a property of one.</p>
+<h2 id="5-resolution-how-many-numbers-you-keep" lang="en">5. Resolution: how many numbers you keep</h2>
+<p lang="en">Average each block of pixels into one value and you get a lower-resolution picture. From left: 32-pixel blocks, 16, 8, and the original (the red car boxed):</p>
+<figure><img src="/img/handbook/01-pixelate.png" alt="The scene at 32, 16 and 8 pixel blocks, and the original" loading="lazy"></figure>
+<pre class="code" lang="en"><code>block 32 px → 10 × 6  = 60 numbers per channel
+block 16 px → 20 × 12 = 240 numbers per channel
+block  8 px → 40 × 23 = 920 numbers per channel</code></pre>
+<p lang="en">At 32-pixel blocks the cars are smudges; somewhere between 16 and 8 a person can tell what they are. <strong>Detectors fail in the same place</strong>: a car far down the road might be 10 pixels wide in a real frame, and there simply are not enough numbers to say "car". This is the single most common reason a camera "doesn't see" something — and the <a href="/games">/games</a> "fewest pixels" game lets you race the detector at exactly this.</p>
+<p lang="en">The site's <code>ops.pixelate(img, block)</code> is 20 lines; read it in <a href="https://github.com/Nonarkara/vision/blob/main/public/js/cv/ops.js"><code>ops.js</code></a>.</p>
+<h2 id="6-why-this-matters-beyond-the-classroom" lang="en">6. Why this matters beyond the classroom</h2>
+<ul><li lang="en"><strong>Storage and bandwidth.</strong> 155 million numbers a second, per camera. Three things follow. Cameras compress (H.264/H.265). Analysis runs on small frames (the site's motion lens works at 192 pixels wide; the detector at 640). And a city cannot "just record everything in full".</li><li lang="en"><strong>Privacy is a resolution question.</strong> A face 8 pixels tall cannot be recognised by anyone; a face 120 pixels tall can. How a system is configured — resolution, zoom, placement — decides what it <em>can</em> know, long before any AI is involved.</li><li lang="en"><strong>Every later step inherits these numbers.</strong> Noise, compression blocks, glare and darkness are in the table before any model sees it. No model can recover information that was never recorded.</li></ul>
+<h2 id="try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</h2>
+<p lang="en"><strong>เป้าหมาย · Goal:</strong> หาว่า "รถ" อยู่ตรงไหนในตารางตัวเลข และดูว่าช่องหยาบเกินไปทำให้เสียอะไร / Find where "car" lives inside a table of numbers — and watch what a too-coarse grid throws away.</p>
+<p lang="th"><strong>ขั้นตอน · Steps</strong></p>
+<ol><li lang="en">เปิด <a href="/learn">/learn บท 1</a> แล้วตั้ง "จำนวนช่องตามแนวนอน" ไว้ที่ 16 — Open <a href="/learn">/learn chapter 1</a> and set <em>Squares across</em> to 16.</li><li lang="th">หาตัวเลขที่สว่างที่สุดบนจอ แล้วเทียบกับตารางในบทนี้ (ถนนประมาณ 70 ท้องฟ้าประมาณ 180) — Find the largest number on screen and compare it with the table above: road ~70, sky ~180.</li><li lang="th">ลดเหลือ 6 ช่อง แล้วลองบอกตัวเองดูว่าภาพนี้คืออะไร — Drop to 6 squares and try to say what the picture shows.</li><li lang="en">ขึ้นไป 96 ช่อง แล้วอ่านตัวเลขรวมใน readout ว่าได้กี่ตัว — Go up to 96 squares and read the total count in the readout.</li></ol>
+<p lang="en"><strong>ควรเห็น · You should see</strong></p>
+<ul><li lang="th">ที่ 16 ช่อง ตัวเลขของถนนกับท้องฟ้าต่างกันชัดเจน แต่คำว่า "รถ" ไม่ได้อยู่ในตารางนั้นเลย — At 16 the road and sky numbers differ clearly, and the word "car" is nowhere in the grid.</li><li lang="th">ที่ 6 ช่อง รูปร่างหายไปหมด เหลือเพียงบล็อกหยาบ ๆ — At 6 the shapes are gone; only coarse blocks remain.</li></ul>
+<p lang="th"><strong>ถ้าไม่เห็น · If you do not</strong> — ตัวเลขจะปรากฏก็ต่อเมื่อช่องใหญ่ (จำนวนน้อย) ถ้ายังไม่เห็น ให้เลื่อนไปทางซ้ายอีก / Numbers appear when the squares are large: slide further left.</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<details><summary lang="en">1. A frame is 640 × 360 pixels in colour. How many numbers is that?</summary><p lang="en">640 × 360 × 3 = 691,200.</p></details>
+<details><summary lang="en">2. Pure yellow is R=255, G=255, B=0. What is its brightness?</summary><p lang="en">0.299 × 255 + 0.587 × 255 + 0.114 × 0 = 225.4 — yellow is very bright, which is why it is used on warning signs.</p></details>
+<details><summary lang="en">3. Why does the computer not "know" that the window above is a car?</summary><p lang="en">Because the numbers carry no label. "Car" is a conclusion someone (a person, or a model trained on people's labels) draws from patterns in many numbers at once. Nothing in a single pixel, or a small table of them, says what it belongs to.</p></details>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th">กล้องเปลี่ยนแสงเป็น <strong>ตารางตัวเลข</strong> แต่ละช่องเรียกว่า <em>พิกเซล</em> และมีตัวเลขสามตัวคือ แดง เขียว น้ำเงิน ตั้งแต่ 0 ถึง 255 ภาพตัวอย่างขนาด 320 × 180 มีตัวเลข 172,800 ตัว ส่วนกล้องจราจร 1080p มีมากกว่าหกล้านตัวต่อภาพ</p>
+<p lang="th">เมื่อดูตัวเลขใต้รถสีแดง จะเห็นถนน (~70) ตัวรถ (~80) และกระจก (~50) แต่ <strong>ไม่มีคำว่า "รถ" อยู่ในตัวเลขเลย</strong> ทุกเทคนิคในคู่มือนี้คือวิธีเดินทางจากตารางตัวเลขไปถึงคำว่า "รถ" พร้อมบอกว่ามั่นใจแค่ไหน</p>
+<p lang="th">ความสว่างคำนวณจาก 0.299R + 0.587G + 0.114B (ตาคนไวต่อสีเขียวที่สุด) และน่าสังเกตว่า <strong>รถสีแดงกับถนนมีความสว่างใกล้กันมาก</strong> บทที่ 2 จะแสดงว่าเรื่องนี้มีผลอย่างไร</p>
+<p lang="th">ความละเอียดของภาพคือจำนวนตัวเลขที่เราเก็บไว้ ถ้าวัตถุอยู่ไกลจนเหลือไม่กี่พิกเซล ทั้งคนและเครื่องก็บอกไม่ได้ว่าคืออะไร และความละเอียดก็เป็นเรื่องความเป็นส่วนตัวด้วย ใบหน้าขนาด 8 พิกเซลไม่มีใครจำได้ แต่ขนาด 120 พิกเซลจำได้</p>
+<p lang="en"><strong>Next:</strong> <a href="/handbook/02">02 · Light, colour and thresholds →</a></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/02"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

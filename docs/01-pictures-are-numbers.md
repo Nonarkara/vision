@@ -99,6 +99,24 @@ The site's `ops.pixelate(img, block)` is 20 lines; read it in [`ops.js`](../publ
 - **Privacy is a resolution question.** A face 8 pixels tall cannot be recognised by anyone; a face 120 pixels tall can. How a system is configured — resolution, zoom, placement — decides what it *can* know, long before any AI is involved.
 - **Every later step inherits these numbers.** Noise, compression blocks, glare and darkness are in the table before any model sees it. No model can recover information that was never recorded.
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** หาว่า "รถ" อยู่ตรงไหนในตารางตัวเลข และดูว่าช่องหยาบเกินไปทำให้เสียอะไร / Find where "car" lives inside a table of numbers — and watch what a too-coarse grid throws away.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 1](/learn) แล้วตั้ง "จำนวนช่องตามแนวนอน" ไว้ที่ 16 — Open [/learn chapter 1](/learn) and set *Squares across* to 16.
+2. หาตัวเลขที่สว่างที่สุดบนจอ แล้วเทียบกับตารางในบทนี้ (ถนนประมาณ 70 ท้องฟ้าประมาณ 180) — Find the largest number on screen and compare it with the table above: road ~70, sky ~180.
+3. ลดเหลือ 6 ช่อง แล้วลองบอกตัวเองดูว่าภาพนี้คืออะไร — Drop to 6 squares and try to say what the picture shows.
+4. ขึ้นไป 96 ช่อง แล้วอ่านตัวเลขรวมใน readout ว่าได้กี่ตัว — Go up to 96 squares and read the total count in the readout.
+
+**ควรเห็น · You should see**
+
+- ที่ 16 ช่อง ตัวเลขของถนนกับท้องฟ้าต่างกันชัดเจน แต่คำว่า "รถ" ไม่ได้อยู่ในตารางนั้นเลย — At 16 the road and sky numbers differ clearly, and the word "car" is nowhere in the grid.
+- ที่ 6 ช่อง รูปร่างหายไปหมด เหลือเพียงบล็อกหยาบ ๆ — At 6 the shapes are gone; only coarse blocks remain.
+
+**ถ้าไม่เห็น · If you do not** — ตัวเลขจะปรากฏก็ต่อเมื่อช่องใหญ่ (จำนวนน้อย) ถ้ายังไม่เห็น ให้เลื่อนไปทางซ้ายอีก / Numbers appear when the squares are large: slide further left.
+
 ## Check yourself
 
 <details><summary>1. A frame is 640 × 360 pixels in colour. How many numbers is that?</summary>

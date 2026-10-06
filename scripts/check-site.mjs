@@ -37,11 +37,15 @@ async function status(url) {
   return checked.get(url)
 }
 
+/** Which local routes each page links to — reachability is checked in section 3. */
+const links = new Map()
+
 // 1. Pages: assemble, scan for local references and CSP hazards.
 for (const route of Object.keys(PAGES)) {
   const res = await fetch(base + route)
   if (res.status !== 200) { fail(route, `HTTP ${res.status}`); continue }
   const html = await res.text()
+  links.set(route, new Set([...html.matchAll(/\shref="(\/[^"#?]*)/g)].map((m) => m[1] || '/')))
   if (/<!--#\w+-->/.test(html)) fail(route, 'unfilled partial')
   if (html.includes('{{v}}')) fail(route, 'unstamped version')
   if (/<script(?![^>]*\bsrc=)[^>]*>/i.test(html)) fail(route, 'inline <script> (CSP blocks it)')
@@ -75,11 +79,23 @@ for (const [route, anchor] of [['/legal', 'takedown'], ['/system', 'credits']]) 
   if (!new RegExp(`id="${anchor}"`).test(html)) fail(route, `missing #${anchor}`)
 }
 
-// 3. Every room is reachable from the home page — a page the nav forgot is a page nobody can find.
+// 3. Every room is reachable from the home page in two hops at most — a page
+// the nav forgot, and whose own index forgot it too, is a page nobody can find.
 {
-  const html = await (await fetch(base + '/')).text()
-  const linked = new Set([...html.matchAll(/\shref="(\/[^"#?]*)/g)].map((m) => m[1]))
-  for (const route of Object.keys(PAGES)) if (!linked.has(route)) fail('/', `room ${route} is not linked from the home page`)
+  const seen = new Set(['/'])
+  let frontier = ['/']
+  for (let hop = 0; hop < 2 && frontier.length; hop++) {
+    const next = []
+    for (const route of frontier) {
+      for (const href of links.get(route) ?? []) {
+        if (seen.has(href) || !(href in PAGES)) continue
+        seen.add(href)
+        next.push(href)
+      }
+    }
+    frontier = next
+  }
+  for (const route of Object.keys(PAGES)) if (!seen.has(route)) fail('/', `room ${route} is not reachable from the home page within two links`)
 }
 
 // 4. What a crawler reads first: robots, a sitemap that names every room, and a title it can quote.

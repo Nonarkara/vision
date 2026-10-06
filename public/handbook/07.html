@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>07 · Teaching a machine · สอนเครื่องด้วยตัวเอง — Handbook · คู่มือ Vision</title>
+<meta name="description" content="In one sentence: borrow a network that already turns pictures into meaningful numbers, then teach only the last decision from a handful of your own examples — and watch out for the machine…">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>07 · Teaching a machine · สอนเครื่องด้วยตัวเอง</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-the-idea-transfer-learning" lang="en">1. The idea: transfer learning</a></li><li><a href="#2-what-train-lets-you-do" lang="en">2. What /train lets you do</a></li><li><a href="#3-learner-one-nearest-neighbours-no-training-at-all" lang="en">3. Learner one: nearest neighbours (no training at all)</a></li><li><a href="#4-learner-two-a-trained-layer" lang="en">4. Learner two: a trained layer</a></li><li><a href="#5-the-map-1280-numbers-squeezed-to-2" lang="en">5. The map: 1,280 numbers squeezed to 2</a></li><li><a href="#6-the-trap-shortcut-learning" lang="en">6. The trap: shortcut learning</a></li><li><a href="#7-from-a-classroom-to-a-product" lang="en">7. From a classroom to a product</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en"><strong>In one sentence:</strong> borrow a network that already turns pictures into meaningful numbers, then teach only the last decision from a handful of your own examples — and watch out for the machine learning the wrong lesson.</blockquote>
+<p lang="en"><a href="/handbook/06">← 06</a> · <a href="/handbook">Handbook</a> · Site: <a href="/train">/train</a> · Run: <code>node examples/07-transfer-learning.mjs</code> · Code: <a href="https://github.com/Nonarkara/vision/blob/main/public/js/ml/learner.js"><code>public/js/ml/learner.js</code></a>, <a href="https://github.com/Nonarkara/vision/tree/main/public/js/train"><code>public/js/train/</code></a></p>
+<hr>
+<h2 id="1-the-idea-transfer-learning" lang="en">1. The idea: transfer learning</h2>
+<p lang="en">Training a network like MobileNetV2 from scratch took 1.28 million labelled photos and a great deal of computing. You have ten photos and a browser. The trick is to <strong>reuse</strong> the expensive part:</p>
+<figure><img src="/img/handbook/transfer.svg" alt="Transfer learning: frozen MobileNetV2 makes 1,280 numbers; you train only the last layer" loading="lazy"></figure>
+<ul><li lang="en"><strong>Frozen:</strong> MobileNetV2 turns any frame into 1,280 numbers — its "fingerprint" of how the picture looks (chapter 05). It never changes on this site.</li><li lang="en"><strong>Trained:</strong> a tiny decision on top of those numbers, learned from <em>your</em> examples, in seconds.</li></ul>
+<p lang="en">Why this works: the features a network learns on one large task are useful for many others, especially the early and middle ones (measured by Yosinski et al., 2014). "Busy road vs empty road" is a new question, but it is asked of the same kinds of edges, textures and shapes.</p>
+<h2 id="2-what-train-lets-you-do" lang="en">2. What /train lets you do</h2>
+<ol><li lang="en"><strong>Pick a challenge</strong> — two to four classes. Presets for your own camera: <em>A / B</em>, <em>Hand up / Hand down</em>, <em>Cup / No cup</em>, <em>Someone there / Nobody</em>, <em>Rock / Paper / Scissors</em>. Presets for public cameras: <em>Busy / Empty road</em>, <em>Rain, wet road / Dry road</em>, <em>Day / Night</em>. Or name your own.</li><li lang="en"><strong>Add examples</strong> — click, or hold to record, from your webcam, a public camera or a photo. Up to 100 per class. Click a thumbnail to throw a bad example away.</li><li lang="en"><strong>Watch it learn</strong> — a nearest-neighbour learner answers immediately; a trained layer runs 200 passes with a live loss curve; a 2-D map shows your examples as clouds.</li><li lang="en"><strong>Judge the country</strong> — freeze what you taught and run it on 24 public cameras it has never seen, one at a time, politely. Answers below 70% are marked <em>unsure</em>.</li><li lang="en"><strong>Keep it</strong> — download the trained layer as a small JSON file (JSON is the plain-text format programs use to exchange data; format <code>vision.nonarkara.org/train-layer</code>), load it again later.</li></ol>
+<p lang="en">Nothing is uploaded at any step. Examples live in the tab's memory and vanish on reload — by design, and the page says so.</p>
+<p lang="en">There is deliberately <strong>no "me / not me" preset</strong>: this site does not teach anyone to recognise a person. <em>Someone there / Nobody</em> asks only whether a person is in view.</p>
+<h2 id="3-learner-one-nearest-neighbours-no-training-at-all" lang="en">3. Learner one: nearest neighbours (no training at all)</h2>
+<p lang="en">Remember every example's 1,280 numbers. For a new frame, find the <em>k</em> most similar examples and let them vote (the site uses <em>k</em> = 5). Similarity is the <strong>cosine</strong>: after scaling every fingerprint to length 1, the <strong>dot product</strong> — multiply the numbers sitting in matching places, then add them up. 1 means "points the same way", 0 means "unrelated".</p>
+<pre class="code" lang="en" data-lang="js"><code>// public/js/ml/learner.js (abridged)
+export function knnPredict(samples, x, classes, k = 5) {
+  const sims = samples.map((s, i) =&gt; ({ i, sim: dot(s.x, x), y: s.y }))   // x and s.x are normalised
+  sims.sort((a, b) =&gt; b.sim - a.sim)
+  const top = sims.slice(0, Math.min(k, sims.length))
+  const votes = new Array(classes).fill(0)
+  for (const n of top) votes[n.y] += Math.max(0, n.sim) + 1e-6           // closer neighbours count more
+  const total = votes.reduce((a, b) =&gt; a + b, 0)
+  return { probs: votes.map((v) =&gt; v / total), neighbours: top }
+}</code></pre>
+<p lang="en">From the example (simulated fingerprints):</p>
+<pre class="code" lang="en"><code>A new river camera picture. Its 5 most similar examples (cosine similarity, 1 = identical):
+  example # 1  river camera  similarity 0.691
+  example # 4  river camera  similarity 0.689
+  example # 0  river camera  similarity 0.686
+  example # 2  river camera  similarity 0.682
+  example # 3  river camera  similarity 0.672
+Vote → river camera 100% · road camera 0%</code></pre>
+<p lang="en">"Training" here is just remembering — which is why /train answers the moment you add a single example. On the page, thin lines on the map run from the live frame to the examples it is listening to.</p>
+<h3 id="how-many-examples" lang="en">How many examples?</h3>
+<p lang="en">Hide each example in turn and predict it from the rest (<strong>leave-one-out</strong>; the /train readout reports this as you add examples):</p>
+<pre class="code" lang="en"><code>  per class    k = 1 (closest one decides)       k = 5 (five closest vote)
+     1          0%                              0%
+     2         75% ███████████████              0%
+     3         83% █████████████████            0%
+     5         88% ██████████████████          80% ████████████████
+    10         81% ████████████████            84% █████████████████
+    20         87% █████████████████           89% ██████████████████
+    40         88% ██████████████████          88% ██████████████████</code></pre>
+<ul><li lang="en">One per class never works: the hidden example's class has nobody left to vote.</li><li lang="en"><strong>k = 5 with three or fewer per class fails outright</strong> — the other class always has more voters. Give each class at least five examples on /train.</li><li lang="en">After that, more examples help with diminishing returns. <strong>Variety beats volume</strong>: ten examples from ten different cameras teach more than a hundred from one.</li></ul>
+<h2 id="4-learner-two-a-trained-layer" lang="en">4. Learner two: a trained layer</h2>
+<p lang="en">One layer of weights — 1,280 inputs × <em>K</em> classes + <em>K</em> biases (2,562 numbers for two classes) — turned into probabilities by <strong>softmax</strong>, adjusted by <strong>gradient descent</strong> to reduce <strong>cross-entropy loss</strong>:</p>
+<pre class="code" lang="en"><code>score_c   = b_c + Σ_i W[c, i] · x_i              for each class c
+p_c       = e^(score_c) / Σ_k e^(score_k)         softmax: scores → probabilities that sum to 1
+loss      = −log p_(correct class)               0 when certain and right; large when confidently wrong
+each pass: W ← W − step × ∂loss/∂W                 (Adam chooses the step per weight; Kingma &amp; Ba, 2014)</code></pre>
+<p lang="en">Read the symbols: <code>Σ_i</code> means <em>add up over all 1,280 inputs</em>; <code>W[c, i]</code> is the weight joining input <em>i</em> to class <em>c</em>; <code>b_c</code> is that class's bias (the extra shift-only number from chapter 03); and <code>∂loss/∂W</code> is the slope that says which way each weight must move to make the loss smaller.</p>
+<p lang="en"><code>createLayer()</code> in <code>learner.js</code> implements exactly this in ~70 lines of plain JavaScript — no TensorFlow. The site runs 200 passes, at most two per animation frame, so you can <em>watch</em> the curve fall (the readout reports the real arithmetic time separately; it is milliseconds).</p>
+<pre class="code" lang="en"><code>cross-entropy loss per pass (200 passes)
+  0.693 │•
+  0.542 │ •
+  0.466 │  •
+  0.315 │   •
+  0.239 │    ••
+  0.163 │      •
+  0.087 │       •••••••
+  0.012 │              ••••••••••••••••••••••••••••••••••••••••••••••
+        └────────────────────────────────────────────────────────────
+first loss 0.693 → last 0.012 · accuracy on 80 NEW examples: layer 100%, k-NN 88%</code></pre>
+<figure><img src="/img/handbook/07-loss.png" alt="Loss curve, as drawn by the example" loading="lazy"></figure>
+<p lang="en">Why does it start at <strong>0.693</strong>? That is −log(0.5): with random small weights the layer gives each of two classes 50%. Why does the layer beat k-NN here? Training taught it <strong>which</strong> of the 1,280 numbers separate the classes; k-NN weighs all of them equally, noise included.</p>
+<h2 id="5-the-map-1280-numbers-squeezed-to-2" lang="en">5. The map: 1,280 numbers squeezed to 2</h2>
+<p lang="en">People cannot see in 1,280 dimensions. <strong>Principal component analysis</strong> (PCA) finds the two directions along which the examples differ most and projects onto them. <code>pca2()</code> uses the Gram-matrix trick. With N examples of D numbers — and N ≪ D, meaning far fewer examples than numbers — it works with the N×N matrix of dot products instead of the much larger D×D covariance matrix. Same leading directions, far less arithmetic.</p>
+<figure><img src="/img/handbook/07-pca.png" alt="PCA map: two clouds, and a new example (Peach Red) landing in the river cloud" loading="lazy"></figure>
+<p lang="en">Two separate clouds mean the classes look different to the network. The map is a <strong>shadow</strong>: two points close here can be far apart in 1,280 dimensions, and the page says so under the picture.</p>
+<h2 id="6-the-trap-shortcut-learning" lang="en">6. The trap: shortcut learning</h2>
+<p lang="en">The example's last section is the most important lesson in applied computer vision. Train <em>river</em> examples that were all taken <strong>at night</strong> and <em>road</em> examples all <strong>by day</strong>:</p>
+<pre class="code" lang="en"><code>trained on: rivers-at-night vs roads-by-day   → training accuracy 100%
+tested on:  rivers and roads, same lighting   → 50%
+tested on:  rivers by day vs roads at night   → 0%</code></pre>
+<p lang="en">A perfect score on its own examples. A coin toss on fair data. <strong>Exactly wrong</strong> when the lighting flips. The layer learned "dark = river" — the easiest difference in the data, not the one you meant. It happens in real systems:</p>
+<ul><li lang="en">a skin-cancer classifier whose decisions were swayed by <strong>surgical ink markings</strong> around lesions (Winkler et al., <em>JAMA Dermatology</em>, 2019);</li><li lang="en">pneumonia models that partly learned <strong>which hospital</strong> took the X-ray (Zech et al., <em>PLOS Medicine</em>, 2018);</li><li lang="en">a broad survey: Geirhos et al., "Shortcut learning in deep neural networks" (2020).</li></ul>
+<p lang="en"><strong>On /train, try it yourself:</strong> teach <em>Cup / No cup</em> with the cup always on the left of the frame, then move it right. Or teach <em>Day / Night</em> from one camera and judge the country.</p>
+<p lang="en">The cure is not a bigger model. It is examples that <strong>vary the things that should not matter</strong> — lighting, camera, angle, background, season — and testing on data collected differently from the training data.</p>
+<h2 id="7-from-a-classroom-to-a-product" lang="en">7. From a classroom to a product</h2>
+<p lang="en">What /train does is the core of commercial "custom vision" services. What a real product adds (see the <a href="/system">blueprint</a>):</p>
+<ul><li lang="en"><strong>Active learning</strong> — show the cases the model is least sure about, let a person correct them, retrain. (/train's judge marks <em>unsure</em> answers; correcting them back into the examples is the natural next feature.)</li><li lang="en"><strong>Held-out evaluation</strong> — never measure on the examples you trained on.</li><li lang="en"><strong>Versioning</strong> — which examples produced which model, so a bad decision can be traced.</li><li lang="en"><strong>Drift monitoring</strong> — cameras get dirty, seasons change; accuracy decays unless measured.</li></ul>
+<h2 id="try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</h2>
+<p lang="th"><strong>เป้าหมาย · Goal:</strong> สอนเครื่องจำสองกลุ่มด้วยภาพไม่กี่ภาพ แล้วจับทางลัดที่มันใช้ / Teach it two groups with a few pictures, then catch the shortcut it is using.</p>
+<p lang="th"><strong>ขั้นตอน · Steps</strong></p>
+<ol><li lang="en">เปิด <a href="/train">/train</a> เพิ่มภาพให้สองกลุ่ม กลุ่มละประมาณ 6 ภาพจากกล้องของคุณ — Open <a href="/train">/train</a> and add about six pictures to each group from your camera.</li><li lang="en">กด "ฝึกและลอง" แล้วดูแถบสองอัน: แถบบนเดาได้ทันทีจากตัวอย่างที่คล้ายกัน แถบล่างใช้ได้หลังกดฝึก — Press <em>Train and try it</em> and watch the two bars: the top one guesses right away from similar examples, the bottom one only after training.</li><li lang="en">ถ่ายภาพใหม่ที่ไม่ได้ใส่ตอนฝึก แล้วเทียบคำตอบของทั้งสองแถบ — Take a fresh picture you never added and compare what the two bars say.</li><li lang="en">ลองสร้างทางลัด: ให้ทุกภาพของกลุ่มแรกมีพื้นหลังหรือแสงเดียวกัน ฝึกใหม่ แล้วย้ายพื้นหลัง — Build a shortcut: give every picture of group one the same background or lighting, retrain, then change the background.</li></ol>
+<p lang="en"><strong>ควรเห็น · You should see</strong></p>
+<ul><li lang="en">แถบบนทำงานตั้งแต่ยังไม่ได้กดฝึก เพราะมันคือ k-NN กับลายนิ้วมือ 1,280 ตัวเลข — The top bar works before you train: it is k-NN over the same 1,280-number fingerprint.</li><li lang="en">พอตัดทางลัด (ย้ายพื้นหลัง) คะแนนร่วง ทั้งที่วัตถุยังเป็นวัตถุเดิม — Remove the shortcut and the score falls, even though the object never changed.</li></ul>
+<p lang="th"><strong>ถ้าไม่เห็น · If you do not</strong> — สองกลุ่มเหมือนกันเกินไปหรือภาพน้อยเกินไป ให้เพิ่มภาพ หรือเลือกสิ่งที่ต่างกันชัดกว่า — If both bars sit at 50/50 the groups are too alike or too few: add pictures, or pick things that differ more.</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<details><summary lang="en">1. You teach Busy road / Empty road using one camera at 8 am (busy) and 3 am (empty). What did the model probably learn?</summary><p lang="en">Day vs night. Every busy example is bright, every empty one dark. Judge the country at noon and every empty road will be called "busy". Collect both classes at the same times of day, from many cameras.</p></details>
+<details><summary lang="en">2. Why does k-NN need no "training" step, while the layer does?</summary><p lang="en">k-NN defers all work to prediction time: it compares the new fingerprint with every stored one. The layer compresses the examples into 2,562 numbers ahead of time, which is what the 200 passes do — and why it can generalise better and predict faster.</p></details>
+<details><summary lang="en">3. The downloaded layer file contains weights, not pictures. Can someone recover your photos from it?</summary><p lang="en">Not the photos themselves — the file holds 1,280 × K weights and K biases, summaries of many examples. But treat model files as derived from your data: they can leak <em>something</em> about it (research on "model inversion" and "membership inference" shows this for larger models). For a small layer trained on your own room, the practical risk is low; for faces or medical images it would not be.</p></details>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th"><strong>การเรียนรู้แบบถ่ายโอน (transfer learning)</strong> คือการยืมโครงข่ายที่ฝึกมาแล้ว (MobileNetV2 จากภาพ 1.28 ล้านภาพ) ให้แปลงภาพเป็น <strong>ตัวเลข 1,280 ตัว</strong> แล้วสอนแค่ "การตัดสินใจขั้นสุดท้าย" ด้วยตัวอย่างไม่กี่ภาพของคุณ ห้อง /train ทำทั้งหมดในเบราว์เซอร์ ไม่มีอะไรถูกอัปโหลด</p>
+<p lang="th">สองวิธีเรียน: <strong>เพื่อนบ้านใกล้สุด (k-NN)</strong> แค่จำตัวอย่างไว้ แล้วให้ตัวอย่างที่คล้ายที่สุด 5 ตัวโหวต (ตอบได้ทันทีตั้งแต่ตัวอย่างแรก แต่ต้องมีอย่างน้อย 5 ภาพต่อกลุ่ม) และ <strong>ชั้นที่ฝึก (softmax)</strong> ปรับน้ำหนัก 2,562 ตัว 200 รอบ จนค่าความผิดพลาด (loss) ลดจาก 0.693 เหลือเกือบศูนย์ ซึ่งมักทำนายได้ดีกว่าเพราะเรียนรู้ว่าตัวเลขไหนสำคัญ</p>
+<p lang="th"><strong>กับดักที่สำคัญที่สุด: การเรียนทางลัด (shortcut learning)</strong> ถ้าภาพ "แม่น้ำ" ทั้งหมดถ่ายตอนกลางคืน และ "ถนน" ถ่ายตอนกลางวัน เครื่องจะเรียนรู้ว่า "มืด = แม่น้ำ" ได้คะแนน 100% กับตัวอย่างของตัวเอง แต่เหลือ 50% กับข้อมูลที่ยุติธรรม และ 0% เมื่อสลับแสง เรื่องนี้เกิดจริงในการแพทย์ ทางแก้ไม่ใช่โมเดลที่ใหญ่ขึ้น แต่คือตัวอย่างที่ <strong>หลากหลายในสิ่งที่ไม่ควรสำคัญ</strong> เช่น แสง มุมกล้อง ฉากหลัง</p>
+<p lang="en"><strong>Next:</strong> <a href="/handbook/08">08 · Limits and ethics →</a></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/06"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/08"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

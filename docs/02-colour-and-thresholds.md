@@ -101,6 +101,23 @@ RGB is how screens emit light, not how people describe colour. Vision systems of
 
 The site stays in RGB and gray on purpose: everything is visible and explainable on one screen.
 
+## Try it yourself · ลองทำเอง
+
+**เป้าหมาย · Goal:** ให้โอตสึเลือกเกณฑ์ให้เอง แล้วดูตอนที่การเลือกนั้นไม่มีความหมาย / Let Otsu pick the threshold for you — then watch the moment the choice stops meaning anything.
+
+**ขั้นตอน · Steps**
+
+1. เปิด [/learn บท 3](/learn) กด "อัตโนมัติ (โอตสึ)" กับภาพถนน แล้วจดตัวเลขที่ได้ ประมาณ 100 — Open [/learn chapter 3](/learn), press *Automatic (Otsu)* on the street and note the number it picks, around 100.
+2. หันกล้องไปที่ผนังสีเดียว หรือปิดเลนส์ แล้วกด Auto อีกครั้ง — มันยังเลือกค่าอยู่ดี — Point the camera at a blank wall (or cover the lens) and press Auto again: it still chooses a value.
+3. ลาก "เส้นแบ่ง" ไปที่ 150 แล้วกลับมาที่ค่าของโอตสึ ดู mask เปลี่ยนอย่างไร — Drag *The line* to 150, then back to Otsu's value, and watch the mask change.
+
+**ควรเห็น · You should see**
+
+- กับภาพถนน ส่วนที่สว่าง เช่นฟ้า เส้นกลางถนน รถขาว ขึ้นเป็นสีขาว แต่รถแดงไม่ขึ้น — On the street the bright parts light up, but the red car does not.
+- กับพื้นผิวสีเดียว mask แบ่งครึ่งแบบไม่มีเหตุผล — On a flat surface the mask splits the frame in half for no reason at all.
+
+**ถ้าไม่เห็น · If you do not** — ถ้า mask ดำสนิท แสดงว่าภาพของคุณมืดกว่าเกณฑ์ที่ตั้งไว้ ให้ลากเส้นลงมา / If the mask is all black your frame is darker than the threshold: drag the line down.
+
 ## Check yourself
 
 <details><summary>1. A frame is all fog: one hill in the histogram. What threshold will Otsu choose, and is it meaningful?</summary>

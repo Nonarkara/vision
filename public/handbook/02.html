@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>02 · Light, colour and thresholds · สี ความสว่าง และเกณฑ์ — Handbook · คู่มือ Vision</title>
+<meta name="description" content="In one sentence: the first decision a machine can make about a pixel is &quot;bright or not?&quot;, and choosing the dividing number — and what to throw away to get there — is already a bet about the world.">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>02 · Light, colour and thresholds · สี ความสว่าง และเกณฑ์</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-the-histogram-a-pictures-fingerprint-of-light" lang="en">1. The histogram: a picture's fingerprint of light</a></li><li><a href="#2-thresholding-one-number-two-classes" lang="en">2. Thresholding: one number, two classes</a></li><li><a href="#3-otsus-method-let-the-data-choose-t" lang="en">3. Otsu's method: let the data choose <em>t</em></a></li><li><a href="#4-the-red-car-that-disappears" lang="en">4. The red car that disappears</a></li><li><a href="#5-why-thresholds-misbehave-on-real-cameras" lang="en">5. Why thresholds misbehave on real cameras</a></li><li><a href="#6-colour-spaces-briefly" lang="en">6. Colour spaces, briefly</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en"><strong>In one sentence:</strong> the first decision a machine can make about a pixel is "bright or not?", and choosing the dividing number — and what to throw away to get there — is already a bet about the world.</blockquote>
+<p lang="en"><a href="/handbook/01">← 01</a> · <a href="/handbook">Handbook</a> · Site: <a href="/learn">/learn, chapters 2–3</a> · Run: <code>node examples/02-threshold.mjs</code></p>
+<hr>
+<h2 id="1-the-histogram-a-pictures-fingerprint-of-light" lang="en">1. The histogram: a picture's fingerprint of light</h2>
+<p lang="en">Count how many pixels have each brightness from 0 to 255 and you get a <strong>histogram</strong>. For the scene (grouped into 16 bins):</p>
+<pre class="code" lang="en"><code>  0– 15
+ 16– 31
+ 32– 47 ██
+ 48– 63 █
+ 64– 79 ██████████████████████████████████████████████████   ← road and ground
+ 80– 95 ██████████
+ 96–111 ██████████████████████████████████ ◀ threshold
+112–127
+  ...
+160–175 ███
+176–191 █████████████████████████████                         ← sky
+192–207 ██████████████████████
+208–223 ██████
+224–239 █</code></pre>
+<p lang="en">Two hills: the dark road and grass, the bright sky. A histogram throws away <em>where</em> every pixel is and keeps only <em>how bright</em>. It is how cameras set exposure, how photo apps "auto-enhance", and how the next technique chooses its number.</p>
+<h2 id="2-thresholding-one-number-two-classes" lang="en">2. Thresholding: one number, two classes</h2>
+<p lang="en">Pick a number <em>t</em>. Every pixel with brightness ≥ <em>t</em> is "on" (1); every other is "off" (0). That is the whole algorithm:</p>
+<pre class="code" lang="en" data-lang="js"><code>// public/js/cv/ops.js
+export function threshold(gray, t) {
+  const out = new Uint8Array(gray.length)
+  for (let i = 0; i &lt; gray.length; i++) out[i] = gray[i] &gt;= t ? 1 : 0
+  return out
+}</code></pre>
+<p lang="en">It is still everywhere: scanning documents (ink vs paper — see <a href="https://scan.nonarkara.org">Ekkasarn</a> for a real Thai OCR pipeline — OCR being optical character recognition, turning a photo of text into text a computer can read), reading QR codes, counting cells under a microscope, finding a bright licence plate in a dark frame.</p>
+<h2 id="3-otsus-method-let-the-data-choose-t" lang="en">3. Otsu's method: let the data choose <em>t</em></h2>
+<p lang="en">Nobuyuki Otsu (1979) asked: which <em>t</em> splits the histogram into two groups that are each as tight as possible and as far apart as possible? Formally, for every candidate <em>t</em> compute the <strong>between-class variance</strong></p>
+<pre class="code" lang="en"><code>σ²_between(t) = w_dark(t) · w_bright(t) · (μ_dark(t) − μ_bright(t))²</code></pre>
+<p lang="en">where <em>w</em> is the share of pixels in each group and <em>μ</em> its mean brightness — then pick the <em>t</em> where it is largest. For our scene, <strong>t = 103</strong>, which lands in the empty valley between the two hills. The site's implementation is 18 lines (<code>ops.otsu</code>), and the <strong>Auto</strong> button on /learn chapter 3 runs it on whatever camera you are looking at.</p>
+<figure><img src="/img/handbook/02-threshold.png" alt="Brightness; the bright pixels at Otsu's threshold; a colour rule finding the red car" loading="lazy"><figcaption lang="en">Left: brightness. Middle: pixels at or above 103 (39.2% of the frame). Right: a colour rule, explained below.</figcaption></figure>
+<h2 id="4-the-red-car-that-disappears" lang="en">4. The red car that disappears</h2>
+<p lang="en">Look at the middle panel. The sky, the centre line, the white car and the water patch light up. <strong>The red car does not.</strong> The example measures why:</p>
+<pre class="code" lang="en"><code>mean brightness, red car body: 81.6
+mean brightness, road:         72.0</code></pre>
+<p lang="en">A bright red car is <em>dark</em> once colour is thrown away, because red contributes only 0.299 to brightness. Against dark asphalt, it all but vanishes. Now use colour instead — "how much redder than green is this pixel?":</p>
+<pre class="code" lang="en"><code>mean "redness" (R − G, doubled), red car: 268.0   road: 0.0
+A rule on redness &gt; 120 finds 1 region: 52×28 at (96,118)
+The answer key says the red car is      52×28 at (96,118).</code></pre>
+<p lang="en">A pixel-perfect find, from a rule a child could write. (On a real road, red brake lights, red signs and a red shirt would all trip it too — no single rule survives the real world for long. That is the argument for <em>learned</em> rules in chapter 05.)</p>
+<blockquote lang="en"><strong>The general lesson.</strong> Every simplification a vision system makes — grayscale, low resolution, a fixed threshold — is a bet about what does not matter. Throwing colour away is cheap and usually harmless, until the thing you care about differs from its background <em>only</em> in colour. When a system fails, the first question is often: <em>what did it throw away?</em></blockquote>
+<h2 id="5-why-thresholds-misbehave-on-real-cameras" lang="en">5. Why thresholds misbehave on real cameras</h2>
+<ul><li lang="en"><strong>Light changes.</strong> A threshold tuned at noon fails at dusk. Otsu re-chooses <em>t</em> per frame, which helps — but it always finds <em>some</em> split, even in a frame with nothing interesting in it.</li><li lang="en"><strong>One histogram, two meanings.</strong> Two hills do not always mean "object vs background": in fog the hills merge; at night a few streetlights make a tiny bright hill that captures the split.</li><li lang="en"><strong>Local vs global.</strong> One <em>t</em> for the whole frame cannot handle a frame that is half in shadow. <em>Adaptive thresholding</em> chooses <em>t</em> per neighbourhood instead — the standard fix in document scanning.</li></ul>
+<p lang="en">On /learn chapter 3 you can drag the threshold by hand, press Auto for Otsu, and watch both behaviours on a live road.</p>
+<h2 id="6-colour-spaces-briefly" lang="en">6. Colour spaces, briefly</h2>
+<p lang="en">RGB is how screens emit light, not how people describe colour. Vision systems often convert first:</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Space</th><th lang="en">Channels</th><th lang="en">Good for</th></tr></thead><tbody><tr><td lang="en">RGB</td><td lang="en">red, green, blue</td><td lang="en">display; what the camera gives you</td></tr><tr><td lang="en">Gray (luma)</td><td lang="en">brightness</td><td lang="en">shape, edges, motion — cheap</td></tr><tr><td lang="en">HSV / HSL</td><td lang="en">hue, saturation, value</td><td lang="en">"find the red things" regardless of brightness</td></tr><tr><td lang="en">YCbCr</td><td lang="en">brightness + two colour-difference channels</td><td lang="en">video compression; keeps detail in Y</td></tr><tr><td lang="en">Lab</td><td lang="en">lightness + two opponent colours</td><td lang="en">measuring "how different do two colours look"</td></tr></tbody></table></div>
+<p lang="en">The site stays in RGB and gray on purpose: everything is visible and explainable on one screen.</p>
+<h2 id="try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</h2>
+<p lang="en"><strong>เป้าหมาย · Goal:</strong> ให้โอตสึเลือกเกณฑ์ให้เอง แล้วดูตอนที่การเลือกนั้นไม่มีความหมาย / Let Otsu pick the threshold for you — then watch the moment the choice stops meaning anything.</p>
+<p lang="th"><strong>ขั้นตอน · Steps</strong></p>
+<ol><li lang="en">เปิด <a href="/learn">/learn บท 3</a> กด "อัตโนมัติ (โอตสึ)" กับภาพถนน แล้วจดตัวเลขที่ได้ ประมาณ 100 — Open <a href="/learn">/learn chapter 3</a>, press <em>Automatic (Otsu)</em> on the street and note the number it picks, around 100.</li><li lang="en">หันกล้องไปที่ผนังสีเดียว หรือปิดเลนส์ แล้วกด Auto อีกครั้ง — มันยังเลือกค่าอยู่ดี — Point the camera at a blank wall (or cover the lens) and press Auto again: it still chooses a value.</li><li lang="en">ลาก "เส้นแบ่ง" ไปที่ 150 แล้วกลับมาที่ค่าของโอตสึ ดู mask เปลี่ยนอย่างไร — Drag <em>The line</em> to 150, then back to Otsu's value, and watch the mask change.</li></ol>
+<p lang="en"><strong>ควรเห็น · You should see</strong></p>
+<ul><li lang="th">กับภาพถนน ส่วนที่สว่าง เช่นฟ้า เส้นกลางถนน รถขาว ขึ้นเป็นสีขาว แต่รถแดงไม่ขึ้น — On the street the bright parts light up, but the red car does not.</li><li lang="en">กับพื้นผิวสีเดียว mask แบ่งครึ่งแบบไม่มีเหตุผล — On a flat surface the mask splits the frame in half for no reason at all.</li></ul>
+<p lang="en"><strong>ถ้าไม่เห็น · If you do not</strong> — ถ้า mask ดำสนิท แสดงว่าภาพของคุณมืดกว่าเกณฑ์ที่ตั้งไว้ ให้ลากเส้นลงมา / If the mask is all black your frame is darker than the threshold: drag the line down.</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<details><summary lang="en">1. A frame is all fog: one hill in the histogram. What threshold will Otsu choose, and is it meaningful?</summary><p lang="en">It will still choose some value — the best split of a single hill, roughly through its middle. The result is a meaningless half-and-half mask. An algorithm that always answers is not the same as an algorithm that is always right; chapter 08 returns to this.</p></details>
+<details><summary lang="en">2. Why is a white car easy to find with a brightness threshold, but a red one hard?</summary><p lang="en">White is bright in all three channels, so its brightness is high (~220). Red is bright only in R, which carries a 0.299 weight, so its brightness (~80) is close to asphalt (~72).</p></details>
+<details><summary lang="en">3. Write a rule that finds the water patch. What else would it catch?</summary><p lang="en">Something like "brightness &gt; 150 and B − R &gt; 30 and below the horizon". On a real camera it would also catch a blue car, a wet reflective road under blue sky, and blue tarpaulin. FloodDash's water heuristic — FloodDash is the separate flood site by the same author that builds this site's camera list; the heuristic is credited in <code>ops.readFrame</code> — is deliberately labelled "consistent with standing water", never "flood".</p></details>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th"><strong>ฮิสโทแกรม</strong> คือการนับว่ามีพิกเซลความสว่างเท่าใดบ้าง ภาพถนนตัวอย่างมี "สองเนิน" คือถนนกับหญ้าที่มืด และท้องฟ้าที่สว่าง</p>
+<p lang="th"><strong>การกำหนดเกณฑ์ (threshold)</strong> คือเลือกตัวเลขหนึ่งตัว พิกเซลที่สว่างกว่านั้นเป็น "1" ที่เหลือเป็น "0" วิธีของ <strong>โอสึ (Otsu, 1979)</strong> เลือกตัวเลขให้อัตโนมัติ โดยหาจุดแบ่งที่ทำให้สองกลุ่มแยกจากกันมากที่สุด ในภาพนี้ได้ 103 ซึ่งอยู่ตรงหุบระหว่างสองเนินพอดี</p>
+<p lang="th">บทเรียนสำคัญ: <strong>รถสีแดงหายไปเมื่อแปลงเป็นภาพขาวดำ</strong> เพราะสีแดงมีน้ำหนักในความสว่างแค่ 0.299 จึงมืดพอ ๆ กับถนน (81.6 กับ 72.0) แต่ถ้าใช้กฎ "แดงกว่าเขียวเท่าไร" ก็หารถเจอตรงตำแหน่งพอดี ทุกครั้งที่ระบบลดทอนข้อมูล (ตัดสี ลดความละเอียด ใช้เกณฑ์ตายตัว) คือการเดิมพันว่าสิ่งที่ตัดทิ้งไม่สำคัญ เมื่อระบบผิดพลาด คำถามแรกคือ "มันตัดอะไรทิ้งไป"</p>
+<p lang="en"><strong>Next:</strong> <a href="/handbook/03">03 · Convolution and edges →</a></p>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/01"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/03"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>
