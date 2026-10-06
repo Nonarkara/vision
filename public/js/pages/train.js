@@ -418,7 +418,7 @@ trainBtn.addEventListener('click', async () => {
   paintTrainState()
   paintHowto()
   paintChallenge()
-  toast(t(`พร้อมแล้ว! ลองภาพใหม่แล้วดูคำตอบด้านบน`, `Ready! Try a new picture and watch the answer above.`))
+  toast(t(`พร้อมแล้ว! ลองภาพใหม่แล้วดูคำตอบด้านล่าง`, `Ready! Try a new picture and watch the answer below.`))
 })
 
 // ── Live prediction: a few looks a second at whatever the source shows ──

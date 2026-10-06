@@ -62,3 +62,9 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Corrected Thai save/judge labels; interrupted demo loading now exits without announcing completion when its preset or class keys change. Removed an unused training progress variable.
 - Deployment gates passed: 69 tests, ten pages, asset/module/model checks and documentation checks. Runtime hashes match package, all four training files, and both audited server files. Public health is 1.3.2 and the served training page contains the corrected Thai label and activity buttons.
 - Commit and push include the training work, release version and this operational handoff, so live deployment can be reproduced from Git.
+
+## 2026-10-06 · /train clarity pass 1.3.3
+
+- Page still read as confusing after 1.3.2; user scoped a copy-and-labels-only pass covering four diagnosed causes: no visual order of operations, two score bars with no stated roles, the mechanism hidden inside a collapsed disclosure, and chapter 02 therefore reading 01 → 03 → 04.
+- Changes: a four-step "How it works" block (choose groups → add pictures → the frozen network makes a 1,280-number fingerprint → press Train) sits between the activity chooser and the room, reusing the existing `.steps` grid; the bars are relabelled "Guesses right away — from similar examples" and "Guesses after you press Train" with one micro line saying which works when; the mechanism disclosure now opens by default with the summary "How the machine learns"; the post-training toast said "above" while the bars sit below the button — corrected to "below" in both languages. No layout moves.
+- Verified: 69 tests, check-site (exact language parity, aria, og, sitemap) and check-docs green; headless render of all ten routes plus a missing path with no console, resource or CSP errors; screenshots at 1280 wide for the new blocks in place, and the map still paints at load because `applyPreset` fires the change that schedules its rebuild.

@@ -22,6 +22,16 @@
 
 <section class="training-start" aria-labelledby="start-title"><h2 id="start-title"><span class="th" lang="th">อยากสอนอะไร?</span><span class="en" lang="en">What would you like to teach?</span></h2><div class="training-choices"><button class="training-choice" type="button" data-activity="demo" aria-pressed="false"><span class="label">01</span><strong><span class="th" lang="th">ลองเลย ไม่ต้องมีกล้อง</span><span class="en" lang="en">Try it without a camera</span></strong><span><span class="th" lang="th">สอนภาพถนนที่วาดไว้ แล้วสลับภาพดูคำตอบ</span><span class="en" lang="en">Teach with drawn roads, then switch pictures to test it</span></span></button><button class="training-choice" type="button" data-activity="hand" aria-pressed="false"><span class="label">02</span><strong><span class="th" lang="th">ยกมือ / มือลง</span><span class="en" lang="en">Hand up / hand down</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนท่าทางสองแบบ</span><span class="en" lang="en">Use your camera to teach two actions</span></span></button><button class="training-choice" type="button" data-activity="cup" aria-pressed="false"><span class="label">03</span><strong><span class="th" lang="th">มีแก้ว / ไม่มีแก้ว</span><span class="en" lang="en">Cup / no cup</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนให้เห็นความต่าง</span><span class="en" lang="en">Use your camera to spot a difference</span></span></button><button class="training-choice" type="button" data-activity="road" aria-pressed="false"><span class="label">04</span><strong><span class="th" lang="th">รถแน่น / ถนนโล่ง</span><span class="en" lang="en">Busy road / empty road</span></strong><span><span class="th" lang="th">เลือกกล้องถนน แล้วเก็บตัวอย่างเอง</span><span class="en" lang="en">Choose a road camera and collect examples</span></span></button></div><p class="prose" data-activity-help aria-live="polite"><span class="th" lang="th">เริ่มที่ “ลองเลย” ได้ทันที หรือเลือกกิจกรรมที่ใช้กล้องของคุณ</span><span class="en" lang="en">Start with “Try it without a camera”, or choose a camera activity.</span></p></section>
 
+  <section class="training-start" aria-labelledby="how-title">
+    <h2 id="how-title"><span class="th" lang="th">มันทำงานยังไง</span><span class="en" lang="en">How it works</span></h2>
+    <ol class="steps">
+      <li><span class="th" lang="th">คุณตั้งสองกลุ่มขึ้นมาก่อน เช่น “ยกมือ” กับ “มือลง”</span><span class="en" lang="en">You set up two groups first — say “Hand up” and “Hand down”</span></li>
+      <li><span class="th" lang="th">แล้วเพิ่มรูปให้แต่ละกลุ่ม ทีละภาพ ยิ่งหลากหลายยิ่งดี</span><span class="en" lang="en">Then add pictures to each group, one at a time — the more varied, the better</span></li>
+      <li><span class="th" lang="th">โครงข่ายที่ฝึกมาแล้วและถูกแช่แข็ง เปลี่ยนรูปของคุณเป็นตัวเลข 1,280 ตัว นั่นคือลายนิ้วมือของภาพ รูปเดิมได้ลายนิ้วมือเดิมทุกครั้ง</span><span class="en" lang="en">A network that is already trained — and frozen — turns your picture into 1,280 numbers: its fingerprint. The same picture always gives the same fingerprint</span></li>
+      <li><span class="th" lang="th">กด “ฝึกแล้วลองทาย” ชั้นเล็ก ๆ ที่อยู่ด้านบนเรียนรู้ที่จะอ่านลายนิ้วมือเหล่านั้น แล้วทายรูปใหม่ให้คุณ</span><span class="en" lang="en">Press “Train and try it” — a small layer on top learns to read those fingerprints, then guesses new pictures for you</span></li>
+    </ol>
+  </section>
+
   <div data-specimen-slot></div>
 
   <section id="training-room" class="room" aria-labelledby="room-title">
@@ -56,9 +66,10 @@
             </div>
             <p class="readout" data-train-say aria-live="polite"></p>
         <div class="live">
-          <span class="label live-head"><span class="th" lang="th">ทายจากภาพที่คล้ายกัน</span><span class="en" lang="en">Guess by similar examples</span></span>
+          <p class="micro live-key"><span class="th" lang="th">สองแถบนี้คือสองวิธีทายของเครื่อง แถบบนทำงานทันที ไม่ต้องฝึก แถบล่างมีชีวิตขึ้นมาก็ต่อเมื่อกด “ฝึกแล้วลองทาย” แล้วเท่านั้น</span><span class="en" lang="en">These two bars are two ways the machine guesses. The top one works at once, with no training. The bottom one comes alive only after you press “Train and try it”.</span></p>
+          <span class="label live-head"><span class="th" lang="th">ทายทันที — ดูภาพที่คล้ายกัน</span><span class="en" lang="en">Guesses right away — from similar examples</span></span>
           <div class="bars" data-bars-knn></div>
-          <span class="label live-head"><span class="th" lang="th">ทายหลังฝึก</span><span class="en" lang="en">Guess after training</span> <span class="micro" data-layer-flag></span></span>
+          <span class="label live-head"><span class="th" lang="th">ทายหลังกดฝึก</span><span class="en" lang="en">Guesses after you press Train</span> <span class="micro" data-layer-flag></span></span>
           <div class="bars" data-bars-layer></div>
         </div>
 <div class="demo-test" data-demo-test hidden><p class="micro"><span class="th" lang="th">ลองภาพวาดใหม่ที่ไม่ได้ใช้ฝึก แล้วดูคำตอบด้านบน นี่เป็นภาพวาด ไม่ใช่การทดสอบกับถนนจริง</span><span class="en" lang="en">Try a new drawing it did not train on. Watch the answer above. These are drawings, not a test on real roads.</span></p><div class="controls"><button class="btn" type="button" data-test-scene="busy"><span class="th" lang="th">ลองถนนรถแน่น</span><span class="en" lang="en">Try a busy road</span></button><button class="btn" type="button" data-test-scene="empty"><span class="th" lang="th">ลองถนนโล่ง</span><span class="en" lang="en">Try an empty road</span></button></div></div>
@@ -87,7 +98,7 @@
     </div>
   </section>
 
-  <details class="training-details"><summary><span class="th" lang="th">อยากรู้ว่าเครื่องเรียนรู้ยังไง?</span><span class="en" lang="en">Curious how the computer learns?</span></summary>
+  <details class="training-details" open><summary><span class="th" lang="th">เครื่องเรียนรู้ยังไง</span><span class="en" lang="en">How the machine learns</span></summary>
   <section class="idea field-quiet" aria-labelledby="idea-title">
     <h2 id="idea-title" class="idea-title"><span class="th" lang="th">การเรียนรู้แบบถ่ายโอน</span><span class="en" lang="en">Transfer learning</span></h2>
     <ol class="steps">
