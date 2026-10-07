@@ -30,6 +30,7 @@ const PAGES = [
   { route: '/handbook/08', name: 'handbook/08', src: '08-limits-and-ethics.md', chapter: '08' },
   { route: '/handbook/glossary', name: 'handbook/glossary', src: 'reference/glossary.md' },
   { route: '/handbook/reading', name: 'handbook/reading', src: 'reference/reading-list.md' },
+  { route: '/handbook/actions', name: 'handbook/actions', src: 'reference/browser-actions.md' },
 ]
 const CHAPTERS = PAGES.filter((p) => p.chapter)
 
@@ -51,6 +52,7 @@ function routeFor(rel) {
   if (ch) return `/handbook/${ch[1]}`
   if (rel === 'reference/glossary.md') return '/handbook/glossary'
   if (rel === 'reference/reading-list.md') return '/handbook/reading'
+  if (rel === 'reference/browser-actions.md') return '/handbook/actions'
   if (rel.startsWith('system/')) return '/system'
   if (rel.startsWith('img/')) return `/img/handbook/${rel.slice(4)}`
   return null
@@ -285,6 +287,7 @@ function docNav(spec) {
   if (n >= 0 && n < CHAPTERS.length - 1) links.push(pair(CHAPTERS[n + 1].route, chrome.nextTh, chrome.nextEn, 'doc-next'))
   if (spec.route === '/handbook/glossary') links.push(pair('/handbook/reading', 'รายการอ่าน', 'Reading list', 'doc-next'))
   if (spec.route === '/handbook/reading') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', 'doc-next'))
+  if (spec.route === '/handbook/actions') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', 'doc-next'))
   return `<nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages">${links.join('')}</nav>`
 }
 

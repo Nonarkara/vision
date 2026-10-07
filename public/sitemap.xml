@@ -4,6 +4,7 @@
   <url><loc>https://vision.nonarkara.org/learn</loc></url>
   <url><loc>https://vision.nonarkara.org/cameras</loc></url>
   <url><loc>https://vision.nonarkara.org/train</loc></url>
+  <url><loc>https://vision.nonarkara.org/gesture</loc></url>
   <url><loc>https://vision.nonarkara.org/games</loc></url>
   <url><loc>https://vision.nonarkara.org/everyday</loc></url>
   <url><loc>https://vision.nonarkara.org/research</loc></url>
@@ -21,4 +22,5 @@
   <url><loc>https://vision.nonarkara.org/handbook/08</loc></url>
   <url><loc>https://vision.nonarkara.org/handbook/glossary</loc></url>
   <url><loc>https://vision.nonarkara.org/handbook/reading</loc></url>
+  <url><loc>https://vision.nonarkara.org/handbook/actions</loc></url>
 </urlset>

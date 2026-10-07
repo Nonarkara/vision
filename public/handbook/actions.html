@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/handbook.css?v={{v}}">
+<title>Browser actions · สิ่งที่เบราว์เซอร์ยอมให้หน้าเว็บทำ — Handbook · คู่มือ Vision</title>
+<meta name="description" content="A web page is a guest on your machine: it may ring a bell in its own room, never pull the fire alarm. This page lists exactly what the gesture room is allowed to do, what it refuses to do, and why.">
+</head>
+<body class="handbook">
+<!--#nav-->
+<main id="main">
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <h1>Browser actions · สิ่งที่เบราว์เซอร์ยอมให้หน้าเว็บทำ</h1>
+    </div>
+    <div class="page-head-side">
+      <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
+      <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#why-a-page-cannot-open-an-app-or-sleep-your-mac" lang="en">Why a page cannot open an app or sleep your Mac</a></li><li><a href="#the-user-gesture-rule" lang="en">The user-gesture rule</a></li><li><a href="#what-the-gesture-room-actually-does" lang="en">What the gesture room actually does</a></li><li><a href="#what-would-be-needed-instead" lang="en">What would be needed instead</a></li><li><a href="#the-rule-this-site-follows" lang="en">The rule this site follows</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+    </div>
+  </header>
+  <article class="doc">
+<blockquote lang="en">A web page is a guest on your machine: it may ring a bell in its own room, never pull the fire alarm. This page lists exactly what <a href="/gesture">the gesture room</a> is allowed to do, what it refuses to do, and why.</blockquote>
+<p lang="en"><a href="/handbook">← Handbook</a></p>
+<hr>
+<h2 id="why-a-page-cannot-open-an-app-or-sleep-your-mac" lang="en">Why a page cannot open an app or sleep your Mac</h2>
+<p lang="en">Everything a website runs inside is chosen by the browser: a sandbox with windows into a few carefully chosen capabilities — a camera you granted, storage for this site, the network for addresses you allow. There is no web API for <em>shut down</em>, <em>sleep</em>, <em>launch an application</em>, or <em>read a file you did not pick</em>. Not because nobody has proposed one, but because the moment a page could do those things, every advertisement on the internet could too.</p>
+<p lang="en">Think of it as a hotel guest. You may use the lamp, the tap, the Wi-Fi. You may not rewire the lift. The browser is both the hotel and the law it enforces, and it enforces the rule on your behalf, whether you asked it to or not.</p>
+<p lang="en">This is also the answer to the question the gesture room gets asked most: <strong>a page cannot close your laptop or put your Mac to sleep — not this one, not any other.</strong> If you ever see a website claiming to, look closer: it is asking you to download a program, and that program is no longer a website.</p>
+<h2 id="the-user-gesture-rule" lang="en">The user-gesture rule</h2>
+<p lang="en">Several actions are locked behind a recent, real click — a person's action, within the last few seconds:</p>
+<ul><li lang="en">opening a new window,</li><li lang="en">entering full screen,</li><li lang="en">starting audio the visitor did not start with a click.</li></ul>
+<p lang="en">The reason is the same: before the rule, pages opened pop-ups behind you, played sound you could not find, and trapped your screen. The gesture rule means the room's <strong>Arm the actions</strong> button is not a decoration — it is the click that unlocks everything the page may do afterwards, and it is the one part of the flow no amount of clever code can skip.</p>
+<h2 id="what-the-gesture-room-actually-does" lang="en">What the gesture room actually does</h2>
+<p lang="en">Each gesture you teach is bound to one of these. When the machine fires one, the room writes what really happened in its log — success or refusal, both reported the same way.</p>
+<div class="table-wrap"><table class="table"><thead><tr><th lang="en">Action</th><th lang="en">What it uses</th><th lang="en">When it refuses, honestly</th></tr></thead><tbody><tr><td lang="en">Short beep</td><td lang="en">Web Audio oscillator, resumed on Arm</td><td lang="en">not armed yet</td></tr><tr><td lang="en">Vibrate</td><td lang="en"><code>navigator.vibrate</code></td><td lang="en">most laptops have no buzzer; the browser may still decline</td></tr><tr><td lang="en">Full screen</td><td lang="en">Fullscreen API, needs the click rule</td><td lang="en">refused without a recent gesture — press the ⛶ button yourself</td></tr><tr><td lang="en">Screen flash</td><td lang="en">a white overlay on this page</td><td lang="en">skipped entirely when the system's <em>reduce motion</em> is on</td></tr><tr><td lang="en">Lamp 1 / Lamp 2</td><td lang="en">an SVG circle on this page — a drawing</td><td lang="en">never touches a real bulb; there is nothing to refuse</td></tr><tr><td lang="en">Play / pause tone</td><td lang="en">a WAV file the page writes itself, plus media keys for this tab only</td><td lang="en">no sound without a click; it never controls another app's music</td></tr><tr><td lang="en">Open the handbook window</td><td lang="en">a window opened during Arm and steered later</td><td lang="en">if the popup was blocked, the room shows a link and says why</td></tr></tbody></table></div>
+<p lang="en">The two lamps deserve their own sentence: <strong>the home board on the page is a picture.</strong> Pressing "Lamp 1" changes the colour of a circle in this tab's memory. Real bulbs live behind hubs, accounts and servers a web page has no business holding.</p>
+<h2 id="what-would-be-needed-instead" lang="en">What would be needed instead</h2>
+<p lang="en">For the things a browser will not allow, the honest routes are:</p>
+<ul><li lang="en"><strong>Sleep, shut down, launch apps</strong> — a small native helper you installed yourself, invoked with an explicit command (on a Mac: <code>pmset sleepnow</code>, or AppleScript through a helper app). The operating system gets to ask you once, at install time, because that is where the trust belongs.</li><li lang="en"><strong>Real lamps and switches</strong> — a hub or service with its own account and permissions (HomeKit, Matter, MQTT, whatever your devices speak), talking to a server you control. The camera gesture would trigger a request to <em>that</em> server; this site is deliberately not that server.</li><li lang="en"><strong>Controlling other apps' music</strong> — the operating system's own media keys and now-playing APIs, which browsers expose only for the page's own media.</li></ul>
+<p lang="en">Every one of those involves leaving the sandbox — which is exactly why browsers make you choose them deliberately, one permission at a time.</p>
+<h2 id="the-rule-this-site-follows" lang="en">The rule this site follows</h2>
+<p lang="en">A refusal is a result. The gesture room reports what happened in full sentences — in Thai and English — instead of going quiet, because a page that pretends it worked is how "smart" gadgets learn to lie to the people using them. The same rule as the rest of <a href="/handbook/08">chapter 08</a>: <em>not detected</em> never means <em>not there</em>, and <em>not allowed</em> should never be dressed up as <em>done</em>.</p>
+<hr>
+<h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
+<p lang="th">หน้าเว็บเป็น "แขก" ในเครื่องของคุณ ทำได้เฉพาะสิ่งที่เบราว์เซอร์อนุญาตอย่างชัดเจน จึงเปิดแอปอื่น ปิดเครื่อง หรือสั่ง Mac เข้าโหมดพักไม่ได้ — ไม่ใช่แค่หน้านี้ แต่คือทุกหน้าเว็บ และนั่นคือเหตุผลที่คุณเปิดเว็บแปลก ๆ ได้โดยไม่ต้องกลัวว่ามันจะปิดเครื่องคุณ การกระทำหลายอย่างต้องใช้ "คลิกของคน" เช่นปุ่มเปิดใช้การกระทำในห้อง /gesture เพื่อกันเว็บเปิดหน้าต่างและเสียงลวนลามคุณ ห้องนี้รายงานทั้งความสำเร็จและการถูกปฏิเสธเป็นประโยคเต็ม ๆ เพราะหน้าเว็บที่แกล้งทำเป็นว่าทำสำเร็จคือจุดเริ่มต้นของอุปกรณ์ "อัจฉริยะ" ที่โกหกคนใช้ ส่วนหลอดไฟจริง เครื่องช่วยสั่งพักเครื่อง หรือการควบคุมแอปอื่น ต้องการโปรแกรมที่ติดตั้งเองหรือเซิร์ฟเวอร์ที่คุณดูแล — นั่นคือทางที่ถูกต้องเมื่อจำเป็นจริง ๆ</p>
+<h2 id="check-yourself" lang="en">Check yourself</h2>
+<ol><li lang="en">A friend claims their website can put a laptop to sleep. What is really happening when a page "does" that?</li><li lang="en">Why does the gesture room ask you to press <strong>Arm the actions</strong> before anything can fire — what would break without that rule?</li><li lang="en">If you wanted a hand gesture at your desk to dim a real lamp, name the three pieces you would have to build, none of which is a web page.</li></ol>
+  </article>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/glossary"><span class="th" lang="th">อภิธานศัพท์</span><span class="en" lang="en">Glossary</span></a></nav>
+</main>
+<!--#foot-->
+</body>
+</html>

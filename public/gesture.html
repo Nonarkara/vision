@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/gesture.css?v={{v}}">
+<title>Gestures that do things · สั่งด้วยท่ามือ — Vision</title>
+<meta name="description" content="Teach your camera two to four gestures and bind each one to a small action in this browser — a beep, a buzz, a flash, a pretend lamp, a tone, a link. Every action stays inside this tab, and when the browser refuses, the page says so. Nothing is uploaded.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="page-head" aria-labelledby="title">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 04 · สั่งด้วยท่า</span><span class="en" lang="en">Room 04 · Gestures</span></span>
+      <h1 id="title"><span class="th" lang="th">ท่ามือของคุณ สั่งสิ่งเล็ก ๆ ได้</span><span class="en" lang="en">Let your gestures do small things</span></h1>
+    </div>
+    <div>
+      <p class="lede"><span class="th" lang="th">สอนกล้องจำท่าสองหรือสามท่า แล้วผูกแต่ละท่ากับการกระทำในเบราว์เซอร์ — เสียง สั่น จอวาบ หลอดไฟปลอม ลิงก์ — ทุกอย่างเกิดในแท็บนี้เท่านั้น และเมื่อเบราว์เซอร์ไม่อนุญาต มันจะบอกตรง ๆ</span><span class="en" lang="en">Teach your camera two or three gestures, then bind each one to an action in this browser — a beep, a buzz, a flash, a pretend lamp, a link. Everything happens inside this tab, and when the browser says no, the page says so.</span></p>
+    </div>
+  </section>
+
+  <section class="start-block" aria-labelledby="how-title">
+    <h2 id="how-title"><span class="th" lang="th">มันทำงานยังไง</span><span class="en" lang="en">How it works</span></h2>
+    <ol class="steps">
+      <li><span class="th" lang="th">ภาพสดจากกล้องถูกเปลี่ยนเป็นลายนิ้วมือ 1,280 ตัว เหมือนกับที่ห้อง /train ใช้</span><span class="en" lang="en">The live camera picture becomes a 1,280-number fingerprint — the same one /train uses</span></li>
+      <li><span class="th" lang="th">คุณตั้งชื่อแต่ละท่า แล้วเก็บตัวอย่างให้มันทีละภาพ</span><span class="en" lang="en">You name each gesture and collect examples for it, one picture at a time</span></li>
+      <li><span class="th" lang="th">เพื่อนบ้านใกล้สุดโหวตว่าภาพตอนนี้เหมือนท่าไหน และมากน้อยแค่ไหน</span><span class="en" lang="en">Nearest neighbours vote on which gesture the current picture looks like, and how strongly</span></li>
+      <li><span class="th" lang="th">เมื่อคะแนนสูงพอและคงที่ การกระทำที่ผูกไว้ก็ถูกเรียก — แต่เฉพาะในสิ่งที่เบราว์เซอร์อนุญาต</span><span class="en" lang="en">When the score is high and steady, its bound action runs — but only among the things a browser allows</span></li>
+    </ol>
+  </section>
+
+  <div data-specimen-slot></div>
+
+  <section id="gesture-room" class="room" aria-labelledby="room-title">
+    <header class="room-head">
+      <span class="chapter-no">01</span>
+      <h2 id="room-title"><span class="th" lang="th">สอนท่าของคุณ</span><span class="en" lang="en">Teach it your gestures</span></h2>
+      <p class="prose"><span class="th" lang="th">เก็บตัวอย่างกลุ่มละ 3 ภาพขึ้นไป ใช้มุมและแสงที่ต่างกัน ตั้งท่าให้ “เปิดใช้การกระทำ” แล้วทำท่าค้างไว้สักครู่ — เมื่อคะแนนมั่นคง มันจะลงมือทำสิ่งที่คุณเลือก</span><span class="en" lang="en">Add at least 3 examples per group, varying angle and light. Press “Arm the actions”, then hold a gesture a moment — when the score settles, it does what you picked.</span></p>
+      <ol class="howto" data-howto data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
+        <li data-step="examples"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">เก็บตัวอย่างกลุ่มละ 3 ภาพขึ้นไป</span><span class="en" lang="en">Add 3 or more examples to each group</span></li>
+        <li data-step="arm"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">กด “เปิดใช้การกระทำ” — นี่คือคลิกที่เบราว์เซอร์เรียกร้อง</span><span class="en" lang="en">Press “Arm the actions” — the click the browser insists on</span></li>
+        <li data-step="fire"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ทำท่าค้าง แล้วดูล็อกด้านล่างว่ามันทำอะไร</span><span class="en" lang="en">Hold a gesture and read the log below for what it did</span></li>
+        <li data-step="again"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ลองท่าที่สอง ดูว่ามันแยกสองท่าได้จริง</span><span class="en" lang="en">Try a second gesture — see whether it tells them apart</span></li>
+      </ol>
+    </header>
+
+    <div class="room-grid">
+      <div class="bench room-bench" data-aria-th="สิ่งที่เครื่องเห็นตอนนี้" data-aria-en="What the machine sees now">
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">ภาพที่เครื่องเห็นตอนนี้</span><span class="en" lang="en">What it sees now</span></span>
+          <span class="num" data-model-state></span>
+        </div>
+        <div class="bench-view">
+          <canvas data-view role="img" data-aria-th="ภาพปัจจุบันจากกล้องของคุณ กล้องสาธารณะ หรือรูปถ่าย" data-aria-en="The current picture from your camera, a public camera, or a photo"></canvas>
+          <div class="bench-state" data-view-state>…</div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" type="button" data-mine>● <span class="th" lang="th">ใช้กล้องของฉัน</span><span class="en" lang="en">Use my camera</span></button>
+        </div>
+        <p class="readout" data-status aria-live="polite"></p>
+        <div class="live">
+          <p class="micro live-key"><span class="th" lang="th">แถบนี้คือคะแนนของท่าที่ใกล้ที่สุดตอนนี้ ไม่ใช่การยืนยันว่าถูก — ที่ถูกต้องคือเมื่อคะแนนมั่นคงพอที่จะลงมือ</span><span class="en" lang="en">This bar shows how close the nearest gesture looks right now — not a verdict. It counts only when the score is steady enough to act on.</span></p>
+          <span class="label live-head"><span class="th" lang="th">คะแนนท่าจากภาพสด</span><span class="en" lang="en">Gesture score from the live picture</span></span>
+          <div class="bars" data-bars></div>
+        </div>
+        <p class="readout live-say" data-live-say aria-live="polite"></p>
+        <div class="controls arm-row">
+          <button class="btn primary" type="button" data-arm aria-pressed="false">⚡ <span class="th" lang="th">เปิดใช้การกระทำ</span><span class="en" lang="en">Arm the actions</span></button>
+          <button class="btn" type="button" data-disarm>■ <span class="th" lang="th">พักไว้ก่อน</span><span class="en" lang="en">Rest them</span></button>
+        </div>
+        <p class="readout" data-arm-say aria-live="polite"></p>
+        <p class="readout log" data-log aria-live="polite"></p>
+        <p class="micro bench-note"><span class="th" lang="th">การกระทำเกิดขึ้นเมื่อท่าถูกต้องเท่านั้น ถ้าทายผิด มันจะลงมือผิดเรื่อง — กด “พักไว้ก่อน” เสมอเมื่อเล่นเสร็จ</span><span class="en" lang="en">Actions run on a correct guess. A wrong guess runs the wrong thing — always press “Rest them” when you stop playing.</span></p>
+      </div>
+
+      <div class="room-classes">
+        <div class="preset">
+          <label class="label" for="preset"><span class="th" lang="th">หรือเลือกชุดท่าอื่น</span><span class="en" lang="en">Or pick another set</span></label>
+          <select id="preset" class="field-input" data-preset></select>
+        </div>
+        <ol class="klasses" data-classes data-aria-th="กลุ่มท่าทั้งหมด" data-aria-en="All gesture groups"></ol>
+        <div class="controls room-more">
+          <button class="btn" type="button" data-add-class>+ <span class="th" lang="th">เพิ่มกลุ่ม</span><span class="en" lang="en">Add a group</span></button>
+        </div>
+        <div class="action-block" data-aria-th="ผูกแต่ละท่ากับการกระทำ" data-aria-en="Bind each gesture to an action">
+          <span class="label"><span class="th" lang="th">ผูกท่ากับการกระทำ</span><span class="en" lang="en">Bind a gesture to an action</span></span>
+          <div class="action-map" data-action-map></div>
+        </div>
+        <p class="micro"><span class="th" lang="th">รายการเลื่อนนี้เลือกได้เฉพาะสิ่งที่เกิดขึ้นในแท็บนี้ ไม่มีหลอดไฟจริง ไม่มีแอปถูกเปิด ไม่มีอะไรออกจากเครื่องคุณ</span><span class="en" lang="en">The dropdown picks only what happens in this tab: no real lamp, no app opened, nothing leaves your device.</span></p>
+
+        <div class="board" data-board data-aria-th="แผงบ้านจำลอง หลอดไฟสองดวง" data-aria-en="A pretend home board with two lamps">
+          <span class="label"><span class="th" lang="th">แผงบ้านจำลอง</span><span class="en" lang="en">A pretend home board</span></span>
+          <svg class="board-svg" viewBox="0 0 260 130" aria-hidden="true">
+            <path d="M18 62 L130 14 L242 62" fill="none" stroke="currentColor" stroke-width="5"/>
+            <rect x="38" y="62" width="184" height="56" fill="none" stroke="currentColor" stroke-width="5"/>
+            <circle class="lamp" data-lamp="0" cx="92" cy="90" r="13"/>
+            <circle class="lamp" data-lamp="1" cx="168" cy="90" r="13"/>
+          </svg>
+          <p class="micro"><span class="th" lang="th">บ้านหลังนี้วาดไว้ในหน้านี้ — การกด “หลอดไฟ” ไม่ได้แตะหลอดจริงแม้ดวงเดียว</span><span class="en" lang="en">This house is drawn on this page — pressing “Lamp” touches not one real bulb.</span></p>
+        </div>
+
+        <div class="link-spot" data-link-spot hidden>
+          <p class="micro"><span class="th" lang="th">เบราว์เซอร์ยอมให้เปิดหน้าต่างใหม่เฉพาะตอนคนคลิกเท่านั้น จึงเปิดรอไว้ไม่ได้ — นี่คือกฎที่หน้านี้ไม่แหก</span><span class="en" lang="en">A browser lets a window open only when a person clicks, so a page cannot hold one open — that is one rule this page will not break.</span></p>
+          <div class="controls">
+            <a class="btn primary" href="/handbook/actions" target="_blank" rel="noopener"><span class="th" lang="th">เปิดคู่มือ: เบราว์เซอร์ยอมให้ทำอะไร</span><span class="en" lang="en">Open the handbook: what a browser allows</span></a>
+          </div>
+        </div>
+
+        <p class="note"><strong><span class="th" lang="th">อยู่ในแท็บนี้เท่านั้น</span><span class="en" lang="en">This tab only.</span></strong> <span class="th" lang="th">ตัวอย่างทั้งหมดอยู่ในหน่วยความจำของแท็บนี้ ไม่ได้บันทึกและไม่ได้ส่งไปไหน ภาพจากกล้องของคุณประมวลผลในเครื่องนี้เท่านั้น</span><span class="en" lang="en">Your examples live in this tab's memory — not saved, not sent anywhere. Your camera's picture is processed on this device only.</span></p>
+        <p class="micro tips"><span class="th" lang="th">ให้ตัวอย่างหลากหลาย ทั้งมุม ระยะ และแสง ถ้าทุกภาพของท่าแรกคุณอยู่หน้ากำแพงสีเดิม เครื่องอาจเรียนรู้กำแพงแทนท่าของคุณ</span><span class="en" lang="en">Vary angle, distance and light. If every first-gesture example has the same wall behind it, the machine may learn the wall instead of your gesture.</span></p>
+      </div>
+    </div>
+    <div class="flash" data-flash aria-hidden="true"></div>
+  </section>
+
+  <section class="chapter" aria-labelledby="limits-title">
+    <header>
+      <span class="chapter-no">02</span>
+      <h2 id="limits-title"><span class="th" lang="th">สิ่งที่เบราว์เซอร์ไม่ยอมให้หน้านี้ทำ</span><span class="en" lang="en">What the browser will not let this page do</span></h2>
+    </header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">ทุกอย่างที่ห้องนี้ทำได้ ล้วนเป็นสิ่งที่เบราว์เซอร์ยอมให้หน้าเว็บทำเท่านั้น หน้าเว็บเป็น “แขก” ในเครื่องคุณ ไม่ใช่เจ้าของ ข้อจำกัดหลายข้อดูน่ารำคาญ แต่เป็นเหตุผลเดียวกันที่คุณเปิดเว็บแปลก ๆ โดยไม่ต้องกลัวว่ามันจะปิดเครื่องคุณ</p>
+        <p class="en" lang="en">Everything this room can do is something a browser allows a page to do. A web page is a guest on your machine, not its owner. Several limits here feel annoying — they are the same reason you can open a strange site without worrying it will shut your laptop down.</p>
+        <ul class="limits">
+          <li><span class="th" lang="th">เปิดแอปอื่น ปิดเครื่อง หรือสั่งให้ Mac ของคุณเข้าสู่โหมดพัก — ไม่มี API ของเว็บตัวไหนไปถึงระบบปฏิบัติการได้ขนาดนั้น</span><span class="en" lang="en">Open another app, shut down, or sleep your Mac — no web API reaches the operating system that far.</span></li>
+          <li><span class="th" lang="th">สั่งหลอดไฟจริงในบ้านคุณ — บ้านหลังนั้นอยู่ในภาพวาดเท่านั้น อุปกรณ์จริงต้องมีเซิร์ฟเวอร์และสิทธิ์ที่หน้านี้ไม่มี</span><span class="en" lang="en">Command a real lamp in your house — that house is a drawing; real devices need a server and permissions this page does not have.</span></li>
+          <li><span class="th" lang="th">เปิดหน้าต่างใหม่หรือเข้าเต็มจอโดยไม่มีคลิก — เบราว์เซอร์เรียกร้อง “การกระทำของคน” ก่อนเสมอ เพื่อกันเว็บลวนลามคุณ</span><span class="en" lang="en">Open a window or go full screen without a click — the browser always demands a person's action first, to stop pages pestering you.</span></li>
+          <li><span class="th" lang="th">สั่นบนแล็ปท็อปส่วนใหญ่ — เครื่องเหล่านั้นไม่มีเข็มสั่นให้สั่ง</span><span class="en" lang="en">Vibrate most laptops — those machines have no buzzer to command.</span></li>
+          <li><span class="th" lang="th">หยุดเพลงในแอปอื่น — หน้านี้ควบคุมเฉพาะสื่อของตัวเองเท่านั้น</span><span class="en" lang="en">Pause music in another app — this page controls only its own media.</span></li>
+        </ul>
+        <p class="micro"><span class="th" lang="th">อ่านรายละเอียดทั้งหมด พร้อมเหตุผลและทางเลือกอื่น ใน <a href="/handbook/actions">คู่มือ: เบราว์เซอร์ยอมให้หน้านี้ทำอะไร</a></span><span class="en" lang="en">Read every limit, with its reason and the alternatives, in <a href="/handbook/actions">the handbook: what a browser allows this page to do</a>.</span></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/gesture.js?v={{v}}"></script>
+</body>
+</html>

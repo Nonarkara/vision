@@ -1,0 +1,85 @@
+/* /gesture — only what vision.css does not already provide. */
+
+/* Say it before you touch it */
+.start-block { padding: 24px var(--gutter); display: grid; gap: 16px; }
+.start-block h2 { font-size: clamp(1.4rem, 2vw, 2rem); }
+.start-block .steps { margin: 0; }
+
+/* The room: camera on the left, gestures and their actions on the right */
+.room { padding: clamp(40px, 6vw, 96px) var(--gutter); }
+.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 70ch; }
+.room-head .prose { margin: 0; }
+.room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
+
+.room-bench { scroll-margin-top: 90px; }
+.room-bench .controls .btn { flex: 1 1 auto; }
+.live { display: grid; gap: 2px; padding: 0 0 2px; }
+.live-head { display: block; padding: 12px 16px 6px; color: var(--gray); }
+.live-head .micro { text-transform: none; letter-spacing: 0; }
+.live-say { color: var(--naples); }
+.bench-note { margin: 0; padding: 4px 16px 16px; color: var(--gray); }
+
+/* Arm, then the trail of what actually happened */
+.arm-row { padding-top: 4px; }
+.log { min-height: calc(var(--target) * 2); color: var(--naples); }
+
+.room-classes { display: grid; gap: 2px; min-width: 0; }
+.preset { display: grid; gap: 6px; padding: 0 0 16px; }
+.klasses { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.klass { display: grid; gap: 2px; padding: 12px 12px 2px; min-width: 0; }
+.klass-head { display: grid; grid-template-columns: var(--target) minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.klass-glyph { display: flex; align-items: center; justify-content: center; min-height: var(--target); font-size: 1.25rem; }
+.klass-name { min-width: 0; }
+.klass-count { font-size: var(--micro); padding: 0 4px; white-space: nowrap; }
+.klass-actions { background: transparent; }
+.klass-actions .btn { flex: 1 1 auto; padding: 0 12px; }
+.klass-hold { touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+
+.shots { display: flex; gap: 2px; overflow-x: auto; min-height: 52px; padding: 2px 0 10px; scrollbar-width: thin; }
+.shot { position: relative; flex: none; width: 64px; height: 48px; padding: 0; border: 0; background: var(--black); cursor: pointer; }
+.shot canvas { width: 100%; height: 100%; object-fit: cover; }
+.shot:hover::after, .shot:focus-visible::after {
+  content: "×"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--black) 70%, transparent); color: var(--white); font-family: var(--mono);
+}
+.shots-empty { align-self: center; color: var(--gray); }
+.room-more { background: transparent; padding-top: 2px; }
+.tips { margin: 12px 0 0; max-width: 60ch; }
+.room-classes .note { margin: 14px 0 0; }
+
+/* Each gesture, bound to what it may do */
+.action-block { display: grid; gap: 6px; padding-top: 14px; }
+.action-map { display: grid; gap: 2px; }
+.action-row {
+  display: grid; grid-template-columns: var(--target) minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 8px; align-items: center; padding: 6px 8px;
+  background: var(--black-2); color: var(--white);
+}
+.action-row .action-name { font-size: var(--micro); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.action-row .field-input { min-width: 0; }
+
+/* The pretend board: gray structure, and only the lit lamp gets the signal */
+.board { display: grid; gap: 8px; padding: 16px 12px 12px; margin-top: 2px; background: var(--quiet); color: var(--quiet-text); }
+.board-svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
+.lamp { fill: none; stroke: currentColor; stroke-width: 4; transition: fill 160ms linear; }
+.lamp.is-on { fill: var(--signal); stroke: var(--signal); }
+.board .micro { margin: 0; }
+
+/* The honest fallback when a popup was blocked */
+.link-spot { display: grid; gap: 10px; padding: 14px 12px; background: var(--black-2); color: var(--white); }
+.link-spot[hidden] { display: none; }
+.link-spot .micro { margin: 0; color: var(--gray); }
+.link-spot .controls { background: transparent; }
+
+/* One white wash, never strobed: the gesture's own cooldown paces it */
+.flash {
+  position: fixed; inset: 0; background: var(--white); opacity: 0;
+  pointer-events: none; z-index: 60; transition: opacity 80ms linear;
+}
+.flash.is-flash { opacity: 1; transition: none; }
+@media (prefers-reduced-motion: reduce) { .flash { transition: none; } }
+
+/* The limits, listed like the fine print they are */
+.limits { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 2px; max-width: 74ch; }
+.limits li { background: var(--quiet); color: var(--quiet-text); padding: 10px 14px; font-size: var(--micro); }

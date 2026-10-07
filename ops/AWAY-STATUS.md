@@ -81,3 +81,16 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Shipped the handbook: `docs/*.md` now renders to `/handbook` (index, chapters 01–08, glossary, reading list) via `scripts/build-handbook.mjs`, checked by `npm run check` (`build-handbook --check`) and gated for two-hop reachability from `/`.
 - Added a hand-drawn `docs/img/06-pipeline.svg` (replacing the only mermaid block) and a bilingual *Try it yourself* exercise in all eight chapters; site links added at `/learn`, footer, and sitemap.
 - `npm run check` green: 69/69 tests, 21 pages, 73 local references, docs links resolve. One intermittent test failure observed once (did not recur in five runs); no action taken.
+
+## 2026-10-07 06:35 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.4.0, uptime 19,209 seconds. App PID 53388 and tunnel PID 13443 running with KeepAlive. Preserve the concurrent handbook release.
+- Catalogue 4,008 cameras; loaded/upstream 2026-10-06 23:34:53 UTC, fresh within seconds of checking. Last five ten-minute refreshes succeeded.
+- Earlier upstream timeouts at 17:55 and 20:05 UTC recovered without intervention. Relay idle, no resting hosts, memory 23–25 MB.
+- No sustained fault or pending work owned by this chat. No restart, deployment, extra camera traffic or machine-wide checks needed; existing scoped heartbeat continues.
+
+## 2026-10-07 09:11 Asia/Bangkok
+
+- Shipped 1.5.0: new room `/gesture` (room 04) — teach 2–4 gestures with the /train embedding + k-NN stack, bind each to one of eight in-browser actions (beep, vibrate, fullscreen, flash, two pretend SVG lamps, a page-written WAV tone, a handbook link). Firing uses leader-stability + global cooldown (7 new tests in `tests/gesture.test.js`); every refusal is reported bilingually; arming takes one click because the browser's user-gesture rule demands it. Nav/home index//learn where-next/README renumbered to nine rooms (Gestures = 04).
+- New handbook reference `/handbook/actions` from `docs/reference/browser-actions.md`: why a page can never open an app or sleep a Mac, the user-gesture rule, what each of the eight actions uses and when it refuses, and what a native helper or server would actually need.
+- `npm run check` green: 76/76 tests, 23 pages, 77 local references, docs links resolve. Headless screenshots verified the room (light+dark), arm/log/board, the limits chapter, and the handbook action table; `/gesture` span parity 58/58.

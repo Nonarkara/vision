@@ -35,6 +35,7 @@ export const PAGES = {
   '/learn': 'learn',
   '/cameras': 'cameras',
   '/train': 'train',
+  '/gesture': 'gesture',
   '/games': 'games',
   '/everyday': 'everyday',
   '/research': 'research',
@@ -52,6 +53,7 @@ export const PAGES = {
   '/handbook/08': 'handbook/08',
   '/handbook/glossary': 'handbook/glossary',
   '/handbook/reading': 'handbook/reading',
+  '/handbook/actions': 'handbook/actions',
 }
 
 /**
