@@ -1,0 +1,43 @@
+/* /drive — only what vision.css does not already have. */
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.drive { padding: 0 var(--gutter) clamp(32px, 4vw, 56px); }
+.drive-grid { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr); gap: var(--gap); align-items: start; }
+@media (max-width: 1000px) { .drive-grid { grid-template-columns: 1fr; } }
+
+.track { display: block; width: 100%; aspect-ratio: 200 / 140; cursor: pointer; background: var(--black-1); }
+
+.knobs { display: grid; gap: 2px; padding-top: 2px; }
+.knob { display: grid; grid-template-columns: 5.5em repeat(3, minmax(0, 1fr)); gap: 2px; align-items: stretch; }
+.knob .label { display: flex; align-items: center; padding: 0 12px; color: var(--gray); }
+.knob .btn { min-width: 0; padding: 0 6px; }
+
+.drive-side { display: grid; gap: 2px; }
+.focus { display: grid; gap: 8px; padding: 16px; }
+.focus p { margin: 0; }
+.focus .label { color: var(--gray); }
+.focus-name { font-family: var(--narrow); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--naples); }
+html[data-lang="th"] .focus-name { font-family: var(--thai); }
+.focus-row { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 8px; font-size: var(--micro); min-height: 2.9em; }
+.focus .btn { justify-self: start; }
+
+.cards { display: grid; gap: 2px; }
+.car-card {
+  display: grid; grid-template-columns: 2.4em minmax(0, 1fr); grid-template-areas: "id name" "id say" "id score"; gap: 2px 10px; align-items: baseline;
+  padding: 10px 12px; border: 0; text-align: left; cursor: pointer;
+  background: var(--black); color: var(--white); font: inherit; font-size: var(--micro);
+}
+.car-card:hover { background: var(--black-2); }
+.car-card[aria-pressed="true"] { outline: 2px solid var(--white); outline-offset: -2px; }
+.car-card.is-crashed .car-id { background: var(--signal); }
+.car-id { grid-area: id; align-self: start; display: flex; align-items: center; justify-content: center; height: 2.2em; font-weight: 600; color: var(--black); }
+.car-card[data-style="careful"] .car-id { background: var(--white); }
+.car-card[data-style="normal"] .car-id { background: var(--gray); }
+.car-card[data-style="hasty"] .car-id { background: var(--naples); }
+.car-name { grid-area: name; font-weight: 600; }
+.car-score { grid-area: score; color: var(--gray); }
+.car-say { grid-area: say; color: var(--naples); min-height: 2.9em; }
+
+.legend { margin: 8px 0 0; }
+.habits th:first-child { width: 34%; }

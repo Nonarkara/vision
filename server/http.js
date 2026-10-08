@@ -36,6 +36,7 @@ export const PAGES = {
   '/cameras': 'cameras',
   '/train': 'train',
   '/gesture': 'gesture',
+  '/drive': 'drive',
   '/games': 'games',
   '/everyday': 'everyday',
   '/research': 'research',

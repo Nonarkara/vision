@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/drive.css?v={{v}}">
+<title>Drive: cars that tell you what they see · ขับเอง: รถที่บอกว่าเห็นอะไร — Vision</title>
+<meta name="description" content="A top-view test track with a roundabout, a traffic light, zebra crossings, people and stray dogs. Six self-driving cars race for laps without hitting anyone — and each one tells you what it sees and why it brakes.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="page-head" aria-labelledby="title">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 05 · ขับเอง</span><span class="en" lang="en">Room 05 · Drive</span></span>
+      <h1 id="title"><span class="th" lang="th">หกคัน กติกาเดียว: ห้ามชนใคร</span><span class="en" lang="en">Six cars. One rule: hit nobody.</span></h1>
+    </div>
+    <div>
+      <p class="lede th" lang="th">รถแต่ละคันมีกล้องและสมองเล็ก ๆ เป้าหมายคือวิ่งให้ได้หลายรอบที่สุด โดยไม่ชนรถ คน หรือสุนัข แตะรถคันไหนก็ได้ แล้วดูว่ามันเห็นอะไร และทำไมมันถึงเบรก</p>
+      <p class="lede en" lang="en">Each car has a camera and a small brain. The goal: as many laps as possible without hitting a car, a person or a dog. Tap any car to see what it sees — and why it brakes.</p>
+    </div>
+  </section>
+
+  <section class="drive" data-drive aria-labelledby="track-title">
+    <h2 id="track-title" class="visually-hidden"><span class="th" lang="th">สนามทดสอบ</span><span class="en" lang="en">The test track</span></h2>
+    <div class="drive-grid">
+      <div class="bench">
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">มองจากด้านบน</span><span class="en" lang="en">Seen from above</span></span>
+          <span class="num" data-totals aria-live="off"></span>
+        </div>
+        <canvas class="track" data-track role="img" data-aria-th="สนามทดสอบมองจากด้านบน มีวงเวียน ไฟจราจร ทางม้าลาย คน สุนัข และรถหกคัน รายละเอียดของรถแต่ละคันอยู่ในรายการข้าง ๆ" data-aria-en="The test track from above: a roundabout, a traffic light, zebra crossings, people, dogs and six cars. Each car's details are in the list beside it."></canvas>
+        <div class="controls">
+          <button class="btn primary" type="button" data-play aria-pressed="true"><span data-play-label></span></button>
+          <button class="btn" type="button" data-set="speed" data-value="1" aria-pressed="true">1×</button>
+          <button class="btn" type="button" data-set="speed" data-value="3" aria-pressed="false">3×</button>
+          <button class="btn" type="button" data-reset>↻ <span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
+          <button class="btn" type="button" data-all aria-pressed="false"><span class="th" lang="th">ดูสายตาทุกคัน</span><span class="en" lang="en">Show every car’s view</span></button>
+        </div>
+        <div class="knobs">
+          <div class="knob" role="group" data-aria-th="สภาพอากาศ" data-aria-en="Weather">
+            <span class="label"><span class="th" lang="th">ฟ้า</span><span class="en" lang="en">Sky</span></span>
+            <button class="btn" type="button" data-set="weather" data-value="day" aria-pressed="true"><span class="th" lang="th">กลางวัน</span><span class="en" lang="en">Day</span></button>
+            <button class="btn" type="button" data-set="weather" data-value="rain" aria-pressed="false"><span class="th" lang="th">ฝนตก</span><span class="en" lang="en">Rain</span></button>
+            <button class="btn" type="button" data-set="weather" data-value="night" aria-pressed="false"><span class="th" lang="th">กลางคืน</span><span class="en" lang="en">Night</span></button>
+          </div>
+          <div class="knob" role="group" data-aria-th="คนเดินถนน" data-aria-en="People">
+            <span class="label"><span class="th" lang="th">คน</span><span class="en" lang="en">People</span></span>
+            <button class="btn" type="button" data-set="people" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span></button>
+            <button class="btn" type="button" data-set="people" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span></button>
+            <button class="btn" type="button" data-set="people" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span></button>
+          </div>
+          <div class="knob" role="group" data-aria-th="สุนัขจรจัด" data-aria-en="Stray dogs">
+            <span class="label"><span class="th" lang="th">สุนัข</span><span class="en" lang="en">Dogs</span></span>
+            <button class="btn" type="button" data-set="dogs" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span></button>
+            <button class="btn" type="button" data-set="dogs" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span></button>
+            <button class="btn" type="button" data-set="dogs" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="drive-side">
+        <div class="focus field-black" data-focus aria-live="polite">
+          <span class="label"><span class="th" lang="th">มองผ่านตารถคันนี้</span><span class="en" lang="en">Looking through this car’s eyes</span></span>
+          <p class="focus-name" data-focus-name></p>
+          <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span></span><span class="num" data-focus-sees></span></p>
+          <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span></span><span data-focus-does></span></p>
+          <button class="btn" type="button" data-blind aria-pressed="false"></button>
+        </div>
+        <div class="cards" data-cards></div>
+        <p class="micro legend"><span class="th" lang="th">สีขาว = ระวัง · สีเทา = ปกติ · สีเหลือง = ใจร้อน · กรอบและพัดสีส้ม = สิ่งที่กล้องของรถเห็น · จุดขาว = คน · ตัวเหลืองเล็ก = สุนัข</span><span class="en" lang="en">White = careful · grey = normal · yellow = hasty · orange boxes and fan = what a car’s camera sees · white dots = people · small yellow shapes = dogs</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="decide" aria-labelledby="decide-h">
+    <header>
+      <span class="chapter-no">01</span>
+      <h2 id="decide-h"><span class="th" lang="th">รถตัดสินใจอย่างไร</span><span class="en" lang="en">How a car decides</span></h2>
+    </header>
+    <div class="chapter-body">
+      <figure class="flow-fig pipe-scroll">
+        <svg class="diagram flow" viewBox="0 0 1000 200">
+          <path class="stroke" d="M60 30 L60 90 L130 60 Z"/>
+          <path class="stroke" d="M130 60 L190 30 M130 60 L190 90"/>
+          <rect class="stroke-signal" x="160" y="44" width="28" height="28"/>
+          <rect class="fill-signal" x="160" y="26" width="58" height="16"/>
+          <text class="on-signal" x="163" y="38">94%</text>
+          <circle class="stroke" cx="350" cy="60" r="30"/>
+          <path class="stroke" d="M350 60 V40 M350 60 L364 70"/>
+          <circle class="fill-gray" cx="590" cy="76" r="6"/>
+          <circle class="stroke-gray" cx="608" cy="62" r="6"/>
+          <circle class="stroke-gray" cx="626" cy="48" r="6"/>
+          <path class="stroke" d="M560 30 H660" stroke-dasharray="6 5"/>
+          <path class="stroke" d="M560 92 H660" stroke-dasharray="6 5"/>
+          <rect class="stroke" x="806" y="34" width="110" height="18"/>
+          <rect class="fill-signal" x="806" y="34" width="38" height="18"/>
+          <rect class="stroke" x="806" y="62" width="110" height="18"/>
+          <rect class="fill-gray" x="806" y="62" width="80" height="18"/>
+          <path class="stroke" d="M254 60 H274 M266 52 L275 60 L266 68"/>
+          <path class="stroke" d="M474 60 H494 M486 52 L495 60 L486 68"/>
+          <path class="stroke" d="M714 60 H734 M726 52 L735 60 L726 68"/>
+          <text class="big en" lang="en" x="140" y="132" text-anchor="middle">1 · See</text>
+          <text class="big thai th" lang="th" x="140" y="132" text-anchor="middle">1 · มอง</text>
+          <text class="en" lang="en" x="140" y="156" text-anchor="middle">boxes, labels, confidence</text>
+          <text class="thai th" lang="th" x="140" y="156" text-anchor="middle">กรอบ ชื่อ และความมั่นใจ</text>
+          <text class="en" lang="en" x="140" y="178" text-anchor="middle">far, small, dark = missed more</text>
+          <text class="thai th" lang="th" x="140" y="178" text-anchor="middle">ไกล เล็ก มืด = พลาดบ่อยขึ้น</text>
+          <text class="big en" lang="en" x="370" y="132" text-anchor="middle">2 · Remember</text>
+          <text class="big thai th" lang="th" x="370" y="132" text-anchor="middle">2 · จำไว้</text>
+          <text class="en" lang="en" x="370" y="156" text-anchor="middle">keeps a thing for 0.7 s</text>
+          <text class="thai th" lang="th" x="370" y="156" text-anchor="middle">จำสิ่งที่เห็นไว้ 0.7 วินาที</text>
+          <text class="en" lang="en" x="370" y="178" text-anchor="middle">after the camera loses it</text>
+          <text class="thai th" lang="th" x="370" y="178" text-anchor="middle">แม้กล้องจะมองไม่เห็นแล้ว</text>
+          <text class="big en" lang="en" x="610" y="132" text-anchor="middle">3 · Predict</text>
+          <text class="big thai th" lang="th" x="610" y="132" text-anchor="middle">3 · คาดเดา</text>
+          <text class="en" lang="en" x="610" y="156" text-anchor="middle">where will it be in 3 s?</text>
+          <text class="thai th" lang="th" x="610" y="156" text-anchor="middle">อีก 3 วินาทีมันจะอยู่ตรงไหน</text>
+          <text class="en" lang="en" x="610" y="178" text-anchor="middle">inside my lane, or not?</text>
+          <text class="thai th" lang="th" x="610" y="178" text-anchor="middle">จะเข้ามาในเลนของฉันไหม</text>
+          <text class="big en" lang="en" x="860" y="132" text-anchor="middle">4 · Choose a speed</text>
+          <text class="big thai th" lang="th" x="860" y="132" text-anchor="middle">4 · เลือกความเร็ว</text>
+          <text class="en" lang="en" x="860" y="156" text-anchor="middle">each thing asks for one</text>
+          <text class="thai th" lang="th" x="860" y="156" text-anchor="middle">ทุกสิ่งขอความเร็วของมัน</text>
+          <text class="en" lang="en" x="860" y="178" text-anchor="middle">the most careful one wins</text>
+          <text class="thai th" lang="th" x="860" y="178" text-anchor="middle">ฟังคำขอที่ระวังที่สุด</text>
+        </svg>
+        <figcaption><span class="th" lang="th">สิบครั้งต่อวินาที รถทุกคันทำสี่ขั้นนี้ แล้วบอกคุณว่าสิ่งไหนทำให้มันชะลอ</span><span class="en" lang="en">Ten times a second, every car runs these four steps — then tells you which thing made it slow down.</span></figcaption>
+      </figure>
+      <div class="prose">
+        <p><span class="th" lang="th">ทุกสิ่งที่รถเชื่อว่ามีอยู่ — รถคันหน้า ไฟแดง คนบนทางม้าลาย สุนัขที่กำลังวิ่ง — ถูกถามคำถามเดียวกัน: “ถ้าบนถนนมีแค่สิ่งนี้ ฉันควรเร่งหรือเบรกแค่ไหน” รถเชื่อคำตอบที่ระวังที่สุด และสิ่งนั้นคือเหตุผลที่มันบอกคุณ</span><span class="en" lang="en">Everything the car believes is there — the car ahead, a red light, a person on the zebra, a running dog — is asked the same question: “if you were the only thing on the road, how hard should I speed up or brake?” The car obeys the most careful answer, and that thing is the reason it gives you.</span></p>
+        <p><span class="th" lang="th">สังเกตว่าบางครั้งสุนัขไกล ๆ ถูกเรียกว่า “แมว?” แต่รถก็ยังเบรก สำหรับการขับรถ สิ่งสำคัญคือ “มีอะไรอยู่ตรงนั้น” ไม่ใช่ “มันชื่ออะไร”</span><span class="en" lang="en">Notice that a far-away dog is sometimes called “cat?” — and the car brakes anyway. For driving, what matters is “something is there”, not “what is it called”.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter field-quiet" id="drivers" aria-labelledby="drivers-h">
+    <header>
+      <span class="chapter-no">02</span>
+      <h2 id="drivers-h"><span class="th" lang="th">นิสัยสามแบบ</span><span class="en" lang="en">Three habits</span></h2>
+    </header>
+    <div class="chapter-body">
+      <table class="table habits">
+        <thead><tr><th></th><th><span class="th" lang="th">ระวัง (1, 4)</span><span class="en" lang="en">Careful (1, 4)</span></th><th><span class="th" lang="th">ปกติ (2, 5)</span><span class="en" lang="en">Normal (2, 5)</span></th><th><span class="th" lang="th">ใจร้อน (3, 6)</span><span class="en" lang="en">Hasty (3, 6)</span></th></tr></thead>
+        <tbody>
+          <tr><th><span class="th" lang="th">มองเห็นไกล (กลางวัน)</span><span class="en" lang="en">Sees as far as (daylight)</span></th><td class="num">50 m</td><td class="num">40 m</td><td class="num">28 m</td></tr>
+          <tr><th><span class="th" lang="th">ความเร็วสูงสุด</span><span class="en" lang="en">Top speed</span></th><td class="num">45 km/h</td><td class="num">50 km/h</td><td class="num">60 km/h</td></tr>
+          <tr><th><span class="th" lang="th">เว้นระยะจากคันหน้า</span><span class="en" lang="en">Gap to the car ahead</span></th><td class="num">1.8 s</td><td class="num">1.2 s</td><td class="num">0.6 s</td></tr>
+          <tr><th><span class="th" lang="th">หยุดให้คนที่รอข้าม</span><span class="en" lang="en">Stops for people waiting to cross</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
+          <tr><th><span class="th" lang="th">ชะลอเมื่อเห็นสุนัขข้างทาง</span><span class="en" lang="en">Slows for a dog by the road</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
+          <tr><th><span class="th" lang="th">ไม่ขับเร็วเกินระยะที่มองเห็น</span><span class="en" lang="en">Never faster than it can see</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
+        </tbody>
+      </table>
+      <div class="prose">
+        <h3><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try this</span></h3>
+        <ol>
+          <li><span class="th" lang="th">เปลี่ยนเป็น “กลางคืน” แล้วดูรถคันที่ 3 และ 6 มันมองเห็นแค่ 17 เมตร แต่ยังขับ 60 กม./ชม. — ต้องใช้ราว 14 เมตรแค่เพื่อเบรก</span><span class="en" lang="en">Switch to Night and watch cars 3 and 6. They can see only 17 m but still drive at 60 km/h — braking alone takes about 14 m.</span></li>
+          <li><span class="th" lang="th">ปิดกล้องของรถคันที่ 1 มันจะฝ่าไฟแดงเพราะมองไม่เห็นไฟ แล้วดูว่าใครต้องหลบให้มัน — ความปลอดภัยบนถนนไม่ได้มาจากรถคันเดียว</span><span class="en" lang="en">Cover car 1’s camera. It runs the red light because it cannot see it — watch who has to dodge it. Safety on a road never comes from one car alone.</span></li>
+          <li><span class="th" lang="th">ตั้งสุนัขเป็น “เยอะ” รถคันไหนชะลอก่อนที่สุนัขจะวิ่ง</span><span class="en" lang="en">Set dogs to Many. Which cars slow down before the dog runs?</span></li>
+          <li><span class="th" lang="th">ใครได้รอบมากที่สุด และคุ้มกับการชนไหม คนที่รอข้ามถนนคิดอย่างไร</span><span class="en" lang="en">Who gets the most laps — and is it worth the crashes? What would the person waiting at the zebra say?</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="honest" aria-labelledby="honest-h">
+    <header>
+      <span class="chapter-no">03</span>
+      <h2 id="honest-h"><span class="th" lang="th">ตรงไหนจริง ตรงไหนจำลอง</span><span class="en" lang="en">What is real, what is pretend</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p><span class="th" lang="th">กล้องในห้องนี้เป็นการจำลอง ไม่ใช่โครงข่ายประสาทเทียม: สิ่งที่อยู่ในพัดสีส้มถูก “เห็น” ด้วยโอกาสที่ลดลงตามระยะ ขนาด และแสง — รูปแบบเดียวกับที่ตัวตรวจจับจริงพลาด ถ้าอยากเห็นตัวตรวจจับจริงทำงาน ไปที่ <a href="/games">ห้องเกม</a></span><span class="en" lang="en">The camera in this room is simulated, not a neural network: whatever is inside the orange fan is “seen” with a chance that falls with distance, size and light — the same shape of mistake a real detector makes. To watch the real detector at work, go to <a href="/games">the games room</a>.</span></p>
+      <p><span class="th" lang="th">การเลือกความเร็วใช้แบบจำลองผู้ขับขี่อัจฉริยะ (Intelligent Driver Model; Treiber, Hennecke &amp; Helbing, 2000) ส่วนการคาดว่าใครจะเข้ามาในเลน ยืมแนวคิดจากตัววางแผนแบบสุ่มตัวอย่างเส้นทาง เช่น Frenetix ของทีม TUM-AVS มหาวิทยาลัยเทคนิคมิวนิก (Trauth et al., 2024) แต่ย่อลงเหลือไม่กี่สิบบรรทัด</span><span class="en" lang="en">Choosing a speed uses the Intelligent Driver Model (Treiber, Hennecke &amp; Helbing, 2000). Predicting who will enter the lane borrows the idea behind sampling planners such as Frenetix from TUM’s autonomous-vehicle group (Trauth et al., 2024) — shrunk to a few dozen lines.</span></p>
+      <p><span class="th" lang="th">รถจริงใช้ทั้งกล้อง เรดาร์ ไลดาร์ และแผนที่ละเอียด ถูกทดสอบเป็นล้านกิโลเมตร และยังพลาดได้ ห้องนี้ไม่ได้เรียนรู้อะไรเอง กติกาทุกข้อเขียนด้วยมือ — เพื่อให้คุณอ่านเหตุผลของมันได้ทุกครั้ง</span><span class="en" lang="en">Real cars combine cameras, radar, lidar and detailed maps, are tested over millions of kilometres, and still make mistakes. Nothing in this room learns by itself; every rule is written by hand — so that you can always read its reason.</span></p>
+    </div>
+  </section>
+
+</main>
+<!--#foot-->
+<script type="module" src="/js/pages/drive.js?v={{v}}"></script>
+</body>
+</html>
