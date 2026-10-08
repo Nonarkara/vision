@@ -125,7 +125,7 @@ curl -sS https://vision.nonarkara.org/api/health | python3 -m json.tool
 | `/research` | papers, models, open questions |
 | `/system` | live diagrams and health |
 | `/legal` | the fine print |
-| `/story` | the control rooms, the makers |
+| `/story` | the control rooms, the maker |
 
 Append `?source=mine` to any room's URL to start on your own camera.
 

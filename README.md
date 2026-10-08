@@ -45,14 +45,13 @@ Which raised the question: **how do we know the humans didn't miss anything?**
 
 That was his first understanding of what computer vision should be — not a machine that replaces the operator or knows who anyone is, but an eye that doesn't blink, watching every screen and tapping a human on the shoulder: *this one, now* — always with a confidence number, because machines miss things too.
 
-Knowledge came from **Dr Supakorn Siddhichai** — PhD in computer vision, Imperial College London; now acting CEO of depa, where Dr Non works. Dr Non learned computer vision from him, and together they built this system. The full story, with the photos from those control rooms, is at [/story](https://vision.nonarkara.org/story).
+An early spark came from conversations with **Dr Supakorn Siddhichai**, who trained in computer vision at Imperial College London decades ago and is now acting CEO of depa, where Dr Non works. The curiosity was his to light; the learning, the design and every line of this system are Dr Non's. The full story, with the photos from those control rooms, is at [/story](https://vision.nonarkara.org/story).
 
-### Makers
+### Maker
 
 | | |
 |---|---|
-| **Dr Non Arkaraprasertkul** · creator | Senior Expert, Smart City Promotion Department, Digital Economy Promotion Agency (depa). Initiator and steward of [FloodDash](https://flood.nonarkara.org) — the camera wall this classroom runs on. |
-| **Dr Supakorn Siddhichai** · co-creator, computer vision | PhD in computer vision, Imperial College London. Acting CEO, depa. |
+| **Dr Non Arkaraprasertkul** · creator and builder | Senior Expert, Smart City Promotion Department, Digital Economy Promotion Agency (depa). Initiator and steward of [FloodDash](https://flood.nonarkara.org) — the camera wall this classroom runs on. |
 
 ---
 
@@ -70,7 +69,7 @@ Knowledge came from **Dr Supakorn Siddhichai** — PhD in computer vision, Imper
 | `/research` | 07 Research | Sixty years of papers, the ones this site runs on, open questions. |
 | `/system` | 08 System | Diagrams, relay rules, CSP, models, live health, credits. |
 | `/legal` | 09 Fine print | PDPA (B.E. 2562), ownership, what not to do, takedowns. |
-| `/story` | The story | The IOC photos (with the detector counting screens vs people), a live six-camera wall the machine watches, the makers. |
+| `/story` | The story | The IOC photos (with the detector counting screens vs people), a live six-camera wall the machine watches, the maker. |
 
 ---
 

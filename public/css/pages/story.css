@@ -79,11 +79,6 @@
 .creator .role [lang="th"] { font-family: var(--thai); }
 .creator p { font-size: var(--micro); max-width: 52ch; }
 .portrait { width: 120px; height: 120px; object-fit: cover; filter: grayscale(1) contrast(1.1); }
-.monogram {
-  display: flex; align-items: center; justify-content: center;
-  width: 120px; height: 120px; background: var(--field); color: var(--field-text);
-  font-family: var(--narrow); font-weight: 700; font-size: 2.75rem;
-}
 @media (max-width: 480px) { .creator { grid-template-columns: 1fr; } }
 /* On-screen display: where and when the photo was taken, from its own metadata. */
 .shot-osd { position: absolute; right: 0; bottom: 0; padding: 4px 8px; font-size: 0.75rem; letter-spacing: 0.04em; background: var(--black); color: var(--naples); }

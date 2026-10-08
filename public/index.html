@@ -56,6 +56,103 @@
     </div>
   </section>
 
+  <section aria-labelledby="pipe-title">
+    <div class="page-head">
+      <h2 id="pipe-title"><span class="th" lang="th">คอมพิวเตอร์มองเห็นอย่างไร ในห้าขั้น</span><span class="en" lang="en">How a computer sees, in five steps</span></h2>
+      <p class="lede th" lang="th">เครื่องไม่เห็นแบบคน มันเดินทางจากแสงไปสู่ตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดา พร้อมบอกความมั่นใจเสมอ</p>
+      <p class="lede en" lang="en">A machine does not see the way you do. It walks from light to numbers, edges, motion — then a guess, always with its confidence attached.</p>
+    </div>
+    <figure class="flow-fig pipe-figure">
+      <div class="pipe-scroll">
+        <svg class="diagram flow" viewBox="0 0 1000 200">
+          <a href="/learn#numbers">
+            <rect class="stroke" x="58" y="30" width="64" height="46"/>
+            <rect class="stroke" x="66" y="22" width="20" height="8"/>
+            <circle class="stroke" cx="90" cy="53" r="13"/>
+            <path class="stroke" d="M16 40 L50 48"/>
+            <path class="stroke" d="M12 53 L50 53"/>
+            <path class="stroke" d="M16 66 L50 58"/>
+            <text class="big en" lang="en" x="90" y="132" text-anchor="middle">Light enters</text>
+            <text class="big thai th" lang="th" x="90" y="132" text-anchor="middle">แสงเข้ากล้อง</text>
+            <text class="en" lang="en" x="90" y="156" text-anchor="middle">a picture arrives</text>
+            <text class="thai th" lang="th" x="90" y="156" text-anchor="middle">ภาพมาถึงเครื่อง</text>
+            <text class="en" lang="en" x="90" y="182" text-anchor="middle">Chapter 01</text>
+            <text class="thai th" lang="th" x="90" y="182" text-anchor="middle">บทที่ 01</text>
+          </a>
+          <a href="/learn#colour">
+            <rect class="stroke" x="253" y="16" width="84" height="84"/>
+            <path class="stroke" d="M274 16 V100"/>
+            <path class="stroke" d="M295 16 V100"/>
+            <path class="stroke" d="M316 16 V100"/>
+            <path class="stroke" d="M253 37 H337"/>
+            <path class="stroke" d="M253 58 H337"/>
+            <path class="stroke" d="M253 79 H337"/>
+            <rect class="fill-ink" x="296" y="39" width="19" height="18"/>
+            <rect class="fill-gray" x="275" y="60" width="19" height="18"/>
+            <rect class="fill-naples" x="317" y="81" width="19" height="18"/>
+            <text x="257" y="31">62</text>
+            <text x="278" y="31">9</text>
+            <text x="299" y="31">80</text>
+            <text x="320" y="31">44</text>
+            <text class="big en" lang="en" x="295" y="132" text-anchor="middle">Pixels are numbers</text>
+            <text class="big thai th" lang="th" x="295" y="132" text-anchor="middle">พิกเซลคือตัวเลข</text>
+            <text class="en" lang="en" x="295" y="156" text-anchor="middle">every dot carries a value</text>
+            <text class="thai th" lang="th" x="295" y="156" text-anchor="middle">ทุกจุดมีตัวเลขของมัน</text>
+            <text class="en" lang="en" x="295" y="182" text-anchor="middle">Chapter 02</text>
+            <text class="thai th" lang="th" x="295" y="182" text-anchor="middle">บทที่ 02</text>
+          </a>
+          <a href="/learn#convolution">
+            <path class="stroke" d="M432 96 L474 40 L516 96 Z"/>
+            <rect class="stroke-signal" x="459" y="53" width="30" height="30" stroke-dasharray="4 3"/>
+            <path class="stroke-signal" d="M540 96 L566 60 L592 96"/>
+            <text class="big en" lang="en" x="500" y="132" text-anchor="middle">A window finds edges</text>
+            <text class="big thai th" lang="th" x="500" y="132" text-anchor="middle">หน้าต่างเลื่อนหาขอบ</text>
+            <text class="en" lang="en" x="500" y="156" text-anchor="middle">outlines replace colour</text>
+            <text class="thai th" lang="th" x="500" y="156" text-anchor="middle">ขอบแทนสี</text>
+            <text class="en" lang="en" x="500" y="182" text-anchor="middle">Chapters 04–05</text>
+            <text class="thai th" lang="th" x="500" y="182" text-anchor="middle">บทที่ 04–05</text>
+          </a>
+          <a href="/learn#motion">
+            <rect class="stroke" x="645" y="20" width="64" height="46"/>
+            <rect class="stroke" x="665" y="42" width="64" height="46"/>
+            <rect class="fill-signal" x="701" y="58" width="26" height="28"/>
+            <text class="big en" lang="en" x="705" y="132" text-anchor="middle">Catches what moves</text>
+            <text class="big thai th" lang="th" x="705" y="132" text-anchor="middle">จับอะไรขยับ</text>
+            <text class="en" lang="en" x="705" y="156" text-anchor="middle">two frames, one difference</text>
+            <text class="thai th" lang="th" x="705" y="156" text-anchor="middle">สองภาพ เทียบความต่าง</text>
+            <text class="en" lang="en" x="705" y="182" text-anchor="middle">Chapter 06</text>
+            <text class="thai th" lang="th" x="705" y="182" text-anchor="middle">บทที่ 06</text>
+          </a>
+          <a href="/learn#detector">
+            <rect class="stroke-signal" x="852" y="26" width="116" height="66"/>
+            <rect class="fill-signal" x="852" y="8" width="74" height="20"/>
+            <text class="on-signal en" lang="en" x="858" y="22">car 92%</text>
+            <text class="on-signal thai th" lang="th" x="858" y="22">รถ 92%</text>
+            <rect class="stroke" x="872" y="56" width="76" height="22"/>
+            <path class="stroke" d="M884 56 L894 42 L926 42 L936 56"/>
+            <circle class="stroke" cx="888" cy="82" r="8"/>
+            <circle class="stroke" cx="932" cy="82" r="8"/>
+            <text class="big en" lang="en" x="910" y="132" text-anchor="middle">A guess + confidence</text>
+            <text class="big thai th" lang="th" x="910" y="132" text-anchor="middle">คำเดา พร้อมความมั่นใจ</text>
+            <text class="en" lang="en" x="910" y="156" text-anchor="middle">never a certainty</text>
+            <text class="thai th" lang="th" x="910" y="156" text-anchor="middle">ไม่ใช่ความแน่นอน</text>
+            <text class="en" lang="en" x="910" y="182" text-anchor="middle">Chapter 07</text>
+            <text class="thai th" lang="th" x="910" y="182" text-anchor="middle">บทที่ 07</text>
+          </a>
+          <path class="stroke" d="M184 58 H201"/>
+          <path class="stroke" d="M195 52 L202 58 L195 64"/>
+          <path class="stroke" d="M389 58 H406"/>
+          <path class="stroke" d="M400 52 L407 58 L400 64"/>
+          <path class="stroke" d="M594 58 H611"/>
+          <path class="stroke" d="M605 52 L612 58 L605 64"/>
+          <path class="stroke" d="M799 58 H816"/>
+          <path class="stroke" d="M810 52 L817 58 L810 64"/>
+        </svg>
+      </div>
+      <figcaption id="pipe-cap"><span class="th" lang="th">จากแสงสู่คำเดา ห้าขั้นนี้คือทางเดินของเครื่องมองเห็น กดแต่ละขั้นเพื่อเปิดเครื่องมือจริงในห้องเรียน</span><span class="en" lang="en">From light to a guess: the machine's walk in five steps. Tap a step to open its live instrument.</span></figcaption>
+    </figure>
+  </section>
+
   <section class="figures field-quiet" aria-label="The system today">
     <div class="figure"><span class="n" data-fig="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ จาก 7 แหล่ง</span><span class="en" lang="en">cameras listed, from 7 sources</span></span></div>
     <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">กล้องที่เครื่องอ่านพิกเซลได้</span><span class="en" lang="en">cameras a machine can read</span></span></div>
@@ -74,8 +171,8 @@
         </figure>
       </div>
       <div>
-        <p class="lede th" lang="th">ในห้องควบคุมของเมืองหลายแห่ง ดร.นน อัครประเสริฐกุล เห็นผนังจอนับร้อยกับเจ้าหน้าที่ที่สัปหงก เล่นมือถือ หรือลุกไปพัก แล้วถามว่า เราจะรู้ได้อย่างไรว่าคนไม่ได้พลาดอะไรไป คำถามนั้นพาเขาไปเรียนคอมพิวเตอร์วิทัศน์กับ ดร.ศุภกร สิทธิไชย และสร้างห้องเรียนนี้ด้วยกัน</p>
-        <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to learn computer vision from Dr Supakorn Siddhichai, and to build this classroom with him.</p>
+        <p class="lede th" lang="th">ในห้องควบคุมของเมืองหลายแห่ง ดร.นน อัครประเสริฐกุล เห็นผนังจอนับร้อยกับเจ้าหน้าที่ที่สัปหงก เล่นมือถือ หรือลุกไปพัก แล้วถามว่า เราจะรู้ได้อย่างไรว่าคนไม่ได้พลาดอะไรไป คำถามนั้นพาเขาไปศึกษาคอมพิวเตอร์วิทัศน์ด้วยตัวเอง และสร้างห้องเรียนนี้ขึ้นมา</p>
+        <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to teach himself computer vision, and to build this classroom.</p>
         <p class="cta"><a class="btn big" href="/story"><span class="th" lang="th">อ่านเรื่องเล่า →</span><span class="en" lang="en">Read the story →</span></a></p>
       </div>
     </div>
