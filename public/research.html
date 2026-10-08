@@ -18,7 +18,7 @@
     <div>
       <p class="lede th" lang="th">จากภาพถ่ายบล็อกไม้ในปี 1963 ถึงแบบจำลองที่ตัดขอบอะไรก็ได้ที่คุณชี้ นี่คืองานวิจัยที่เปลี่ยนวิธีคิด งานที่เว็บนี้ใช้อยู่จริง และคำถามที่ยังไม่มีใครตอบได้</p>
       <p class="lede en" lang="en">From a photograph of blocks in 1963 to a model that outlines anything you point at: the papers that changed the thinking, the ones this site actually runs, and the questions nobody has answered yet.</p>
-      <div class="cta"><a class="btn primary" href="#history-lab"><span class="th" lang="th">เริ่มจากภาพอธิบาย ↓</span><span class="en" lang="en">Explore the visual history ↓</span></a><a class="btn" href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษา NT TAG ID ↓</span><span class="en" lang="en">Explore NT TAG ID ↓</span></a></div>
+      <div class="cta"><a class="btn primary" href="#history-lab"><span class="th" lang="th">เริ่มจากภาพอธิบาย ↓</span><span class="en" lang="en">Explore the visual history ↓</span></a><a class="btn" href="#learning-kinds"><span class="th" lang="th">เครื่องเรียนรู้สามแบบ ↓</span><span class="en" lang="en">Three ways to learn ↓</span></a><a class="btn" href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษา NT TAG ID ↓</span><span class="en" lang="en">Explore NT TAG ID ↓</span></a></div>
       <p class="micro cite-rule"><span class="th" lang="th">ทุกงานในหน้านี้มีอยู่จริง เราอ้างผู้เขียน ปี และที่ตีพิมพ์ ถ้าไม่แน่ใจในรายละเอียดใด เราตัดทิ้ง ชื่องานคงไว้เป็นภาษาอังกฤษตามต้นฉบับ</span><span class="en" lang="en">Every work on this page is real. We give authors, year and venue; where we were not sure of a detail, we left it out.</span></p>
     </div>
   </section>
@@ -105,6 +105,86 @@
 </article>
 <nav class="history-next" data-aria-th="อ่านต่อในหน้านี้" data-aria-en="Continue on this page"><a href="#by-hand"><span class="th" lang="th">ดูเส้นเวลางานวิจัยทั้งหมด</span><span class="en" lang="en">Browse the full research timeline</span></a><a href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษาในไทย: NT TAG ID</span><span class="en" lang="en">Thai case study: NT TAG ID</span></a><a href="#open"><span class="th" lang="th">ยังมีอะไรที่เครื่องทำไม่ได้?</span><span class="en" lang="en">What can it still get wrong?</span></a>
 </nav>
+</section>
+
+<section class="learning-kinds field-quiet" id="learning-kinds" aria-labelledby="learning-kinds-title">
+<h2 id="learning-kinds-title"><span class="th" lang="th">เครื่องเรียนรู้ได้สามแบบ</span><span class="en" lang="en">Three ways a machine can learn</span>
+</h2>
+<p class="prose"><span class="th" lang="th">คำถามสำคัญคือ เครื่องได้รับคำตอบแบบไหน? บางครั้งเราให้ชื่อที่ถูกต้อง บางครั้งให้แค่ข้อมูล และบางครั้งให้คะแนนหลังจากมันลองทำ</span><span class="en" lang="en">The key question is: what feedback does the machine get? Sometimes we give it correct answers, sometimes just data, and sometimes a reward after it tries an action.</span>
+</p>
+<div class="learning-cards">
+<article aria-labelledby="supervised-title"><span class="label">01</span>
+<h3 id="supervised-title"><span class="th" lang="th">มีคำตอบให้: Supervised learning</span><span class="en" lang="en">Learn with answers: supervised learning</span>
+</h3>
+<p><span class="th" lang="th">เหมือนฝึกจากบัตรคำที่มีเฉลย เราให้ภาพพร้อมชื่อ เช่น “วงกลม” หรือ “สี่เหลี่ยม” เครื่องใช้ตัวอย่างเพื่อเรียนรู้การทายชื่อของภาพใหม่</span><span class="en" lang="en">Like practising with flashcards that have answers. We give each picture a label, such as “circle” or “square”. The machine uses these examples to learn how to label a new picture.</span>
+</p>
+<ul class="learning-objects">
+<li data-shape="circle" data-colour="red"><span class="learning-object circle red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีส้ม</span><span class="en" lang="en">Orange circle</span></span><span class="learning-answer" hidden><span class="th" lang="th">วงกลม</span><span class="en" lang="en">Circle</span></span>
+</li>
+<li data-shape="square" data-colour="yellow"><span class="learning-object square yellow" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">สี่เหลี่ยมสีเหลือง</span><span class="en" lang="en">Yellow square</span></span><span class="learning-answer" hidden><span class="th" lang="th">สี่เหลี่ยม</span><span class="en" lang="en">Square</span></span>
+</li>
+<li data-shape="circle" data-colour="yellow"><span class="learning-object circle yellow" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีเหลือง</span><span class="en" lang="en">Yellow circle</span></span><span class="learning-answer" hidden><span class="th" lang="th">วงกลม</span><span class="en" lang="en">Circle</span></span>
+</li>
+<li data-shape="square" data-colour="red"><span class="learning-object square red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">สี่เหลี่ยมสีส้ม</span><span class="en" lang="en">Orange square</span></span><span class="learning-answer" hidden><span class="th" lang="th">สี่เหลี่ยม</span><span class="en" lang="en">Square</span></span>
+</li>
+</ul>
+<div class="learning-interaction" hidden><button class="btn" type="button" data-reveal-labels aria-pressed="false"><span class="th" lang="th">เปิดเฉลยบนบัตร</span><span class="en" lang="en">Show the answers on the cards</span></button>
+</div>
+<p class="learning-limit"><span class="th" lang="th">ต้องลองภาพที่ไม่ได้ใช้ฝึกด้วย จำเฉลยชุดเดิมได้ ไม่ได้แปลว่าทายภาพใหม่ได้เสมอ</span><span class="en" lang="en">Test with pictures it did not learn from. Remembering the practice answers does not guarantee success on new pictures.</span>
+</p><a href="/train"><span class="th" lang="th">ลองสอนด้วยตัวอย่างในห้องฝึก →</span><span class="en" lang="en">Teach with examples in Training →</span></a>
+</article>
+<article aria-labelledby="unsupervised-title"><span class="label">02</span>
+<h3 id="unsupervised-title"><span class="th" lang="th">ไม่มีเฉลย: Unsupervised learning</span><span class="en" lang="en">Find patterns: unsupervised learning</span>
+</h3>
+<p><span class="th" lang="th">เราให้ข้อมูลโดยไม่บอกชื่อที่ถูกต้อง เครื่องมองหาความคล้ายกัน เช่น จัดภาพเป็นกลุ่ม สีหรือรูปร่างอาจทำให้ได้กลุ่มคนละแบบ กลุ่มเหล่านี้ไม่ได้มีชื่อว่า “แมว” หรือ “สุนัข” ขึ้นมาเอง</span><span class="en" lang="en">We give data without the correct labels. The machine looks for patterns, such as groups of similar pictures. Colour and shape can produce different groups. These groups do not automatically name themselves “cat” or “dog”.</span>
+</p>
+<div data-grouped-objects>
+<ul class="learning-objects">
+<li data-shape="circle" data-colour="red"><span class="learning-object circle red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีส้ม</span><span class="en" lang="en">Orange circle</span></span>
+</li>
+<li data-shape="square" data-colour="yellow"><span class="learning-object square yellow" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">สี่เหลี่ยมสีเหลือง</span><span class="en" lang="en">Yellow square</span></span>
+</li>
+<li data-shape="circle" data-colour="yellow"><span class="learning-object circle yellow" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีเหลือง</span><span class="en" lang="en">Yellow circle</span></span>
+</li>
+<li data-shape="square" data-colour="red"><span class="learning-object square red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">สี่เหลี่ยมสีส้ม</span><span class="en" lang="en">Orange square</span></span>
+</li>
+</ul>
+</div>
+<div class="learning-interaction" hidden>
+<div class="controls"><button class="btn" type="button" data-group-by="shape" aria-pressed="false"><span class="th" lang="th">กลุ่มตามรูปร่าง</span><span class="en" lang="en">Group by shape</span></button><button class="btn" type="button" data-group-by="colour" aria-pressed="false"><span class="th" lang="th">กลุ่มตามสี</span><span class="en" lang="en">Group by colour</span></button>
+</div>
+</div>
+<p class="micro"><span class="th" lang="th">ภาพอธิบาย: เราเลือกกฎจัดกลุ่มง่าย ๆ เพื่อให้เห็นผลของการเลือกความคล้าย นี่ไม่ใช่การฝึกโมเดลจัดกลุ่ม</span><span class="en" lang="en">Guided illustration: these buttons use simple sorting rules to show how a choice of similarity changes the groups. They do not train a clustering model.</span>
+</p>
+<p class="learning-limit"><span class="th" lang="th">พบรูปแบบได้ แต่ต้องตรวจว่ารูปแบบนั้นมีประโยชน์หรือเป็นเพียงสิ่งบังเอิญ</span><span class="en" lang="en">Finding a pattern does not tell us whether it is useful or just a coincidence.</span>
+</p>
+</article>
+<article aria-labelledby="reinforcement-title"><span class="label">03</span>
+<h3 id="reinforcement-title"><span class="th" lang="th">ลองทำแล้วรับคะแนน: Reinforcement learning</span><span class="en" lang="en">Try, get a reward: reinforcement learning</span>
+</h3>
+<p><span class="th" lang="th">เหมือนหุ่นยนต์ลองเลือกทาง มันทำบางอย่าง รับคะแนน แล้วปรับว่าครั้งต่อไปควรเลือกอะไร เป้าหมายคือได้คะแนนรวมดีขึ้น ไม่ใช่รับเฉลยให้ทุกการกระทำ</span><span class="en" lang="en">Like a robot trying a route. It takes an action, gets a reward, then adjusts what to choose next. Its goal is to earn better rewards, rather than receive the correct answer for every action.</span>
+</p>
+<div class="reward-paths">
+<div>← <span class="th" lang="th">ทางซ้าย: ไปถึงเป้าหมาย</span><span class="en" lang="en">Left path: reach the goal</span><strong>+1</strong>
+</div>
+<div>→ <span class="th" lang="th">ทางขวา: เจอสิ่งกีดขวาง</span><span class="en" lang="en">Right path: hit an obstacle</span><strong>−1</strong>
+</div>
+</div>
+<div class="learning-interaction" hidden>
+<div class="controls"><button class="btn" type="button" data-reward-action="0"><span class="th" lang="th">ลองทางซ้าย</span><span class="en" lang="en">Try left</span></button><button class="btn" type="button" data-reward-action="1"><span class="th" lang="th">ลองทางขวา</span><span class="en" lang="en">Try right</span></button><button class="btn primary" type="button" data-reward-choose><span class="th" lang="th">ให้หุ่นยนต์เลือก</span><span class="en" lang="en">Let the robot choose</span></button><button class="btn" type="button" data-reward-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Reset</span></button>
+</div>
+<p class="readout" data-reward-readout aria-live="polite">
+</p>
+<p class="micro" data-reward-values></p>
+</div>
+<p class="micro"><span class="th" lang="th">ตัวอย่างเรียนรู้จริงแบบหนึ่งก้าว: จำคะแนนเฉลี่ยของสองทาง เริ่มจากลองทางที่ยังไม่รู้ แล้วเลือกทางที่เคยได้คะแนนดีกว่า ระบบที่ต้องเดินหลายก้าวซับซ้อนกว่านี้มาก</span><span class="en" lang="en">A real, tiny one-step reward learner: it remembers each path’s average reward, tries unknown paths first, then chooses the better one. Learning sequences of many actions is much more complex.</span>
+</p>
+<p class="learning-limit"><span class="th" lang="th">คะแนนต้องตรงกับสิ่งที่เราต้องการ ถ้าให้คะแนนความเร็วอย่างเดียว หุ่นยนต์อาจเรียนรู้ให้รีบโดยไม่ปลอดภัย สนามขับรถในเว็บนี้ใช้กฎที่เขียนไว้ ไม่ได้ฝึกด้วย reinforcement learning</span><span class="en" lang="en">Rewards must match what we want. Rewarding only speed can encourage unsafe behaviour. This site’s driving track uses written rules; it is not trained with reinforcement learning.</span>
+</p>
+</article>
+</div>
+<p class="prose"><span class="th" lang="th">จำง่าย ๆ: มีเฉลย → เรียนจากตัวอย่าง; ไม่มีเฉลย → หารูปแบบ; มีคะแนนหลังทำ → เรียนจากผลของการกระทำ คำว่า “non-supervised” มักหมายถึง “unsupervised” วิธีเหล่านี้ใช้ร่วมกันได้ และโมเดลที่เรียนรู้เองจากคำตอบที่สร้างจากข้อมูลเรียกว่า self-supervised ซึ่งเป็นอีกแนวคิดหนึ่ง</span><span class="en" lang="en">Remember: answers → learn from examples; no answers → find patterns; rewards after actions → learn from outcomes. “Non-supervised” usually means “unsupervised”. These approaches can work together. Self-supervised learning, where training targets come from the data itself, is a related but distinct idea.</span>
+</p>
 </section>
 
   <section class="chapter tagid-case field-quiet" id="nt-tag-id" aria-labelledby="tagid-h">

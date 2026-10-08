@@ -83,3 +83,28 @@
 .history-next { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .history-next a { min-height: 44px; display: inline-flex; align-items: center; }
 @media (max-width: 900px) { .history-panel { grid-template-columns: 1fr; } .history-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.learning-kinds { padding: clamp(24px, 4vw, 56px) var(--gutter); scroll-margin-top: 90px; }
+.learning-kinds > h2 { font-size: clamp(1.75rem, 3vw, 3rem); margin-bottom: 16px; }
+.learning-kinds > .prose { max-width: 80ch; }
+.learning-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0; }
+.learning-cards article { min-width: 0; border-top: 3px solid currentColor; padding-top: 16px; }
+.learning-cards h3 { font-size: clamp(1.35rem, 2vw, 1.8rem); margin: 10px 0 16px; }
+.learning-cards .controls { flex-wrap: wrap; background: transparent; padding: 0; }
+.learning-cards .controls .btn { white-space: normal; }
+.learning-objects { list-style: none; padding: 16px; margin: 12px 0; display: flex; flex-wrap: wrap; gap: 20px; background: var(--black); color: var(--white); }
+.learning-objects li { display: grid; justify-items: center; gap: 8px; min-width: 56px; }
+.learning-object { display: block; width: 44px; height: 44px; }
+.learning-object.circle { clip-path: circle(50%); }
+.learning-object.red { background: var(--signal); }
+.learning-object.yellow { background: var(--naples); }
+.learning-answer { font-size: var(--micro); }
+.learning-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.learning-groups h4 { margin: 12px 0 0; }
+.learning-groups .learning-objects { padding: 12px; gap: 12px; }
+.learning-limit { border-left: 3px solid currentColor; padding-left: 12px; }
+.reward-paths { display: grid; gap: 4px; margin: 16px 0; }
+.reward-paths > div { background: var(--black); color: var(--white); padding: 12px; }
+.reward-paths strong { display: block; color: var(--naples); font-size: 1.4rem; margin-top: 6px; }
+.learning-interaction .readout { padding: 12px 0; color: inherit; }
+@media (max-width: 1100px) { .learning-cards { grid-template-columns: 1fr; gap: 32px; } }
