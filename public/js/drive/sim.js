@@ -37,30 +37,33 @@ export function rng(seed) {
   }
 }
 
-const CARS = [
-  ['A', 'careful'], ['A', 'normal'], ['A', 'hasty'],
-  ['B', 'careful'], ['B', 'normal'], ['B', 'hasty'],
-]
-
-export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 'few' } = {}) {
-  const track = buildTrack()
+export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 'few', layout = 'practice', traffic = 6 } = {}) {
+  const track = buildTrack(layout)
   const world = {
-    t: 0, tick: 0, rand: rng(seed), track, weather, people, dogs,
+    t: 0, tick: 0, rand: rng(seed), track, weather, people, dogs, layout, zebras: track.zebras,
     light: { ...LIGHT_CYCLE[0] }, phase: 0, phaseT: 0,
     cars: [], walkers: [], nextId: 100, events: [],
-    zebraT: Object.fromEntries(ZEBRAS.map((z, i) => [z.id, 2 + 2 * i])),
+    zebraT: Object.fromEntries(track.zebras.map((z, i) => [z.id, 2 + 2 * i])),
     dogT: 4,
     objects() { return [...this.cars, ...this.walkers] },
   }
-  const perLoop = { A: 0, B: 0 }
-  CARS.forEach(([loop, kind], i) => {
+  const routes = Object.keys(track)
+  const total = Math.max(4, Math.min(32, Number(traffic) || 6))
+  const specs = Array.from({ length: total }, (_, i) => [routes[Math.floor(i * routes.length / total)], ['careful', 'normal', 'hasty'][i % 3]])
+  const perLoop = Object.fromEntries(routes.map((id) => [id, 0]))
+  specs.forEach(([loop, kind], i) => {
     const route = track[loop]
-    const s = (perLoop[loop]++ / 3) * route.len + 12
-    world.cars.push(placeCar({
+    const s = (perLoop[loop]++ / specs.filter(([id]) => id === loop).length) * route.len + 12
+    const car = placeCar({
       id: i + 1, kind: 'car', style: STYLES[kind], styleName: kind, route, s, v: 6, h: 0,
       laps: 0, crashes: 0, wasHit: 0, hitPeople: 0, hitDogs: 0, frozen: 0, cooldown: 0, blind: false,
       tracks: new Map(), ghost: new Set(), decision: { acc: 0, action: 'cruising', reason: 'clear' }, r: 1.1,
-    }))
+    })
+    // Routes may share pavement: never start two cars inside each other.
+    for (let attempt = 0; attempt < 100 && world.cars.some((other) => circles(car).some((p) => circles(other).some((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 2.6))); attempt++) {
+      car.s = (car.s + 6) % route.len; placeCar(car)
+    }
+    world.cars.push(car)
   })
   return world
 }
@@ -117,7 +120,7 @@ function tickLight(world) {
 
 function spawn(world) {
   const r = world.rand
-  for (const z of ZEBRAS) {
+  for (const z of world.zebras) {
     world.zebraT[z.id] -= DT
     if (world.zebraT[z.id] > 0) continue
     world.zebraT[z.id] = RATES.people[world.people] * (0.5 + r())

@@ -41,3 +41,8 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 
 .legend { margin: 8px 0 0; }
 .habits th:first-child { width: 34%; }
+
+.scenario-picks { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:2px; margin-bottom:12px; }
+.scenario-picks .btn { white-space:normal; min-height:60px; }
+.cards { max-height:540px; overflow:auto; }
+@media(max-width:700px) { .scenario-picks { grid-template-columns:repeat(2,minmax(0,1fr)); } }

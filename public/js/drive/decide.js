@@ -68,7 +68,7 @@ function constraints(car, world) {
   // The light, read by the same camera — a covered camera cannot see it either.
   if (route.stopS != null && !car.blind) {
     const d = ahead(car.s, route.stopS, route.len) - CAR_LEN / 2
-    const state = world.light[route.id]
+    const state = world.light[route.lightGroup ?? route.id]
     if (d > -1 && d < R) {
       if (state === 'red') out.push({ gap: d, dv: v, reason: 'light_red' })
       else if (state === 'amber' && d > v * v / (2 * 4)) out.push({ gap: d, dv: v, reason: 'light_amber' })

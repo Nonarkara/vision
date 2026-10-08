@@ -121,7 +121,8 @@ for (const file of walk(path.join(PUBLIC, 'js'), '.js')) {
   for (const match of src.matchAll(/(?:^|[\s;])(?:import|export)\s[^'"]*?from\s*['"]([^'"]+)['"]|import\s*\(\s*['"]([^'"]+)['"]\s*\)|^import\s+['"]([^'"]+)['"]/gm)) {
     const spec = match[1] ?? match[2] ?? match[3]
     if (!spec) continue
-    const target = spec.startsWith('/') ? path.join(PUBLIC, spec) : path.resolve(path.dirname(file), spec)
+    const cleanSpec = spec.split(/[?#]/)[0]
+    const target = cleanSpec.startsWith('/') ? path.join(PUBLIC, cleanSpec) : path.resolve(path.dirname(file), cleanSpec)
     if (!fs.existsSync(target)) fail(rel, `import ${spec} → missing`)
   }
 }

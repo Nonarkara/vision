@@ -1,0 +1,9 @@
+MediaPipe Tasks Vision 0.10.32 — Google LLC, Apache License 2.0.
+Original npm package: https://www.npmjs.com/package/@mediapipe/tasks-vision/v/0.10.32
+vision_bundle.cjs copied unmodified as vision.js; wasm files unmodified.
+Source: https://github.com/google-ai-edge/mediapipe
+License: LICENSE.txt in this directory.
+Face Landmarker model (float16, version 1), hosted separately at /models/face_landmarker/face_landmarker.task:
+https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+Documentation/model cards: https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker
+No image or video fixtures are bundled with the experiment.

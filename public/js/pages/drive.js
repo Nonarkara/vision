@@ -4,7 +4,7 @@
 
 import '../core/site.js'
 import { lang, onLang } from '../core/i18n.js'
-import { createWorld, step, DT } from '../drive/sim.js'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.9.1'
 import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js'
 import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js'
 
@@ -16,9 +16,9 @@ const totalsEl = root.querySelector('[data-totals]')
 const focusEl = root.querySelector('[data-focus]')
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
 
-const settings = { weather: 'day', people: 'few', dogs: 'few', speed: 1 }
+const settings = { weather: 'day', people: 'few', dogs: 'few', speed: 1, layout: 'two', traffic: 6 }
 let world = createWorld({ seed: Date.now() % 100000, ...settings })
-let selected = 3
+let selected = 1
 let showAll = false
 let playing = !reduced
 let bg = null      // the static track, drawn once per size
@@ -36,15 +36,17 @@ root.addEventListener('click', (e) => {
   if (!b) return
   if (b.dataset.set) {
     const { set, value } = b.dataset
-    settings[set] = set === 'speed' ? Number(value) : value
-    if (set !== 'speed') world[set] = value
+    settings[set] = ['speed', 'traffic'].includes(set) ? Number(value) : value
+    if (set === 'layout' || set === 'traffic') {
+      if (set === 'layout' && value === 'city') { settings.traffic = 24; settings.people = 'many'; settings.dogs = 'many'; press('traffic', 24); press('people', 'many'); press('dogs', 'many') }
+      resetWorld()
+    } else if (set !== 'speed') world[set] = value
     press(set, value)
   } else if (b.hasAttribute('data-play')) {
     playing = !playing
     syncPlay()
   } else if (b.hasAttribute('data-reset')) {
-    world = createWorld({ seed: Date.now() % 100000, ...settings })
-    render()
+    resetWorld()
   } else if (b.hasAttribute('data-all')) {
     showAll = !showAll
     b.setAttribute('aria-pressed', String(showAll))
@@ -73,6 +75,13 @@ function syncPlay() {
   b.querySelector('[data-play-label]').innerHTML = playing
     ? '<span class="th" lang="th">❚❚ หยุดชั่วคราว</span><span class="en" lang="en">❚❚ Pause</span>'
     : '<span class="th" lang="th">▶ เริ่ม</span><span class="en" lang="en">▶ Play</span>'
+}
+
+function resetWorld() {
+  world = createWorld({ seed: Date.now() % 100000, ...settings })
+  selected = Math.min(selected, world.cars.length); bg = null; acc = 0
+  root.querySelectorAll('[data-set="people"]').forEach((b) => { b.disabled = !world.zebras.length })
+  buildCards(); syncCards(); syncFocus(); render()
 }
 
 // ── Cards: one per car, the text twin of the picture ─────────────────
@@ -133,17 +142,19 @@ function render() {
   drawWorld(ctx, k, world, colours, { selected, showAll, lang: lang() })
 }
 
+let inView = true
+new IntersectionObserver(([entry]) => { inView = entry.isIntersecting }).observe(canvas)
 let last = performance.now(), acc = 0, textT = 0
 function frame(now) {
   const dt = Math.min(0.1, (now - last) / 1000)
   last = now
-  if (playing) {
+  if (playing && !document.hidden && inView) {
     acc += dt * settings.speed
     while (acc >= DT) { step(world); acc -= DT }
   }
-  render()
+  if (!document.hidden && inView) render()
   textT += dt
-  if (textT > 0.25) { textT = 0; syncCards(); syncFocus() }
+  if (textT > 0.25 && !document.hidden && inView) { textT = 0; syncCards(); syncFocus() }
   requestAnimationFrame(frame)
 }
 
@@ -152,6 +163,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { bg
 onLang(() => { syncCards(); syncFocus() })
 
 buildCards()
+root.querySelectorAll('[data-set="people"]').forEach((b) => { b.disabled = !world.zebras.length })
 syncPlay()
 syncCards()
 syncFocus()

@@ -4,7 +4,7 @@
 
 A public, bilingual (ไทย / English) classroom for computer vision. Visitors point the machine at Thailand's open road cameras — or at **their own camera or photos** — and watch it go from pixels → numbers → edges → motion → "car 68%".
 
-Every model runs in the visitor's browser (TensorFlow.js, self-hosted weights). The server never looks at a picture: it serves the site, publishes the camera catalogue, and relays still frames from allow-listed hosts **in memory only**.
+Every model runs in the visitor's browser (TensorFlow.js and MediaPipe, self-hosted weights). The server never looks at a picture: it serves the site, publishes the camera catalogue, and relays still frames from allow-listed hosts **in memory only**.
 
 ---
 
@@ -202,3 +202,7 @@ Camera owners: open an issue at [github.com/Nonarkara/vision/issues](https://git
 Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex, Archivo Narrow, JetBrains Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009).
 
 © 2026 Dr Non Arkaraprasertkul. All rights reserved.
+
+## Face & focus experiment
+
+`/focus` is opt-in, local face-landmark analysis, not identity recognition or emotion inference. MediaPipe 0.10.32 and the Face Landmarker float16 v1 model are self-hosted. A classic worker owns inference at no more than two frames per second; only its response CSP permits WASM compilation. Sessions have a maximum eight-hour wall-clock limit, bounded minute summaries and self-reported mood notes. Hidden tabs, pause, finish, navigation, stalled frames and failures release camera tracks and terminate the worker. No imagery or landmarks persist or upload. Export is an explicit local download. Threshold/calibration and eight-hour bounded-state tests use synthetic signals; browser lifecycle checks use generated video, never a private camera.

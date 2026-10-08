@@ -106,3 +106,16 @@ test('robots points at the sitemap, and the sitemap names exactly the routed pag
   for (const route of Object.keys(PAGES)) assert.ok(locs.has(route), `sitemap is missing ${route}`)
   for (const loc of locs) assert.ok(loc in PAGES, `sitemap names an unrouted path ${loc}`)
 })
+
+test('only face worker may compile WASM; documents keep strict script policy', async () => {
+  const { createStatic }=await import('../server/http.js')
+  const statics=createStatic({root:PUBLIC,version:'t'})
+  let headers
+  const res={writeHead:(_s,h)=>{headers=h},end(){}}
+  statics.serve({method:'HEAD',headers:{}},res,'/js/focus/worker.js')
+  assert.match(headers['Content-Security-Policy'], /'wasm-unsafe-eval'/)
+  statics.page({method:'HEAD',headers:{}},res,'focus')
+  assert.doesNotMatch(headers['Content-Security-Policy'], /'wasm-unsafe-eval'/)
+  statics.serve({method:'HEAD',headers:{}},res,'/vendor/mediapipe-0.10.32/wasm/vision_wasm_internal.wasm')
+  assert.equal(headers['Content-Type'],'application/wasm')
+})

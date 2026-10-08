@@ -100,3 +100,32 @@ test('a car with its camera covered runs red lights — and the others still hav
   assert.ok(redRuns > 0)
   assert.equal(blind.tracks.size, 0, 'it believes in nothing')
 })
+
+test('road choices have actual distinct lanes, opposing directions and bounded traffic', () => {
+  for (const [layout,lanes] of [['two',2],['four',4],['city',4]]) {
+    const w=run(createWorld({seed:9,layout,traffic:24}),20)
+    assert.equal(Object.keys(w.track).length,lanes)
+    assert.equal(w.cars.length,24)
+    assert.ok(w.cars.every((c)=>Number.isFinite(c.x+c.y+c.v+c.s)))
+    const repeat=run(createWorld({seed:9,layout,traffic:24}),20)
+    assert.deepEqual(w.cars.map((c)=>c.s),repeat.cars.map((c)=>c.s))
+    if(layout!=='city') {
+      assert.equal(w.zebras.length,0)
+      const routes=Object.values(w.track)
+      assert.ok(routes.every((r)=>r.stopS===null))
+      // Opposite winding is a physical opposing lane, not a decorative stripe.
+      const area=(r)=>r.pts.reduce((n,p,i)=>{const q=r.pts[(i+1)%r.pts.length];return n+p.x*q.y-q.x*p.y},0)
+      assert.ok(area(routes[0])*area(routes.at(-1))<0)
+    }
+  }
+  assert.equal(createWorld({traffic:1000}).cars.length,32)
+})
+
+test('cars sharing city roads never spawn inside each other', () => {
+  const points=(c)=>[-1.25,1.25].map((d)=>[c.x+Math.cos(c.h)*d,c.y+Math.sin(c.h)*d])
+  for(const layout of ['two','four','practice','city']) {
+    const w=createWorld({layout,traffic:24})
+    for(let i=0;i<w.cars.length;i++)for(let j=i+1;j<w.cars.length;j++)
+      assert.ok(points(w.cars[i]).every((p)=>points(w.cars[j]).every((q)=>Math.hypot(p[0]-q[0],p[1]-q[1])>=2.6)),`${layout}: cars ${i+1}/${j+1} overlap at start`)
+  }
+})

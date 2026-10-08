@@ -137,9 +137,30 @@ export function alongMyLane(route, s, range, x, y, slack = 0) {
   return best
 }
 
-export function buildTrack() {
-  return {
-    A: makeRoute('A', LOOP_A, LIGHT.stops.A),
-    B: makeRoute('B', LOOP_B, LIGHT.stops.B),
+export function buildTrack(layout = 'practice') {
+  if (layout !== 'practice' && layout !== 'city') {
+    const count = layout === 'four' ? 4 : 2
+    const track = {}
+    for (let i = 0; i < count; i++) {
+      const d = i * 3.6
+      const points = [[20 + d, 30 + d], [180 - d, 30 + d], [180 - d, 110 - d], [20 + d, 110 - d]]
+      // Left-hand traffic: each direction has its own actual path.
+      if (i >= count / 2) points.reverse()
+      const id = String.fromCharCode(65 + i)
+      track[id] = makeRoute(id, points, null)
+      track[id].zebras = []
+    }
+    Object.defineProperty(track, 'layout', { value: layout })
+    Object.defineProperty(track, 'zebras', { value: [] })
+    return track
   }
+  const track = { A: makeRoute('A', LOOP_A, LIGHT.stops.A), B: makeRoute('B', LOOP_B, LIGHT.stops.B) }
+  if (layout === 'city') {
+    track.C = makeRoute('C', [[20, 40], [120, 40], [120, 110], [20, 110]], [47.5, 110])
+    track.D = makeRoute('D', [[40, 20], [175, 20], [175, 130], [40, 130]], [40, 117.5])
+    track.C.lightGroup = 'A'; track.D.lightGroup = 'B'
+  }
+  Object.defineProperty(track, 'layout', { value: layout })
+  Object.defineProperty(track, 'zebras', { value: ZEBRAS })
+  return track
 }

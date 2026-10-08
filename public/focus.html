@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/focus.css?v={{v}}">
+<title>Face &amp; focus: a private camera experiment · ใบหน้าและสมาธิ — Vision</title>
+<meta name="description" content="An opt-in, on-device face-landmark experiment. Explore head direction and facial movements, calibrate your own position, and review a session without saving photos or guessing emotions.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+<section class="page-head">
+<div>
+<span class="eyebrow label">
+<span class="th" lang="th">ทดลอง · ใบหน้าและสมาธิ</span>
+<span class="en" lang="en">Experiment · Face &amp; focus</span>
+</span>
+<h1>
+<span class="th" lang="th">กล้องเห็นอะไรในช่วงที่คุณทำงาน</span>
+<span class="en" lang="en">What does a camera notice while you work?</span>
+</h1>
+</div>
+<div>
+<p class="lede">
+<span class="th" lang="th">ลองกับตัวเองเท่านั้น ตั้งท่านั่งปกติ แล้วดูช่วงที่หันออกจากหน้าจอ หลับตา หรือกล้องไม่เห็นใบหน้า ผลเป็นเพียงเบาะแส ไม่ใช่คะแนนสมาธิหรือการอ่านใจ</span>
+<span class="en" lang="en">Try this on yourself. Set your usual sitting position, then explore head turns, closed eyes and times the camera cannot see your face. These are clues, not a focus score or a way to read your mind.</span>
+</p>
+</div>
+</section>
+<section class="focus-room" data-focus-room>
+<div class="focus-grid">
+<div class="bench">
+<div class="bench-caption">
+<span class="label">
+<span class="th" lang="th">ภาพอยู่ในอุปกรณ์นี้</span>
+<span class="en" lang="en">Picture stays on this device</span>
+</span>
+<span class="num" data-clock>00:00</span>
+</div>
+<canvas data-face-view width="640" height="480" role="img" data-aria-th="ภาพกล้องของคุณพร้อมจุดบนใบหน้า" data-aria-en="Your camera preview with face landmarks">
+</canvas>
+<p class="session-state" data-status role="status">
+<span class="th" lang="th">กล้องปิด · ยังไม่เริ่ม</span>
+<span class="en" lang="en">Camera off · Not started</span>
+</p>
+<div class="controls">
+<button type="button" class="btn primary" data-start disabled>
+<span class="th" lang="th">ยินยอมและเริ่ม</span>
+<span class="en" lang="en">Agree &amp; start</span>
+</button>
+<button type="button" class="btn" data-pause disabled>
+<span class="th" lang="th">พักและปิดกล้อง</span>
+<span class="en" lang="en">Pause &amp; camera off</span>
+</button>
+<button type="button" class="btn" data-stop disabled>
+<span class="th" lang="th">จบและดูสรุป</span>
+<span class="en" lang="en">Finish &amp; review</span>
+</button>
+</div>
+</div>
+<div class="focus-setup">
+<h2>
+<span class="th" lang="th">1 · เลือกช่วงเวลา</span>
+<span class="en" lang="en">1 · Choose a session</span>
+</h2>
+<label class="setting">
+<span class="th" lang="th">หยุดอัตโนมัติหลัง</span>
+<span class="en" lang="en">Stop automatically after</span>
+<select data-duration>
+<option value="15">15 min</option>
+<option value="60" selected>1 h</option>
+<option value="120">2 h</option>
+<option value="480">8 h</option>
+</select>
+</label>
+<label class="setting">
+<span class="th" lang="th">นับการหันออกเมื่อเกิน</span>
+<span class="en" lang="en">Count a look-away after</span>
+<select data-threshold>
+<option value="2">2 s</option>
+<option value="3" selected>3 s</option>
+<option value="5">5 s</option>
+<option value="10">10 s</option>
+</select>
+</label>
+<h2>
+<span class="th" lang="th">2 · อ่านและยินยอม</span>
+<span class="en" lang="en">2 · Read &amp; agree</span>
+</h2>
+<p>
+<span class="th" lang="th">ใช้กล้องหน้า ไม่ใช้ไมโครโฟน ไม่บันทึกภาพ วิดีโอ หรือชื่อบุคคล ประมวลผลในแท็บนี้เท่านั้น สรุปเก็บในหน่วยความจำจนปิดหน้า คุณเลือกดาวน์โหลดได้</span>
+<span class="en" lang="en">Front camera only. No microphone, photos, video or identity records. Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span>
+</p>
+<label class="consent">
+<input type="checkbox" data-consent>
+<span class="th" lang="th">ฉันยินยอมให้วิเคราะห์ใบหน้าของฉันเอง และรู้ว่าหยุดได้ทุกเมื่อ</span>
+<span class="en" lang="en">I agree to analyse my own face, and know I can stop at any time.</span>
+</label>
+<label class="consent">
+<input type="checkbox" data-awake>
+<span class="th" lang="th">ขอให้หน้าจอเปิดระหว่างทดลอง (ถ้าอุปกรณ์รองรับ)</span>
+<span class="en" lang="en">Keep the screen awake during this session (if supported)</span>
+</label>
+<p class="micro">
+<span class="th" lang="th">เปิดแท็บนี้ไว้ด้านหน้า เมื่อซ่อนแท็บจะพักและปิดกล้อง คุณต้องกดเริ่มต่อเอง เวลาที่เลือกนับช่วงพักด้วย อุปกรณ์ที่หลับหรือช้าจะมีช่วงที่ไม่ได้วัด ไม่มีการนับช่วงเหล่านั้นว่าเสียสมาธิ</span>
+<span class="en" lang="en">Keep this tab visible. Hiding it pauses the session and turns the camera off; resume yourself when ready. The time limit includes pauses. Device sleep and slow processing leave unmeasured gaps. Those gaps are never counted as distraction.</span>
+</p>
+<h2>
+<span class="th" lang="th">3 · ตั้งท่าปกติ</span>
+<span class="en" lang="en">3 · Set your usual position</span>
+</h2>
+<p>
+<span class="th" lang="th">หลังเริ่ม มองหน้าจอตามปกติประมาณ 5 วินาที มีใบหน้าเดียวและแสงสว่างเพียงพอ จากนั้นทดลองหันหน้าออกแล้วกลับมา ถ้าขยับที่นั่งให้ตั้งค่าใหม่</span>
+<span class="en" lang="en">After starting, look at the screen normally for about five seconds. Use good light and keep just one face in view. Then try turning away and coming back. Recalibrate if you move your seat.</span>
+</p>
+<button type="button" class="btn" data-calibrate disabled>
+<span class="th" lang="th">ตั้งท่าปกติใหม่</span>
+<span class="en" lang="en">Recalibrate</span>
+</button>
+</div>
+</div>
+<div class="session-results">
+<h2>
+<span class="th" lang="th">สิ่งที่สังเกตได้</span>
+<span class="en" lang="en">What was observed</span>
+</h2>
+<p class="micro">
+<span class="th" lang="th">หันออก ≠ เสียสมาธิ อาจกำลังคิด อ่านหนังสือ หรือคุยกับคนอื่น ไม่ใช้ผลเพื่อตัดสินการเรียนหรือการทำงาน</span>
+<span class="en" lang="en">Looking away ≠ being distracted. You might be thinking, reading a book or talking to someone. Do not use this experiment to grade study or work.</span>
+</p>
+<div class="session-metrics" data-metrics>
+</div>
+<div class="session-live" data-signals>
+</div>
+<h3>
+<span class="th" lang="th">แต่ละนาทีที่วัดได้</span>
+<span class="en" lang="en">Each measured minute</span>
+</h3>
+<div class="session-timeline" data-timeline>
+</div>
+<p class="micro">
+<span class="th" lang="th">เขียวมะกอก = หันตรง · เหลือง = หันออก · เทา = ไม่เห็นใบหน้า</span>
+<span class="en" lang="en">Olive = facing forward · yellow = looking away · grey = no face seen</span>
+</p>
+<h3>
+<span class="th" lang="th">คุณรู้สึกอย่างไร (เลือกเอง)</span>
+<span class="en" lang="en">How do you feel? (Your own note)</span>
+</h3>
+<p>
+<span class="th" lang="th">กล้องรู้ไม่ได้ว่าคุณรู้สึกอะไร คุณเป็นผู้บอกเอง ปุ่มนี้ไม่เปลี่ยนผลการวัด</span>
+<span class="en" lang="en">The camera cannot know your mood. You tell it yourself. These notes do not change the measurements.</span>
+</p>
+<div class="controls">
+<button type="button" class="btn" data-mood="okay" disabled>
+<span class="th" lang="th">สบายดี</span>
+<span class="en" lang="en">Okay</span>
+</button>
+<button type="button" class="btn" data-mood="happy" disabled>
+<span class="th" lang="th">มีความสุข</span>
+<span class="en" lang="en">Happy</span>
+</button>
+<button type="button" class="btn" data-mood="tired" disabled>
+<span class="th" lang="th">เหนื่อย</span>
+<span class="en" lang="en">Tired</span>
+</button>
+<button type="button" class="btn" data-mood="stressed" disabled>
+<span class="th" lang="th">เครียด</span>
+<span class="en" lang="en">Stressed</span>
+</button>
+<button type="button" class="btn" data-mood="unsure" disabled>
+<span class="th" lang="th">ไม่แน่ใจ</span>
+<span class="en" lang="en">Unsure</span>
+</button>
+</div>
+<p data-mood-notes>
+</p>
+<div class="controls">
+<button type="button" class="btn" data-export disabled>
+<span class="th" lang="th">ดาวน์โหลดสรุป (JSON)</span>
+<span class="en" lang="en">Download summary (JSON)</span>
+</button>
+<button type="button" class="btn" data-clear>
+<span class="th" lang="th">ลบสรุป</span>
+<span class="en" lang="en">Clear summary</span>
+</button>
+</div>
+</div>
+</section>
+<section class="chapter">
+<header>
+<span class="chapter-no">?</span>
+<h2>
+<span class="th" lang="th">เข้าใจผลก่อนใช้</span>
+<span class="en" lang="en">Understand the result</span>
+</h2>
+</header>
+<div class="chapter-body">
+<p>
+<span class="th" lang="th">ระบบหาจุดบนใบหน้าและการเคลื่อนไหว เช่น มุมปากยกขึ้น อ้าปาก หรือยกคิ้ว สิ่งเหล่านี้ไม่พิสูจน์ว่ามีความสุข ง่วง หรือโกรธ ไม่ได้ระบุตัวว่าเป็นใครและไม่ได้วินิจฉัยสุขภาพ</span>
+<span class="en" lang="en">The model finds face landmarks and movements such as raised mouth corners, an open mouth or raised brows. These do not prove happiness, sleepiness or anger. It does not identify who you are or diagnose health.</span>
+</p>
+<p>
+<span class="th" lang="th">แว่นตา แสง มุมกล้อง การบังใบหน้า และความแตกต่างระหว่างบุคคลทำให้ผิดพลาดได้ การหันออกนับจากมุมศีรษะและการเคลื่อนไหวดวงตาที่ประมาณไว้ ไม่ใช่การติดตามจุดที่มองอย่างแม่นยำ</span>
+<span class="en" lang="en">Glasses, lighting, camera angles, occlusion and individual differences can cause errors. Look-away uses estimated head direction and eye movement; it is not precise gaze tracking.</span>
+</p>
+<p>
+<span class="th" lang="th">หนึ่งเหตุการณ์คือการหันออกหรือไม่เห็นใบหน้าต่อเนื่องเกินเวลาที่เลือก ไม่ใช่จำนวนภาพ หลับตาต่อเนื่องอย่างน้อยหนึ่งวินาทีนับแยกจากการกะพริบตา เวลาทุกประเภทเป็นค่าประมาณ</span>
+<span class="en" lang="en">One event is a continuous look-away or missing face longer than your chosen threshold, not a count of frames. Eyes closed for at least one second are counted separately from brief blinks. All durations are estimates.</span>
+</p>
+<p>
+<a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker/web_js">Google MediaPipe Face Landmarker ↗</a> · <a href="/research#learning-kinds">
+<span class="th" lang="th">เรียนรู้เรื่องโมเดล</span>
+<span class="en" lang="en">Learn how models learn</span>
+</a>
+</p>
+</div>
+</section>
+<!--#foot-->
+</main>
+<script type="module" src="/js/pages/focus.js?v={{v}}">
+</script>
+</body>
+</html>

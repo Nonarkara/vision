@@ -85,7 +85,7 @@ export function initFullscreen() {
   for (const bench of document.querySelectorAll('.bench')) {
     if (!bench.querySelector('canvas')) continue
     // Training needs its example buttons beside the camera while enlarged.
-    const panel = bench.classList.contains('room-bench') ? bench.closest('.room-grid') : bench
+    const panel = bench.closest('.focus-room') ?? (bench.classList.contains('room-bench') ? bench.closest('.room-grid') : bench)
     panel.classList.add('instrument')
     let button = bench.querySelector('[data-fullscreen]')
     if (!button) {

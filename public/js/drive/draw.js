@@ -44,10 +44,16 @@ export function drawTrack(ctx, k, track, c) {
     ctx.closePath()
     ctx.stroke()
   }
+  if (track.layout === 'practice' || track.layout === 'city') {
   ctx.fillStyle = c.olive
   ctx.beginPath()
   ctx.arc(RING.x * k, RING.y * k, (RING.r - LANE - 0.4) * k, 0, 2 * Math.PI)
   ctx.fill()
+  }
+  if (track.layout === 'city') {
+    ctx.fillStyle = c.olive
+    for (const [x,y,w,h] of [[55,30,22,9],[80,78,28,20],[55,78,17,20],[128,27,12,20]]) ctx.fillRect(x*k,y*k,w*k,h*k)
+  }
 
   for (const route of Object.values(track)) {
     // One-way arrows every 30 m, so the direction of travel is obvious.
@@ -69,7 +75,7 @@ export function drawTrack(ctx, k, track, c) {
     }
   }
   ctx.fillStyle = c.white
-  for (const z of ZEBRAS) {
+  for (const z of track.zebras) {
     for (let i = -2; i <= 2; i++) ctx.fillRect((z.x + i * 0.9 - 0.3) * k, (z.y - LANE) * k, 0.6 * k, LANE * 2 * k)
   }
 }
@@ -181,7 +187,9 @@ function drawCar(ctx, k, car, c, sel) {
 }
 
 function drawLights(ctx, k, world, c) {
-  for (const [loop, [x, y]] of Object.entries(LIGHT.stops)) {
+  for (const route of Object.values(world.track)) {
+    if (route.stopS == null) continue
+    const { x, y } = at(route, route.stopS), loop = route.lightGroup ?? route.id
     const state = world.light[loop]
     const lx = loop === 'A' ? x : x - LANE - 2.2, ly = loop === 'A' ? y + LANE + 3 : y // on the driver's left
     ctx.fillStyle = c.black

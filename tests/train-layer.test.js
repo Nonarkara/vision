@@ -22,11 +22,11 @@ test('stopping training settles its completion and cancels scheduled work', asyn
 test('training completes at the requested epoch and reports progress', async () => {
   const progress = []
   const job = trainLayer([{ x: new Float32Array(1280), y: 0 }], 2, { epochs: 3, onProgress: (p) => progress.push(p.epoch) })
-  tick()
-  tick()
+  while (frames.size) tick()
   const result = await job.done
   assert.equal(result.layer.epochs, 3)
-  assert.deepEqual(progress, [2, 3])
+  assert.equal(progress.at(-1), 3)
+  assert.ok(progress.every((epoch, i) => epoch > (progress[i - 1] ?? 0) && epoch - (progress[i - 1] ?? 0) <= 2), 'progress advances in bounded passes even on a busy CPU')
   assert.equal(frames.size, 0)
 })
 

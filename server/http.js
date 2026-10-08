@@ -17,6 +17,8 @@ const TYPES = {
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2',
+  '.wasm': 'application/wasm',
+  '.task': 'application/octet-stream',
   '.bin': 'application/octet-stream',
   '.txt': 'text/plain; charset=utf-8',
   '.md': 'text/markdown; charset=utf-8',
@@ -37,6 +39,7 @@ export const PAGES = {
   '/train': 'train',
   '/gesture': 'gesture',
   '/drive': 'drive',
+  '/focus': 'focus',
   '/games': 'games',
   '/everyday': 'everyday',
   '/research': 'research',
@@ -191,8 +194,10 @@ export function createStatic({ root, version, log = () => {} }) {
     return entry
   }
 
-  function send(req, res, entry, cc, status = 200) {
+  function send(req, res, entry, cc, status = 200, wasmWorker = false) {
     const headers = { 'Content-Type': entry.type, 'Cache-Control': cc, ETag: entry.etag, Vary: 'Accept-Encoding', ...securityHeaders() }
+    // Only this worker may compile WASM; document scripts still cannot eval.
+    if (wasmWorker) headers['Content-Security-Policy'] = CSP.replace("script-src 'self'", "script-src 'self' 'wasm-unsafe-eval'")
     if (status === 200 && req.headers['if-none-match'] === entry.etag) { res.writeHead(304, headers); return res.end() }
     const wantsGz = entry.gz && wantsGzip(req)
     const body = wantsGz ? entry.gz : entry.body
@@ -227,7 +232,7 @@ export function createStatic({ root, version, log = () => {} }) {
     // Page templates are only ever served assembled, under their clean URL.
     if (found.full.endsWith('.html')) return false
     // Memo by the resolved file, not the request path: `/a//b` and `/a/b` are one file, one entry.
-    send(req, res, load(found.full, found.full, found.st), cacheControl('/' + path.relative(root, found.full).split(path.sep).join('/')))
+    send(req, res, load(found.full, found.full, found.st), cacheControl('/' + path.relative(root, found.full).split(path.sep).join('/')), 200, path.relative(root, found.full) === 'js/focus/worker.js')
     return true
   }
 
