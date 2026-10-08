@@ -28,6 +28,49 @@
       <li><span class="th" lang="th">เพื่อนบ้านใกล้สุดโหวตว่าภาพตอนนี้เหมือนท่าไหน และมากน้อยแค่ไหน</span><span class="en" lang="en">Nearest neighbours vote on which gesture the current picture looks like, and how strongly</span></li>
       <li><span class="th" lang="th">เมื่อคะแนนสูงพอและคงที่ การกระทำที่ผูกไว้ก็ถูกเรียก — แต่เฉพาะในสิ่งที่เบราว์เซอร์อนุญาต</span><span class="en" lang="en">When the score is high and steady, its bound action runs — but only among the things a browser allows</span></li>
     </ol>
+    <figure class="flow-fig pipe-scroll">
+      <svg class="diagram flow" viewBox="0 0 1000 180">
+        <rect class="fill-gray" x="104" y="72" width="12" height="18"/>
+        <rect class="fill-gray" x="122" y="56" width="12" height="34"/>
+        <rect class="fill-gray" x="140" y="40" width="12" height="50"/>
+        <rect class="fill-signal" x="158" y="26" width="12" height="64"/>
+        <rect class="stroke" x="308" y="26" width="52" height="40"/>
+        <rect class="stroke" x="372" y="26" width="52" height="40"/>
+        <path class="stroke" d="M320 46 L330 58 L346 36"/>
+        <path class="stroke" d="M384 46 L394 58 L410 36"/>
+        <text x="366" y="92" text-anchor="middle">×2</text>
+        <circle class="stroke" cx="606" cy="54" r="26"/>
+        <path class="stroke" d="M606 54 V38"/>
+        <path class="stroke" d="M606 54 L618 62"/>
+        <text x="644" y="59">2.5 s</text>
+        <path class="fill-signal" d="M846 26 L872 26 L858 50 L872 50 L842 88 L852 58 L838 58 Z"/>
+        <path class="stroke" d="M882 40 q10 7 0 14"/>
+        <path class="stroke" d="M890 33 q17 14 0 28"/>
+        <path class="stroke" d="M254 58 H266"/>
+        <path class="stroke" d="M260 52 L267 58 L260 64"/>
+        <path class="stroke" d="M494 58 H506"/>
+        <path class="stroke" d="M500 52 L507 58 L500 64"/>
+        <path class="stroke" d="M734 58 H746"/>
+        <path class="stroke" d="M740 52 L747 58 L740 64"/>
+        <text class="big en" lang="en" x="140" y="128" text-anchor="middle">The score rises</text>
+        <text class="big thai th" lang="th" x="140" y="128" text-anchor="middle">คะแนนขึ้น</text>
+        <text class="en" lang="en" x="140" y="154" text-anchor="middle">how like your gesture it looks</text>
+        <text class="thai th" lang="th" x="140" y="154" text-anchor="middle">เหมือนท่าของคุณแค่ไหน</text>
+        <text class="big en" lang="en" x="380" y="128" text-anchor="middle">Steady for two looks</text>
+        <text class="big thai th" lang="th" x="380" y="128" text-anchor="middle">มั่นคงสองหน้าตา</text>
+        <text class="en" lang="en" x="380" y="154" text-anchor="middle">a flicker is noise, not a gesture</text>
+        <text class="thai th" lang="th" x="380" y="154" text-anchor="middle">ภาพแกว่งเป็นสัญญาณรบกวน ไม่ใช่ท่า</text>
+        <text class="big en" lang="en" x="620" y="128" text-anchor="middle">Then it rests 2.5 s</text>
+        <text class="big thai th" lang="th" x="620" y="128" text-anchor="middle">แล้วพัก 2.5 วินาที</text>
+        <text class="en" lang="en" x="620" y="154" text-anchor="middle">a held pose fires once</text>
+        <text class="thai th" lang="th" x="620" y="154" text-anchor="middle">ท่าค้างยิงครั้งเดียว</text>
+        <text class="big en" lang="en" x="860" y="128" text-anchor="middle">The action runs</text>
+        <text class="big thai th" lang="th" x="860" y="128" text-anchor="middle">การกระทำเกิดขึ้น</text>
+        <text class="en" lang="en" x="860" y="154" text-anchor="middle">beep, flash, lamp — in this tab</text>
+        <text class="thai th" lang="th" x="860" y="154" text-anchor="middle">เสียง จอวาบ หลอดไฟ — ในแท็บนี้</text>
+      </svg>
+      <figcaption><span class="th" lang="th">ท่าจะสั่งสิ่งที่ผูกไว้เมื่อคะแนนมั่นคง ไม่ใช่แค่สูง — นี่คือกติกาทั้งหมดของห้องนี้</span><span class="en" lang="en">A gesture fires only when the score is steady — not merely high. That is this room's whole rule.</span></figcaption>
+    </figure>
   </section>
 
   <div data-specimen-slot></div>

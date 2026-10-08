@@ -21,6 +21,10 @@
 }
 .learn-toc a:hover, .learn-toc a:focus-visible { background: var(--field); color: var(--field-text); }
 
+/* The journey map: the eight chapters as one path, drawn, tappable. */
+.learn-map { padding: 16px var(--gutter) 8px; }
+.learn-map svg { min-width: 900px; }
+
 /* "Try" lines under the prose. */
 .try { font-size: var(--micro); max-width: 62ch; }
 .try .label { margin-right: 8px; }

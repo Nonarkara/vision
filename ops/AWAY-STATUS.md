@@ -94,3 +94,23 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Shipped 1.5.0: new room `/gesture` (room 04) — teach 2–4 gestures with the /train embedding + k-NN stack, bind each to one of eight in-browser actions (beep, vibrate, fullscreen, flash, two pretend SVG lamps, a page-written WAV tone, a handbook link). Firing uses leader-stability + global cooldown (7 new tests in `tests/gesture.test.js`); every refusal is reported bilingually; arming takes one click because the browser's user-gesture rule demands it. Nav/home index//learn where-next/README renumbered to nine rooms (Gestures = 04).
 - New handbook reference `/handbook/actions` from `docs/reference/browser-actions.md`: why a page can never open an app or sleep a Mac, the user-gesture rule, what each of the eight actions uses and when it refuses, and what a native helper or server would actually need.
 - `npm run check` green: 76/76 tests, 23 pages, 77 local references, docs links resolve. Headless screenshots verified the room (light+dark), arm/log/board, the limits chapter, and the handbook action table; `/gesture` span parity 58/58.
+
+## 2026-10-07 12:36 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.5.0, uptime 12,184 seconds. App PID 4549 and tunnel PID 13443 running with KeepAlive. Preserve the other agent's documented gesture-room release.
+- Catalogue 4,014 cameras; loaded 05:33:24 UTC, upstream 05:31:06 UTC, about three and five minutes old. Last five ten-minute refreshes succeeded.
+- No new application warnings since 2026-10-06 20:05 UTC. Relay idle, no resting hosts; memory 19–21 MB. No sustained fault or pending implementation owned by this chat.
+- No restart, deployment, extra camera traffic or machine-wide checks needed. Existing scoped heartbeat continues within the away window.
+
+## 2026-10-07 18:38 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.5.0, uptime approximately 33,850 seconds. App PID 4549 and tunnel PID 13443 remain running with KeepAlive.
+- Catalogue 3,980 cameras; loaded 11:33:24 UTC, upstream 11:31:07 UTC, about four and six minutes old. Last five ten-minute refreshes succeeded; no new app warning since 2026-10-06 20:05 UTC.
+- Relay has ten historical checks (four successful, six failed), but no current inflight/waiting work or resting hosts. Historical camera failures alone do not establish a service fault. Memory 26–29 MB.
+- No restart, deployment, extra camera probes or machine-wide checks justified. Shared notice's temporary CNX preview belongs to CNX; no changes made to it. Existing Vision heartbeat continues within the away window.
+
+## 2026-10-08 00:40 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.5.0, uptime 55,566 seconds. App PID 4549 and tunnel PID 13443 running with KeepAlive. Catalogue loaded 17:33:25 UTC, upstream 17:31:07 UTC (six/eight minutes old); last five refreshes succeeded.
+- Catalogue count declined from 3,980 to 3,427, entirely in view-only entries (774 → 221); video/still/off counts unchanged at 53/2,676/477. Inspected the cached upstream source metadata: all seven sources report live with no error (GISTDA 371, iTIC 164, NST 215, Pakkret 52, Rangsit 1, DWR 130, Maholan 2,697 before deduplication). FloodDash health also returns ok. This check establishes fresh upstream metadata, not the cause of the view-only reduction; no Vision refresh fault is evident. Watch for sustained source errors rather than restoring obsolete entries or probing owner cameras.
+- No new app warnings; relay idle without resting hosts; memory 21–24 MB. No repair, restart, deployment or camera requests justified. Existing scoped heartbeat continues.

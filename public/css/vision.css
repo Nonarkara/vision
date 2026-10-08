@@ -364,6 +364,17 @@ figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
 .diagram .stroke { stroke: currentColor; fill: none; stroke-width: 2; }
 .diagram .stroke-signal { stroke: var(--signal); fill: none; stroke-width: 3; }
 .diagram .stroke-gray { stroke: var(--gray); fill: none; stroke-width: 2; }
+.diagram a { cursor: pointer; transition: opacity 160ms var(--ease); }
+.diagram a:hover { opacity: 0.65; }
+.diagram .mark { fill: var(--ground); stroke: currentColor; stroke-width: 2; }
+.diagram .mark-signal { fill: var(--signal); stroke: var(--signal); stroke-width: 3; }
+
+/* Wide diagrams: they scroll inside themselves on narrow screens instead of
+   shrinking into illegibility. */
+.pipe-scroll { overflow-x: auto; scrollbar-width: thin; }
+.pipe-scroll svg { min-width: 780px; }
+.flow-fig { margin: 0; }
+.pipe-figure { padding: 0 var(--gutter) clamp(32px, 4vw, 56px); }
 
 .table { width: 100%; border-collapse: collapse; font-size: var(--micro); }
 .table th, .table td { text-align: left; padding: 10px 12px; vertical-align: top; }

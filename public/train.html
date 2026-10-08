@@ -30,6 +30,57 @@
       <li><span class="th" lang="th">โครงข่ายที่ฝึกมาแล้วและถูกแช่แข็ง เปลี่ยนรูปของคุณเป็นตัวเลข 1,280 ตัว นั่นคือลายนิ้วมือของภาพ รูปเดิมได้ลายนิ้วมือเดิมทุกครั้ง</span><span class="en" lang="en">A network that is already trained — and frozen — turns your picture into 1,280 numbers: its fingerprint. The same picture always gives the same fingerprint</span></li>
       <li><span class="th" lang="th">กด “ฝึกแล้วลองทาย” ชั้นเล็ก ๆ ที่อยู่ด้านบนเรียนรู้ที่จะอ่านลายนิ้วมือเหล่านั้น แล้วทายรูปใหม่ให้คุณ</span><span class="en" lang="en">Press “Train and try it” — a small layer on top learns to read those fingerprints, then guesses new pictures for you</span></li>
     </ol>
+    <figure class="flow-fig pipe-scroll">
+      <svg class="diagram flow" viewBox="0 0 1000 180">
+        <rect class="stroke" x="86" y="34" width="56" height="42"/>
+        <rect class="stroke" x="106" y="26" width="56" height="42"/>
+        <rect class="stroke" x="126" y="18" width="56" height="42"/>
+        <rect class="fill-ink" x="316" y="66" width="10" height="24"/>
+        <rect class="fill-ink" x="332" y="50" width="10" height="40"/>
+        <rect class="fill-ink" x="348" y="34" width="10" height="56"/>
+        <rect class="fill-ink" x="364" y="58" width="10" height="32"/>
+        <rect class="fill-ink" x="380" y="26" width="10" height="64"/>
+        <rect class="fill-ink" x="396" y="46" width="10" height="44"/>
+        <rect class="fill-ink" x="412" y="38" width="10" height="52"/>
+        <rect class="fill-ink" x="428" y="62" width="10" height="28"/>
+        <circle class="fill-gray" cx="566" cy="44" r="4"/>
+        <circle class="fill-gray" cx="596" cy="74" r="4"/>
+        <circle class="fill-gray" cx="612" cy="34" r="4"/>
+        <circle class="fill-gray" cx="648" cy="80" r="4"/>
+        <circle class="fill-gray" cx="668" cy="50" r="4"/>
+        <circle class="fill-gray" cx="580" cy="66" r="4"/>
+        <path class="stroke" d="M622 58 L596 74"/>
+        <path class="stroke" d="M622 58 L612 34"/>
+        <path class="stroke" d="M622 58 L648 80"/>
+        <circle class="fill-signal" cx="622" cy="58" r="6"/>
+        <rect class="fill-signal" x="796" y="42" width="128" height="28"/>
+        <text class="on-signal en" lang="en" x="806" y="61">Hand up 87%</text>
+        <text class="on-signal thai th" lang="th" x="806" y="61">ยกมือ 87%</text>
+        <path class="stroke" d="M254 58 H266"/>
+        <path class="stroke" d="M260 52 L267 58 L260 64"/>
+        <path class="stroke" d="M494 58 H506"/>
+        <path class="stroke" d="M500 52 L507 58 L500 64"/>
+        <path class="stroke" d="M734 58 H746"/>
+        <path class="stroke" d="M740 52 L747 58 L740 64"/>
+        <text class="big en" lang="en" x="140" y="128" text-anchor="middle">A few examples</text>
+        <text class="big thai th" lang="th" x="140" y="128" text-anchor="middle">ตัวอย่างไม่กี่ภาพ</text>
+        <text class="en" lang="en" x="140" y="154" text-anchor="middle">yours, from any camera</text>
+        <text class="thai th" lang="th" x="140" y="154" text-anchor="middle">ของคุณ จากกล้องใดก็ได้</text>
+        <text class="big en" lang="en" x="380" y="128" text-anchor="middle">A 1,280-number fingerprint</text>
+        <text class="big thai th" lang="th" x="380" y="128" text-anchor="middle">ลายนิ้วมือ 1,280 ตัวเลข</text>
+        <text class="en" lang="en" x="380" y="154" text-anchor="middle">same picture, same numbers</text>
+        <text class="thai th" lang="th" x="380" y="154" text-anchor="middle">ภาพเดิม ได้เลขเดิมเสมอ</text>
+        <text class="big en" lang="en" x="620" y="128" text-anchor="middle">Neighbours vote</text>
+        <text class="big thai th" lang="th" x="620" y="128" text-anchor="middle">เพื่อนบ้านโหวต</text>
+        <text class="en" lang="en" x="620" y="154" text-anchor="middle">which examples are closest?</text>
+        <text class="thai th" lang="th" x="620" y="154" text-anchor="middle">ตัวอย่างไหนใกล้ที่สุด</text>
+        <text class="big en" lang="en" x="860" y="128" text-anchor="middle">A guess + confidence</text>
+        <text class="big thai th" lang="th" x="860" y="128" text-anchor="middle">คำเดา + ความมั่นใจ</text>
+        <text class="en" lang="en" x="860" y="154" text-anchor="middle">it always shows the number</text>
+        <text class="thai th" lang="th" x="860" y="154" text-anchor="middle">บอกคะแนนเสมอ</text>
+      </svg>
+      <figcaption><span class="th" lang="th">สี่ขั้นจากตัวอย่างของคุณสู่คำเดาที่บอกความมั่นใจเสมอ</span><span class="en" lang="en">Four steps from your examples to a guess that always shows its confidence.</span></figcaption>
+    </figure>
   </section>
 
   <div data-specimen-slot></div>
