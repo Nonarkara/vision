@@ -16,6 +16,7 @@ const ACTION = {
   speeding_up: ['เร่ง', 'Speeding up'],
   cruising: ['วิ่งต่อ', 'Cruising'],
   capped: ['คุมความเร็ว', 'Keeping its speed down'],
+  watching: ['เฝ้าดู', 'Watching'],
 }
 
 /** Reasons that cap speed rather than demand a stop. */
@@ -57,7 +58,8 @@ export function sayDecision(car, world, lang) {
   const R = Math.round(sightRange(car, world.weather))
   const why = pick(REASON[key] ?? REASON.clear, lang).replace('{R}', R)
   const dist = d.dist != null && key !== 'short_sight' ? ` · ${Math.round(d.dist)} ${lang === 'en' ? 'm' : 'ม.'}` : ''
-  const action = CAPS.has(key) && (d.action === 'speeding_up' || d.action === 'cruising') ? 'capped' : d.action
+  const easy = d.action === 'speeding_up' || d.action === 'cruising'
+  const action = !easy || key === 'clear' ? d.action : CAPS.has(key) ? 'capped' : 'watching'
   return `${pick(ACTION[action], lang)} — ${why}${dist}`
 }
 

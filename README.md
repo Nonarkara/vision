@@ -63,12 +63,13 @@ An early spark came from conversations with **Dr Supakorn Siddhichai**, who trai
 | `/learn` | 01 Learn | Eight chapters, each with a live instrument: pixels, colour channels, thresholds/Otsu, 3×3 convolution, Sobel edges, frame differencing, a detector with a confidence slider, and what it cannot do. |
 | `/cameras` | 02 Cameras | Tile-free dot map of ~4,000 cameras from 7 sources; filter, study any readable camera, run a polite census. |
 | `/train` | 03 Train | Teachable-machine: examples from your webcam/camera/photo → MobileNetV2 embeddings → k-NN and a trained softmax layer, loss curve, PCA map; then judge cameras nationwide. |
-| `/gesture` | 04 Gestures | Teach 2–4 gestures, bind each to a small in-browser action (beep, buzz, flash, lamps, tone, link); honest limits of what a page may do. |
-| `/games` | 05 Games | Count race vs the detector, fewest-pixels guessing, and "fool the machine" on your own webcam. |
-| `/everyday` | 06 Everyday | Face unlock, QR, OCR, X-rays, lane keeping, self-checkout, crop apps, traffic cameras — how each works and fails. |
-| `/research` | 07 Research | Sixty years of papers, the ones this site runs on, open questions. |
-| `/system` | 08 System | Diagrams, relay rules, CSP, models, live health, credits. |
-| `/legal` | 09 Fine print | PDPA (B.E. 2562), ownership, what not to do, takedowns. |
+| `/gesture` | 04 Gestures | Teach 2–4 gestures (one finger, palm, …), bind each to a small in-browser action (beep, buzz, flash, lamps, tone, link); honest limits of what a page may do. |
+| `/drive` | 05 Drive | Top-view test track: roundabout, traffic light, zebras, people, stray dogs. Six self-driving cars (careful / normal / hasty) race for laps without hitting anyone; each says what its simulated camera sees and why it brakes. Day / rain / night; cover a car's camera. |
+| `/games` | 06 Games | Count race vs the detector, fewest-pixels guessing, and "fool the machine" on your own webcam. |
+| `/everyday` | 07 Everyday | Face unlock, QR, OCR, X-rays, lane keeping, self-checkout, crop apps, traffic cameras — how each works and fails. |
+| `/research` | 08 Research | Sixty years of papers, the ones this site runs on, open questions. |
+| `/system` | 09 System | Diagrams, relay rules, CSP, models, live health, credits. |
+| `/legal` | 10 Fine print | PDPA (B.E. 2562), ownership, what not to do, takedowns. |
 | `/story` | The story | The IOC photos (with the detector counting screens vs people), a live six-camera wall the machine watches, the maker. |
 
 ---

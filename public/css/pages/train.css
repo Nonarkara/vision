@@ -115,7 +115,8 @@
 /* Choose, teach, test: the first screen works without reading the lesson. */
 .training-start { padding: 24px var(--gutter); display: grid; gap: 16px; }
 .training-start h2 { font-size: clamp(1.4rem, 2vw, 2rem); }
-.training-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
+.training-choices { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; }
+a.training-choice { text-decoration: none; }
 .training-choice { text-align: left; background: var(--black-2); color: var(--white); border: 2px solid transparent; padding: 18px; display: grid; gap: 10px; cursor: pointer; font: inherit; min-width: 0; }
 .training-choice strong { font-size: 1.15rem; }
 .training-choice > span:last-child { font-size: var(--micro); color: var(--gray); }
