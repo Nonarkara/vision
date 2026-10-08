@@ -5,11 +5,12 @@
 //
 // Everything — examples, weights, predictions — lives in this tab's memory.
 
-import '../core/site.js'
+import '../core/site.js?v=1.10.0'
+import { mountVideoLesson } from '../train/video-lesson.js?v=1.10.0'
 import { t, n, pct, lang, onLang } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js'
-import { canUseWebcam } from '../core/source.js'
+import { toast, confirmBox } from '../core/site.js?v=1.10.0'
+import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.10.0'
+import { canUseWebcam } from '../core/source.js?v=1.10.0'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { knnPredict, leaveOneOutAsync } from '../ml/learner.js'
 import * as store from '../train/store.js'
@@ -41,10 +42,7 @@ const statusEl = $('[data-status]')
 runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), { fps: 15, state: createLensState(), onFrame: () => { viewState.hidden = true } })
 specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = '' })
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
-viewState.textContent = t('กำลังหากล้องที่ตอบ…', 'Finding a camera that answers…')
-startSpecimen(specimen).then((src) => {
-  if (!src) viewState.textContent = t('ยังไม่มีกล้องตอบ ลองกด ↻ หรือใช้กล้องของคุณ หรือเปิดรูปของคุณเอง', 'No camera answered — press ↻, use your own camera, or open one of your photos')
-})
+viewState.textContent = t('เลือกวิดีโอหรือกล้องในบทเรียนด้านบน', 'Choose a video or camera in the lesson above')
 
 const mineBtn = $('[data-mine]')
 if (!canUseWebcam()) mineBtn.hidden = true
@@ -454,7 +452,7 @@ function canGuess() {
 async function liveTick() {
   try {
     const src = specimen.source
-    if (isLoaded() && !isBusy() && !document.hidden && src?.ready && canGuess()) {
+    if (isLoaded() && !isBusy() && !document.hidden && document.querySelector('.advanced-training').open && src?.ready && canGuess()) {
       // Stills and photos only change now and then: look again only when they, or the examples, do.
       const key = src.moving ? '' : `${src.frameAt}:${samplesStamp}:${trained ? 1 : 0}`
       if (src.moving || key !== lastLiveKey) {
@@ -633,3 +631,5 @@ $('.training-details').addEventListener('toggle', () => { if ($('.training-detai
 paintActivity()
 
 $('.training-curve').addEventListener('toggle', () => { if ($('.training-curve').open) drawCurve(curve, history) })
+
+mountVideoLesson(specimen)

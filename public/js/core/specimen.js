@@ -3,9 +3,9 @@
 // stream. The bar that controls it always names the camera and its owner.
 
 import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js'
-import { openCamera, openWebcam, openPhoto, SourceError, canUseWebcam, countWebcams } from './source.js'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.10.0'
 import { t, bi, esc, onLang } from './i18n.js'
-import { toast } from './site.js'
+import { toast } from './site.js?v=1.10.0'
 
 const STILL_REFRESH_MS = 20_000
 
@@ -170,6 +170,8 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     if (!source) return { name: '', meta: '' }
     if (source.kind === 'webcam') return { name: t('กล้องของคุณ', 'Your camera'), meta: t('ภาพอยู่ในเครื่องของคุณเท่านั้น ไม่ถูกส่งไปไหน', 'The picture stays on this device; nothing is sent anywhere') }
     if (source.kind === 'photo') return { name: t('รูปของคุณ', 'Your photo'), meta: t('เปิดในเครื่องของคุณ ไม่ได้อัปโหลด', 'Opened on this device; not uploaded') }
+    if (source.kind === 'practice') return { name: t('วิดีโอฝึกที่วาดในหน้านี้', 'Drawn practice video'), meta: t('ภาพจำลอง ไม่ใช่ถนนจริง · รถแน่นสลับถนนโล่งทุก 8 วินาที', 'Simulation, not a real road · busy and quiet alternate every 8 seconds') }
+    if (source.kind === 'localvideo') return { name: t('วิดีโอของคุณ', 'Your video'), meta: t('เปิดในเครื่อง ไม่อัปโหลด', 'Played locally; not uploaded') }
     const c = source.cam
     const kind = c.k === 'video' ? t('วิดีโอสด', 'live video') : t('ภาพนิ่ง ส่งต่อผ่านหน่วยความจำ', 'still, relayed in memory')
     return { name: camName(c), meta: `${t('ภาพจาก', 'Image')}: ${sourceName(c.src)} · ${kind}`, link: c.w }
@@ -202,6 +204,12 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
   return {
     get source() { return source },
     next, useCamera, useWebcam, flipWebcam, usePhoto,
+    async useVideo(file) {
+      const ticket = ++request
+      try { const src = await openLocalVideo(file); return setSource(src, ticket) ? src : null }
+      catch(err) { if(ticket !== request)return null; throw err }
+    },
+    useLocal(src) { return setSource(src, ++request) },
     on(fn) { listeners.add(fn); return () => listeners.delete(fn) },
     onError(fn) { errorListeners.add(fn); return () => errorListeners.delete(fn) },
     close() { request++; barSize?.disconnect(); clearInterval(refreshTimer); source?.close(); source = null; render(); emit() },

@@ -3,8 +3,8 @@
 // the page and in the tests, and a seed makes every run repeatable.
 
 import { buildTrack, at, ZEBRAS, LANE } from './track.js'
-import { perceive } from './perceive.js'
-import { decide } from './decide.js'
+import { perceive } from './perceive.js?v=1.10.0'
+import { decide } from './decide.js?v=1.10.0'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack

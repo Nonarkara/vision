@@ -46,3 +46,16 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .scenario-picks .btn { white-space:normal; min-height:60px; }
 .cards { max-height:540px; overflow:auto; }
 @media(max-width:700px) { .scenario-picks { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+.driver-dialog { padding:0; border:1px solid var(--gray); width:min(1100px,96vw); max-width:96vw; max-height:96dvh; background:var(--black); color:var(--white); overflow:auto; }
+.driver-dialog::backdrop { background:rgba(7,12,17,.8); }
+.driver-shell { display:grid; gap:2px; }
+.driver-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 16px; }
+.driver-head h2 { margin:0; font-size:1.4rem; }
+.driver-screen canvas { width:100%; height:clamp(210px,48dvh,520px); display:block; }
+.driver-dashboard { padding:12px 16px; display:grid; grid-template-columns:auto 1fr; gap:6px 20px; }
+.driver-dashboard p { margin:0; }
+.driver-dashboard p:last-child { grid-column:1/-1; color:var(--gray); white-space:pre-line; }
+.driver-note { padding:8px 16px 14px; margin:0; color:var(--gray); }
+.driver-dialog .controls .btn { flex:1; white-space:normal; }
+@media(max-width:600px) { .driver-dashboard { grid-template-columns:1fr; } .driver-dialog .controls { display:grid; grid-template-columns:1fr 1fr; } }

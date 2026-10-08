@@ -11,7 +11,7 @@
 // predict-then-check idea behind sampling planners such as TUM's Frenetix.
 
 import { at, alongMyLane, LANE } from './track.js'
-import { sightRange } from './perceive.js'
+import { sightRange } from './perceive.js?v=1.10.0'
 
 export const CAR_LEN = 4.6
 export const MAX_BRAKE = 9            // m/s², an emergency stop on dry tarmac
@@ -154,6 +154,9 @@ export function decide(car, world) {
     : acc > 0.3 ? 'speeding_up' : 'cruising'
   return {
     acc,
+    targetId: binding?.track?.obj?.id ?? null,
+    targetSpeed: v0,
+    desiredGap: st.s0 + Math.max(0, car.v * st.T + car.v * (binding?.dv ?? 0) / (2 * Math.sqrt(st.a * st.b))),
     action,
     reason,
     label: binding?.track?.label ?? null,

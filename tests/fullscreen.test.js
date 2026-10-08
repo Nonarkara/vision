@@ -19,13 +19,13 @@ function children(parent, ...items) {
   for (const child of items) child.parentElement = parent
 }
 
-for (const focusRoom of [false, true]) test(`phone viewport mode keeps ${focusRoom ? 'session consent and summary' : 'bench controls'}, isolates the page, and restores it on Escape`, async () => {
+for (const focusRoom of [false, true, 'lesson']) test(`phone viewport mode keeps ${focusRoom ? 'session consent and summary' : 'bench controls'}, isolates the page, and restores it on Escape`, async () => {
   const root = element(), body = element(), header = element(), main = element()
   const bench = element(['bench']), sibling = element(), button = element()
   sibling.inert = true // existing disabled content must remain disabled afterwards
   children(root, body)
   children(body, header, main)
-  const panel = focusRoom ? element(['focus-room']) : bench
+  const panel = focusRoom ? element([focusRoom === 'lesson' ? 'video-lesson' : 'focus-room']) : bench
   const consent = element()
   if (focusRoom) children(panel, bench, consent)
   children(main, panel, sibling)

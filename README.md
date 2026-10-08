@@ -62,9 +62,9 @@ An early spark came from conversations with **Dr Supakorn Siddhichai**, who trai
 | `/` | Home | One live camera, five lenses: picture · numbers · edges · motion · objects. "Try it on your own camera." |
 | `/learn` | 01 Learn | Eight chapters, each with a live instrument: pixels, colour channels, thresholds/Otsu, 3×3 convolution, Sobel edges, frame differencing, a detector with a confidence slider, and what it cannot do. |
 | `/cameras` | 02 Cameras | Tile-free dot map of ~4,000 cameras from 7 sources; filter, study any readable camera, run a polite census. |
-| `/train` | 03 Train | Teachable-machine: examples from your webcam/camera/photo → MobileNetV2 embeddings → k-NN and a trained softmax layer, loss curve, PCA map; then judge cameras nationwide. |
+| `/train` | 03 Train | Guided lessons on one video: label frames (supervised nearest neighbours), group unnamed frames (two-cluster k-means), reward alert actions (one-step contextual bandit). Drawn practice clip, public-camera switching and local video files; optional object teaching, trained layer and diagnostic tools. |
 | `/gesture` | 04 Gestures | Teach 2–4 gestures (one finger, palm, …), bind each to a small in-browser action (beep, buzz, flash, lamps, tone, link); honest limits of what a page may do. |
-| `/drive` | 05 Drive | Top-view test track: roundabout, traffic light, zebras, people, stray dogs. Six self-driving cars (careful / normal / hasty) race for laps without hitting anyone; each says what its simulated camera sees and why it brakes. Day / rain / night; cover a car's camera. |
+| `/drive` | 05 Drive | Two/four lanes, roundabout or Bangkok-inspired city; 6–24 cars. Click any car for a moving perspective view of the same world, detection boxes, obstacle gaps and computed acceleration. Day, rain with wipers, night and sun glare. Written rules and simulated detections, not a trained driving system. |
 | `/games` | 06 Games | Count race vs the detector, fewest-pixels guessing, and "fool the machine" on your own webcam. |
 | `/everyday` | 07 Everyday | Face unlock, QR, OCR, X-rays, lane keeping, self-checkout, crop apps, traffic cameras — how each works and fails. |
 | `/research` | 08 Research | Sixty years of papers, the ones this site runs on, open questions. |

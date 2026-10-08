@@ -12,6 +12,7 @@ export const MEMORY = 0.7                   // seconds a lost object is still be
 
 export const WEATHER = {
   day: { range: 1, p: 1 },
+  sun: { range: 0.85, p: 0.9 },
   rain: { range: 0.75, p: 0.88 },
   night: { range: 0.6, p: 0.8 },
 }

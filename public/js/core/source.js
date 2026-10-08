@@ -349,3 +349,26 @@ export async function openPhoto(file) {
     throw new SourceError('เปิดรูปนี้ไม่ได้', 'Could not open that picture')
   }
 }
+
+/** A user-selected clip stays local and releases its object URL on close. */
+export async function openLocalVideo(file) {
+  const video = document.createElement('video')
+  video.muted = true; video.playsInline = true; video.loop = true
+  const url = URL.createObjectURL(file)
+  holder().append(video)
+  const cleanup = () => { video.pause(); video.removeAttribute('src'); video.load(); video.remove(); URL.revokeObjectURL(url) }
+  try {
+    await new Promise((resolve,reject) => {
+      const finish = (err) => { clearTimeout(timer); video.removeEventListener('loadeddata',ready); video.removeEventListener('error',failed); err ? reject(err) : resolve() }
+      const ready = () => finish(), failed = () => finish(new SourceError('เล่นวิดีโอนี้ไม่ได้ ลอง MP4 หรือ WebM','Could not play this video. Try MP4 or WebM.'))
+      const timer = setTimeout(() => finish(new SourceError('วิดีโอเปิดไม่ทัน ลองไฟล์อื่น','Video did not open in time. Try another file.')),15000)
+      video.addEventListener('loadeddata',ready);video.addEventListener('error',failed);video.src=url
+    })
+    await cameraDeadline(video.play(), 15000, new SourceError('วิดีโอไม่เริ่มเล่น ลองไฟล์อื่น', 'Video playback did not start. Try another file.'))
+    const src = new FrameSource('localvideo', video)
+    Object.defineProperty(src,'moving',{value:true})
+    const close = src.close.bind(src)
+    src.close = () => { if(src.closed)return;close();cleanup() }
+    return src
+  } catch(err) { cleanup();throw err }
+}

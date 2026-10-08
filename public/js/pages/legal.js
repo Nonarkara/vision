@@ -1,3 +1,3 @@
 // Legal: plain terms, no instruments. The page needs nothing but the language switch.
 
-import '../core/site.js'
+import '../core/site.js?v=1.10.0'

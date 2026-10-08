@@ -6,11 +6,11 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js'
+import '../core/site.js?v=1.10.0'
 import { t, n, pct, lang, onLang, esc } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js'
-import { canUseWebcam } from '../core/source.js'
+import { toast, confirmBox } from '../core/site.js?v=1.10.0'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.10.0'
+import { canUseWebcam } from '../core/source.js?v=1.10.0'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { knnPredict } from '../ml/learner.js'
 import * as store from '../train/store.js'

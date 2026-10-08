@@ -30,6 +30,7 @@
       <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
     </div>
     <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถจักรยานยนต์ หรือแผนที่กรุงเทพฯ จริง</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorcycles and no real Bangkok map.</span></p>
+    <p class="micro"><span class="th" lang="th">แตะรถบนแผนที่ หรือเลือกปุ่มรถ เพื่อเปิดจอคนขับที่เคลื่อนไหว กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">Tap a car on the map or choose its numbered button to open its moving windshield view. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
     <div class="drive-grid">
       <div class="bench">
         <div class="bench-caption">
@@ -42,7 +43,7 @@
           <button class="btn" type="button" data-set="speed" data-value="1" aria-pressed="true">1×</button>
           <button class="btn" type="button" data-set="speed" data-value="3" aria-pressed="false">3×</button>
           <button class="btn" type="button" data-reset>↻ <span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
-          <button class="btn" type="button" data-all aria-pressed="false"><span class="th" lang="th">ดูสายตาทุกคัน</span><span class="en" lang="en">Show every car’s view</span></button>
+          <button class="btn" type="button" data-all aria-pressed="false"><span class="th" lang="th">ดูขอบเขตกล้องทุกคัน</span><span class="en" lang="en">Show all detection cones</span></button>
         </div>
         <div class="knobs">
           <div class="knob" role="group" data-aria-th="จำนวนรถ" data-aria-en="Traffic">
@@ -57,6 +58,7 @@
             <button class="btn" type="button" data-set="weather" data-value="rain" aria-pressed="false"><span class="th" lang="th">ฝนตก</span><span class="en" lang="en">Rain</span></button>
             <button class="btn" type="button" data-set="weather" data-value="night" aria-pressed="false"><span class="th" lang="th">กลางคืน</span><span class="en" lang="en">Night</span></button>
           </div>
+          <div class="controls"><button class="btn" data-set="weather" data-value="sun" aria-pressed="false"><span class="th" lang="th">แดดจ้าและแสงแยงตา</span><span class="en" lang="en">Bright sun &amp; glare</span></button></div>
           <div class="knob" role="group" data-aria-th="คนเดินถนน" data-aria-en="People">
             <span class="label"><span class="th" lang="th">คน</span><span class="en" lang="en">People</span></span>
             <button class="btn" type="button" data-set="people" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span></button>
@@ -73,11 +75,12 @@
       </div>
 
       <div class="drive-side">
-        <div class="focus field-black" data-focus aria-live="polite">
+        <div class="focus field-black" data-focus aria-live="off">
           <span class="label"><span class="th" lang="th">มองผ่านตารถคันนี้</span><span class="en" lang="en">Looking through this car’s eyes</span></span>
           <p class="focus-name" data-focus-name></p>
           <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span></span><span class="num" data-focus-sees></span></p>
           <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span></span><span data-focus-does></span></p>
+          <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดมุมมองคนขับ ↗</span><span class="en" lang="en">Open driver’s view ↗</span></button>
           <button class="btn" type="button" data-blind aria-pressed="false"></button>
         </div>
         <div class="cards" data-cards></div>
@@ -188,6 +191,15 @@
     </div>
   </section>
 
+<dialog class="driver-dialog" data-driver-dialog aria-labelledby="driver-title">
+  <div class="driver-shell">
+    <header class="driver-head"><h2 id="driver-title" data-driver-title></h2><button class="btn" data-driver-close><span class="th" lang="th">ปิด ×</span><span class="en" lang="en">Close ×</span></button></header>
+    <div class="driver-screen"><canvas data-windshield role="img" data-aria-th="มุมมองคนขับจำลอง พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="Simulated moving windshield view with detected-object boxes"></canvas></div>
+    <div class="driver-dashboard"><p data-driver-speed class="num"></p><p data-driver-action></p><p data-driver-math class="micro"></p></div>
+    <div class="controls"><button class="btn" data-driver-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span></button><button class="btn" data-driver-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span></button><button class="btn" data-driver-pause><span class="th" lang="th">หยุด / เล่นต่อ</span><span class="en" lang="en">Pause / resume</span></button><button class="btn" data-driver-weather><span class="th" lang="th">เปลี่ยนอากาศ</span><span class="en" lang="en">Change weather</span></button><button class="btn" data-driver-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span></button></div>
+    <p class="driver-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว เส้นประ = จำจากเฟรมก่อน สิ่งที่พลาดจะไม่มีกรอบ อุปสรรคด้านข้างอาจอยู่นอกจอนี้</span><span class="en" lang="en">Drawn from the actual map positions; this is a teaching simulation, not real camera footage or a neural detector. Yellow = detected or remembered. Orange = affects speed. Dashed = remembered from an earlier frame. Missed objects have no box. Side-camera detections may be outside this front view.</span></p>
+  </div>
+</dialog>
 </main>
 <!--#foot-->
 <script type="module" src="/js/pages/drive.js?v={{v}}"></script>

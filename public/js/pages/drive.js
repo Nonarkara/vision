@@ -2,11 +2,13 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js'
+import '../core/site.js?v=1.10.0'
 import { lang, onLang } from '../core/i18n.js'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.9.1'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js'
-import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.10.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.10.0'
+import { sightRange } from '../drive/perceive.js?v=1.10.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.0'
+import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -57,7 +59,7 @@ root.addEventListener('click', (e) => {
     syncFocus()
   } else if (b.dataset.car) {
     selected = Number(b.dataset.car)
-    syncFocus()
+    syncFocus(); openDriver()
   }
 })
 
@@ -66,7 +68,7 @@ canvas.addEventListener('click', (e) => {
   const scale = canvas.width / r.width
   const x = ((e.clientX - r.left) * scale) / k, y = ((e.clientY - r.top) * scale) / k
   const near = world.cars.reduce((best, c) => (Math.hypot(c.x - x, c.y - y) < Math.hypot(best.x - x, best.y - y) ? c : best))
-  if (Math.hypot(near.x - x, near.y - y) < 8) { selected = near.id; syncFocus() }
+  if (Math.hypot(near.x - x, near.y - y) < 8) { selected = near.id; syncFocus(); openDriver() }
 })
 
 function syncPlay() {
@@ -129,6 +131,36 @@ function syncFocus() {
   cardsEl.querySelectorAll('[data-car]').forEach((el) => el.setAttribute('aria-pressed', String(Number(el.dataset.car) === selected)))
 }
 
+const dialog = document.querySelector('[data-driver-dialog]')
+const windshield = dialog.querySelector('[data-windshield]')
+const wg = windshield.getContext('2d')
+function openDriver() { if (!dialog.open) dialog.showModal(); paintDriver() }
+root.querySelector('[data-driver-open]').addEventListener('click', openDriver)
+dialog.querySelector('[data-driver-close]').addEventListener('click', () => dialog.close())
+dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() })
+for (const [sel, delta] of [['prev', -1], ['next', 1]]) dialog.querySelector(`[data-driver-${sel}]`).addEventListener('click', () => { selected = (selected - 1 + delta + world.cars.length) % world.cars.length + 1; syncFocus(); paintDriver() })
+dialog.querySelector('[data-driver-pause]').addEventListener('click', () => { playing = !playing; syncPlay(); paintDriver() })
+dialog.querySelector('[data-driver-blind]').addEventListener('click', () => root.querySelector('[data-blind]').click())
+dialog.querySelector('[data-driver-weather]').addEventListener('click', () => { const skies = ['day','rain','night','sun']; settings.weather = world.weather = skies[(skies.indexOf(world.weather)+1)%skies.length]; press('weather',world.weather) })
+let driverFrameAt = 0, driverTextAt = 0
+function paintDriver() {
+  if (!dialog.open) return
+  const now = performance.now()
+  if (now - driverFrameAt < 33) return
+  driverFrameAt = now
+  const c = world.cars[selected-1], en = lang()==='en', d = c.decision
+  const w = Math.max(1, windshield.clientWidth), h = windshield.clientHeight, ratio=Math.min(2,devicePixelRatio||1)
+  if(windshield.width!==Math.round(w*ratio)||windshield.height!==Math.round(h*ratio)){windshield.width=Math.round(w*ratio);windshield.height=Math.round(h*ratio)}
+  wg.setTransform(ratio,0,0,ratio,0,0); drawWindshield(wg,c,world,w,h,lang())
+  if (now - driverTextAt < 250) return
+  driverTextAt = now
+  dialog.querySelector('[data-driver-title]').textContent = en ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]}` : `รถ ${c.id} · ${STYLE_NAME[c.styleName][0]}`
+  dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${en?'km/h':'กม./ชม.'} · ${en?'view':'มองเห็น'} ${Math.round(sightRange(c,world.weather))} m · ${({day:en?'Day':'กลางวัน',rain:en?'Rain':'ฝน',night:en?'Night':'กลางคืน',sun:en?'Sun glare':'แดดจ้า'})[world.weather]} ${playing?'':'⏸'}`
+  dialog.querySelector('[data-driver-action]').textContent=sayDecision(c,world,lang())
+  const gap=d.dist==null?(en?'No stopping obstacle selected':'ยังไม่มีอุปสรรคที่ต้องหยุด'):`${en?'Gap to obstacle':'ระยะถึงอุปสรรค'} ${d.dist.toFixed(1)} m`
+  dialog.querySelector('[data-driver-math]').textContent=`${gap} · ${en?'preferred gap':'ระยะที่ต้องการ'} ${(d.desiredGap??0).toFixed(1)} m · ${en?'speed change':'ปรับความเร็ว'} ${(d.acc*3.6).toFixed(1)} ${en?'km/h each second':'กม./ชม. ต่อวินาที'}\n${en?'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.':'คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด'}`
+}
+
 // ── The loop ──────────────────────────────────────────────────────────
 
 function render() {
@@ -148,13 +180,13 @@ let last = performance.now(), acc = 0, textT = 0
 function frame(now) {
   const dt = Math.min(0.1, (now - last) / 1000)
   last = now
-  if (playing && !document.hidden && inView) {
+  if (playing && !document.hidden && (inView || dialog.open)) {
     acc += dt * settings.speed
     while (acc >= DT) { step(world); acc -= DT }
   }
-  if (!document.hidden && inView) render()
+  if (!document.hidden && (inView || dialog.open)) { if (inView) render(); paintDriver() }
   textT += dt
-  if (textT > 0.25 && !document.hidden && inView) { textT = 0; syncCards(); syncFocus() }
+  if (textT > 0.25 && !document.hidden && (inView || dialog.open)) { textT = 0; syncCards(); syncFocus() }
   requestAnimationFrame(frame)
 }
 

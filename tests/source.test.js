@@ -152,3 +152,27 @@ test('a working webcam is installed even when device enumeration never answers',
   specimen.close()
   assert.equal(stream.track.stopped, true)
 })
+
+test('a late local clip is discarded after a newer source choice and releases its URL', async () => {
+  const events = new Map()
+  const video = {
+    videoWidth:640, videoHeight:360, removed:false, paused:false,
+    addEventListener(type,fn) { events.set(type,fn) },
+    removeEventListener(type) { events.delete(type) },
+    play:async()=>{}, pause() { this.paused=true },
+    removeAttribute() {}, load() {}, remove() { this.removed=true },
+  }
+  document.getElementById=()=>({append(){}})
+  document.createElement=(kind)=>kind==='video'?video:{getContext:()=>({})}
+  const specimen=createSpecimen({refreshStills:false})
+  const opening=specimen.useVideo(new Blob(['test'],{type:'video/webm'}))
+  const newer={kind:'practice',close(){this.closed=true}}
+  specimen.useLocal(newer)
+  events.get('loadeddata')()
+  assert.equal(await opening,null)
+  assert.equal(specimen.source,newer)
+  assert.equal(video.removed,true)
+  assert.equal(video.paused,true)
+  specimen.close()
+  assert.equal(newer.closed,true)
+})

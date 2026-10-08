@@ -47,7 +47,7 @@ export function initFullscreen() {
   }
 
   function credit(panel) {
-    if (panel.querySelector('[data-specimen]') || !panel.querySelector('canvas[data-view], canvas[data-eye]')) return
+    if (panel.querySelector('[data-specimen]') || !panel.querySelector('canvas[data-view], canvas[data-eye], canvas[data-lesson-view]')) return
     const bar = document.querySelector('[data-specimen]')
     const name = bar?.querySelector('[data-specimen-name]')
     const meta = bar?.querySelector('[data-specimen-meta]')
@@ -85,7 +85,7 @@ export function initFullscreen() {
   for (const bench of document.querySelectorAll('.bench')) {
     if (!bench.querySelector('canvas')) continue
     // Training needs its example buttons beside the camera while enlarged.
-    const panel = bench.closest('.focus-room') ?? (bench.classList.contains('room-bench') ? bench.closest('.room-grid') : bench)
+    const panel = bench.closest('.focus-room') ?? bench.closest('.video-lesson') ?? (bench.classList.contains('room-bench') ? bench.closest('.room-grid') : bench)
     panel.classList.add('instrument')
     let button = bench.querySelector('[data-fullscreen]')
     if (!button) {

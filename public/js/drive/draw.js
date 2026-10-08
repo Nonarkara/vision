@@ -3,8 +3,8 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js'
-import { CAR_LEN } from './decide.js'
+import { FOV, sightRange } from './perceive.js?v=1.10.0'
+import { CAR_LEN } from './decide.js?v=1.10.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 const NAME = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'] }
