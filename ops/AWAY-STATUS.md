@@ -182,3 +182,12 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Catalogue 3,428 cameras; loaded 22:24:28 UTC, upstream 22:21:07 UTC (six/nine minutes old). All four refreshes since deployment succeeded. A 20:06 UTC upstream fetch warning recovered; no new warning since release.
 - Previously impaired tunnel connection 1 and connection 3 registered successfully at 21:31:40 UTC (bkk09/sin14); no newer tunnel error in recent logs. Public health succeeds. Relay idle, no resting hosts, memory 21–23 MB.
 - Working tree clean before this entry. Requested frontend deliverables already shipped and reported. No sustained fault, repair, restart, deployment, camera probes or machine-wide jobs needed. Scoped heartbeat continues within the away window.
+
+## 2026-10-09 Usability pass on Codex's 1.10.0, release 1.10.1 (Asia/Bangkok)
+
+- Reviewed Codex commits 4061321…ab6382d (research history, three learning methods, graduated Drive scenarios + windshield view, opt-in Face & focus room). 100/100 tests green before changes.
+- Drive: "Try this" experiments referenced the roundabout track while the room now opens on Two lanes; each now has a "Set it up" button (track, sky, car, covered camera) that scrolls back to the track.
+- Train: lesson step numbering continued at 2 after the page's own step 2; now 3/4.
+- Home: promise ii said "does not recognise faces" beside the new face room; reworded to "never who" and explains the face room finds eye/head direction, not identity.
+- Gesture (user's one-finger request, browser-only): new default set One finger / Palm / Nothing; palm saves the camera picture (download), Nothing is a resting pose that does nothing; room waits for "Use my camera" instead of loading a road camera; "Why a Nothing group?" tip; limits list says Settings/whole-screen need a local program. The OS helper stays parked pending the user.
+- Cache safety: all ?v= stamps 1.10.0 → 1.10.1, and store.js / classes-ui.js / actions.js now stamped at every import site (checked: no module imported under two URLs, which would split the class store).

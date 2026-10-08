@@ -14,7 +14,12 @@ export const ACTIONS = [
   { id: 'lamp2', th: 'หลอดไฟ 2', en: 'Lamp 2' },
   { id: 'media', th: 'เล่น/หยุดโทนเสียง', en: 'Play / pause the tone' },
   { id: 'link', th: 'เปิดหน้าต่างคู่มือ', en: 'Open the handbook window' },
+  { id: 'snapshot', th: 'บันทึกภาพจากกล้อง', en: 'Save the camera picture' },
+  { id: 'none', th: 'ไม่ทำอะไร (ท่าพัก)', en: 'Nothing (a resting pose)' },
 ]
+
+/** Starter bindings for a preset, by class position. */
+export const PRESET_ACTIONS = { fingers: ['beep', 'snapshot', 'none'] }
 
 /** What a class gets before the visitor picks anything. */
 export const DEFAULT_ACTIONS = ['beep', 'buzz', 'flash', 'lamp1']
@@ -62,7 +67,7 @@ const refuse = (th, en) => ({ ok: false, th, en })
  * lamps: the two <circle data-lamp> elements · spot: the fallback link box.
  * Everything is passed in; the module touches nothing until you call it.
  */
-export function createActions({ room = null, flash = null, lamps = [], spot = null } = {}) {
+export function createActions({ room = null, flash = null, lamps = [], spot = null, frame = null } = {}) {
   let ctx = null
   let held = null
   let tone = null
@@ -182,6 +187,18 @@ export function createActions({ room = null, flash = null, lamps = [], spot = nu
       }
       if (spot) spot.hidden = false
       return refuse('เปิดหน้าต่างใหม่ได้เฉพาะตอนคลิก —กดลิงก์ที่หน้านี้เอง', 'A window opens only on a click — press the link on this page')
+    }
+    if (id === 'none') return ok('ท่าพัก — ไม่ทำอะไร', 'Resting pose — nothing to do')
+    if (id === 'snapshot') {
+      // A page cannot capture your whole screen without asking every time;
+      // it can save the picture its own camera canvas is showing.
+      if (!frame?.width) return refuse('ยังไม่มีภาพจากกล้อง', 'No camera picture yet')
+      const blob = await new Promise((r) => frame.toBlob(r, 'image/png'))
+      if (!blob) return refuse('บันทึกภาพไม่สำเร็จ', 'Could not save the picture')
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: `vision-gesture-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.png` })
+      a.click()
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000)
+      return ok('บันทึกภาพจากกล้องลงโฟลเดอร์ดาวน์โหลดแล้ว (เบราว์เซอร์อาจถามก่อนครั้งแรก)', 'Saved the camera picture to Downloads (the browser may ask the first time)')
     }
     return refuse('ไม่รู้จักการกระทำนี้', 'Unknown action')
   }

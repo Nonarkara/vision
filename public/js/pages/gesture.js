@@ -6,19 +6,19 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.10.0'
+import '../core/site.js?v=1.10.1'
 import { t, n, pct, lang, onLang, esc } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js?v=1.10.0'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.10.0'
-import { canUseWebcam } from '../core/source.js?v=1.10.0'
+import { toast, confirmBox } from '../core/site.js?v=1.10.1'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.10.1'
+import { canUseWebcam } from '../core/source.js?v=1.10.1'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { knnPredict } from '../ml/learner.js'
-import * as store from '../train/store.js'
+import * as store from '../train/store.js?v=1.10.1'
 import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js'
-import { createClassList } from '../train/classes-ui.js'
+import { createClassList } from '../train/classes-ui.js?v=1.10.1'
 import { createBars } from '../train/bars.js'
 import { createTrigger } from '../gesture/fire.js'
-import { ACTIONS, DEFAULT_ACTIONS, createActions } from '../gesture/actions.js'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.10.1'
 
 const K = 5
 const LIVE_MS = 250
@@ -40,10 +40,16 @@ const statusEl = $('[data-status]')
 runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), { fps: 15, state: createLensState(), onFrame: () => { viewState.hidden = true } })
 specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = '' })
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
-viewState.textContent = t('กำลังหากล้องที่ตอบ…', 'Finding a camera that answers…')
-startSpecimen(specimen).then((src) => {
-  if (!src) viewState.textContent = t('ยังไม่มีกล้องตอบ ลองกด ↻ หรือใช้กล้องของคุณ หรือเปิดรูปของคุณเอง', 'No camera answered — press ↻, use your own camera, or open one of your photos')
-})
+// Gestures are made by you, so your camera comes first. A road camera loads
+// only on a device that has no camera to offer.
+if (canUseWebcam()) {
+  viewState.textContent = t('กด “ใช้กล้องของฉัน” เพื่อเริ่ม — ภาพไม่ออกจากเครื่องนี้', 'Press “Use my camera” to begin — the picture never leaves this device')
+} else {
+  viewState.textContent = t('กำลังหากล้องที่ตอบ…', 'Finding a camera that answers…')
+  startSpecimen(specimen).then((src) => {
+    if (!src) viewState.textContent = t('ยังไม่มีกล้องตอบ ลองกด ↻ หรือเปิดรูปของคุณเอง', 'No camera answered — press ↻ or open one of your photos')
+  })
+}
 
 const mineBtn = $('[data-mine]')
 if (!canUseWebcam()) mineBtn.hidden = true
@@ -104,7 +110,7 @@ $('[data-add-class]').addEventListener('click', () => store.addClass())
 // The starter set follows what you are looking at — hand up/down for your own
 // camera, busy/empty for a road camera — until you pick a set yourself.
 const presetEl = $('[data-preset]')
-let preset = 'hand'
+let preset = 'fingers'
 let presetChosen = false
 
 function setPreset(id) {
@@ -126,7 +132,7 @@ function renderPresets() {
 
 specimen.on((src) => {
   if (presetChosen || store.hasSamples() || !src) return
-  const want = src.kind === 'webcam' || src.kind === 'photo' ? 'hand' : 'road'
+  const want = src.kind === 'webcam' || src.kind === 'photo' ? 'fingers' : 'road'
   if (want !== preset) setPreset(want)
 })
 
@@ -144,7 +150,10 @@ presetEl.addEventListener('change', async () => {
 
 const mapEl = $('[data-action-map]')
 const actionPick = new Map()   // class key → action id
-const actionFor = (c, i) => actionPick.get(c.key) ?? DEFAULT_ACTIONS[i % DEFAULT_ACTIONS.length]
+const actionFor = (c, i) => {
+  const starter = PRESET_ACTIONS[preset] ?? DEFAULT_ACTIONS
+  return actionPick.get(c.key) ?? starter[i % starter.length]
+}
 
 function paintActionMap() {
   const list = store.getClasses()
@@ -164,6 +173,7 @@ const actions = createActions({
   flash: $('[data-flash]'),
   lamps: [document.querySelector('[data-lamp="0"]'), document.querySelector('[data-lamp="1"]')],
   spot: $('[data-link-spot]'),
+  frame: $('[data-view]'),
 })
 
 // ── Arm / rest: the click the browser insists on before anything runs ───
@@ -243,6 +253,7 @@ async function fireGesture({ index }) {
   const c = list[index]
   if (!c) return
   const def = ACTIONS.find((a) => a.id === actionFor(c, index)) ?? ACTIONS[0]
+  if (def.id === 'none') return // the resting pose exists so the machine can say "no gesture"
   const res = await actions.fire(def.id)
   const name = store.nameOf(c, lang())
   pushLog({

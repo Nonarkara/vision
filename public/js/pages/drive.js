@@ -2,13 +2,13 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.10.0'
+import '../core/site.js?v=1.10.1'
 import { lang, onLang } from '../core/i18n.js'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.10.0'
-import { drawWindshield } from '../drive/perspective.js?v=1.10.0'
-import { sightRange } from '../drive/perceive.js?v=1.10.0'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.0'
-import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.10.1'
+import { drawWindshield } from '../drive/perspective.js?v=1.10.1'
+import { sightRange } from '../drive/perceive.js?v=1.10.1'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.1'
+import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.1'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -61,6 +61,28 @@ root.addEventListener('click', (e) => {
     selected = Number(b.dataset.car)
     syncFocus(); openDriver()
   }
+})
+
+// "Try this": each experiment sets its own track, sky and car, then scrolls up to watch.
+const TRIES = {
+  night: { set: { weather: 'night' }, car: 3 },
+  blind: { set: { weather: 'day' }, car: 1, blind: true },
+  dogs: { set: { weather: 'day', dogs: 'many' }, car: 1 },
+  laps: { set: { weather: 'day', people: 'many', speed: 3 }, car: 3 },
+}
+
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-try]')
+  const plan = b && TRIES[b.dataset.try]
+  if (!plan) return
+  Object.assign(settings, { layout: 'practice', traffic: 6, people: 'few', dogs: 'few', speed: 1 }, plan.set)
+  for (const key of ['layout', 'traffic', 'people', 'dogs', 'speed', 'weather']) press(key, settings[key])
+  resetWorld()
+  selected = plan.car
+  if (plan.blind) world.cars[selected - 1].blind = true
+  playing = true
+  syncPlay(); syncFocus()
+  root.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
 })
 
 canvas.addEventListener('click', (e) => {

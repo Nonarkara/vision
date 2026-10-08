@@ -1,7 +1,7 @@
 // The windshield and detector boxes share the top-view world's coordinates.
 // Only actual tracks get boxes; visible, missed objects stay unboxed.
 import { at, LANE } from './track.js'
-import { sightRange } from './perceive.js?v=1.10.0'
+import { sightRange } from './perceive.js?v=1.10.1'
 
 export function relative(car, point) {
   const dx = point.x - car.x,

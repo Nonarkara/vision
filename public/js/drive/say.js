@@ -1,7 +1,7 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange } from './perceive.js?v=1.10.0'
+import { sightRange } from './perceive.js?v=1.10.1'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful'],

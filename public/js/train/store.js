@@ -18,6 +18,7 @@ export const GLYPHS = ['●', '■', '▲', '✕']
 // in view.
 export const PRESETS = [
   { id: 'ab', group: 'mine', names: [['ก', 'A'], ['ข', 'B']] },
+  { id: 'fingers', group: 'mine', names: [['นิ้วเดียว', 'One finger'], ['ฝ่ามือ', 'Palm'], ['ไม่ทำท่า', 'Nothing']] },
   { id: 'hand', group: 'mine', names: [['ยกมือ', 'Hand up'], ['มือลง', 'Hand down']] },
   { id: 'cup', group: 'mine', names: [['มีแก้ว', 'Cup'], ['ไม่มีแก้ว', 'No cup']] },
   { id: 'someone', group: 'mine', names: [['มีคนอยู่', 'Someone there'], ['ไม่มีใคร', 'Nobody']] },

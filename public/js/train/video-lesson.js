@@ -84,18 +84,9 @@ export function mountVideoLesson(specimen) {
     root
       .querySelectorAll('[data-reward]')
       .forEach((b) => (b.disabled = !pending))
-    const step =
-      mode === 'supervised'
-        ? learned
-          ? 3
-          : 2
-        : mode === 'unsupervised'
-          ? groups
-            ? 3
-            : 2
-          : feedback.length
-            ? 3
-            : 2
+    // Steps 1 (video) and 2 (method) are in the page; the lesson continues at 3.
+    const done = mode === 'supervised' ? learned : mode === 'unsupervised' ? groups : feedback.length
+    const step = done ? 4 : 3
     $('[data-lesson-step]').textContent =
       mode === 'supervised'
         ? t(

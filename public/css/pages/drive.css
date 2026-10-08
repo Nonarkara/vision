@@ -59,3 +59,6 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .driver-note { padding:8px 16px 14px; margin:0; color:var(--gray); }
 .driver-dialog .controls .btn { flex:1; white-space:normal; }
 @media(max-width:600px) { .driver-dashboard { grid-template-columns:1fr; } .driver-dialog .controls { display:grid; grid-template-columns:1fr 1fr; } }
+
+/* "Try this" buttons sit at the end of each experiment. */
+.try-go { min-height: 36px; margin: 6px 0 4px; padding: 0 12px; }
