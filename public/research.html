@@ -4,7 +4,7 @@
 <!--#head-->
 <link rel="stylesheet" href="/css/pages/research.css?v={{v}}">
 <title>Research · งานวิจัย — Vision</title>
-<meta name="description" content="Sixty years of teaching machines to see: the papers that mattered, from Roberts's blocks world to Segment Anything, the ones this site runs on, and the questions computer vision still cannot answer.">
+<meta name="description" content="An illustrated history of computer vision: explore four milestones, try related classroom tools, read the original papers, and discover what machines can still get wrong.">
 </head>
 <body>
 <!--#nav-->
@@ -18,11 +18,94 @@
     <div>
       <p class="lede th" lang="th">จากภาพถ่ายบล็อกไม้ในปี 1963 ถึงแบบจำลองที่ตัดขอบอะไรก็ได้ที่คุณชี้ นี่คืองานวิจัยที่เปลี่ยนวิธีคิด งานที่เว็บนี้ใช้อยู่จริง และคำถามที่ยังไม่มีใครตอบได้</p>
       <p class="lede en" lang="en">From a photograph of blocks in 1963 to a model that outlines anything you point at: the papers that changed the thinking, the ones this site actually runs, and the questions nobody has answered yet.</p>
-      <div class="cta"><a class="btn" href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษา NT TAG ID ↓</span><span class="en" lang="en">Explore NT TAG ID ↓</span></a></div>
+      <div class="cta"><a class="btn primary" href="#history-lab"><span class="th" lang="th">เริ่มจากภาพอธิบาย ↓</span><span class="en" lang="en">Explore the visual history ↓</span></a><a class="btn" href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษา NT TAG ID ↓</span><span class="en" lang="en">Explore NT TAG ID ↓</span></a></div>
       <p class="micro cite-rule"><span class="th" lang="th">ทุกงานในหน้านี้มีอยู่จริง เราอ้างผู้เขียน ปี และที่ตีพิมพ์ ถ้าไม่แน่ใจในรายละเอียดใด เราตัดทิ้ง ชื่องานคงไว้เป็นภาษาอังกฤษตามต้นฉบับ</span><span class="en" lang="en">Every work on this page is real. We give authors, year and venue; where we were not sure of a detail, we left it out.</span></p>
     </div>
   </section>
 
+
+<section class="history-lab" id="history-lab" aria-labelledby="history-title">
+<h2 id="history-title"><span class="th" lang="th">จากเส้น สู่คำทาย: ลองเดินผ่านประวัติศาสตร์</span><span class="en" lang="en">From lines to guesses: walk through the history</span>
+</h2>
+<p class="prose"><span class="th" lang="th">กดปีเพื่อดูว่าคำถามและวิธีคิดเปลี่ยนไปอย่างไร นี่คือสี่ตัวอย่างสำคัญ ไม่ใช่ทุกก้าวของประวัติศาสตร์ วิธีเก่ากับวิธีใหม่ยังใช้ร่วมกันได้</span><span class="en" lang="en">Choose a year to see how the question and approach changed. These are four landmarks, not the whole history. Older and newer methods still work together.</span>
+</p>
+<div class="history-choices" hidden role="group" data-aria-th="เลือกตัวอย่างทางประวัติศาสตร์" data-aria-en="Choose a history example"><button class="btn" type="button" data-history-choice="shapes" aria-controls="history-shapes" aria-pressed="true"><span class="num">1963</span><span class="th" lang="th">หาขอบ แล้วประกอบเป็นรูปทรง</span><span class="en" lang="en">Find edges, build shapes</span></button><button class="btn" type="button" data-history-choice="features" aria-controls="history-features" aria-pressed="true"><span class="num">2005</span><span class="th" lang="th">วัดลักษณะ แล้วให้เครื่องตัดสิน</span><span class="en" lang="en">Measure features, then decide</span></button><button class="btn" type="button" data-history-choice="boxes" aria-controls="history-boxes" aria-pressed="true"><span class="num">2016</span><span class="th" lang="th">เรียนรู้จากภาพ แล้ววางกรอบ</span><span class="en" lang="en">Learn from pictures, draw boxes</span></button><button class="btn" type="button" data-history-choice="masks" aria-controls="history-masks" aria-pressed="true"><span class="num">2023</span><span class="th" lang="th">ชี้สิ่งที่สนใจ แล้วแยกพิกเซล</span><span class="en" lang="en">Point to an object, select its pixels</span></button>
+</div>
+<article class="history-panel" id="history-shapes" data-history-panel="shapes" aria-labelledby="history-shapes-title">
+<figure><img src="/img/history/shapes.svg" alt="" aria-hidden="true" width="600" height="320">
+<figcaption class="micro"><span class="th" lang="th">ภาพอธิบายที่วาดใหม่ ไม่ใช่ผลจากโมเดล</span><span class="en" lang="en">Original explanatory illustration, not model output</span>
+</figcaption>
+</figure>
+<div><span class="label">1963</span>
+<h3 id="history-shapes-title"><span class="th" lang="th">เส้นในภาพบอกอะไร?</span><span class="en" lang="en">What do the lines tell us?</span>
+</h3>
+<p><span class="th" lang="th">ในภาพนี้ สีแต่ละด้านช่วยให้เราเห็นลูกบาศก์ นักวิจัยยุคแรกให้เครื่องหาขอบ แล้วใช้กฎที่คนเขียนจับคู่กับรูปทรงที่รู้จัก งานของ Roberts ศึกษาฉากที่มีทรงเรขาคณิตง่าย ๆ</span><span class="en" lang="en">The coloured faces help us see a cube. Early researchers used edges and rules to match familiar solid shapes. Roberts studied scenes of simple geometric objects.</span>
+</p>
+<p class="history-limit"><span class="th" lang="th">ฉากเรียบง่ายช่วยให้ทำได้ แต่ต้นไม้ เงา หรือของที่บังกันทำให้กฎยุ่งยากขึ้น</span><span class="en" lang="en">Simple scenes make this easier. Trees, shadows and overlapping objects make rules much harder.</span>
+</p>
+<div class="controls"><a class="btn primary" href="/learn#edges"><span class="th" lang="th">ลองหาขอบในภาพ</span><span class="en" lang="en">Try finding edges</span> →</a><a class="btn" href="https://dspace.mit.edu/entities/publication/840d8056-9b54-4bd4-b16f-2f3d8296386e" target="_blank" rel="noopener"><span class="th" lang="th">ต้นฉบับงานวิจัย</span><span class="en" lang="en">Original research</span> ↗</a>
+</div>
+<p class="micro">Roberts · MIT thesis · 1963 · <a href="/img/history/shapes.svg" download><span class="th" lang="th">ดาวน์โหลดภาพอธิบาย</span><span class="en" lang="en">Download illustration</span></a>
+</p>
+</div>
+</article>
+<article class="history-panel" id="history-features" data-history-panel="features" aria-labelledby="history-features-title">
+<figure><img src="/img/history/features.svg" alt="" aria-hidden="true" width="600" height="320">
+<figcaption class="micro"><span class="th" lang="th">ภาพอธิบายที่วาดใหม่ ไม่ใช่ผลจากโมเดล</span><span class="en" lang="en">Original explanatory illustration, not model output</span>
+</figcaption>
+</figure>
+<div><span class="label">2005</span>
+<h3 id="history-features-title"><span class="th" lang="th">รูปร่างนี้คล้ายคนไหม?</span><span class="en" lang="en">Does this shape look like a person?</span>
+</h3>
+<p><span class="th" lang="th">รูปคนทางซ้ายถูกย่อเป็นทิศทางของขอบและจำนวนทางขวา HOG ของ Dalal และ Triggs วัดว่าขอบในแต่ละบริเวณชี้ไปทางไหน แล้วใช้ตัวจำแนกที่ฝึกไว้ตัดสินว่าเป็นคนหรือไม่</span><span class="en" lang="en">The person on the left becomes edge directions and counts on the right. Dalal and Triggs’s HOG measured local edge directions. A trained classifier used those measurements to decide whether a window contained a person.</span>
+</p>
+<p class="history-limit"><span class="th" lang="th">คนยังเลือกว่าจะวัดอะไร เครื่องอาจพลาดเมื่อภาพต่างจากตัวอย่างที่ใช้ฝึก</span><span class="en" lang="en">People still choose what to measure. Different poses or pictures can confuse a system trained on other examples.</span>
+</p>
+<div class="controls"><a class="btn primary" href="/learn#convolution"><span class="th" lang="th">ลองดูหน้าต่างเล็ก ๆ</span><span class="en" lang="en">Try the sliding window</span> →</a><a class="btn" href="https://doi.org/10.1109/CVPR.2005.177" target="_blank" rel="noopener"><span class="th" lang="th">ต้นฉบับงานวิจัย</span><span class="en" lang="en">Original research</span> ↗</a>
+</div>
+<p class="micro">Dalal &amp; Triggs · CVPR · 2005 · <a href="/img/history/features.svg" download><span class="th" lang="th">ดาวน์โหลดภาพอธิบาย</span><span class="en" lang="en">Download illustration</span></a>
+</p>
+</div>
+</article>
+<article class="history-panel" id="history-boxes" data-history-panel="boxes" aria-labelledby="history-boxes-title">
+<figure><img src="/img/history/boxes.svg" alt="" aria-hidden="true" width="600" height="320">
+<figcaption class="micro"><span class="th" lang="th">ภาพอธิบายที่วาดใหม่ ไม่ใช่ผลจากโมเดล</span><span class="en" lang="en">Original explanatory illustration, not model output</span>
+</figcaption>
+</figure>
+<div><span class="label">2016</span>
+<h3 id="history-boxes-title"><span class="th" lang="th">มีอะไรอยู่ตรงไหน?</span><span class="en" lang="en">What is here, and where?</span>
+</h3>
+<p><span class="th" lang="th">กรอบล้อมบริเวณที่คาดว่ามีรถ โครงข่ายเรียนรู้ลักษณะที่มีประโยชน์จากภาพฝึก แทนให้คนออกแบบทุกลักษณะ YOLO รวมการทายชนิดและกรอบไว้ในโครงข่ายเดียว</span><span class="en" lang="en">The box marks where a car is thought to be. A neural network learns useful features from training pictures. YOLO combined guesses about object types and their boxes in one network.</span>
+</p>
+<p class="history-limit"><span class="th" lang="th">กรอบเป็นคำทาย ไม่ใช่หลักฐานว่าเครื่องเข้าใจรถ ภาพเบลอหรือวัตถุเล็กอาจทำให้พลาด เว็บนี้ใช้ SSDLite ไม่ใช่ YOLO</span><span class="en" lang="en">A box is a guess, not proof that it understands cars. Blur and small objects can cause misses. This site uses SSDLite, not YOLO.</span>
+</p>
+<div class="controls"><a class="btn primary" href="/learn#detector"><span class="th" lang="th">ลองให้เครื่องหาวัตถุ</span><span class="en" lang="en">Try finding objects</span> →</a><a class="btn" href="https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/Redmon_You_Only_Look_CVPR_2016_paper.html" target="_blank" rel="noopener"><span class="th" lang="th">ต้นฉบับงานวิจัย</span><span class="en" lang="en">Original research</span> ↗</a>
+</div>
+<p class="micro">Redmon et al. · CVPR · 2016 · <a href="/img/history/boxes.svg" download><span class="th" lang="th">ดาวน์โหลดภาพอธิบาย</span><span class="en" lang="en">Download illustration</span></a>
+</p>
+</div>
+</article>
+<article class="history-panel" id="history-masks" data-history-panel="masks" aria-labelledby="history-masks-title">
+<figure><img src="/img/history/masks.svg" alt="" aria-hidden="true" width="600" height="320">
+<figcaption class="micro"><span class="th" lang="th">ภาพอธิบายที่วาดใหม่ ไม่ใช่ผลจากโมเดล</span><span class="en" lang="en">Original explanatory illustration, not model output</span>
+</figcaption>
+</figure>
+<div><span class="label">2023</span>
+<h3 id="history-masks-title"><span class="th" lang="th">พิกเซลไหนเป็นส่วนของสิ่งนี้?</span><span class="en" lang="en">Which pixels belong to this object?</span>
+</h3>
+<p><span class="th" lang="th">สีส้มตามรูปรถละเอียดกว่ากรอบ นี่เรียกว่าการแบ่งส่วนภาพ SAM รับจุดหรือกรอบเป็นคำใบ้ แล้วสร้างพื้นที่ที่คาดว่าเป็นวัตถุที่ต้องการ</span><span class="en" lang="en">Orange follows the car’s shape more closely than a box. This is segmentation. SAM takes prompts such as points or boxes and proposes a mask for the selected object.</span>
+</p>
+<p class="history-limit"><span class="th" lang="th">พื้นที่ที่เลือกอาจยังผิด และไม่ได้บอกโดยอัตโนมัติว่าวัตถุนั้นคืออะไร เว็บนี้ไม่ได้รัน SAM ภาพนี้เป็นเพียงภาพอธิบาย</span><span class="en" lang="en">The selected area can still be wrong. A mask does not automatically name the object. This site does not run SAM; this is an explanatory drawing.</span>
+</p>
+<div class="controls"><a class="btn primary" href="/handbook/06"><span class="th" lang="th">อ่านเรื่องกรอบกับพิกเซล</span><span class="en" lang="en">Read about boxes and pixels</span> →</a><a class="btn" href="https://openaccess.thecvf.com/content/ICCV2023/html/Kirillov_Segment_Anything_ICCV_2023_paper.html" target="_blank" rel="noopener"><span class="th" lang="th">ต้นฉบับงานวิจัย</span><span class="en" lang="en">Original research</span> ↗</a>
+</div>
+<p class="micro">Kirillov et al. · ICCV · 2023 · <a href="/img/history/masks.svg" download><span class="th" lang="th">ดาวน์โหลดภาพอธิบาย</span><span class="en" lang="en">Download illustration</span></a>
+</p>
+</div>
+</article>
+<nav class="history-next" data-aria-th="อ่านต่อในหน้านี้" data-aria-en="Continue on this page"><a href="#by-hand"><span class="th" lang="th">ดูเส้นเวลางานวิจัยทั้งหมด</span><span class="en" lang="en">Browse the full research timeline</span></a><a href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษาในไทย: NT TAG ID</span><span class="en" lang="en">Thai case study: NT TAG ID</span></a><a href="#open"><span class="th" lang="th">ยังมีอะไรที่เครื่องทำไม่ได้?</span><span class="en" lang="en">What can it still get wrong?</span></a>
+</nav>
+</section>
 
   <section class="chapter tagid-case field-quiet" id="nt-tag-id" aria-labelledby="tagid-h">
     <header>

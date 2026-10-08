@@ -298,7 +298,14 @@ function paintTrainState() {
       : stale ? `· ${t('ตัวอย่างเปลี่ยนแล้ว กดฝึกใหม่', 'examples changed — train again')}` : ''
   // While a run is under way the readout belongs to the live pass counter;
   // repainting it here would wipe the one number the visitor is watching.
-  if (!training) trainSay.textContent = trainNote()
+  if (!training) {
+    const missing = store.getClasses().filter(c => !c.samples.length)
+    trainSay.textContent = !ready
+      ? t(`เพิ่มภาพให้ครบทุกกลุ่ม ยังขาด: ${missing.map(c => store.nameOf(c, lang())).join(' / ')}`, `Add a picture to each group. Still needs pictures: ${missing.map(c => store.nameOf(c, lang())).join(' / ')}`)
+      : !trained ? t('ตัวอย่างพร้อมแล้ว กด “ฝึกแล้วลองทาย” จากนั้นลองภาพใหม่', 'Examples ready. Press Train and try it, then show a new picture.')
+        : stale ? t('เพิ่มหรือเปลี่ยนตัวอย่างแล้ว กดฝึกอีกครั้งเพื่อให้เครื่องเรียนรู้ภาพใหม่', 'Your examples changed. Train again so it learns from the new pictures.')
+          : trainNote()
+  }
 }
 
 // ── Leave-one-out: graded, and computed in slices so a big set cannot stall ─
@@ -369,7 +376,7 @@ function paintHowto() {
 }
 
 store.onChange((kind) => {
-  if (kind === 'names') { paintLabels(); paintLive(); return }
+  if (kind === 'names') { paintLabels(); paintLive(); paintTrainState(); return }
   set = store.trainingSet()
   samplesStamp++
   lastLiveKey = ''

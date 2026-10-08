@@ -64,3 +64,22 @@
   .tagid-pipeline { padding: 16px; }
   .tagid-input, .tagid-output { gap: 4px 12px; }
 }
+
+/* A visual route into the papers, with no horizontal scrolling on phones. */
+.history-lab { padding: clamp(24px, 4vw, 56px) var(--gutter); display: grid; gap: 20px; scroll-margin-top: 90px; }
+.history-lab h2 { font-size: clamp(1.75rem, 3vw, 3rem); max-width: 28ch; }
+.history-lab > .prose { margin: 0; max-width: 74ch; }
+.history-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
+.history-choices .btn { display: grid; grid-template-columns: 1fr; gap: 4px; align-content: start; white-space: normal; height: auto; min-height: 60px; text-align: left; justify-content: flex-start; padding: 12px; }
+.history-choices .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
+.history-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+.history-panel figure { margin: 0; min-width: 0; }
+.history-panel img { width: 100%; height: auto; display: block; }
+.history-panel figcaption { margin-top: 8px; }
+.history-panel h3 { font-size: clamp(1.35rem, 2vw, 2rem); margin: 8px 0 16px; }
+.history-panel p { max-width: 66ch; }
+.history-panel .controls { padding: 0; background: transparent; flex-wrap: wrap; }
+.history-limit { border-left: 3px solid currentColor; padding-left: 16px; }
+.history-next { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.history-next a { min-height: 44px; display: inline-flex; align-items: center; }
+@media (max-width: 900px) { .history-panel { grid-template-columns: 1fr; } .history-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
