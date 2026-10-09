@@ -165,9 +165,12 @@ export function createCatalogStore({ floodDashBase, cacheFile, refreshMs = 10 * 
       const payload = await res.json()
       adopt(payload, 'flooddash')
       const tmp = `${cacheFile}.tmp`
-      fs.mkdirSync(path.dirname(cacheFile), { recursive: true })
-      fs.writeFileSync(tmp, JSON.stringify({ fetched_at: payload.fetched_at, sources: payload.sources, cameras: payload.cameras }))
-      fs.renameSync(tmp, cacheFile)
+      await fs.promises.mkdir(path.dirname(cacheFile), { recursive: true })
+      // Async write + rename: the catalogue is ~2.4 MB and a synchronous
+      // write blocked the event loop for tens of milliseconds every
+      // ten-minute refresh, on the same loop that serves frames.
+      await fs.promises.writeFile(tmp, JSON.stringify({ fetched_at: payload.fetched_at, sources: payload.sources, cameras: payload.cameras }))
+      await fs.promises.rename(tmp, cacheFile)
       log('info', 'catalogue refreshed', { cameras: state.cameras.length, ...countKinds(state.cameras) })
     } catch (err) {
       log('warn', 'catalogue refresh failed; keeping last good copy', { error: String(err.message ?? err), cameras: state.cameras.length })

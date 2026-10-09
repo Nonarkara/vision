@@ -1,7 +1,7 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange } from './perceive.js?v=1.10.1'
+import { sightRange } from './perceive.js?v=1.10.2'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful'],
@@ -46,7 +46,7 @@ const REASON = {
   hit_dog: ['ชนสุนัข! มันไม่ทันเห็นหรือไม่ทันหยุด', 'it hit a dog — it saw it too late, or could not stop in time'],
 }
 
-const LABEL = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'] }
+const LABEL = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'], truck: ['รถบรรทุก', 'truck'], bus: ['รถโดยสาร', 'bus'] }
 
 const pick = (pair, lang) => pair[lang === 'en' ? 1 : 0]
 

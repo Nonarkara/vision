@@ -2,13 +2,13 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.10.1'
+import '../core/site.js?v=1.10.2'
 import { lang, onLang } from '../core/i18n.js'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.10.1'
-import { drawWindshield } from '../drive/perspective.js?v=1.10.1'
-import { sightRange } from '../drive/perceive.js?v=1.10.1'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.1'
-import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.1'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.10.2'
+import { drawWindshield } from '../drive/perspective.js?v=1.10.2'
+import { sightRange } from '../drive/perceive.js?v=1.10.2'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.2'
+import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.2'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -171,7 +171,7 @@ function paintDriver() {
   if (now - driverFrameAt < 33) return
   driverFrameAt = now
   const c = world.cars[selected-1], en = lang()==='en', d = c.decision
-  const w = Math.max(1, windshield.clientWidth), h = windshield.clientHeight, ratio=Math.min(2,devicePixelRatio||1)
+  const w = Math.max(1, windshield.clientWidth), h = windshield.clientHeight, ratio=Math.min(3,devicePixelRatio||1)
   if(windshield.width!==Math.round(w*ratio)||windshield.height!==Math.round(h*ratio)){windshield.width=Math.round(w*ratio);windshield.height=Math.round(h*ratio)}
   wg.setTransform(ratio,0,0,ratio,0,0); drawWindshield(wg,c,world,w,h,lang())
   if (now - driverTextAt < 250) return

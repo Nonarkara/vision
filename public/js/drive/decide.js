@@ -11,12 +11,18 @@
 // predict-then-check idea behind sampling planners such as TUM's Frenetix.
 
 import { at, alongMyLane, LANE } from './track.js'
-import { sightRange } from './perceive.js?v=1.10.1'
+import { sightRange } from './perceive.js?v=1.10.2'
 
 export const CAR_LEN = 4.6
 export const MAX_BRAKE = 9            // m/s², an emergency stop on dry tarmac
 const SIGHT_BRAKE = 4                 // m/s², the firm stop a sensible driver plans for
 const HORIZON = [0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2]
+
+/** A vehicle's real length — cars keep the original 4.6 m arithmetic, so
+ *  lorry-free worlds behave exactly as before. */
+const len = (v) => v?.dims?.L ?? CAR_LEN
+/** Gap between two vehicles' centres, from both real lengths (never shorter than the legacy car-car 4.6). */
+const both = (me, lead) => Math.max(CAR_LEN, (len(me) + len(lead)) / 2)
 
 /** Intelligent Driver Model: acceleration for speed v, gap to what is ahead, closing speed dv. */
 export function idm(v, v0, gap, dv, st) {
@@ -67,7 +73,7 @@ function constraints(car, world) {
 
   // The light, read by the same camera — a covered camera cannot see it either.
   if (route.stopS != null && !car.blind) {
-    const d = ahead(car.s, route.stopS, route.len) - CAR_LEN / 2
+    const d = ahead(car.s, route.stopS, route.len) - Math.max(CAR_LEN / 2, len(car) / 2)
     const state = world.light[route.lightGroup ?? route.id]
     if (d > -1 && d < R) {
       if (state === 'red') out.push({ gap: d, dv: v, reason: 'light_red' })
@@ -84,7 +90,7 @@ function constraints(car, world) {
     if (o.kind === 'person' && o.state === 'wait' && car.style.yieldWaiting) {
       const z = route.zebras.find((zz) => zz.zebra.id === o.zebra.id)
       if (z) {
-        const d = ahead(car.s, z.s, route.len) - CAR_LEN / 2 - 2.5
+        const d = ahead(car.s, z.s, route.len) - Math.max(CAR_LEN / 2, len(car) / 2) - 2.5
         if (d > 0 && d < R && (d > v * v / (2 * car.style.b) * 0.7 || v < 2)) out.push({ gap: d, dv: v, reason: 'person_waiting', track: tr })
       }
     }
@@ -101,9 +107,9 @@ function constraints(car, world) {
       if (o.kind === 'car') {
         const lane = at(route, car.s + along).h
         const lead = o.frozen > 0 ? 0 : Math.max(0, o.v * Math.cos(o.h - lane))
-        out.push({ gap: along - CAR_LEN, dv: v - lead, reason: lead < 1 && Math.cos(o.h - lane) < 0.5 ? 'car_crossing' : 'car_ahead', track: tr })
+        out.push({ gap: along - both(car, o), dv: v - lead, reason: lead < 1 && Math.cos(o.h - lane) < 0.5 ? 'car_crossing' : 'car_ahead', track: tr })
       } else {
-        out.push({ gap: along - CAR_LEN / 2 - o.r - 0.5, dv: v, reason: `${o.kind}_in_lane`, track: tr })
+        out.push({ gap: along - Math.max(CAR_LEN / 2, len(car) / 2) - o.r - 0.5, dv: v, reason: `${o.kind}_in_lane`, track: tr })
       }
       continue
     }
@@ -117,9 +123,9 @@ function constraints(car, world) {
       if (o.kind === 'car') {
         if (Math.cos(o.h - at(route, car.s + hit.along).h) > 0.85 && at(o.route, o.s).ring) break // same way round: just follow
         if (!iYield(car, o, mine, t)) break
-        out.push({ gap: hit.along - 3.5, dv: v, reason: at(route, car.s + hit.along).ring ? 'yield_ring' : 'yield_car', track: tr })
+        out.push({ gap: hit.along - Math.max(3.5, (len(car) + len(o)) / 2), dv: v, reason: at(route, car.s + hit.along).ring ? 'yield_ring' : 'yield_car', track: tr })
       } else {
-        out.push({ gap: hit.along - CAR_LEN / 2 - 2, dv: v, reason: `${o.kind}_will_cross`, track: tr })
+        out.push({ gap: hit.along - Math.max(CAR_LEN / 2, len(car) / 2) - 2, dv: v, reason: `${o.kind}_will_cross`, track: tr })
       }
       break
     }
@@ -134,7 +140,7 @@ export function decide(car, world) {
   const curve = curveLimit(car)
   if (curve < v0) { v0 = curve; reason = 'curve' }
   // Never faster than it can stop within what it can see. The hasty skip this rule.
-  const sight = Math.sqrt(2 * SIGHT_BRAKE * Math.max(0, sightRange(car, world.weather) - st.s0 - CAR_LEN))
+  const sight = Math.sqrt(2 * SIGHT_BRAKE * Math.max(0, sightRange(car, world.weather) - st.s0 - Math.max(CAR_LEN, len(car))))
   if (st.sightLimit && sight < v0) { v0 = sight; reason = 'short_sight' }
 
   const list = constraints(car, world)

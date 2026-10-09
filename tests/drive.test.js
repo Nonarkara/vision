@@ -4,9 +4,9 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { buildTrack, at, alongMyLane } from '../public/js/drive/track.js'
-import { detectChance } from '../public/js/drive/perceive.js'
+import { detectChance, perceive } from '../public/js/drive/perceive.js'
 import { idm } from '../public/js/drive/decide.js'
-import { createWorld, step, run, DT, STYLES } from '../public/js/drive/sim.js'
+import { createWorld, step, run, DT, STYLES, VEHICLES, circles } from '../public/js/drive/sim.js'
 
 const MINUTES = 10
 
@@ -121,11 +121,63 @@ test('road choices have actual distinct lanes, opposing directions and bounded t
   assert.equal(createWorld({traffic:1000}).cars.length,32)
 })
 
+test('vehicles have their real Thai sizes — the sizes every view shares', () => {
+  // The registry the track, the top view, the windshield view and the
+  // collision maths all read from. Thai traffic, measured in metres.
+  assert.deepEqual(VEHICLES.car, { L: 4.4, W: 1.8, H: 1.5 })      // Honda City / Vios class
+  assert.deepEqual(VEHICLES.pickup, { L: 5.3, W: 1.9, H: 1.9 })  // D-Max / Revo class
+  assert.deepEqual(VEHICLES.truck, { L: 9.6, W: 2.5, H: 3.2 })   // 6-wheel cargo lorry
+  assert.deepEqual(VEHICLES.bus, { L: 11.95, W: 2.5, H: 3.3 })   // Bangkok city bus
+  // Nothing wider than the legal 2.5 m, nothing taller than a real roof.
+  for (const [name, v] of Object.entries(VEHICLES)) {
+    assert.ok(v.W <= 2.5, `${name} fits a Thai lane legally`)
+    assert.ok(v.L > v.W && v.H > 0.5, `${name} has a body`)
+  }
+})
+
+test('traffic mixes sedans, pickups, lorries and buses — and lorries drive like lorries', () => {
+  const bodies = (w) => new Set(w.cars.map((c) => c.body))
+  const w6 = createWorld({ seed: 4 })
+  assert.ok(bodies(w6).has('car') && bodies(w6).has('pickup') && bodies(w6).has('truck'), 'even a 6-vehicle street shows the mix')
+  const w24 = createWorld({ seed: 4, layout: 'city', traffic: 24 })
+  assert.ok(bodies(w24).has('bus'), 'a crowded city run has buses')
+  assert.ok(w24.cars.every((c) => c.dims === VEHICLES[c.body]), 'every vehicle carries its true dims')
+  const lorry = w24.cars.find((c) => c.body === 'truck')
+  assert.ok(lorry.style.v0 <= 11.1 && lorry.style.s0 > STYLES[lorry.styleName].s0, 'lorries cruise slower and keep more space')
+})
+
+test('collision footprints follow real lengths: a lorry outweighs two sedans of road', () => {
+  const shape = (body) => circles({ x: 0, y: 0, h: 0, dims: VEHICLES[body] })
+  const reach = (c) => Math.max(...c.map((p) => Math.abs(p[0]))) + c[0][2]
+  assert.ok(reach(shape('truck')) > 2 * reach(shape('car')), 'a 9.6 m lorry occupies more than two 4.4 m sedans')
+  assert.ok(shape('bus').length > shape('car').length, 'long vehicles get more collision circles')
+})
+
+test('a lorry fills more of the frame — and the detector calls it a lorry', () => {
+  const viewer = { style: STYLES.normal, blind: false }
+  assert.ok(detectChance(viewer, 'car', 20, 'day', 'truck') > detectChance(viewer, 'car', 20, 'day', 'car'))
+  assert.ok(detectChance(viewer, 'car', 20, 'day', 'bus') > detectChance(viewer, 'car', 20, 'day', 'car'))
+  const w = createWorld({ seed: 1, layout: 'two', traffic: 24, people: 'none', dogs: 'none' })
+  const eye = w.cars[0]
+  const lorry = w.cars.find((c) => c.body === 'truck')
+  lorry.route = eye.route
+  lorry.s = eye.s + 15
+  const p = at(eye.route, lorry.s)
+  lorry.x = p.x; lorry.y = p.y; lorry.h = p.h
+  perceive(eye, w, () => 0)
+  assert.equal(eye.tracks.get(lorry.id)?.label, 'truck', 'COCO really has a truck class')
+})
+
 test('cars sharing city roads never spawn inside each other', () => {
-  const points=(c)=>[-1.25,1.25].map((d)=>[c.x+Math.cos(c.h)*d,c.y+Math.sin(c.h)*d])
-  for(const layout of ['two','four','practice','city']) {
-    const w=createWorld({layout,traffic:24})
-    for(let i=0;i<w.cars.length;i++)for(let j=i+1;j<w.cars.length;j++)
-      assert.ok(points(w.cars[i]).every((p)=>points(w.cars[j]).every((q)=>Math.hypot(p[0]-q[0],p[1]-q[1])>=2.6)),`${layout}: cars ${i+1}/${j+1} overlap at start`)
+  for (const layout of ['two', 'four', 'practice', 'city']) {
+    const w = createWorld({ layout, traffic: 24 })
+    for (let i = 0; i < w.cars.length; i++)
+      for (let j = i + 1; j < w.cars.length; j++) {
+        const a = circles(w.cars[i]), b = circles(w.cars[j])
+        assert.ok(
+          a.every((p) => b.every((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) >= p[2] + q[2] - 0.01)),
+          `${layout}: vehicles ${i + 1}/${j + 1} overlap at start`,
+        )
+      }
   }
 })

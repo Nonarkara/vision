@@ -119,9 +119,12 @@ export function assemblePage(html, { partials, page, version }) {
 
 // Models, fonts and vendored libraries never change under the same path (a new
 // version gets a new folder), so they are cached for a year at the edge. Our
-// own JS and CSS revalidate on every load: ES-module imports cannot carry a
-// ?v= query, and a stale nested module is the bug that cost FloodDash six
-// version bumps in one night (CLAUDE.md, "Cache escape pattern"). A 304 is cheap.
+// own JS and CSS revalidate on every load — the imports do carry a ?v= stamp,
+// but a stale nested module remains the failure mode to guard: no module may
+// ever be imported under two different URLs, or the page splits the module
+// registry (two store.js instances, two languages, two everythings). The
+// stamps are checked by hand at release; check-site verifies the imports
+// themselves resolve. A 304 is cheap.
 function cacheControl(rel) {
   if (/^\/(models|fonts|vendor)\//.test(rel)) return 'public, max-age=31536000, immutable'
   if (/^\/(img|data)\//.test(rel)) return 'public, max-age=3600'

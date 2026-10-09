@@ -1,7 +1,12 @@
 // The windshield and detector boxes share the top-view world's coordinates.
 // Only actual tracks get boxes; visible, missed objects stay unboxed.
+// Vehicles are drawn at their real Thai sizes (VEHICLES in sim.js): a sedan
+// is 4.4 × 1.8 m with a 1.5 m roof, a 6-wheel lorry 9.6 × 2.5 m and 3.2 m
+// tall — so what towers over you in this view is what would tower over you
+// on the road.
 import { at, LANE } from './track.js'
-import { sightRange } from './perceive.js?v=1.10.1'
+import { sightRange } from './perceive.js?v=1.10.2'
+import { VEHICLES } from './sim.js?v=1.10.2'
 
 export function relative(car, point) {
   const dx = point.x - car.x,
@@ -27,6 +32,8 @@ const names = {
   person: ['คน', 'person'],
   dog: ['สุนัข', 'dog'],
   cat: ['แมว?', 'cat?'],
+  truck: ['รถบรรทุก', 'truck'],
+  bus: ['รถโดยสาร', 'bus'],
 }
 function line(g, points) {
   g.beginPath()
@@ -106,8 +113,119 @@ function dog(g, x, y, s, t) {
     [x - s * 0.58, y - s * 0.75],
   ])
 }
+// Vehicle silhouettes at true scale: cross-sections from rear (a=0) to
+// front (a=1), each with its height in metres. A sedan's roof is 1.50 m;
+// a pickup's cab 1.90 m; a lorry's box rides at 3.20 m — the reason it
+// towers over you in the windshield. Heights track VEHICLES in sim.js.
+const PROFILES = {
+  car: [[0, 1.02], [0.1, 1.5], [0.48, 1.5], [0.62, 1.02], [0.78, 0.88], [1, 0.72]],
+  pickup: [[0, 1.2], [0.5, 1.2], [0.55, 1.9], [0.75, 1.9], [0.8, 1.05], [1, 0.95]],
+  truck: [[0, 3.2], [0.68, 3.2], [0.71, 2.25], [0.86, 2.25], [0.89, 1.6], [1, 1.55]],
+  bus: [[0, 3.3], [0.92, 3.3], [1, 2.6]],
+}
+const BODY_COLOUR = {
+  careful: { top: '#e8e8de', side: '#c2c2b6' },
+  normal: { top: '#879599', side: '#6b767a' },
+  hasty: { top: '#d1b85e', side: '#af9749' },
+}
+const GLASS = '#26323b'
+const AXLES = { car: [0.17, 0.83], pickup: [0.16, 0.84], truck: [0.11, 0.66], bus: [0.12, 0.86] }
+
+/** A point on a vehicle, in world metres: frac 0–1 rear→front, side ±1, height m. */
+function vpt(view, o, dims, frac, side, height, w, h) {
+  const along = (frac - 0.5) * dims.L
+  const lat = side * (dims.W / 2)
+  return project(view, {
+    x: o.x + Math.cos(o.h) * along - Math.sin(o.h) * lat,
+    y: o.y + Math.sin(o.h) * along + Math.cos(o.h) * lat,
+  }, w, h, height)
+}
+
+/** One vehicle as a depth-sorted set of real-size faces. */
+function drawVehicle(g, view, o, w, h, night) {
+  const dims = o.dims ?? VEHICLES.car
+  const prof = PROFILES[o.body ?? 'car'] ?? PROFILES.car
+  const col = BODY_COLOUR[o.styleName] ?? BODY_COLOUR.normal
+  const braking = o.decision.acc < -0.3
+
+  // Ground shadow, spread a little wider than the tyres.
+  const gl = vpt(view, o, dims, 0, -1.08, 0, w, h), gr = vpt(view, o, dims, 0, 1.08, 0, w, h)
+  const fl = vpt(view, o, dims, 1, -1.08, 0, w, h), fr = vpt(view, o, dims, 1, 1.08, 0, w, h)
+  if (gl && gr && fl && fr) {
+    g.fillStyle = night ? 'rgba(0,0,0,.45)' : 'rgba(20,24,26,.2)'
+    polygon(g, [gl, gr, fr, fl])
+  }
+
+  // Sections: two roof corners and two ground corners, projected.
+  const secs = prof.map(([a, hgt]) => ({
+    a, h: hgt,
+    lt: vpt(view, o, dims, a, -1, hgt, w, h), rt: vpt(view, o, dims, a, 1, hgt, w, h),
+    lg: vpt(view, o, dims, a, -1, 0, w, h), rg: vpt(view, o, dims, a, 1, 0, w, h),
+  })).filter((s) => s.lt && s.rt && s.lg && s.rg)
+  if (secs.length < 2) return
+
+  // Faces with a depth each, painted far to near.
+  const faces = []
+  for (let i = 0; i < secs.length - 1; i++) {
+    const A = secs[i], B = secs[i + 1]
+    const glass = Math.abs(A.h - B.h) > 0.3 && A.a > 0.05 // windscreen slope, rear window
+    const roof = glass ? GLASS : col.top
+    faces.push({ depth: (A.lt.depth + B.lt.depth) / 2, pts: [A.lt, B.lt, B.rt, A.rt], fill: roof })
+    faces.push({ depth: (A.lg.depth + B.lg.depth) / 2, pts: [A.lt, A.lg, B.lg, B.lt], fill: col.side })
+    faces.push({ depth: (A.rg.depth + B.rg.depth) / 2, pts: [A.rt, A.rg, B.rg, B.rt], fill: col.side })
+  }
+  const rear = secs[0], front = secs.at(-1)
+  faces.push({ depth: rear.lg.depth, pts: [rear.lg, rear.rg, rear.rt, rear.lt], fill: col.side })
+  faces.push({ depth: front.lg.depth, pts: [front.lg, front.rg, front.rt, front.lt], fill: col.side })
+  faces.sort((a, b) => b.depth - a.depth)
+  for (const f of faces) { g.fillStyle = f.fill; polygon(g, f.pts) }
+
+  // Glasshouse: a darker band under the roof run (cars, pickups, buses).
+  const roofTop = Math.max(...prof.map(([, hgt]) => hgt))
+  g.fillStyle = GLASS
+  for (let i = 0; i < secs.length - 1; i++) {
+    const A = secs[i], B = secs[i + 1]
+    if (A.h < roofTop - 0.05 || B.h < roofTop - 0.05) continue
+    const drop = 0.55
+    for (const side of [-0.92, 0.92]) {
+      const ta = vpt(view, o, dims, A.a, side, A.h, w, h)
+      const tb = vpt(view, o, dims, B.a, side, B.h, w, h)
+      const ba = vpt(view, o, dims, A.a, side, Math.max(A.h - drop, 0.7), w, h)
+      const bb = vpt(view, o, dims, B.a, side, Math.max(B.h - drop, 0.7), w, h)
+      if (ta && tb && ba && bb) polygon(g, [ta, tb, bb, ba])
+    }
+  }
+
+  // Wheels at the axles, both sides — 0.64 m tyres on real Thai vehicles.
+  g.fillStyle = '#171d22'
+  for (const ax of AXLES[o.body ?? 'car'] ?? AXLES.car)
+    for (const side of [-0.96, 0.96]) {
+      const p = vpt(view, o, dims, ax, side, 0.32, w, h)
+      if (p) { g.beginPath(); g.arc(p.x, p.y, Math.max(2, p.scale * 0.32), 0, Math.PI * 2); g.fill() }
+    }
+
+  // Lights at true positions: taillights on the rear face, headlights on
+  // the front. Brake lights burn brighter — and glow at night.
+  const inset = 1 - 0.45 / dims.W
+  for (const side of [-1, 1]) {
+    const t = vpt(view, o, dims, 0, side * inset, 0.75, w, h)
+    if (t) {
+      g.fillStyle = braking ? '#ff4530' : night ? '#c1372b' : '#a94335'
+      if (braking && night) { g.shadowColor = '#ff4530'; g.shadowBlur = 10 }
+      g.fillRect(t.x - t.scale * 0.09, t.y - t.scale * 0.05, t.scale * 0.18, t.scale * 0.1)
+      g.shadowBlur = 0
+    }
+    const hd = vpt(view, o, dims, 1, side * inset, 0.66, w, h)
+    if (hd) {
+      g.fillStyle = night ? '#ffe9a8' : '#d9d4c2'
+      if (night) { g.shadowColor = '#ffe9a8'; g.shadowBlur = 8 }
+      g.fillRect(hd.x - hd.scale * 0.08, hd.y - hd.scale * 0.045, hd.scale * 0.16, hd.scale * 0.09)
+      g.shadowBlur = 0
+    }
+  }
+}
+
 export function drawWindshield(g, car, world, w, h, language = 'en') {
-  g.clearRect(0, 0, w, h)
   const night = world.weather === 'night',
     rain = world.weather === 'rain',
     sun = world.weather === 'sun'
@@ -156,36 +274,74 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
   g.fillStyle = night ? '#333c46' : rain ? '#515d64' : '#60676b'
   for (const q of quads.sort((a, b) => b.depth - a.depth))
     if (q.points.length >= 3) polygon(g, q.points)
-  g.strokeStyle = night ? '#9a9b89' : '#d7d5b8'
-  g.lineWidth = 2
-  for (let d = 4; d < 95; d += 6)
-    for (const side of [-1, 1]) {
-      const a = at(car.route, car.s + d),
-        b = at(car.route, car.s + d + 2.5)
-      const pa = project(
-        car,
-        {
-          x: a.x - Math.sin(a.h) * LANE * side,
-          y: a.y + Math.cos(a.h) * LANE * side,
-        },
-        w,
-        h,
-      )
-      const pb = project(
-        car,
-        {
-          x: b.x - Math.sin(b.h) * LANE * side,
-          y: b.y + Math.cos(b.h) * LANE * side,
-        },
-        w,
-        h,
-      )
-      if (pa && pb)
-        line(g, [
-          [pa.x, pa.y],
-          [pb.x, pb.y],
-        ])
+  // Real road furniture, at real scale. Lane width is 3.2 m (LANE, the same
+  // constant the top view draws with), so every road here is 6.4 m of
+  // tarmac: solid edge lines at the shoulders, a dashed centre line with
+  // the 3 m stroke / 9 m gap of a Thai urban road, zebra bars and stop
+  // lines exactly where the top view has them.
+  const edgeColour = night ? '#8d8f7d' : '#cfd0b4'
+  const dashColour = night ? '#b9bb9d' : '#e6e4c6'
+  const paint = night ? 'rgba(214,216,196,.75)' : 'rgba(238,238,224,.85)'
+  function groundPoint(route, s, side) {
+    const p = at(route, s)
+    return { x: p.x - Math.sin(p.h) * LANE * side, y: p.y + Math.cos(p.h) * LANE * side }
+  }
+  function nearestS(route) {
+    let best = 0, bd = Infinity
+    for (let i = 0; i < route.pts.length; i += 2) {
+      const p = route.pts[i]
+      const d = (p.x - car.x) ** 2 + (p.y - car.y) ** 2
+      if (d < bd) { bd = d; best = i }
     }
+    return best * 0.5
+  }
+  g.lineWidth = Math.max(1.5, w / 400)
+  for (const route of Object.values(world.track)) {
+    const s0 = nearestS(route)
+    // Solid edge lines at ±LANE, split into runs wherever the near plane cuts.
+    for (const side of [-1, 1]) {
+      g.strokeStyle = edgeColour
+      g.beginPath()
+      let pen = false
+      for (let d = -30; d < 100; d += 3) {
+        if (relative(car, groundPoint(route, s0 + d, side)).depth < 1.8) { pen = false; continue }
+        const p = project(car, groundPoint(route, s0 + d, side), w, h)
+        if (!p) { pen = false; continue }
+        if (pen) g.lineTo(p.x, p.y)
+        else { g.moveTo(p.x, p.y); pen = true }
+      }
+      g.stroke()
+    }
+    // Dashed centre line: 3 m stroke, 9 m gap (Thai urban standard).
+    g.strokeStyle = dashColour
+    for (let d = -36; d < 100; d += 12) {
+      const a = project(car, groundPoint(route, s0 + d, 0), w, h)
+      const b = project(car, groundPoint(route, s0 + d + 3, 0), w, h)
+      if (a && b) line(g, [[a.x, a.y], [b.x, b.y]])
+    }
+    // Zebra crossings, as paint on the road surface where the top view has them.
+    for (const z of route.zebras) {
+      if (Math.hypot(at(route, z.s).x - car.x, at(route, z.s).y - car.y) > 110) continue
+      for (let i = -2; i <= 2; i++) {
+        const quad = roadQuad(car, [
+          groundPoint(route, z.s + i * 0.9 - 0.3, -1),
+          groundPoint(route, z.s + i * 0.9 + 0.3, -1),
+          groundPoint(route, z.s + i * 0.9 + 0.3, 1),
+          groundPoint(route, z.s + i * 0.9 - 0.3, 1),
+        ], w, h)
+        if (quad.length >= 3) { g.fillStyle = paint; polygon(g, quad) }
+      }
+    }
+    if (route.stopS != null) {
+      const quad = roadQuad(car, [
+        groundPoint(route, route.stopS, -1),
+        groundPoint(route, route.stopS + 0.5, -1),
+        groundPoint(route, route.stopS + 0.5, 1),
+        groundPoint(route, route.stopS, 1),
+      ], w, h)
+      if (quad.length >= 3) { g.fillStyle = paint; polygon(g, quad) }
+    }
+  }
   const objects = world
     .objects()
     .filter((o) => o !== car && !o.gone)
@@ -202,25 +358,10 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
         : 1
     let bw, bh
     if (o.kind === 'car') {
-      bw = s * 1.85
-      bh = s * 1.5
-      g.fillStyle =
-        o.styleName === 'hasty'
-          ? '#d1b85e'
-          : o.styleName === 'careful'
-            ? '#e0e0d5'
-            : '#879599'
-      g.fillRect(p.x - bw / 2, p.y - bh * 0.65, bw, bh * 0.65)
-      g.fillRect(p.x - bw * 0.36, p.y - bh, bw * 0.72, bh * 0.5)
-      g.fillStyle = '#26323b'
-      g.fillRect(p.x - bw * 0.28, p.y - bh * 0.9, bw * 0.56, bh * 0.28)
-      g.fillStyle = '#161e24'
-      g.fillRect(p.x - bw * 0.43, p.y - s * 0.14, s * 0.28, s * 0.2)
-      g.fillRect(p.x + bw * 0.28, p.y - s * 0.14, s * 0.28, s * 0.2)
-      const braking = o.decision.acc < -0.3
-      g.fillStyle = braking ? '#ff5740' : night ? '#fff1ae' : '#a94335'
-      g.fillRect(p.x - bw * 0.42, p.y - bh * 0.35, bw * 0.18, bh * 0.13)
-      g.fillRect(p.x + bw * 0.24, p.y - bh * 0.35, bw * 0.18, bh * 0.13)
+      const dims = o.dims ?? VEHICLES.car
+      bw = s * dims.W
+      bh = s * dims.H
+      drawVehicle(g, car, o, w, h, night)
     } else if (o.kind === 'person') {
       bw = s * 0.8
       bh = s * 1.8

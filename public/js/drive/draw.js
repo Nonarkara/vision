@@ -3,11 +3,11 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js?v=1.10.1'
-import { CAR_LEN } from './decide.js?v=1.10.1'
+import { FOV, sightRange } from './perceive.js?v=1.10.2'
+import { VEHICLES } from './sim.js?v=1.10.2'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
-const NAME = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'] }
+const NAME = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'], truck: ['รถบรรทุก', 'truck'], bus: ['รถโดยสาร', 'bus'] }
 
 export function palette() {
   const css = getComputedStyle(document.documentElement)
@@ -20,7 +20,7 @@ export function palette() {
 
 /** Size the canvas to its box (sharp on high-DPI screens); returns metres → pixels. */
 export function fit(canvas) {
-  const dpr = Math.min(2, window.devicePixelRatio || 1)
+  const dpr = Math.min(3, window.devicePixelRatio || 1)
   const w = canvas.clientWidth
   const h = (w * WORLD.h) / WORLD.w
   if (canvas.width !== Math.round(w * dpr)) {
@@ -137,7 +137,7 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     if (car.id !== selected && !showAll) continue
     for (const tr of car.tracks.values()) {
       const o = tr.obj
-      const half = (o.kind === 'car' ? 3 : o.kind === 'dog' ? 1.1 : 0.9) * k
+      const half = (o.kind === 'car' ? Math.max(o.dims?.L ?? 4.6, o.dims?.W ?? 1.85) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
       ctx.strokeStyle = c.signal
       ctx.lineWidth = car.id === selected ? 2 : 1
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
@@ -164,15 +164,42 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
   }
 }
 
+/** A vehicle at its real Thai size, seen from above: 4.4 × 1.8 m sedans,
+ *  5.3 m pickups, 9.6 m lorries with a separate cab, 12 m buses. */
 function drawCar(ctx, k, car, c, sel) {
+  const dims = car.dims ?? VEHICLES.car
   ctx.save()
   ctx.translate(car.x * k, car.y * k)
   ctx.rotate(car.h)
-  const L = CAR_LEN * k, W = 2 * k
-  ctx.fillStyle = car.styleName === 'careful' ? c.white : car.styleName === 'normal' ? c.gray : c.naples
-  ctx.fillRect(-L / 2, -W / 2, L, W)
-  ctx.fillStyle = c.black
-  ctx.fillRect(L / 2 - 1.2 * k, -W / 2 + 0.25 * k, 0.5 * k, W - 0.5 * k) // windscreen: which end is the front
+  const L = dims.L * k, W = dims.W * k
+  const body = car.styleName === 'careful' ? c.white : car.styleName === 'normal' ? c.gray : c.naples
+  if (car.body === 'truck') {
+    // Cargo box takes the rear 68%; the cab sits in front with a gap.
+    ctx.fillStyle = c.black
+    ctx.fillRect(-L / 2 + 0.7 * L, -W / 2 - 0.5, 0.04 * L, W + 1) // gap line between box and cab
+    ctx.fillStyle = body
+    ctx.fillRect(-L / 2, -W / 2, 0.68 * L, W)
+    ctx.fillRect(-L / 2 + 0.72 * L, -W / 2 + 0.12 * k, 0.24 * L, W - 0.24 * k)
+    ctx.fillStyle = c.black
+    ctx.fillRect(-L / 2 + 0.66 * L, -W / 2 + 0.22 * k, 0.05 * L, W - 0.44 * k) // cab windscreen
+  } else if (car.body === 'bus') {
+    ctx.fillStyle = body
+    ctx.fillRect(-L / 2, -W / 2, L, W)
+    ctx.fillStyle = c.black
+    for (let x = -L / 2 + 1.4 * k; x < L / 2 - 1.6 * k; x += 1.7 * k) ctx.fillRect(x, -W / 2 + 0.22 * k, 1.0 * k, 0.18 * k)
+    ctx.fillRect(-L / 2 + 0.22 * k, -W / 2 + 0.25 * k, 0.35 * k, W - 0.5 * k) // windscreen
+  } else {
+    ctx.fillStyle = body
+    ctx.fillRect(-L / 2, -W / 2, L, W)
+    ctx.fillStyle = c.black
+    ctx.fillRect(L / 2 - 1.2 * k, -W / 2 + 0.25 * k, 0.5 * k, W - 0.5 * k) // windscreen: which end is the front
+    if (car.body === 'pickup') {
+      // Open bed behind the cab.
+      ctx.strokeStyle = c.black
+      ctx.lineWidth = 0.18 * k
+      ctx.strokeRect(-L / 2 + 0.3 * k, -W / 2 + 0.2 * k, 0.42 * L, W - 0.4 * k)
+    }
+  }
   if (sel || car.frozen > 0) {
     ctx.strokeStyle = car.frozen > 0 ? c.signal : c.white
     ctx.lineWidth = 2

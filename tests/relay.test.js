@@ -85,6 +85,29 @@ test('sweep empties expired frames so idle memory returns to zero', async () => 
   assert.equal(relay.stats().cached_frames, 0)
 })
 
+test('refuses new frames once the wait queue is full — the relay is not a socket warehouse', async () => {
+  // Six cameras across three hosts fill the four upstream slots and the
+  // two wait slots; a seventh frame must be turned away with 503 rather
+  // than parked on the queue holding its socket open.
+  let release
+  const gate = new Promise((r) => { release = r })
+  const f = fakeFetch(async () => { await gate; return ok() })
+  const relay = createRelay({ fetchImpl: f, maxQueue: 2 })
+  const map = {}
+  const spread = [['a1', 'one.test'], ['a2', 'one.test'], ['b1', 'two.test'], ['b2', 'two.test'], ['c1', 'three.test'], ['c2', 'three.test']]
+  for (const [id, host] of spread) map[id] = `https://${host}/x.jpg`
+  const r = resolve(map)
+  const busy = spread.map(([id]) => relay.frame(id, r).catch((e) => e))
+  await new Promise((settled) => setTimeout(settled, 0))
+  const refused = await relay.frame('d1', resolve({ d1: 'https://four.test/x.jpg' })).catch((e) => e)
+  release()
+  const served = await Promise.all(busy)
+  assert.ok(served.every((entry) => !(entry instanceof Error)), 'the six admitted frames all complete')
+  assert.ok(refused instanceof RelayError && refused.status === 503, 'the seventh frame is turned away')
+  assert.match(refused.message, /busy/)
+  assert.equal(f.calls.length, 6, 'only the six admitted frames were ever fetched')
+})
+
 test('semaphore limits concurrency and serves waiters in order', async () => {
   const sem = semaphore(2)
   const order = []

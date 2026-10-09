@@ -20,6 +20,11 @@
 //      a host that keeps failing is left alone for a while instead of being
 //      hammered by everyone who opens the page.
 //   4. Bounded. Size cap, content-type check, timeout.
+//   5. Bounded waiting. Upstream slots (4) and the per-IP frame budget
+//      would still let one client stack unlimited waiters on the global
+//      queue while the upstream drains slowly — every waiter holds a
+//      socket. Past MAX_QUEUE the relay answers 503 "busy" immediately
+//      instead of accumulating memory it cannot shed.
 
 export const FRAME_TTL_MS = 30_000
 export const MAX_CACHE_ENTRIES = 240
@@ -29,6 +34,7 @@ export const UPSTREAM_CONCURRENCY = 4
 export const PER_HOST_CONCURRENCY = 2
 export const BREAKER_FAILS = 8
 export const BREAKER_OPEN_MS = 3 * 60_000
+export const MAX_QUEUE = 100
 
 export class RelayError extends Error {
   constructor(status, message) {
@@ -61,7 +67,7 @@ export function semaphore(limit) {
   }
 }
 
-export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = () => {} } = {}) {
+export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = () => {}, maxQueue = MAX_QUEUE } = {}) {
   const cache = new Map()        // id -> { body, type, at }
   const inflight = new Map()     // id -> Promise
   const global = semaphore(UPSTREAM_CONCURRENCY)
@@ -84,6 +90,9 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     const host = hostOf(url)
     const hs = hostState(host)
     if (hs.openUntil > now()) throw new RelayError(503, `upstream ${host} is resting after repeated failures`)
+    // Rule 5: the wait queue is bounded. A slow upstream plus a fast client
+    // must not turn this process into a socket warehouse.
+    if (global.waiting >= maxQueue) throw new RelayError(503, 'relay is busy — too many frames already queued, try again shortly')
     const releaseHost = await hs.sem.acquire()
     const releaseGlobal = await global.acquire()
     const t0 = now()

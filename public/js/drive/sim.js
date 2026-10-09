@@ -3,11 +3,55 @@
 // the page and in the tests, and a seed makes every run repeatable.
 
 import { buildTrack, at, ZEBRAS, LANE } from './track.js'
-import { perceive } from './perceive.js?v=1.10.1'
-import { decide } from './decide.js?v=1.10.1'
+import { perceive } from './perceive.js?v=1.10.2'
+import { decide } from './decide.js?v=1.10.2'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack
+
+// Real Thai vehicles, in metres — the sizes the road, the drawings and the
+// collision maths all share. A Bangkok street is mostly sedans and pickups,
+// with 6-wheel cargo trucks and city buses in the mix.
+//   car: Honda City / Toyota Vios class — 4.40 × 1.80, roof 1.50
+//   pickup: Isuzu D-Max / Toyota Revo — 5.30 × 1.90, cab 1.90
+//   truck: 6-wheel cargo truck — 9.60 × 2.50, box 3.20
+//   bus: Bangkok city bus — 11.95 × 2.50, roof 3.30
+export const VEHICLES = {
+  car: { L: 4.4, W: 1.8, H: 1.5 },
+  pickup: { L: 5.3, W: 1.9, H: 1.9 },
+  truck: { L: 9.6, W: 2.5, H: 3.2 },
+  bus: { L: 11.95, W: 2.5, H: 3.3 },
+}
+
+/** What body each spawned vehicle gets, cycling with traffic size. */
+const BODY_CYCLE = ['car', 'car', 'pickup', 'car', 'truck', 'car', 'car', 'pickup', 'car', 'car', 'truck', 'bus']
+
+/** Lorries and buses drive like lorries and buses: slower, gentler, further back. */
+function bodyAdjust(base, body) {
+  if (body === 'car' || body === 'pickup') return base
+  return {
+    ...base,
+    v0: Math.min(base.v0, 11.1),
+    a: Math.min(base.a, 0.9),
+    b: Math.min(base.b, 1.8),
+    s0: base.s0 + 1.5,
+    T: Math.max(base.T, 1.4),
+  }
+}
+
+/** Collision circles for a body: capsules along the length, radius from width.
+ *  Cars keep the original ±1.25 m / 1.05 m pair, so their physics is unchanged. */
+export function circles(car) {
+  const dims = car.dims ?? VEHICLES.car
+  const r = dims.W / 2 + 0.15
+  const span = Math.max(dims.L / 2 - r, 1.25)
+  const n = Math.max(2, Math.ceil(dims.L / (2 * r)))
+  const c = Math.cos(car.h), s = Math.sin(car.h)
+  return Array.from({ length: n }, (_, i) => {
+    const off = n === 1 ? 0 : -span + (2 * span * i) / (n - 1)
+    return [car.x + c * off, car.y + s * off, r]
+  })
+}
 
 export const STYLES = {
   careful: { v0: 12.5, T: 1.8, s0: 3.5, a: 1.4, b: 2.0, range: 50, quality: 0.97, yieldWaiting: true, wary: true, sightLimit: true },
@@ -49,18 +93,19 @@ export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 
   }
   const routes = Object.keys(track)
   const total = Math.max(4, Math.min(32, Number(traffic) || 6))
-  const specs = Array.from({ length: total }, (_, i) => [routes[Math.floor(i * routes.length / total)], ['careful', 'normal', 'hasty'][i % 3]])
+  const specs = Array.from({ length: total }, (_, i) => [routes[Math.floor(i * routes.length / total)], ['careful', 'normal', 'hasty'][i % 3], BODY_CYCLE[i % BODY_CYCLE.length]])
   const perLoop = Object.fromEntries(routes.map((id) => [id, 0]))
-  specs.forEach(([loop, kind], i) => {
+  specs.forEach(([loop, kind, body], i) => {
     const route = track[loop]
     const s = (perLoop[loop]++ / specs.filter(([id]) => id === loop).length) * route.len + 12
     const car = placeCar({
-      id: i + 1, kind: 'car', style: STYLES[kind], styleName: kind, route, s, v: 6, h: 0,
+      id: i + 1, kind: 'car', body, dims: VEHICLES[body],
+      style: bodyAdjust(STYLES[kind], body), styleName: kind, route, s, v: 6, h: 0,
       laps: 0, crashes: 0, wasHit: 0, hitPeople: 0, hitDogs: 0, frozen: 0, cooldown: 0, blind: false,
       tracks: new Map(), ghost: new Set(), decision: { acc: 0, action: 'cruising', reason: 'clear' }, r: 1.1,
     })
     // Routes may share pavement: never start two cars inside each other.
-    for (let attempt = 0; attempt < 100 && world.cars.some((other) => circles(car).some((p) => circles(other).some((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 2.6))); attempt++) {
+    for (let attempt = 0; attempt < 100 && world.cars.some((other) => circles(car).some((p) => circles(other).some((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < p[2] + q[2] + 0.5))); attempt++) {
       car.s = (car.s + 6) % route.len; placeCar(car)
     }
     world.cars.push(car)
@@ -212,12 +257,7 @@ function moveDog(world, w, r) {
   if (crossed > LANE + 2.5) w.gone = true
 }
 
-// ── Collisions: two circles per car, one per person or dog ──────────────
-
-function circles(car) {
-  const c = Math.cos(car.h), s = Math.sin(car.h)
-  return [[car.x + c * 1.25, car.y + s * 1.25], [car.x - c * 1.25, car.y - s * 1.25]]
-}
+// ── Collisions: capsule circles per car, one per person or dog ──────────
 
 function collide(world) {
   const cars = world.cars
@@ -227,7 +267,7 @@ function collide(world) {
       const b = cars[j]
       if (a.cooldown > 0 || b.cooldown > 0 || a.ghost.has(b.id)) continue
       const cb = circles(b)
-      if (ca.some((p) => cb.some((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 2.1))) {
+      if (ca.some((p) => cb.some((q) => Math.hypot(p[0] - q[0], p[1] - q[1]) < p[2] + q[2]))) {
         // Fault lies with whoever drove into the other: the other car is in front of it.
         const facing = (c, o) => Math.cos(c.h) * (o.x - c.x) + Math.sin(c.h) * (o.y - c.y) > 0.5 * Math.hypot(o.x - c.x, o.y - c.y)
         const fa = facing(a, b), fb = facing(b, a)
@@ -241,7 +281,7 @@ function collide(world) {
     }
     for (const w of world.walkers) {
       if (w.gone || a.frozen > 0) continue
-      if (ca.some((p) => Math.hypot(p[0] - w.x, p[1] - w.y) < 1.05 + w.r)) {
+      if (ca.some((p) => Math.hypot(p[0] - w.x, p[1] - w.y) < p[2] + w.r)) {
         if (a.v < 1.5) { bounce(w); continue } // walked into a car that had all but stopped
         w.gone = true
         if (w.kind === 'person') a.hitPeople++; else a.hitDogs++

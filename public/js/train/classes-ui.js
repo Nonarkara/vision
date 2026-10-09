@@ -3,7 +3,7 @@
 // a bad example teaches as surely as a good one.
 
 import { t, bi, esc, n, lang, onLang } from '../core/i18n.js'
-import * as store from './store.js?v=1.10.1'
+import * as store from './store.js?v=1.10.2'
 import { isBusy } from './eye.js'
 
 const HOLD_MS = 250
