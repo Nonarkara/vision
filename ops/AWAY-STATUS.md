@@ -236,4 +236,8 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 
 - **Gates.** 120 tests pass (14 new in `tests/street.test.js` covering COCO class truth, unique ids, junctions kept clear, kerbs at 3.2 m, parked bikes outside the lane, challenge fairness and determinism, and exact-match scoring). 25 pages, 87 references, all JS parses, documentation checks green. Cache stamps 1.10.2 → 1.11.0 across 65 sites, with the new modules stamped at every import site so no module is ever loaded under two URLs.
 
-- Not deployed: the user asked for the work, not a release. Version is 1.11.0 in the workspace and ready for `npm run deploy` on request. No private camera opened; no live traffic generated beyond the ordinary catalogue refresh.
+- **Deployed.** User asked to go live. `git push` (45d6641…b2af4ca) then `npm run deploy`, which re-ran the full gate, kept one generation for rollback, pruned orphans, restarted the launchd service and waited for the new version to answer healthy. Published 1.11.0; the script's rollback path was not needed. Public health 1.11.0, catalogue ~3,426 cameras fresh at load.
+
+- **Post-release verification.** Cache-key census across all 14 served pages: exactly one distinct `?v=` value per page, 1.11.0, no fork. The census had to be scoped to this site's own asset stamps — a naive `?v=` grep reports `/research` as forked because two YouTube links carry `watch?v=<video-id>`, which is theirs, not ours. Worth remembering before writing that check for real. All four new modules serve 200; the gate, the tone-ladder tokens and the twelve-swatch footer chord are present; the hand-placed city blocks are gone from the shipped `draw.js`.
+
+- No private camera opened; no live traffic generated beyond the ordinary catalogue refresh.
