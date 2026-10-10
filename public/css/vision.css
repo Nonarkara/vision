@@ -479,6 +479,37 @@ html[data-lang="th"] .surface-prompt { font-family: var(--thai); }
 }
 .bench-state[hidden] { display: none; }
 .bench-caption { padding: 12px 16px; font-size: var(--micro); color: var(--gray); min-height: var(--target); display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; justify-content: space-between; }
+.spotted { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: baseline; color: var(--white); }
+.spotted .micro { color: var(--gray); }
+
+/* Confidence, drawn on the picture. Peach Red is the reading, not a tile. */
+.saw {
+  position: absolute; z-index: 3; right: 12px; bottom: 12px;
+  display: grid; gap: 6px; width: min(220px, calc(100% - 24px));
+  padding: 8px 10px; background: var(--black); color: var(--white);
+  pointer-events: none;
+}
+.saw-read { margin: 0; display: flex; gap: 8px; align-items: baseline; font-family: var(--mono); font-size: var(--micro); }
+.saw-read .micro { color: var(--gray); }
+.saw-meter { height: 8px; background: var(--olive); }
+.saw-meter i { display: block; height: 100%; width: 0; background: var(--signal); }
+.saw-flash {
+  margin: 0; padding: 6px 8px; background: var(--signal); color: var(--black);
+  font-family: var(--mono); font-size: var(--micro);
+  animation: machine-trail 1.4s var(--ease) 1 both;
+}
+@media (max-width: 700px) {
+  .saw { left: 12px; right: 12px; bottom: 48px; width: auto; }
+}
+
+/* Konami: a Peach Red line crossing the page. It does not scroll the document. */
+.machine-scan {
+  position: fixed; z-index: 80; left: 0; right: 0; top: 0; height: 2px;
+  background: var(--signal); pointer-events: none;
+  box-shadow: 0 0 12px var(--signal);
+  animation: machine-scan 3.2s linear infinite;
+}
+@keyframes machine-scan { from { transform: translateY(0); } to { transform: translateY(100vh); } }
 .bench-caption a { color: var(--white); }
 .bench-caption .who { color: var(--white); }
 .controls { display: flex; flex-wrap: wrap; gap: 2px; background: var(--black); }
