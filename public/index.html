@@ -9,23 +9,7 @@
 <!--#nav-->
 <main id="main">
 
-  <section class="opening" aria-labelledby="title">
-    <div class="opening-text">
-      <div>
-        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์ · กล้องจริง ถนนจริง</span><span class="en" lang="en">A computer-vision classroom · real cameras, real roads</span></span>
-        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์<br>มองเห็น<br>อย่างไร</span><span class="en" lang="en">How a<br>computer<br>sees</span></h1>
-      </div>
-      <div>
-        <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
-        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
-        <div class="cta">
-          <a class="btn primary big" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
-          <button class="btn big" type="button" data-mine><span class="th" lang="th">กล้องของคุณ</span><span class="en" lang="en">Your camera</span></button>
-        </div>
-        <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
-      </div>
-    </div>
-
+  <section class="opening opening-live" aria-labelledby="title">
     <div class="opening-stage bench" aria-label="The machine's eye">
       <div class="bench-caption">
         <span class="label"><span class="th" lang="th">ตาของเครื่อง</span><span class="en" lang="en">The machine's eye</span></span>
@@ -34,15 +18,26 @@
       <div class="bench-view stage-view">
         <canvas data-eye role="img" aria-label="A live public camera, shown through the selected lens"></canvas>
         <div class="bench-state" data-eye-state>…</div>
+        <div class="feed-title">
+          <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์ · กล้องจริง ถนนจริง</span><span class="en" lang="en">A computer-vision classroom · real cameras, real roads</span></span>
+          <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์<br>มองเห็นอย่างไร</span><span class="en" lang="en">How a<br>computer sees</span></h1>
+          <p class="lede th" lang="th">มันกำลังเดาสิ่งที่เห็นอยู่ แล้วจะเดินย้อนจากภาพสู่ตัวเลข ขอบ และการเคลื่อนไหวเอง</p>
+          <p class="lede en" lang="en">It is already guessing. Then it walks back through the picture, the numbers, the edges and the motion.</p>
+        </div>
       </div>
       <div class="controls lens-steps" role="group" aria-label="Lenses">
-        <button class="btn" type="button" data-lens="picture" aria-pressed="true"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span></button>
+        <button class="btn" type="button" data-lens="picture" aria-pressed="false"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span></button>
         <button class="btn" type="button" data-lens="numbers" aria-pressed="false"><span class="num">2</span> <span class="th" lang="th">ตัวเลข</span><span class="en" lang="en">Numbers</span></button>
         <button class="btn" type="button" data-lens="edges" aria-pressed="false"><span class="num">3</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></button>
         <button class="btn" type="button" data-lens="motion" aria-pressed="false"><span class="num">4</span> <span class="th" lang="th">ขยับ</span><span class="en" lang="en">Motion</span></button>
-        <button class="btn" type="button" data-lens="objects" aria-pressed="false"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span></button>
+        <button class="btn" type="button" data-lens="objects" aria-pressed="true"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span></button>
       </div>
       <p class="readout lens-say" data-lens-say aria-live="polite"></p>
+      <div class="controls">
+        <a class="btn primary" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
+        <button class="btn" type="button" data-mine><span class="th" lang="th">กล้องของคุณ</span><span class="en" lang="en">Your camera</span></button>
+      </div>
+      <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
       <div class="bench-caption specimen-line" data-specimen>
         <span><span class="who" data-specimen-name>…</span><br><span data-specimen-meta></span></span>
         <span class="controls">

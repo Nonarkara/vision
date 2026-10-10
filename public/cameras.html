@@ -10,14 +10,17 @@
 <!--#nav-->
 <main id="main">
 
-  <section class="page-head" aria-labelledby="title">
+  <section class="page-head is-slim" aria-labelledby="title">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 02 · กล้องทุกตัว</span><span class="en" lang="en">Room 02 · Every camera</span></span>
       <h1 id="title"><span class="th" lang="th">กล้อง<br>ทุกตัว</span><span class="en" lang="en">Every<br>camera</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">กล้องสาธารณะหลายพันตัว จากเจ็ดแหล่ง บนแผนที่เดียว เลือกตัวไหนก็ได้ให้เครื่องลองมอง หรือสุ่มหลายสิบตัวแล้วนับว่าเครื่องเห็นอะไรบ้าง</p>
-      <p class="lede en" lang="en">Thousands of public cameras from seven sources, on one map. Point the machine at any one, or sample a few dozen and count what it sees.</p>
+      <details class="explain">
+        <summary><span class="th" lang="th">แผนที่นี้มาจากไหน</span><span class="en" lang="en">Where this map comes from</span></summary>
+        <p class="lede th" lang="th">กล้องสาธารณะหลายพันตัว จากเจ็ดแหล่ง บนแผนที่เดียว เลือกตัวไหนก็ได้ให้เครื่องลองมอง หรือสุ่มหลายสิบตัวแล้วนับว่าเครื่องเห็นอะไรบ้าง</p>
+        <p class="lede en" lang="en">Thousands of public cameras from seven sources, on one map. Point the machine at any one, or sample a few dozen and count what it sees.</p>
+      </details>
     </div>
   </section>
 
@@ -86,6 +89,7 @@
         <div class="map-view">
           <canvas data-map role="img" aria-label="Map of camera positions across Thailand. The list beside it holds the same cameras."></canvas>
           <div class="bench-state" data-map-state>…</div>
+          <p class="surface-prompt"><span class="th" lang="th">แตะกล้อง</span><span class="en" lang="en">Tap a camera</span></p>
         </div>
         <div class="controls map-tools" role="group" aria-label="Map zoom">
           <button class="btn" type="button" data-zoom-in aria-label="Zoom in">+</button>

@@ -1,5 +1,13 @@
 /* /gesture — only what vision.css does not already provide. */
 
+/* The live picture is the page. How-it-works sits underneath. */
+#main { display: flex; flex-direction: column; }
+#main > #gesture-room { order: -3; padding-top: 8px; }
+#main > [data-specimen-slot] { order: -2; }
+#main > .page-head { order: -1; }
+#gesture-room { display: flex; flex-direction: column; }
+#gesture-room > .room-grid { order: -1; }
+
 /* Say it before you touch it */
 .start-block { padding: 24px var(--gutter); display: grid; gap: 16px; }
 .start-block h2 { font-size: clamp(1.4rem, 2vw, 2rem); }

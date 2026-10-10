@@ -17,9 +17,9 @@
 //      inside the tab: no upload, no dataset, just the honest size of nine
 //      labels, measured in front of you.
 
-import { makeChallenge, check, score, TARGETS, GRID, TILES } from '../drive/captcha.js?v=1.12.1'
-import { rng } from '../drive/rand.js?v=1.12.1'
-import { features, train, pick } from '../drive/teach.js?v=1.12.1'
+import { makeChallenge, check, score, TARGETS, GRID, TILES } from '../drive/captcha.js?v=1.13.0'
+import { rng } from '../drive/rand.js?v=1.13.0'
+import { features, train, pick } from '../drive/teach.js?v=1.13.0'
 
 /** One tile: a slice of street seen from a camera. Deliberately simple.
  *  Seeded by the challenge, so every round draws a different street. */

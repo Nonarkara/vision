@@ -10,13 +10,16 @@
 <!--#nav-->
 <main id="main">
 
-  <section class="page-head">
+  <section class="page-head is-slim">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 07 · ในชีวิตประจำวัน</span><span class="en" lang="en">Room 07 · In everyday life</span></span>
-      <h1><span class="th" lang="th">คอมพิวเตอร์วิทัศน์<br>ที่คุณใช้อยู่ทุกวัน</span><span class="en" lang="en">The vision<br>you already<br>use</span></h1>
+      <h1><span class="th" lang="th">ยกกระดาษขึ้นมา</span><span class="en" lang="en">Hold up a page</span></h1>
     </div>
-    <p class="lede th" lang="th">ทุกอย่างในหน้านี้ทำสี่อย่างเหมือนกัน: ได้ภาพมา หาส่วนที่สำคัญ แปลงเป็นตัวเลข แล้วตัดสินใจ เราเปิดดูข้างในทีละอย่าง และดูว่าแต่ละอย่างพลาดได้ตรงไหน</p>
-    <p class="lede en" lang="en">Every one of these makes the same four moves: get a picture, find what matters, turn it into numbers, decide. Here is each one opened up — and where each one fails.</p>
+    <details class="explain">
+      <summary><span class="th" lang="th">แปดอย่างที่คุณใช้อยู่</span><span class="en" lang="en">Eight things you already use</span></summary>
+      <p class="lede th" lang="th">ทุกอย่างในหน้านี้ทำสี่อย่างเหมือนกัน: ได้ภาพมา หาส่วนที่สำคัญ แปลงเป็นตัวเลข แล้วตัดสินใจ เราเปิดดูข้างในทีละอย่าง และดูว่าแต่ละอย่างพลาดได้ตรงไหน</p>
+      <p class="lede en" lang="en">Every one of these makes the same four moves: get a picture, find what matters, turn it into numbers, decide. Here is each one opened up — and where each one fails.</p>
+    </details>
   </section>
 
   <nav aria-label="Cases">
@@ -283,6 +286,7 @@
         <div class="bench-view">
           <canvas data-view role="img" aria-label="The picture, reduced to light and dark by the machine"></canvas>
           <div class="bench-state" data-state>…</div>
+          <p class="surface-prompt"><span class="th" lang="th">ยกกระดาษขึ้นมา</span><span class="en" lang="en">Hold up a page</span></p>
         </div>
         <div class="controls" role="group" aria-label="Step">
           <button class="btn" type="button" data-mode="threshold" aria-pressed="true"><span class="th" lang="th">มืดหรือสว่าง</span><span class="en" lang="en">Light or dark</span></button>

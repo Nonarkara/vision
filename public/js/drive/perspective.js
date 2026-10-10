@@ -5,9 +5,9 @@
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
 import { at, LANE, STEP } from './track.js'
-import { sightRange } from './perceive.js?v=1.12.1'
-import { VEHICLES } from './sim.js?v=1.12.1'
-import { ITEMS, STREET } from './street.js?v=1.12.1'
+import { sightRange } from './perceive.js?v=1.13.0'
+import { VEHICLES } from './sim.js?v=1.13.0'
+import { ITEMS, STREET } from './street.js?v=1.13.0'
 import { labelName } from './draw.js'
 
 export function relative(car, point) {

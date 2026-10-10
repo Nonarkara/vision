@@ -10,70 +10,30 @@
 <!--#nav-->
 <main id="main">
 
-  <section class="page-head" aria-labelledby="title">
-    <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 05 · ขับเอง</span><span class="en" lang="en">Room 05 · Drive</span></span>
-      <h1 id="title"><span class="th" lang="th">เริ่มถนนเงียบ แล้วลองเมืองที่วุ่นวาย</span><span class="en" lang="en">Start quiet. Build a busy city.</span></h1>
-    </div>
-    <div>
-      <p class="lede th" lang="th">เลือกถนน เพิ่มรถ แล้วแตะรถหนึ่งคัน ดูว่ากล้องจำลองเห็นอะไรและทำไมรถจึงชะลอ เริ่มจากสองช่องทาง แล้วลองแยกที่วุ่นวายแบบกรุงเทพฯ</p>
-      <p class="lede en" lang="en">Choose a road, add traffic, then tap a car. Watch what its simulated camera sees and why it slows down. Start with two lanes; work up to a crowded, Bangkok-inspired junction.</p>
-    </div>
-  </section>
-
-  <section class="gate" data-gate aria-labelledby="gate-h">
-    <div class="gate-head">
-      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span></span>
-      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span></h2>
-      <p class="lede"><span class="th" lang="th">คุณทำสิ่งนี้มาทั้งชีวิตโดยไม่รู้ตัว ลองก่อน แล้วค่อยเข้าห้องขับรถ</span><span class="en" lang="en">You have been doing this your whole life without knowing. Try, then drive.</span></p>
-      <p class="micro gate-taught" data-gate-taught hidden role="status"></p>
-    </div>
-    <div class="gate-replay">
-      <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span></button>
-      <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span></button>
-    </div>
-    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares">
-      <p class="captcha-ask" data-captcha-target></p>
-      <div class="captcha-pad">
-        <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for."></canvas>
-        <div class="captcha-tiles">
-          <button class="btn tile-pick" data-tile="0" aria-pressed="false">1</button>
-          <button class="btn tile-pick" data-tile="1" aria-pressed="false">2</button>
-          <button class="btn tile-pick" data-tile="2" aria-pressed="false">3</button>
-          <button class="btn tile-pick" data-tile="3" aria-pressed="false">4</button>
-          <button class="btn tile-pick" data-tile="4" aria-pressed="false">5</button>
-          <button class="btn tile-pick" data-tile="5" aria-pressed="false">6</button>
-          <button class="btn tile-pick" data-tile="6" aria-pressed="false">7</button>
-          <button class="btn tile-pick" data-tile="7" aria-pressed="false">8</button>
-          <button class="btn tile-pick" data-tile="8" aria-pressed="false">9</button>
-        </div>
+  <section class="drive" data-drive aria-labelledby="title">
+    <header class="page-head is-slim">
+      <div>
+        <span class="eyebrow label"><span class="th" lang="th">ห้อง 05 · ขับเอง</span><span class="en" lang="en">Room 05 · Drive</span></span>
+        <h1 id="title"><span class="th" lang="th">แตะรถคันใดก็ได้</span><span class="en" lang="en">Tap any car</span></h1>
       </div>
-      <div class="controls pad">
-        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span></button>
-        <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
-        <button class="btn" data-gate-skip><span class="th" lang="th">ข้ามไปก่อน — อยากเข้าห้องเลย</span><span class="en" lang="en">Skip — take me straight in</span></button>
-      </div>
-      <p class="micro warn-line" data-captcha-state role="status" aria-live="polite"></p>
-    </div>
-  </section>
-
-  <section class="drive" data-drive aria-labelledby="track-title" hidden>
+    </header>
     <h2 id="track-title" class="visually-hidden"><span class="th" lang="th">สนามทดสอบ</span><span class="en" lang="en">The test track</span></h2>
-    <div class="scenario-picks" role="group" data-aria-th="เลือกถนน" data-aria-en="Choose a road">
-      <button class="btn" data-set="layout" data-value="two" aria-pressed="true"><span class="th" lang="th">1 · สองช่องทาง</span><span class="en" lang="en">1 · Two lanes</span></button>
-      <button class="btn" data-set="layout" data-value="four" aria-pressed="false"><span class="th" lang="th">2 · สี่ช่องทาง</span><span class="en" lang="en">2 · Four lanes</span></button>
-      <button class="btn" data-set="layout" data-value="practice" aria-pressed="false"><span class="th" lang="th">3 · วงเวียนและแยก</span><span class="en" lang="en">3 · Roundabout &amp; junction</span></button>
-      <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
-    </div>
-    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถยนต์ไม่ขับ และไม่มีแผนที่กรุงเทพฯ จริง รอบรถนี้มีถนน ไม้เท้า เสาไฟ ทางเท้า อาคารติดถนน รถจักรยานยนต์และจักรยานจอดข้างทาง หัวดับเพลิง ม้านั่ง และต้นไม้ในกระถาง ทุกชิ้นวางที่ตำแหน่งจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorbikes driving and no real Bangkok map. The road now has kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, fire hydrants, benches and planters — every one placed at its real size on a Thai road: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses, on lanes 3.2 m wide.</span></p>
-    <p class="micro"><span class="th" lang="th">แตะรถบนแผนที่ หรือเลือกปุ่มรถ เพื่อเปิดจอคนขับที่เคลื่อนไหว กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">Tap a car on the map or choose its numbered button to open its moving windshield view. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
     <div class="drive-grid">
       <div class="bench">
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">มองจากด้านบน</span><span class="en" lang="en">Seen from above</span></span>
           <span class="num" data-totals aria-live="off"></span>
         </div>
-        <canvas class="track" data-track role="img" data-aria-th="ภาพจำลองถนนมองจากด้านบน เลือกถนนและรถ เพื่ออ่านสิ่งที่รถเห็นและการตัดสินใจในรายการข้าง ๆ" data-aria-en="A road simulation from above. Choose a layout and select a car to read what it sees and decides in the list beside it."></canvas>
+        <div class="track-wrap">
+          <canvas class="track" data-track role="img" data-aria-th="ภาพจำลองถนนมองจากด้านบน แตะรถคันใดก็ได้" data-aria-en="A road simulation from above. Tap any car."></canvas>
+          <p class="surface-prompt"><span class="th" lang="th">แตะรถคันใดก็ได้</span><span class="en" lang="en">Tap any car</span></p>
+        </div>
+        <div class="scenario-picks" role="group" data-aria-th="เลือกถนน" data-aria-en="Choose a road">
+          <button class="btn" data-set="layout" data-value="two" aria-pressed="true"><span class="th" lang="th">1 · สองช่องทาง</span><span class="en" lang="en">1 · Two lanes</span></button>
+          <button class="btn" data-set="layout" data-value="four" aria-pressed="false"><span class="th" lang="th">2 · สี่ช่องทาง</span><span class="en" lang="en">2 · Four lanes</span></button>
+          <button class="btn" data-set="layout" data-value="practice" aria-pressed="false"><span class="th" lang="th">3 · วงเวียนและแยก</span><span class="en" lang="en">3 · Roundabout &amp; junction</span></button>
+          <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
+        </div>
         <div class="controls">
           <button class="btn primary" type="button" data-play aria-pressed="true"><span data-play-label></span></button>
           <button class="btn" type="button" data-set="speed" data-value="1" aria-pressed="true">1×</button>
@@ -125,6 +85,50 @@
       </div>
     </div>
   </section>
+
+  <details class="explain" id="about-drive">
+    <summary><span class="th" lang="th">ถนนนี้ทำงานอย่างไร</span><span class="en" lang="en">How this road works</span></summary>
+    <p class="lede"><span class="th" lang="th">เลือกถนน เพิ่มรถ แล้วแตะรถหนึ่งคัน ดูว่ากล้องจำลองเห็นอะไรและทำไมรถจึงชะลอ เริ่มจากสองช่องทาง แล้วลองแยกที่วุ่นวายแบบกรุงเทพฯ</span><span class="en" lang="en">Choose a road, add traffic, then tap a car. Watch what its simulated camera sees and why it slows down. Start with two lanes, then a crowded junction.</span></p>
+    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ รอบรถมีทางเท้า อาคาร เสาไฟ และของข้างทาง ทุกชิ้นวางที่ขนาดจริงบนถนนไทย</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic and no pedestrian crossings. Cars follow written rules: a teaching simulation, not a trained driver. Kerbs, footways, buildings and lamps sit at their real Thai sizes.</span></p>
+  </details>
+
+  <details class="explain" id="captcha-card">
+    <summary><span class="th" lang="th">แบบทดสอบป้ายภาพ — ไม่บังคับ</span><span class="en" lang="en">Labelling challenge — optional</span></summary>
+    <section class="gate" data-gate aria-labelledby="gate-h">
+      <div class="gate-head">
+        <span class="eyebrow stem-label"><span class="th" lang="th">คุณเคยฝึกเครื่องมาแล้ว</span><span class="en" lang="en">You have trained a machine before</span></span>
+        <h2 id="gate-h"><span class="th" lang="th">เก้าช่องนี้คือที่มาของข้อมูล</span><span class="en" lang="en">These nine squares are where the data came from</span></h2>
+        <p class="lede"><span class="th" lang="th">ลองติดป้ายภาพถนน แบบที่ reCAPTCHA ให้คนทั้งโลกทำโดยไม่บอก ห้องขับรถด้านบนเปิดอยู่แล้ว</span><span class="en" lang="en">Label a street the way reCAPTCHA asked the world to, without saying so. The drive room above is already open.</span></p>
+        <p class="micro gate-taught" data-gate-taught hidden role="status"></p>
+      </div>
+      <div class="gate-replay">
+        <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span></button>
+        <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span></button>
+      </div>
+      <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares">
+        <p class="captcha-ask" data-captcha-target></p>
+        <div class="captcha-pad">
+          <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for."></canvas>
+          <div class="captcha-tiles">
+            <button class="btn tile-pick" data-tile="0" aria-pressed="false">1</button>
+            <button class="btn tile-pick" data-tile="1" aria-pressed="false">2</button>
+            <button class="btn tile-pick" data-tile="2" aria-pressed="false">3</button>
+            <button class="btn tile-pick" data-tile="3" aria-pressed="false">4</button>
+            <button class="btn tile-pick" data-tile="4" aria-pressed="false">5</button>
+            <button class="btn tile-pick" data-tile="5" aria-pressed="false">6</button>
+            <button class="btn tile-pick" data-tile="6" aria-pressed="false">7</button>
+            <button class="btn tile-pick" data-tile="7" aria-pressed="false">8</button>
+            <button class="btn tile-pick" data-tile="8" aria-pressed="false">9</button>
+          </div>
+        </div>
+        <div class="controls pad">
+          <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span></button>
+          <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
+        </div>
+        <p class="micro warn-line" data-captcha-state role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </details>
 
   <section class="chapter gate-note" id="lesson" aria-labelledby="note-h">
     <header>

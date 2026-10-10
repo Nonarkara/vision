@@ -1,7 +1,7 @@
 // The story: control-room photographs the machine can count, a live wall it
 // can watch, and the people who made this.
 
-import '../core/site.js?v=1.12.1'
+import '../core/site.js?v=1.13.0'
 import { lang } from '../core/i18n.js'
 import { createWall } from '../story/wall.js'
 import { createExhibits } from '../story/exhibits.js'
