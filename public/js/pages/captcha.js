@@ -5,8 +5,8 @@
 // joke working in your favour: the challenge is made of the simulator, so
 // passing it teaches the simulator's own vocabulary.
 
-import { makeChallenge, check, score, GRID, TILES } from '../drive/captcha.js?v=1.11.1'
-import { rng } from '../drive/rand.js?v=1.11.1'
+import { makeChallenge, check, score, GRID, TILES } from '../drive/captcha.js?v=1.11.2'
+import { rng } from '../drive/rand.js?v=1.11.2'
 
 /** One tile: a slice of street seen from a camera. Deliberately simple. */
 function drawTile(g, tile, x, y, w, h, target) {
@@ -111,6 +111,9 @@ export function mountGate(root, { onPass, lang = () => 'en', onLang } = {}) {
 
   function paint() {
     const box = canvas.getBoundingClientRect()
+    // Not laid out yet (hidden, or measured before layout): tiles would have
+    // negative size. The ResizeObserver below paints again once it has a box.
+    if (box.width < 40 || box.height < 40) return
     const ratio = Math.min(3, window.devicePixelRatio || 1)
     const w = Math.max(1, box.width), h = Math.max(1, box.height)
     if (canvas.width !== Math.round(w * ratio)) {

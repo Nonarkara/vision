@@ -4,8 +4,8 @@
 // about every camera, and yours is one of them.
 
 import { t, lang, onLang } from '../core/i18n.js'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.11.1'
-import { SourceError } from '../core/source.js?v=1.11.1'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.11.2'
+import { SourceError } from '../core/source.js?v=1.11.2'
 import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js'
 import { cocoName } from '../ml/labels.js'
 

@@ -2,14 +2,14 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.11.1'
+import '../core/site.js?v=1.11.2'
 import { lang, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.11.1'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.11.1'
-import { drawWindshield } from '../drive/perspective.js?v=1.11.1'
-import { sightRange } from '../drive/perceive.js?v=1.11.1'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.1'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.1'
+import { mountGate } from './captcha.js?v=1.11.2'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.11.2'
+import { drawWindshield } from '../drive/perspective.js?v=1.11.2'
+import { sightRange } from '../drive/perceive.js?v=1.11.2'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.2'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.2'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -30,7 +30,13 @@ function openRoom() {
   gateEl?.setAttribute('data-open', 'true')
   replay?.setAttribute('aria-expanded', 'false')
 }
-const gate = mountGate(gateEl, { onPass: openRoom, lang, onLang })
+// The gate is a lesson, never a lock: if it fails to draw, the room opens.
+let gate = null
+try {
+  gate = mountGate(gateEl, { onPass: openRoom, lang, onLang })
+} catch {
+  openRoom()
+}
 gateEl?.querySelector('[data-gate-skip]')?.addEventListener('click', openRoom)
 // The gate collapses to a receipt once you are through. Reopening it does NOT
 // re-lock the room — the lesson has already been had, and taking the road away

@@ -271,3 +271,9 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Catalogue 3,427 cameras; loaded/upstream 10:26:47 UTC, about eight minutes old. Last seven ten-minute refreshes succeeded; no new app warning since 2026-10-09 20:47 UTC. Relay idle without resting hosts; memory 15–18 MB.
 - Tunnel connection 0 registered at 10:09:19 UTC and connections 1/2/3 at 10:09:32 following brief retries. Public health succeeds; no sustained failure requiring intervention.
 - Only existing operations notes were modified. No repair, deployment, camera probes or machine-wide checks justified. Other agents' release preserved; scoped monitoring continues within the away window.
+
+## 2026-10-10 Drive room crash fix, release 1.11.2 (Asia/Bangkok)
+
+- Verified the GLM agent's 1.10.2 report: bounded relay queue (MAX_QUEUE 100 → 503), deploy keeps one rollback generation and prunes orphans (safe: the only runtime write is data/cameras.json, outside pruned server/ and public/), async catalogue write. 120 tests green.
+- Found live: /drive was dead on load. The CAPTCHA gate painted before layout (1 px box → negative tile size → IndexSizeError in canvas.arc), thrown at the top level of drive.js, so no cards, no simulation. Fixed: paint() waits for a real box (ResizeObserver repaints); mountGate wrapped so a gate failure opens the room. Stamps 1.11.1 → 1.11.2.
+- Still the user's call: the gate stays skippable as built.
