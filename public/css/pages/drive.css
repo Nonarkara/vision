@@ -110,6 +110,8 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate-replay { display: none; margin-left: auto; }
 .gate-replay .btn { min-height: 34px; padding: 0 12px; }
 .captcha [data-captcha-state]:empty { display: none; }
+/* The machine's report card, once it has taken a fresh grid. */
+.gate-taught { margin: 6px 0 0; max-width: 78ch; color: var(--naples); }
 /* Once you are through, the gate stops being a wall and becomes a receipt.
    It has done its job, and the room needs its pixels back: 370px of black band
    sitting on top of a road you cannot see is the same defect as the essay was.
@@ -121,7 +123,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate[data-open="true"] .gate-head .lede { display: none; }
 .gate[data-open="true"] .gate-head h2 { font-size: var(--body); line-height: 1.2; }
 .gate[data-open="true"] .stem-label { display: none; }
-.gate[data-open="true"] .gate-replay { display: inline-flex; }
+.gate[data-open="true"] .gate-replay { display: inline-flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
 /* The long-form story, now sitting under the room as an ordinary chapter. */
 .chapter.gate-note { background: var(--quiet); color: var(--quiet-text); }
 @media (max-width: 900px) {

@@ -3,9 +3,9 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js?v=1.11.2'
-import { VEHICLES } from './sim.js?v=1.11.2'
-import { ITEMS, STREET, offset } from './street.js?v=1.11.2'
+import { FOV, sightRange } from './perceive.js?v=1.12.0'
+import { VEHICLES } from './sim.js?v=1.12.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.12.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -232,7 +232,10 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     if (car.id !== selected && !showAll) continue
     for (const tr of car.tracks.values()) {
       const o = tr.obj
-      const half = (ITEMS[o.kind]?.dims ? Math.max(ITEMS[o.kind].dims.L, ITEMS[o.kind].dims.W) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
+      // The object's real footprint — a lorry's box is a lorry's size. Street
+      // furniture has no dims of its own, so it borrows the class table's.
+      const dims = o.dims ?? ITEMS[o.kind]?.dims
+      const half = (dims ? Math.max(dims.L, dims.W) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
       ctx.strokeStyle = c.signal
       ctx.lineWidth = car.id === selected ? 2 : 1
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)

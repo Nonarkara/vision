@@ -6,7 +6,7 @@
 import { t, bi, n, onLang } from '../core/i18n.js'
 import { STREET } from '../ml/labels.js'
 import { drawDetections } from '../cv/draw.js'
-import { startSpecimen } from '../core/specimen.js?v=1.11.2'
+import { startSpecimen } from '../core/specimen.js?v=1.12.0'
 import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js'
 
 const ROUNDS = 5

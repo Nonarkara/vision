@@ -2,14 +2,14 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.11.2'
+import '../core/site.js?v=1.12.0'
 import { lang, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.11.2'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.11.2'
-import { drawWindshield } from '../drive/perspective.js?v=1.11.2'
-import { sightRange } from '../drive/perceive.js?v=1.11.2'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.2'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.2'
+import { mountGate } from './captcha.js?v=1.12.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.12.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.12.0'
+import { sightRange } from '../drive/perceive.js?v=1.12.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.12.0'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.12.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -44,7 +44,7 @@ gateEl?.querySelector('[data-gate-skip]')?.addEventListener('click', openRoom)
 replay?.addEventListener('click', () => {
   gateEl.removeAttribute('data-open')
   replay.setAttribute('aria-expanded', 'true')
-  gate?.clearPicks()
+  gate?.replay()
 })
 // Someone who arrived with the room already open (a deep link from a "try this"
 // experiment) should not meet a wall they did not ask for.
