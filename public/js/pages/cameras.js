@@ -6,11 +6,11 @@
 // filters decide which cameras are "in view", and the map, the list and the
 // census all read that same set.
 
-import '../core/site.js?v=1.11.0'
+import '../core/site.js?v=1.11.1'
 import { t, esc, n, onLang } from '../core/i18n.js'
-import { whenVisible } from '../core/site.js?v=1.11.0'
+import { whenVisible } from '../core/site.js?v=1.11.1'
 import { loadCatalog, camName, sourceName, isReadable, byId } from '../core/catalog.js'
-import { wantsWebcam } from '../core/specimen.js?v=1.11.0'
+import { wantsWebcam } from '../core/specimen.js?v=1.11.1'
 import { paintFigures } from '../cameras/figures.js'
 import { createFilters, matches, kindName, safeKind } from '../cameras/filters.js'
 import { createMap } from '../cameras/map.js'

@@ -241,3 +241,19 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **Post-release verification.** Cache-key census across all 14 served pages: exactly one distinct `?v=` value per page, 1.11.0, no fork. The census had to be scoped to this site's own asset stamps — a naive `?v=` grep reports `/research` as forked because two YouTube links carry `watch?v=<video-id>`, which is theirs, not ours. Worth remembering before writing that check for real. All four new modules serve 200; the gate, the tone-ladder tokens and the twelve-swatch footer chord are present; the hand-placed city blocks are gone from the shipped `draw.js`.
 
 - No private camera opened; no live traffic generated beyond the ordinary catalogue refresh.
+
+## 2026-10-10 · The gate stops eating the room, release 1.11.1 (Asia/Bangkok)
+
+- **Report from the user:** "Track and simulations gone from the Drive tap." The room was not deleted — it was pushed roughly 2.5 screens below the fold. Verified against the live page before touching anything.
+
+- **Cause, in two layers.** The 1.11.0 gate was a full-width block holding the nine-square challenge *and* the three-paragraph essay, so it consumed the entire first screen before the room could start. That was the visible half. The hidden half: `openRoom()` set `data-open="true"` on the gate, and **no stylesheet rule anywhere read `data-open`**. The comment in the old CSS promised the gate "gets out of the way the moment you are through it"; the code had never implemented it. So even a passing visitor kept a 370 px black band on top of a road they could not see.
+
+- **Fixes.** The essay moved out of the gate into an ordinary chapter beneath the room (`#lesson`), where a passing reader who wants the sources finds them and a passing one who does not never scrolls past a road to reach them. The gate itself became a band, and its nine buttons now sit as a transparent overlay on the drawn squares instead of in a numbered row beneath them, which removes a strip of height and means you click the square you mean. Finally `.gate[data-open="true"]` now collapses to a single line — headline kept, because it is the line the page exists to make, plus a "Try the challenge again" button so the only path back to the challenge is not deleted along with the pixels. Reopening does not re-lock the room.
+
+- **Also fixed while in there.** The "Cannot name" row hid only its `<span>`, leaving the label stranded on screen with nothing under it; `hidden` moved to the whole `<p>`, since a heading over an empty readout looks broken rather than empty. The moved section had been given the meaningless id `labelled`, renamed to `lesson` to match its siblings (`decide`, `drivers`, `honest`).
+
+- **Two bugs the verification caught that review did not.** (1) `gateEl.removeAttribute('data-open')` was being used as a boolean; `removeAttribute` returns `undefined`, not `true`, so `aria-expanded` was being set to the literal string `"undefined"`. (2) Replaying the challenge restored it still wearing the squares you had passed with, so Check was live with a stale answer on screen; `mountGate` now returns `clearPicks` and the duplicate clear-the-picks blocks were folded into one `clearSelection`. Both were found by driving the real page over the Chrome DevTools Protocol rather than by reading the diff.
+
+- **Gates.** 120 tests pass, plus 14 assertions run against the live DOM through CDP: room locked on arrival, gate 365 px before and 50 px after, track top at 713 px inside a 900 px viewport, challenge reopens with no stale picks, Check disabled when nothing is picked, `aria-expanded` correct in both states, and the room never re-locks. Verified visually in both languages.
+
+- **Judgement call left open for the user:** the CAPTCHA remains skippable. A public classroom that walls off its own lesson behind a CAPTCHA is the wrong trade, but it is their site and the call is theirs.

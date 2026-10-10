@@ -5,8 +5,8 @@
 // joke working in your favour: the challenge is made of the simulator, so
 // passing it teaches the simulator's own vocabulary.
 
-import { makeChallenge, check, score, GRID, TILES } from '../drive/captcha.js?v=1.11.0'
-import { rng } from '../drive/rand.js?v=1.11.0'
+import { makeChallenge, check, score, GRID, TILES } from '../drive/captcha.js?v=1.11.1'
+import { rng } from '../drive/rand.js?v=1.11.1'
 
 /** One tile: a slice of street seen from a camera. Deliberately simple. */
 function drawTile(g, tile, x, y, w, h, target) {
@@ -147,6 +147,17 @@ export function mountGate(root, { onPass, lang = () => 'en', onLang } = {}) {
     pass.disabled = picked.size === 0
   }
 
+  function clearSelection() {
+    picked.clear()
+    for (const b of root.querySelectorAll('[data-tile]')) b.setAttribute('aria-pressed', 'false')
+    pass.disabled = true
+  }
+  function clearPicks() {
+    clearSelection()
+    state.textContent = ''
+    paint()
+  }
+
   root.addEventListener('click', (e) => {
     const tile = e.target.closest('[data-tile]')
     if (tile) { select(Number(tile.dataset.tile)); return }
@@ -160,17 +171,11 @@ export function mountGate(root, { onPass, lang = () => 'en', onLang } = {}) {
         state.textContent = l === 'en'
           ? `${s.right} of ${s.missed + s.right} right${s.extra ? `, and ${s.extra} square${s.extra > 1 ? 's' : ''} with nothing in them` : ''}. Look again.`
           : `ถูก ${s.right} จาก ${s.missed + s.right}${s.extra ? ` และเลือกเกินมา ${s.extra} ช่อง` : ''} ลองอีกครั้ง`
-        picked.clear()
-        for (const b of root.querySelectorAll('[data-tile]')) b.setAttribute('aria-pressed', 'false')
-        pass.disabled = true
+        clearSelection()
         paint()
       }
     } else if (e.target.closest('[data-captcha-reset]')) {
-      picked.clear()
-      state.textContent = ''
-      for (const b of root.querySelectorAll('[data-tile]')) b.setAttribute('aria-pressed', 'false')
-      pass.disabled = true
-      paint()
+      clearPicks()
     }
   })
 
@@ -180,5 +185,7 @@ export function mountGate(root, { onPass, lang = () => 'en', onLang } = {}) {
   pass.disabled = true
   // The question is written in whichever language is showing, like everything else.
   onLang?.(() => { ask(); state.textContent = ''; paint() })
-  return { challenge, paint }
+  // clearPicks is handed back so reopening a collapsed gate starts a fresh
+  // challenge rather than one still wearing the squares you passed with.
+  return { challenge, paint, clearPicks }
 }

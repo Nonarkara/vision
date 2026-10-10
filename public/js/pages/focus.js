@@ -1,6 +1,6 @@
-import '../core/site.js?v=1.11.0'
+import '../core/site.js?v=1.11.1'
 import { t, bi, onLang } from '../core/i18n.js'
-import { openWebcam } from '../core/source.js?v=1.11.0'
+import { openWebcam } from '../core/source.js?v=1.11.1'
 import { faceSignals, createSession } from '../focus/session.js'
 
 const root = document.querySelector('[data-focus-room]')

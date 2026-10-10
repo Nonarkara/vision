@@ -1,5 +1,5 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.11.0'
+import '../core/site.js?v=1.11.1'
 
 const choices = [...document.querySelectorAll('[data-history-choice]')]
 const panels = [...document.querySelectorAll('[data-history-panel]')]

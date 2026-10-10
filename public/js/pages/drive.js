@@ -2,14 +2,14 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.11.0'
+import '../core/site.js?v=1.11.1'
 import { lang, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.11.0'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.11.0'
-import { drawWindshield } from '../drive/perspective.js?v=1.11.0'
-import { sightRange } from '../drive/perceive.js?v=1.11.0'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.0'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.0'
+import { mountGate } from './captcha.js?v=1.11.1'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.11.1'
+import { drawWindshield } from '../drive/perspective.js?v=1.11.1'
+import { sightRange } from '../drive/perceive.js?v=1.11.1'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.1'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.1'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -20,6 +20,7 @@ const ctx = canvas.getContext('2d')
 // always there. Passing the challenge unlocks it early and teaches why it is
 // there at all.
 const gateEl = document.querySelector('[data-gate]')
+const replay = gateEl?.querySelector('[data-gate-replay]')
 let through = false
 function openRoom() {
   if (through) return
@@ -27,9 +28,18 @@ function openRoom() {
   root.hidden = false
   root.removeAttribute('aria-hidden')
   gateEl?.setAttribute('data-open', 'true')
+  replay?.setAttribute('aria-expanded', 'false')
 }
-mountGate(gateEl, { onPass: openRoom, lang, onLang })
+const gate = mountGate(gateEl, { onPass: openRoom, lang, onLang })
 gateEl?.querySelector('[data-gate-skip]')?.addEventListener('click', openRoom)
+// The gate collapses to a receipt once you are through. Reopening it does NOT
+// re-lock the room — the lesson has already been had, and taking the road away
+// again would be a punishment for looking back.
+replay?.addEventListener('click', () => {
+  gateEl.removeAttribute('data-open')
+  replay.setAttribute('aria-expanded', 'true')
+  gate?.clearPicks()
+})
 // Someone who arrived with the room already open (a deep link from a "try this"
 // experiment) should not meet a wall they did not ask for.
 if (new URLSearchParams(location.search).has('go')) openRoom()
@@ -165,9 +175,11 @@ function syncFocus() {
     : `รถคันที่ ${c.id} · ${STYLE_NAME[c.styleName][0]} · ${speedKmh(c)} กม./ชม.`
   focusEl.querySelector('[data-focus-sees]').textContent = saySeen(c, l)
   const unnamed = sayUnnamed(c, world, l)
-  const unnamedEl = focusEl.querySelector('[data-focus-unnamed]')
-  unnamedEl.textContent = unnamed
-  unnamedEl.hidden = !unnamed
+  const unnamedRow = focusEl.querySelector('[data-focus-unnamed-row]')
+  // Hide the whole row, label and all: a "Cannot name" heading with nothing
+  // under it reads as a broken readout, not as "nothing to report right now".
+  unnamedRow.querySelector('[data-focus-unnamed]').textContent = unnamed
+  unnamedRow.hidden = !unnamed
   focusEl.querySelector('[data-focus-does]').textContent = sayDecision(c, world, l)
   const blind = focusEl.querySelector('[data-blind]')
   blind.setAttribute('aria-pressed', String(c.blind))
