@@ -3,8 +3,13 @@
 // the page and in the tests, and a seed makes every run repeatable.
 
 import { buildTrack, at, ZEBRAS, LANE } from './track.js'
-import { perceive } from './perceive.js?v=1.10.2'
-import { decide } from './decide.js?v=1.10.2'
+import { perceive } from './perceive.js?v=1.11.0'
+import { decide } from './decide.js?v=1.11.0'
+import { buildStreet, stepStreet, detectable } from './street.js?v=1.11.0'
+import { rng } from './rand.js?v=1.11.0'
+
+// Re-exported so anything that used to reach for sim.js still finds it.
+export { rng } from './rand.js?v=1.11.0'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack
@@ -69,27 +74,29 @@ const RATES = {
   dogs: { none: Infinity, few: 12, many: 5 },     // mean seconds between dogs anywhere
 }
 
-/** Small, fast, seedable random numbers (mulberry32). */
-export function rng(seed) {
-  let a = seed >>> 0
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0
-    let t = a
-    t = Math.imul(t ^ (t >>> 15), t | 1)
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-  }
-}
 
 export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 'few', layout = 'practice', traffic = 6 } = {}) {
   const track = buildTrack(layout)
+  // The street the road runs through. Built once per world from the same seed,
+  // so a layout is the same street every time a visitor picks it.
+  const street = buildStreet(track, { seed, layout })
   const world = {
     t: 0, tick: 0, rand: rng(seed), track, weather, people, dogs, layout, zebras: track.zebras,
     light: { ...LIGHT_CYCLE[0] }, phase: 0, phaseT: 0,
     cars: [], walkers: [], nextId: 100, events: [],
+    street,
+    // Everything the simulated camera is allowed to put a box on. References, not
+    // copies: stepStreet moves the people and dogs on the footway in place, and
+    // the camera has to see them where they actually are. Street lamps, poles,
+    // kerbs and buildings are in the world but never in here, because COCO has no
+    // name for them — the detector is not failing to see them.
+    seen: detectable(street),
     zebraT: Object.fromEntries(track.zebras.map((z, i) => [z.id, 2 + 2 * i])),
     dogT: 4,
-    objects() { return [...this.cars, ...this.walkers] },
+    // What a camera in this car could be pointed at: traffic first, then the
+    // named street. Used by both perception and the windshield drawing, so the
+    // two can never disagree about what is in frame.
+    objects() { return [...this.cars, ...this.walkers, ...this.seen] },
   }
   const routes = Object.keys(track)
   const total = Math.max(4, Math.min(32, Number(traffic) || 6))
@@ -148,6 +155,7 @@ export function step(world) {
     placeCar(car)
   }
   moveWalkers(world)
+  stepStreet(world.street, world)
   collide(world)
   world.events = world.events.filter((e) => world.t - e.t < 2.5)
 }

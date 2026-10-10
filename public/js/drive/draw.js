@@ -3,19 +3,30 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js?v=1.10.2'
-import { VEHICLES } from './sim.js?v=1.10.2'
+import { FOV, sightRange } from './perceive.js?v=1.11.0'
+import { VEHICLES } from './sim.js?v=1.11.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.11.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
-const NAME = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'], truck: ['รถบรรทุก', 'truck'], bus: ['รถโดยสาร', 'bus'] }
 
 export function palette() {
   const css = getComputedStyle(document.documentElement)
   const v = (k) => css.getPropertyValue(k).trim()
   return {
-    ground: v('--black-1'), road: v('--black-3'), mark: v('--gray'), white: v('--white'),
+    // Three instrument steps, well apart, so three surfaces read as three
+    // surfaces from above: verge, footway, carriageway. Hardware, not content,
+    // so they stay in the black ramp and never borrow a plate hue.
+    ground: v('--black'), pave: v('--black-2'), road: v('--black-3'),
+    kerb: v('--gray'), block: v('--olive'),
+    mark: v('--gray'), white: v('--white'),
     naples: v('--naples'), gray: v('--gray'), olive: v('--olive'), signal: v('--signal'), black: v('--black'),
   }
+}
+
+/** The localised name a detection label prints. Keys come from ITEMS in street.js. */
+export function labelName(label, lang) {
+  const row = ITEMS[label]
+  return row ? row.label[lang === 'en' ? 1 : 0] : label
 }
 
 /** Size the canvas to its box (sharp on high-DPI screens); returns metres → pixels. */
@@ -30,8 +41,8 @@ export function fit(canvas) {
   return (w / WORLD.w) * dpr
 }
 
-/** The static layer: roads, island, zebras, stop lines. Drawn once per resize. */
-export function drawTrack(ctx, k, track, c) {
+/** The static layer: roads, island, zebras, stop lines, footways, buildings. */
+export function drawTrack(ctx, k, track, c, street) {
   ctx.fillStyle = c.ground
   ctx.fillRect(0, 0, WORLD.w * k, WORLD.h * k)
   ctx.lineJoin = 'round'
@@ -50,10 +61,9 @@ export function drawTrack(ctx, k, track, c) {
   ctx.arc(RING.x * k, RING.y * k, (RING.r - LANE - 0.4) * k, 0, 2 * Math.PI)
   ctx.fill()
   }
-  if (track.layout === 'city') {
-    ctx.fillStyle = c.olive
-    for (const [x,y,w,h] of [[55,30,22,9],[80,78,28,20],[55,78,17,20],[128,27,12,20]]) ctx.fillRect(x*k,y*k,w*k,h*k)
-  }
+  // The hand-placed city blocks that used to be hardcoded here are gone:
+  // street.js builds the buildings from the footway, so a block is always
+  // standing where a street actually is, at the right distance back from it.
 
   for (const route of Object.values(track)) {
     // One-way arrows every 30 m, so the direction of travel is obvious.
@@ -78,6 +88,41 @@ export function drawTrack(ctx, k, track, c) {
   for (const z of track.zebras) {
     for (let i = -2; i <= 2; i++) ctx.fillRect((z.x + i * 0.9 - 0.3) * k, (z.y - LANE) * k, 0.6 * k, LANE * 2 * k)
   }
+  if (street) drawStreet(ctx, k, street, c)
+}
+
+/**
+ * The street itself, seen from above: footways behind a kerb line, and the
+ * shophouses set back behind those. Neither is a road marking, so neither is
+ * drawn in road paint — a footway is a raised slab and a building is a block,
+ * and from above the only honest difference is which tone they are.
+ */
+function drawStreet(ctx, k, street, c) {
+  for (const fw of street.footways) {
+    if (fw.kerb.length < 2) continue
+    ctx.beginPath()
+    fw.kerb.forEach((p, i) => (i ? ctx.lineTo(p.x * k, p.y * k) : ctx.moveTo(p.x * k, p.y * k)))
+    for (let i = fw.back.length - 1; i >= 0; i--) ctx.lineTo(fw.back[i].x * k, fw.back[i].y * k)
+    ctx.closePath()
+    ctx.fillStyle = c.pave
+    ctx.fill()
+    // The kerb itself: one line, at the real 3.2 m from the centreline.
+    ctx.strokeStyle = c.kerb
+    ctx.lineWidth = Math.max(1, 0.22 * k)
+    ctx.beginPath()
+    fw.kerb.forEach((p, i) => (i ? ctx.lineTo(p.x * k, p.y * k) : ctx.moveTo(p.x * k, p.y * k)))
+    ctx.stroke()
+  }
+  // Buildings last: they sit behind everything and must not be overpainted.
+  for (const it of street.items) {
+    if (it.kind !== 'building') continue
+    ctx.save()
+    ctx.translate(it.x * k, it.y * k)
+    ctx.rotate(it.h)
+    ctx.fillStyle = c.block
+    ctx.fillRect((-it.depth / 2) * k, (-it.width / 2) * k, it.depth * k, it.width * k)
+    ctx.restore()
+  }
 }
 
 function chevron(ctx, x, y, h, size) {
@@ -96,8 +141,58 @@ function chevron(ctx, x, y, h, size) {
 }
 
 /** Everything that moves. `selected` is the car whose eyes we look through. */
+/**
+ * Lamp posts, poles, signs and everything at the kerb, drawn at its real
+ * footprint. These are the things the camera walks past without naming: from
+ * above a lamp post is a 0.3 m square, which is exactly why it is easy to miss
+ * and exactly why there is no box on it.
+ */
+function drawFurniture(ctx, k, world, c) {
+  for (const it of world.street.items) {
+    if (it.kind === 'building') continue        // static layer, already painted
+    if (it.kind === 'person' || it.kind === 'dog') continue  // drawn with the walkers
+    const dims = ITEMS[it.kind]?.dims
+    if (!dims) continue
+    ctx.save()
+    ctx.translate(it.x * k, it.y * k)
+    ctx.rotate(it.h)
+    const L = dims.L * k, W = dims.W * k
+    // Lamps, poles and signs stand upright; seen from above they are a footprint
+    // plus the faint circle of what they shade.
+    if (it.kind === 'lamp' || it.kind === 'pole') {
+      ctx.fillStyle = c.gray
+      ctx.fillRect(-W / 2, -W / 2, W, W)
+      ctx.globalAlpha = 0.18
+      ctx.beginPath()
+      ctx.arc(0, 0, Math.max(2, 1.6 * k), 0, 2 * Math.PI)
+      ctx.fill()
+    } else if (it.kind === 'bicycle' || it.kind === 'motorcycle') {
+      ctx.fillStyle = c.naples
+      ctx.fillRect(-L / 2, -W / 2, L, W)
+      ctx.fillStyle = c.black
+      ctx.beginPath()
+      ctx.arc(-L * 0.32, 0, Math.max(1, W * 0.42), 0, 2 * Math.PI)
+      ctx.arc(L * 0.32, 0, Math.max(1, W * 0.42), 0, 2 * Math.PI)
+      ctx.fill()
+    } else if (it.kind === 'stopSign') {
+      // White, not Peach Red. Red belongs to the machine: only a detection box
+      // and its confidence are ever signal-coloured, never the object itself.
+      ctx.fillStyle = c.white
+      ctx.beginPath()
+      ctx.arc(0, 0, Math.max(2, 0.45 * k), 0, 2 * Math.PI)
+      ctx.fill()
+    } else {
+      ctx.fillStyle = c.gray
+      ctx.globalAlpha = 0.75
+      ctx.fillRect(-L / 2, -W / 2, L, W)
+    }
+    ctx.restore()
+  }
+}
+
 export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
   drawLights(ctx, k, world, c)
+  drawFurniture(ctx, k, world, c)
 
   for (const car of world.cars) {
     const sel = car.id === selected
@@ -137,12 +232,12 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     if (car.id !== selected && !showAll) continue
     for (const tr of car.tracks.values()) {
       const o = tr.obj
-      const half = (o.kind === 'car' ? Math.max(o.dims?.L ?? 4.6, o.dims?.W ?? 1.85) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
+      const half = (ITEMS[o.kind]?.dims ? Math.max(ITEMS[o.kind].dims.L, ITEMS[o.kind].dims.W) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
       ctx.strokeStyle = c.signal
       ctx.lineWidth = car.id === selected ? 2 : 1
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
       if (car.id !== selected) continue
-      const text = `${NAME[tr.label][lang === 'en' ? 1 : 0]} ${Math.round(tr.conf * 100)}%`
+      const text = `${labelName(tr.label, lang)} ${Math.round(tr.conf * 100)}%`
       ctx.font = `600 ${Math.max(10, 1.9 * k)}px "JetBrains Mono", monospace`
       const tw = ctx.measureText(text).width
       ctx.fillStyle = c.signal

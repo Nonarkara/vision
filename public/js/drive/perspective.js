@@ -4,9 +4,11 @@
 // is 4.4 × 1.8 m with a 1.5 m roof, a 6-wheel lorry 9.6 × 2.5 m and 3.2 m
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
-import { at, LANE } from './track.js'
-import { sightRange } from './perceive.js?v=1.10.2'
-import { VEHICLES } from './sim.js?v=1.10.2'
+import { at, LANE, STEP } from './track.js'
+import { sightRange } from './perceive.js?v=1.11.0'
+import { VEHICLES } from './sim.js?v=1.11.0'
+import { ITEMS, STREET } from './street.js?v=1.11.0'
+import { labelName } from './draw.js'
 
 export function relative(car, point) {
   const dx = point.x - car.x,
@@ -25,15 +27,11 @@ export function project(car, point, w, h, height = 0) {
     y: h * 0.38 + ((1.35 - height) * f) / p.depth,
     scale: f / p.depth,
     depth: p.depth,
+    // World position too, so a face can be culled against the view vector
+    // rather than against its own screen quad.
+    wx: point.x,
+    wy: point.y,
   }
-}
-const names = {
-  car: ['รถ', 'car'],
-  person: ['คน', 'person'],
-  dog: ['สุนัข', 'dog'],
-  cat: ['แมว?', 'cat?'],
-  truck: ['รถบรรทุก', 'truck'],
-  bus: ['รถโดยสาร', 'bus'],
 }
 function line(g, points) {
   g.beginPath()
@@ -62,11 +60,11 @@ function roadQuad(car, points, w, h) {
   }
   return out.map((p) => project(car, p, w, h)).filter(Boolean)
 }
-function person(g, x, y, s, t) {
-  g.strokeStyle = '#f0ebe1'
+function person(g, x, y, s, t, colour = '#f0ebe1') {
+  g.strokeStyle = colour
   g.lineWidth = Math.max(2, s * 0.085)
   g.lineCap = 'round'
-  g.fillStyle = '#f0ebe1'
+  g.fillStyle = colour
   g.beginPath()
   g.arc(x, y - s * 1.55, s * 0.14, 0, Math.PI * 2)
   g.fill()
@@ -225,6 +223,173 @@ function drawVehicle(g, view, o, w, h, night) {
   }
 }
 
+// ── The street, at eye level ──────────────────────────────────────────
+// Everything below is the same geometry the top view draws, seen from the
+// driver's seat. Depths and sizes are shared with street.js, so a lamp post is
+// 8.5 m tall on the map and 8.5 m tall through the windscreen.
+
+const CONCRETE = { day: '#7e8288', rain: '#63686d', night: '#353b42', sun: '#8b9196' }
+const KERB = { day: '#9a978a', rain: '#75736a', night: '#3e4347', sun: '#a5a294' }
+const METAL = { day: '#5c636a', rain: '#4c5258', night: '#252a30', sun: '#686f76' }
+const WALL = { day: '#7c8288', rain: '#5f6469', night: '#262b31', sun: '#8b9197' }
+const ROOF = { day: '#6a7076', rain: '#53585d', night: '#22272c', sun: '#787e84' }
+const GREENERY = { day: '#5c7a52', rain: '#4a6343', night: '#243024', sun: '#688a5c' }
+
+/**
+ * One upright box, back faces culled, the rest painted far to near.
+ * `angle` is its heading: L runs along it, W across it, H up.
+ */
+function box(g, view, cx, cy, angle, L, W, H, w, h, fills) {
+  const c = Math.cos(angle), s = Math.sin(angle)
+  const pt = (dx, dy, up) => project(view, { x: cx + dx * c - dy * s, y: cy + dx * s + dy * c }, w, h, up)
+  const faces = [
+    { n: [0, 0, 1], top: true, pts: [pt(-L / 2, -W / 2, H), pt(L / 2, -W / 2, H), pt(L / 2, W / 2, H), pt(-L / 2, W / 2, H)] },
+    { n: [c, s, 0], pts: [pt(L / 2, -W / 2, 0), pt(L / 2, W / 2, 0), pt(L / 2, W / 2, H), pt(L / 2, -W / 2, H)] },
+    { n: [-c, -s, 0], pts: [pt(-L / 2, W / 2, 0), pt(-L / 2, -W / 2, 0), pt(-L / 2, -W / 2, H), pt(-L / 2, W / 2, H)] },
+    { n: [-s, c, 0], pts: [pt(-L / 2, W / 2, 0), pt(L / 2, W / 2, 0), pt(L / 2, W / 2, H), pt(-L / 2, W / 2, H)] },
+    { n: [s, -c, 0], pts: [pt(L / 2, -W / 2, 0), pt(-L / 2, -W / 2, 0), pt(-L / 2, -W / 2, H), pt(L / 2, -W / 2, H)] },
+  ]
+  const out = []
+  for (const f of faces) {
+    if (f.pts.some((p) => !p)) continue
+    let mx = 0, my = 0
+    for (const p of f.pts) { mx += p.wx; my += p.wy }
+    mx /= 4; my /= 4
+    if (f.n[0] * (view.x - mx) + f.n[1] * (view.y - my) <= 0) continue
+    out.push({ pts: f.pts, depth: f.pts.reduce((n, p) => n + p.depth, 0) / 4, top: !!f.top })
+  }
+  out.sort((a, b) => b.depth - a.depth)
+  for (const f of out) {
+    g.fillStyle = f.top ? fills.top : fills.side
+    polygon(g, f.pts)
+  }
+  return out.length > 0
+}
+
+/** A thin upright: a pole, a post, a mast. Cheap, and it sells the scale. */
+function post(g, view, cx, cy, height, thickness, w, h, fill, arm = 0, angle = 0) {
+  box(g, view, cx, cy, angle, thickness, thickness, height, w, h, { top: fill, side: fill })
+  if (!arm) return
+  // A lamp arm reaches out over the carriageway, so the light it throws lands on
+  // the road rather than on the footway behind it.
+  const nx = -Math.sin(angle), ny = Math.cos(angle)
+  box(g, view, cx + (nx * arm) / 2, cy + (ny * arm) / 2, angle, arm, thickness, thickness, w, h, { top: fill, side: fill })
+}
+
+/** A footway ribbon: a kerb face on the road side, with the slab on top of it. */
+function footway(g, view, fw, w, h, weather) {
+  const kerbColour = KERB[weather] ?? KERB.day
+  const slab = CONCRETE[weather] ?? CONCRETE.day
+  for (let i = 0; i + 2 < fw.kerb.length; i += 2) {
+    const k0 = fw.kerb[i], k1 = fw.kerb[i + 2], b0 = fw.back[i], b1 = fw.back[i + 2]
+    const k0g = project(view, k0, w, h, 0)
+    const k0t = project(view, k0, w, h, STREET.kerbHeight)
+    const k1g = project(view, k1, w, h, 0)
+    const k1t = project(view, k1, w, h, STREET.kerbHeight)
+    const b0t = project(view, b0, w, h, STREET.kerbHeight)
+    const b1t = project(view, b1, w, h, STREET.kerbHeight)
+    // The kerb face is the only vertical surface in the whole footway, so it is
+    // shaded a step darker than the slab. Without that step the raised footway
+    // reads as a flat plane painted on the ground.
+    if (k0g && k0t && k1g && k1t) { g.fillStyle = kerbColour; polygon(g, [k0g, k0t, k1t, k1g]) }
+    if (k0t && k1t && b0t && b1t) { g.fillStyle = slab; polygon(g, [k0t, b0t, b1t, k1t]) }
+  }
+}
+
+/** Buildings behind the footway — the backdrop the camera sees over parked bikes. */
+function drawBuildings(g, view, world, w, h, weather) {
+  const wall = WALL[weather] ?? WALL.day
+  const roof = ROOF[weather] ?? ROOF.day
+  for (const it of world.street.items) {
+    if (it.kind !== 'building') continue
+    if (Math.hypot(it.x - view.x, it.y - view.y) > 150) continue
+    box(g, view, it.x, it.y, it.h, it.depth, it.width, it.height, w, h, { top: roof, side: wall })
+  }
+}
+
+/**
+ * Everything standing at the kerb. Draw after the buildings so a bicycle at the
+ * kerb lands in front of the wall behind it.
+ */
+function drawStreetFurniture(g, view, world, w, h, weather) {
+  const metal = METAL[weather] ?? METAL.day
+  const concrete = CONCRETE[weather] ?? CONCRETE.day
+  for (const it of world.street.items) {
+    if (it.kind === 'building') continue
+    if (it.kind === 'person' || it.kind === 'dog') continue
+    if (Math.hypot(it.x - view.x, it.y - view.y) > 110) continue
+    const dims = ITEMS[it.kind]?.dims
+    if (!dims) continue
+    // Lamp posts and poles are 8.5–9 m tall and 25 cm wide. Beyond about 70 m they
+    // stop being objects and become vertical noise across the skyline, so the
+    // camera stops drawing them there — which is also roughly where a real one
+    // stops being recognisable.
+    const far = Math.hypot(it.x - view.x, it.y - view.y)
+    if ((it.kind === 'lamp' || it.kind === 'pole') && far > 70) continue
+    switch (it.kind) {
+      case 'lamp':
+        post(g, view, it.x, it.y, STREET.lampHeight, 0.28, w, h, metal, STREET.lampArm, it.h)
+        break
+      case 'pole':
+        post(g, view, it.x, it.y, STREET.poleHeight, 0.22, w, h, metal)
+        break
+      case 'stopSign':
+        post(g, view, it.x, it.y, dims.H - 0.75, 0.08, w, h, metal)
+        box(g, view, it.x, it.y, it.h, 0.06, 0.75, dims.H, w, h, { top: '#b0342a', side: '#b0342a' })
+        break
+      case 'pedSignal':
+        post(g, view, it.x, it.y, dims.H, 0.16, w, h, metal)
+        box(g, view, it.x, it.y, it.h, 0.24, 0.3, 0.5, w, h, { top: '#1b2126', side: '#1b2126' })
+        break
+      case 'hydrant':
+        box(g, view, it.x, it.y, it.h, dims.L, dims.W, dims.H, w, h, { top: '#b03a2c', side: '#8d2d22' })
+        break
+      case 'bench':
+        box(g, view, it.x, it.y, it.h, dims.L, dims.W, dims.H, w, h, { top: '#6b5136', side: '#4d3a26' })
+        break
+      case 'planter':
+        box(g, view, it.x, it.y, it.h, dims.L, dims.W, dims.H * 0.55, w, h, { top: concrete, side: concrete })
+        box(g, view, it.x, it.y, it.h, dims.L * 0.8, dims.W * 0.8, dims.H, w, h, {
+          top: GREENERY[weather] ?? GREENERY.day,
+          side: GREENERY[weather] ?? GREENERY.day,
+        })
+        break
+      case 'bicycle':
+      case 'motorcycle':
+        // Two wheels and a frame, because from the driver's seat that silhouette
+        // is the whole of what a parked bike is.
+        for (const end of [-0.32, 0.32]) {
+          const a = project(view, { x: it.x + Math.cos(it.h) * dims.L * end, y: it.y + Math.sin(it.h) * dims.L * end }, w, h, 0.32)
+          if (!a) continue
+          g.fillStyle = '#15191d'
+          g.beginPath(); g.arc(a.x, a.y, Math.max(1.5, a.scale * 0.3), 0, Math.PI * 2); g.fill()
+        }
+        box(g, view, it.x, it.y, it.h, dims.L * 0.5, dims.W * 0.4, dims.H * 0.5, w, h, {
+          top: it.kind === 'motorcycle' ? '#2f3439' : '#3c4147',
+          side: it.kind === 'motorcycle' ? '#24282c' : '#2d3136',
+        })
+        break
+      default:
+        break
+    }
+  }
+}
+
+/** People and dogs walking the footway, at their real heights. */
+function drawFootwayWalkers(g, view, world, w, h, weather) {
+  const cloth = { day: '#dcd8cc', rain: '#b9bcbd', night: '#5c6168', sun: '#e4e0d4' }
+  for (const it of world.street.items) {
+    if (it.kind !== 'person' && it.kind !== 'dog') continue
+    const p = project(view, it, w, h)
+    if (!p || p.depth > 90) continue
+    if (it.kind === 'person') {
+      person(g, p.x, p.y, p.scale, it.phase, cloth[weather] ?? cloth.day)
+    } else {
+      dog(g, p.x, p.y, p.scale, it.phase)
+    }
+  }
+}
+
 export function drawWindshield(g, car, world, w, h, language = 'en') {
   const night = world.weather === 'night',
     rain = world.weather === 'rain',
@@ -251,6 +416,11 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
     const bh = ((20 + ((i * 23) % 48)) * h) / 480
     g.fillRect((i * w) / 20, h * 0.38 - bh, w / 23, bh)
   }
+  // The street arrives behind the road: buildings first, then the footway slab,
+  // then whatever stands on it. Painting back-to-front is what makes the depth
+  // read as depth rather than as a stack of shapes.
+  drawBuildings(g, car, world, w, h, world.weather)
+  for (const fw of world.street.footways) footway(g, car, fw, w, h, world.weather)
   const quads = []
   for (const route of Object.values(world.track))
     for (let s = 0; s < route.len; s += 3) {
@@ -345,9 +515,14 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
   const objects = world
     .objects()
     .filter((o) => o !== car && !o.gone)
+    // Footway walkers are drawn with the street furniture, behind the traffic,
+    // so a person on a footway is never painted over by a car in front of them.
+    .filter((o) => !(o.kind === 'person' || o.kind === 'dog') || o.state !== undefined)
     .map((o) => ({ o, p: project(car, o, w, h) }))
     .filter(({ p }) => p && p.depth < 100)
     .sort((a, b) => b.p.depth - a.p.depth)
+  drawStreetFurniture(g, car, world, w, h, world.weather)
+  drawFootwayWalkers(g, car, world, w, h, world.weather)
   for (const { o, p } of objects) {
     const s = p.scale
     if (p.x < -s * 3 || p.x > w + s * 3) continue
@@ -366,10 +541,16 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
       bw = s * 0.8
       bh = s * 1.8
       person(g, p.x, p.y, s, world.t * (o.state === 'wait' ? 0 : 1))
-    } else {
+    } else if (o.kind === 'dog') {
       bw = s * 1.3
       bh = s
       dog(g, p.x, p.y, s, world.t * (o.state === 'run' ? 1 : 0))
+    } else {
+      // Street furniture: already painted by drawStreetFurniture. It still needs
+      // a box size, because a box is a claim about where the thing is on screen.
+      const dims = ITEMS[o.kind]?.dims
+      bw = dims ? s * dims.W : s
+      bh = dims ? s * dims.H : s
     }
     g.globalAlpha = 1
     const tr = car.tracks.get(o.id)
@@ -380,7 +561,7 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
       g.setLineDash(world.t - tr.last > 0.2 ? [5, 4] : [])
       g.strokeRect(p.x - bw / 2 - 3, p.y - bh - 3, bw + 6, bh + 6)
       g.setLineDash([])
-      const label = `${names[tr.label]?.[language === 'th' ? 0 : 1] ?? tr.label} ${Math.round(tr.conf * 100)}% · ${Math.round(Math.hypot(o.x - car.x, o.y - car.y))} m`
+      const label = `${labelName(tr.label, language)} ${Math.round(tr.conf * 100)}% · ${Math.round(Math.hypot(o.x - car.x, o.y - car.y))} m`
       g.font = `${Math.max(11, Math.min(15, w / 55))}px sans-serif`
       const tw = g.measureText(label).width + 10,
         lx = Math.max(2, Math.min(w - tw - 2, p.x - bw / 2 - 3)),

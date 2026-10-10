@@ -20,6 +20,9 @@
 .focus-name { font-family: var(--narrow); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--naples); }
 html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .focus-row { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 8px; font-size: var(--micro); min-height: 2.9em; }
+/* The unnamed row: the lesson of the room, so it reads as its own line. */
+.focus-row.unnamed { color: var(--gray); }
+.focus-row.unnamed .unnamed { color: var(--naples); }
 .focus .btn { justify-self: start; }
 
 .cards { display: grid; gap: 2px; }
@@ -62,3 +65,31 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 
 /* "Try this" buttons sit at the end of each experiment. */
 .try-go { min-height: 36px; margin: 6px 0 4px; padding: 0 12px; }
+
+/* ── The gate ────────────────────────────────────────────────────────── */
+/* A teaching device, not a security control. It sits above the room, takes the
+   whole width, and gets out of the way the moment you are through it. */
+.gate {
+  display: grid; gap: var(--gap);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  padding: clamp(28px, 3.5vw, 56px) var(--gutter);
+  background: var(--field); color: var(--field-text);
+}
+.gate-head h2 { margin-bottom: 0.5em; }
+.gate-head .lede { margin: 0; max-width: 40ch; }
+.gate .stem-label { color: var(--naples); }
+.captcha { display: grid; gap: 12px; align-content: start; }
+.captcha-ask { margin: 0; font-size: var(--body); font-weight: 600; }
+.captcha-grid {
+  width: 100%; aspect-ratio: 1; background: var(--black);
+  border: 0; cursor: crosshair; display: block;
+}
+.captcha-tiles { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 2px; }
+.captcha-tiles .btn { padding: 0; min-height: var(--target); }
+.captcha-tiles .btn[aria-pressed="true"] { background: var(--signal); color: var(--black); }
+.captcha [data-captcha-state]:empty { display: none; }
+.gate-note { grid-column: 1 / -1; max-width: 74ch; }
+.gate-note h3 { margin-top: 0; }
+.gate-note p { margin-bottom: 1em; }
+.gate-note a { text-decoration: underline; }
+@media (max-width: 900px) { .gate { grid-template-columns: 1fr; } }

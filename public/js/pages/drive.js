@@ -2,17 +2,37 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.10.2'
+import '../core/site.js?v=1.11.0'
 import { lang, onLang } from '../core/i18n.js'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.10.2'
-import { drawWindshield } from '../drive/perspective.js?v=1.10.2'
-import { sightRange } from '../drive/perceive.js?v=1.10.2'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.10.2'
-import { sayDecision, saySeen, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.10.2'
+import { mountGate } from './captcha.js?v=1.11.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.11.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.11.0'
+import { sightRange } from '../drive/perceive.js?v=1.11.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.11.0'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.11.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
 const ctx = canvas.getContext('2d')
+
+// ── The gate ──────────────────────────────────────────────────────────
+// Nothing is blocked: the room is behind the challenge, and the Skip button is
+// always there. Passing the challenge unlocks it early and teaches why it is
+// there at all.
+const gateEl = document.querySelector('[data-gate]')
+let through = false
+function openRoom() {
+  if (through) return
+  through = true
+  root.hidden = false
+  root.removeAttribute('aria-hidden')
+  gateEl?.setAttribute('data-open', 'true')
+}
+mountGate(gateEl, { onPass: openRoom, lang, onLang })
+gateEl?.querySelector('[data-gate-skip]')?.addEventListener('click', openRoom)
+// Someone who arrived with the room already open (a deep link from a "try this"
+// experiment) should not meet a wall they did not ask for.
+if (new URLSearchParams(location.search).has('go')) openRoom()
 const cardsEl = root.querySelector('[data-cards]')
 const totalsEl = root.querySelector('[data-totals]')
 const focusEl = root.querySelector('[data-focus]')
@@ -144,6 +164,10 @@ function syncFocus() {
     ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]} · ${speedKmh(c)} km/h`
     : `รถคันที่ ${c.id} · ${STYLE_NAME[c.styleName][0]} · ${speedKmh(c)} กม./ชม.`
   focusEl.querySelector('[data-focus-sees]').textContent = saySeen(c, l)
+  const unnamed = sayUnnamed(c, world, l)
+  const unnamedEl = focusEl.querySelector('[data-focus-unnamed]')
+  unnamedEl.textContent = unnamed
+  unnamedEl.hidden = !unnamed
   focusEl.querySelector('[data-focus-does]').textContent = sayDecision(c, world, l)
   const blind = focusEl.querySelector('[data-blind]')
   blind.setAttribute('aria-pressed', String(c.blind))
@@ -190,7 +214,7 @@ function render() {
   if (!bg || bg.width !== canvas.width) {
     colours = palette()
     bg = Object.assign(document.createElement('canvas'), { width: canvas.width, height: canvas.height })
-    drawTrack(bg.getContext('2d'), k, world.track, colours)
+    drawTrack(bg.getContext('2d'), k, world.track, colours, world.street)
   }
   ctx.drawImage(bg, 0, 0)
   drawWorld(ctx, k, world, colours, { selected, showAll, lang: lang() })
@@ -206,7 +230,12 @@ function frame(now) {
     acc += dt * settings.speed
     while (acc >= DT) { step(world); acc -= DT }
   }
-  if (!document.hidden && (inView || dialog.open)) { if (inView) render(); paintDriver() }
+  if (!document.hidden && (inView || dialog.open)) {
+    // Behind the gate the canvas has no width yet; drawing at scale 0 is wasted
+    // work and can leave a zero-sized backing store the first time it appears.
+    if (inView && canvas.clientWidth) render()
+    paintDriver()
+  }
   textT += dt
   if (textT > 0.25 && !document.hidden && (inView || dialog.open)) { textT = 0; syncCards(); syncFocus() }
   requestAnimationFrame(frame)

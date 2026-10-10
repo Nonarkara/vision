@@ -55,6 +55,28 @@ An early spark came from conversations with **Dr Supakorn Siddhichai**, who trai
 
 ---
 
+## The design system
+
+One page owns it: [`public/css/vision.css`](public/css/vision.css). Colour is Sanzo Wada's Plate 303 in four hues, and **no fifth hue is admitted**. Each hue also carries a `deep` and a `pale` step built on one shared ladder — 76% hue + 24% black, 78% hue + 22% white — so a pale Olive and a pale Naples Yellow are visibly the same move rather than two accidental colours.
+
+Every pairing the CSS is allowed to set is measured, and every forbidden pairing is proved illegible rather than assumed:
+
+```bash
+npm run palette      # print the ladder and 21 measured contrast ratios
+```
+
+The ladder buys one real freedom: base Peach Red on Naples is 2.7:1 and was always banned as text on paper, while `signal-deep` clears 13.0:1 — so emphasis set in signal on the paper ground is legal now, same hue, same job, one step down. `npm run check` fails if that ever stops being true.
+
+Type is eight steps rather than three, and the playfulness comes from mixing the three families — Archivo Narrow for display Latin, IBM Plex Sans/Thai for reading, JetBrains Mono for every number — in named pairings (`.stem`, `.measure`, `.mix`) rather than from arbitrary sizes.
+
+## The Drive room's street
+
+`public/js/drive/street.js` builds everything beside the road from the track's own centreline, in real metres: kerbs at 3.2 m, footways 2.6 m deep with a 15 cm upstand, shophouses 1.2 m behind them, lamps every 30 m at 8.5 m, utility poles every 45 m at 9 m, bicycles and motorbikes at the kerb.
+
+The rule the room is built on: **the simulated camera may only name things the site's real detector can name.** Every detectable item carries a real COCO id and the same Thai name the model prints in `ml/labels.js`, and `tests/street.test.js` checks that against the real table. A lamp post is 8.5 m tall, three metres from the car, and COCO has no category for it — so it is drawn and never given a box. That gap is the lesson, not a defect.
+
+---
+
 ## Rooms
 
 | URL | Room | What you can do |
@@ -64,7 +86,7 @@ An early spark came from conversations with **Dr Supakorn Siddhichai**, who trai
 | `/cameras` | 02 Cameras | Tile-free dot map of ~4,000 cameras from 7 sources; filter, study any readable camera, run a polite census. |
 | `/train` | 03 Train | Guided lessons on one video: label frames (supervised nearest neighbours), group unnamed frames (two-cluster k-means), reward alert actions (one-step contextual bandit). Drawn practice clip, public-camera switching and local video files; optional object teaching, trained layer and diagnostic tools. |
 | `/gesture` | 04 Gestures | Teach 2–4 gestures (one finger, palm, …), bind each to a small in-browser action (beep, buzz, flash, lamps, tone, link); honest limits of what a page may do. |
-| `/drive` | 05 Drive | Two/four lanes, roundabout or Bangkok-inspired city; 6–24 cars. Click any car for a moving perspective view of the same world, detection boxes, obstacle gaps and computed acceleration. Day, rain with wipers, night and sun glare. Written rules and simulated detections, not a trained driving system. |
+| `/drive` | 05 Drive | A real street, not a bare track: kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, hydrants, benches, planters, people and dogs. Two/four lanes, roundabout or Bangkok-inspired city; 6–24 cars. Click any car for its moving driver's view, with detection boxes and computed acceleration. Day, rain, night, sun glare. Written rules and simulated detections, not a trained driving system. Behind a CAPTCHA that explains where the training data came from. |
 | `/games` | 06 Games | Count race vs the detector, fewest-pixels guessing, and "fool the machine" on your own webcam. |
 | `/everyday` | 07 Everyday | Face unlock, QR, OCR, X-rays, lane keeping, self-checkout, crop apps, traffic cameras — how each works and fails. |
 | `/research` | 08 Research | Sixty years of papers, the ones this site runs on, open questions. |
@@ -162,12 +184,12 @@ No dependencies. Node ≥ 22. Webcam access needs a secure context: `localhost` 
 | `public/js/core/` | i18n, catalogue, frame sources (public camera · webcam · photo), the shared specimen bar |
 | `public/js/cv/` | classical CV (pure functions, tested in Node), lenses, drawing |
 | `public/js/ml/` | TF.js loader, SSDLite detector (COCO), MobileNetV2 embedder, kNN / softmax learner |
-| `public/js/<room>/` | each room's instruments |
+| `public/js/<room>/` | each room's instruments; `drive/street.js` builds the street around the road and `drive/captcha.js` the challenge in front of it |
 | `public/models/` | weights, cached immutable for a year — a new model gets a new folder |
 | `public/CCTV photos/` | original IOC photographs (with EXIF); web copies live in `public/img/ioc/` |
 | `ops/` | launchd services and tunnel routing template |
-| `tests/` | ten `node --test` files: server, relay, CV ops, learner, sources, layer races, and the handbook's quoted numbers |
-| `scripts/` | `build-handbook.mjs` (renders `docs/*.md` to the site's `/handbook` section; `--check` fails when stale) · `slug.mjs` (shared heading slugs) · `check-site.mjs` (pages, links, reachability, imports, CSP, parity, robots/sitemap, model shards) · `check-docs.mjs` (handbook links and anchors) · `deploy-local.mjs` |
+| `tests/` | eleven `node --test` files: server, relay, CV ops, learner, sources, layer races, the street and its COCO classes, and the handbook's quoted numbers |
+| `scripts/` | `build-handbook.mjs` (renders `docs/*.md` to the site's `/handbook` section; `--check` fails when stale) · `slug.mjs` (shared heading slugs) · `check-site.mjs` (pages, links, reachability, imports, CSP, parity, robots/sitemap, model shards) · `check-docs.mjs` (handbook links and anchors) · `palette-measure.mjs` (prints the tone ladder and proves every colour pairing) · `deploy-local.mjs` |
 | `data/` | `cameras.json` — the last catalogue FloodDash handed us; gitignored, recreated on first run |
 | `docs/` | the handbook: eight chapters, system design, reference; `docs/img/` figures and diagrams |
 | `examples/` | eight runnable lessons on synthetic scenes; `build-figures.mjs` regenerates `docs/img/*.png` |
@@ -199,7 +221,7 @@ Camera owners: open an issue at [github.com/Nonarkara/vision/issues](https://git
 
 ## Credits
 
-Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex, Archivo Narrow, JetBrains Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009).
+Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex, Archivo Narrow, JetBrains Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
 
 © 2026 Dr Non Arkaraprasertkul. All rights reserved.
 

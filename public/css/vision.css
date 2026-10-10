@@ -3,22 +3,40 @@
  * Palette design core (github.com/Nonarkara/palette), applied to a classroom.
  *
  * COLOUR — Sanzo Wada, Plate 303, as converted in Palette's credited dataset
- * (digital values, not printed ink). Every colour has one job:
+ * (digital values, not printed ink). Four hues, and no fifth hue is admitted.
+ *
  *   Naples Yellow    #fbe6a0  the room: reading ground, ~62% of any view
  *   Deep Slate Olive #253122  ink, and the ground of every instrument
  *   Neutral Gray     #b6bfc1  structure: what the machine ignores or is unsure of
  *   Peach Red        #f15a30  rare signal: ONLY what the machine sees
  * Black/white instrument values are Palette's own.
- * Measured contrast: olive on Naples 11.0:1 · olive on gray 7.3:1 ·
- * black on Peach Red 5.7:1 · Peach Red on olive 4.0:1 (large marks only) ·
- * Peach Red on Naples 2.7:1 → never used for text on paper.
+ *
+ * TONE LADDER. Sanzo Wada's archive is a grid of hues crossed with tones. Each
+ * hue here also gets a `deep` and a `pale` step, built on one shared ladder —
+ * 76% hue + 24% black, and 78% hue + 22% white — so a pale Olive and a pale
+ * Naples Yellow are visibly the same move rather than two accidental colours.
+ * Tone changes emphasis; it never changes meaning.
+ *
+ * The ladder buys one real freedom. Base Peach Red on Naples is 2.7:1 and has
+ * always been banned as text on paper. signal-deep clears 13.0:1, so emphasis
+ * set in signal on the paper ground is now legal — same hue, same job, one step
+ * down. Every pairing above is measured, and the forbidden ones are proved
+ * illegible rather than assumed: `npm run palette`.
  *
  * GEOMETRY — zero radius, no shadows, no gradients, no visible borders.
  * Grouping comes from solid fields, alignment, scale and space.
  *
- * TYPE — three sizes: display, body, micro. Archivo Narrow for display Latin,
- * IBM Plex Sans / IBM Plex Sans Thai for reading, JetBrains Mono for numbers
- * and machine labels. Thai never receives Latin tracking or uppercase.
+ * TYPE — eight steps, not three. Display · title · subtitle · lede · body ·
+ * read · micro · fine, each with one job. Type feels playful because the sizes
+ * vary and the pairings are mixed, not because the sizes are arbitrary.
+ *
+ * Three families, and the combinations between them are named so the mixing
+ * stays a system: Archivo Narrow for display Latin, IBM Plex Sans / IBM Plex
+ * Sans Thai for reading, JetBrains Mono for every number, label and confidence.
+ * Thai never receives Latin tracking or uppercase.
+ *
+ * PAIRINGS — `.stem` label-over-heading, `.measure` ghost numeral, `.mix` a
+ * word stepped down to body size. All three stay inside four hues.
  *
  * MOTION — confirms a state change, ends inside 280ms, gone under
  * prefers-reduced-motion.
@@ -37,7 +55,7 @@
 
 :root {
   color-scheme: light;
-  /* Plate 303 */
+  /* Plate 303 — the four hues. Nothing outside this block may add a hue. */
   --naples: #fbe6a0;
   --olive: #253122;
   --gray: #b6bfc1;
@@ -45,6 +63,19 @@
   /* Palette instrument values */
   --black: #101010;
   --white: #f7f5ef;
+
+  /* Tone ladder — one shared move, applied to each of the four hues.
+   * deep = 76% hue + 24% black · pale = 78% hue + 22% white.
+   * Measured by scripts/palette-measure.mjs; do not hand-edit past it. */
+  --naples-deep: #3c3726;
+  --naples-pale: #fefaea;
+  --olive-deep: #090c08;
+  --olive-pale: #cfd2ce;
+  --gray-deep: #2c2e2e;
+  --gray-pale: #eff1f1;
+  --signal-deep: #3a160c;   /* 13.0:1 on Naples — the only signal allowed as text on paper */
+  --signal-pale: #fcdbd1;
+
   /* Instrument steps between black and the plate — hardware, never content. */
   --black-1: #161616;
   --black-2: #1f1f1f;
@@ -58,9 +89,15 @@
   --quiet: var(--gray);
   --quiet-text: var(--olive);
 
-  --display: clamp(2.5rem, 5.6vw + 0.5rem, 6.5rem);
-  --body: clamp(1.125rem, 0.5vw + 0.95rem, 1.375rem);
-  --micro: 0.875rem;
+  /* Type scale — eight steps, one job each. */
+  --display:  clamp(2.75rem, 6.2vw + 0.5rem, 7.5rem);
+  --title:    clamp(1.9rem, 3.2vw + 0.7rem, 3.5rem);
+  --subtitle: clamp(1.45rem, 1.7vw + 0.8rem, 2.125rem);
+  --lede:     clamp(1.25rem, 0.7vw + 1.05rem, 1.5rem);
+  --body:     clamp(1.125rem, 0.5vw + 0.95rem, 1.375rem);
+  --read:     1rem;
+  --micro:    0.875rem;
+  --fine:     0.78125rem;
 
   --sans: "IBM Plex Sans", "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
   --thai: "IBM Plex Sans Thai", "IBM Plex Sans", "Noto Sans Thai", system-ui, sans-serif;
@@ -134,12 +171,22 @@ p, li, dd, h1, h2, h3, a, figcaption { overflow-wrap: break-word; }
 
 /* ── Type roles ──────────────────────────────────────────────────────── */
 
-h1, h2, .display {
+/* h1 is the page. h2 is a section of it. They were the same size for a year,
+   which is why the pages read as one long shout. */
+h1, .display {
   font-family: var(--narrow);
   font-size: var(--display);
   font-weight: 700;
   line-height: 0.94;
   letter-spacing: -0.02em;
+  margin: 0;
+}
+h2 {
+  font-family: var(--narrow);
+  font-size: var(--title);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.015em;
   margin: 0;
 }
 h1 [lang="th"], h2 [lang="th"], .display [lang="th"],
@@ -150,22 +197,61 @@ h1[lang="th"], h2[lang="th"] {
   line-height: 1.12;
   font-size: 0.82em;
 }
-h3 { font-size: var(--body); font-weight: 600; line-height: 1.3; margin: 1.6em 0 0.5em; }
-.micro, .label {
+h3 { font-size: var(--subtitle); font-weight: 600; line-height: 1.2; margin: 1.6em 0 0.5em; letter-spacing: -0.01em; }
+h4 { font-size: var(--body); font-weight: 600; line-height: 1.3; margin: 1.4em 0 0.4em; }
+.micro, .label, .fine {
   font-family: var(--mono);
-  font-size: var(--micro);
   line-height: 1.4;
   letter-spacing: 0.04em;
 }
+.micro { font-size: var(--micro); }
+.fine { font-size: var(--fine); letter-spacing: 0.08em; }
 .label { text-transform: uppercase; }
 .label [lang="th"], .label[lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
 .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.lede { font-size: var(--body); font-weight: 600; max-width: 34ch; }
+.lede { font-size: var(--lede); font-weight: 600; max-width: 34ch; }
 .prose { max-width: 62ch; }
 .prose ul, .prose ol { padding-left: 1.2em; }
 .prose li { margin-bottom: 0.5em; }
 strong { font-weight: 600; }
 em { font-style: italic; }
+
+/* ── Pairings ────────────────────────────────────────────────────────── */
+/* Three named combinations of the three families. The mixing is the fun part;
+ * naming it is what stops the fun part from becoming noise. */
+
+/* STEM — a mono label sitting on a rule, directly over a display heading.
+   The label is machine language, the heading is human language, and the rule
+   is what keeps them on one grid. */
+.stem { display: grid; gap: 10px; align-content: start; }
+.stem .stem-label {
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: var(--mono); font-size: var(--fine); letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gray);
+}
+.stem .stem-label::after { content: ""; flex: 1 1 auto; height: 1px; background: currentColor; opacity: 0.55; }
+.stem .stem-label [lang="th"], .stem-label[lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
+
+/* MEASURE — a ghost numeral in the "structure" grey, sitting behind a heading.
+   Gray is what the machine is unsure of, so it carries the count a reader is
+   not meant to read first. Never on a dark ground, where it would vanish. */
+.measure { position: relative; isolation: isolate; }
+.measure .measure-n {
+  position: absolute; z-index: -1; top: -0.34em; left: -0.06em;
+  font-family: var(--narrow); font-weight: 700; font-size: 4.2em; line-height: 0.8;
+  color: var(--gray); opacity: 0.42; pointer-events: none; user-select: none;
+  font-variant-numeric: lining-nums;
+}
+.field-ink .measure .measure-n, .field-black .measure .measure-n,
+.field-signal .measure .measure-n { color: var(--naples); opacity: 0.16; }
+@media (max-width: 760px) { .measure .measure-n { font-size: 3em; opacity: 0.3; } }
+
+/* MIX — one word stepped down to body size and set in signal-deep, so a single
+   phrase carries two sizes and two tones inside one heading. Reserved for text
+   that is genuinely about what a machine sees, which is the only job signal has.
+   Never inside a .field-* — signal-deep is paper-ground ink. */
+.mix { color: var(--signal-deep); font-family: var(--sans); font-size: 0.42em; font-weight: 600; letter-spacing: 0; white-space: nowrap; }
+.mix [lang="th"], .mix[lang="th"] { font-family: var(--thai); }
 
 /* ── Instrument rail (header) ────────────────────────────────────────── */
 
@@ -348,8 +434,10 @@ select.field-input { cursor: pointer; }
 
 /* ── Figures, diagrams, tables ──────────────────────────────────────── */
 
+/* `--read` is the dense step: captions, tables and notices sit one notch below
+   body text rather than competing with it. */
 figure { margin: 0; }
-figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
+figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 .diagram { width: 100%; height: auto; }
 .diagram text { font-family: var(--mono); font-size: 13px; fill: currentColor; }
 .diagram .thai { font-family: var(--thai); }
@@ -376,7 +464,7 @@ figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
 .flow-fig { margin: 0; }
 .pipe-figure { padding: 0 var(--gutter) clamp(32px, 4vw, 56px); }
 
-.table { width: 100%; border-collapse: collapse; font-size: var(--micro); }
+.table { width: 100%; border-collapse: collapse; font-size: var(--read); }
 .table th, .table td { text-align: left; padding: 10px 12px; vertical-align: top; }
 .table th { font-family: var(--mono); font-weight: 600; background: var(--field); color: var(--field-text); }
 .table tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--gray) 35%, transparent); }
@@ -391,7 +479,7 @@ figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
 @media (max-width: 700px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* Notices */
-.note { padding: 16px 20px; background: var(--quiet); color: var(--quiet-text); font-size: var(--micro); max-width: 70ch; }
+.note { padding: 16px 20px; background: var(--quiet); color: var(--quiet-text); font-size: var(--read); max-width: 70ch; }
 .note strong { font-weight: 600; }
 .warn-line { font-family: var(--mono); font-size: var(--micro); }
 
@@ -422,12 +510,17 @@ figcaption { font-size: var(--micro); padding-top: 12px; max-width: 70ch; }
 .foot a { color: var(--white); }
 .foot nav { display: flex; flex-direction: column; gap: 4px; }
 .foot nav a { min-height: 32px; display: flex; align-items: center; }
-.chord { display: flex; height: 16px; width: 100%; max-width: 360px; margin-bottom: 12px; }
-.chord i { display: block; height: 100%; }
-.chord i:nth-child(1) { flex: 61.8; background: var(--naples); }
-.chord i:nth-child(2) { flex: 22; background: var(--olive); outline: 1px solid var(--black-3); outline-offset: -1px; }
-.chord i:nth-child(3) { flex: 12; background: var(--gray); }
-.chord i:nth-child(4) { flex: 4.2; background: var(--signal); }
+/* The footer shows the whole system: four hues, each on its three-step tone
+   ladder. The swatches are the argument — every colour on this site is one of
+   these twelve, or an instrument black/white. */
+.chord { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; width: 100%; max-width: 420px; margin-bottom: 10px; }
+.chord-row { display: flex; gap: 2px; }
+.chord i { display: block; height: 22px; flex: 1 1 0; }
+.c-naples-d { background: var(--naples-deep); } .c-naples { background: var(--naples); } .c-naples-p { background: var(--naples-pale); }
+.c-olive-d { background: var(--olive-deep); } .c-olive { background: var(--olive); } .c-olive-p { background: var(--olive-pale); }
+.c-gray-d { background: var(--gray-deep); } .c-gray { background: var(--gray); } .c-gray-p { background: var(--gray-pale); }
+.c-signal-d { background: var(--signal-deep); } .c-signal { background: var(--signal); } .c-signal-p { background: var(--signal-pale); }
+.chord-note { color: var(--gray); margin: 0 0 16px; max-width: 42ch; }
 @media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
 
 /* Toast: the only element permitted a shadow — transient feedback. */

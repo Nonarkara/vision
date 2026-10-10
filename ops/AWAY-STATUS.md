@@ -191,3 +191,49 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Home: promise ii said "does not recognise faces" beside the new face room; reworded to "never who" and explains the face room finds eye/head direction, not identity.
 - Gesture (user's one-finger request, browser-only): new default set One finger / Palm / Nothing; palm saves the camera picture (download), Nothing is a resting pose that does nothing; room waits for "Use my camera" instead of loading a road camera; "Why a Nothing group?" tip; limits list says Settings/whole-screen need a local program. The OS helper stays parked pending the user.
 - Cache safety: all ?v= stamps 1.10.0 → 1.10.1, and store.js / classes-ui.js / actions.js now stamped at every import site (checked: no module imported under two URLs, which would split the class store).
+
+## 2026-10-09 11:32 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.10.2, uptime 4,507 seconds. App PID 56049 and tunnel PID 13443 running with KeepAlive. Runtime startup at 03:17:29 UTC matches the other agent's committed release 45d6641 (vehicle sizing, bounded relay queue and deployment rollback); local package also 1.10.2. Preserve that release.
+- Catalogue 3,427 cameras, loaded/upstream 04:27:34 UTC, about five minutes old. Last seven refreshes succeeded; no newer application warning since 2026-10-08 20:06 UTC. Relay idle, no resting hosts, memory 22–24 MB.
+- Tunnel edge retries recovered: connection 0 registered at 04:27:54 UTC; connections 1/2/3 registered at 04:31:08 UTC. Public health succeeds; no sustained fault requiring recovery.
+- Working tree clean before this entry. No repair, restart, deployment, camera probes or machine-wide jobs performed. Scoped heartbeat continues within the away window.
+
+## 2026-10-09 17:33 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.10.2, uptime approximately 26,167 seconds. App PID 56049 and tunnel PID 13443 running with KeepAlive; no new application restart.
+- Catalogue 3,426 cameras; loaded/upstream 10:27:32 UTC, about six minutes old. Last seven ten-minute refreshes succeeded. No newer app warning since 2026-10-08 20:06 UTC. Relay idle, no resting hosts; memory 18–20 MB.
+- Tunnel connections 0/2/3 retried around 10:23 UTC and registered again by 10:24:04 UTC. Public health succeeds; recovered edge errors do not justify a restart or transport change.
+- Only the existing operations note was uncommitted before this entry. No concrete frontend fault, repair, deployment, camera probes or machine-wide work needed. Preserve other agents' release and continue scoped monitoring within the away window.
+
+## 2026-10-09 23:34 Asia/Bangkok
+
+- Local/public health `ok: true`, version 1.10.2, uptime approximately 47,800 seconds. App PID 56049 and tunnel PID 13443 running with KeepAlive; no app restart.
+- Catalogue 3,429 cameras; loaded/upstream 16:27:33 UTC, about seven minutes old. Last seven refreshes succeeded; no newer app warning since 2026-10-08 20:06 UTC. Relay idle without resting hosts, memory 19–22 MB.
+- Several tunnel connections timed out during this check at 16:34:01 UTC. Connection 0 registered at 16:34:02 and connections 1/2/3 at 16:34:14. One bounded follow-up confirmed public health still succeeds. No sustained outage or recovery action justified.
+- Only existing operations notes were modified before this entry. No repair, deployment, camera probes or machine-wide checks performed; other agents' release preserved. Scoped monitoring continues within the away window.
+
+## 2026-10-10 05:35 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.10.2, uptime 69,466 seconds. App PID 56049 and tunnel PID 13443 remain running; no new application restart.
+- Catalogue 3,427 cameras; loaded/upstream 22:27:33 UTC, about eight minutes old. One upstream fetch failure at 20:47 UTC recovered at 20:57; subsequent ten-minute refreshes succeeded. Relay idle, no resting hosts; memory 17–20 MB.
+- Tunnel connections 1/2/3 registered at 22:22:32 UTC; connection 0 timed out at 22:32:47 and registered again at 22:32:49. Public health succeeds; no sustained failure requiring intervention.
+- Only existing operations notes were modified. No repair, deployment, camera probes or machine-wide checks justified. Other agents' release preserved; scoped monitoring continues within the away window.
+
+## 2026-10-10 · Street, tone ladder and the CAPTCHA, release 1.11.0 (Asia/Bangkok)
+
+- User returned and asked for two things: a more playful type system across the whole site that still obeys the Sanzo Wada (MoMA) rules, and a real-world street in room 05 instead of a bare test track, with a CAPTCHA in front of it that teaches where the training data came from. Both taken to completion.
+
+- **Colour.** Four Plate 303 hues remain and no fifth is admitted. Each hue now also carries `deep` and `pale` steps built on one shared ladder (76% hue + 24% black, 78% hue + 22% white), so a pale Olive and a pale Naples Yellow are the same move rather than two accidents. `scripts/palette-measure.mjs` prints the ladder and measures 21 pairings; 16 required pairings must clear their floor and 5 forbidden ones must stay illegible, so a ban is proved rather than asserted. The ladder unlocked one real freedom: base Peach Red on Naples is 2.7:1 and was always banned as text on paper, while `signal-deep` clears 13.0:1. Wired into `npm run check`.
+
+- **Type.** Three sizes became eight (display · title · subtitle · lede · body · read · micro · fine), h1 and h2 separated so a page stops reading as one long shout, and three named pairings added (`.stem`, `.measure`, `.mix`). Whole-site adoption happened through shared component classes in vision.css rather than per-page edits, so all 25 pages moved together. Verified in both languages; Thai keeps Plex Thai with no Latin tracking.
+
+- **Street.** New `public/js/drive/street.js` builds kerbs, footways with a 15 cm upstand, shophouse terraces, street lamps every 30 m at 8.5 m, utility poles every 45 m at 9 m, parked bicycles and motorbikes, hydrants, benches, planters, people and dogs — all measured off the track's own centreline in real metres, drawn in both the top view and the driver's view. The load-bearing rule: the simulated camera may only name things the real detector can name. Every detectable item carries a real COCO id and the Thai name from `ml/labels.js`, checked against that table in the tests. Lamps, poles and buildings have no COCO class, so they are drawn and never boxed — that gap is the lesson.
+
+- **Three bugs worth naming.** (1) Every street object was built without an id, so all 195 collided on one `undefined` key in the tracker's Map and the camera could believe in exactly one piece of street at a time. (2) With ids fixed, footway dogs started triggering the "stray dog by the road" rule for every cautious car, and parked bikes sat *inside* the running lane — both fixed at the source: pets are marked as pets, bikes moved to the kerb edge at LANE + 0.45, and nothing is placed within 9 m of another route's centreline so a junction stays clear. (3) The cross-check against `ml/labels.js` found the room calling a bus "รถโดยสาร" while the model prints "รถบัส"; both names now match the model's.
+
+- **CAPTCHA.** `public/js/drive/captcha.js` + `pages/captcha.js`: a nine-square street challenge in front of the room, drawn from the same simulator. It is explicitly a teaching device, not a security control — the skip button is always there, there is no timer, every square is keyboard-reachable, and the panel states two limits plainly: those labels trained Google's models, not this site's (which are COCO and ImageNet, human-labelled but paid and slow), and the machine-passing-the-test moment is on the record at 99.8% versus humans at 33% (Goodfellow et al., 2014).
+
+- **Gates.** 120 tests pass (14 new in `tests/street.test.js` covering COCO class truth, unique ids, junctions kept clear, kerbs at 3.2 m, parked bikes outside the lane, challenge fairness and determinism, and exact-match scoring). 25 pages, 87 references, all JS parses, documentation checks green. Cache stamps 1.10.2 → 1.11.0 across 65 sites, with the new modules stamped at every import site so no module is ever loaded under two URLs.
+
+- Not deployed: the user asked for the work, not a release. Version is 1.11.0 in the workspace and ready for `npm run deploy` on request. No private camera opened; no live traffic generated beyond the ordinary catalogue refresh.

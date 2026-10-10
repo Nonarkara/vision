@@ -21,7 +21,43 @@
     </div>
   </section>
 
-  <section class="drive" data-drive aria-labelledby="track-title">
+  <section class="gate" data-gate aria-labelledby="gate-h">
+    <div class="gate-head">
+      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span></span>
+      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span></h2>
+      <p class="lede"><span class="th" lang="th">ก่อนเข้าห้องขับรถ ลองทำสิ่งที่คุณทำมาทั้งชีวิตโดยไม่รู้ตัว — เลือกช่องภาพที่มีสิ่งที่ถามหา</span><span class="en" lang="en">Before you drive, do the thing you have been doing all along without knowing — pick the squares that contain what we ask for.</span></p>
+    </div>
+    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares">
+      <p class="captcha-ask" data-captcha-target></p>
+      <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for."></canvas>
+      <div class="captcha-tiles">
+        <button class="btn tile-pick" data-tile="0" aria-pressed="false">1</button>
+        <button class="btn tile-pick" data-tile="1" aria-pressed="false">2</button>
+        <button class="btn tile-pick" data-tile="2" aria-pressed="false">3</button>
+        <button class="btn tile-pick" data-tile="3" aria-pressed="false">4</button>
+        <button class="btn tile-pick" data-tile="4" aria-pressed="false">5</button>
+        <button class="btn tile-pick" data-tile="5" aria-pressed="false">6</button>
+        <button class="btn tile-pick" data-tile="6" aria-pressed="false">7</button>
+        <button class="btn tile-pick" data-tile="7" aria-pressed="false">8</button>
+        <button class="btn tile-pick" data-tile="8" aria-pressed="false">9</button>
+      </div>
+      <div class="controls pad">
+        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span></button>
+        <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
+        <button class="btn" data-gate-skip><span class="th" lang="th">ข้ามไปก่อน — อยากเข้าห้องเลย</span><span class="en" lang="en">Skip — take me straight in</span></button>
+      </div>
+      <p class="micro warn-line" data-captcha-state role="status" aria-live="polite"></p>
+    </div>
+    <div class="prose gate-note">
+      <h3><span class="th" lang="th">สิ่งที่เพิ่งเกิดขึ้น</span><span class="en" lang="en">What just happened</span></h3>
+      <p><span class="th" lang="th">เมื่อปี 2007 หลุยส์ ฟอน อาน์ (Luis von Ahn) ที่มหาวิทยาลัยคาร์เนกีเมลลอนทำ reCAPTCHA เขาคิดว่า ๆ ถ้าคนต้องพิสูจน์ว่าตัวเองเป็นมนุษย์อยู่แล้ว ก็ให้เขาช่วยอ่านหนังสือที่คอมพิวเตอร์อ่านไม่ออกไปด้วย ต่อมาในปี 2012 เขาสลับมาใช้ภาพถนนจาก Street View แทน คนที่กด “ฉันไม่ใช่โรงหุ่นยนต์” จึงได้กลายเป็นผู้ติดป้ายภาพถนนให้กูเกิลโดยไม่รู้ตัว Google เขียนไว้เองว่าทุกครั้งที่แก้ CAPTCHAs “ช่วยทำดิจิทัลไซซ์ตัวอักษร ทำภาพและสร้างชุดข้อมูลสำหรับการเรียนรู้ของเครื่อง”</span><span class="en" lang="en">In 2007, Luis von Ahn at Carnegie Mellon had an idea for reCAPTCHA: if you are going to make someone prove they are human, make them read a word the computer cannot, while they are at it. By 2012 it had switched to Street View photographs, so that clicking “I'm not a robot” also produced human-labelled images of streets. Google puts it plainly: every solved CAPTCHA “helps digitize text, annotate images, and build machine learning datasets”.</span></p>
+      <p><span class="th" lang="th">สองข้อที่เราไม่อยากพูดเกินจริง: ป้ายที่ได้จากการท้าทายเหล่านั้นฝึกโมเดลของกูเกิล ไม่ใช่ของเว็บนี้ ตัวที่รันในเบราว์เซอร์ของคุณคือ SSDLite บน MobileNetV2 ที่ฝึกด้วย COCO และ ImageNet ซึ่งก็มาจากคนเช่นกัน แต่คนที่ทำงานนั้นได้ค่าจ้างและใช้เวลาเป็นปี ๆ และวันที่เครื่องผ่านการท้าทายนั้นได้จริงก็มีบันทึกไว้: Goodfellow และคณะ (2014) อ่าน CAPTCHAs แบบบิดเบือนที่ยากที่สุดได้ 99.8% ขณะที่คนทำได้ 33%</span><span class="en" lang="en">Two limits we will not paper over. First: those challenge labels trained Google's models, not this site's. The detector running in your browser is SSDLite on MobileNetV2, trained on COCO and ImageNet — also human-labelled, but by people who were paid, over years. And the moment the machine passed the test is on the record: Goodfellow and colleagues (2014) read the hardest distorted-text CAPTCHAs at 99.8%, while people managed 33%. That is why the challenges had to change shape each time.</span></p>
+      <p class="micro"><span class="th" lang="th">แหล่งอ้างอิง: <a href="https://www.google.com/recaptcha/intro/">Google reCAPTCHA — คำอธิบายของกูเกิลเอง</a> · von Ahn และคณะ (2008) <i>reCAPTCHA: Human-assisted OCR</i> · Goodfellow และคณะ (2014) <i>Multi-digit Number Recognition from Street View Imagery</i> · Lin และคณะ (2014) <i>Microsoft COCO</i></span><span class="en" lang="en">Sources: <a href="https://www.google.com/recaptcha/intro/">Google's own description of reCAPTCHA</a> · von Ahn et al. (2008), reCAPTCHA: Human-assisted character recognition · Goodfellow et al. (2014), Multi-digit Number Recognition from Street View Imagery · Lin et al. (2014), Microsoft COCO.</span></p>
+      <p class="micro"><span class="th" lang="th">ข้อสำคัญด้านการเข้าถึง: ปุ่ม “ข้าม” ใช้ได้เสมอ ไม่มีตัวจับเวลา และทุกช่องเลือกได้ด้วยแป้นพิมพ์ ถ้าคุณใช้โปรแกรมอ่านหน้าจอหรือไม่สะดวกกับภาพ ให้ข้ามไปได้เลย — เรื่องในห้องนี้ไม่ได้มีแต่กุญแจที่คุณต้องผ่าน</span><span class="en" lang="en">On access: the Skip button is always there, there is no timer, and every square is reachable by keyboard. If you use a screen reader, or pictures are not how you take this in, skip it — what this room has to say does not come with a key.</span></p>
+    </div>
+  </section>
+
+  <section class="drive" data-drive aria-labelledby="track-title" hidden>
     <h2 id="track-title" class="visually-hidden"><span class="th" lang="th">สนามทดสอบ</span><span class="en" lang="en">The test track</span></h2>
     <div class="scenario-picks" role="group" data-aria-th="เลือกถนน" data-aria-en="Choose a road">
       <button class="btn" data-set="layout" data-value="two" aria-pressed="true"><span class="th" lang="th">1 · สองช่องทาง</span><span class="en" lang="en">1 · Two lanes</span></button>
@@ -29,7 +65,7 @@
       <button class="btn" data-set="layout" data-value="practice" aria-pressed="false"><span class="th" lang="th">3 · วงเวียนและแยก</span><span class="en" lang="en">3 · Roundabout &amp; junction</span></button>
       <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
     </div>
-    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถจักรยานยนต์ หรือแผนที่กรุงเทพฯ จริง ทุกคันวาดตามขนาดจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorcycles and no real Bangkok map. Every vehicle is drawn at its real Thai size: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses — on lanes 3.2 m wide.</span></p>
+    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถยนต์ไม่ขับ และไม่มีแผนที่กรุงเทพฯ จริง รอบรถนี้มีถนน ไม้เท้า เสาไฟ ทางเท้า อาคารติดถนน รถจักรยานยนต์และจักรยานจอดข้างทาง หัวดับเพลิง ม้านั่ง และต้นไม้ในกระถาง ทุกชิ้นวางที่ตำแหน่งจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorbikes driving and no real Bangkok map. The road now has kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, fire hydrants, benches and planters — every one placed at its real size on a Thai road: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses, on lanes 3.2 m wide.</span></p>
     <p class="micro"><span class="th" lang="th">แตะรถบนแผนที่ หรือเลือกปุ่มรถ เพื่อเปิดจอคนขับที่เคลื่อนไหว กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">Tap a car on the map or choose its numbered button to open its moving windshield view. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
     <div class="drive-grid">
       <div class="bench">
@@ -79,12 +115,13 @@
           <span class="label"><span class="th" lang="th">มองผ่านตารถคันนี้</span><span class="en" lang="en">Looking through this car’s eyes</span></span>
           <p class="focus-name" data-focus-name></p>
           <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span></span><span class="num" data-focus-sees></span></p>
+          <p class="focus-row unnamed"><span class="label"><span class="th" lang="th">เรียกไม่ถูก</span><span class="en" lang="en">Cannot name</span></span><span class="unnamed" data-focus-unnamed hidden></span></p>
           <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span></span><span data-focus-does></span></p>
           <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดมุมมองคนขับ ↗</span><span class="en" lang="en">Open driver’s view ↗</span></button>
           <button class="btn" type="button" data-blind aria-pressed="false"></button>
         </div>
         <div class="cards" data-cards></div>
-        <p class="micro legend"><span class="th" lang="th">สีขาว = ระวัง · สีเทา = ปกติ · สีเหลือง = ใจร้อน · กรอบและพัดสีส้ม = สิ่งที่กล้องของรถเห็น · จุดขาว = คน · ตัวเหลืองเล็ก = สุนัข</span><span class="en" lang="en">White = careful · grey = normal · yellow = hasty · orange boxes and fan = what a car’s camera sees · white dots = people · small yellow shapes = dogs</span></p>
+        <p class="micro legend"><span class="th" lang="th">สีขาว = ระวัง · สีเทา = ปกติ · สีเหลือง = ใจร้อน · กรอบและพัดสีส้ม = สิ่งที่กล้องของรถเห็น · จุดขาว = คน · ตัวเหลืองเล็ก = สุนัข · แถบเทาคือทางเท้า แถบเขียวคืออาคาร · เสาไฟและเสาไฟฟ้าไม่มีกรอบ เพราะ COCO ไม่มีชื่อสิ่งเหล่านั้น</span><span class="en" lang="en">White = careful · grey = normal · yellow = hasty · orange boxes and fan = what a car’s camera sees · white dots = people · small yellow shapes = dogs · grey strip = footway · olive blocks = buildings · lamp posts and utility poles have no box, because COCO has no name for them</span></p>
       </div>
     </div>
   </section>

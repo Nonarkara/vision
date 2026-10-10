@@ -1,7 +1,9 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange } from './perceive.js?v=1.10.2'
+import { sightRange, FOV } from './perceive.js?v=1.11.0'
+import { ITEMS } from './street.js?v=1.11.0'
+import { wrap } from './track.js'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful'],
@@ -46,9 +48,11 @@ const REASON = {
   hit_dog: ['ชนสุนัข! มันไม่ทันเห็นหรือไม่ทันหยุด', 'it hit a dog — it saw it too late, or could not stop in time'],
 }
 
-const LABEL = { car: ['รถ', 'car'], person: ['คน', 'person'], dog: ['สุนัข', 'dog'], cat: ['แมว?', 'cat?'], truck: ['รถบรรทุก', 'truck'], bus: ['รถโดยสาร', 'bus'] }
-
+// Detection labels name themselves from ITEMS in street.js, so a class is
+// defined in exactly one place: the COCO id and both languages together.
 const pick = (pair, lang) => pair[lang === 'en' ? 1 : 0]
+
+export const labelFor = (label, lang) => pick(ITEMS[label]?.label ?? [label, label], lang)
 
 /** "Braking hard — a person is in its lane · 12 m" */
 export function sayDecision(car, world, lang) {
@@ -71,7 +75,37 @@ export function saySeen(car, lang) {
     .slice(0, 3)
   if (car.blind) return lang === 'en' ? 'nothing — its camera is covered' : 'ไม่เห็นอะไรเลย — กล้องถูกปิดอยู่'
   if (!seen.length) return lang === 'en' ? 'nothing in view' : 'ไม่มีอะไรในสายตา'
-  return seen.map(({ tr, d }) => `${pick(LABEL[tr.label], lang)} ${Math.round(tr.conf * 100)}% ${Math.round(d)} ${lang === 'en' ? 'm' : 'ม.'}`).join(' · ')
+  return seen.map(({ tr, d }) => `${labelFor(tr.label, lang)} ${Math.round(tr.conf * 100)}% ${Math.round(d)} ${lang === 'en' ? 'm' : 'ม.'}`).join(' · ')
 }
 
 export const speedKmh = (car) => Math.round(car.v * 3.6)
+
+/**
+ * What is in view that the camera has no name for.
+ *
+ * This is the point of the whole room. A detector is a closed list: COCO's
+ * eighty categories and no others. Everything else on a street is simply not
+ * reportable — not "missed", not "below threshold", *unnamed*. A lamp post at
+ * 6 m is described perfectly well by the geometry and still gets no box,
+ * because no category exists for it.
+ */
+export function sayUnnamed(car, world, lang) {
+  const R = sightRange(car, world.weather)
+  if (car.blind) return ''
+  const kinds = new Map()
+  for (const it of world.street.items) {
+    if (it.kind === 'building' || ITEMS[it.kind]?.detectable) continue
+    const dx = it.x - car.x, dy = it.y - car.y
+    const d = Math.hypot(dx, dy)
+    if (d > R || Math.abs(wrap(Math.atan2(dy, dx) - car.h)) > FOV / 2) continue
+    kinds.set(it.kind, (kinds.get(it.kind) ?? 0) + 1)
+  }
+  const total = [...kinds.values()].reduce((n, v) => n + v, 0)
+  if (!total) return ''
+  const list = [...kinds.entries()].sort((a, b) => b[1] - a[1]).slice(0, 2)
+    .map(([kind, n]) => (n > 1 ? `${n}× ${labelFor(kind, lang)}` : labelFor(kind, lang)))
+    .join(lang === 'en' ? ', ' : ' · ')
+  return lang === 'en'
+    ? `${total} in view with no name for them — ${list}`
+    : `มองเห็น ${total} อย่างที่เรียกไม่ถูก — ${list}`
+}

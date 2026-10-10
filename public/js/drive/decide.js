@@ -11,7 +11,7 @@
 // predict-then-check idea behind sampling planners such as TUM's Frenetix.
 
 import { at, alongMyLane, LANE } from './track.js'
-import { sightRange } from './perceive.js?v=1.10.2'
+import { sightRange } from './perceive.js?v=1.11.0'
 
 export const CAR_LEN = 4.6
 export const MAX_BRAKE = 9            // m/s², an emergency stop on dry tarmac
@@ -52,6 +52,9 @@ function future(obj, t) {
     const p = at(obj.route, obj.s + obj.v * t)
     return { x: p.x, y: p.y }
   }
+  // Street furniture is nailed to the pavement: it has no velocity, and treating
+  // that as zero rather than as NaN is what keeps it out of the lane test.
+  if (obj.vx == null) return { x: obj.x, y: obj.y }
   return { x: obj.x + obj.vx * t, y: obj.y + obj.vy * t }
 }
 
@@ -95,8 +98,9 @@ function constraints(car, world) {
       }
     }
 
-    // A dog at the roadside may run; the wary slow down before it does.
-    if (o.kind === 'dog' && car.style.wary && o.state !== 'run') {
+    // A stray at the roadside may run; the wary slow down before it does.
+    // A dog on the footway is not a stray — it is somebody walking past.
+    if (o.kind === 'dog' && !o.pet && car.style.wary && o.state !== 'run') {
       const near = alongMyLane(route, car.s, R, o.x, o.y, 3.5)
       if (near && near.lateral > LANE * 0.62) out.push({ gap: Infinity, dv: 0, reason: 'dog_roadside', track: tr, v0: 7 })
     }

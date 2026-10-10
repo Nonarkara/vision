@@ -11,8 +11,8 @@ import { cocoName } from '../ml/labels.js'
 import { detect } from '../ml/detector.js'
 import { pixelate } from '../cv/ops.js'
 import { drawDetections } from '../cv/draw.js'
-import { startSpecimen } from '../core/specimen.js?v=1.10.2'
-import { sleep } from '../core/site.js?v=1.10.2'
+import { startSpecimen } from '../core/specimen.js?v=1.11.0'
+import { sleep } from '../core/site.js?v=1.11.0'
 import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, biClass, shuffle, FLOOR_SCORE } from './common.js'
 
 const ROUNDS = 5
