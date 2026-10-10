@@ -1,11 +1,13 @@
-import '../core/site.js?v=1.15.0'
+import '../core/site.js?v=1.16.0'
 import { t, bi, onLang } from '../core/i18n.js'
-import { openWebcam } from '../core/source.js?v=1.15.0'
+import { openWebcam } from '../core/source.js?v=1.16.0'
 import { faceSignals, createSession } from '../focus/session.js'
+import { drawFaceOval, outlineEdges, faceBox, mountSaw } from '../cv/feedback.js?v=1.16.0'
 
 const root = document.querySelector('[data-focus-room]')
 const el = (name) => root.querySelector(`[data-${name}]`)
 const canvas = el('face-view'), ctx = canvas.getContext('2d')
+const saw = mountSaw(canvas.parentElement)
 let phase = 'idle', reason = '', source = null, worker = null, timer = null, watchdog = null, wake = null
 let cancelLoading = null
 let ticket = 0, session = createSession(), baseline = null, calibration = [], calibrated = 0
@@ -55,6 +57,7 @@ function release() {
   worker?.terminate(); worker = null
   wake?.release().catch(() => {}); wake = null
   busy = false; session.gap(); lastVideo = -1
+  saw.clear()
   ctx.fillStyle = '#171917'; ctx.fillRect(0,0,canvas.width,canvas.height)
 }
 function halt(next, message = '') { release(); phase = next; reason = message; paint() }
@@ -98,8 +101,18 @@ async function start() {
         if (calibrated >= 10) { baseline = Object.fromEntries(['yaw','pitch','gaze'].map((k) => [k, calibration.reduce((s,x) => s+x[k],0)/10])); calibration = []; phase = 'running'; session.gap() }
       } else current = session.observe(signal, baseline, data.time)
       const rect = source.drawTo(ctx, canvas.width, canvas.height)
-      ctx.fillStyle = '#f15a30'
-      for (const face of data.result.faceLandmarks ?? []) for (let i=0; i<face.length; i+=4) { const p=face[i]; ctx.fillRect(rect.x+p.x*rect.w-1,rect.y+p.y*rect.h-1,2,2) }
+      const faces = data.result.faceLandmarks ?? []
+      const face = faces.length === 1 ? faces[0] : null
+      if (face && rect) {
+        const box = faceBox(face)
+        const img = source.grab(96)
+        const sharp = img && box ? outlineEdges(ctx, img, box, rect) : 0
+        drawFaceOval(ctx, face, rect)
+        saw.update(Math.min(0.98, 0.6 + 0.38 * sharp), 'MediaPipe')
+      } else {
+        saw.clear()
+        for (const marks of faces) if (rect) drawFaceOval(ctx, marks, rect)
+      }
       paint()
       // Keep live movement separate from the time summary.
       if (signal && baseline) el('signals').textContent += t(` · มุมปากยก ${Math.round(signal.smile*100)}% · อ้าปาก ${Math.round(signal.jaw*100)}% · คิ้วยก ${Math.round(signal.brow*100)}% (ไม่ใช่อารมณ์)`, ` · Mouth corners raised ${Math.round(signal.smile*100)}% · Jaw open ${Math.round(signal.jaw*100)}% · Brow raised ${Math.round(signal.brow*100)}% (not mood)`)

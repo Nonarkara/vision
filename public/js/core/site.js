@@ -1,7 +1,8 @@
 // Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
 
-import { lang, setLang, onLang } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.15.0'
+import { lang, setLang, onLang, t } from './i18n.js'
+import { initFullscreen } from './fullscreen.js?v=1.16.0'
+import { konamiStep } from './konami.js?v=1.16.0'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))
@@ -100,6 +101,34 @@ export function confirmBox(message, { ok = 'OK', cancel = 'Cancel' } = {}) {
 }
 
 initFullscreen()
+
+// Konami code: ↑ ↑ ↓ ↓ ← → ← → B A. Machine vision is a view, not an account.
+function setMachine(on, announce) {
+  document.documentElement.dataset.machine = on ? '1' : '0'
+  try { sessionStorage.setItem('vision_machine_v1', on ? '1' : '0') } catch { /* this tab only */ }
+  document.querySelector('.machine-scan')?.remove()
+  if (on) {
+    const bar = document.createElement('div')
+    bar.className = 'machine-scan'
+    bar.setAttribute('aria-hidden', 'true')
+    document.body.append(bar)
+  }
+  document.dispatchEvent(new CustomEvent('machinevision', { detail: { on } }))
+  if (announce) toast(on
+    ? t('โหมดสายตาเครื่องเปิด — ขอบ การเคลื่อนไหว สิ่งของ', 'Machine vision on — edges, motion, objects')
+    : t('โหมดสายตาเครื่องปิด', 'Machine vision off'))
+}
+try { if (sessionStorage.getItem('vision_machine_v1') === '1') setMachine(true, false) } catch { /* leave it off */ }
+let konamiBuf = []
+document.addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return
+  if (/input|textarea|select/i.test(e.target?.tagName || '')) return
+  const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
+  const step = konamiStep(konamiBuf, key)
+  konamiBuf = step.buf
+  if (!step.fire) return
+  setMachine(document.documentElement.dataset.machine !== '1', true)
+})
 
 // Match anchor offsets to the rail after wrapping, zooming or switching language.
 const rail = document.querySelector('.rail')

@@ -6,19 +6,20 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.15.0'
+import '../core/site.js?v=1.16.0'
 import { t, n, pct, lang, onLang, esc } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js?v=1.15.0'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.15.0'
-import { canUseWebcam } from '../core/source.js?v=1.15.0'
+import { toast, confirmBox } from '../core/site.js?v=1.16.0'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.16.0'
+import { canUseWebcam } from '../core/source.js?v=1.16.0'
 import { runLens, createLensState } from '../cv/lenses.js'
+import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.16.0'
 import { knnPredict } from '../ml/learner.js'
-import * as store from '../train/store.js?v=1.15.0'
+import * as store from '../train/store.js?v=1.16.0'
 import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js'
-import { createClassList } from '../train/classes-ui.js?v=1.15.0'
+import { createClassList } from '../train/classes-ui.js?v=1.16.0'
 import { createBars } from '../train/bars.js'
 import { createTrigger } from '../gesture/fire.js'
-import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.15.0'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.16.0'
 
 const K = 5
 const LIVE_MS = 250
@@ -37,7 +38,23 @@ const specimen = createSpecimen({ bar: $('[data-specimen]'), prefer: 'video' })
 const viewState = $('[data-view-state]')
 const statusEl = $('[data-status]')
 
-runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), { fps: 15, state: createLensState(), onFrame: () => { viewState.hidden = true } })
+const handSaw = mountSaw(document.querySelector('[data-view]')?.parentElement)
+let handGray = null
+runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), {
+  fps: 15,
+  state: createLensState(),
+  onFrame: (rect, _state, src) => {
+    viewState.hidden = true
+    if (src?.kind !== 'webcam' || !rect) { handGray = null; handSaw.clear(); return }
+    const img = src.grab(80)
+    if (!img) return
+    const found = handRegion(img, handGray)
+    handGray = found.gray
+    if (!found.region) { handSaw.clear(); return }
+    outlineEdges($('[data-view]').getContext('2d'), img, found.region, rect)
+    handSaw.update(found.score, 'edges')
+  },
+})
 specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = '' })
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
 // Gestures are made by you, so your camera comes first. A road camera loads

@@ -6,6 +6,7 @@
 import * as ops from './ops.js'
 import { paintImageData, drawDetections, drawBlobs, drawMask, clear, NAPLES } from './draw.js'
 import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
+import { noteVehicles } from './spotted.js'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
@@ -151,6 +152,7 @@ export function objects(ctx, src, state, { every = 700, onResult = null } = {}) 
         state.detectedAt = performance.now()
         state.detectedFrame = frameAt
         state.error = null
+        noteVehicles(detections)
         onResult?.(detections, ms)
       })
       .catch((err) => { if (!src.closed && state.source === src) { state.error = err; state.detectedAt = performance.now() + 5000; state.detectedFrame = frameAt } })
