@@ -23,8 +23,14 @@
  * down. Every pairing above is measured, and the forbidden ones are proved
  * illegible rather than assumed: `npm run palette`.
  *
- * GEOMETRY — zero radius, no shadows, no gradients, no visible borders.
- * Grouping comes from solid fields, alignment, scale and space.
+ * GEOMETRY — zero radius, no gradients, no visible borders. Grouping comes
+ * from solid fields, alignment, scale and space.
+ *
+ * MACHINE LIGHT. A shadow is allowed in one place: Peach Red, and only on
+ * what the machine sees. The glow is that same hue drawn soft — never a
+ * fifth colour, never a gradient fill. A trail fades by opacity. Reduced
+ * motion keeps the mark and drops the pulse. `npm run palette` still
+ * measures the four hues; the glow does not add a pairing.
  *
  * TYPE — eight steps, not three. Display · title · subtitle · lede · body ·
  * read · micro · fine, each with one job. Type feels playful because the sizes
@@ -271,9 +277,7 @@ em { font-style: italic; }
 .mark svg { width: 28px; height: 28px; flex: none; }
 .rooms {
   display: flex; align-items: stretch; flex: 1 1 auto; min-width: 0;
-  overflow-x: auto; scrollbar-width: none;
 }
-.rooms::-webkit-scrollbar { display: none; }
 .rooms a {
   display: flex; align-items: center; gap: 8px;
   padding: 0 12px; min-height: 56px; white-space: nowrap;
@@ -284,6 +288,37 @@ em { font-style: italic; }
 .rooms a:hover { color: var(--white); }
 .rooms a[aria-current="page"] { background: var(--signal); color: var(--black); }
 .rooms a[aria-current="page"] .num { color: var(--black); opacity: 1; }
+.more-room { position: relative; display: flex; align-items: stretch; }
+.more-room > summary {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 12px; min-height: 56px; cursor: pointer; list-style: none;
+  font-size: var(--micro); color: var(--gray); white-space: nowrap;
+}
+.more-room > summary::-webkit-details-marker { display: none; }
+.more-room > summary::after { content: "+"; font-family: var(--mono); }
+.more-room[open] > summary::after { content: "–"; }
+.more-room:has(a[aria-current="page"]) > summary { background: var(--signal); color: var(--black); }
+.more-list {
+  position: absolute; z-index: 30; top: 100%; right: 0;
+  display: grid; min-width: min(280px, 100vw);
+  background: var(--black); color: var(--white);
+}
+.more-list a { min-height: var(--target); }
+
+/* Peach Red, soft, only on a lens that reports what the machine sees.
+   The previous one keeps a fading trail. Picture and numbers stay quiet. */
+@keyframes machine-fade { from { opacity: 1; } to { opacity: 0.4; } }
+@keyframes machine-trail { from { opacity: 0.7; } to { opacity: 0; } }
+.lens-steps .btn[data-lens="edges"][aria-pressed="true"],
+.lens-steps .btn[data-lens="motion"][aria-pressed="true"],
+.lens-steps .btn[data-lens="objects"][aria-pressed="true"] {
+  box-shadow: 0 0 14px var(--signal);
+  animation: machine-fade 1.6s var(--ease) infinite alternate;
+}
+.lens-steps .btn.machine-trail {
+  box-shadow: 0 0 10px var(--signal);
+  animation: machine-trail 1.2s var(--ease) 1 forwards;
+}
 .rail-tools { display: flex; align-items: stretch; flex: 0 0 auto; }
 .lang-toggle {
   display: flex; align-items: center; gap: 6px;
@@ -297,8 +332,9 @@ em { font-style: italic; }
 @media (max-width: 820px) {
   .rail { flex-wrap: wrap; }
   .mark { flex: 1 1 auto; }
-  .rooms { order: 3; flex: 1 0 100%; background: var(--olive); }
-  .rooms a { min-height: var(--target); }
+  .rooms { order: 3; flex: 1 0 100%; flex-wrap: wrap; background: var(--olive); }
+  .rooms a, .more-room > summary { min-height: var(--target); }
+  .more-list { position: static; width: 100%; }
 }
 
 /* ── Fields ──────────────────────────────────────────────────────────── */
@@ -578,7 +614,8 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 .chord-note { color: var(--gray); margin: 0 0 16px; max-width: 42ch; }
 @media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
 
-/* Toast: the only element permitted a shadow — transient feedback. */
+/* Toast: a black instrument shadow for transient feedback. Peach Red glow
+   is reserved for machine light (see GEOMETRY). */
 .toast {
   position: fixed; left: 50%; bottom: 24px; z-index: 60; transform: translateX(-50%);
   max-width: min(92vw, 560px); padding: 14px 18px;

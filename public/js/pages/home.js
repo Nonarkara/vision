@@ -1,9 +1,9 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.14.0'
+import '../core/site.js?v=1.15.0'
 import { t, lang, n, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.14.0'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.15.0'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
 import { cocoName } from '../ml/labels.js'
 
@@ -41,9 +41,14 @@ function say() {
 
 function applyLens(name, byUser) {
   if (byUser) sweeping = false
+  const prev = buttons.find((x) => x.getAttribute('aria-pressed') === 'true')
   lens = name
   const b = buttons.find((x) => x.dataset.lens === name)
-  for (const x of buttons) x.setAttribute('aria-pressed', String(x === b))
+  const allowTrail = prev && prev !== b && !matchMedia('(prefers-reduced-motion: reduce)').matches
+  for (const x of buttons) {
+    x.setAttribute('aria-pressed', String(x === b))
+    x.classList.toggle('machine-trail', allowTrail && x === prev)
+  }
   if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
   if (lens === 'objects' && !lensState.detectedAt) modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
   say()

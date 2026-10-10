@@ -6,11 +6,11 @@
 // filters decide which cameras are "in view", and the map, the list and the
 // census all read that same set.
 
-import '../core/site.js?v=1.14.0'
+import '../core/site.js?v=1.15.0'
 import { t, esc, n, onLang } from '../core/i18n.js'
-import { whenVisible } from '../core/site.js?v=1.14.0'
+import { whenVisible } from '../core/site.js?v=1.15.0'
 import { loadCatalog, camName, sourceName, isReadable, byId } from '../core/catalog.js'
-import { wantsWebcam } from '../core/specimen.js?v=1.14.0'
+import { wantsWebcam } from '../core/specimen.js?v=1.15.0'
 import { paintFigures } from '../cameras/figures.js'
 import { createFilters, matches, kindName, safeKind } from '../cameras/filters.js'
 import { createMap } from '../cameras/map.js'
@@ -135,7 +135,9 @@ loadCatalog().then((data) => {
   applyFilter(filters.state)
   onLang(paintCount)
   const wanted = wantedId ? byId(cameras, wantedId) : null
+  const live = cameras.find((c) => c.k === 'video' && isReadable(c))
   if (wanted && isReadable(wanted)) study(wanted)
+  else if (live) { show(live); bench.study(live) }
   else if (wantedId) whenVisible(benchRoot, () => bench.start())
 }).catch(() => {
   mapState.textContent = t('โหลดรายชื่อกล้องไม่ได้ ลองโหลดหน้านี้ใหม่ — กล้องของคุณยังใช้ได้ที่ม้านั่งด้านล่าง', 'Could not load the camera list. Try reloading — your own camera still works on the bench below.')
