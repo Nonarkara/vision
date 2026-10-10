@@ -5,9 +5,9 @@
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
 import { at, LANE, STEP } from './track.js'
-import { sightRange } from './perceive.js?v=1.13.0'
-import { VEHICLES } from './sim.js?v=1.13.0'
-import { ITEMS, STREET } from './street.js?v=1.13.0'
+import { sightRange } from './perceive.js?v=1.14.0'
+import { VEHICLES } from './sim.js?v=1.14.0'
+import { ITEMS, STREET } from './street.js?v=1.14.0'
 import { labelName } from './draw.js'
 
 export function relative(car, point) {
@@ -304,6 +304,22 @@ function drawBuildings(g, view, world, w, h, weather) {
     if (it.kind !== 'building') continue
     if (Math.hypot(it.x - view.x, it.y - view.y) > 150) continue
     box(g, view, it.x, it.y, it.h, it.depth, it.width, it.height, w, h, { top: roof, side: wall })
+    // A tree beside the block. Scenery only: it is not a street item, so it is never boxed.
+    const tx = it.x + Math.cos(it.h + 1.15) * (it.depth / 2 + 1.6)
+    const ty = it.y + Math.sin(it.h + 1.15) * (it.width / 2 + 1.2)
+    const canopy = project(view, { x: tx, y: ty }, w, h, 3.4)
+    const trunk = project(view, { x: tx, y: ty }, w, h, 0)
+    if (!canopy || !trunk || canopy.depth > 80 || canopy.depth < 2) continue
+    g.strokeStyle = weather === 'night' ? '#14160f' : '#2c2618'
+    g.lineWidth = Math.max(1.5, canopy.scale * 0.18)
+    g.beginPath()
+    g.moveTo(trunk.x, trunk.y)
+    g.lineTo(canopy.x, canopy.y)
+    g.stroke()
+    g.fillStyle = GREENERY[weather] ?? GREENERY.day
+    g.beginPath()
+    g.arc(canopy.x, canopy.y, Math.max(4, canopy.scale * 1.35), 0, Math.PI * 2)
+    g.fill()
   }
 }
 
@@ -556,7 +572,8 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
     const tr = car.tracks.get(o.id)
     if (tr && !car.blind) {
       const binding = car.decision.targetId === o.id
-      g.strokeStyle = binding ? '#ff714f' : '#e1c97c'
+      g.strokeStyle = '#f15a30'
+      g.globalAlpha = binding ? 1 : 0.7
       g.lineWidth = binding ? 3 : 1.5
       g.setLineDash(world.t - tr.last > 0.2 ? [5, 4] : [])
       g.strokeRect(p.x - bw / 2 - 3, p.y - bh - 3, bw + 6, bh + 6)
@@ -568,8 +585,9 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
         ly = Math.max(18, p.y - bh - 5)
       g.fillStyle = '#172127'
       g.fillRect(lx, ly - 18, tw, 19)
-      g.fillStyle = binding ? '#ff9c79' : '#eee3b8'
+      g.fillStyle = '#f15a30'
       g.fillText(label, lx + 5, ly - 4)
+      g.globalAlpha = 1
     }
   }
   if (car.route.stopS != null) {
@@ -610,6 +628,35 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
   if (sun) {
     g.fillStyle = 'rgba(255,236,170,.14)'
     g.fillRect(w * 0.64, 0, w * 0.26, h * 0.7)
+  }
+  if (!car.blind) {
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+    g.save()
+    g.strokeStyle = '#f15a30'
+    g.globalAlpha = 0.9
+    g.lineWidth = 2
+    g.setLineDash([8, 6])
+    g.beginPath()
+    let pen = false
+    for (let i = 0; i <= 8; i++) {
+      const p = project(car, at(car.route, car.s + Math.max(car.v, 0.5) * 0.4 * i), w, h, 0.05)
+      if (!p) { pen = false; continue }
+      if (pen) g.lineTo(p.x, p.y)
+      else { g.moveTo(p.x, p.y); pen = true }
+    }
+    g.stroke()
+    g.setLineDash([])
+    if (!reducedMotion) {
+      const u = (Math.sin(performance.now() / 280) + 1) / 2
+      const sweep = -0.7 + u * 1.4
+      g.shadowColor = '#f15a30'
+      g.shadowBlur = 14
+      g.beginPath()
+      g.moveTo(w / 2, h * 0.9)
+      g.lineTo(w / 2 + Math.sin(sweep) * w * 0.48, h * 0.26)
+      g.stroke()
+    }
+    g.restore()
   }
   if (car.blind) {
     g.fillStyle = 'rgba(12,18,23,.94)'

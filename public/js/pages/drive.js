@@ -2,14 +2,14 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.13.0'
+import '../core/site.js?v=1.14.0'
 import { lang, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.13.0'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.13.0'
-import { drawWindshield } from '../drive/perspective.js?v=1.13.0'
-import { sightRange } from '../drive/perceive.js?v=1.13.0'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.13.0'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.13.0'
+import { mountGate } from './captcha.js?v=1.14.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.14.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.14.0'
+import { sightRange } from '../drive/perceive.js?v=1.14.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.14.0'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.14.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -227,15 +227,16 @@ function paintDriver() {
 
 // ── The loop ──────────────────────────────────────────────────────────
 
-function render() {
+function render(lead) {
   k = fit(canvas)
-  if (!bg || bg.width !== canvas.width) {
+  if (!bg || bg.width !== canvas.width || bg._weather !== world.weather) {
     colours = palette()
     bg = Object.assign(document.createElement('canvas'), { width: canvas.width, height: canvas.height })
-    drawTrack(bg.getContext('2d'), k, world.track, colours, world.street)
+    bg._weather = world.weather
+    drawTrack(bg.getContext('2d'), k, world.track, colours, world.street, world.weather)
   }
   ctx.drawImage(bg, 0, 0)
-  drawWorld(ctx, k, world, colours, { selected, showAll, lang: lang() })
+  drawWorld(ctx, k, world, colours, { selected, showAll, lang: lang(), lead: reduced ? 0 : lead, reduced, now: performance.now() })
 }
 
 let inView = true
@@ -251,7 +252,7 @@ function frame(now) {
   if (!document.hidden && (inView || dialog.open)) {
     // Behind the gate the canvas has no width yet; drawing at scale 0 is wasted
     // work and can leave a zero-sized backing store the first time it appears.
-    if (inView && canvas.clientWidth) render()
+    if (inView && canvas.clientWidth) render(playing ? acc : 0)
     paintDriver()
   }
   textT += dt
