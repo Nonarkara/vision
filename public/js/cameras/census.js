@@ -9,8 +9,8 @@
 
 import { t, lang, n, pct, onLang } from '../core/i18n.js'
 import { camName, sourceName, pickReadable } from '../core/catalog.js'
-import { openCamera, SourceError } from '../core/source.js?v=1.13.0'
-import { sleep } from '../core/site.js?v=1.13.0'
+import { openCamera, SourceError } from '../core/source.js?v=1.14.0'
+import { sleep } from '../core/site.js?v=1.14.0'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
 import { STREET, cocoName } from '../ml/labels.js'
 import { SIGNAL, BLACK } from '../cv/draw.js'

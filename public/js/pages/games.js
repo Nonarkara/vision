@@ -2,7 +2,7 @@
 // its bench and its own picture source, and none of them downloads the
 // neural network until someone presses its start button.
 
-import '../core/site.js?v=1.13.0'
+import '../core/site.js?v=1.14.0'
 import { initCount } from '../games/count.js'
 import { initPixels } from '../games/pixels.js'
 import { initFool } from '../games/fool.js'

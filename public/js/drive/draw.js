@@ -3,9 +3,9 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js?v=1.13.0'
-import { VEHICLES } from './sim.js?v=1.13.0'
-import { ITEMS, STREET, offset } from './street.js?v=1.13.0'
+import { FOV, sightRange } from './perceive.js?v=1.14.0'
+import { VEHICLES } from './sim.js?v=1.14.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.14.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -31,8 +31,8 @@ export function labelName(label, lang) {
 
 /** Size the canvas to its box (sharp on high-DPI screens); returns metres → pixels. */
 export function fit(canvas) {
-  const dpr = Math.min(3, window.devicePixelRatio || 1)
   const w = canvas.clientWidth
+  const dpr = Math.min(w < 700 ? 2 : 3, window.devicePixelRatio || 1)
   const h = (w * WORLD.h) / WORLD.w
   if (canvas.width !== Math.round(w * dpr)) {
     canvas.width = Math.round(w * dpr)
@@ -41,54 +41,93 @@ export function fit(canvas) {
   return (w / WORLD.w) * dpr
 }
 
-/** The static layer: roads, island, zebras, stop lines, footways, buildings. */
-export function drawTrack(ctx, k, track, c, street) {
-  ctx.fillStyle = c.ground
+/** The static layer: roads, island, zebras, stop lines, footways, buildings, trees. */
+export function drawTrack(ctx, k, track, c, street, weather = 'day') {
+  const night = weather === 'night'
+  ctx.fillStyle = night ? c.black : c.ground
   ctx.fillRect(0, 0, WORLD.w * k, WORLD.h * k)
   ctx.lineJoin = 'round'
   ctx.lineCap = 'round'
   for (const route of Object.values(track)) {
-    ctx.strokeStyle = c.road
+    ctx.strokeStyle = night ? c.black : c.road
     ctx.lineWidth = LANE * 2 * k
     ctx.beginPath()
     route.pts.forEach((p, i) => (i ? ctx.lineTo(p.x * k, p.y * k) : ctx.moveTo(p.x * k, p.y * k)))
     ctx.closePath()
     ctx.stroke()
+    // Shoulders: a solid line at each edge of the lane.
+    ctx.strokeStyle = c.mark
+    ctx.globalAlpha = night ? 0.35 : 0.7
+    ctx.lineWidth = Math.max(1, 0.16 * k)
+    for (const side of [-1, 1]) {
+      ctx.beginPath()
+      for (let s = 0, pen = false; s <= route.len; s += 3) {
+        const p = at(route, s)
+        const x = (p.x - Math.sin(p.h) * LANE * 0.92 * side) * k
+        const y = (p.y + Math.cos(p.h) * LANE * 0.92 * side) * k
+        if (pen) ctx.lineTo(x, y)
+        else { ctx.moveTo(x, y); pen = true }
+      }
+      ctx.stroke()
+    }
+    // Dashed centre line, 3 m paint / 4 m gap, so the lane reads as a lane.
+    ctx.setLineDash([3 * k, 4 * k])
+    ctx.beginPath()
+    route.pts.forEach((p, i) => (i ? ctx.lineTo(p.x * k, p.y * k) : ctx.moveTo(p.x * k, p.y * k)))
+    ctx.stroke()
+    ctx.setLineDash([])
+    ctx.globalAlpha = 1
   }
   if (track.layout === 'practice' || track.layout === 'city') {
-  ctx.fillStyle = c.olive
-  ctx.beginPath()
-  ctx.arc(RING.x * k, RING.y * k, (RING.r - LANE - 0.4) * k, 0, 2 * Math.PI)
-  ctx.fill()
+    ctx.fillStyle = c.olive
+    ctx.globalAlpha = night ? 0.45 : 0.85
+    ctx.beginPath()
+    ctx.arc(RING.x * k, RING.y * k, (RING.r - LANE - 0.4) * k, 0, 2 * Math.PI)
+    ctx.fill()
+    ctx.globalAlpha = 1
   }
-  // The hand-placed city blocks that used to be hardcoded here are gone:
-  // street.js builds the buildings from the footway, so a block is always
-  // standing where a street actually is, at the right distance back from it.
+  if (street) drawStreet(ctx, k, street, c, weather)
+
+  if (weather === 'rain') {
+    ctx.fillStyle = c.gray
+    ctx.globalAlpha = 0.14
+    ctx.fillRect(0, 0, WORLD.w * k, WORLD.h * k)
+    ctx.globalAlpha = 1
+  } else if (weather === 'sun') {
+    ctx.fillStyle = c.naples
+    ctx.globalAlpha = 0.08
+    ctx.fillRect(0, 0, WORLD.w * k, WORLD.h * k)
+    ctx.globalAlpha = 1
+  }
 
   for (const route of Object.values(track)) {
-    // One-way arrows every 30 m, so the direction of travel is obvious.
     ctx.fillStyle = c.mark
+    ctx.globalAlpha = night ? 0.4 : 0.55
     for (let s = 20; s < route.len; s += 30) {
       const p = at(route, s)
       if (p.ring) continue
       chevron(ctx, p.x * k, p.y * k, p.h, 1.3 * k)
     }
+    ctx.globalAlpha = 1
     if (route.stopS != null) {
       const p = at(route, route.stopS)
       ctx.strokeStyle = c.white
+      ctx.globalAlpha = night ? 0.55 : 1
       ctx.lineWidth = 0.5 * k
       const nx = -Math.sin(p.h), ny = Math.cos(p.h)
       ctx.beginPath()
       ctx.moveTo((p.x + nx * LANE) * k, (p.y + ny * LANE) * k)
       ctx.lineTo((p.x - nx * LANE) * k, (p.y - ny * LANE) * k)
       ctx.stroke()
+      ctx.globalAlpha = 1
     }
   }
   ctx.fillStyle = c.white
+  ctx.globalAlpha = night ? 0.6 : 1
   for (const z of track.zebras) {
     for (let i = -2; i <= 2; i++) ctx.fillRect((z.x + i * 0.9 - 0.3) * k, (z.y - LANE) * k, 0.6 * k, LANE * 2 * k)
   }
-  if (street) drawStreet(ctx, k, street, c)
+  ctx.globalAlpha = 1
 }
 
 /**
@@ -97,7 +136,7 @@ export function drawTrack(ctx, k, track, c, street) {
  * drawn in road paint — a footway is a raised slab and a building is a block,
  * and from above the only honest difference is which tone they are.
  */
-function drawStreet(ctx, k, street, c) {
+function drawStreet(ctx, k, street, c, weather = 'day') {
   for (const fw of street.footways) {
     if (fw.kerb.length < 2) continue
     ctx.beginPath()
@@ -113,15 +152,55 @@ function drawStreet(ctx, k, street, c) {
     fw.kerb.forEach((p, i) => (i ? ctx.lineTo(p.x * k, p.y * k) : ctx.moveTo(p.x * k, p.y * k)))
     ctx.stroke()
   }
-  // Buildings last: they sit behind everything and must not be overpainted.
+  // Buildings last: a cast shadow, the block, a darker roof. Trees are scenery
+  // only — they are not street items, so the camera never boxes them.
+  const night = weather === 'night'
+  let tree = 0
   for (const it of street.items) {
     if (it.kind !== 'building') continue
     ctx.save()
     ctx.translate(it.x * k, it.y * k)
     ctx.rotate(it.h)
+    const x0 = (-it.depth / 2) * k, y0 = (-it.width / 2) * k
+    const dw = it.depth * k, dh = it.width * k
+    ctx.fillStyle = c.black
+    ctx.globalAlpha = night ? 0.55 : 0.28
+    ctx.fillRect(x0 + 0.7 * k, y0 + 0.9 * k, dw, dh)
+    ctx.globalAlpha = night ? 0.72 : 1
     ctx.fillStyle = c.block
-    ctx.fillRect((-it.depth / 2) * k, (-it.width / 2) * k, it.depth * k, it.width * k)
+    ctx.fillRect(x0, y0, dw, dh)
+    ctx.fillStyle = c.black
+    ctx.globalAlpha = 0.22
+    ctx.fillRect(x0 + dw * 0.08, y0 + dh * 0.1, dw * 0.84, dh * 0.8)
+    if (night) {
+      ctx.globalAlpha = 0.9
+      ctx.fillStyle = c.naples
+      const win = Math.max(1.5, 0.7 * k)
+      ctx.fillRect(x0 + dw * 0.2, y0 + dh * 0.28, win, win)
+      ctx.fillRect(x0 + dw * 0.55, y0 + dh * 0.28, win, win)
+    }
     ctx.restore()
+    ctx.globalAlpha = 1
+    if (tree++ % 2) continue
+    const ox = Math.cos(it.h + 1.15) * (it.depth / 2 + 1.6)
+    const oy = Math.sin(it.h + 1.15) * (it.depth / 2 + 1.6)
+    const tx = (it.x + ox) * k, ty = (it.y + oy) * k, r = 1.35 * k
+    ctx.fillStyle = c.black
+    ctx.globalAlpha = night ? 0.4 : 0.22
+    ctx.beginPath()
+    ctx.ellipse(tx + 0.45 * k, ty + 0.55 * k, r, r * 0.42, 0, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.globalAlpha = night ? 0.6 : 1
+    ctx.fillStyle = c.olive
+    ctx.beginPath()
+    ctx.arc(tx, ty, r, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = c.black
+    ctx.globalAlpha = 0.2
+    ctx.beginPath()
+    ctx.arc(tx - r * 0.25, ty - r * 0.2, r * 0.5, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.globalAlpha = 1
   }
 }
 
@@ -190,11 +269,24 @@ function drawFurniture(ctx, k, world, c) {
   }
 }
 
-export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
+/** Where a moving thing is drawn. `lead` is the fraction of a step still to come, so motion stays smooth without touching the physics state. */
+function pose(o, lead) {
+  if (!lead) return o
+  if (o.route && o.v > 0 && !(o.frozen > 0)) {
+    const p = at(o.route, o.s + o.v * lead)
+    return { ...o, x: p.x, y: p.y, h: p.h }
+  }
+  if (o.vx || o.vy) return { ...o, x: o.x + (o.vx || 0) * lead, y: o.y + (o.vy || 0) * lead }
+  return o
+}
+
+export function drawWorld(ctx, k, world, c, { selected, showAll, lang, lead = 0, reduced = false, now = 0 }) {
+  const rain = world.weather === 'rain'
   drawLights(ctx, k, world, c)
   drawFurniture(ctx, k, world, c)
 
-  for (const car of world.cars) {
+  for (const raw of world.cars) {
+    const car = pose(raw, lead)
     const sel = car.id === selected
     if (!sel && !showAll) continue
     const R = car.blind ? 0 : sightRange(car, world.weather)
@@ -206,9 +298,43 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     ctx.closePath()
     ctx.fill()
     ctx.globalAlpha = 1
+    if (!sel || car.blind || !R) continue
+    // Predicted path: where this speed would be in the next two seconds.
+    ctx.save()
+    ctx.strokeStyle = c.signal
+    ctx.globalAlpha = 0.75
+    ctx.lineWidth = 1.5
+    ctx.setLineDash([5, 5])
+    ctx.beginPath()
+    for (let i = 0; i <= 8; i++) {
+      const p = at(car.route, car.s + car.v * 0.28 * i)
+      if (i) ctx.lineTo(p.x * k, p.y * k)
+      else ctx.moveTo(p.x * k, p.y * k)
+    }
+    ctx.stroke()
+    ctx.setLineDash([])
+    ctx.restore()
+    if (reduced) continue
+    // One lidar-style ray inside the cone. A single blurred stroke, not one per box.
+    const u = (Math.sin(now / 280) + 1) / 2
+    const a = car.h - FOV / 2 + u * FOV
+    ctx.save()
+    ctx.strokeStyle = c.signal
+    ctx.globalAlpha = 0.9
+    ctx.lineWidth = 1.5
+    ctx.shadowColor = c.signal
+    ctx.shadowBlur = 10
+    ctx.beginPath()
+    ctx.moveTo(car.x * k, car.y * k)
+    ctx.lineTo(car.x * k + Math.cos(a) * R * k, car.y * k + Math.sin(a) * R * k)
+    ctx.stroke()
+    ctx.restore()
+    ctx.shadowBlur = 0
+    ctx.globalAlpha = 1
   }
 
-  for (const w of world.walkers) {
+  for (const raw of world.walkers) {
+    const w = pose(raw, lead)
     if (w.kind === 'person') {
       ctx.fillStyle = c.white
       ctx.beginPath()
@@ -226,17 +352,22 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     }
   }
 
-  for (const car of world.cars) drawCar(ctx, k, car, c, car.id === selected)
+  for (const raw of world.cars) drawCar(ctx, k, pose(raw, lead), c, raw.id === selected, world.weather)
 
-  for (const car of world.cars) {
+  for (const raw of world.cars) {
+    const car = pose(raw, lead)
     if (car.id !== selected && !showAll) continue
-    for (const tr of car.tracks.values()) {
-      const o = tr.obj
+    for (const tr of raw.tracks.values()) {
+      const o = pose(tr.obj, lead)
       // The object's real footprint — a lorry's box is a lorry's size. Street
       // furniture has no dims of its own, so it borrows the class table's.
       const dims = o.dims ?? ITEMS[o.kind]?.dims
       const half = (dims ? Math.max(dims.L, dims.W) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
       ctx.strokeStyle = c.signal
+      ctx.globalAlpha = 0.35
+      ctx.lineWidth = car.id === selected ? 5 : 2
+      ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
+      ctx.globalAlpha = 1
       ctx.lineWidth = car.id === selected ? 2 : 1
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
       if (car.id !== selected) continue
@@ -260,16 +391,39 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     ctx.stroke()
     ctx.globalAlpha = 1
   }
+
+  if (rain && !reduced) {
+    ctx.strokeStyle = c.gray
+    ctx.globalAlpha = 0.45
+    ctx.lineWidth = 1
+    const span = WORLD.w * k
+    for (let i = 0; i < 48; i++) {
+      const x = (i * 97 + now * 0.35) % span
+      const y = (i * 53 + now * 0.8) % (WORLD.h * k)
+      ctx.beginPath()
+      ctx.moveTo(x, y)
+      ctx.lineTo(x - 3, y + 10)
+      ctx.stroke()
+    }
+    ctx.globalAlpha = 1
+  }
 }
 
 /** A vehicle at its real Thai size, seen from above: 4.4 × 1.8 m sedans,
  *  5.3 m pickups, 9.6 m lorries with a separate cab, 12 m buses. */
-function drawCar(ctx, k, car, c, sel) {
+function drawCar(ctx, k, car, c, sel, weather = 'day') {
   const dims = car.dims ?? VEHICLES.car
+  const L = dims.L * k, W = dims.W * k
+  const night = weather === 'night' || weather === 'rain'
   ctx.save()
   ctx.translate(car.x * k, car.y * k)
   ctx.rotate(car.h)
-  const L = dims.L * k, W = dims.W * k
+  ctx.fillStyle = c.black
+  ctx.globalAlpha = night ? 0.45 : 0.22
+  ctx.beginPath()
+  ctx.ellipse(0.3 * k, W * 0.15, L * 0.46, W * 0.42, 0, 0, Math.PI * 2)
+  ctx.fill()
+  ctx.globalAlpha = 1
   const body = car.styleName === 'careful' ? c.white : car.styleName === 'normal' ? c.gray : c.naples
   if (car.body === 'truck') {
     // Cargo box takes the rear 68%; the cab sits in front with a gap.
@@ -297,6 +451,30 @@ function drawCar(ctx, k, car, c, sel) {
       ctx.lineWidth = 0.18 * k
       ctx.strokeRect(-L / 2 + 0.3 * k, -W / 2 + 0.2 * k, 0.42 * L, W - 0.4 * k)
     }
+  }
+  // Wheels, then lamps. Headlights throw a short pool at night and in rain.
+  ctx.fillStyle = c.black
+  for (const fx of [-1, 1]) {
+    for (const fy of [-1, 1]) {
+      ctx.beginPath()
+      ctx.ellipse(fx * L * 0.34, fy * W * 0.48, Math.max(1.2, L * 0.07), Math.max(1, W * 0.12), 0, 0, Math.PI * 2)
+      ctx.fill()
+    }
+  }
+  ctx.fillStyle = night ? c.naples : c.white
+  ctx.fillRect(L / 2 - 0.15 * k, -W / 2 + 0.12 * k, Math.max(1.5, 0.35 * k), Math.max(1.2, 0.28 * k))
+  ctx.fillRect(L / 2 - 0.15 * k, W / 2 - 0.4 * k, Math.max(1.5, 0.35 * k), Math.max(1.2, 0.28 * k))
+  if (night && car.v > 0.4) {
+    ctx.fillStyle = c.naples
+    ctx.globalAlpha = 0.16
+    ctx.beginPath()
+    ctx.moveTo(L / 2, -W * 0.3)
+    ctx.lineTo(L / 2 + 4.2 * k, -W * 0.9)
+    ctx.lineTo(L / 2 + 4.2 * k, W * 0.9)
+    ctx.lineTo(L / 2, W * 0.3)
+    ctx.closePath()
+    ctx.fill()
+    ctx.globalAlpha = 1
   }
   if (sel || car.frozen > 0) {
     ctx.strokeStyle = car.frozen > 0 ? c.signal : c.white
