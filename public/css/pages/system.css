@@ -1,3 +1,8 @@
+/* /system — the picture's path is the page. */
+#main { display: flex; flex-direction: column; }
+#main > #travel { order: -2; }
+#main > .page-head { order: -1; }
+
 /* /system — diagrams, rules and a live status block. Only what vision.css lacks. */
 
 .sys h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }

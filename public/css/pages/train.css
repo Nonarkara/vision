@@ -1,4 +1,9 @@
-/* /train — only what vision.css does not already provide. */
+/* /train — the lesson picture is the page. */
+#main { display: flex; flex-direction: column; }
+#main > .video-lesson { order: -6; }
+#main > [data-specimen-slot] { order: -5; }
+#main > .page-head { order: -4; }
+.video-lesson > .lesson-grid { order: -1; }
 
 /* Transfer learning, in one band */
 .idea { padding: clamp(32px, 5vw, 64px) var(--gutter); display: grid; gap: 24px; }

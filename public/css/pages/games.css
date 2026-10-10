@@ -2,7 +2,12 @@
 
 .games-privacy { margin: 16px 0 0; max-width: 46ch; }
 
-/* Rules, score and lesson sit in the chapter's narrow left column, so the title steps down a size. */
+/* The count race is the page. The title waits under the picture. */
+#main { display: flex; flex-direction: column; }
+#main > #count { order: -3; }
+#main > .page-head { order: -1; }
+#count.chapter { display: flex; flex-direction: column; padding-top: 8px; }
+#count > .chapter-body { order: -1; }
 .chapter > header h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); overflow-wrap: normal; }
 .game-rules { margin: 0; padding-left: 1.2em; font-size: var(--micro); max-width: 40ch; }
 .game-rules li { margin-bottom: 0.5em; }

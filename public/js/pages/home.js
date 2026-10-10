@@ -1,9 +1,9 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.12.1'
+import '../core/site.js?v=1.13.0'
 import { t, lang, n, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.12.1'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.13.0'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
 import { cocoName } from '../ml/labels.js'
 
@@ -13,8 +13,9 @@ const sayEl = document.querySelector('[data-lens-say]')
 const buttons = [...document.querySelectorAll('[data-lens]')]
 const specimen = createSpecimen({ bar: document.querySelector('[data-specimen]'), prefer: 'video' })
 
-let lens = 'picture'
+let lens = 'objects'
 let modelNote = ''
+let sweeping = !matchMedia('(prefers-reduced-motion: reduce)').matches
 const lensState = createLensState()
 
 function say() {
@@ -38,15 +39,17 @@ function say() {
   sayEl.textContent = `${name}. ${text}${extra}`
 }
 
-for (const b of buttons) {
-  b.addEventListener('click', () => {
-    lens = b.dataset.lens
-    for (const x of buttons) x.setAttribute('aria-pressed', String(x === b))
-    if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
-    if (lens === 'objects' && !lensState.detectedAt) modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
-    say()
-  })
+function applyLens(name, byUser) {
+  if (byUser) sweeping = false
+  lens = name
+  const b = buttons.find((x) => x.dataset.lens === name)
+  for (const x of buttons) x.setAttribute('aria-pressed', String(x === b))
+  if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
+  if (lens === 'objects' && !lensState.detectedAt) modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+  say()
 }
+
+for (const b of buttons) b.addEventListener('click', () => applyLens(b.dataset.lens, true))
 
 document.addEventListener('modelprogress', (e) => {
   if (e.detail.name !== 'detector') return
@@ -80,8 +83,16 @@ startSpecimen(specimen).then((src) => { if (!src) stateEl.textContent = t('ย�
 // "Try it on your own camera": open the webcam, jump to the objects lens, bring the stage into view.
 const stage = document.querySelector('.opening-stage')
 function pickLens(name) {
-  document.querySelector(`[data-lens="${name}"]`)?.click()
+  applyLens(name, true)
 }
+// Detection is on when the page opens. If motion is welcome, the five lenses
+// then take turns: picture, numbers, edges, motion, objects.
+modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+setInterval(() => {
+  if (!sweeping || document.hidden) return
+  const i = LENS_ORDER.indexOf(lens)
+  applyLens(LENS_ORDER[(i + 1) % LENS_ORDER.length], false)
+}, 4200)
 document.querySelector('[data-mine]')?.addEventListener('click', async () => {
   stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
   const src = await specimen.useWebcam()

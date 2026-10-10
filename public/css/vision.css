@@ -324,6 +324,61 @@ em { font-style: italic; }
   .opening { grid-template-columns: 1fr; min-height: 0; }
 }
 
+/* The homepage is the feed. The headline sits on the picture. */
+.opening-live {
+  display: block;
+  min-height: calc(100svh - var(--rail-height));
+  background: var(--black);
+  color: var(--white);
+}
+.opening-live .opening-stage { min-height: inherit; }
+.opening-live .stage-view { position: relative; flex: 1 1 auto; min-height: min(62vh, 640px); }
+.feed-title {
+  position: absolute; z-index: 2; top: 0; left: 0; right: 0;
+  padding: clamp(16px, 2.4vw, 32px) clamp(16px, 3vw, 36px) 18px;
+  background: var(--black);
+  color: var(--naples);
+  pointer-events: none;
+}
+.feed-title h1 { font-size: clamp(1.8rem, 3vw, 3.1rem); color: var(--naples); }
+.feed-title .lede { color: var(--white); margin: 10px 0 0; max-width: 36ch; font-size: var(--read); }
+.feed-title .cta, .feed-title .mine-note { pointer-events: auto; }
+.feed-title .mine-note { color: var(--gray); }
+.feed-title .cta { margin-top: 14px; }
+
+/* One line, drawn on the thing you can touch. */
+.surface-prompt {
+  position: absolute; z-index: 2; left: 12px; bottom: 12px; margin: 0;
+  max-width: min(42ch, calc(100% - 24px));
+  padding: 8px 12px;
+  background: var(--black);
+  color: var(--naples);
+  font-family: var(--mono); font-size: var(--micro); line-height: 1.35;
+  pointer-events: none;
+}
+html[data-lang="th"] .surface-prompt { font-family: var(--thai); }
+
+/* The essay waits. The instrument does not. */
+.page-head.is-slim {
+  padding: 12px var(--gutter) 8px;
+  align-items: end;
+}
+.page-head.is-slim h1 { font-size: clamp(1.7rem, 2vw + 0.8rem, 2.5rem); }
+.explain { background: var(--quiet); color: var(--quiet-text); }
+.explain > summary {
+  cursor: pointer; min-height: var(--target);
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px var(--gutter);
+  font-family: var(--mono); font-size: var(--micro);
+}
+.explain > summary::-webkit-details-marker { display: none; }
+.explain > summary::before { content: "+"; font-family: var(--mono); }
+.explain[open] > summary::before { content: "–"; }
+.explain[open] > summary { background: var(--field); color: var(--field-text); }
+.explain .page-head, .explain .prose, .explain .micro, .explain .lede { padding-left: var(--gutter); padding-right: var(--gutter); }
+.explain .lede { margin: 0 0 12px; }
+.explain .micro { padding-bottom: 16px; }
+
 .page-head {
   display: grid; gap: var(--gap);
   grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr);
@@ -571,6 +626,11 @@ html[data-lang="th"] .lens-say { font-family: var(--thai); }
 .specimen-line { border-top: 0; align-items: flex-end; }
 .specimen-line .btn { flex: none; }
 @media (max-width: 900px) { .opening-stage .stage-view { aspect-ratio: 16 / 10; min-height: 0; } }
+@media (max-width: 900px) {
+  .opening-live .opening-stage .stage-view { aspect-ratio: auto; min-height: 72vh; }
+  .feed-title { padding: 12px 16px 10px; }
+  .feed-title h1 { font-size: 1.65rem; }
+}
 
 .promise-list { list-style: none; margin: 0; padding: 0 var(--gutter) clamp(48px, 7vw, 112px); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
 .promise-list li { display: flex; flex-direction: column; gap: 8px; max-width: 36ch; }

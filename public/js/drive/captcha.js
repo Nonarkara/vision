@@ -23,7 +23,7 @@
 //      et al. (2014) read the hardest distorted-text reCAPTCHAs at 99.8%, while
 //      people managed 33%. That is why the challenges changed shape each time.
 
-import { rng } from './rand.js?v=1.12.1'
+import { rng } from './rand.js?v=1.13.0'
 
 export const GRID = 3
 export const TILES = GRID * GRID
