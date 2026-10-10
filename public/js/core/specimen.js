@@ -3,9 +3,9 @@
 // stream. The bar that controls it always names the camera and its owner.
 
 import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.12.0'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.12.1'
 import { t, bi, esc, onLang } from './i18n.js'
-import { toast } from './site.js?v=1.12.0'
+import { toast } from './site.js?v=1.12.1'
 
 const STILL_REFRESH_MS = 20_000
 

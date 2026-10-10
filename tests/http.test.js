@@ -43,9 +43,11 @@ test('clientIp trusts cf-connecting-ip only from loopback', () => {
   assert.equal(clientIp({ socket: { remoteAddress: '9.9.9.9' }, headers: { 'cf-connecting-ip': '1.2.3.4' } }), '9.9.9.9')
 })
 
-test('CSP forbids inline script, eval and framing', () => {
-  assert.match(CSP, /script-src 'self'(;|$)/)
-  assert.doesNotMatch(CSP, /unsafe-(inline|eval)/)
+test('CSP forbids inline script, eval and framing, and allows only the Cloudflare analytics beacon', () => {
+  assert.match(CSP, /script-src 'self' https:\/\/static\.cloudflareinsights\.com(;|$)/)
+  assert.match(CSP, /connect-src 'self' https:\/\/cloudflareinsights\.com /)
+  assert.doesNotMatch(CSP, /unsafe-inline/)
+  assert.doesNotMatch(CSP, /unsafe-eval/)
   assert.match(CSP, /frame-ancestors 'none'/)
 })
 

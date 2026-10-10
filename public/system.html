@@ -172,11 +172,11 @@
       </div>
       <div class="prose">
         <h3><span class="th" lang="th">นโยบายความปลอดภัยของเนื้อหา</span><span class="en" lang="en">Content Security Policy</span></h3>
-        <p class="th" lang="th">สคริปต์ สไตล์ ฟอนต์ และโมเดลทั้งหมดมาจากเว็บนี้เอง ไม่มีโค้ดที่ซ่อนอยู่ในตัวหน้าเอง (สคริปต์ในบรรทัด) ไม่มีการสั่งรันโค้ดที่แนบมากับคำขอ (eval) และไม่มีหน้าเว็บอื่นถูกฝังอยู่ในหน้านี้ (iframe) การเชื่อมต่อออกไปข้างนอกที่หน้าเว็บทำได้มีแค่วิดีโอจากโฮสต์ที่รายชื่อเรียกว่า “วิดีโอสด”</p>
-        <p class="en" lang="en">Every script, style, font and model is served from here. No code hidden inside the page itself (inline scripts), no running code sent in with a request (eval), and no other web page embedded inside this one (iframes). The only third-party traffic a page may make is camera video, and only to the hosts the catalogue calls “video”.</p>
+        <p class="th" lang="th">สคริปต์ สไตล์ ฟอนต์ และโมเดลทั้งหมดมาจากเว็บนี้เอง ไม่มีโค้ดที่ซ่อนอยู่ในตัวหน้าเอง (สคริปต์ในบรรทัด) ไม่มีการสั่งรันโค้ดที่แนบมากับคำขอ (eval) และไม่มีหน้าเว็บอื่นถูกฝังอยู่ในหน้านี้ (iframe) ข้อยกเว้นเดียวคือบีคอนวิเคราะห์ของ Cloudflare ที่ไม่ใช้คุกกี้ จาก static.cloudflareinsights.com นอกนั้นการเชื่อมต่อออกไปมีแค่วิดีโอจากโฮสต์ที่รายชื่อเรียกว่า “วิดีโอสด”</p>
+        <p class="en" lang="en">Every script, style, font and model is served from here. No code hidden inside the page itself (inline scripts), no running code sent in with a request (eval), and no other web page embedded inside this one (iframes). The one exception is Cloudflare’s cookieless analytics beacon from static.cloudflareinsights.com. Other third-party traffic is camera video only, and only to the hosts the catalogue calls “video”.</p>
         <ul>
-          <li><code>script-src 'self'</code> · <code>style-src 'self'</code> · <code>font-src 'self'</code></li>
-          <li><code>media-src</code> · <code>connect-src</code>: <span class="th" lang="th">เว็บนี้ และ</span><span class="en" lang="en">this site, plus</span> camerai1.iticfoundation.org, camera1.iticfoundation.org, *.ipcamlive.com</li>
+          <li><code>script-src 'self' https://static.cloudflareinsights.com</code> · <code>style-src 'self'</code> · <code>font-src 'self'</code></li>
+          <li><code>media-src</code> · <code>connect-src</code>: <span class="th" lang="th">เว็บนี้ และ</span><span class="en" lang="en">this site, plus</span> cloudflareinsights.com, camerai1.iticfoundation.org, camera1.iticfoundation.org, *.ipcamlive.com</li>
           <li><code>frame-src 'none'</code> · <code>object-src 'none'</code> · <code>frame-ancestors 'none'</code></li>
           <li><code>Permissions-Policy: camera=(self), microphone=(), geolocation=()</code> <span class="th" lang="th">กล้องเปิดได้เฉพาะหน้าของเราและเมื่อคุณอนุญาต ไมโครโฟนและตำแหน่งปิดตาย</span><span class="en" lang="en">— the camera only for our own pages and only when you allow it; microphone and location are switched off entirely.</span></li>
         </ul>

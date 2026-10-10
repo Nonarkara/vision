@@ -3,9 +3,9 @@
 // is the one exception, because a red light has to look red.
 
 import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js'
-import { FOV, sightRange } from './perceive.js?v=1.12.0'
-import { VEHICLES } from './sim.js?v=1.12.0'
-import { ITEMS, STREET, offset } from './street.js?v=1.12.0'
+import { FOV, sightRange } from './perceive.js?v=1.12.1'
+import { VEHICLES } from './sim.js?v=1.12.1'
+import { ITEMS, STREET, offset } from './street.js?v=1.12.1'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 

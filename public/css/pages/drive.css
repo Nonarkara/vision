@@ -1,4 +1,16 @@
-/* /drive — only what vision.css does not already have. */
+/* /drive — only what vision.css does not already have.
+   On a phone the decision diagram used to be a 780px sideways scroller.
+   The same four steps stack instead, and the page itself does not scroll sideways. */
+
+.drive-stack { display: none; }
+@media (max-width: 760px) {
+  #decide-figure { overflow-x: hidden; }
+  #decide-figure svg { display: none; }
+  #decide-figure .drive-stack { display: grid; grid-template-columns: 1fr; margin: 0; }
+  .drive, .gate, .chapter { overflow-x: clip; max-width: 100%; }
+  .habits { table-layout: fixed; }
+  .habits th, .habits td { overflow-wrap: anywhere; }
+}
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
