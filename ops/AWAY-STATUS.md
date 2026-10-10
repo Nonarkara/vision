@@ -257,3 +257,17 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **Gates.** 120 tests pass, plus 14 assertions run against the live DOM through CDP: room locked on arrival, gate 365 px before and 50 px after, track top at 713 px inside a 900 px viewport, challenge reopens with no stale picks, Check disabled when nothing is picked, `aria-expanded` correct in both states, and the room never re-locks. Verified visually in both languages.
 
 - **Judgement call left open for the user:** the CAPTCHA remains skippable. A public classroom that walls off its own lesson behind a CAPTCHA is the wrong trade, but it is their site and the call is theirs.
+
+## 2026-10-10 11:35 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.11.1, uptime 4,698 seconds. App PID 98162 and tunnel PID 13443 running. App restart matches the other agent's documented release aabff47; local package also 1.11.1. Preserve that release and its gate/layout fixes.
+- Catalogue 3,425 cameras; loaded/upstream 04:26:48 UTC, about eight minutes old. All eight recent refreshes succeeded; no new application warning since the recovered 2026-10-09 20:47 UTC fetch failure. Relay idle without resting hosts; memory 16–18 MB.
+- Tunnel connection 3 retried and registered at 04:11:42 UTC; public health succeeds with no newer tunnel errors in the recent log. No sustained failure requiring recovery.
+- Working tree clean before this entry. No repairs, deployments, camera probes or machine-wide checks performed. Scoped monitoring continues within the away window.
+
+## 2026-10-10 17:34 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.11.1, uptime 26,270 seconds. App PID 98162 and tunnel PID 13443 running; no new app restart.
+- Catalogue 3,427 cameras; loaded/upstream 10:26:47 UTC, about eight minutes old. Last seven ten-minute refreshes succeeded; no new app warning since 2026-10-09 20:47 UTC. Relay idle without resting hosts; memory 15–18 MB.
+- Tunnel connection 0 registered at 10:09:19 UTC and connections 1/2/3 at 10:09:32 following brief retries. Public health succeeds; no sustained failure requiring intervention.
+- Only existing operations notes were modified. No repair, deployment, camera probes or machine-wide checks justified. Other agents' release preserved; scoped monitoring continues within the away window.
