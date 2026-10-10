@@ -154,9 +154,9 @@ sequenceDiagram
 
 ### Rules the code enforces
 
-- **Privacy:** webcam and photos never leave the tab; no uploads, no accounts, no analytics, no cookies (localStorage holds only the language choice and game best scores). No face recognition, no plate reading, no stored imagery.
+- **Privacy:** webcam and photos never leave the tab; no uploads, no accounts, no cookies (localStorage holds only the language choice and game best scores). The only analytics is Cloudflare’s cookieless beacon, which does not identify a visitor. No face recognition, no plate reading, no stored imagery.
 - **Not an open proxy:** relay serves only catalogue ids on allow-listed https hosts, rejects redirects, non-images, tiny or > 4 MB bodies; per-host circuit breaker.
-- **Strict CSP:** `script-src 'self'`, no inline script/style, no eval (TF.js's regenerator fallback is pre-empted in `ml/tf.js`), media only from the two CORS video hosts.
+- **Strict CSP:** `script-src 'self' https://static.cloudflareinsights.com`, no inline script/style, no eval (TF.js's regenerator fallback is pre-empted in `ml/tf.js`), media only from the two CORS video hosts.
 - **Honesty in the UI:** every machine answer carries its confidence; "not detected ≠ not there".
 
 ---

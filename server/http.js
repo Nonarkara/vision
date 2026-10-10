@@ -67,11 +67,13 @@ export const PAGES = {
  */
 export const CSP = [
   "default-src 'self'",
-  "script-src 'self'",
+  // Cloudflare injects a cookieless analytics beacon at the edge. It is the
+  // only script allowed off this origin; inline script and eval stay forbidden.
+  "script-src 'self' https://static.cloudflareinsights.com",
   "style-src 'self'",
   "img-src 'self' data: blob:",
   "media-src 'self' blob: https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com",
-  "connect-src 'self' https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com",
+  "connect-src 'self' https://cloudflareinsights.com https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com",
   "worker-src 'self' blob:",
   "font-src 'self'",
   "frame-src 'none'",
