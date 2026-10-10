@@ -1,7 +1,7 @@
 // Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
 
 import { lang, setLang, onLang } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.14.0'
+import { initFullscreen } from './fullscreen.js?v=1.15.0'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))

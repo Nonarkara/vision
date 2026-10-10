@@ -6,7 +6,7 @@
 import { t, bi, n, onLang } from '../core/i18n.js'
 import { STREET } from '../ml/labels.js'
 import { drawDetections } from '../cv/draw.js'
-import { startSpecimen } from '../core/specimen.js?v=1.14.0'
+import { startSpecimen } from '../core/specimen.js?v=1.15.0'
 import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js'
 
 const ROUNDS = 5
@@ -190,6 +190,6 @@ export function initCount(root) {
 
   onLang(render)
   new ResizeObserver(draw).observe(canvas)
-  state(t('ยังไม่ได้โหลดอะไร กด “เริ่มเกม” เมื่อพร้อม', 'Nothing loaded yet. Press “Start” when you are ready.'))
   render()
+  beginRound()
 }

@@ -66,16 +66,51 @@ function label(ctx, text, x, y, { fill = SIGNAL, ink = BLACK } = {}) {
   ctx.fillText(text, x + pad, ty + pad)
 }
 
+function motionReduced() {
+  return typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+// A short memory of earlier boxes, so a finding leaves a fading trail.
+// Keyed by canvas so two instruments never share a ghost.
+const trails = new WeakMap()
+const TRAIL_MS = 520
+
+function earlier(ctx, key, boxes) {
+  if (motionReduced()) return []
+  let bag = trails.get(ctx.canvas)
+  if (!bag) trails.set(ctx.canvas, bag = new Map())
+  const now = performance.now()
+  const prev = (bag.get(key) ?? []).filter((p) => now - p.t < TRAIL_MS)
+  bag.set(key, [...prev, { t: now, boxes }].slice(-5))
+  return prev.map((p) => ({ a: 0.15 + 0.45 * (1 - (now - p.t) / TRAIL_MS), boxes: p.boxes }))
+}
+
+function glowBox(ctx, x, y, w, h, alpha, blur) {
+  ctx.save()
+  ctx.globalAlpha = alpha
+  ctx.strokeStyle = SIGNAL
+  ctx.shadowColor = SIGNAL
+  ctx.shadowBlur = blur
+  ctx.strokeRect(x, y, w, h)
+  ctx.restore()
+}
+
 /** Detector boxes (0–1 coords) over a frame drawn at `rect`. */
 export function drawDetections(ctx, detections, rect, { showScore = true } = {}) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   ctx.lineWidth = Math.max(2, 2 * dpr)
-  ctx.strokeStyle = SIGNAL
+  const ghosts = earlier(ctx, 'det', detections)
+  for (const g of ghosts) {
+    for (const d of g.boxes) {
+      glowBox(ctx, rect.x + d.x * rect.w, rect.y + d.y * rect.h, d.w * rect.w, d.h * rect.h, g.a, 0)
+    }
+  }
+  const blur = 10 * dpr
   const l = lang()
   for (const d of detections) {
     const x = rect.x + d.x * rect.w, y = rect.y + d.y * rect.h
     const w = d.w * rect.w, h = d.h * rect.h
-    ctx.strokeRect(x, y, w, h)
+    glowBox(ctx, x, y, w, h, 1, blur)
     const text = showScore ? `${cocoName(d.cls, l)} ${Math.round(d.score * 100)}%` : cocoName(d.cls, l)
     label(ctx, text, x, y)
   }
@@ -85,12 +120,23 @@ export function drawDetections(ctx, detections, rect, { showScore = true } = {})
 export function drawBlobs(ctx, list, rect, aw, ah, text = null) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   ctx.lineWidth = Math.max(2, 2 * dpr)
-  ctx.strokeStyle = SIGNAL
+  const ghosts = earlier(ctx, 'blob', list)
+  const box = (b) => ({
+    x: rect.x + (b.x / aw) * rect.w,
+    y: rect.y + (b.y / ah) * rect.h,
+    w: (b.w / aw) * rect.w,
+    h: (b.h / ah) * rect.h,
+  })
+  for (const g of ghosts) {
+    for (const b of g.boxes) {
+      const r = box(b)
+      glowBox(ctx, r.x, r.y, r.w, r.h, g.a, 0)
+    }
+  }
   for (const b of list) {
-    const x = rect.x + (b.x / aw) * rect.w, y = rect.y + (b.y / ah) * rect.h
-    const w = (b.w / aw) * rect.w, h = (b.h / ah) * rect.h
-    ctx.strokeRect(x, y, w, h)
-    if (text) label(ctx, text, x, y)
+    const r = box(b)
+    glowBox(ctx, r.x, r.y, r.w, r.h, 1, 8 * dpr)
+    if (text) label(ctx, text, r.x, r.y)
   }
 }
 
