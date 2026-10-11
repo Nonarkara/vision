@@ -1,5 +1,15 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.12.1'
+import '../core/site.js?v=1.13.0'
+
+// The evidence strip: live numbers from the same catalogue the map reads, so
+// the about chapter's claims and the cameras page's dots can never disagree.
+fetch('/api/cameras').then((r) => r.json()).then((d) => {
+  const set = (k, v) => { const el = document.querySelector(`[data-fig="${k}"]`); if (el) el.textContent = v.toLocaleString() }
+  set('total', d.counts?.total ?? d.cameras.length)
+  for (const k of ['video', 'still', 'off']) set(k, d.counts?.[k] ?? 0)
+  set('readable', d.cameras.filter((c) => c.k === 'video' || (c.k === 'still' && c.h !== 0)).length)
+  set('sources', (d.sources ?? [...new Set(d.cameras.map((c) => c.src))]).length)
+}).catch(() => {})
 
 const choices = [...document.querySelectorAll('[data-history-choice]')]
 const panels = [...document.querySelectorAll('[data-history-panel]')]

@@ -50,15 +50,13 @@
         <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
         <ul class="th" lang="th">
           <li>มันคือเกณฑ์ ไม่ใช่ความแน่นอน ตั้งเข้มไปก็ไม่ยอมรับคุณตอนแสงน้อย ตั้งหลวมไปพี่น้องของคุณก็เข้าได้ ผู้ผลิตโทรศัพท์บางรายเตือนเองว่าฝาแฝดและญาติที่หน้าคล้ายกันอาจปลดล็อกเครื่องของกันและกันได้</li>
-          <li>โทรศัพท์ที่ใช้แค่กล้องธรรมดาโดยไม่วัดความลึก ถูกหลอกด้วยรูปถ่ายได้ง่ายกว่า โทรศัพท์ Android บางรุ่นจึงจัดการปลดล็อกด้วยใบหน้าแบบนี้เป็นแค่ความสะดวก และแอปธนาคารจะไม่ยอมรับ</li>
-          <li>หน้ากาก แว่นหนา หนวดที่เพิ่งไว้ ตัวเลขก็เปลี่ยนตาม ระบบที่ดีจะค่อย ๆ ปรับชุดที่บันทึกไว้ตามหน้าคุณที่เปลี่ยนไป</li>
-          <li>เว็บนี้ไม่ทำแบบนี้เลย การจดจำใบหน้าของคนใดคนหนึ่งคือสิ่งที่เรา<a href="/system#not-built">ตั้งใจไม่สร้าง</a></li>
+          <li>โทรศัพท์ที่วัดความลึกมีเกราะของตัวเอง Apple เขียนไว้เองว่าการจับคู่ของ Face ID ทำในส่วน Secure Enclave ของชิป และมีโครงข่ายอีกตัวที่หน้าที่เดียวคือจับการหลอกด้วยรูปถ่ายหรือหน้ากาก โทรศัพท์ที่ใช้แค่กล้องธรรมดาไม่มีเกราะชั้นนี้ จึงถูกหลอกง่ายกว่า และแอปธนาคารไม่ยอมรับ</li>
+          <li>หน้ากาก แว่นหนา หนวดที่เพิ่งไว้ ตัวเลขก็เปลี่ยนตาม Apple เขียนไว้ด้วยว่าเมื่อระบบจำไม่ได้แต่คุณป้อนรหัสตามทันที มันจะเก็บภาพใหม่ไว้ปรับชุดตัวเลขชั่วคราวให้ตามหน้าที่เปลี่ยน เว็บนี้ไม่ทำแบบนี้เลย — การจดจำใบหน้าของคนใดคนหนึ่งคือสิ่งที่เรา<a href="/system#not-built">ตั้งใจไม่สร้าง</a></li>
         </ul>
         <ul class="en" lang="en">
           <li>It is a threshold, not a certainty. Set it strict and it refuses you in bad light; set it loose and a sibling gets in. Some phone makers warn that twins and close relatives may unlock each other's phones.</li>
-          <li>Phones that use only an ordinary camera, with no depth, are easier to fool with a photo. That is why some Android phones treat that kind of face unlock as a convenience, and banking apps will not accept it.</li>
-          <li>A mask, heavy glasses, a new beard: the numbers move. Good systems slowly update the stored list as your face changes.</li>
-          <li>This site never does any of this. Recognising a particular face is exactly what we <a href="/system#not-built">chose not to build</a>.</li>
+          <li>Depth carries its own armour. Apple publishes that Face ID's matching happens in the chip's Secure Enclave, with a second network whose only job is catching photo and mask attempts. Phones that use an ordinary camera alone have no such layer — easier to fool, and banking apps will not accept them.</li>
+          <li>A mask, heavy glasses, a new beard: the numbers move. Apple also says that when a match fails but you immediately enter your passcode, it takes a fresh capture and temporarily augments the stored numbers to follow your changing face. This site never does any of this — recognising a particular face is exactly what we <a href="/system#not-built">chose not to build</a>.</li>
         </ul>
       </div>
     </div>
@@ -80,12 +78,14 @@
       <div class="prose">
         <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
         <ul class="th" lang="th">
-          <li>แสงสะท้อน รอยพับ แสงน้อย ขั้นแยกมืดกับสว่างจะพังก่อนเสมอ QR code จึงมีบิตสำรองไว้ซ่อมส่วนที่เสียหาย ระดับสูงสุดซ่อมได้ราว 30% ของโค้ด</li>
+          <li>แสงสะท้อน รอยพับ แสงน้อย ขั้นแยกมืดกับสว่างจะพังก่อนเสมอ QR code จึงมีบิตสำรองไว้ซ่อมส่วนที่เสียหาย ผู้ประดิษฐ์กำหนดระดับการซ่อมไว้สี่ระดับ: L ซ่อมได้ 7% M 15% Q 25% และ H สูงสุดราว 30% ของโค้ด</li>
           <li>ความผิดพลาดที่อันตรายจริงไม่ใช่การอ่านผิด สติกเกอร์ที่แปะทับ QR ของร้านถูกอ่านได้อย่างสมบูรณ์แบบ แล้วพาเงินของคุณไปที่อื่น เครื่องตรวจได้แค่ว่าบิตครบ ไม่ได้ตรวจว่าผู้รับเงินสุจริต ก่อนจ่ายผ่านพร้อมเพย์หรือแอปธนาคาร ให้อ่านชื่อผู้รับที่แอปแสดงทุกครั้ง</li>
+          <li>โค้ดที่อ่านได้ก็ยังเป็นแค่ที่อยู่ ไม่ใช่การรับรอง เครื่องเปิดลิงก์ที่ฝังอยู่เท่านั้น ไม่ได้ตรวจว่าหน้าปลายทางเป็นของธนาคารจริงหรือไม่ และลิงก์ย่อก็ยัดที่อยู่จริงให้มองไม่เห็น ให้ดูชื่อโดเมนและชื่อผู้รับก่อนยืนยันทุกครั้ง</li>
         </ul>
         <ul class="en" lang="en">
-          <li>Glare, a crease, low light: the light-or-dark step fails first. So QR codes carry spare bits to repair damage — at the highest level, about 30% of the code.</li>
+          <li>Glare, a crease, low light: the light-or-dark step fails first. So QR codes carry spare bits to repair damage. The inventor defines four repair levels: L restores 7%, M 15%, Q 25%, and H — the highest — about 30% of the code.</li>
           <li>The dangerous failure is not a misread. A sticker pasted over a shop's real code is read perfectly — and sends your money somewhere else. The machine checks that the bits are intact, not that the payee is honest. Before paying by PromptPay or any banking app, read the name the app shows you.</li>
+          <li>A code that reads perfectly is still only an address, not a guarantee. The reader opens the link inside it; it does not check that the page at the other end really belongs to your bank, and short links hide where they lead. Read the domain and the payee name before you confirm, every time.</li>
         </ul>
       </div>
     </div>
@@ -124,8 +124,8 @@
     <header><span class="chapter-no">04</span><h2 id="xray-h"><span class="th" lang="th">ภาพเอกซเรย์ปอด</span><span class="en" lang="en">Chest X-rays</span></h2></header>
     <div class="chapter-body">
       <div class="prose">
-        <p class="th" lang="th">โรงพยาบาลในหลายประเทศเริ่มใช้ซอฟต์แวร์อ่านภาพเอกซเรย์ปอด เพื่อคัดภาพที่อาจมีร่องรอยของโรค เช่น วัณโรค หรือก้อนในปอด ให้รังสีแพทย์ดูก่อน โครงข่ายนี้ฝึกจากภาพเอกซเรย์จำนวนมากที่แพทย์ติดป้ายไว้แล้ว มันไม่รู้จักกายวิภาค มันรู้แค่ว่ารูปแบบแบบไหนมักมาคู่กับป้ายแบบไหน</p>
-        <p class="en" lang="en">Hospitals in many countries now run software that reads chest X-rays and flags the ones that may show signs of disease — tuberculosis, a lung nodule — so a radiologist sees the worrying ones first. The network was trained on many X-rays that doctors had already labelled. It does not know anatomy. It knows which patterns came with which labels.</p>
+        <p class="th" lang="th">โรงพยาบาลในหลายประเทศเริ่มใช้ซอฟต์แวร์อ่านภาพเอกซเรย์ปอด เพื่อคัดภาพที่อาจมีร่องรอยของโรค เช่น วัณโรค หรือก้อนในปอด ให้รังสีแพทย์ดูก่อน องค์การอนามัยโลกแนะนำให้ใช้ซอฟต์แวร์ช่วยอ่านเป็นหนึ่งในเครื่องมือคัดกรองวัณโรคมาตั้งแต่แนวทางปี 2021 โครงข่ายนี้ฝึกจากภาพเอกซเรย์จำนวนมากที่แพทย์ติดป้ายไว้แล้ว มันไม่รู้จักกายวิภาค มันรู้แค่ว่ารูปแบบแบบไหนมักมาคู่กับป้ายแบบไหน</p>
+        <p class="en" lang="en">Hospitals in many countries now run software that reads chest X-rays and flags the ones that may show signs of disease — tuberculosis, a lung nodule — so a radiologist sees the worrying ones first. The World Health Organization has recommended computer-aided detection as one of its TB screening tools since its 2021 guidelines: a sorter for the doctor, never a replacement. The network was trained on many X-rays that doctors had already labelled. It does not know anatomy. It knows which patterns came with which labels.</p>
       </div>
       <ol class="steps" aria-label="Pipeline">
         <li><strong><span class="th" lang="th">ปรับมาตรฐาน</span><span class="en" lang="en">Standardise</span></strong><br><span class="th" lang="th">ขนาด ความเข้ม และทิศทางของภาพ</span><span class="en" lang="en">Size, contrast, which way up</span></li>
@@ -166,13 +166,13 @@
         <h3><span class="th" lang="th">อะไรผิดพลาดได้</span><span class="en" lang="en">What can go wrong</span></h3>
         <ul class="th" lang="th">
           <li>สีเส้นจาง ฝนตกตอนกลางคืน แดดยามเย็นส่องตรงหน้า เส้นเก่าที่ยังเห็นหลังซ่อมถนน ขั้นหาขอบเห็นทั้งหมดนี้ หรือไม่เห็นอะไรเลย ลองดูได้ด้วย<a href="/">เลนส์ “ขอบ” ที่หน้าแรก</a></li>
-          <li>ถนนไทยมีโจทย์ของตัวเอง ช่องทางที่อยู่ ๆ ก็หายไป มอเตอร์ไซค์ในช่องว่าง และเส้นที่ไม่เคยถูกทาเลย เมื่อระบบหาเส้นไม่เจอมันจะหยุดทำงาน และรถที่ดีจะบอกคุณ</li>
-          <li>มันมองหาเส้น ไม่ได้มองโลก มันไม่รู้ว่าช่องทางข้างหน้ามีน้ำท่วมอยู่</li>
+          <li>ข้อมูลจริงของ IIHS พบว่าระบบเตือนเมื่อคนเลี่ยงออกจากช่องทางลดการชนแบบข้างชนข้างและชนหัวที่รายงานตำรวจได้จริง แต่การสำรวจของ IIHS เองก็พบรถจำนวนไม่น้อยที่ปิดระบบนี้ทิ้ง — ระบบที่ถูกปิดไม่ช่วยใครเลย</li>
+          <li>ถนนไทยมีโจทย์ของตัวเอง ช่องทางที่อยู่ ๆ ก็หาย มอเตอร์ไซค์ในช่องว่าง และเส้นที่ไม่เคยถูกทา มันมองหาเส้น ไม่ได้มองโลก และไม่รู้ว่าช่องข้างหน้ามีน้ำท่วมอยู่ เมื่อหาเส้นไม่เจอ ระบบจะหยุดทำงาน และรถที่ดีจะบอกคุณ</li>
         </ul>
         <ul class="en" lang="en">
           <li>Faded paint, rain at night, low sun dead ahead, old markings still visible after road works: the edge step sees all of these, or none of them. Try <a href="/">the Edges lens on the home page</a>.</li>
-          <li>Thai roads add their own: lanes that stop being lanes, motorcycles in the gap, markings that were never painted. When the system loses the lines it switches off, and a good car tells you so.</li>
-          <li>It looks for lines, not for the world. It does not know that the lane ahead is flooded.</li>
+          <li>IIHS's real-world data finds lane departure warning does reduce police-reported sideswipe and head-on crashes. But IIHS's own dealership survey also found a sizeable share of cars with the system switched off — a system someone turned off protects no one.</li>
+          <li>Thai roads add their own: lanes that stop being lanes, motorcycles in the gap, markings that were never painted. It looks for lines, not for the world — it does not know the lane ahead is flooded. When it loses the lines it switches off, and a good car tells you so.</li>
         </ul>
       </div>
     </div>
@@ -196,10 +196,12 @@
         <ul class="th" lang="th">
           <li>ของที่หน้าตาคล้ายกัน มะนาวกับส้มเขียวลูกเล็ก มะม่วงสองสายพันธุ์ เครื่องจึงเสนอหลายตัวเลือกแล้วให้คุณเลือกเอง</li>
           <li>ถุงพลาสติก มือที่ติดเข้ามาในภาพ สินค้าใหม่ที่ร้านลืมเพิ่ม ลายนิ้วมือที่ “ใกล้ที่สุด” ก็ยังเป็นคำตอบ แม้ว่ามันจะอยู่ไกลมากก็ตาม</li>
+          <li>ผู้ขายระบบเชิงพาณิชย์อย่าง Mashgin ใช้กล้องหลายตัวสร้างแบบจำลองสามมิติของสินค้าแต่ละชิ้น และเขียนไว้เองว่าความแม่น 95% ยังหมายถึงต้องให้คนเข้ามาช่วยอย่างน้อยหนึ่งในยี่สิบรายการ — จุดที่เครื่องยังต้องเดา คือจุดที่คุณควรตรวจ</li>
         </ul>
         <ul class="en" lang="en">
           <li>Lookalikes: limes and small green oranges, two kinds of mango. That is why it offers choices and lets you pick.</li>
           <li>A plastic bag, a hand in the picture, a new product the shop forgot to add: the nearest fingerprint is still the answer, even when it is far away.</li>
+          <li>Commercial vendors fight this with hardware: Mashgin builds a 3D model of every item from several cameras, and says plainly that 95% accuracy still means staff stepping in on at least one transaction in twenty. Where the machine still has to guess is exactly where your check matters.</li>
         </ul>
       </div>
     </div>
@@ -209,8 +211,8 @@
     <header><span class="chapter-no">07</span><h2 id="crops-h"><span class="th" lang="th">แอปตรวจโรคพืช</span><span class="en" lang="en">Crop disease apps</span></h2></header>
     <div class="chapter-body">
       <div class="prose">
-        <p class="th" lang="th">ถ่ายรูปใบที่เป็นโรค แล้วแอปก็บอกชื่อโรค แอปเหล่านี้จัดกลุ่มภาพเทียบกับโรคที่มันเคยถูกฝึกมา ช่วยให้เกษตรกรตั้งคำถามที่ถูกได้เร็วขึ้น แต่ก็ผิดได้อย่างมั่นใจเช่นกัน</p>
-        <p class="en" lang="en">Photograph a sick leaf, get the name of a disease. These apps classify the photo against the diseases they were trained on. They can help a farmer ask the right question sooner. They can also be confidently wrong.</p>
+        <p class="th" lang="th">ถ่ายรูปใบที่เป็นโรค แล้วแอปก็บอกชื่อโรค แอปเหล่านี้จัดกลุ่มภาพเทียบกับโรคที่มันเคยถูกฝึกมา แอปใหญ่ที่สุดในกลุ่มนี้อย่าง Plantix บอกว่าตอบคำถามเรื่องพืชมาแล้วกว่าร้อยล้านครั้ง และยังคงมีชุมชนผู้เชี่ยวชาญเกษตรคอยตอบคำถามที่โมเดลไม่แน่ใจ — คนยังเป็นส่วนหนึ่งของระบบเสมอ แอปช่วยให้เกษตรกรตั้งคำถามที่ถูกได้เร็วขึ้น แต่ก็ผิดได้อย่างมั่นใจเช่นกัน</p>
+        <p class="en" lang="en">Photograph a sick leaf, get the name of a disease. These apps classify the photo against the diseases they were trained on. Plantix, the largest of them, says it has answered over 100 million crop questions — and still keeps a community of agricultural experts for the cases the model is unsure about: a person stays part of the loop. The app can help a farmer ask the right question sooner. It can also be confidently wrong.</p>
       </div>
       <ol class="steps" aria-label="Pipeline">
         <li><strong><span class="th" lang="th">ถ่าย</span><span class="en" lang="en">Photograph</span></strong><br><span class="th" lang="th">รูปใบไม้หนึ่งใบหรือหลายใบ</span><span class="en" lang="en">One leaf, or several</span></li>
@@ -296,6 +298,34 @@
         </div>
         <p class="readout" data-readout></p>
       </div>
+    </div>
+  </section>
+
+  <section class="chapter field-quiet" id="learned" aria-labelledby="learned-h">
+    <header>
+      <span class="chapter-no"><span class="th" lang="th">เรียนจากของจริง</span><span class="en" lang="en">FROM THE REAL APPS</span></span>
+      <h2 id="learned-h"><span class="th" lang="th">เคดิต: แอปและเอกสารที่หน้านี้เรียนมา</span><span class="en" lang="en">Credits: the apps and documents this page learned from</span></h2>
+      <p class="micro"><span class="th" lang="th">ทุกแอปบนหน้านี้เราไปอ่านเอกสารที่ผู้ทำมันเผยแพร่เอง แล้วยืมสิ่งที่เขาอธิบายได้ดีที่สุด มาอธิบายต่อ พร้อมบอกที่มาทุกครั้ง ถ้าเขาอธิบายไว้ดีกว่า เราเรียนจากเขา — นี่คือสิ่งที่เรายืม</span><span class="en" lang="en">For every app on this page we read what its makers publish, borrowed what they explain best, and named the source each time. Where they say it better, we learned from them — this is what we borrowed.</span></p>
+    </header>
+    <div class="chapter-body">
+      <ul class="th" lang="th">
+        <li><a href="https://support.apple.com/guide/security/facial-matching-security-sece151358d1/web">Apple Platform Security: Facial matching security</a> — การจับคู่ใน Secure Enclave โครงข่ายต้านการหลอก และการปรับชุดตัวเลขหลังคุณป้อนรหัส</li>
+        <li><a href="https://www.qrcode.com/en/about/error_correction.html">Denso Wave ผู้ประดิษฐ์ QR code</a> — ตารางระดับการซ่อมข้อผิดพลาด L 7% · M 15% · Q 25% · H 30%</li>
+        <li><a href="https://www.who.int/publications/i/item/9789240022676">องค์การอนามัยโลก แนวทางคัดกรองวัณโรค (2021)</a> — บทบาทของซอฟต์แวร์ช่วยอ่านฟิล์มในฐานะเครื่องมือคัดกรอง</li>
+        <li><a href="https://www.iihs.org/topics/advanced-driver-assistance">IIHS: Advanced driver assistance</a> — ข้อมูลการชนจริงของระบบเตือนออกจากช่องทาง และอัตราที่คนปิดระบบทิ้ง</li>
+        <li><a href="https://plantix.net/en/">Plantix</a> — สเกลของแอปวินิจฉัยโรคพืช และชุมชนผู้เชี่ยวชาญที่ยังคงอยู่ในระบบ</li>
+        <li><a href="https://www.mashgin.com/">Mashgin</a> — คำอธิบายผู้ขายเองว่าความแม่น 95% หมายถึงอะไรในทางปฏิบัติ และกล้องหลายตัวสำหรับสินค้าสามมิติ</li>
+        <li><a href="https://flood.nonarkara.org/">FloodDash</a> — รายชื่อกล้องสาธารณะของไทยที่ห้อง 08 และหน้ากล้องของเว็บนี้อ่าน</li>
+      </ul>
+      <ul class="en" lang="en">
+        <li><a href="https://support.apple.com/guide/security/facial-matching-security-sece151358d1/web">Apple Platform Security: Facial matching security</a> — the Secure Enclave matching, the anti-spoofing network, and the passcode-followed augmentation.</li>
+        <li><a href="https://www.qrcode.com/en/about/error_correction.html">Denso Wave, inventor of the QR code</a> — the error-correction table: L 7% · M 15% · Q 25% · H 30%.</li>
+        <li><a href="https://www.who.int/publications/i/item/9789240022676">World Health Organization, TB screening guidelines (2021)</a> — computer-aided detection's role as a screening tool.</li>
+        <li><a href="https://www.iihs.org/topics/advanced-driver-assistance">IIHS: Advanced driver assistance</a> — real-world lane-departure crash data, and how often drivers switch the system off.</li>
+        <li><a href="https://plantix.net/en/">Plantix</a> — the scale of crop-diagnosis apps, and the human experts that stay in the loop.</li>
+        <li><a href="https://www.mashgin.com/">Mashgin</a> — a vendor's own explanation of what 95% accuracy means in practice, and multi-camera 3D for hard-to-tell items.</li>
+        <li><a href="https://flood.nonarkara.org/">FloodDash</a> — Thailand's public camera list, which this site and its cameras page read.</li>
+      </ul>
     </div>
   </section>
 
