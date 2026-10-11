@@ -2,9 +2,9 @@
 // what every bench studies — a public camera, the visitor's own camera, or a
 // photo — so switching to your own face re-teaches the whole page at once.
 
-import '../core/site.js?v=1.12.0'
+import '../core/site.js?v=1.12.1'
 import { t, onLang } from '../core/i18n.js'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.12.0'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.12.1'
 import { numbersChapter, colourChapter, thresholdChapter } from '../learn/pixels.js'
 import { convolutionChapter, edgesChapter, motionChapter } from '../learn/filters.js'
 import { detectorChapter, limitsChapter } from '../learn/neural.js'

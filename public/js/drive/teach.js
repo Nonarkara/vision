@@ -33,9 +33,16 @@ const FILTERS = [
   [95, 196, 107],  // green
 ]
 
+// Colour hits are rare — one lamp head is a fraction of one percent of a
+// tile — so they are scaled to the same order as the brightness cells.
+// Without this the learner can never lift their weights: a plain gradient
+// step moves a weight by (error × feature), and 0.002 × anything goes nowhere.
+const FILTER_SCALE = 250
+
 /**
- * One tile, as the learner sees it: 64 brightness cells plus 3 colour
- * fractions. `data` is RGBA pixels of width `w`, height `h`.
+ * One tile, as the learner sees it: 64 brightness cells (centred on mid-grey,
+ * so "darker than usual" and "brighter than usual" count equally) plus 3
+ * colour-filter readings. `data` is RGBA pixels of width `w`, height `h`.
  */
 export function features(data, w, h) {
   const cells = new Float64Array(VIEW * VIEW)
@@ -56,9 +63,9 @@ export function features(data, w, h) {
     }
   }
   const out = new Array(VIEW * VIEW)
-  for (let i = 0; i < out.length; i++) out[i] = cells[i] / (counted[i] * 255)
+  for (let i = 0; i < out.length; i++) out[i] = cells[i] / (counted[i] * 255) - 0.5
   const total = Math.max(1, w * h)
-  for (const hits of filterHits) out.push(hits / total)
+  for (const hits of filterHits) out.push((hits / total) * FILTER_SCALE)
   return out
 }
 
