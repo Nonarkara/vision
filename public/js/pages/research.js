@@ -1,14 +1,18 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.13.0'
+import '../core/site.js?v=1.13.1'
+import { evidence } from '../core/catalog.js'
 
 // The evidence strip: live numbers from the same catalogue the map reads, so
 // the about chapter's claims and the cameras page's dots can never disagree.
+// The counting rule lives in catalog.js next to isReadable; this file only
+// writes the answer down.
 fetch('/api/cameras').then((r) => r.json()).then((d) => {
-  const set = (k, v) => { const el = document.querySelector(`[data-fig="${k}"]`); if (el) el.textContent = v.toLocaleString() }
-  set('total', d.counts?.total ?? d.cameras.length)
-  for (const k of ['video', 'still', 'off']) set(k, d.counts?.[k] ?? 0)
-  set('readable', d.cameras.filter((c) => c.k === 'video' || (c.k === 'still' && c.h !== 0)).length)
-  set('sources', (d.sources ?? [...new Set(d.cameras.map((c) => c.src))]).length)
+  const figures = evidence(d)
+  if (!figures) return
+  for (const [k, v] of Object.entries(figures)) {
+    const el = document.querySelector(`[data-fig="${k}"]`)
+    if (el) el.textContent = typeof v === 'number' ? v.toLocaleString() : '—'
+  }
 }).catch(() => {})
 
 const choices = [...document.querySelectorAll('[data-history-choice]')]

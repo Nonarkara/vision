@@ -57,6 +57,40 @@ export function isReadable(c) {
   return c.k === 'video' || (c.k === 'still' && c.h !== 0)
 }
 
+/**
+ * The six figures the About chapter prints. Pure — takes the catalogue
+ * payload, returns the numbers, so a test can pin them without a browser.
+ *
+ * "a machine can read" is counted with isReadable, the same rule the bench,
+ * the judge and the wall already use. That chapter promises its numbers cannot
+ * disagree with the cameras page; keeping a second copy of the rule inline in
+ * that page's own script is exactly how the promise would rot.
+ *
+ * A figure the payload cannot support comes back null and prints as an em
+ * dash, never as 0. A zero is a claim about the world. This page makes claims.
+ */
+export function evidence(d) {
+  if (!d || !Array.isArray(d.cameras)) return null
+  const empty = { total: null, readable: null, video: null, still: null, off: null, sources: null }
+  // A catalogue that has not loaded yet is not evidence that there is nothing
+  // out there. Before the first upstream fetch the server honestly reports zero
+  // of everything and origin "empty". Printing those six zeros under the line
+  // "they are the camera list this site is reading right now" would be six
+  // false claims; a dash says "not known yet", which is the truth. A real zero
+  // — a day with no live video — still prints as a zero, because by then the
+  // catalogue has loaded and the zero is a fact about the world.
+  if (!d.loadedAt) return empty
+  const counts = d.counts ?? {}
+  return {
+    total: counts.total ?? d.cameras.length,
+    readable: d.cameras.filter(isReadable).length,
+    video: counts.video ?? null,
+    still: counts.still ?? null,
+    off: counts.off ?? null,
+    sources: Array.isArray(d.sources) ? d.sources.length : new Set(d.cameras.map((c) => c.src)).size,
+  }
+}
+
 export function shuffle(arr) {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
