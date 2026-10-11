@@ -65,6 +65,17 @@ for (const route of Object.keys(PAGES)) {
   if (ariaTh !== ariaEn) fail(route, `aria parity: ${ariaTh} data-aria-th vs ${ariaEn} data-aria-en`)
   if (!/property="og:title"/.test(html)) fail(route, 'missing og:title')
   if (!/rel="canonical"/.test(html)) fail(route, 'missing canonical')
+  // Cache-key census, scoped to this site's OWN assets. A naive `?v=` grep is
+  // wrong here and was wrong once already: /research links two YouTube videos
+  // whose URLs carry `watch?v=<video-id>`, which is theirs, not a version of
+  // ours, so the page looks forked when nothing is. Only root-relative src/href
+  // count, and they must all carry the same stamp.
+  const stamps = new Set()
+  for (const [, ref] of html.matchAll(/\s(?:src|href)="(\/[^"]*\?v=[0-9.]+)"/g)) stamps.add(/\?v=[0-9.]+/.exec(ref)[0])
+  if (stamps.size > 1) fail(route, `mixed cache keys ${[...stamps].join(' + ')} — a page loading two versions of itself`)
+  for (const [, ref] of html.matchAll(/\s(?:src|href)="(\/[^"#]*\.(?:js|css))"/g)) {
+    if (!ref.includes('?v=')) fail(route, `unstamped asset ${ref.split('?')[0]} — it can never be cache-busted`)
+  }
   for (const [, ref] of html.matchAll(/\s(?:src|href)="(\/[^"#]*)/g)) {
     const url = ref.split('?')[0]
     if (url.startsWith('//')) continue

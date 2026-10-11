@@ -1,6 +1,6 @@
 {
   "name": "vision",
-  "version": "1.13.1",
+  "version": "1.13.2",
   "private": true,
   "description": "vision.nonarkara.org — a public classroom for computer vision on Thailand's open cameras. TH/EN.",
   "type": "module",
@@ -11,7 +11,7 @@
     "start": "node server/index.js",
     "dev": "PORT=8431 node server/index.js",
     "test": "node --test tests/*.test.js",
-    "check": "node scripts/build-handbook.mjs --check && node --test tests/*.test.js && node scripts/check-site.mjs && node scripts/check-forked-imports.mjs && node scripts/check-docs.mjs && node scripts/palette-measure.mjs --check",
+    "check": "node scripts/build-handbook.mjs --check && node --test tests/*.test.js && node scripts/check-site.mjs && node scripts/check-forked-imports.mjs && node scripts/check-privacy.mjs && node scripts/check-docs.mjs && node scripts/palette-measure.mjs --check",
     "build:handbook": "node scripts/build-handbook.mjs",
     "palette": "node scripts/palette-measure.mjs",
     "deploy": "node scripts/deploy-local.mjs",

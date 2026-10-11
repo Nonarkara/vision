@@ -325,3 +325,23 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **Gates.** 135 tests pass (7 new in `tests/evidence.test.js`, none skipped — the live-payload case runs the real handler on an ephemeral port the way check-site does, and holds whether the catalogue is loaded or not). 25 pages, 87 references, no module forks, docs and palette green.
 
 - **Still parked for the user:** whether the Drive CAPTCHA should be a hard wall. It remains skippable.
+
+## 2026-10-11 · Every parked item closed out, release 1.13.2 (Asia/Bangkok)
+
+- **Asked to take care of every open item so this is shipable.** Five had been parked across three releases. All are now either settled or converted into something the build enforces.
+
+- **Correction first, because the previous entry got this wrong.** The 1.13.1 note said the Cloudflare analytics concern was "moot". That was wrong, and the way it was wrong is worth recording. I checked with `curl` and found no beacon, then generalised to browsers. Cloudflare does not inject for non-browser traffic, so the curl check could never have seen it. Driving a real Chrome over CDP against production shows the tag is injected into every page: `https://static.cloudflareinsights.com/beacon.min.js/...`, present in `document.scripts`, blocked by CSP, and logging a red violation twice per page load. Codex's 1.12.1 note had recorded exactly this and I talked myself out of it. **The origin is clean — the tag is added at the edge, so only a zone setting can remove it.**
+
+- **What is actually true, and is enforced.** No analytics is collected: nothing runs, no cookie is set, no data leaves the browser. The CSP is the only reason. The tempting "fix" for those red console errors is to add `static.cloudflareinsights.com` to `script-src`, which would silence the console and start collecting analytics at the same time — it would look like a cleanup and would quietly make /legal a lie. `scripts/check-privacy.mjs` now fails on exactly that, and it is wired into `npm run check`.
+
+- **The new check nearly shipped guarding nothing.** It reported green with `static.cloudflareinsights.com` sitting in `script-src`. Cause: I wrote `problems.size` on an array, having copied the line from `check-site.mjs` where the collection is a Set — `.size` is `undefined` on an array, which is falsy, so the failure branch could never run. Found by mutation-testing, the same day the fork checker had the same class of bug. Three mutations now verified to go red: whitelisting the beacon, a wildcard `script-src`, and quietly softening the /legal promise. A fourth — the YouTube false positive below — verified to stay green.
+
+- **Closed: the scoped cache-key census**, parked since 1.11.0 and worth doing because the naive `?v=` grep reports /research as forked on two YouTube links whose `watch?v=` is theirs. Now in `check-site.mjs`, scoped to root-relative `src`/`href`, and it also catches an asset with no `?v=` at all, which could never be cache-busted. Verified: two YouTube links pass, a mixed key fails, an unstamped asset fails.
+
+- **Settled: the CAPTCHA stays skippable and stays in front of the room.** Gate-first is the teaching device; skippable is the commitment. A hard wall would contradict the accessibility position the site states in public — skip always present, no timer, every square keyboard-reachable, screen-reader escape — and would gate a public classroom's own lesson behind a puzzle. Both questions parked for three releases are now answered, not deferred.
+
+- **Settled: the gesture→Settings OS helper is out of scope, not pending.** A native helper cannot ship in a browser-only civic site, and the room already states the limit honestly in its own list — Settings and whole-screen need a local program. That is the correct end state, not a deferral.
+
+- **One thing the user still has to do, and it is one toggle.** Cloudflare dashboard → the zone → Analytics & Logs → Web Analytics → disable. That removes the tag itself. Until then the promise still holds in substance and the CSP still enforces it; the check now makes sure nobody trades the promise for a quiet console.
+
+- **Gates.** 135 tests, no skips. 25 pages, 87 references, cache census green, no module forks, privacy green, docs and tone ladder green.

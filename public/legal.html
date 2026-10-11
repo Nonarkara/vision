@@ -57,6 +57,7 @@
         <ul class="th" lang="th">
           <li>ไม่มีบัญชีผู้ใช้ ไม่มีแบบฟอร์ม ไม่ถามชื่อหรืออีเมล</li>
           <li>ไม่มีระบบวิเคราะห์ผู้ใช้ ไม่มีโฆษณา ไม่มีสคริปต์ติดตามของบุคคลที่สาม</li>
+          <li>Cloudflare แทรกแท็กสคริปต์วัดผล (Web Analytics) ลงในทุกหน้าที่มันให้บริการ แต้เว็บนี้ส่งนโยบาย Content-Security-Policy ที่ปิดสคริปต์นอกโดเมนนี้ทิ้ง เบราว์เซอร์จึงไม่รันมันและไม่มีการส่งข้อมูลใด ๆ ออกไป ถ้าคุณเปิดเครื่องมือนักพัฒนาแล้วเห็นข้อความว่า beacon ถูกบล็อก นั่นคือกลไกนี้ทำงานตามเหตุผล ไม่ใช่ข้อผิดพลาดของเว็บ</li>
           <li>ภาพนิ่งจากกล้องสาธารณะอยู่ในหน่วยความจำของรีเลย์ไม่เกิน 30 วินาที ไม่ถูกเขียนลงดิสก์ เซิร์ฟเวอร์ไม่วิเคราะห์ภาพ และไม่มีส่วนใดพยายามระบุตัวบุคคล</li>
           <li>เซิร์ฟเวอร์ใช้ที่อยู่เครือข่ายของคุณชั่วคราวในหน่วยความจำ เพื่อจำกัดอัตราการขอเท่านั้น และไม่บันทึกไว้ในล็อก</li>
           <li>เว็บให้บริการผ่าน Cloudflare ซึ่งจัดการการเชื่อมต่อตามเงื่อนไขของ Cloudflare เอง และเมื่อคุณดูวิดีโอสด เบราว์เซอร์ของคุณเชื่อมต่อกับเซิร์ฟเวอร์ของเจ้าของกล้องโดยตรง</li>
@@ -64,6 +65,7 @@
         <ul class="en" lang="en">
           <li>No accounts, no forms; we never ask for a name or an email.</li>
           <li>No analytics, no advertising, no third-party tracking scripts.</li>
+          <li>Cloudflare injects a Web Analytics script into every page it serves. This site sends a Content-Security-Policy that refuses scripts from off-origin, so your browser never runs it and nothing is sent anywhere. If you open developer tools and see the beacon blocked, that is this rule working, not a fault on the site.</li>
           <li>Public-camera stills sit in the relay's memory for at most 30 seconds and are never written to disk. The server does not analyse pictures, and nothing on the site tries to identify anyone.</li>
           <li>The server holds your network address briefly, in memory, only to enforce rate limits. It is not written to our logs.</li>
           <li>The site is served through Cloudflare, which handles connections under its own terms. When you watch live video, your browser connects directly to the camera owner's server.</li>
