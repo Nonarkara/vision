@@ -277,3 +277,25 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - Verified the GLM agent's 1.10.2 report: bounded relay queue (MAX_QUEUE 100 → 503), deploy keeps one rollback generation and prunes orphans (safe: the only runtime write is data/cameras.json, outside pruned server/ and public/), async catalogue write. 120 tests green.
 - Found live: /drive was dead on load. The CAPTCHA gate painted before layout (1 px box → negative tile size → IndexSizeError in canvas.arc), thrown at the top level of drive.js, so no cards, no simulation. Fixed: paint() waits for a real box (ResizeObserver repaints); mountGate wrapped so a gate failure opens the room. Stamps 1.11.1 → 1.11.2.
 - Still the user's call: the gate stays skippable as built.
+
+## 2026-10-10 23:35 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.12.0, uptime 3,156 seconds. App PID 69987 and tunnel PID 13443 running. App startup 15:42:29 UTC matches the other agent's committed release 25761e5; local package also 1.12.0. Preserve that release and preceding Drive crash fix feed74c.
+- Catalogue 3,430 cameras; loaded 16:32:29 UTC and upstream 16:28:26 UTC, approximately three/seven minutes old. A 15:41 UTC refresh timeout recovered at 15:43; every refresh since startup succeeded. Relay idle without resting hosts; memory 22–24 MB.
+- Tunnel connections 1/2 registered again at 16:34:59 UTC following brief QUIC retries. Public health succeeds; no sustained fault justifying recovery.
+- Working tree clean before this entry. No repair, deployment, camera probes or machine-wide checks performed. Scoped monitoring continues within the away window.
+
+## 2026-10-11 05:35 Asia/Bangkok
+
+- Local/public health both `ok: true`, version 1.12.0, uptime 24,788 seconds. App PID 69987 and tunnel PID 13443 running; no new app restart.
+- Catalogue 3,425 cameras; loaded 22:32:30 UTC and upstream 22:28:26 UTC, about three/seven minutes old. A 21:03 UTC timeout recovered; last seven refreshes succeeded. Relay idle without resting hosts; memory 22–24 MB.
+- Tunnel connection 0 registered at 22:26:48 UTC and connections 1/2 at 22:27:02 after brief retries. Public health succeeds; no sustained failure requiring recovery.
+- Only existing operations notes were modified. No repair, deployment, camera probes or machine-wide checks justified. Other agents' release preserved; scoped monitoring continues within the away window.
+
+## 2026-10-11 · Shipability test and reconciliation, release 1.12.1 (Asia/Bangkok)
+
+- User asked for the shipability test after the earlier green runs. Full gate green twice: 128/128 tests (was 120 — see below), handbook matches docs, 25 pages/87 local references, all JS parses, model shards present, docs links resolve, tone ladder 16 required pairings clear and 5 forbidden stay illegible.
+- The shipability test itself found one defect: the live runtime's `js/drive/teach.js` differed from the repo — the running copy had a better learner (brightness centred on mid-grey; colour filters scaled by FILTER_SCALE 250 so 0.002-sized readings can lift their weights) that never made it into commit 25761e5. The repo could not reproduce production. Full-tree diff of `~/Library/Application Support/Vision` against the workspace confirmed teach.js was the only drifted file (server/, package.json, all other public/ files identical; `.DS_Store` and the private `CCTV photos` dir are workspace-only by design).
+- Reconciliation release 1.12.1: adopted the live-proven teach.js into the workspace, added `tests/teach.test.js` (8 tests: centring, −0.5..+0.5 mapping, filter scaling with the regression that raw 0.002 fractions could never teach their weight, deterministic training, sigmoid saturation, pick threshold, empty-lesson behaviour), bumped version and all 76 `?v=` import stamps 1.12.0 → 1.12.1 per the no-module-under-two-URLs rule.
+- Deployed 1.12.1 via `npm run deploy` (gate re-run inside the script; rollback generation kept; not needed). Public health ok on 1.12.1; served teach.js now byte-equal to the repo; live /drive rendered six car cards with no console errors beyond the known, decision-pending Cloudflare beacon CSP block.
+- Still parked for the user: the CAPTCHA gate placement (room open by default vs gate first), the Cloudflare Web Analytics zone auto-inject (site promises "no analytics" in legal/system pages, so the beacon should be disabled at the zone rather than allowed in CSP), and the paused gesture→Settings helper CSP change.
