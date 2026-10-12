@@ -288,6 +288,9 @@ em { font-style: italic; }
 }
 .rooms a .num { color: var(--gray); opacity: 0.7; }
 .rooms a:hover { color: var(--white); }
+/* A link that straddles the rail would paint half a word against ›.
+   Hidden, it keeps its width, so the chevron still means there is more. */
+.rooms a.is-clipped { visibility: hidden; }
 .rooms a[aria-current="page"] { background: var(--signal); color: var(--black); }
 .rooms a[aria-current="page"] .num { color: var(--black); opacity: 1; }
 .rail-tools { display: flex; align-items: stretch; flex: 0 0 auto; }

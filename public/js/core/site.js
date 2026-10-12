@@ -21,13 +21,15 @@ function paintAria() {
 paintAria()
 onLang(paintAria)
 
-// A room link that straddles the right edge of the scroller shows up as a
-// half glyph tucked against the chevron (08–10 at 1024–1280). Push that link
-// fully past the edge. At the end of the list, leave the last rooms visible.
-export function roomClipDelta({ edge, left, right, atEnd }) {
-  if (atEnd) return 0
-  if (right > edge + 1 && left < edge - 1) return Math.ceil(edge - left)
-  return 0
+// A room link that straddles the scroller is a half word against the chevron
+// (08–10 at 1024–1280). Hide that link. Scrolling it away would walk the rail
+// to the end and cut 01 off the left, and there is no chevron back.
+// Four pixels of slack: a link's own padding can pass the edge without a
+// letter being cut. At the end of the list the last rooms stay visible.
+export function roomIsClipped({ edge, left, right, atEnd, start = null }) {
+  const cutsRight = !atEnd && right > edge + 4 && left < edge - 4
+  const cutsLeft = start != null && left < start - 4 && right > start + 4
+  return cutsRight || cutsLeft
 }
 
 // The room rail scrolls sideways and hides its scrollbar. At widths too narrow
@@ -40,20 +42,15 @@ const navRail = document.querySelector('.rail')
 const roomsRail = document.querySelector('.rooms')
 const railMore = document.querySelector('[data-rail-more]')
 if (navRail && roomsRail && railMore) {
-  const snapRooms = () => {
+  const paintClip = () => {
     const max = roomsRail.scrollWidth - roomsRail.clientWidth
-    if (max <= 4) return
-    const atEnd = roomsRail.scrollLeft >= max - 1
-    const edge = roomsRail.getBoundingClientRect().right
-    let delta = 0
+    const atEnd = max <= 4 || roomsRail.scrollLeft >= max - 1
+    const box = roomsRail.getBoundingClientRect()
     for (const link of roomsRail.querySelectorAll(':scope > a')) {
-      const box = link.getBoundingClientRect()
-      delta = Math.max(delta, roomClipDelta({ edge, left: box.left, right: box.right, atEnd }))
+      const r = link.getBoundingClientRect()
+      const clipped = roomIsClipped({ edge: box.right, left: r.left, right: r.right, atEnd, start: box.left })
+      link.classList.toggle('is-clipped', clipped)
     }
-    if (delta <= 0) return
-    // Near the end, finish the scroll so the last rooms are whole.
-    const next = roomsRail.scrollLeft + delta >= max - 1 ? max : roomsRail.scrollLeft + delta
-    if (next !== roomsRail.scrollLeft) roomsRail.scrollLeft = next
   }
   const syncMore = () => {
     // Measure with the chevron pulled out of the layout first. It sits in the
@@ -67,7 +64,7 @@ if (navRail && roomsRail && railMore) {
     navRail.dataset.more = String(room)
     railMore.setAttribute('aria-hidden', String(!room))
     railMore.tabIndex = room ? 0 : -1
-    if (room) snapRooms()
+    paintClip()
   }
   railMore.addEventListener('click', () => {
     roomsRail.scrollBy({ left: Math.round(roomsRail.clientWidth * 0.8), behavior: 'smooth' })
