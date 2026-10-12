@@ -359,3 +359,17 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **Two smaller things found on the way.** `site.js` already had a `const rail` further down for anchor-offset work; the new one collided and killed the whole module — caught by `check-site.mjs`, which is exactly what it is for. And the first sweep I ran reported "all 52 combinations broken", which was my probe measuring children inside a scroll container, plus a `?lang=en` parameter the site does not support at all (`lang()` reads `data-lang`), so both halves of the "both languages" sweep were the same language. Both were measurement errors, corrected before anything shipped.
 
 - **Gates.** 135 tests, no skips. 25 pages, 87 references, no module forks, privacy green, docs and tone ladder green.
+
+### Cloudflare Web Analytics — attempted, blocked on token scope (2026-10-12)
+
+- I told the user this needed their dashboard, then told them I had API access and could do it myself. Both were wrong in sequence. Here is the exact position so nobody repeats the round trip.
+
+- **What is found.** Two Web Analytics sites exist on account `74ad6bf8…`. One, `d2b5e8ec…`, is a manual snippet install with `auto_install: false`. The other, `fa9e416d…`, is the zone-level install: `auto_install: true`, `ruleset.enabled: true`, `zone_name: nonarkara.org`. That is what injects the beacon into every page of every subdomain.
+
+- **What the token can and cannot do.** `CLOUDFLARE_API_TOKEN` is active and can read zones, read zone settings, and **write zone settings** (`PATCH /zones/:id/settings/browser_check` returns a value error, not an auth error, so write is genuinely held). It cannot write RUM: PATCH, PUT, POST and DELETE on `/accounts/:id/rum/site_info/:tag` all return `10000 Authentication error`. Web Analytics is not among the zone's 56 settings, so there is no route around it through the settings API.
+
+- **Nothing was changed.** Verified after every attempt: `fa9e416d… auto_install true, ruleset enabled true`. The pre-change state is saved at `/tmp/webanalytics-backup.json` (site_tag `fa9e416d…`, token `9efbcc8c…`, ruleset id `3bc27b92-70e6-4566-8349-fe8db155b4ae`).
+
+- **To finish it, one of:** toggle zone `nonarkara.org` → Analytics & Logs → Web Analytics off in the dashboard (about thirty seconds, works now, no code change); or add the RUM/Web Analytics **write** permission to the token and I can do it and verify the beacon disappears from a live browser.
+
+- **Until then nothing is wrong with the site.** The CSP blocks the beacon, no cookie is set, nothing is collected, `/legal` documents it in both languages, and `check-privacy.mjs` fails the build if anyone widens `script-src` to silence the console.
