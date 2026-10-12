@@ -58,3 +58,33 @@ for (const focusRoom of [false, true, 'lesson']) test(`phone viewport mode keeps
   assert.equal(sibling.inert, true)
   assert.equal(button.attrs['aria-pressed'], 'false')
 })
+
+test('desktop Escape asks the browser to leave fullscreen and does not swallow the key', async () => {
+  const root = element(), body = element(), header = element(), main = element()
+  const bench = element(['bench']), button = element()
+  children(root, body)
+  children(body, header, main)
+  children(main, bench)
+  bench.querySelector = (selector) => selector === 'canvas' ? {} : selector === '[data-fullscreen]' ? button : null
+  const events = {}
+  const doc = {
+    body, documentElement: { dataset: { lang: 'en' } },
+    fullscreenEnabled: true,
+    fullscreenElement: null,
+    querySelectorAll: () => [bench],
+    addEventListener: (type, fn) => { events[type] = fn },
+    exitFullscreen: async () => { doc.fullscreenElement = null; exited = true },
+  }
+  let exited = false
+  globalThis.document = doc
+  globalThis.window = { matchMedia: () => ({ matches: true }), dispatchEvent() {} }
+  bench.requestFullscreen = async () => { doc.fullscreenElement = bench }
+  initFullscreen()
+  await button.events.click()
+  assert.equal(doc.fullscreenElement, bench)
+  assert.equal(bench.classList.contains('is-expanded'), false)
+  let prevented = false
+  events.keydown({ key: 'Escape', repeat: false, preventDefault() { prevented = true } })
+  assert.equal(prevented, false)
+  assert.equal(exited, true)
+})

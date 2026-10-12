@@ -104,13 +104,23 @@ export function shuffle(arr) {
  * Choose `n` readable cameras. Stills known to have worked come first, then
  * untested stills; videos are mixed in when asked, because a page that opens
  * 20 live streams at once is a page that stutters.
+ *
+ * `avoid` drops cameras that just failed, when enough others remain, so a
+ * census retry does not spend another nine seconds on the same dead hosts.
+ * `prefer` (ids that answered in this tab) sorts with the server's `h: 1`.
  */
-export function pickReadable(cams, n, { video = 0, src = null } = {}) {
-  const pool = cams.filter((c) => isReadable(c) && (!src || c.src === src))
-  const vids = shuffle(pool.filter((c) => c.k === 'video')).slice(0, video)
+export function pickReadable(cams, n, { video = 0, src = null, avoid = null, prefer = null } = {}) {
+  const skip = avoid instanceof Set ? avoid : new Set(avoid ?? [])
+  const boost = prefer instanceof Set ? prefer : new Set(prefer ?? [])
+  const usable = cams.filter((c) => isReadable(c) && (!src || c.src === src))
+  const fresh = skip.size ? usable.filter((c) => !skip.has(c.id)) : usable
+  const pool = fresh.length ? fresh : usable
+  const rank = (c) => (boost.has(c.id) || c.h === 1 ? 2 : skip.has(c.id) ? 0 : 1)
+  const vids = shuffle(pool.filter((c) => c.k === 'video'))
   const stills = shuffle(pool.filter((c) => c.k === 'still'))
-  stills.sort((a, b) => (b.h === 1) - (a.h === 1))
-  return [...vids, ...stills].slice(0, n)
+  vids.sort((a, b) => rank(b) - rank(a))
+  stills.sort((a, b) => rank(b) - rank(a))
+  return [...vids.slice(0, video), ...stills].slice(0, n)
 }
 
 export function byId(cams, id) {

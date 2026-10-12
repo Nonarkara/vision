@@ -6,19 +6,19 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.13.4'
+import '../core/site.js?v=1.13.5'
 import { t, n, pct, lang, onLang, esc } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js?v=1.13.4'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.13.4'
-import { canUseWebcam } from '../core/source.js?v=1.13.4'
+import { toast, confirmBox } from '../core/site.js?v=1.13.5'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.13.5'
+import { canUseWebcam } from '../core/source.js?v=1.13.5'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { knnPredict } from '../ml/learner.js'
-import * as store from '../train/store.js?v=1.13.4'
+import * as store from '../train/store.js?v=1.13.5'
 import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js'
-import { createClassList } from '../train/classes-ui.js?v=1.13.4'
+import { createClassList } from '../train/classes-ui.js?v=1.13.5'
 import { createBars } from '../train/bars.js'
 import { createTrigger } from '../gesture/fire.js'
-import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.13.4'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.13.5'
 
 const K = 5
 const LIVE_MS = 250

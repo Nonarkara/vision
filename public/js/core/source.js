@@ -111,7 +111,8 @@ class FrameSource {
   }
 }
 
-async function openVideo(cam) {
+async function openVideo(cam, { signal, timeout = 20_000 } = {}) {
+  if (signal?.aborted) throw new SourceError('ยกเลิกการเปิดกล้อง', 'Camera open was cancelled')
   const video = document.createElement('video')
   video.muted = true
   video.playsInline = true
@@ -122,15 +123,24 @@ async function openVideo(cam) {
   let src = null
   const Hls = await loadHls().catch(() => null)
   const done = new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new SourceError('กล้องไม่ส่งภาพภายใน 20 วินาที', 'The camera sent no picture within 20 seconds')), 20_000)
-    video.addEventListener('loadeddata', () => { clearTimeout(timer); resolve() }, { once: true })
-    video.addEventListener('error', () => { clearTimeout(timer); reject(new SourceError('เบราว์เซอร์เล่นวิดีโอนี้ไม่ได้', 'This browser could not play the stream')) }, { once: true })
+    const seconds = Math.max(1, Math.round(timeout / 1000))
+    let timer
+    const finish = (err) => {
+      clearTimeout(timer)
+      signal?.removeEventListener('abort', onAbort)
+      if (err) reject(err)
+      else resolve()
+    }
+    const onAbort = () => finish(new SourceError('ยกเลิกการเปิดกล้อง', 'Camera open was cancelled'))
+    timer = setTimeout(() => finish(new SourceError(`กล้องไม่ส่งภาพภายใน ${seconds} วินาที`, `The camera sent no picture within ${seconds} seconds`)), timeout)
+    signal?.addEventListener('abort', onAbort, { once: true })
+    video.addEventListener('loadeddata', () => finish(), { once: true })
+    video.addEventListener('error', () => finish(new SourceError('เบราว์เซอร์เล่นวิดีโอนี้ไม่ได้', 'This browser could not play the stream')), { once: true })
     if (Hls && Hls.isSupported()) {
       hls = new Hls({ maxBufferLength: 8, liveSyncDurationCount: 2, enableWorker: true, lowLatencyMode: false })
       hls.on(Hls.Events.ERROR, (_e, data) => {
         if (!data.fatal) return
-        clearTimeout(timer)
-        reject(new SourceError('สตรีมจากต้นทางขาด', 'The upstream stream failed'))
+        finish(new SourceError('สตรีมจากต้นทางขาด', 'The upstream stream failed'))
         // After the stream has started, a fatal error means it dropped mid-viewing.
         if (src && !src.closed) { src.closed = true; src.onended?.() }
       })
@@ -139,8 +149,7 @@ async function openVideo(cam) {
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = cam.v
     } else {
-      clearTimeout(timer)
-      reject(new SourceError('เบราว์เซอร์นี้เล่นสตรีม HLS ไม่ได้', 'This browser cannot play HLS streams'))
+      finish(new SourceError('เบราว์เซอร์นี้เล่นสตรีม HLS ไม่ได้', 'This browser cannot play HLS streams'))
     }
   })
   try {
@@ -174,13 +183,28 @@ async function openVideo(cam) {
   return src
 }
 
-async function fetchStill(cam) {
-  const res = await fetch(`/api/frame?id=${encodeURIComponent(cam.id)}`)
+async function fetchStill(cam, { signal } = {}) {
+  let res
+  try {
+    res = await fetch(`/api/frame?id=${encodeURIComponent(cam.id)}`, { signal })
+  } catch (err) {
+    if (err?.name === 'AbortError' || signal?.aborted) throw new SourceError('ยกเลิกการเปิดกล้อง', 'Camera open was cancelled')
+    throw new SourceError('ขอภาพจากตัวส่งต่อไม่ได้', 'Could not reach the frame relay')
+  }
   if (!res.ok) {
     let msg = ''
-    try { msg = (await res.json()).error ?? '' } catch { /* not json */ }
+    try { msg = (await res.json()).error ?? '' } catch { /* not json — often Cloudflare's own 502/504 page */ }
     if (res.status === 429) throw new SourceError('ขอภาพถี่เกินไป กรุณารอสักครู่ กล้องเป็นของผู้อื่น', 'Too many frames — please wait a moment; these cameras belong to other people')
-    throw new SourceError(`กล้องต้นทางไม่ตอบ (${res.status})`, `The camera's owner did not answer (${res.status}${msg ? ': ' + msg : ''})`)
+    if (res.status === 502 || res.status === 504) {
+      throw new SourceError(
+        'อุโมงค์ตอบ 502/504 แทนภาพ โครงข่ายประสาทเทียมไม่ได้ล้ม ลองใหม่ได้',
+        'The tunnel answered 502/504 instead of a picture. The neural network did not fail — try again.',
+      )
+    }
+    throw new SourceError(
+      `เจ้าของกล้องไม่ส่งภาพที่ใช้ได้${msg ? ` (${msg})` : ` (${res.status})`}`,
+      `The camera's owner did not send a usable picture${msg ? ` (${msg})` : ` (${res.status})`}`,
+    )
   }
   const blob = await res.blob()
   try {
@@ -190,8 +214,8 @@ async function fetchStill(cam) {
   }
 }
 
-async function openStill(cam) {
-  const bitmap = await fetchStill(cam)
+async function openStill(cam, opts) {
+  const bitmap = await fetchStill(cam, opts)
   const src = new FrameSource('still', bitmap, { cam })
   src.refresh = async () => {
     const next = await fetchStill(cam)
@@ -205,10 +229,10 @@ async function openStill(cam) {
 }
 
 /** Open a catalogue camera. Throws SourceError with a reason a person can read. */
-export async function openCamera(cam) {
+export async function openCamera(cam, opts = {}) {
   if (!cam) throw new SourceError('ไม่มีกล้อง', 'No camera')
-  if (cam.k === 'video') return openVideo(cam)
-  if (cam.k === 'still') return openStill(cam)
+  if (cam.k === 'video') return openVideo(cam, opts)
+  if (cam.k === 'still') return openStill(cam, opts)
   throw new SourceError('กล้องนี้ดูได้ที่เว็บไซต์ของเจ้าของเท่านั้น ระบบอ่านพิกเซลไม่ได้', 'This camera can only be watched on its owner\'s site; no machine here can read its pixels')
 }
 

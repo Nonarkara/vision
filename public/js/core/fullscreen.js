@@ -109,9 +109,17 @@ export function initFullscreen() {
     paint()
     window.dispatchEvent(new Event('resize'))
   })
+  // Capture, not bubble: a fullscreen element can stop the key before it
+  // reaches a bubble listener, and Escape then does nothing. Viewport mode
+  // has no browser fullscreen to fall back on, so it must leave itself.
+  // Native fullscreen is asked to leave here as well, without preventDefault,
+  // so the browser's own Escape handling still runs.
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && active) { event.preventDefault(); exitViewport() }
-  })
+    if (event.key !== 'Escape' || event.repeat) return
+    if (active) { event.preventDefault(); exitViewport(); return }
+    const el = document.fullscreenElement
+    if (el && buttons.has(el)) document.exitFullscreen?.()?.catch(() => {})
+  }, true)
   onLang(() => {
     paint()
     // The specimen's own language listener runs in the same event dispatch.

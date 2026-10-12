@@ -39,16 +39,23 @@ test('never follows redirects and refuses unknown ids', async () => {
   assert.equal(f.calls[0].opts.redirect, 'error')
 })
 
-test('rejects non-images, tiny and oversized bodies', async () => {
+test('rejects non-images, tiny and oversized bodies as 424, never 502 or 504', async () => {
+  const timeout = () => { const err = new Error('slow'); err.name = 'TimeoutError'; throw err }
   const cases = [
     [() => ok('<html>', 'text/html'), /not an image/],
     [() => ok(Buffer.alloc(10), 'image/jpeg'), /too small/],
     [() => ok(Buffer.alloc(MAX_FRAME_BYTES + 1), 'image/jpeg'), /too large/],
-    [() => new Response('x', { status: 500 }), /answered 500/],
+    [() => new Response('x', { status: 502 }), /answered 502/],
+    [timeout, /did not answer in time/],
+    [async () => { throw new TypeError('network') }, /unreachable/],
   ]
   for (const [handler, msg] of cases) {
     const relay = createRelay({ fetchImpl: fakeFetch(handler) })
-    await assert.rejects(relay.frame('a', resolve({ a: 'https://cctv.maholan.net/a.jpg' })), (e) => e instanceof RelayError && msg.test(e.message))
+    await assert.rejects(
+      relay.frame('a', resolve({ a: 'https://cctv.maholan.net/a.jpg' })),
+      (e) => e instanceof RelayError && e.status === 424 && e.status !== 502 && e.status !== 504 && msg.test(e.message),
+    )
+    assert.equal(relay.revision, 1)
   }
 })
 

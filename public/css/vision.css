@@ -273,6 +273,12 @@ em { font-style: italic; }
   display: flex; align-items: stretch; flex: 1 1 auto; min-width: 0;
   overflow-x: auto; scrollbar-width: none;
 }
+/* A little air after the last room, only while the chevron is in the row,
+   so 10 Legal is not flush against › once you have scrolled to it. */
+.rail[data-more="true"] .rooms::after {
+  content: "";
+  flex: 0 0 12px;
+}
 .rooms::-webkit-scrollbar { display: none; }
 .rooms a {
   display: flex; align-items: center; gap: 6px;

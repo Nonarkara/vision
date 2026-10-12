@@ -89,9 +89,10 @@ x-frame-age-ms: 0
 | 400 | `{"error":"missing camera id"}` | no `id` (or longer than 160 characters) |
 | 404 | `{"error":"not a relayable camera"}` | id not in the catalogue, or not a `still` |
 | 429 | `{"error":"too many frames — the cameras belong to other people; please slow down"}` | > 600 frames/min (burst 200); `Retry-After: 20` |
-| 502 | `{"error":"upstream answered 502"}` · `"…not an image"` · `"frame too large"` · `"frame too small to be a picture"` | the owner's host misbehaved |
+| 424 | `{"error":"upstream answered 502"}` · `"…not an image"` · `"frame too large"` · `"frame too small to be a picture"` · `"upstream did not answer in time"` · `"upstream unreachable"` | the owner's host misbehaved, or did not answer within 9 s |
 | 503 | `{"error":"upstream <host> is resting after repeated failures"}` | circuit breaker open (3 min) |
-| 504 | `{"error":"upstream did not answer in time"}` · `"upstream unreachable"` | timeout (9 s) or network error |
+
+The relay answers **424**, not 502 or 504. Cloudflare replaces those two origin statuses with its own branded page and drops this site's headers (including `content-security-policy`), so a census looked like the tunnel had died. 404 and 503 from this handler already pass through; 424 does too. The JSON still names the owner's failure (`upstream answered 502` is the owner's status, inside our 424). A branded Cloudflare 502/504 on the public URL, with no `content-security-policy`, means the tunnel rewrote the origin — see [operations](../system/operations.md#run-the-census-shows-502--504).
 
 ## `GET /api/health` — is it working?
 

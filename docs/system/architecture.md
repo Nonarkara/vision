@@ -148,7 +148,7 @@ sequenceDiagram
 | Catalogue refresh | every 10 min; 60 s timeout; disk fallback |
 | Catalogue response | ~4,000 rows, gzip; built once per minute |
 | Relay frame life | 30 s in memory, max 240 frames, max 4 MB each |
-| Relay politeness | ≤ 4 upstream fetches at once, ≤ 2 per host, 9 s timeout |
+| Relay politeness | ≤ 4 upstream fetches at once, ≤ 2 per host, 9 s timeout, owner failures returned as 424 (Cloudflare rewrites 502 and 504) |
 | Detector | 18 MB · input squashed to 300 × 300 · 1,917 anchors · 90 classes |
 | Embedder | 14 MB · 224 × 224 input · 1,280-number fingerprint |
 | Server memory at rest | ~21 MB RSS (from `/api/health`) |

@@ -1,6 +1,6 @@
 # The frame relay · ตัวส่งต่อภาพนิ่ง
 
-> The one place this project touches camera imagery on a server — and therefore the place with the most rules. Code: [`server/relay.js`](../../server/relay.js) (187 lines) · tests: [`tests/relay.test.js`](../../tests/relay.test.js).
+> The one place this project touches camera imagery on a server — and therefore the place with the most rules. Code: [`server/relay.js`](../../server/relay.js) · tests: [`tests/relay.test.js`](../../tests/relay.test.js).
 
 [← Architecture](architecture.md) · [Handbook](../README.md)
 
@@ -57,9 +57,12 @@ export const UPSTREAM_CONCURRENCY = 4       // fetches in flight, all hosts
 export const PER_HOST_CONCURRENCY = 2       // fetches in flight, one host
 export const BREAKER_FAILS = 8              // consecutive failures before a host rests
 export const BREAKER_OPEN_MS = 3 * 60_000   // ...for three minutes
+export const UPSTREAM_STATUS = 424          // not 502/504 — see below
 ```
 
 Change any of these and `tests/relay.test.js` tells you which promise you broke.
+
+An owner's 502, a non-image, a tiny body, a 9 s timeout, or a network error is returned as **424** with a JSON `error`. Cloudflare replaces an origin 502 or 504 with a branded page and strips `content-security-policy`, which is what "Run the census" was showing. 404 and the breaker's 503 already survive that rewrite; 424 does too. Each stored frame and each failed fetch bumps `revision`, so `/api/cameras` can refresh `h` without waiting out its 60 s cache.
 
 ## 4. A worked example of politeness
 

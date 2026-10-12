@@ -7,10 +7,10 @@
 // a pause after each, a hard cap on how many, and a stop button that works.
 // The cameras belong to road agencies and city halls, not to us.
 
-import { t, lang, n, pct, onLang } from '../core/i18n.js'
+import { t, lang, n, pct, onLang, bi } from '../core/i18n.js'
 import { camName, sourceName, pickReadable } from '../core/catalog.js'
-import { openCamera, SourceError } from '../core/source.js?v=1.13.4'
-import { sleep } from '../core/site.js?v=1.13.4'
+import { openCamera, SourceError } from '../core/source.js?v=1.13.5'
+import { sleep } from '../core/site.js?v=1.13.5'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
 import { STREET, cocoName } from '../ml/labels.js'
 import { SIGNAL, BLACK } from '../cv/draw.js'
@@ -35,6 +35,10 @@ export function createCensus(root, { getPool, onStudy }) {
   const resultEl = root.querySelector('[data-census-result]')
 
   let run = null          // { asked, tiles, tally, read, failed, ms, stopped, done, modelPct }
+  // Cameras this tab already asked. A retry skips the ones that failed when
+  // enough others are left, and asks the ones that answered first.
+  const missed = new Set()
+  const worked = new Set()
 
   // ── Words ──────────────────────────────────────────────────────────────
 
@@ -43,6 +47,12 @@ export function createCensus(root, { getPool, onStudy }) {
     const { asked, read, failed } = run
     if (run.modelPct !== null) return `${t('กำลังโหลดโครงข่ายประสาทเทียม (ครั้งแรกเท่านั้น)', 'Loading the neural network (first time only)')} ${run.modelPct}%`
     if (run.error) return run.error
+    if (run.done && read === 0 && failed > 0) {
+      return t(
+        'ไม่ได้ภาพกลับมาเลย เจ้าของกล้องไม่ส่งภาพ หรืออุโมงค์ตอบ 502/504 แทนภาพ โครงข่ายประสาทเทียมไม่ได้ล้ม กดลองอีกครั้ง รอบนี้จะข้ามกล้องที่เพิ่งไม่ตอบ',
+        'No picture came back. The camera owner sent nothing usable, or the tunnel answered 502/504 instead of a picture. The neural network did not fail. Press Try again — this round skips the cameras that just failed.',
+      )
+    }
     const seen = `${t('อ่านภาพได้', 'Frames read')} ${n(read)} / ${n(asked.length)} · ${t('ต้นทางไม่ตอบ', 'owners did not answer')} ${n(failed)}`
     if (!run.done) return `${seen}\n${t('ขอทีละไม่เกิน 2 ภาพ และเว้นจังหวะทุกครั้ง เพราะกล้องเหล่านี้เป็นของผู้อื่น', 'At most 2 frames at a time, with a pause after each — these cameras belong to other people.')}`
     const how = run.stopped ? t('หยุดก่อนครบ', 'Stopped early') : t('เสร็จแล้ว', 'Done')
@@ -145,10 +155,13 @@ export function createCensus(root, { getPool, onStudy }) {
       tile.state = 'done'
       run.read++
       run.ms += ms
+      worked.add(tile.cam.id)
+      missed.delete(tile.cam.id)
     } catch (err) {
       tile.state = 'fail'
       tile.why = err instanceof SourceError ? err.text : t('อ่านภาพนี้ไม่สำเร็จ', 'Could not read this frame')
       run.failed++
+      missed.add(tile.cam.id)
     } finally {
       src?.close()
     }
@@ -165,7 +178,7 @@ export function createCensus(root, { getPool, onStudy }) {
   async function start() {
     if (run && !run.done) return
     const want = ALLOWED_N.includes(Number(nSel.value)) ? Number(nSel.value) : 24
-    const asked = pickReadable(getPool().filter((c) => c.k === 'still'), want)
+    const asked = pickReadable(getPool().filter((c) => c.k === 'still'), want, { avoid: missed, prefer: worked })
     if (!asked.length) {
       run = null
       statusEl.textContent = t('ตัวกรองตอนนี้ไม่มีกล้องภาพนิ่งที่เครื่องอ่านได้ ลองล้างตัวกรอง', 'Your filters leave no readable still cameras — try clearing them.')
@@ -174,6 +187,7 @@ export function createCensus(root, { getPool, onStudy }) {
     run = { asked, tiles: asked.map(makeTile), tally: emptyTally(), read: 0, failed: 0, ms: 0, stopped: false, done: false, modelPct: 0, error: null }
     tilesEl.replaceChildren(...run.tiles.map((x) => x.el))
     runBtn.disabled = true
+    runBtn.innerHTML = bi('เริ่มนับ', 'Run the census')
     stopBtn.disabled = false
     render()
     try {
@@ -189,6 +203,9 @@ export function createCensus(root, { getPool, onStudy }) {
     } finally {
       run.done = true
       runBtn.disabled = false
+      runBtn.innerHTML = run.read === 0 && (run.failed > 0 || run.error)
+        ? bi('ลองอีกครั้ง', 'Try again')
+        : bi('เริ่มนับ', 'Run the census')
       stopBtn.disabled = true
       render()
     }

@@ -3,11 +3,41 @@
 // stream. The bar that controls it always names the camera and its owner.
 
 import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.13.4'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.13.5'
 import { t, bi, esc, onLang } from './i18n.js'
-import { toast } from './site.js?v=1.13.4'
+import { toast } from './site.js?v=1.13.5'
 
 const STILL_REFRESH_MS = 20_000
+const LAST_CAMERA = 'vision.camera'
+// A cold open used to try cameras one at a time, and a silent video waits 8s
+// before the next one even starts. Three at once, and the last camera that
+// answered is in the first batch.
+export const PROBE_PARALLEL = 3
+export const PROBE_ATTEMPTS = 6
+const PROBE_VIDEO_MS = 8_000
+
+function rememberedId() {
+  try { return sessionStorage.getItem(LAST_CAMERA) || '' } catch { return '' }
+}
+
+function remember(cam) {
+  try { if (cam?.id) sessionStorage.setItem(LAST_CAMERA, cam.id) } catch { /* private mode */ }
+}
+
+/** First camera that opens. The rest are aborted and closed. */
+export async function probeCameras(cams, openOne) {
+  if (!cams.length) return null
+  const controllers = cams.map(() => new AbortController())
+  let won = false
+  const jobs = cams.map((cam, i) => openOne(cam, controllers[i].signal).then((src) => {
+    if (!src) return null
+    if (won) { src.close?.(); return null }
+    won = true
+    for (let j = 0; j < controllers.length; j++) if (j !== i) controllers[j].abort()
+    return { cam, src }
+  }).catch(() => null))
+  return (await Promise.all(jobs)).find(Boolean) ?? null
+}
 
 export function createSpecimen({ bar = null, prefer = 'video', refreshStills = true } = {}) {
   let source = null
@@ -32,6 +62,7 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     if (ticket !== request) { next?.close(); return false }
     source?.close()
     source = next
+    if (next?.cam) remember(next.cam)
     if (next && !next.onended) {
       next.onended = () => { if (source === next) status(t('สตรีมนี้ขาดไป กด ↻ เพื่อดูกล้องอื่น', 'This stream dropped — press ↻ for another camera')) }
     }
@@ -69,7 +100,25 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     return queue
   }
 
-  /** Open the next camera that actually answers. Tries a few before giving up. */
+  function takeCandidates(n) {
+    const out = []
+    const seen = new Set()
+    const push = (cam) => {
+      if (!cam || seen.has(cam.id) || !isReadable(cam)) return
+      seen.add(cam.id)
+      out.push(cam)
+    }
+    const id = rememberedId()
+    if (id) push(cams.find((c) => c.id === id))
+    while (out.length < n) {
+      const cam = nextCandidates().shift()
+      if (!cam) break
+      push(cam)
+    }
+    return out
+  }
+
+  /** Open the next camera that actually answers. A few are asked at once. */
   async function next() {
     if (searching === request) return source
     const ticket = ++request
@@ -77,13 +126,15 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     status(t('กำลังหากล้องที่ตอบ…', 'Finding a camera that answers…'))
     try {
       await ensureCatalog()
-      for (let attempt = 0; attempt < 6 && ticket === request; attempt++) {
-        const cam = nextCandidates().shift()
-        if (!cam) break
-        try {
-          const src = await openCamera(cam)
-          return setSource(src, ticket) ? src : null
-        } catch { /* try the next camera */ }
+      const candidates = takeCandidates(PROBE_ATTEMPTS)
+      for (let i = 0; i < candidates.length && ticket === request; i += PROBE_PARALLEL) {
+        const hit = await probeCameras(candidates.slice(i, i + PROBE_PARALLEL), (cam, signal) => (
+          openCamera(cam, { signal, videoTimeout: PROBE_VIDEO_MS }).catch((err) => {
+            if (signal?.aborted || err?.en === 'Camera open was cancelled') return null
+            throw err
+          })
+        ))
+        if (hit && setSource(hit.src, ticket)) return hit.src
       }
       if (ticket !== request) return null
       status(t('ไม่มีกล้องตอบตอนนี้ ลองใช้กล้องของคุณเองหรือรูปของคุณ', 'No camera is answering right now — try your own camera or a photo'))
