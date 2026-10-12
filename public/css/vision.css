@@ -288,7 +288,8 @@ em { font-style: italic; }
 .rooms a:hover { color: var(--white); }
 .rooms a[aria-current="page"] { background: var(--signal); color: var(--black); }
 .rooms a[aria-current="page"] .num { color: var(--black); opacity: 1; }
-.more-room { position: relative; display: flex; align-items: stretch; }
+.more-room { position: relative; display: flex; flex-direction: column; align-items: stretch; }
+.more-room:not([open]) > .more-list { display: none; }
 .more-room > summary {
   display: flex; align-items: center; gap: 8px;
   padding: 0 12px; min-height: 56px; cursor: pointer; list-style: none;
@@ -334,7 +335,9 @@ em { font-style: italic; }
   .mark { flex: 1 1 auto; }
   .rooms { order: 3; flex: 1 0 100%; flex-wrap: wrap; background: var(--olive); }
   .rooms a, .more-room > summary { min-height: var(--target); }
-  .more-list { position: static; width: 100%; }
+  .more-room[open] { flex: 1 0 100%; }
+  .more-list { position: static; width: 100%; min-width: 0; }
+  .more-list a { white-space: normal; }
 }
 
 /* ── Fields ──────────────────────────────────────────────────────────── */
