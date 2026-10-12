@@ -5,6 +5,8 @@ import { t, lang, n, count, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
 import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.15.2'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
+import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.17.0'
+import { onSpotted } from '../cv/spotted.js?v=1.17.0'
 import { cocoName } from '../ml/labels.js'
 
 const canvas = document.querySelector('[data-eye]')
@@ -19,8 +21,15 @@ const specimen = createSpecimen({ bar: document.querySelector('[data-specimen]')
 let lens = 'picture'
 let modelNote = ''
 let modelSeen = false   // has this page ever finished a detection?
-let sweeping = true     // do the lenses take turns until the visitor touches one?
+let machine = document.documentElement.dataset.machine === '1'
+let sweeping = !matchMedia('(prefers-reduced-motion: reduce)').matches
 const lensState = createLensState()
+const saw = mountSaw(document.querySelector('.stage-view'))
+const MACHINE = ['edges', 'motion', 'objects']
+onSpotted((count) => {
+  const el = document.querySelector('[data-spotted]')
+  if (el) el.textContent = n(count)
+})
 
 /** The confidence line: what the network was asked for, and what the page draws. */
 function showLine(on) {
@@ -110,9 +119,16 @@ document.addEventListener('modelprogress', (e) => {
 runLens(canvas, () => specimen.source, () => ({ name: lens }), {
   fps: 12,
   state: lensState,
-  onFrame: () => {
+  onFrame: (rect, state, src) => {
     stateEl.hidden = true
     if (lens === 'objects') { if (lensState.detectedAt && !lensState.error) modelSeen = true; say() }
+    const person = src?.kind === 'webcam' && (lens === 'objects' || lens === 'picture')
+      ? state.detections.filter((d) => d.cls === 1 && d.score >= 0.45).sort((a, b) => b.score - a.score)[0]
+      : null
+    if (!person || !rect) { saw.clear(); return }
+    const img = src.grab(96)
+    if (img) outlineEdges(canvas.getContext('2d'), img, person, rect)
+    saw.update(person.score, 'COCO')
   },
 })
 
@@ -138,10 +154,20 @@ function pickLens(name) {
 // Detection is on when the page opens. If motion is welcome, the lenses take
 // turns: picture, numbers, edges, motion, objects. Any deliberate choice stops
 // this for good — `sweeping` is cleared inside applyLens and never set back.
+// Detection is on when the page opens. If motion is welcome, the five lenses
+// then take turns: picture, numbers, edges, motion, objects.
+modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+document.addEventListener('machinevision', (e) => {
+  machine = e.detail.on
+  if (!machine) return
+  sweeping = !matchMedia('(prefers-reduced-motion: reduce)').matches
+  applyLens('edges', false)
+})
 setInterval(() => {
   if (!sweeping || document.hidden) return
-  const i = LENS_ORDER.indexOf(lens)
-  applyLens(LENS_ORDER[(i + 1) % LENS_ORDER.length], false)
+  const order = machine ? MACHINE : LENS_ORDER
+  const i = order.indexOf(lens)
+  applyLens(order[(i + 1) % order.length], false)
 }, 4200)
 
 document.querySelector('[data-mine]')?.addEventListener('click', async () => {
