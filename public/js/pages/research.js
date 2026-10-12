@@ -1,5 +1,5 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.16.0'
+import '../core/site.js?v=1.17.0'
 import { evidence } from '../core/catalog.js'
 
 // The evidence strip: live numbers from the same catalogue the map reads, so
