@@ -275,8 +275,8 @@ em { font-style: italic; }
 }
 .rooms::-webkit-scrollbar { display: none; }
 .rooms a {
-  display: flex; align-items: center; gap: 8px;
-  padding: 0 12px; min-height: 56px; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 8px; min-height: 56px; white-space: nowrap;
   font-size: var(--micro); color: var(--gray);
   transition: color 160ms var(--ease), background-color 160ms var(--ease);
 }
@@ -285,6 +285,19 @@ em { font-style: italic; }
 .rooms a[aria-current="page"] { background: var(--signal); color: var(--black); }
 .rooms a[aria-current="page"] .num { color: var(--black); opacity: 1; }
 .rail-tools { display: flex; align-items: stretch; flex: 0 0 auto; }
+/* The room rail is a horizontal scroller with its scrollbar hidden, so below
+   the width where all ten rooms fit it looks like the list simply ends. This
+   says otherwise — a solid chevron, because the house rules are no gradients,
+   no shadows and no radius. It only exists while there is somewhere to go. */
+.rail-more {
+  display: none; align-items: center; justify-content: center;
+  width: var(--target); min-height: 56px; padding: 0;
+  background: var(--black); color: var(--gray);
+  border: 0; border-left: 1px solid var(--olive); cursor: pointer;
+  font-family: var(--mono); font-size: 1.25rem; line-height: 1;
+}
+.rail-more:hover { color: var(--signal); }
+.rail[data-more="true"] .rail-more { display: inline-flex; }
 .lang-toggle {
   display: flex; align-items: center; gap: 6px;
   min-width: var(--target); min-height: 56px; padding: 0 var(--gutter) 0 16px;

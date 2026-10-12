@@ -345,3 +345,17 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **One thing the user still has to do, and it is one toggle.** Cloudflare dashboard → the zone → Analytics & Logs → Web Analytics → disable. That removes the tag itself. Until then the promise still holds in substance and the CSP still enforces it; the check now makes sure nobody trades the promise for a quiet console.
 
 - **Gates.** 135 tests, no skips. 25 pages, 87 references, cache census green, no module forks, privacy green, docs and tone ladder green.
+
+## 2026-10-12 · The nav was quietly hiding rooms; a chevron that cannot lie, release 1.13.3 (Asia/Bangkok)
+
+- **Found by sweeping every page in a real browser at two widths**, which is the first time anything has looked at the sticky rail rather than the page body.
+
+- **The defect.** `.rooms` is a horizontal scroller with `scrollbar-width: none`. Measured on production: at 1440 all ten rooms fit, but at **1280 — the most common laptop width — System and Fine print (legal) were cut off**, with no scrollbar and no other hint that two rooms existed. At 1024 three rooms were cut; at 390 **seven of ten**. The language toggle was always reachable, and the document never overflowed, which is exactly why no static gate had ever noticed: the content was clipped inside a container, not off the page.
+
+- **Fixed in two parts.** The rail fits at 1280 now — "Research · About" and "Fine print" become "Research" and "Legal" in the rail only (full titles unchanged on the page, in `<title>` and in the nav's own accessible names), and the room links tighten from 12px to 8px of padding. That took the needed width from 1143px to 957px against 995px available, verified identical at devicePixelRatio 1 and 2. Below 1280 the rail still scrolls, so a solid `›` chevron appears — no gradient, no shadow, no radius, per the house rules — and disappears again once you reach the end.
+
+- **The chevron measures the rail without itself, because it changes the answer.** It lives in the rail's flex row, so while it is on screen it takes width away from `.rooms`. The first version therefore kept itself on forever at 1280: the rail overflowed only *because* the chevron was showing. `syncMore()` now pulls the chevron out of the layout, measures, and puts it back. A self-confirming indicator is worse than none.
+
+- **Two smaller things found on the way.** `site.js` already had a `const rail` further down for anchor-offset work; the new one collided and killed the whole module — caught by `check-site.mjs`, which is exactly what it is for. And the first sweep I ran reported "all 52 combinations broken", which was my probe measuring children inside a scroll container, plus a `?lang=en` parameter the site does not support at all (`lang()` reads `data-lang`), so both halves of the "both languages" sweep were the same language. Both were measurement errors, corrected before anything shipped.
+
+- **Gates.** 135 tests, no skips. 25 pages, 87 references, no module forks, privacy green, docs and tone ladder green.
