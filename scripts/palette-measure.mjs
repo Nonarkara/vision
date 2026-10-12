@@ -15,6 +15,8 @@
 //
 //   deep = 76% hue + 24% black     base = the plate's own value     pale = 78% hue + 22% white
 //
+// Machine light may glow Peach Red — the same hue, soft, only on what the
+// machine sees. That glow is not a new pairing and not a fifth hue.
 // One job per colour still holds: tone changes emphasis, never meaning. Peach Red
 // is only ever what the machine sees, at any tone.
 

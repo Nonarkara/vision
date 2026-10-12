@@ -1,7 +1,7 @@
 // Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
 
 import { lang, setLang, onLang } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.15.0'
+import { initFullscreen } from './fullscreen.js?v=1.16.0'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))
@@ -20,38 +20,6 @@ function paintAria() {
 }
 paintAria()
 onLang(paintAria)
-
-// The room rail scrolls sideways and hides its scrollbar. At widths too narrow
-// to hold all ten rooms that reads as a list that simply ends, with no hint
-// that three more exist — so the chevron is shown only while there is actually
-// somewhere to scroll to, and taken away again once you reach the end.
-// Named navRail/roomsRail to stay clear of the `rail` used further down for the
-// anchor-offset work; a duplicate `const rail` kills the whole module.
-const navRail = document.querySelector('.rail')
-const roomsRail = document.querySelector('.rooms')
-const railMore = document.querySelector('[data-rail-more]')
-if (navRail && roomsRail && railMore) {
-  const syncMore = () => {
-    // Measure with the chevron pulled out of the layout first. It sits in the
-    // rail's flex row, so while it is on screen it takes width away from
-    // .rooms — and a rail that overflows only *because* the chevron is showing
-    // would then keep the chevron showing, forever, for no reason.
-    const showing = navRail.dataset.more === 'true'
-    if (showing) railMore.style.display = 'none'
-    const room = roomsRail.scrollWidth - roomsRail.clientWidth > 4
-    if (showing) railMore.style.display = ''
-    navRail.dataset.more = String(room)
-    railMore.setAttribute('aria-hidden', String(!room))
-    railMore.tabIndex = room ? 0 : -1
-  }
-  railMore.addEventListener('click', () => {
-    roomsRail.scrollBy({ left: Math.round(roomsRail.clientWidth * 0.8), behavior: 'smooth' })
-  })
-  roomsRail.addEventListener('scroll', syncMore, { passive: true })
-  addEventListener('resize', syncMore, { passive: true })
-  onLang(syncMore)
-  syncMore()
-}
 
 let toastTimer = null
 /** Transient feedback. Also announced, because a toast nobody can hear is a toast half the audience misses. */
