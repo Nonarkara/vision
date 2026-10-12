@@ -9,22 +9,25 @@
 <body>
 <!--#nav-->
 <main id="main">
-<section class="page-head">
+<section class="page-head is-slim">
 <div>
 <span class="eyebrow label">
 <span class="th" lang="th">ทดลอง · ใบหน้าและสมาธิ</span>
 <span class="en" lang="en">Experiment · Face &amp; focus</span>
 </span>
 <h1>
-<span class="th" lang="th">กล้องเห็นอะไรในช่วงที่คุณทำงาน</span>
-<span class="en" lang="en">What does a camera notice while you work?</span>
+<span class="th" lang="th">มองมาที่นี่</span>
+<span class="en" lang="en">Look here</span>
 </h1>
 </div>
 <div>
+<details class="explain">
+<summary><span class="th" lang="th">การทดลองนี้วัดอะไร</span><span class="en" lang="en">What this experiment measures</span></summary>
 <p class="lede">
 <span class="th" lang="th">ลองกับตัวเองเท่านั้น ตั้งท่านั่งปกติ แล้วดูช่วงที่หันออกจากหน้าจอ หลับตา หรือกล้องไม่เห็นใบหน้า ผลเป็นเพียงเบาะแส ไม่ใช่คะแนนสมาธิหรือการอ่านใจ</span>
 <span class="en" lang="en">Try this on yourself. Set your usual sitting position, then explore head turns, closed eyes and times the camera cannot see your face. These are clues, not a focus score or a way to read your mind.</span>
 </p>
+</details>
 </div>
 </section>
 <section class="focus-room" data-focus-room>
@@ -37,8 +40,11 @@
 </span>
 <span class="num" data-clock>00:00</span>
 </div>
+<div class="face-stage">
 <canvas data-face-view width="640" height="480" role="img" data-aria-th="ภาพกล้องของคุณพร้อมจุดบนใบหน้า" data-aria-en="Your camera preview with face landmarks">
 </canvas>
+<p class="surface-prompt"><span class="th" lang="th">มองมาที่นี่</span><span class="en" lang="en">Look here</span></p>
+</div>
 <p class="session-state" data-status role="status">
 <span class="th" lang="th">กล้องปิด · ยังไม่เริ่ม</span>
 <span class="en" lang="en">Camera off · Not started</span>

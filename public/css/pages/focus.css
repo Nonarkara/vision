@@ -1,4 +1,8 @@
-.focus-room { padding:0 var(--gutter) 48px; }
+#main { display:flex; flex-direction:column; }
+#main > .focus-room { order:-2; }
+#main > .page-head { order:-1; }
+.focus-room { padding:8px var(--gutter) 48px; }
+.face-stage { position:relative; }
 .focus-grid { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr); gap:var(--gap); align-items:start; }
 [data-face-view] { width:100%; display:block; aspect-ratio:4/3; background:var(--black); }
 .focus-setup { display:grid; gap:16px; }

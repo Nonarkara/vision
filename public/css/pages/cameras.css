@@ -18,8 +18,13 @@
 .kinds dt { font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; }
 .kinds dd { margin: 0; font-size: var(--micro); max-width: 46ch; }
 
-/* B. The map and the list */
-.atlas { padding: clamp(48px, 7vw, 112px) 0 0; }
+/* B. The map is the page. The title and the census sit under it. */
+#main { display: flex; flex-direction: column; }
+#main > .atlas { order: -8; }
+#main > section:has([data-bench]) { order: -4; }
+#main > .page-head { order: -1; }
+.atlas { display: flex; flex-direction: column; padding: 8px 0 0; }
+.atlas > .atlas-grid { order: -1; }
 .atlas-head { display: grid; gap: 12px; padding: 0 var(--gutter) var(--gap); }
 .atlas-head h2 { margin-bottom: 0.2em; }
 .atlas-head .chapter-no { font-family: var(--mono); font-size: var(--micro); }

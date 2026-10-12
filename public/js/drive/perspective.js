@@ -4,11 +4,11 @@
 // is 4.4 × 1.8 m with a 1.5 m roof, a 6-wheel lorry 9.6 × 2.5 m and 3.2 m
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
-import { at, LANE, STEP } from './track.js?v=1.13.4'
-import { sightRange } from './perceive.js?v=1.13.4'
-import { VEHICLES } from './sim.js?v=1.13.4'
-import { ITEMS, STREET } from './street.js?v=1.13.4'
-import { labelName } from './draw.js?v=1.13.4'
+import { at, LANE, STEP } from './track.js?v=1.14.0'
+import { sightRange } from './perceive.js?v=1.14.0'
+import { VEHICLES } from './sim.js?v=1.14.0'
+import { ITEMS, STREET } from './street.js?v=1.14.0'
+import { labelName } from './draw.js?v=1.14.0'
 
 export function relative(car, point) {
   const dx = point.x - car.x,
