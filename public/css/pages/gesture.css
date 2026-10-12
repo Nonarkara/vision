@@ -4,6 +4,19 @@
 .start-block { padding: 24px var(--gutter); display: grid; gap: 16px; }
 .start-block h2 { font-size: clamp(1.4rem, 2vw, 2rem); }
 .start-block .steps { margin: 0; }
+@media (max-width: 760px) {
+  /* The icon row is a 1000-unit diagram. On a phone it became a sideways
+     scroller and cut the step names in half. The numbered steps above already
+     say the same thing, and they wrap. */
+  .start-block .pipe-scroll svg { display: none; }
+  .start-block .pipe-scroll { overflow: visible; }
+  .start-block .steps { grid-template-columns: 1fr; }
+}
+/* Step names live in their own column so a long line cannot run into the next step. */
+.gstep { display: block; width: 220px; box-sizing: border-box; overflow-wrap: break-word; text-align: center; color: inherit; font-family: var(--narrow); font-weight: 700; font-size: 16px; line-height: 1.15; }
+.gstep strong, .gstep span { display: block; }
+.gstep span { margin-top: 4px; font-family: var(--mono); font-weight: 400; font-size: 11px; line-height: 1.35; }
+html[data-lang="th"] .gstep { font-family: var(--thai); }
 
 /* The room: camera on the left, gestures and their actions on the right */
 .room { padding: clamp(40px, 6vw, 96px) var(--gutter); }

@@ -145,7 +145,13 @@
       <h2 id="decide-h"><span class="th" lang="th">รถตัดสินใจอย่างไร</span><span class="en" lang="en">How a car decides</span></h2>
     </header>
     <div class="chapter-body">
-      <figure class="flow-fig pipe-scroll">
+      <figure class="flow-fig pipe-scroll" id="decide-figure">
+        <ol class="steps drive-stack">
+          <li><strong class="en" lang="en">See</strong><strong class="th" lang="th">มอง</strong> <span class="en" lang="en">Boxes, labels and confidence. Far, small or dark things are missed more often.</span><span class="th" lang="th">กรอบ ชื่อ และความมั่นใจ สิ่งที่ไกล เล็ก หรือมืดจะพลาดบ่อยขึ้น</span></li>
+          <li><strong class="en" lang="en">Remember</strong><strong class="th" lang="th">จำไว้</strong> <span class="en" lang="en">Keeps a thing for 0.7 s after the camera loses it.</span><span class="th" lang="th">จำสิ่งที่เห็นไว้ 0.7 วินาที แม้กล้องจะมองไม่เห็นแล้ว</span></li>
+          <li><strong class="en" lang="en">Predict</strong><strong class="th" lang="th">คาดเดา</strong> <span class="en" lang="en">Where will it be in 3 s — inside my lane, or not?</span><span class="th" lang="th">อีก 3 วินาทีมันจะอยู่ตรงไหน จะเข้ามาในเลนของฉันไหม</span></li>
+          <li><strong class="en" lang="en">Choose a speed</strong><strong class="th" lang="th">เลือกความเร็ว</strong> <span class="en" lang="en">Each thing asks for one speed. The most careful request wins.</span><span class="th" lang="th">ทุกสิ่งขอความเร็วของมัน ฟังคำขอที่ระวังที่สุด</span></li>
+        </ol>
         <svg class="diagram flow" viewBox="0 0 1000 200">
           <path class="stroke" d="M60 30 L60 90 L130 60 Z"/>
           <path class="stroke" d="M130 60 L190 30 M130 60 L190 90"/>
