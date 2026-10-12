@@ -67,6 +67,8 @@ npm run palette      # print the ladder and 21 measured contrast ratios
 
 The ladder buys one real freedom: base Peach Red on Naples is 2.7:1 and was always banned as text on paper, while `signal-deep` clears 13.0:1 — so emphasis set in signal on the paper ground is legal now, same hue, same job, one step down. `npm run check` fails if that ever stops being true.
 
+Machine light is the other freedom, and it is still the same hue. Peach Red may glow — a soft shadow of `#f15a30`, never a fifth colour and never a gradient fill — only on what the machine sees: a detection, a motion mark, the lens that is reporting one. A trail fades by opacity. `prefers-reduced-motion` keeps the mark and drops the pulse. `npm run palette` does not gain a pairing from that glow.
+
 Type is eight steps rather than three, and the playfulness comes from mixing the three families — Archivo Narrow for display Latin, IBM Plex Sans/Thai for reading, JetBrains Mono for every number — in named pairings (`.stem`, `.measure`, `.mix`) rather than from arbitrary sizes.
 
 ## The Drive room's street

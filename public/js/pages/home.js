@@ -19,6 +19,7 @@ const specimen = createSpecimen({ bar: document.querySelector('[data-specimen]')
 let lens = 'picture'
 let modelNote = ''
 let modelSeen = false   // has this page ever finished a detection?
+let sweeping = true     // do the lenses take turns until the visitor touches one?
 const lensState = createLensState()
 
 /** The confidence line: what the network was asked for, and what the page draws. */
@@ -70,22 +71,35 @@ function say() {
   sayEl.textContent = `${name}. ${text}${extra}`
 }
 
-for (const b of buttons) {
-  b.addEventListener('click', () => {
-    lens = b.dataset.lens
-    for (const x of buttons) x.setAttribute('aria-pressed', String(x === b))
-    if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
-    // "first time only" is a promise about this visitor's browser. Once the network
-    // has answered once, switching camera or lens must not repeat it.
-    if (lens === 'objects' && !lensState.detectedAt) {
-      modelNote = modelSeen
-        ? t('กำลังอ่านภาพใหม่…', 'Reading the new picture…')
-        : t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
-    }
-    showLine(lens === 'objects')
-    say()
-  })
+// The lenses take turns on their own until the visitor touches one, and the
+// lens being left behind keeps a short trail so the eye can follow what the
+// machine moved on from.
+function applyLens(name, byUser) {
+  if (byUser) sweeping = false
+  const prev = buttons.find((x) => x.getAttribute('aria-pressed') === 'true')
+  lens = name
+  const b = buttons.find((x) => x.dataset.lens === name)
+  const allowTrail = prev && prev !== b && !matchMedia('(prefers-reduced-motion: reduce)').matches
+  for (const x of buttons) {
+    x.setAttribute('aria-pressed', String(x === b))
+    x.classList.toggle('machine-trail', allowTrail && x === prev)
+  }
+  if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
+  // Two things this branch's refactor had dropped, kept because the page makes
+  // both promises: "first time only" is a claim about THIS visitor's browser, so
+  // once the network has answered, switching camera or lens must not repeat the
+  // download; and showLine() draws the confidence line under the objects lens —
+  // without it that lens has nothing to say.
+  if (lens === 'objects' && !lensState.detectedAt) {
+    modelNote = modelSeen
+      ? t('กำลังอ่านภาพใหม่…', 'Reading the new picture…')
+      : t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+  }
+  showLine(lens === 'objects')
+  say()
 }
+
+for (const b of buttons) b.addEventListener('click', () => applyLens(b.dataset.lens, true))
 
 document.addEventListener('modelprogress', (e) => {
   if (e.detail.name !== 'detector') return
@@ -121,6 +135,15 @@ const stage = document.querySelector('.opening-stage')
 function pickLens(name) {
   document.querySelector(`[data-lens="${name}"]`)?.click()
 }
+// Detection is on when the page opens. If motion is welcome, the lenses take
+// turns: picture, numbers, edges, motion, objects. Any deliberate choice stops
+// this for good — `sweeping` is cleared inside applyLens and never set back.
+setInterval(() => {
+  if (!sweeping || document.hidden) return
+  const i = LENS_ORDER.indexOf(lens)
+  applyLens(LENS_ORDER[(i + 1) % LENS_ORDER.length], false)
+}, 4200)
+
 document.querySelector('[data-mine]')?.addEventListener('click', async () => {
   stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
   const src = await specimen.useWebcam()
