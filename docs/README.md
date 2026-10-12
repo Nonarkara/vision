@@ -48,6 +48,8 @@ Each chapter matches a room on the site. Seven of the eight have a runnable exam
 | [API](reference/api.md) | every endpoint (one web address you may ask for data) with real requests and responses |
 | [Glossary · อภิธานศัพท์](reference/glossary.md) | about 100 terms in Thai and English, with the chapter that explains each |
 | [Reading list](reference/reading-list.md) | the papers behind each chapter, every link checked |
+| [The ultimate sources](SOURCES.md) | free, forkable vision repositories: licence, stars, what each one is for, and whether a browser can run it |
+| [Superpowers](SUPERPOWERS.md) | ten ranked upgrades for this classroom, with the flood angle for FloodDash's camera wall |
 | [Browser actions · เบราว์เซอร์ยอมให้ทำอะไร](reference/browser-actions.md) | what a web page may do and refuse — and why it can never open an app or sleep your Mac |
 
 ## How to use the examples
