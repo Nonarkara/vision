@@ -1,3 +1,9 @@
+/* /research — the history lab is the page. */
+#main { display: flex; flex-direction: column; }
+#main > #history-lab { order: -2; }
+#main > .page-head { order: -1; }
+.history-panel figure { position: relative; }
+
 /* /research — a timeline of papers. Only what vision.css lacks. */
 
 .era h2, #here h2, #open h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); }
@@ -66,7 +72,9 @@
 }
 
 /* A visual route into the papers, with no horizontal scrolling on phones. */
-.history-lab { padding: clamp(24px, 4vw, 56px) var(--gutter); display: grid; gap: 20px; scroll-margin-top: 90px; }
+.history-lab { padding: 8px var(--gutter) clamp(24px, 4vw, 56px); display: grid; gap: 20px; scroll-margin-top: 90px; }
+.history-lab > .history-choices { order: -2; }
+.history-lab > .history-panel { order: -1; }
 .history-lab h2 { font-size: clamp(1.75rem, 3vw, 3rem); max-width: 28ch; }
 .history-lab > .prose { margin: 0; max-width: 74ch; }
 .history-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }

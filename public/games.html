@@ -10,15 +10,18 @@
 <!--#nav-->
 <main id="main">
 
-  <header class="page-head">
+  <header class="page-head is-slim">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 06 · เกม</span><span class="en" lang="en">Room 06 · Games</span></span>
       <h1><span class="th" lang="th">นับให้เก่งกว่า<br>ทายให้ไวกว่า<br>หลอกให้ได้</span><span class="en" lang="en">Out-count it.<br>Out-guess it.<br>Fool it.</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">สามเกมกับเครื่องตรวจจับวัตถุตัวจริง ตัวเดียวกับที่ใช้ทั้งเว็บนี้ ไม่มีฝ่ายไหนเป็นเฉลย คุณจะเห็นว่าเครื่องเก่งตรงไหน พลาดตรงไหน และพลาดเพราะอะไร</p>
-      <p class="lede en" lang="en">Three games against a real object detector — the same one used across this site. Neither side is the answer key. You will see where the machine is good, where it slips, and why.</p>
-      <p class="micro games-privacy"><span class="th" lang="th">ทุกอย่างคำนวณในเบราว์เซอร์นี้ ภาพจากกล้องหรือรูปของคุณไม่ถูกส่งหรือบันทึกไว้ที่ไหน คะแนนสูงสุดเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span><span class="en" lang="en">Everything computes in this browser. Your camera and photos are never sent or saved anywhere. Best scores stay in this browser only.</span></p>
+      <details class="explain">
+        <summary><span class="th" lang="th">สามเกมกับเครื่องตัวจริง</span><span class="en" lang="en">Three games, one real detector</span></summary>
+        <p class="lede th" lang="th">สามเกมกับเครื่องตรวจจับวัตถุตัวจริง ตัวเดียวกับที่ใช้ทั้งเว็บนี้ ไม่มีฝ่ายไหนเป็นเฉลย คุณจะเห็นว่าเครื่องเก่งตรงไหน พลาดตรงไหน และพลาดเพราะอะไร</p>
+        <p class="lede en" lang="en">Three games against a real object detector — the same one used across this site. Neither side is the answer key. You will see where the machine is good, where it slips, and why.</p>
+        <p class="micro games-privacy"><span class="th" lang="th">ทุกอย่างคำนวณในเบราว์เซอร์นี้ ภาพจากกล้องหรือรูปของคุณไม่ถูกส่งหรือบันทึกไว้ที่ไหน คะแนนสูงสุดเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span><span class="en" lang="en">Everything computes in this browser. Your camera and photos are never sent or saved anywhere. Best scores stay in this browser only.</span></p>
+      </details>
     </div>
   </header>
 
@@ -44,6 +47,7 @@
         <div class="bench-view">
           <canvas data-count-canvas role="img" aria-label="A frozen camera frame for counting"></canvas>
           <div class="bench-state" data-count-state></div>
+          <p class="surface-prompt"><span class="th" lang="th">นับยานพาหนะในภาพ</span><span class="en" lang="en">Count the vehicles</span></p>
         </div>
         <div class="controls game-choice" role="group" aria-label="What to count">
           <button class="btn" type="button" data-count-target="vehicles" aria-pressed="true"><span class="th" lang="th">นับยานพาหนะ</span><span class="en" lang="en">Count vehicles</span></button>

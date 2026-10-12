@@ -10,14 +10,17 @@
 <!--#nav-->
 <main id="main" class="learn">
 
-  <header class="page-head">
+  <header class="page-head is-slim">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span></span>
       <h1><span class="th" lang="th">เครื่องมองอย่างไร<br>ทีละขั้น</span><span class="en" lang="en">How it looks,<br>step by step</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">ทุกบทศึกษาภาพเดียวกัน เลือกได้จากแถบสีดำด้านล่าง จะเป็นกล้องสาธารณะ กล้องของคุณเอง หรือรูปของคุณก็ได้ เปลี่ยนเมื่อไรก็ได้ เครื่องมือทุกบทจะเปลี่ยนตาม</p>
-      <p class="lede en" lang="en">Every chapter studies the same picture, chosen in the black bar below: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p>
+      <details class="explain">
+        <summary><span class="th" lang="th">ทุกบทใช้ภาพเดียวกัน</span><span class="en" lang="en">Every chapter shares one picture</span></summary>
+        <p class="lede th" lang="th">ทุกบทศึกษาภาพเดียวกัน เลือกได้จากแถบสีดำ จะเป็นกล้องสาธารณะ กล้องของคุณเอง หรือรูปของคุณก็ได้ เปลี่ยนเมื่อไรก็ได้ เครื่องมือทุกบทจะเปลี่ยนตาม</p>
+        <p class="lede en" lang="en">Every chapter studies the same picture: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p>
+      </details>
       <div class="cta">
         <button class="btn primary" type="button" data-learn-mine>● <span class="th" lang="th">ใช้กล้องของฉันทั้งหน้า</span><span class="en" lang="en">Use my camera for the whole page</span></button>
       </div>
@@ -116,7 +119,7 @@
         <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
       </div>
       <div class="bench">
-        <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div><p class="surface-prompt"><span class="th" lang="th">เลื่อนแถบ แล้วดูตัวเลข</span><span class="en" lang="en">Slide the bar. Watch the numbers.</span></p></div>
         <div class="slider">
           <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
           <output for="cols" data-cols-out></output>

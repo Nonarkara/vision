@@ -18,7 +18,9 @@
 .drive-grid { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr); gap: var(--gap); align-items: start; }
 @media (max-width: 1000px) { .drive-grid { grid-template-columns: 1fr; } }
 
+.track-wrap { position: relative; }
 .track { display: block; width: 100%; aspect-ratio: 200 / 140; cursor: pointer; background: var(--black-1); }
+#captcha-card .gate { margin: 0; }
 
 .knobs { display: grid; gap: 2px; padding-top: 2px; }
 .knob { display: grid; grid-template-columns: 5.5em repeat(3, minmax(0, 1fr)); gap: 2px; align-items: stretch; }
