@@ -21,6 +21,17 @@ function paintAria() {
 paintAria()
 onLang(paintAria)
 
+// A room link that straddles the scroller is a half word against the chevron
+// (08–10 at 1024–1280). Hide that link. Scrolling it away would walk the rail
+// to the end and cut 01 off the left, and there is no chevron back.
+// Four pixels of slack: a link's own padding can pass the edge without a
+// letter being cut. At the end of the list the last rooms stay visible.
+export function roomIsClipped({ edge, left, right, atEnd, start = null }) {
+  const cutsRight = !atEnd && right > edge + 4 && left < edge - 4
+  const cutsLeft = start != null && left < start - 4 && right > start + 4
+  return cutsRight || cutsLeft
+}
+
 // The room rail scrolls sideways and hides its scrollbar. At widths too narrow
 // to hold all ten rooms that reads as a list that simply ends, with no hint
 // that three more exist — so the chevron is shown only while there is actually
@@ -31,6 +42,16 @@ const navRail = document.querySelector('.rail')
 const roomsRail = document.querySelector('.rooms')
 const railMore = document.querySelector('[data-rail-more]')
 if (navRail && roomsRail && railMore) {
+  const paintClip = () => {
+    const max = roomsRail.scrollWidth - roomsRail.clientWidth
+    const atEnd = max <= 4 || roomsRail.scrollLeft >= max - 1
+    const box = roomsRail.getBoundingClientRect()
+    for (const link of roomsRail.querySelectorAll(':scope > a')) {
+      const r = link.getBoundingClientRect()
+      const clipped = roomIsClipped({ edge: box.right, left: r.left, right: r.right, atEnd, start: box.left })
+      link.classList.toggle('is-clipped', clipped)
+    }
+  }
   const syncMore = () => {
     // Measure with the chevron pulled out of the layout first. It sits in the
     // rail's flex row, so while it is on screen it takes width away from
@@ -43,6 +64,7 @@ if (navRail && roomsRail && railMore) {
     navRail.dataset.more = String(room)
     railMore.setAttribute('aria-hidden', String(!room))
     railMore.tabIndex = room ? 0 : -1
+    paintClip()
   }
   railMore.addEventListener('click', () => {
     roomsRail.scrollBy({ left: Math.round(roomsRail.clientWidth * 0.8), behavior: 'smooth' })

@@ -35,6 +35,10 @@ export const PER_HOST_CONCURRENCY = 2
 export const BREAKER_FAILS = 8
 export const BREAKER_OPEN_MS = 3 * 60_000
 export const MAX_QUEUE = 100
+// Cloudflare replaces an origin 502 or 504 with its own branded page and
+// drops this JSON, so a census looks like the tunnel died. 424 means the
+// picture depended on an owner who did not send one, and the body survives.
+export const UPSTREAM_STATUS = 424
 
 export class RelayError extends Error {
   /**
@@ -85,6 +89,7 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
   const global = semaphore(UPSTREAM_CONCURRENCY)
   const hosts = new Map()        // host -> { sem, fails, openUntil }
   const health = new Map()       // id -> { ok, at, ms }
+  let revision = 0
 
   function hostState(host) {
     let h = hosts.get(host)
@@ -124,7 +129,10 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
       })
       async function refuse(message, { hostFault = false } = {}) {
         await res.body?.cancel().catch(() => {})
-        throw new RelayError(502, message, { hostFault })
+        // 424 Failed Dependency, not a bare 502: the upstream answered and
+        // what it answered was unusable for this camera. hostFault stays — it
+        // is what stops eight dead cameras resting an entire host.
+        throw new RelayError(UPSTREAM_STATUS, message, { hostFault })
       }
       // A 5xx is the host misbehaving; a 404/410 is one camera being gone.
       if (!res.ok) await refuse(`upstream answered ${res.status}`, { hostFault: res.status >= 500 })
@@ -144,18 +152,25 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
             size += value.byteLength
             if (size > MAX_FRAME_BYTES) {
               await reader.cancel().catch(() => {})
-              throw new RelayError(502, 'frame too large', { hostFault: false })
+        // 424 Failed Dependency, not a bare 502: the upstream answered and
+        // what it answered was unusable for this camera. hostFault stays — it
+        // is what stops eight dead cameras resting an entire host.
+        throw new RelayError(UPSTREAM_STATUS, 'frame too large', { hostFault: false })
             }
             chunks.push(Buffer.from(value))
           }
         } finally { reader.releaseLock() }
       }
       const body = Buffer.concat(chunks, size)
-      if (body.length < 512) throw new RelayError(502, 'frame too small to be a picture', { hostFault: false })
+        // 424 Failed Dependency, not a bare 502: the upstream answered and
+        // what it answered was unusable for this camera. hostFault stays — it
+        // is what stops eight dead cameras resting an entire host.
+        if (body.length < 512) throw new RelayError(UPSTREAM_STATUS, 'frame too small to be a picture', { hostFault: false })
       hs.fails = 0
       const entry = { body, type, at: now() }
       remember(id, entry)
       health.set(id, { ok: true, at: entry.at, ms: entry.at - t0 })
+      revision++
       return entry
     } catch (err) {
       if (err instanceof RelayError && err.status === 503) throw err
@@ -168,9 +183,10 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
         log('warn', 'relay breaker opened', { host })
       }
       health.set(id, { ok: false, at: now(), ms: now() - t0 })
+      revision++
       if (err instanceof RelayError) throw err
       const reason = err?.name === 'TimeoutError' ? 'upstream did not answer in time' : 'upstream unreachable'
-      throw new RelayError(504, reason)
+      throw new RelayError(UPSTREAM_STATUS, reason)
     } finally {
       releaseGlobal()
       releaseHost()
@@ -220,5 +236,5 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     for (const [id, e] of cache) if (e.at < cutoff) cache.delete(id)
   }
 
-  return { frame, stats, sweep, health }
+  return { frame, stats, sweep, health, get revision() { return revision } }
 }

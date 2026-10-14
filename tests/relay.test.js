@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { createRelay, RelayError, semaphore, FRAME_TTL_MS, BREAKER_FAILS, MAX_FRAME_BYTES } from '../server/relay.js'
+import { createRelay, RelayError, semaphore, FRAME_TTL_MS, BREAKER_FAILS, MAX_FRAME_BYTES, UPSTREAM_STATUS } from '../server/relay.js'
 
 const JPEG = Buffer.alloc(2048, 1)
 
@@ -39,16 +39,23 @@ test('never follows redirects and refuses unknown ids', async () => {
   assert.equal(f.calls[0].opts.redirect, 'error')
 })
 
-test('rejects non-images, tiny and oversized bodies', async () => {
+test('rejects non-images, tiny and oversized bodies as 424, never 502 or 504', async () => {
+  const timeout = () => { const err = new Error('slow'); err.name = 'TimeoutError'; throw err }
   const cases = [
     [() => ok('<html>', 'text/html'), /not an image/],
     [() => ok(Buffer.alloc(10), 'image/jpeg'), /too small/],
     [() => ok(Buffer.alloc(MAX_FRAME_BYTES + 1), 'image/jpeg'), /too large/],
-    [() => new Response('x', { status: 500 }), /answered 500/],
+    [() => new Response('x', { status: 502 }), /answered 502/],
+    [timeout, /did not answer in time/],
+    [async () => { throw new TypeError('network') }, /unreachable/],
   ]
   for (const [handler, msg] of cases) {
     const relay = createRelay({ fetchImpl: fakeFetch(handler) })
-    await assert.rejects(relay.frame('a', resolve({ a: 'https://cctv.maholan.net/a.jpg' })), (e) => e instanceof RelayError && msg.test(e.message))
+    await assert.rejects(
+      relay.frame('a', resolve({ a: 'https://cctv.maholan.net/a.jpg' })),
+      (e) => e instanceof RelayError && e.status === 424 && e.status !== 502 && e.status !== 504 && msg.test(e.message),
+    )
+    assert.equal(relay.revision, 1)
   }
 })
 
@@ -192,9 +199,11 @@ test('dead cameras cannot be used to rest a whole host', async () => {
   const url = (id) => `https://cctv.maholan.net/${id}.jpg`
   for (let i = 0; i < BREAKER_FAILS + 4; i++) await relay.frame(`dead${i}`, url).catch(() => {})
 
-  // Every one of those ids still reports its own 502, not a breaker refusal.
+  // Every one of those ids still reports its OWN failure — 424 Failed Dependency,
+  // not the 503 a resting host gives. That distinction is the whole point: the
+  // visitor is told this camera cannot be read, not that the whole host is down.
   const after = await relay.frame('dead0', url).then(() => 'served', (e) => e.status)
-  assert.equal(after, 502, 'a dead camera reports its own 502')
+  assert.equal(after, UPSTREAM_STATUS, 'a dead camera reports its own upstream refusal')
 
   // And a camera that IS alive still works — the host is not resting.
   const good = fakeFetch(() => ok())

@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import http from 'node:http'
 import net from 'node:net'
-import { handler, parseTarget } from '../server/index.js'
+import { handler, parseTarget, tuneServer } from '../server/index.js'
 
 test('parseTarget accepts paths and refuses authority-shaped targets without throwing', () => {
   assert.equal(parseTarget('/api/health?x=1').pathname, '/api/health')
@@ -27,5 +27,14 @@ test('hostile request targets get an answer, not a crash', async () => {
     assert.ok(code >= 200 && code < 500, `${t} → ${code}`)
   }
   assert.equal(await raw('/index.html'), 200)
+  server.close()
+})
+
+test('keep-alive stays shorter than the headers deadline', () => {
+  const server = http.createServer()
+  tuneServer(server)
+  assert.equal(server.keepAliveTimeout, 120_000)
+  assert.equal(server.headersTimeout, 125_000)
+  assert.ok(server.headersTimeout > server.keepAliveTimeout)
   server.close()
 })

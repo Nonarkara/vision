@@ -48,7 +48,10 @@ const statics = createStatic({ root: path.join(ROOT, 'public'), version: VERSION
 const frameLimiter = createLimiter({ rate: 600, burst: 200 })
 const apiLimiter = createLimiter({ rate: 300, burst: 120 })
 
-// The serialised catalogue is the same for everyone; build it once per minute.
+// The serialised catalogue is the same for everyone; build it once per minute,
+// and again as soon as a frame changes what we know about a camera — a retry of
+// the census has to see "this one just answered" without waiting the minute.
+//
 // The ENCODED form is memoised too. Holding only the object meant json() did
 // Buffer.from(JSON.stringify(...)) and gzipSync on every single request — ~19 ms
 // of blocked event loop on a 400-camera catalogue, from the same single thread
@@ -56,9 +59,11 @@ const apiLimiter = createLimiter({ rate: 300, burst: 120 })
 let catalogBody = null
 let catalogEncoded = null
 let catalogBuiltAt = 0
+let catalogRev = -1
 function catalogPayload() {
   const state = catalog.get()
-  if (catalogBody && Date.now() - catalogBuiltAt < 60_000 && catalogBody.loadedAt === state.loadedAt) return catalogBody
+  const rev = relay.revision
+  if (catalogBody && catalogRev === rev && Date.now() - catalogBuiltAt < 60_000 && catalogBody.loadedAt === state.loadedAt) return catalogBody
   const frameHealth = relay.health
   const cameras = state.cameras.map((c) => {
     if (c.k !== 'still') return c
@@ -77,7 +82,18 @@ function catalogPayload() {
   const body = Buffer.from(JSON.stringify(catalogBody))
   catalogEncoded = { body, gz: body.length > 1024 ? zlib.gzipSync(body) : null }
   catalogBuiltAt = Date.now()
+  catalogRev = rev
   return catalogBody
+}
+
+/**
+ * Cloudflare reuses a connection for about 100s. Node's default headersTimeout
+ * is 60s, so a keepAliveTimeout set above it destroys a reused socket and the
+ * tunnel reports 502. headersTimeout stays strictly greater.
+ */
+export function tuneServer(server) {
+  server.keepAliveTimeout = 120_000
+  server.headersTimeout = 125_000
 }
 
 const ROUTES = {
@@ -166,7 +182,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const sweeper = setInterval(() => relay.sweep(), 15_000)
   sweeper.unref()
   const server = http.createServer(handler)
-  server.keepAliveTimeout = 65_000
+  tuneServer(server)
   // An EADDRINUSE arrives as an 'error' event, not a throw. With only the
   // uncaughtException backstop installed it was swallowed and the process exited
   // 0 having never listened — launchd then retried happily while a deploy waited
@@ -179,7 +195,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const shutdown = (sig) => {
     log('info', 'shutting down', { sig })
     server.close(() => process.exit(0))
-    server.closeIdleConnections?.() // let pooled keep-alive sockets go at once, not after 65s
+    server.closeIdleConnections?.() // let pooled keep-alive sockets go at once, not after two minutes
     setTimeout(() => process.exit(0), 3000).unref()
   }
   process.on('SIGTERM', shutdown)

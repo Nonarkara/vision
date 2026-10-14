@@ -121,7 +121,36 @@ grep 'catalogue refresh failed' ~/Library/Application\ Support/Vision/logs/org.n
 curl -sS -m 10 -o /dev/null -w '%{http_code} %{content_type} %{size_download}\n' "<snapshot_url>"
 ```
 
-`502` from the owner, a timeout, or HTML instead of an image are the owner's problem; the breaker keeps us polite. A camera owner who wants it removed: see [/legal#takedown](https://vision.nonarkara.org/legal#takedown).
+`502` from the owner, a timeout, or HTML instead of an image are the owner's problem; the breaker keeps us polite. The visitor-facing status for that failure is **424** (see the next section). A camera owner who wants it removed: see [/legal#takedown](https://vision.nonarkara.org/legal#takedown).
+
+### Run the census shows 502 / 504
+
+The census asks the browser's own neural network to look at stills from `/api/frame`. The weights are a file on this site, `GET /models/ssdlite_mobilenet_v2/model.json` (200, same origin). A 502 or 504 during "Run the census" is the frame relay, not the model and not CORS. There is no Cloudflare Worker in this repo.
+
+What the origin does: if the camera owner answers with an error, HTML, or a tiny body, or does not answer within 9 seconds, this process returns **424** JSON (`{"error":"…"}`) and the site's `content-security-policy`. Pak Kret (`www.thaiclouderp.com`, ids such as `pakkret:CAMPK001`) often does not answer in 9 seconds. Some `cctv.maholan.net` stills fail in about a second. After 8 failures on one host the breaker returns **503** JSON (`upstream <host> is resting`) for 3 minutes, and 503 already passes through Cloudflare.
+
+Cloudflare replaces an origin **502** or **504** with its own branded page and removes the CSP. That is the page a visitor saw while this process still emitted 502/504. Confirmed 12 October 2026: a local hanging upstream produced `504` JSON plus CSP in 9.0 s; the public URL for the same kind of failure was a branded 504 in ~9.8 s with no CSP. 404 and 503 from the same handler were unchanged on the public URL.
+
+After this version is deployed, both of these must be **424** JSON **with** `content-security-policy`, within about 15 seconds:
+
+```bash
+curl -sS -D - -m 15 -o /tmp/frame.bin -A 'Mozilla/5.0' \
+  'http://127.0.0.1:8430/api/frame?id=pakkret:CAMPK001'
+curl -sS -D - -m 15 -o /tmp/frame-public.bin -A 'Mozilla/5.0' \
+  'https://vision.nonarkara.org/api/frame?id=pakkret:CAMPK001'
+```
+
+Use a browser user agent. A bare client is often `403` error 1010 from Cloudflare's bot check, which is a different failure.
+
+Read the pair this way:
+
+| Local `127.0.0.1:8430` | Public `vision.nonarkara.org` | What to do |
+|---|---|---|
+| 424 JSON, CSP present | 424 JSON, CSP present | Nothing. The census can say Try again. A camera that still does not answer is the owner's host. |
+| 424 JSON, CSP present | branded 502/504, no CSP | The tunnel rewrote the status. `launchctl kickstart -k gui/$(id -u)/org.nonarkara.vision-tunnel`. Confirm `~/.cloudflared/vision.yml` points at `http://127.0.0.1:8430`, not `localhost`. |
+| connection refused | anything | The app is down. Kickstart `org.nonarkara.vision` (see above). |
+
+Do not put a Worker in front of `/api/frame`. Do not move the model to another host. The census button then reads Try again and skips cameras that just failed in this tab.
 
 ### A deploy is "not showing"
 
@@ -147,3 +176,5 @@ Production is unaffected (runtime is on the internal disk). Only `npm run deploy
 ปล่อยเวอร์ชันใหม่: เพิ่มเลขเวอร์ชันใน `package.json` แล้วรัน `npm run deploy` สคริปต์จะตรวจทั้งเว็บ คัดลอกไฟล์ รีสตาร์ตเฉพาะแอป และรอจนเวอร์ชันใหม่รายงานว่าพร้อม จากนั้นตรวจ `/api/health` จากภายนอก
 
 เหตุการณ์จริง 4–5 ต.ค. 2569: FloodDash ค้างนานราว 13 ชั่วโมง รายชื่อกล้องจึงไม่อัปเดต แต่เว็บไซต์ยังให้บริการด้วยรายชื่อล่าสุดจากดิสก์ได้ตามที่ออกแบบไว้ บทเรียน: การแคช promise ต้องมีกำหนดเวลาเสมอ
+
+ถ้าหน้านับกล้องขึ้น 502/504: โมเดลไม่ได้พัง เจ้าของกล้องไม่ส่งภาพหรืออุโมงค์เขียนสถานะทับ หลังปล่อยเวอร์ชันนี้ ทั้ง `127.0.0.1:8430` และโดเมนสาธารณะต้องตอบ 424 พร้อม `content-security-policy` ถ้าในเครื่องเป็น 424 แต่ข้างนอกยังเป็นหน้า Cloudflare ให้รีสตาร์ตอุโมงค์และตรวจว่า ingress ชี้ `http://127.0.0.1:8430`

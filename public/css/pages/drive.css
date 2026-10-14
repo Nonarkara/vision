@@ -110,16 +110,21 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
    It saves a strip of height, and it means you click the square you mean. */
 .captcha-pad { position: relative; width: min(58vw, 248px); }
 .captcha-grid {
+  position: relative; z-index: 0;
   width: 100%; aspect-ratio: 1;
-  background: var(--black); border: 0; cursor: pointer; display: block;
+  background: var(--black); border: 0; display: block;
+  /* The nine buttons are the hit targets. A canvas on top swallows the click
+     and the squares look dead while Skip, which sits outside it, still works. */
+  pointer-events: none;
 }
 .captcha-tiles {
-  position: absolute; inset: 0; display: grid;
+  position: absolute; inset: 0; z-index: 2; display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 2px;
 }
 .captcha-tiles .btn {
+  position: relative; z-index: 1; pointer-events: auto;
   min-height: 0; min-width: 0; padding: 0;
   background: transparent; color: transparent; font-size: 0.6875rem;
 }
