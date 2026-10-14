@@ -473,3 +473,11 @@ The commit was rebased onto origin/main: 39 files had been touched by both sides
 The merged tree was then proven in a browser at 390 px: Drive shows the four-step stacked list instead of the 780 px SVG (hidden), zero document overflow, hero intact (358×220, readouts live); Gesture's SVG is hidden, its steps stack one column, four `.gstep` labels wrap; console clean on both. Gate green (163 tests, 25 pages, 87 references, no forked imports).
 
 Published as 1.15.2 — the release that finally ships v1.13.4's phone fixes to production alongside everything since.
+
+### Cross-examined by a second agent · uncommitted no more
+
+MiniMax independently verified the 1.15.2 push line by line — history, gate, live health, stamps, the landed v1.13.4 markup, the committer convention — and went past the summary: all six of its security fixes survived the 39-file rebase, the runtime is byte-identical to the repo for `server/` and `public/js/`, and `tests/` gained 530 lines with zero deletions, so nothing was weakened to reach green. It also re-derived the stamps-only claim independently. Its verdict on the blink drill fix stands as the honest record: the drill it shipped was dead on arrival (a lookup scoped to `#try` that could never find the exhibits' photographs), its pure-logic tests could not see the DOM, and it mistook the second bug for a harness artifact — both found here, both pinned by regression tests that fail under reintroduction (18/18).
+
+Its one correction of this line's work is fair: the README's test-file count was restaled by the blink drill's own test file. Rather than write 22 and wait to be bitten a third time, the count is gone and the roster now points at `ls tests/*.test.js` with the reason in the cell. Committed and pushed here, since a verified edit sitting uncommitted is the exact failure mode the last pass recorded.
+
+One judgement call left open on purpose: the camera figures in `docs/08` and `architecture.md` trail production by a few (225→221 view, 3,430→3,426 total). They stay dated snapshots — chapter 08 already says the counts move by tens a day, and wiring prose to live numbers would churn documents on every deploy. If the docs should instead track live, that is a design change worth its own decision, not a passing fix.

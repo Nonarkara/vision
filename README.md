@@ -188,7 +188,7 @@ No dependencies. Node ≥ 22. Webcam access needs a secure context: `localhost` 
 | `public/models/` | weights, cached immutable for a year — a new model gets a new folder |
 | `public/CCTV photos/` | original IOC photographs (with EXIF); web copies live in `public/img/ioc/` |
 | `ops/` | launchd services and tunnel routing template |
-| `tests/` | twenty-one `node --test` files: server, relay, CV ops, learner, sources, layer races, the street and its COCO classes, and the handbook's quoted numbers |
+| `tests/` | `node --test` suites for the server, relay, CV ops, learner, sources, layers, fullscreen, the street and its COCO classes, gesture, focus, reward, the blink drill's arithmetic **and a full drill driven through a stub DOM**, and the handbook's quoted numbers. `ls tests/*.test.js` is the roster — it is deliberately not written down here, because a count written in prose was stale twice before this line was removed. |
 | `scripts/` | `build-handbook.mjs` (renders `docs/*.md` to the site's `/handbook` section; `--check` fails when stale) · `slug.mjs` (shared heading slugs) · `check-site.mjs` (pages, links, reachability, imports, CSP, parity, robots/sitemap, model shards) · `check-docs.mjs` (handbook links and anchors) · `palette-measure.mjs` (prints the tone ladder and proves every colour pairing) · `deploy-local.mjs` |
 | `data/` | `cameras.json` — the last catalogue FloodDash handed us; gitignored, recreated on first run |
 | `docs/` | the handbook: eight chapters, system design, reference; `docs/img/` figures and diagrams |
