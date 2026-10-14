@@ -4,125 +4,68 @@
 <!--#head-->
 <link rel="stylesheet" href="/css/pages/learn.css?v={{v}}">
 <title>Learn — How a computer sees, in eight chapters · เรียนรู้ว่าเครื่องมองอย่างไร</title>
-<meta name="description" content="Eight short chapters, from 'a picture is numbers' to 'what it cannot do', each with a live instrument you can point at a Thai public camera, your own webcam or a photo. In Thai and English; everything runs in your browser.">
+<meta name="description" content="Eight short chapters, from 'a picture is numbers' to 'what it cannot do', each with a live instrument you can point at a Thai public camera, your own webcam or a photo. In Thai, English and Chinese; everything runs in your browser.">
 </head>
-<body>
+<body data-level="begin">
 <!--#nav-->
+<!--#path-->
 <main id="main" class="learn">
 
   <header class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span></span>
-      <h1><span class="th" lang="th">เครื่องมองอย่างไร<br>ทีละขั้น</span><span class="en" lang="en">How it looks,<br>step by step</span></h1>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span><span class="zh" lang="zh-Hans">房间 01 · 八章</span></span>
+      <h1><span class="th" lang="th">เครื่องมองอย่างไร<br>ทีละขั้น</span><span class="en" lang="en">How it looks,<br>step by step</span><span class="zh" lang="zh-Hans">它怎样看，<br>一步一步</span></h1>
     </div>
     <div>
       <p class="lede th" lang="th">ทุกบทศึกษาภาพเดียวกัน เลือกได้จากแถบสีดำด้านล่าง จะเป็นกล้องสาธารณะ กล้องของคุณเอง หรือรูปของคุณก็ได้ เปลี่ยนเมื่อไรก็ได้ เครื่องมือทุกบทจะเปลี่ยนตาม</p>
-      <p class="lede en" lang="en">Every chapter studies the same picture, chosen in the black bar below: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p>
+      <p class="lede en" lang="en">Every chapter studies the same picture, chosen in the black bar below: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p><p class="lede zh" lang="zh-Hans">每一章研究的是同一张图像，在下面的黑色条里选择：公共摄像头、你自己的摄像头，或你的一张照片。随时可以更换，每一个工具都会跟着改变。</p>
       <div class="cta">
-        <button class="btn primary" type="button" data-learn-mine>● <span class="th" lang="th">ใช้กล้องของฉันทั้งหน้า</span><span class="en" lang="en">Use my camera for the whole page</span></button>
+        <button class="btn primary" type="button" data-learn-mine>● <span class="th" lang="th">ใช้กล้องของฉันทั้งหน้า</span><span class="en" lang="en">Use my camera for the whole page</span><span class="zh" lang="zh-Hans">整个页面使用我的摄像头</span></button>
       </div>
-      <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+      <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere.</span><span class="zh" lang="zh-Hans">你的摄像头或照片只在这个浏览器里处理。不会发送到任何地方，也不会被保存。</span></p>
     </div>
   </header>
 
   <div data-specimen-slot></div>
 
   <nav class="learn-toc" aria-label="Chapters">
-    <a href="#numbers"><span class="num">01</span> <span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></a>
-    <a href="#colour"><span class="num">02</span> <span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span></a>
-    <a href="#threshold"><span class="num">03</span> <span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span></a>
-    <a href="#convolution"><span class="num">04</span> <span class="th" lang="th">หน้าต่างเล็ก ๆ</span><span class="en" lang="en">A sliding window</span></a>
-    <a href="#edges"><span class="num">05</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></a>
-    <a href="#motion"><span class="num">06</span> <span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span></a>
-    <a href="#detector"><span class="num">07</span> <span class="th" lang="th">โครงข่ายที่ฝึกแล้ว</span><span class="en" lang="en">A trained network</span></a>
-    <a href="#limits"><span class="num">08</span> <span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></a>
+    <a href="#numbers"><span class="num">01</span> <span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span><span class="zh" lang="zh-Hans">图像是数字</span></a>
+    <a href="#colour"><span class="num">02</span> <span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span><span class="zh" lang="zh-Hans">颜色是三个数字</span></a>
+    <a href="#threshold"><span class="num">03</span> <span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span><span class="zh" lang="zh-Hans">亮或暗</span></a>
+    <a href="#convolution"><span class="num">04</span> <span class="th" lang="th">หน้าต่างเล็ก ๆ</span><span class="en" lang="en">A sliding window</span><span class="zh" lang="zh-Hans">一个滑动的窗口</span></a>
+    <a href="#edges"><span class="num">05</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span><span class="zh" lang="zh-Hans">边缘</span></a>
+    <a href="#motion"><span class="num">06</span> <span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span><span class="zh" lang="zh-Hans">什么动了</span></a>
+    <a href="#detector"><span class="num">07</span> <span class="th" lang="th">โครงข่ายที่ฝึกแล้ว</span><span class="en" lang="en">A trained network</span><span class="zh" lang="zh-Hans">一个训练好的网络</span></a>
+    <a href="#limits"><span class="num">08</span> <span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span><span class="zh" lang="zh-Hans">它不能做什么</span></a>
   </nav>
 
-  <figure class="flow-fig learn-map pipe-scroll">
-    <svg class="diagram flow" viewBox="0 0 1000 130">
-      <path class="stroke" d="M20 60 H980"/>
-      <a href="#numbers">
-        <circle class="mark" cx="63" cy="60" r="15"/>
-        <text class="en" lang="en" x="63" y="65" text-anchor="middle">01</text>
-        <text class="thai th" lang="th" x="63" y="65" text-anchor="middle">01</text>
-        <text class="en" lang="en" x="63" y="104" text-anchor="middle">Numbers</text>
-        <text class="thai th" lang="th" x="63" y="104" text-anchor="middle">ตัวเลข</text>
-      </a>
-      <a href="#colour">
-        <circle class="mark" cx="188" cy="60" r="15"/>
-        <text class="en" lang="en" x="188" y="65" text-anchor="middle">02</text>
-        <text class="thai th" lang="th" x="188" y="65" text-anchor="middle">02</text>
-        <text class="en" lang="en" x="188" y="104" text-anchor="middle">Colour</text>
-        <text class="thai th" lang="th" x="188" y="104" text-anchor="middle">สี</text>
-      </a>
-      <a href="#threshold">
-        <circle class="mark" cx="313" cy="60" r="15"/>
-        <text class="en" lang="en" x="313" y="65" text-anchor="middle">03</text>
-        <text class="thai th" lang="th" x="313" y="65" text-anchor="middle">03</text>
-        <text class="en" lang="en" x="313" y="104" text-anchor="middle">Threshold</text>
-        <text class="thai th" lang="th" x="313" y="104" text-anchor="middle">เกณฑ์</text>
-      </a>
-      <a href="#convolution">
-        <circle class="mark" cx="438" cy="60" r="15"/>
-        <text class="en" lang="en" x="438" y="65" text-anchor="middle">04</text>
-        <text class="thai th" lang="th" x="438" y="65" text-anchor="middle">04</text>
-        <text class="en" lang="en" x="438" y="104" text-anchor="middle">The window</text>
-        <text class="thai th" lang="th" x="438" y="104" text-anchor="middle">หน้าต่าง</text>
-      </a>
-      <a href="#edges">
-        <circle class="mark" cx="563" cy="60" r="15"/>
-        <text class="en" lang="en" x="563" y="65" text-anchor="middle">05</text>
-        <text class="thai th" lang="th" x="563" y="65" text-anchor="middle">05</text>
-        <text class="en" lang="en" x="563" y="104" text-anchor="middle">Edges</text>
-        <text class="thai th" lang="th" x="563" y="104" text-anchor="middle">ขอบ</text>
-      </a>
-      <a href="#motion">
-        <circle class="mark" cx="688" cy="60" r="15"/>
-        <text class="en" lang="en" x="688" y="65" text-anchor="middle">06</text>
-        <text class="thai th" lang="th" x="688" y="65" text-anchor="middle">06</text>
-        <text class="en" lang="en" x="688" y="104" text-anchor="middle">Motion</text>
-        <text class="thai th" lang="th" x="688" y="104" text-anchor="middle">ขยับ</text>
-      </a>
-      <a href="#detector">
-        <circle class="mark-signal" cx="813" cy="60" r="15"/>
-        <text class="on-signal en" lang="en" x="813" y="65" text-anchor="middle">07</text>
-        <text class="on-signal thai th" lang="th" x="813" y="65" text-anchor="middle">07</text>
-        <text class="en" lang="en" x="813" y="104" text-anchor="middle">A guess</text>
-        <text class="thai th" lang="th" x="813" y="104" text-anchor="middle">คำเดา</text>
-      </a>
-      <a href="#limits">
-        <circle class="mark" cx="938" cy="60" r="15"/>
-        <text class="en" lang="en" x="938" y="65" text-anchor="middle">08</text>
-        <text class="thai th" lang="th" x="938" y="65" text-anchor="middle">08</text>
-        <text class="en" lang="en" x="938" y="104" text-anchor="middle">The limits</text>
-        <text class="thai th" lang="th" x="938" y="104" text-anchor="middle">ขีดจำกัด</text>
-      </a>
-    </svg>
-    <figcaption><span class="th" lang="th">แปดบทของการมองเห็น ตั้งแต่แสงจนถึงขีดจำกัด กดหมายเลขเพื่อไปที่บทนั้น</span><span class="en" lang="en">Eight chapters of seeing, from light to the limits. Tap a number to jump there.</span></figcaption>
-  </figure>
 
   <!-- 01 -->
   <section class="chapter" id="numbers" data-chapter="numbers" aria-labelledby="numbers-title">
     <header>
       <span class="chapter-no">01 / 08</span>
-      <h2 id="numbers-title"><span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></h2>
+      <h2 id="numbers-title"><span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span><span class="zh" lang="zh-Hans">图像是数字</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่าพิกเซล คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
-        <p class="en" lang="en">A picture on a screen is made of tiny squares called pixels. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
+        <p class="idea th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่าพิกเซล คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
+        <p class="idea en" lang="en">A picture on a screen is made of tiny squares called pixels. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p><p class="idea zh" lang="zh-Hans">屏幕上的图像由叫做像素的小方块组成。计算机看见的不是路，也不是车。它收到的是每个方块有多亮的一个数字，从 0（黑）到 255（白）。</p>
         <p class="th" lang="th">เลื่อนแถบให้เหลือช่องน้อยลง แล้วตัวเลขจะปรากฏในช่อง ภาพจากกล้องจริงหนึ่งภาพมีตัวเลขแบบนี้หลายล้านตัว ทุกอย่างที่เหลือในหน้านี้คือการคิดเลขกับตารางนี้</p>
-        <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
+        <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p><p class="zh" lang="zh-Hans">把滑块移向更少的方块，数字就会出现在方块里面。一张真实的摄像头图像含有几百万个这样的数字。本页上的其他一切，都是在这个网格上做的算术。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="slider">
-          <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
+          <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span><span class="zh" lang="zh-Hans">横向的方块数</span></label>
           <output for="cols" data-cols-out></output>
           <input id="cols" type="range" min="6" max="96" step="1" value="16" data-cols>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว ความสว่างใช้ ITU-R BT.601 ภาพคือกล้องที่แถบสีดำระบุชื่อ เจ้าของกล้องคือหน่วยงานนั้น รายชื่อมาจาก FloodDash</span><span class="en" lang="en">No trained model. Brightness follows ITU-R BT.601. The picture is the camera named in the black bar; that agency owns it. The list comes from FloodDash.</span><span class="zh" lang="zh-Hans">没有经过训练的模型。亮度遵循 ITU-R BT.601。图像是黑条上点名的那台摄像头，归那家机构所有。清单来自 FloodDash。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span><span class="zh" lang="zh-Hans">找到最亮的地方。它的数字接近 255 吗？</span></p>
+        <p class="bridge"><a href="#colour"><span class="th" lang="th">ต่อไป สีไม่ใช่ตัวเลขเดียว แต่เป็นสามตัว</span><span class="en" lang="en">Next: colour is three numbers, not one.</span><span class="zh" lang="zh-Hans">下一步：颜色不是一个数字，而是三个。</span></a></p>
       </div>
     </div>
   </section>
@@ -131,25 +74,29 @@
   <section class="chapter field-quiet" id="colour" data-chapter="colour" aria-labelledby="colour-title">
     <header>
       <span class="chapter-no">02 / 08</span>
-      <h2 id="colour-title"><span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span></h2>
+      <h2 id="colour-title"><span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span><span class="zh" lang="zh-Hans">颜色是三个数字</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">ภาพสีเก็บตัวเลขสามตัวต่อหนึ่งพิกเซล คือ แดง เขียว และน้ำเงิน (R G B) แต่ละตัวมีค่า 0 ถึง 255 จอของคุณผสมแสงสามสีนี้เข้าด้วยกัน ตาเราจึงเห็นเป็นสีเดียว</p>
-        <p class="en" lang="en">A colour picture stores three numbers per pixel: red, green and blue (R G B), each from 0 to 255. Your screen mixes those three lights, and your eye sees one colour.</p>
+        <p class="idea th" lang="th">ภาพสีเก็บตัวเลขสามตัวต่อหนึ่งพิกเซล คือ แดง เขียว และน้ำเงิน (R G B) แต่ละตัวมีค่า 0 ถึง 255 จอของคุณผสมแสงสามสีนี้เข้าด้วยกัน ตาเราจึงเห็นเป็นสีเดียว</p>
+        <p class="idea en" lang="en">A colour picture stores three numbers per pixel: red, green and blue (R G B), each from 0 to 255. Your screen mixes those three lights, and your eye sees one colour.</p><p class="idea zh" lang="zh-Hans">一张彩色图像为每个像素存放三个数字：红、绿和蓝（R G B），每一个从 0 到 255。屏幕把这三种光混在一起，你的眼睛看见一种颜色。</p>
         <p class="th" lang="th">ดูทีละช่องสีแล้วจะเห็นว่าท้องฟ้าสว่างในช่องน้ำเงิน ต้นไม้สว่างในช่องเขียว ไฟท้ายรถสว่างในช่องแดง เครื่องใช้ความต่างแบบนี้แยกสิ่งต่าง ๆ ออกจากกันได้ ก่อนจะรู้ด้วยซ้ำว่าสิ่งนั้นคืออะไร</p>
-        <p class="en" lang="en">Look at one channel at a time: sky is bright in blue, trees in green, tail-lights in red. A machine can use differences like these to tell things apart before it knows what anything is.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ถือของสีแดงไว้หน้ากล้องของคุณ แล้วดูว่ามันสว่างในช่องไหน</span><span class="en" lang="en">Hold something red up to your camera. Which channel lights up?</span></p>
+        <p class="en" lang="en">Look at one channel at a time: sky is bright in blue, trees in green, tail-lights in red. A machine can use differences like these to tell things apart before it knows what anything is.</p><p class="zh" lang="zh-Hans">一次看一个通道：天空在蓝色里是亮的，树在绿色里是亮的，车尾灯在红色里是亮的。机器可以用这样的差别把东西分开，即使它还不知道任何东西是什么。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ภาพแยกเป็นช่องแดง เขียว น้ำเงิน · The picture split into red, green and blue"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="controls" role="group" aria-label="Channel">
-          <button class="btn" type="button" data-channel="grid" aria-pressed="true"><span class="th" lang="th">ทั้งสี่</span><span class="en" lang="en">All four</span></button>
-          <button class="btn" type="button" data-channel="r" aria-pressed="false"><span class="th" lang="th">แดง</span><span class="en" lang="en">Red</span> R</button>
-          <button class="btn" type="button" data-channel="g" aria-pressed="false"><span class="th" lang="th">เขียว</span><span class="en" lang="en">Green</span> G</button>
-          <button class="btn" type="button" data-channel="b" aria-pressed="false"><span class="th" lang="th">น้ำเงิน</span><span class="en" lang="en">Blue</span> B</button>
+          <button class="btn" type="button" data-channel="grid" aria-pressed="true"><span class="th" lang="th">ทั้งสี่</span><span class="en" lang="en">All four</span><span class="zh" lang="zh-Hans">全部四个</span></button>
+          <button class="btn" type="button" data-channel="r" aria-pressed="false"><span class="th" lang="th">แดง</span><span class="en" lang="en">Red</span><span class="zh" lang="zh-Hans">红</span> R</button>
+          <button class="btn" type="button" data-channel="g" aria-pressed="false"><span class="th" lang="th">เขียว</span><span class="en" lang="en">Green</span><span class="zh" lang="zh-Hans">绿</span> G</button>
+          <button class="btn" type="button" data-channel="b" aria-pressed="false"><span class="th" lang="th">น้ำเงิน</span><span class="en" lang="en">Blue</span><span class="zh" lang="zh-Hans">蓝</span> B</button>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว สามช่องคือแดง เขียว น้ำเงิน ภาพคือกล้องที่แถบสีดำระบุชื่อ รายชื่อมาจาก FloodDash</span><span class="en" lang="en">No trained model. The three channels are red, green and blue. The picture is the camera named in the black bar. The list comes from FloodDash.</span><span class="zh" lang="zh-Hans">没有经过训练的模型。三个通道是红、绿、蓝。图像是黑条上点名的那台摄像头。清单来自 FloodDash。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">ถือของสีแดงไว้หน้ากล้องของคุณ แล้วดูว่ามันสว่างในช่องไหน</span><span class="en" lang="en">Hold something red up to your camera. Which channel lights up?</span><span class="zh" lang="zh-Hans">把红色的东西举到你的摄像头前。哪个通道会亮起来？</span></p>
+        <p class="bridge"><a href="#threshold"><span class="th" lang="th">ต่อไป เลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่งสว่างกับมืด</span><span class="en" lang="en">Next: pick one number as the line between light and dark.</span><span class="zh" lang="zh-Hans">下一步：选一个数字，作为亮和暗的分界。</span></a></p>
       </div>
     </div>
   </section>
@@ -158,28 +105,32 @@
   <section class="chapter" id="threshold" data-chapter="threshold" aria-labelledby="threshold-title">
     <header>
       <span class="chapter-no">03 / 08</span>
-      <h2 id="threshold-title"><span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span></h2>
+      <h2 id="threshold-title"><span class="th" lang="th">สว่างหรือมืด</span><span class="en" lang="en">Light or dark</span><span class="zh" lang="zh-Hans">亮或暗</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">วิธีที่ง่ายที่สุดในการแยกสิ่งของออกจากพื้นหลัง คือเลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่ง พิกเซลที่สว่างกว่าเส้นนี้นับเป็น “สว่าง” ที่เหลือนับเป็น “มืด” วิธีนี้เรียกว่าการตัดด้วยค่าขีดแบ่ง (thresholding)</p>
-        <p class="en" lang="en">The simplest way to separate something from its background: pick one number as a line. Pixels brighter than the line count as “light”, the rest as “dark”. This is called thresholding.</p>
+        <p class="idea th" lang="th">วิธีที่ง่ายที่สุดในการแยกสิ่งของออกจากพื้นหลัง คือเลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่ง พิกเซลที่สว่างกว่าเส้นนี้นับเป็น “สว่าง” ที่เหลือนับเป็น “มืด” วิธีนี้เรียกว่าการตัดด้วยค่าขีดแบ่ง (thresholding)</p>
+        <p class="idea en" lang="en">The simplest way to separate something from its background: pick one number as a line. Pixels brighter than the line count as “light”, the rest as “dark”. This is called thresholding.</p><p class="idea zh" lang="zh-Hans">把一个东西和它的背景分开，最简单的办法是：选一个数字当作一条线。比这条线更亮的像素算作“亮”，其余的算作“暗”。这叫做阈值处理。</p>
         <p class="th" lang="th">กราฟใต้ภาพคือฮิสโตแกรม นับว่ามีพิกเซลกี่จุดในแต่ละระดับความสว่าง ปุ่ม “อัตโนมัติ” ใช้วิธีของโอตสึ (Otsu, 1979) หาเส้นแบ่งที่แยกพิกเซลเป็นสองกลุ่มได้ชัดที่สุด เครื่องสแกนเอกสารยังใช้หลักนี้อยู่ทุกวันนี้</p>
-        <p class="en" lang="en">The chart under the picture is a histogram: how many pixels sit at each brightness. “Automatic” uses Otsu's method (Otsu, 1979) to find the line that splits the pixels most cleanly into two groups. Document scanners still work this way.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ส่องกล้องไปที่กระดาษที่มีตัวหนังสือ แล้วกด “อัตโนมัติ”</span><span class="en" lang="en">Point your camera at a page of writing and press “Automatic”.</span></p>
+        <p class="en" lang="en">The chart under the picture is a histogram: how many pixels sit at each brightness. “Automatic” uses Otsu's method (Otsu, 1979) to find the line that splits the pixels most cleanly into two groups. Document scanners still work this way.</p><p class="zh" lang="zh-Hans">图像下面的这张图是直方图：每个亮度上有多少像素。“自动”使用 Otsu 的方法（Otsu, 1979），找出能把像素最干净地分成两组的那条线。扫描文档的机器至今仍是这样做的。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ภาพขาวดำตามเส้นแบ่ง · The picture as light or dark"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="hist-view"><canvas data-hist role="img" aria-label="ฮิสโตแกรมความสว่าง · Brightness histogram"></canvas></div>
         <div class="slider">
-          <label for="level"><span class="th" lang="th">เส้นแบ่ง (0–255)</span><span class="en" lang="en">The line (0–255)</span></label>
+          <label for="level"><span class="th" lang="th">เส้นแบ่ง (0–255)</span><span class="en" lang="en">The line (0–255)</span><span class="zh" lang="zh-Hans">这条线（0–255）</span></label>
           <output for="level" data-level-out></output>
           <input id="level" type="range" min="0" max="255" step="1" value="128" data-level>
         </div>
         <div class="controls">
-          <button class="btn" type="button" data-otsu aria-pressed="false"><span class="th" lang="th">อัตโนมัติ (โอตสึ)</span><span class="en" lang="en">Automatic (Otsu)</span></button>
+          <button class="btn" type="button" data-otsu aria-pressed="false"><span class="th" lang="th">อัตโนมัติ (โอตสึ)</span><span class="en" lang="en">Automatic (Otsu)</span><span class="zh" lang="zh-Hans">自动（Otsu）</span></button>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว โอตสึ (1979) เลือกเส้นแบ่งเอง ภาพคือกล้องที่แถบสีดำระบุชื่อ</span><span class="en" lang="en">No trained model. Otsu (1979) chooses the line. The picture is the camera named in the black bar.</span><span class="zh" lang="zh-Hans">没有经过训练的模型。大津法（Otsu，1979）自己选那条线。图像是黑条上点名的那台摄像头。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">ส่องกล้องไปที่กระดาษที่มีตัวหนังสือ แล้วกด “อัตโนมัติ”</span><span class="en" lang="en">Point your camera at a page of writing and press “Automatic”.</span><span class="zh" lang="zh-Hans">把你的摄像头对准写着字的一页，按下“自动”。</span></p>
+        <p class="bridge"><a href="#convolution"><span class="th" lang="th">ต่อไป หน้าต่าง 3×3 เปลี่ยนตัวเลขเก้าตัวเป็นพิกเซลใหม่หนึ่งจุด</span><span class="en" lang="en">Next: a 3×3 window turns nine numbers into one new pixel.</span><span class="zh" lang="zh-Hans">下一步：一个 3×3 的窗口，把九个数字变成一个新像素。</span></a></p>
       </div>
     </div>
   </section>
@@ -188,36 +139,41 @@
   <section class="chapter field-quiet" id="convolution" data-chapter="convolution" aria-labelledby="convolution-title">
     <header>
       <span class="chapter-no">04 / 08</span>
-      <h2 id="convolution-title"><span class="th" lang="th">หน้าต่างเล็ก ๆ ที่เลื่อนไป</span><span class="en" lang="en">Sliding a small window</span></h2>
+      <h2 id="convolution-title"><span class="th" lang="th">หน้าต่างเล็ก ๆ ที่เลื่อนไป</span><span class="en" lang="en">Sliding a small window</span><span class="zh" lang="zh-Hans">滑动一个小窗口</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">วางหน้าต่างขนาด 3×3 ช่องลงบนภาพ เอาตัวเลขเก้าตัวใต้หน้าต่างคูณกับตัวเลขเก้าตัวของ “เคอร์เนล” แล้วบวกกันทั้งหมด ได้พิกเซลใหม่หนึ่งจุด จากนั้นเลื่อนไปหนึ่งช่องแล้วทำซ้ำจนทั่วภาพ ขั้นตอนนี้เรียกว่าคอนโวลูชัน (convolution)</p>
-        <p class="en" lang="en">Lay a 3×3 window on the picture. Multiply the nine numbers under it by the nine numbers of a “kernel”, and add them all up: that is one new pixel. Slide one step and repeat, across the whole picture. This is called convolution.</p>
+        <p class="idea th" lang="th">วางหน้าต่างขนาด 3×3 ช่องลงบนภาพ เอาตัวเลขเก้าตัวใต้หน้าต่างคูณกับตัวเลขเก้าตัวของ “เคอร์เนล” แล้วบวกกันทั้งหมด ได้พิกเซลใหม่หนึ่งจุด จากนั้นเลื่อนไปหนึ่งช่องแล้วทำซ้ำจนทั่วภาพ ขั้นตอนนี้เรียกว่าคอนโวลูชัน (convolution)</p>
+        <p class="idea en" lang="en">Lay a 3×3 window on the picture. Multiply the nine numbers under it by the nine numbers of a “kernel”, and add them all up: that is one new pixel. Slide one step and repeat, across the whole picture. This is called convolution.</p><p class="idea zh" lang="zh-Hans">在图像上放一个 3×3 的窗口。把窗口下面的九个数字，分别乘以“卷积核”的九个数字，再全部加起来：得到的就是一个新像素。滑动一步，再重复，直到整张图像。这叫做卷积。</p>
         <p class="th" lang="th">เปลี่ยนตัวเลขเก้าตัว ผลก็เปลี่ยน ภาพอาจเบลอ คมขึ้น หรือเหลือแต่ขอบ แตะที่ภาพเพื่อย้ายหน้าต่าง แล้วดูการคำนวณจริงด้านล่าง</p>
-        <p class="en" lang="en">Change the nine numbers and the result changes: blur, sharpen, or nothing but edges. Tap the picture to move the window and watch the real arithmetic below it.</p>
+        <p class="en" lang="en">Change the nine numbers and the result changes: blur, sharpen, or nothing but edges. Tap the picture to move the window and watch the real arithmetic below it.</p><p class="zh" lang="zh-Hans">改变这九个数字，结果就跟着改变：变模糊、变锐利，或者只剩下边缘。点这张图像来移动窗口，并看窗口下面真实的算术。</p>
         <p class="th" lang="th">นี่คือเมล็ดพันธุ์ของโครงข่ายประสาทเทียมแบบคอนโวลูชัน (CNN) ต่างกันเพียงว่าไม่มีใครเลือกตัวเลขให้ CNN มันเรียนรู้ตัวเลขเองจากภาพตัวอย่าง และซ้อนหน้าต่างแบบนี้หลายพันอันเป็นชั้น ๆ (LeCun และคณะ, 1998; Krizhevsky และคณะ, 2012)</p>
-        <p class="en" lang="en">This is the seed of convolutional neural networks (CNNs). The only difference: nobody chooses a CNN's numbers. It learns them from example pictures, and stacks thousands of such windows in layers (LeCun et al., 1998; Krizhevsky et al., 2012).</p>
+        <p class="en" lang="en">This is the seed of convolutional neural networks (CNNs). The only difference: nobody chooses a CNN's numbers. It learns them from example pictures, and stacks thousands of such windows in layers (LeCun et al., 1998; Krizhevsky et al., 2012).</p><p class="zh" lang="zh-Hans">这是卷积神经网络（CNN）的起点。唯一的不同是：CNN 的数字不是人选定的。它从例子图像里学习这些数字，并把成千上万个这样的窗口叠成一层一层（LeCun et al., 1998; Krizhevsky et al., 2012）。</p>
       </div>
       <div class="bench">
         <div class="bench-view tap"><canvas data-view role="img" aria-label="ภาพหลังผ่านเคอร์เนล แตะเพื่อย้ายหน้าต่าง · The picture after the kernel; tap to move the window"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="controls" role="group" aria-label="Kernel">
-          <button class="btn" type="button" data-kernel="identity" aria-pressed="true"><span class="th" lang="th">เหมือนเดิม</span><span class="en" lang="en">Identity</span></button>
-          <button class="btn" type="button" data-kernel="blur" aria-pressed="false"><span class="th" lang="th">เบลอ</span><span class="en" lang="en">Blur</span></button>
-          <button class="btn" type="button" data-kernel="sharpen" aria-pressed="false"><span class="th" lang="th">คมขึ้น</span><span class="en" lang="en">Sharpen</span></button>
-          <button class="btn" type="button" data-kernel="edges" aria-pressed="false"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></button>
-          <button class="btn" type="button" data-kernel="vertical" aria-pressed="false"><span class="th" lang="th">เส้นตั้ง</span><span class="en" lang="en">Vertical</span></button>
-          <button class="btn" type="button" data-kernel="horizontal" aria-pressed="false"><span class="th" lang="th">เส้นนอน</span><span class="en" lang="en">Horizontal</span></button>
-          <button class="btn" type="button" data-kernel="emboss" aria-pressed="false"><span class="th" lang="th">นูน</span><span class="en" lang="en">Emboss</span></button>
+          <button class="btn" type="button" data-kernel="identity" aria-pressed="true"><span class="th" lang="th">เหมือนเดิม</span><span class="en" lang="en">Identity</span><span class="zh" lang="zh-Hans">原样</span></button>
+          <button class="btn" type="button" data-kernel="blur" aria-pressed="false"><span class="th" lang="th">เบลอ</span><span class="en" lang="en">Blur</span><span class="zh" lang="zh-Hans">模糊</span></button>
+          <button class="btn" type="button" data-kernel="sharpen" aria-pressed="false"><span class="th" lang="th">คมขึ้น</span><span class="en" lang="en">Sharpen</span><span class="zh" lang="zh-Hans">锐化</span></button>
+          <button class="btn" type="button" data-kernel="edges" aria-pressed="false"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span><span class="zh" lang="zh-Hans">边缘</span></button>
+          <button class="btn" type="button" data-kernel="vertical" aria-pressed="false"><span class="th" lang="th">เส้นตั้ง</span><span class="en" lang="en">Vertical</span><span class="zh" lang="zh-Hans">垂直</span></button>
+          <button class="btn" type="button" data-kernel="horizontal" aria-pressed="false"><span class="th" lang="th">เส้นนอน</span><span class="en" lang="en">Horizontal</span><span class="zh" lang="zh-Hans">水平</span></button>
+          <button class="btn" type="button" data-kernel="emboss" aria-pressed="false"><span class="th" lang="th">นูน</span><span class="en" lang="en">Emboss</span><span class="zh" lang="zh-Hans">浮雕</span></button>
         </div>
         <div class="kmath" aria-live="off">
-          <figure><figcaption class="label"><span class="th" lang="th">ใต้หน้าต่าง</span><span class="en" lang="en">Under the window</span></figcaption><div class="kgrid num" data-patch></div></figure>
+          <figure><figcaption class="label"><span class="th" lang="th">ใต้หน้าต่าง</span><span class="en" lang="en">Under the window</span><span class="zh" lang="zh-Hans">窗口下面</span></figcaption><div class="kgrid num" data-patch></div></figure>
           <span class="kop" aria-hidden="true">×</span>
-          <figure><figcaption class="label"><span class="th" lang="th">เคอร์เนล</span><span class="en" lang="en">Kernel</span></figcaption><div class="kgrid num" data-kernel-grid></div></figure>
+          <figure><figcaption class="label"><span class="th" lang="th">เคอร์เนล</span><span class="en" lang="en">Kernel</span><span class="zh" lang="zh-Hans">卷积核</span></figcaption><div class="kgrid num" data-kernel-grid></div></figure>
           <span class="kop" aria-hidden="true">=</span>
-          <figure><figcaption class="label"><span class="th" lang="th">พิกเซลใหม่</span><span class="en" lang="en">New pixel</span></figcaption><div class="kout num" data-kresult>—</div></figure>
+          <figure><figcaption class="label"><span class="th" lang="th">พิกเซลใหม่</span><span class="en" lang="en">New pixel</span><span class="zh" lang="zh-Hans">新像素</span></figcaption><div class="kout num" data-kresult>—</div></figure>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว น้ำหนักเก้าตัวมีคนเลือกให้ โครงข่ายเรียนรู้หน้าต่างแบบนี้เอง (LeCun และคณะ, 1998; Krizhevsky และคณะ, 2012)</span><span class="en" lang="en">No trained model. A person chose these nine weights. Networks learn windows like these (LeCun et al., 1998; Krizhevsky et al., 2012).</span><span class="zh" lang="zh-Hans">没有经过训练的模型。这九个权重是人选定的。网络会自己学会这样的窗口（LeCun 等，1998；Krizhevsky 等，2012）。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">แตะจุดที่รถตัดกับถนน แล้วอ่านตัวเลขเก้าตัวกับพิกเซลใหม่</span><span class="en" lang="en">Tap where a vehicle meets the road. Read the nine numbers and the new pixel.</span><span class="zh" lang="zh-Hans">点一下车和路面相接的地方。读那九个数字，以及新的像素。</span></p>
+        <p class="bridge"><a href="#edges"><span class="th" lang="th">ต่อไป หน้าต่างสองบานแบบนี้หาจุดที่ความสว่างเปลี่ยนเร็ว</span><span class="en" lang="en">Next: two of these windows find where brightness changes fast.</span><span class="zh" lang="zh-Hans">下一步：两扇这样的窗口，找出亮度变化得快的地方。</span></a></p>
       </div>
     </div>
   </section>
@@ -226,23 +182,27 @@
   <section class="chapter" id="edges" data-chapter="edges" aria-labelledby="edges-title">
     <header>
       <span class="chapter-no">05 / 08</span>
-      <h2 id="edges-title"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></h2>
+      <h2 id="edges-title"><span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span><span class="zh" lang="zh-Hans">边缘</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">ขอบคือตรงที่ความสว่างเปลี่ยนเร็ว เช่น ตรงที่ตัวรถตัดกับพื้นถนน ตัวกรองโซเบล (Sobel) ใช้หน้าต่างสองแบบจากบทที่แล้ว แบบหนึ่งหาการเปลี่ยนจากซ้ายไปขวา อีกแบบหาจากบนลงล่าง แล้วรวมกันเป็นความแรงของขอบ</p>
-        <p class="en" lang="en">An edge is where brightness changes fast, like where a car meets the road. The Sobel filter uses two windows from the last chapter, one for left-to-right change and one for top-to-bottom, and combines them into edge strength.</p>
+        <p class="idea th" lang="th">ขอบคือตรงที่ความสว่างเปลี่ยนเร็ว เช่น ตรงที่ตัวรถตัดกับพื้นถนน ตัวกรองโซเบล (Sobel) ใช้หน้าต่างสองแบบจากบทที่แล้ว แบบหนึ่งหาการเปลี่ยนจากซ้ายไปขวา อีกแบบหาจากบนลงล่าง แล้วรวมกันเป็นความแรงของขอบ</p>
+        <p class="idea en" lang="en">An edge is where brightness changes fast, like where a car meets the road. The Sobel filter uses two windows from the last chapter, one for left-to-right change and one for top-to-bottom, and combines them into edge strength.</p><p class="idea zh" lang="zh-Hans">边缘是亮度变化很快的地方，就像车和路面相接的地方。Sobel 滤波器使用上一章的两个窗口，一个看从左到右的变化，一个看从上到下的变化，再把它们合成边缘的强度。</p>
         <p class="th" lang="th">ยิ่งสว่างยิ่งเป็นขอบที่ชัด เพิ่มความไวเพื่อดูขอบจาง ๆ เครื่องยังไม่รู้ว่าเส้นเหล่านี้คืออะไร แต่รูปร่างเริ่มโผล่ขึ้นมาแล้ว ชั้นแรก ๆ ของ CNN ที่ฝึกเสร็จแล้วมักเรียนรู้ตัวกรองที่หน้าตาคล้ายแบบนี้ขึ้นมาเอง</p>
-        <p class="en" lang="en">Brighter means a stronger edge. Raise the gain to see faint ones. The machine still has no idea what any line is, but shape is starting to appear. The first layers of a trained CNN often end up learning filters much like this on their own.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ใช้กล้องของคุณแล้วขยับมือช้า ๆ ขอบนิ้วชัดแค่ไหนเมื่อพื้นหลังสว่างหรือมืด</span><span class="en" lang="en">Use your camera and move a hand slowly. How clear are your fingers against a light or a dark background?</span></p>
+        <p class="en" lang="en">Brighter means a stronger edge. Raise the gain to see faint ones. The machine still has no idea what any line is, but shape is starting to appear. The first layers of a trained CNN often end up learning filters much like this on their own.</p><p class="zh" lang="zh-Hans">更亮，表示边缘更强。把增益调高，就能看见淡的边缘。机器仍然不知道任何一条线是什么，但形状开始出现了。训练好的 CNN，最前面的几层常常会自己学出很像这样的滤波器。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ความแรงของขอบ · Edge strength"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="slider">
-          <label for="gain"><span class="th" lang="th">ความไว</span><span class="en" lang="en">Gain</span></label>
+          <label for="gain"><span class="th" lang="th">ความไว</span><span class="en" lang="en">Gain</span><span class="zh" lang="zh-Hans">增益</span></label>
           <output for="gain" data-gain-out></output>
           <input id="gain" type="range" min="0.5" max="5" step="0.25" value="1.5" data-gain>
         </div>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว โซเบลและเฟลด์แมน, 1968 ภาพคือกล้องที่แถบสีดำระบุชื่อ</span><span class="en" lang="en">No trained model. Sobel and Feldman, 1968. The picture is the camera named in the black bar.</span><span class="zh" lang="zh-Hans">没有经过训练的模型。Sobel 与 Feldman，1968。图像是黑条上点名的那台摄像头。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">ใช้กล้องของคุณแล้วขยับมือช้า ๆ ขอบนิ้วชัดแค่ไหนเมื่อพื้นหลังสว่างหรือมืด</span><span class="en" lang="en">Use your camera and move a hand slowly. How clear are your fingers against a light or a dark background?</span><span class="zh" lang="zh-Hans">使用你的摄像头，把手慢慢移动。在浅色背景前和在深色背景前，你的手指有多清楚？</span></p>
+        <p class="bridge"><a href="#motion"><span class="th" lang="th">ต่อไป เอาสองภาพมาลบกัน สิ่งที่เปลี่ยนคือสิ่งที่ขยับ</span><span class="en" lang="en">Next: subtract two pictures. What changed is what moved.</span><span class="zh" lang="zh-Hans">下一步：把两张图像相减。变了的地方，就是动了的东西。</span></a></p>
       </div>
     </div>
   </section>
@@ -251,26 +211,30 @@
   <section class="chapter field-quiet" id="motion" data-chapter="motion" aria-labelledby="motion-title">
     <header>
       <span class="chapter-no">06 / 08</span>
-      <h2 id="motion-title"><span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span></h2>
+      <h2 id="motion-title"><span class="th" lang="th">อะไรขยับ</span><span class="en" lang="en">What moved</span><span class="zh" lang="zh-Hans">什么动了</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">เอาภาพตอนนี้ลบด้วยภาพเมื่อครู่ ช่องที่ตัวเลขเปลี่ยนมากกว่าค่าที่ตั้งไว้คือสิ่งที่ขยับ สีส้มคือสิ่งที่เครื่องสังเกตเห็น กรอบคือกลุ่มพิกเซลที่อยู่ติดกัน</p>
-        <p class="en" lang="en">Subtract the picture from a moment ago from the picture now. Squares whose number changed by more than the setting are things that moved. Orange marks what the machine noticed; boxes group pixels that touch.</p>
+        <p class="idea th" lang="th">เอาภาพตอนนี้ลบด้วยภาพเมื่อครู่ ช่องที่ตัวเลขเปลี่ยนมากกว่าค่าที่ตั้งไว้คือสิ่งที่ขยับ สีส้มคือสิ่งที่เครื่องสังเกตเห็น กรอบคือกลุ่มพิกเซลที่อยู่ติดกัน</p>
+        <p class="idea en" lang="en">Subtract the picture from a moment ago from the picture now. Squares whose number changed by more than the setting are things that moved. Orange marks what the machine noticed; boxes group pixels that touch.</p><p class="idea zh" lang="zh-Hans">用现在的图像，减去片刻之前的图像。数字的变化超过设定值的方块，就是动了的东西。橙色标出机器注意到的地方；方框把互相挨着的像素归成一组。</p>
         <p class="th" lang="th">ตั้งค่าต่ำเกินไป เครื่องจะจับได้แม้แต่ใบไม้ไหวหรือสัญญาณรบกวนของกล้อง ตั้งสูงเกินไป มันจะพลาดรถที่สีคล้ายถนน ไม่มีค่าไหนถูกต้องเสมอ</p>
-        <p class="en" lang="en">Set it too low and it catches swaying leaves and camera noise. Too high and it misses a car the same colour as the road. No setting is always right.</p>
+        <p class="en" lang="en">Set it too low and it catches swaying leaves and camera noise. Too high and it misses a car the same colour as the road. No setting is always right.</p><p class="zh" lang="zh-Hans">设得太低，它会抓住摇摆的叶子和摄像头的噪声。设得太高，它会漏掉一辆和路面颜色相同的车。没有哪一个设定是永远正确的。</p>
         <p class="th" lang="th">กล้องบางตัวส่งภาพนิ่งทุกราว 20 วินาที ไม่ใช่วิดีโอ เครื่องจึงเห็นความเปลี่ยนแปลงได้เฉพาะตอนที่ภาพใหม่มาถึง และในยี่สิบวินาที รถทั้งคันอาจผ่านมาแล้วก็ผ่านไป</p>
-        <p class="en" lang="en">Some cameras send a still picture about every 20 seconds, not video. The machine can only see change when the next picture arrives — and in twenty seconds a whole car can come and go.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">เปิดกล้องของคุณ อยู่นิ่ง ๆ แล้วโบกมือ</span><span class="en" lang="en">Open your camera, keep still, then wave.</span></p>
+        <p class="en" lang="en">Some cameras send a still picture about every 20 seconds, not video. The machine can only see change when the next picture arrives — and in twenty seconds a whole car can come and go.</p><p class="zh" lang="zh-Hans">有些摄像头大约每 20 秒发送一张静止图像，而不是视频。只有下一张图像到来时，机器才能看见变化——而在二十秒里，一整辆车可以开过来，又开走。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="สิ่งที่เปลี่ยนระหว่างสองภาพ · What changed between two pictures"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="slider">
-          <label for="delta"><span class="th" lang="th">ต้องเปลี่ยนอย่างน้อย (จาก 255)</span><span class="en" lang="en">Minimum change (out of 255)</span></label>
+          <label for="delta"><span class="th" lang="th">ต้องเปลี่ยนอย่างน้อย (จาก 255)</span><span class="en" lang="en">Minimum change (out of 255)</span><span class="zh" lang="zh-Hans">最小变化（满值是 255）</span></label>
           <output for="delta" data-delta-out></output>
           <input id="delta" type="range" min="4" max="80" step="1" value="22" data-delta>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">ไม่มีโมเดลที่ฝึกแล้ว นี่คือการลบสองภาพ กล้องสาธารณะบางตัวส่งภาพนิ่งราวทุก 20 วินาที ไม่ใช่วิดีโอ</span><span class="en" lang="en">No trained model. This is frame differencing. Some public cameras send a still about every 20 seconds, not video.</span><span class="zh" lang="zh-Hans">没有经过训练的模型。这是帧差。有些公共摄像头大约每 20 秒才发一张静止图像，不是视频。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">เปิดกล้องของคุณ อยู่นิ่ง ๆ แล้วโบกมือ</span><span class="en" lang="en">Open your camera, keep still, then wave.</span><span class="zh" lang="zh-Hans">打开你的摄像头，先保持不动，然后挥手。</span></p>
+        <p class="bridge"><a href="#detector"><span class="th" lang="th">ต่อไป โครงข่ายที่ฝึกจากภาพมีป้าย จะเดาชื่อพร้อมคะแนน</span><span class="en" lang="en">Next: a network trained on labelled photos guesses a name and a score.</span><span class="zh" lang="zh-Hans">下一步：用标注过的照片训练的网络，会猜一个名字和一个分数。</span></a></p>
       </div>
     </div>
   </section>
@@ -279,55 +243,60 @@
   <section class="chapter" id="detector" data-chapter="detector" aria-labelledby="detector-title">
     <header>
       <span class="chapter-no">07 / 08</span>
-      <h2 id="detector-title"><span class="th" lang="th">โครงข่ายที่ฝึกแล้วลองเดา</span><span class="en" lang="en">A trained network guesses</span></h2>
+      <h2 id="detector-title"><span class="th" lang="th">โครงข่ายที่ฝึกแล้วลองเดา</span><span class="en" lang="en">A trained network guesses</span><span class="zh" lang="zh-Hans">一个训练好的网络在猜测</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">ทุกอย่างก่อนหน้านี้ทำตามกฎที่คนเขียนไว้ บทนี้ต่างออกไป โครงข่ายประสาทเทียมชื่อ SSDLite-MobileNetV2 เรียนรู้ว่า “รถยนต์” “คน” หรือ “เรือ” หน้าตาเป็นอย่างไร จากภาพที่มีคนติดป้ายไว้กว่าแสนภาพในชุดข้อมูล COCO (Lin และคณะ, 2014) มันดูภาพเพียงครั้งเดียว แล้วเสนอกรอบหลายพันกรอบ แต่ละกรอบมีคะแนน</p>
-        <p class="en" lang="en">Everything so far followed rules a person wrote. This is different. A neural network called SSDLite-MobileNetV2 learned what “car”, “person” and “boat” look like from over a hundred thousand labelled photos in the COCO dataset (Lin et al., 2014). It looks at the picture once and proposes thousands of boxes, each with a score.</p>
+        <p class="idea th" lang="th">ทุกอย่างก่อนหน้านี้ทำตามกฎที่คนเขียนไว้ บทนี้ต่างออกไป โครงข่ายประสาทเทียมชื่อ SSDLite-MobileNetV2 เรียนรู้ว่า “รถยนต์” “คน” หรือ “เรือ” หน้าตาเป็นอย่างไร จากภาพที่มีคนติดป้ายไว้กว่าแสนภาพในชุดข้อมูล COCO (Lin และคณะ, 2014) มันดูภาพเพียงครั้งเดียว แล้วเสนอกรอบหลายพันกรอบ แต่ละกรอบมีคะแนน</p>
+        <p class="idea en" lang="en">Everything so far followed rules a person wrote. This is different. A neural network called SSDLite-MobileNetV2 learned what “car”, “person” and “boat” look like from over a hundred thousand labelled photos in the COCO dataset (Lin et al., 2014). It looks at the picture once and proposes thousands of boxes, each with a score.</p><p class="idea zh" lang="zh-Hans">到目前为止，一切都遵循人写下的规则。这里不一样。一个叫做 SSDLite-MobileNetV2 的神经网络，从 COCO 数据集里超过十万张标好的照片中，学会了“车”、“人”和“船”是什么样子（Lin et al., 2014）。它看一次图像，就提出成千上万个框，每一个框都有一个分数。</p>
         <p class="th" lang="th">คะแนนคือความมั่นใจของตัวมันเอง ไม่ใช่ความจริง เลื่อนแถบเพื่อเลือกว่ามันต้องมั่นใจแค่ไหนถึงจะพูด ตั้งต่ำไปจะเห็นของที่ไม่มีอยู่จริง ตั้งสูงไปจะพลาดของที่มีอยู่ ทุกระบบจริงต้องเลือกจุดแลกเปลี่ยนนี้</p>
-        <p class="en" lang="en">The score is its own confidence, not the truth. Slide to choose how sure it must be before it speaks. Too low and it sees things that are not there; too high and it misses things that are. Every real system has to choose this trade-off.</p>
+        <p class="en" lang="en">The score is its own confidence, not the truth. Slide to choose how sure it must be before it speaks. Too low and it sees things that are not there; too high and it misses things that are. Every real system has to choose this trade-off.</p><p class="zh" lang="zh-Hans">这个分数是它自己的置信度，不是事实。滑动来选择：它要有多确定，才把结果说出来。太低，它会看见并不存在的东西；太高，它会漏掉确实存在的东西。每一个真实的系统都必须做这个取舍。</p>
         <p class="th" lang="th">โมเดลมีขนาด 18 MB โหลดครั้งเดียวเมื่อคุณกดปุ่ม และคำนวณในเบราว์เซอร์นี้ ไม่มีภาพถูกส่งออกไปไหน</p>
-        <p class="en" lang="en">The model is 18 MB, loaded once when you press the button, and computes in this browser. No picture is sent anywhere.</p>
+        <p class="en" lang="en">The model is 18 MB, loaded once when you press the button, and computes in this browser. No picture is sent anywhere.</p><p class="zh" lang="zh-Hans">这个模型有 18 MB，按下按钮时加载一次，并在这个浏览器里计算。没有任何图像被发送到别处。</p>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="กรอบที่โครงข่ายพบพร้อมความมั่นใจ · Boxes the network found, with confidence"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="controls">
-          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span></button>
+          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span><span class="zh" lang="zh-Hans">▶ 加载神经网络</span></button>
         </div>
         <div class="slider">
-          <label for="min"><span class="th" lang="th">แสดงเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Show only when at least this sure</span></label>
+          <label for="min"><span class="th" lang="th">แสดงเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Show only when at least this sure</span><span class="zh" lang="zh-Hans">至少达到这个确定程度才显示</span></label>
           <output for="min" data-min-out></output>
           <input id="min" type="range" min="10" max="95" step="5" value="50" data-min>
         </div>
         <p class="readout" data-readout></p>
         <div class="bars score-list" data-list></div>
+<p class="credit"><span class="th" lang="th">SSDLite MobileNetV2, Apache-2.0 จากคลังโมเดล TensorFlow.js ฝึกด้วย COCO (Lin และคณะ, 2014) ตัวตรวจจับ: Liu และคณะ, 2016 แกน: Sandler และคณะ, 2018 คำนวณในเบราว์เซอร์นี้</span><span class="en" lang="en">SSDLite MobileNetV2, Apache-2.0, from the TensorFlow.js model zoo. Trained on COCO (Lin et al., 2014). Detector: Liu et al., 2016. Backbone: Sandler et al., 2018. It runs in this browser.</span><span class="zh" lang="zh-Hans">SSDLite MobileNetV2，Apache-2.0，来自 TensorFlow.js 模型库。用 COCO 训练（Lin 等，2014）。检测器：Liu 等，2016。骨干网络：Sandler 等，2018。在这个浏览器里运算。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">ลดเส้นลงจนมีกรอบโผล่บนถนนว่าง แล้วขยับขึ้นจนรถจริงหายไป</span><span class="en" lang="en">Lower the line until a box appears on empty road, then raise it until a real vehicle disappears.</span><span class="zh" lang="zh-Hans">把线降到空路面上也出现框，再升高，直到一辆真的车消失。</span></p>
+        <p class="bridge"><a href="#limits"><span class="th" lang="th">ต่อไป ดูคำเดาหายไปเมื่อพิกเซลเหลือน้อย ทั้งที่ของยังอยู่</span><span class="en" lang="en">Next: watch the guess vanish as the pixels go, while the thing is still there.</span><span class="zh" lang="zh-Hans">下一步：像素变少时，看着猜测消失，东西却还在。</span></a></p>
       </div>
     </div>
   </section>
 
   <section class="pipe-figure" id="dog-cat-car" aria-labelledby="dcc-title">
     <div class="page-head">
-      <h2 id="dcc-title"><span class="th" lang="th">มันรู้ได้อย่างไรว่านี่คือสุนัข แมว หรือรถ</span><span class="en" lang="en">How does it know: dog, cat or car?</span></h2>
+      <h2 id="dcc-title"><span class="th" lang="th">มันรู้ได้อย่างไรว่านี่คือสุนัข แมว หรือรถ</span><span class="en" lang="en">How does it know: dog, cat or car?</span><span class="zh" lang="zh-Hans">它怎么知道是狗、猫，还是车？</span></h2>
       <p class="lede th" lang="th">ไม่มีใครบอกมันว่า “สุนัขมีหูตก” มันดูภาพที่มีป้ายกำกับนับแสนภาพ แล้วปรับตัวเลขข้างในทีละนิด จนชิ้นส่วนที่มักอยู่ในภาพสุนัขช่วยดันคะแนน “สุนัข” ขึ้น</p>
-      <p class="lede en" lang="en">Nobody told it “a dog has floppy ears”. It looked at hundreds of thousands of labelled photos and nudged its numbers, little by little, until the parts that tend to appear in dog photos push the “dog” score up.</p>
+      <p class="lede en" lang="en">Nobody told it “a dog has floppy ears”. It looked at hundreds of thousands of labelled photos and nudged its numbers, little by little, until the parts that tend to appear in dog photos push the “dog” score up.</p><p class="lede zh" lang="zh-Hans">没有人告诉过它“狗有下垂的耳朵”。它看了几十万张标好的照片，把数字一点一点地挪动，直到那些经常出现在狗的照片里的部分，把“狗”的分数往上推。</p>
     </div>
     <figure class="flow-fig">
       <div class="pipe-scroll">
       <svg class="diagram flow" viewBox="0 0 1000 430">
-        <text class="big en" lang="en" x="105" y="34" text-anchor="middle">1 · The picture</text>
+        <text class="big en" lang="en" x="105" y="34" text-anchor="middle">1 · The picture</text><text class="big zh" lang="zh-Hans" x="105" y="34" text-anchor="middle">1 · 图像</text>
         <text class="big thai th" lang="th" x="105" y="34" text-anchor="middle">1 · ภาพ</text>
-        <text class="big en" lang="en" x="285" y="34" text-anchor="middle">2 · Edges</text>
+        <text class="big en" lang="en" x="285" y="34" text-anchor="middle">2 · Edges</text><text class="big zh" lang="zh-Hans" x="285" y="34" text-anchor="middle">2 · 边缘</text>
         <text class="big thai th" lang="th" x="285" y="34" text-anchor="middle">2 · ขอบ</text>
-        <text class="big en" lang="en" x="520" y="34" text-anchor="middle">3 · Parts</text>
+        <text class="big en" lang="en" x="520" y="34" text-anchor="middle">3 · Parts</text><text class="big zh" lang="zh-Hans" x="520" y="34" text-anchor="middle">3 · 部分</text>
         <text class="big thai th" lang="th" x="520" y="34" text-anchor="middle">3 · ชิ้นส่วน</text>
-        <text class="big en" lang="en" x="840" y="34" text-anchor="middle">4 · A vote</text>
+        <text class="big en" lang="en" x="840" y="34" text-anchor="middle">4 · A vote</text><text class="big zh" lang="zh-Hans" x="840" y="34" text-anchor="middle">4 · 一次投票</text>
         <text class="big thai th" lang="th" x="840" y="34" text-anchor="middle">4 · โหวต</text>
-        <text class="en" lang="en" x="285" y="56" text-anchor="middle">first layers</text>
+        <text class="en" lang="en" x="285" y="56" text-anchor="middle">first layers</text><text class="zh" lang="zh-Hans" x="285" y="56" text-anchor="middle">前面几层</text>
         <text class="thai th" lang="th" x="285" y="56" text-anchor="middle">ชั้นแรก ๆ</text>
-        <text class="en" lang="en" x="520" y="56" text-anchor="middle">middle layers</text>
+        <text class="en" lang="en" x="520" y="56" text-anchor="middle">middle layers</text><text class="zh" lang="zh-Hans" x="520" y="56" text-anchor="middle">中间几层</text>
         <text class="thai th" lang="th" x="520" y="56" text-anchor="middle">ชั้นกลาง</text>
-        <text class="en" lang="en" x="840" y="56" text-anchor="middle">last layer</text>
+        <text class="en" lang="en" x="840" y="56" text-anchor="middle">last layer</text><text class="zh" lang="zh-Hans" x="840" y="56" text-anchor="middle">最后一层</text>
         <text class="thai th" lang="th" x="840" y="56" text-anchor="middle">ชั้นสุดท้าย</text>
         <circle class="stroke" cx="105" cy="112" r="26"/>
         <ellipse class="stroke" cx="76" cy="104" rx="8" ry="19"/>
@@ -354,73 +323,73 @@
         <path class="stroke" d="M362 330 H384 M376 322 L385 330 L376 338"/>
         <path class="stroke" d="M668 330 H690 M682 322 L691 330 L682 338"/>
         <rect class="fill-signal" x="400" y="96" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="442" y="115" text-anchor="middle">floppy ear</text>
+        <text class="on-signal en" lang="en" x="442" y="115" text-anchor="middle">floppy ear</text><text class="on-signal zh" lang="zh-Hans" x="442" y="115" text-anchor="middle">下垂的耳朵</text>
         <text class="on-signal thai th" lang="th" x="442" y="115" text-anchor="middle">หูตก</text>
         <rect class="fill-signal" x="488" y="96" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="530" y="115" text-anchor="middle">snout</text>
+        <text class="on-signal en" lang="en" x="530" y="115" text-anchor="middle">snout</text><text class="on-signal zh" lang="zh-Hans" x="530" y="115" text-anchor="middle">口鼻</text>
         <text class="on-signal thai th" lang="th" x="530" y="115" text-anchor="middle">จมูกยื่น</text>
         <rect class="stroke-gray" x="576" y="96" width="84" height="28"/>
-        <text class="en" lang="en" x="618" y="115" text-anchor="middle">whiskers</text>
+        <text class="en" lang="en" x="618" y="115" text-anchor="middle">whiskers</text><text class="zh" lang="zh-Hans" x="618" y="115" text-anchor="middle">胡须</text>
         <text class="thai th" lang="th" x="618" y="115" text-anchor="middle">หนวด</text>
         <rect class="fill-signal" x="400" y="206" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="442" y="225" text-anchor="middle">pointy ear</text>
+        <text class="on-signal en" lang="en" x="442" y="225" text-anchor="middle">pointy ear</text><text class="on-signal zh" lang="zh-Hans" x="442" y="225" text-anchor="middle">尖耳朵</text>
         <text class="on-signal thai th" lang="th" x="442" y="225" text-anchor="middle">หูตั้ง</text>
         <rect class="fill-signal" x="488" y="206" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="530" y="225" text-anchor="middle">whiskers</text>
+        <text class="on-signal en" lang="en" x="530" y="225" text-anchor="middle">whiskers</text><text class="on-signal zh" lang="zh-Hans" x="530" y="225" text-anchor="middle">胡须</text>
         <text class="on-signal thai th" lang="th" x="530" y="225" text-anchor="middle">หนวด</text>
         <rect class="stroke-gray" x="576" y="206" width="84" height="28"/>
-        <text class="en" lang="en" x="618" y="225" text-anchor="middle">snout</text>
+        <text class="en" lang="en" x="618" y="225" text-anchor="middle">snout</text><text class="zh" lang="zh-Hans" x="618" y="225" text-anchor="middle">口鼻</text>
         <text class="thai th" lang="th" x="618" y="225" text-anchor="middle">จมูกยื่น</text>
         <rect class="fill-signal" x="400" y="316" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="442" y="335" text-anchor="middle">wheel</text>
+        <text class="on-signal en" lang="en" x="442" y="335" text-anchor="middle">wheel</text><text class="on-signal zh" lang="zh-Hans" x="442" y="335" text-anchor="middle">车轮</text>
         <text class="on-signal thai th" lang="th" x="442" y="335" text-anchor="middle">ล้อ</text>
         <rect class="fill-signal" x="488" y="316" width="84" height="28"/>
-        <text class="on-signal en" lang="en" x="530" y="335" text-anchor="middle">window</text>
+        <text class="on-signal en" lang="en" x="530" y="335" text-anchor="middle">window</text><text class="on-signal zh" lang="zh-Hans" x="530" y="335" text-anchor="middle">车窗</text>
         <text class="on-signal thai th" lang="th" x="530" y="335" text-anchor="middle">กระจก</text>
         <rect class="stroke-gray" x="576" y="316" width="84" height="28"/>
-        <text class="en" lang="en" x="618" y="335" text-anchor="middle">fur</text>
+        <text class="en" lang="en" x="618" y="335" text-anchor="middle">fur</text><text class="zh" lang="zh-Hans" x="618" y="335" text-anchor="middle">毛</text>
         <text class="thai th" lang="th" x="618" y="335" text-anchor="middle">ขน</text>
-        <text class="en" lang="en" x="746" y="91" text-anchor="end">dog</text>
+        <text class="en" lang="en" x="746" y="91" text-anchor="end">dog</text><text class="zh" lang="zh-Hans" x="746" y="91" text-anchor="end">狗</text>
         <text class="thai th" lang="th" x="746" y="91" text-anchor="end">สุนัข</text>
         <rect class="fill-signal" x="756" y="79" width="130" height="12"/>
         <text x="894" y="91">81%</text>
-        <text class="en" lang="en" x="746" y="111" text-anchor="end">cat</text>
+        <text class="en" lang="en" x="746" y="111" text-anchor="end">cat</text><text class="zh" lang="zh-Hans" x="746" y="111" text-anchor="end">猫</text>
         <text class="thai th" lang="th" x="746" y="111" text-anchor="end">แมว</text>
         <rect class="fill-gray" x="756" y="99" width="22" height="12"/>
         <text x="786" y="111">14%</text>
-        <text class="en" lang="en" x="746" y="131" text-anchor="end">car</text>
+        <text class="en" lang="en" x="746" y="131" text-anchor="end">car</text><text class="zh" lang="zh-Hans" x="746" y="131" text-anchor="end">汽车</text>
         <text class="thai th" lang="th" x="746" y="131" text-anchor="end">รถ</text>
         <rect class="fill-gray" x="756" y="119" width="2" height="12"/>
         <text x="766" y="131">1%</text>
-        <text class="en" lang="en" x="746" y="201" text-anchor="end">cat</text>
+        <text class="en" lang="en" x="746" y="201" text-anchor="end">cat</text><text class="zh" lang="zh-Hans" x="746" y="201" text-anchor="end">猫</text>
         <text class="thai th" lang="th" x="746" y="201" text-anchor="end">แมว</text>
         <rect class="fill-signal" x="756" y="189" width="123" height="12"/>
         <text x="887" y="201">77%</text>
-        <text class="en" lang="en" x="746" y="221" text-anchor="end">dog</text>
+        <text class="en" lang="en" x="746" y="221" text-anchor="end">dog</text><text class="zh" lang="zh-Hans" x="746" y="221" text-anchor="end">狗</text>
         <text class="thai th" lang="th" x="746" y="221" text-anchor="end">สุนัข</text>
         <rect class="fill-gray" x="756" y="209" width="30" height="12"/>
         <text x="794" y="221">19%</text>
-        <text class="en" lang="en" x="746" y="241" text-anchor="end">car</text>
+        <text class="en" lang="en" x="746" y="241" text-anchor="end">car</text><text class="zh" lang="zh-Hans" x="746" y="241" text-anchor="end">汽车</text>
         <text class="thai th" lang="th" x="746" y="241" text-anchor="end">รถ</text>
         <rect class="fill-gray" x="756" y="229" width="3" height="12"/>
         <text x="767" y="241">2%</text>
-        <text class="en" lang="en" x="746" y="311" text-anchor="end">car</text>
+        <text class="en" lang="en" x="746" y="311" text-anchor="end">car</text><text class="zh" lang="zh-Hans" x="746" y="311" text-anchor="end">汽车</text>
         <text class="thai th" lang="th" x="746" y="311" text-anchor="end">รถ</text>
         <rect class="fill-signal" x="756" y="299" width="154" height="12"/>
         <text x="918" y="311">96%</text>
-        <text class="en" lang="en" x="746" y="331" text-anchor="end">dog</text>
+        <text class="en" lang="en" x="746" y="331" text-anchor="end">dog</text><text class="zh" lang="zh-Hans" x="746" y="331" text-anchor="end">狗</text>
         <text class="thai th" lang="th" x="746" y="331" text-anchor="end">สุนัข</text>
         <rect class="fill-gray" x="756" y="319" width="2" height="12"/>
         <text x="766" y="331">1%</text>
-        <text class="en" lang="en" x="746" y="351" text-anchor="end">cat</text>
+        <text class="en" lang="en" x="746" y="351" text-anchor="end">cat</text><text class="zh" lang="zh-Hans" x="746" y="351" text-anchor="end">猫</text>
         <text class="thai th" lang="th" x="746" y="351" text-anchor="end">แมว</text>
         <rect class="fill-gray" x="756" y="339" width="2" height="12"/>
         <text x="766" y="351">1%</text>
-        <text class="en" lang="en" x="500" y="400" text-anchor="middle">It never sees “dog”. It sees which part-detectors fire — then the parts vote.</text>
+        <text class="en" lang="en" x="500" y="400" text-anchor="middle">It never sees “dog”. It sees which part-detectors fire — then the parts vote.</text><text class="zh" lang="zh-Hans" x="500" y="400" text-anchor="middle">它看到的并不是“狗”。它看到的是哪些部分检测器被触发——然后由这些部分来投票。</text>
         <text class="thai th" lang="th" x="500" y="400" text-anchor="middle">มันไม่เคยเห็นคำว่า “สุนัข” มันเห็นแค่ว่าตัวตรวจจับชิ้นส่วนตัวไหนทำงาน แล้วให้ชิ้นส่วนโหวต</text>
       </svg>
       </div>
-      <figcaption><span class="th" lang="th">ชื่อชิ้นส่วนเป็นของเราเอง ชิ้นส่วนในโครงข่ายไม่มีชื่อ นักวิจัยรู้ว่ามันจับอะไรได้จากการดูว่าภาพแบบไหนทำให้มันทำงาน (Zeiler &amp; Fergus, 2014; Olah et al., 2017) สุนัขกับแมวสับสนกันง่ายเพราะมีชิ้นส่วนร่วมกันมาก — ขน ตา สี่ขา และเมื่อภาพเล็กหรือไกล เหลือแต่ชิ้นส่วนที่ร่วมกัน นั่นคือเหตุผลที่ใน <a href="/drive">ห้องขับเอง</a> สุนัขไกล ๆ ถูกเรียกว่า “แมว?”</span><span class="en" lang="en">The part names are ours — the network’s parts have no names; researchers learn what each one catches by finding the pictures that make it fire (Zeiler &amp; Fergus, 2014; Olah et al., 2017). Dogs and cats get mixed up because they share so many parts — fur, eyes, four legs — and when a picture is small or far away, only the shared parts survive. That is why, in <a href="/drive">the Drive room</a>, a far-away dog is sometimes called “cat?”.</span></figcaption>
+      <figcaption><span class="th" lang="th">ชื่อชิ้นส่วนเป็นของเราเอง ชิ้นส่วนในโครงข่ายไม่มีชื่อ นักวิจัยรู้ว่ามันจับอะไรได้จากการดูว่าภาพแบบไหนทำให้มันทำงาน (Zeiler &amp; Fergus, 2014; Olah et al., 2017) สุนัขกับแมวสับสนกันง่ายเพราะมีชิ้นส่วนร่วมกันมาก — ขน ตา สี่ขา และเมื่อภาพเล็กหรือไกล เหลือแต่ชิ้นส่วนที่ร่วมกัน นั่นคือเหตุผลที่ใน <a href="/drive">ห้องขับเอง</a> สุนัขไกล ๆ ถูกเรียกว่า “แมว?”</span><span class="en" lang="en">The part names are ours — the network’s parts have no names; researchers learn what each one catches by finding the pictures that make it fire (Zeiler &amp; Fergus, 2014; Olah et al., 2017). Dogs and cats get mixed up because they share so many parts — fur, eyes, four legs — and when a picture is small or far away, only the shared parts survive. That is why, in <a href="/drive">the Drive room</a>, a far-away dog is sometimes called “cat?”.</span><span class="zh" lang="zh-Hans">这些部分的名字是我们取的——网络里的部分并没有名字；研究者找出能让它触发的图像，从而知道它抓住的是什么（Zeiler &amp; Fergus, 2014; Olah et al., 2017）。狗和猫会被混在一起，因为它们有很多相同的部分——毛、眼睛、四条腿——当图像很小或很远时，只有那些共有的部分还留得下来。所以在 <a href="/drive">驾驶房间</a> 里，远处的狗有时会被叫做“猫？”。</span></figcaption>
     </figure>
   </section>
 
@@ -428,12 +397,12 @@
   <section class="chapter field-quiet" id="limits" data-chapter="limits" aria-labelledby="limits-title">
     <header>
       <span class="chapter-no">08 / 08</span>
-      <h2 id="limits-title"><span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></h2>
+      <h2 id="limits-title"><span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span><span class="zh" lang="zh-Hans">它不能做什么</span></h2>
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">เลื่อนแถบเพื่อลดจำนวนพิกเซล นี่คือสิ่งที่เครื่องได้รับเมื่อรถอยู่ไกล กล้องราคาถูก หรือภาพถูกบีบอัดมาก เมื่อพิกเซลน้อยลง สิ่งที่มันเห็นก็หายไปทีละอย่าง ทั้งที่รถยังจอดอยู่ตรงนั้น</p>
-        <p class="en" lang="en">Slide to take pixels away. This is what the machine gets when a car is far off, the camera is cheap, or the picture is squeezed hard. As pixels go, its findings vanish one by one — while the car is still standing right there.</p>
+        <p class="idea th" lang="th">เลื่อนแถบเพื่อลดจำนวนพิกเซล นี่คือสิ่งที่เครื่องได้รับเมื่อรถอยู่ไกล กล้องราคาถูก หรือภาพถูกบีบอัดมาก เมื่อพิกเซลน้อยลง สิ่งที่มันเห็นก็หายไปทีละอย่าง ทั้งที่รถยังจอดอยู่ตรงนั้น</p>
+        <p class="idea en" lang="en">Slide to take pixels away. This is what the machine gets when a car is far off, the camera is cheap, or the picture is squeezed hard. As pixels go, its findings vanish one by one — while the car is still standing right there.</p><p class="idea zh" lang="zh-Hans">滑动来减少像素。当车离得很远、摄像头很便宜，或者图像被压得很厉害时，机器得到的就是这样。像素变少，它的发现就一个一个消失——而那辆车仍然好好地在那里。</p>
         <ul class="th limits" lang="th">
           <li><strong>มันรู้เฉพาะสิ่งที่เคยถูกสอน</strong> COCO มี 80 ประเภท ภาพส่วนใหญ่มาจากเว็บ Flickr ไม่มีตุ๊กตุ๊ก ไม่มีสองแถว ไม่มีรถเข็นขายของ มันจะเรียกตุ๊กตุ๊กว่า “รถยนต์” หรือ “รถจักรยานยนต์” หรือไม่เห็นเลย ข้อมูลฝึกที่เอียง ทำให้เครื่องเอียงตาม</li>
           <li><strong>กลางคืน ฝน หมอก แสงสะท้อน เลนส์สกปรก</strong> ทุกอย่างนี้เปลี่ยนตัวเลขทุกตัวในภาพ เมื่อสภาพต่างจากภาพที่มันเคยเห็นตอนฝึก มันจะพลาดมากขึ้น</li>
@@ -447,36 +416,114 @@
           <li><strong>“Not detected” does not mean “not there”.</strong> Never treat an empty result as proof that the road is empty.</li>
           <li><strong>Confident is not correct.</strong> 90% is the score it gives itself, not a 90-in-100 chance of being right.</li>
           <li><strong>It can say “person”, never who.</strong> We do not recognise faces or read number plates, on any camera. Research has shown commercial face-analysis systems making far more mistakes for some groups of people than others (Buolamwini &amp; Gebru, 2018), and under Thailand's Personal Data Protection Act (2019) a face that identifies someone is personal data.</li>
+        </ul><ul class="zh limits" lang="zh-Hans">          <li><strong>它只认识被教过的东西。</strong> COCO 有 80 种东西，大多来自 Flickr 上的照片。没有 tuk-tuk（嘟嘟车），没有 songthaew（双条车），没有街头小吃车。它会把 tuk-tuk 叫做“车”或“摩托车”，或者什么都看不见。不均衡的训练数据，会造出不均衡的机器。</li>
+          <li><strong>夜晚、雨、雾、眩光、脏镜头。</strong> 每一种都会改变图像里的每一个数字。当情况和它训练时的图像不一样，它会漏掉更多。</li>
+          <li><strong>“未检测到”并不表示“不在那里”。</strong> 绝不要把一个空的结果，当成道路上什么都没有的证明。</li>
+          <li><strong>有把握并不等于正确。</strong> 90% 是它给自己打的分数，不是一百次里对九十次的概率。</li>
+          <li><strong>它可以说“人”，绝不能说出是谁。</strong> 在任何摄像头上，我们都不识别人脸，也不读取车牌。研究表明，商用人脸分析系统对某些人群的错误远远多于其他人群（Buolamwini &amp; Gebru, 2018）；根据泰国《个人数据保护法》（PDPA，2019），一张能够识别出某人的脸，属于个人数据。</li>
         </ul>
       </div>
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ภาพที่ลดพิกเซล และสิ่งที่โครงข่ายยังเห็น · The picture with fewer pixels, and what the network still finds"></canvas><div class="bench-state" data-state>…</div></div>
         <div class="controls">
-          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span></button>
+          <button class="btn primary load-btn" type="button" data-load><span class="th" lang="th">▶ โหลดโครงข่ายประสาทเทียม</span><span class="en" lang="en">▶ Load the neural network</span><span class="zh" lang="zh-Hans">▶ 加载神经网络</span></button>
         </div>
         <div class="slider">
-          <label for="res"><span class="th" lang="th">จำนวนพิกเซลตามแนวนอน</span><span class="en" lang="en">Pixels across</span></label>
+          <label for="res"><span class="th" lang="th">จำนวนพิกเซลตามแนวนอน</span><span class="en" lang="en">Pixels across</span><span class="zh" lang="zh-Hans">横向的像素数</span></label>
           <output for="res" data-res-out></output>
           <input id="res" type="range" min="0" max="100" step="1" value="100" data-res>
         </div>
         <p class="readout" data-readout></p>
+<p class="credit"><span class="th" lang="th">โมเดลเดียวกับบทที่แล้ว SSDLite MobileNetV2 บน COCO พิกเซลที่ลดลงคือสิ่งที่กล้องไกลหรือภาพถูกบีบอัดมอบให้มัน</span><span class="en" lang="en">The same model as the last chapter: SSDLite MobileNetV2 on COCO. Fewer pixels is what a distant camera, or a hard squeeze, actually gives it.</span><span class="zh" lang="zh-Hans">和上一章同一个模型：COCO 上的 SSDLite MobileNetV2。像素变少，就是远处的摄像头或被压得很狠的图像真正交给它的东西。</span></p>
+      </div>
+      <div class="after">
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span><span class="zh" lang="zh-Hans">试一试</span></span> <span class="th" lang="th">เลื่อนจนคุณยังเห็นรถ แต่โครงข่ายไม่เห็นแล้ว</span><span class="en" lang="en">Slide until you can still see the vehicle and the network no longer can.</span><span class="zh" lang="zh-Hans">往下拉，直到你还看得见那辆车，而网络已经看不见。</span></p>
+        <p class="bridge"><a href="/cameras"><span class="th" lang="th">ขั้นต่อไป ความคิดเดียวกันนี้ บนกล้องสาธารณะของไทย</span><span class="en" lang="en">Next level: the same ideas, on Thailand’s public cameras.</span><span class="zh" lang="zh-Hans">下一级：同样的想法，用在泰国的公共摄像头上。</span></a></p>
       </div>
     </div>
   </section>
 
+  <figure class="flow-fig learn-map pipe-scroll">
+    <svg class="diagram flow" viewBox="0 0 1000 130">
+      <path class="stroke" d="M20 60 H980"/>
+      <a href="#numbers">
+        <circle class="mark" cx="63" cy="60" r="15"/>
+        <text class="en" lang="en" x="63" y="65" text-anchor="middle">01</text><text class="zh" lang="zh-Hans" x="63" y="65" text-anchor="middle">01</text>
+        <text class="thai th" lang="th" x="63" y="65" text-anchor="middle">01</text>
+        <text class="en" lang="en" x="63" y="104" text-anchor="middle">Numbers</text><text class="zh" lang="zh-Hans" x="63" y="104" text-anchor="middle">数字</text>
+        <text class="thai th" lang="th" x="63" y="104" text-anchor="middle">ตัวเลข</text>
+      </a>
+      <a href="#colour">
+        <circle class="mark" cx="188" cy="60" r="15"/>
+        <text class="en" lang="en" x="188" y="65" text-anchor="middle">02</text><text class="zh" lang="zh-Hans" x="188" y="65" text-anchor="middle">02</text>
+        <text class="thai th" lang="th" x="188" y="65" text-anchor="middle">02</text>
+        <text class="en" lang="en" x="188" y="104" text-anchor="middle">Colour</text><text class="zh" lang="zh-Hans" x="188" y="104" text-anchor="middle">颜色</text>
+        <text class="thai th" lang="th" x="188" y="104" text-anchor="middle">สี</text>
+      </a>
+      <a href="#threshold">
+        <circle class="mark" cx="313" cy="60" r="15"/>
+        <text class="en" lang="en" x="313" y="65" text-anchor="middle">03</text><text class="zh" lang="zh-Hans" x="313" y="65" text-anchor="middle">03</text>
+        <text class="thai th" lang="th" x="313" y="65" text-anchor="middle">03</text>
+        <text class="en" lang="en" x="313" y="104" text-anchor="middle">Threshold</text><text class="zh" lang="zh-Hans" x="313" y="104" text-anchor="middle">阈值</text>
+        <text class="thai th" lang="th" x="313" y="104" text-anchor="middle">เกณฑ์</text>
+      </a>
+      <a href="#convolution">
+        <circle class="mark" cx="438" cy="60" r="15"/>
+        <text class="en" lang="en" x="438" y="65" text-anchor="middle">04</text><text class="zh" lang="zh-Hans" x="438" y="65" text-anchor="middle">04</text>
+        <text class="thai th" lang="th" x="438" y="65" text-anchor="middle">04</text>
+        <text class="en" lang="en" x="438" y="104" text-anchor="middle">The window</text><text class="zh" lang="zh-Hans" x="438" y="104" text-anchor="middle">窗口</text>
+        <text class="thai th" lang="th" x="438" y="104" text-anchor="middle">หน้าต่าง</text>
+      </a>
+      <a href="#edges">
+        <circle class="mark" cx="563" cy="60" r="15"/>
+        <text class="en" lang="en" x="563" y="65" text-anchor="middle">05</text><text class="zh" lang="zh-Hans" x="563" y="65" text-anchor="middle">05</text>
+        <text class="thai th" lang="th" x="563" y="65" text-anchor="middle">05</text>
+        <text class="en" lang="en" x="563" y="104" text-anchor="middle">Edges</text><text class="zh" lang="zh-Hans" x="563" y="104" text-anchor="middle">边缘</text>
+        <text class="thai th" lang="th" x="563" y="104" text-anchor="middle">ขอบ</text>
+      </a>
+      <a href="#motion">
+        <circle class="mark" cx="688" cy="60" r="15"/>
+        <text class="en" lang="en" x="688" y="65" text-anchor="middle">06</text><text class="zh" lang="zh-Hans" x="688" y="65" text-anchor="middle">06</text>
+        <text class="thai th" lang="th" x="688" y="65" text-anchor="middle">06</text>
+        <text class="en" lang="en" x="688" y="104" text-anchor="middle">Motion</text><text class="zh" lang="zh-Hans" x="688" y="104" text-anchor="middle">运动</text>
+        <text class="thai th" lang="th" x="688" y="104" text-anchor="middle">ขยับ</text>
+      </a>
+      <a href="#detector">
+        <circle class="mark-signal" cx="813" cy="60" r="15"/>
+        <text class="on-signal en" lang="en" x="813" y="65" text-anchor="middle">07</text><text class="on-signal zh" lang="zh-Hans" x="813" y="65" text-anchor="middle">07</text>
+        <text class="on-signal thai th" lang="th" x="813" y="65" text-anchor="middle">07</text>
+        <text class="en" lang="en" x="813" y="104" text-anchor="middle">A guess</text><text class="zh" lang="zh-Hans" x="813" y="104" text-anchor="middle">一次猜测</text>
+        <text class="thai th" lang="th" x="813" y="104" text-anchor="middle">คำเดา</text>
+      </a>
+      <a href="#limits">
+        <circle class="mark" cx="938" cy="60" r="15"/>
+        <text class="en" lang="en" x="938" y="65" text-anchor="middle">08</text><text class="zh" lang="zh-Hans" x="938" y="65" text-anchor="middle">08</text>
+        <text class="thai th" lang="th" x="938" y="65" text-anchor="middle">08</text>
+        <text class="en" lang="en" x="938" y="104" text-anchor="middle">The limits</text><text class="zh" lang="zh-Hans" x="938" y="104" text-anchor="middle">限度</text>
+        <text class="thai th" lang="th" x="938" y="104" text-anchor="middle">ขีดจำกัด</text>
+      </a>
+    </svg>
+    <figcaption><span class="th" lang="th">แปดบทของการมองเห็น ตั้งแต่แสงจนถึงขีดจำกัด กดหมายเลขเพื่อไปที่บทนั้น</span><span class="en" lang="en">Eight chapters of seeing, from light to the limits. Tap a number to jump there.</span><span class="zh" lang="zh-Hans">看见的八章，从光一直到限度。点一个数字，就能跳到那里。</span></figcaption>
+  </figure>
+
   <section class="field-ink learn-next" aria-labelledby="next-title">
     <div class="page-head">
-      <h2 id="next-title"><span class="th" lang="th">ต่อจากนี้</span><span class="en" lang="en">Where next</span></h2>
-      <p class="lede th" lang="th">คุณเห็นแล้วว่าเครื่องมองอย่างไร ต่อไปอ่านว่าทำไมมันถึงทำงาน สอนมันเอง หรือหาทางหลอกตามัน</p>
-      <p class="lede en" lang="en">You have seen how it looks. Now read why it works, teach one yourself, or find ways to fool it.</p>
+      <h2 id="next-title"><span class="th" lang="th">ต่อจากนี้</span><span class="en" lang="en">Where next</span><span class="zh" lang="zh-Hans">接下来去哪里</span></h2>
+      <p class="lede th" lang="th">คุณเดินมาถึงปลายบทเรียนแล้ว เส้นทางด้านบนพาต่อไป: มองบนกล้องจริง สอนด้วยตัวอย่าง แล้วหาจุดที่มันพลาด</p>
+      <p class="lede en" lang="en">You have reached the end of the lessons. The path above continues: look on real cameras, teach with examples, then find where it fails.</p>
+      <p class="lede zh" lang="zh-Hans">八章走到这里。上面的路径还在继续：到真实摄像头上看，用例子去教，然后找出它会错在哪里。</p>
     </div>
     <ol class="index">
-      <li><a href="/handbook"><span class="num">HB</span><span class="title"><span class="th" lang="th">คู่มือ: ทฤษฎีและแบบฝึกหัด</span><span class="en" lang="en">Handbook: theory &amp; exercises</span></span><span class="desc"><span class="th" lang="th">อ่านทั้งแปดบทแบบเต็ม พร้อมแบบฝึกหัดให้ลองทำเอง คำถามท้ายบท และอภิธานศัพท์ไทย–อังกฤษ</span><span class="en" lang="en">All eight chapters in full, with exercises you can try yourself, questions to check yourself, and a Thai–English glossary.</span></span></a></li>
-      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span></span><span class="desc"><span class="th" lang="th">สอนด้วยตัวอย่างไม่กี่ภาพจากกล้องของคุณ ฝึกเสร็จในไม่กี่วินาที</span><span class="en" lang="en">Teach it with a few examples from your camera; training takes seconds.</span></span></a></li>
-      <li><a href="/gesture"><span class="num">04</span><span class="title"><span class="th" lang="th">สั่งสิ่งเล็ก ๆ ด้วยท่ามือ</span><span class="en" lang="en">Gestures that do things</span></span><span class="desc"><span class="th" lang="th">ให้ท่ามือของคุณสั่งสิ่งเล็ก ๆ ในเบราว์เซอร์ พร้อมดูว่าเบราว์เซอร์ไม่ยอมให้ทำอะไร</span><span class="en" lang="en">Let your hand run small things in the browser — and see what a browser will not allow.</span></span></a></li>
-      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร รถหกคันแข่งกันทำรอบโดยไม่ชนใคร และบอกเหตุผลทุกครั้งที่เบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Six cars race for laps without hitting anyone — and say why every time they brake.</span></span></a></li>
-      <li><a href="/games"><span class="num">06</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง และทายภาพจากพิกเซลน้อยที่สุด</span><span class="en" lang="en">Out-count it, and out-guess it from the fewest pixels.</span></span></a></li>
-      <li><a href="/legal"><span class="num">10</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span></span><span class="desc"><span class="th" lang="th">ทำไมเราไม่ระบุตัวบุคคล และกล้องเป็นของใคร</span><span class="en" lang="en">Why we never identify anyone, and who owns the cameras.</span></span></a></li>
+      <li><a href="/cameras"><span class="num">02</span><span class="title"><span class="th" lang="th">กล้องทุกตัว</span><span class="en" lang="en">Every camera</span><span class="zh" lang="zh-Hans">每一台摄像头</span></span><span class="desc"><span class="th" lang="th">แผนที่กล้องทั้งหมด เลือกกล้องไหนก็ได้ให้เครื่องวิเคราะห์ หรือนับรถทั้งประเทศพร้อมกัน</span><span class="en" lang="en">A map of them all. Point the machine at any one, or run a census across the country.</span><span class="zh" lang="zh-Hans">一张放着全部摄像头的地图。把机器指向任意一台，或在全国做一次普查。</span></span></a></li>
+      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span><span class="zh" lang="zh-Hans">自己训练一台机器</span></span><span class="desc"><span class="th" lang="th">สอนด้วยตัวอย่างไม่กี่ภาพจากกล้องของคุณ ฝึกเสร็จในไม่กี่วินาที</span><span class="en" lang="en">Teach it with a few examples from your camera; training takes seconds.</span><span class="zh" lang="zh-Hans">用你的摄像头里的几个例子来教它；训练只要几秒。</span></span></a></li>
+      <li><a href="/gesture"><span class="num">04</span><span class="title"><span class="th" lang="th">สั่งสิ่งเล็ก ๆ ด้วยท่ามือ</span><span class="en" lang="en">Gestures that do things</span><span class="zh" lang="zh-Hans">能做成事情的手势</span></span><span class="desc"><span class="th" lang="th">ให้ท่ามือของคุณสั่งสิ่งเล็ก ๆ ในเบราว์เซอร์ พร้อมดูว่าเบราว์เซอร์ไม่ยอมให้ทำอะไร</span><span class="en" lang="en">Let your hand run small things in the browser — and see what a browser will not allow.</span><span class="zh" lang="zh-Hans">让你的手在浏览器里做一些小事——并看看浏览器不允许什么。</span></span></a></li>
+      <li><a href="/games"><span class="num">06</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span><span class="zh" lang="zh-Hans">游戏：你对机器</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง และทายภาพจากพิกเซลน้อยที่สุด</span><span class="en" lang="en">Out-count it, and out-guess it from the fewest pixels.</span><span class="zh" lang="zh-Hans">在计数上超过它，并用尽可能少的像素在猜测上超过它。</span></span></a></li>
+      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span><span class="zh" lang="zh-Hans">驾驶：会说出自己看见了什么的车</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร รถหกคันแข่งกันทำรอบโดยไม่ชนใคร และบอกเหตุผลทุกครั้งที่เบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Six cars race for laps without hitting anyone — and say why every time they brake.</span><span class="zh" lang="zh-Hans">一条试验赛道，有环岛、一盏信号灯、斑马线、人和流浪狗。六辆车互相争抢圈数，同时不撞到任何人——并且每次刹车都说出原因。</span></span></a></li>
+      <li><a href="/everyday"><span class="num">07</span><span class="title"><span class="th" lang="th">ในชีวิตประจำวัน</span><span class="en" lang="en">In everyday life</span><span class="zh" lang="zh-Hans">在日常生活里</span></span><span class="desc"><span class="th" lang="th">ปลดล็อกมือถือ สแกน QR ตรวจเอกซเรย์ รถช่วยเลี้ยว ทำงานอย่างไร และอะไรผิดพลาดได้</span><span class="en" lang="en">Phone unlock, QR codes, X-rays, lane keeping — how each works and what can go wrong.</span><span class="zh" lang="zh-Hans">手机解锁、QR 码、X 光、车道保持——每一种如何工作，以及哪里会出错。</span></span></a></li>
+      <li><a href="/research"><span class="num">08</span><span class="title"><span class="th" lang="th">วิจัย · เกี่ยวกับ</span><span class="en" lang="en">Research · About</span><span class="zh" lang="zh-Hans">研究 · 关于</span></span><span class="desc"><span class="th" lang="th">หลักฐานที่ห้องเรียนนี้ยืนอยู่ สี่ก้าวสำคัญของประวัติศาสตร์ กรณีศึกษาในไทย และงานที่เว็บนี้ใช้จริง</span><span class="en" lang="en">The live evidence this classroom stands on, four landmarks of the field, a Thai case study, and the work this site actually runs.</span><span class="zh" lang="zh-Hans">这间教室所依靠的实时证据、这个领域的四个里程碑、一个泰国案例，以及本站真正在运行的工作。</span></span></a></li>
+      <li><a href="/system"><span class="num">09</span><span class="title"><span class="th" lang="th">ระบบทำงานอย่างไร</span><span class="en" lang="en">How the system works</span><span class="zh" lang="zh-Hans">系统如何工作</span></span><span class="desc"><span class="th" lang="th">แผนผังทั้งระบบ ภาพเดินทางอย่างไร โมเดลมาจากไหน และอะไรที่เราตั้งใจไม่ทำ</span><span class="en" lang="en">The whole design: how a picture travels, where models come from, and what we chose not to build.</span><span class="zh" lang="zh-Hans">整个设计：一幅图像怎样传来，模型从哪里来，以及我们选择不建造什么。</span></span></a></li>
+      <li><a href="/legal"><span class="num">10</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span><span class="zh" lang="zh-Hans">细则</span></span><span class="desc"><span class="th" lang="th">ทำไมเราไม่ระบุตัวบุคคล และกล้องเป็นของใคร</span><span class="en" lang="en">Why we never identify anyone, and who owns the cameras.</span><span class="zh" lang="zh-Hans">我们为什么从不辨认任何人，以及摄像头属于谁。</span></span></a></li>
+      <li><a href="/handbook"><span class="num">HB</span><span class="title"><span class="th" lang="th">คู่มือ: ทฤษฎีและแบบฝึกหัด</span><span class="en" lang="en">Handbook: theory &amp; exercises</span><span class="zh" lang="zh-Hans">手册：理论与练习</span></span><span class="desc"><span class="th" lang="th">อ่านทั้งแปดบทแบบเต็ม พร้อมแบบฝึกหัดให้ลองทำเอง คำถามท้ายบท และอภิธานศัพท์ไทย–อังกฤษ</span><span class="en" lang="en">All eight chapters in full, with exercises you can try yourself, questions to check yourself, and a Thai–English glossary.</span><span class="zh" lang="zh-Hans">完整的八章，带有你可以自己试一试的练习、用来自己检查的问题，以及一份泰语–英语词汇表。</span></span></a></li>
     </ol>
   </section>
 

@@ -13,22 +13,27 @@ export const LENS_TEXT = {
   picture: {
     th: ['ภาพ', 'นี่คือสิ่งที่กล้องส่งมา สำหรับเรา มันคือถนน สำหรับคอมพิวเตอร์ ยังไม่มีความหมายอะไรเลย'],
     en: ['Picture', 'This is what the camera sends. To you it is a road. To the computer it does not mean anything yet.'],
+    zh: ['图像', '这是摄像头传来的画面。对你来说它是一条路。对计算机来说，它还没有任何意义。'],
   },
   numbers: {
     th: ['ตัวเลข', 'ภาพคือตารางช่องสี่เหลี่ยมเล็ก ๆ แต่ละช่องคือตัวเลขความสว่าง 0 (ดำ) ถึง 255 (ขาว) คอมพิวเตอร์เห็นแค่นี้'],
     en: ['Numbers', 'A picture is a grid of tiny squares. Each holds a brightness number from 0 (black) to 255 (white). This is all the computer gets.'],
+    zh: ['数字', '图像是一格格小方块。每一格是一个亮度数字，从 0（黑）到 255（白）。计算机得到的只有这些。'],
   },
   edges: {
     th: ['ขอบ', 'ตรงไหนที่ตัวเลขข้างกันต่างกันมาก ตรงนั้นคือขอบ ขอบคือร่องรอยแรกของรูปร่าง'],
     en: ['Edges', 'Where neighbouring numbers differ a lot, there is an edge. Edges are the first trace of shape.'],
+    zh: ['边缘', '相邻的数字相差很大的地方，就是边缘。边缘是形状留下的第一道痕迹。'],
   },
   motion: {
     th: ['การเคลื่อนไหว', 'เอาภาพนี้ลบกับภาพก่อนหน้า ช่องที่ตัวเลขเปลี่ยนคือสิ่งที่ขยับ สีส้มคือสิ่งที่เครื่องสังเกตเห็น'],
     en: ['Motion', 'Subtract the previous frame from this one. Squares whose numbers changed are things that moved. Orange marks what the machine noticed.'],
+    zh: ['运动', '用这一帧减去上一帧。数字变了的格子，就是动了的东西。橙色标出机器注意到的部分。'],
   },
   objects: {
     th: ['สิ่งของ', 'โครงข่ายประสาทเทียมที่ฝึกจากภาพนับแสนภาพ เดาว่ามีอะไรอยู่ตรงไหน พร้อมบอกว่ามั่นใจกี่เปอร์เซ็นต์'],
     en: ['Objects', 'A neural network trained on hundreds of thousands of photos guesses what is where — and says how sure it is.'],
+    zh: ['物体', '一个用几十万张照片训练过的神经网络，猜测哪里有什么，并说出自己有多确定。'],
   },
 }
 

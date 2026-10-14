@@ -1,9 +1,10 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange, FOV } from './perceive.js?v=1.15.2'
-import { ITEMS } from './street.js?v=1.15.2'
-import { wrap } from './track.js?v=1.15.2'
+import { sightRange, FOV } from './perceive.js?v=1.16.0'
+import { ITEMS } from './street.js?v=1.16.0'
+import { wrap } from './track.js?v=1.16.0'
+import { phraseFor } from '../core/i18n.js'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful'],
@@ -50,7 +51,13 @@ const REASON = {
 
 // Detection labels name themselves from ITEMS in street.js, so a class is
 // defined in exactly one place: the COCO id and both languages together.
-const pick = (pair, lang) => pair[lang === 'en' ? 1 : 0]
+const pick = (pair, lang) => phraseFor(lang, pair[0], pair[1])
+
+function metres(lang) {
+  if (lang === 'en') return 'm'
+  if (lang === 'zh') return '米'
+  return 'ม.'
+}
 
 export const labelFor = (label, lang) => pick(ITEMS[label]?.label ?? [label, label], lang)
 
@@ -61,7 +68,7 @@ export function sayDecision(car, world, lang) {
   if (d.label === 'cat' && /^dog_(in_lane|will_cross)$/.test(key)) key = key.replace('dog', 'cat')
   const R = Math.round(sightRange(car, world.weather))
   const why = pick(REASON[key] ?? REASON.clear, lang).replace('{R}', R)
-  const dist = d.dist != null && key !== 'short_sight' ? ` · ${Math.round(d.dist)} ${lang === 'en' ? 'm' : 'ม.'}` : ''
+  const dist = d.dist != null && key !== 'short_sight' ? ` · ${Math.round(d.dist)} ${metres(lang)}` : ''
   const easy = d.action === 'speeding_up' || d.action === 'cruising'
   const action = !easy || key === 'clear' ? d.action : CAPS.has(key) ? 'capped' : 'watching'
   return `${pick(ACTION[action], lang)} — ${why}${dist}`
@@ -73,9 +80,9 @@ export function saySeen(car, lang) {
     .map((tr) => ({ tr, d: Math.hypot(tr.obj.x - car.x, tr.obj.y - car.y) }))
     .sort((a, b) => a.d - b.d)
     .slice(0, 3)
-  if (car.blind) return lang === 'en' ? 'nothing — its camera is covered' : 'ไม่เห็นอะไรเลย — กล้องถูกปิดอยู่'
-  if (!seen.length) return lang === 'en' ? 'nothing in view' : 'ไม่มีอะไรในสายตา'
-  return seen.map(({ tr, d }) => `${labelFor(tr.label, lang)} ${Math.round(tr.conf * 100)}% ${Math.round(d)} ${lang === 'en' ? 'm' : 'ม.'}`).join(' · ')
+  if (car.blind) return pick(['ไม่เห็นอะไรเลย — กล้องถูกปิดอยู่', 'nothing — its camera is covered'], lang)
+  if (!seen.length) return pick(['ไม่มีอะไรในสายตา', 'nothing in view'], lang)
+  return seen.map(({ tr, d }) => `${labelFor(tr.label, lang)} ${Math.round(tr.conf * 100)}% ${Math.round(d)} ${metres(lang)}`).join(' · ')
 }
 
 export const speedKmh = (car) => Math.round(car.v * 3.6)
@@ -105,7 +112,7 @@ export function sayUnnamed(car, world, lang) {
   const list = [...kinds.entries()].sort((a, b) => b[1] - a[1]).slice(0, 2)
     .map(([kind, n]) => (n > 1 ? `${n}× ${labelFor(kind, lang)}` : labelFor(kind, lang)))
     .join(lang === 'en' ? ', ' : ' · ')
-  return lang === 'en'
-    ? `${total} in view with no name for them — ${list}`
-    : `มองเห็น ${total} อย่างที่เรียกไม่ถูก — ${list}`
+  if (lang === 'zh') return `视线里有 ${total} 个叫不出名字的东西——${list}`
+  if (lang === 'en') return `${total} in view with no name for them — ${list}`
+  return `มองเห็น ${total} อย่างที่เรียกไม่ถูก — ${list}`
 }

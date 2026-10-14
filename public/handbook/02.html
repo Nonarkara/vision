@@ -11,13 +11,14 @@
 <main id="main">
   <header class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span></span>
+      <span class="eyebrow label"><span class="th" lang="th">คู่มือ · อ่านเองทีละบท</span><span class="en" lang="en">Handbook · read it on your own</span><span class="zh" lang="zh-Hans">手册 · 自己读一章</span></span>
       <h1>02 · Light, colour and thresholds · สี ความสว่าง และเกณฑ์</h1>
     </div>
     <div class="page-head-side">
       <p class="lede th" lang="th">อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง</p>
       <p class="lede en" lang="en">Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.</p>
-      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary><ol><li><a href="#1-the-histogram-a-pictures-fingerprint-of-light" lang="en">1. The histogram: a picture's fingerprint of light</a></li><li><a href="#2-thresholding-one-number-two-classes" lang="en">2. Thresholding: one number, two classes</a></li><li><a href="#3-otsus-method-let-the-data-choose-t" lang="en">3. Otsu's method: let the data choose <em>t</em></a></li><li><a href="#4-the-red-car-that-disappears" lang="en">4. The red car that disappears</a></li><li><a href="#5-why-thresholds-misbehave-on-real-cameras" lang="en">5. Why thresholds misbehave on real cameras</a></li><li><a href="#6-colour-spaces-briefly" lang="en">6. Colour spaces, briefly</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
+      <p class="lede zh" lang="zh-Hans">一次读一章。每一章都有可以自己试的练习，以及用来核对的问题。想再深入时，回到这个网站上的房间，真的跑一遍。</p>
+      <details class="doc-toc"><summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span><span class="zh" lang="zh-Hans">本页内容</span></summary><ol><li><a href="#1-the-histogram-a-pictures-fingerprint-of-light" lang="en">1. The histogram: a picture's fingerprint of light</a></li><li><a href="#2-thresholding-one-number-two-classes" lang="en">2. Thresholding: one number, two classes</a></li><li><a href="#3-otsus-method-let-the-data-choose-t" lang="en">3. Otsu's method: let the data choose <em>t</em></a></li><li><a href="#4-the-red-car-that-disappears" lang="en">4. The red car that disappears</a></li><li><a href="#5-why-thresholds-misbehave-on-real-cameras" lang="en">5. Why thresholds misbehave on real cameras</a></li><li><a href="#6-colour-spaces-briefly" lang="en">6. Colour spaces, briefly</a></li><li><a href="#try-it-yourself--ลองทำเอง" lang="en">Try it yourself · ลองทำเอง</a></li><li><a href="#check-yourself" lang="en">Check yourself</a></li></ol></details>
     </div>
   </header>
   <article class="doc">
@@ -90,7 +91,7 @@ The answer key says the red car is      52×28 at (96,118).</code></pre>
 <p lang="th">บทเรียนสำคัญ: <strong>รถสีแดงหายไปเมื่อแปลงเป็นภาพขาวดำ</strong> เพราะสีแดงมีน้ำหนักในความสว่างแค่ 0.299 จึงมืดพอ ๆ กับถนน (81.6 กับ 72.0) แต่ถ้าใช้กฎ "แดงกว่าเขียวเท่าไร" ก็หารถเจอตรงตำแหน่งพอดี ทุกครั้งที่ระบบลดทอนข้อมูล (ตัดสี ลดความละเอียด ใช้เกณฑ์ตายตัว) คือการเดิมพันว่าสิ่งที่ตัดทิ้งไม่สำคัญ เมื่อระบบผิดพลาด คำถามแรกคือ "มันตัดอะไรทิ้งไป"</p>
 <p lang="en"><strong>Next:</strong> <a href="/handbook/03">03 · Convolution and edges →</a></p>
   </article>
-  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/01"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" data-page="handbook/02" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a><a class="doc-next" href="/handbook/03"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span></a></nav>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages" data-aria-zh="手册的其他页面"><a class="doc-prev" href="/handbook/01"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span><span class="zh" lang="zh-Hans">← 上一章</span></a><a class="doc-index" data-page="handbook/02" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span><span class="zh" lang="zh-Hans">手册目录</span></a><a class="doc-next" href="/handbook/03"><span class="th" lang="th">บทถัดไป →</span><span class="en" lang="en">Next chapter →</span><span class="zh" lang="zh-Hans">下一章 →</span></a></nav>
 </main>
 <!--#foot-->
 </body>

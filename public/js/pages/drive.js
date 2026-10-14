@@ -2,14 +2,14 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.15.2'
-import { lang, count, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.15.2'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.15.2'
-import { drawWindshield } from '../drive/perspective.js?v=1.15.2'
-import { sightRange } from '../drive/perceive.js?v=1.15.2'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.15.2'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.15.2'
+import '../core/site.js?v=1.16.0'
+import { lang, count, onLang, phraseFor } from '../core/i18n.js'
+import { mountGate } from './captcha.js?v=1.16.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.16.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.16.0'
+import { sightRange } from '../drive/perceive.js?v=1.16.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.16.0'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.16.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -247,12 +247,16 @@ function paintDriver() {
   blitView(windshield, wg)
   if (now - driverTextAt < 250) return
   driverTextAt = now
-  const c = world.cars[selected - 1], en = lang() === 'en', d = c.decision
-  dialog.querySelector('[data-driver-title]').textContent = en ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]}` : `รถ ${c.id} · ${STYLE_NAME[c.styleName][0]}`
-  dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${en?'km/h':'กม./ชม.'} · ${en?'view':'มองเห็น'} ${Math.round(sightRange(c,world.weather))} m · ${({day:en?'Day':'กลางวัน',rain:en?'Rain':'ฝน',night:en?'Night':'กลางคืน',sun:en?'Sun glare':'แดดจ้า'})[world.weather]} ${playing?'':'⏸'}`
-  dialog.querySelector('[data-driver-action]').textContent=sayDecision(c,world,lang())
-  const gap=d.dist==null?(en?'No stopping obstacle selected':'ยังไม่มีอุปสรรคที่ต้องหยุด'):`${en?'Gap to obstacle':'ระยะถึงอุปสรรค'} ${d.dist.toFixed(1)} m`
-  dialog.querySelector('[data-driver-math]').textContent=`${gap} · ${en?'preferred gap':'ระยะที่ต้องการ'} ${(d.desiredGap??0).toFixed(1)} m · ${en?'speed change':'ปรับความเร็ว'} ${(d.acc*3.6).toFixed(1)} ${en?'km/h each second':'กม./ชม. ต่อวินาที'}\n${en?'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.':'คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด'}`
+  const c = world.cars[selected - 1], L = lang(), d = c.decision
+  const p = (th, en, zh) => phraseFor(L, th, en, zh)
+  const style = phraseFor(L, STYLE_NAME[c.styleName][0], STYLE_NAME[c.styleName][1])
+  dialog.querySelector('[data-driver-title]').textContent = `${p('รถ', 'Car', '车')} ${c.id} · ${style}`
+  const weather = { day: p('กลางวัน', 'Day', '白天'), rain: p('ฝน', 'Rain', '雨'), night: p('กลางคืน', 'Night', '夜晚'), sun: p('แดดจ้า', 'Sun glare', '阳光刺眼') }[world.weather]
+  const paused = playing ? '' : p(' · หยุด', ' · paused', ' · 已暂停')
+  dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${p('กม./ชม.', 'km/h', '公里/小时')} · ${p('มองเห็น', 'view', '视野')} ${Math.round(sightRange(c, world.weather))} m · ${weather}${paused}`
+  dialog.querySelector('[data-driver-action]').textContent = sayDecision(c, world, L)
+  const gap = d.dist == null ? p('ยังไม่มีอุปสรรคที่ต้องหยุด', 'No stopping obstacle selected', '还没有选定必须停下的障碍') : `${p('ระยะถึงอุปสรรค', 'Gap to obstacle', '到障碍的距离')} ${d.dist.toFixed(1)} m`
+  dialog.querySelector('[data-driver-math]').textContent = `${gap} · ${p('ระยะที่ต้องการ', 'preferred gap', '希望保持的距离')} ${(d.desiredGap ?? 0).toFixed(1)} m · ${p('ปรับความเร็ว', 'speed change', '速度变化')} ${(d.acc * 3.6).toFixed(1)} ${p('กม./ชม. ต่อวินาที', 'km/h each second', '公里/小时每秒')}\n${p('คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด', 'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.', '速度由距离、接近速度和安全间距算出来。刹车请求里最谨慎的那个胜出。')}`
 }
 
 // ── The loop ──────────────────────────────────────────────────────────

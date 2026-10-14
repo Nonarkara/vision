@@ -2,10 +2,11 @@
 // only ever what a machine sees — the cones and the boxes. The traffic light
 // is the one exception, because a red light has to look red.
 
-import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.15.2'
-import { FOV, sightRange } from './perceive.js?v=1.15.2'
-import { VEHICLES } from './sim.js?v=1.15.2'
-import { ITEMS, STREET, offset } from './street.js?v=1.15.2'
+import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.16.0'
+import { FOV, sightRange } from './perceive.js?v=1.16.0'
+import { VEHICLES } from './sim.js?v=1.16.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.16.0'
+import { phraseFor } from '../core/i18n.js'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -26,7 +27,7 @@ export function palette() {
 /** The localised name a detection label prints. Keys come from ITEMS in street.js. */
 export function labelName(label, lang) {
   const row = ITEMS[label]
-  return row ? row.label[lang === 'en' ? 1 : 0] : label
+  return row ? phraseFor(lang, row.label[0], row.label[1]) : label
 }
 
 /** Size the canvas to its box (sharp on high-DPI screens); returns metres → pixels. */

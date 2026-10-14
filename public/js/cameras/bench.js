@@ -4,8 +4,8 @@
 // about every camera, and yours is one of them.
 
 import { t, lang, onLang } from '../core/i18n.js'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.15.2'
-import { SourceError } from '../core/source.js?v=1.15.2'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.16.0'
+import { SourceError } from '../core/source.js?v=1.16.0'
 import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js'
 import { cocoName } from '../ml/labels.js'
 
@@ -44,7 +44,7 @@ export function createBench(root) {
   }
 
   function say() {
-    const [name, text] = LENS_TEXT[lens][lang()]
+    const [name, text] = LENS_TEXT[lens][lang()] ?? LENS_TEXT[lens].en
     let extra = lens === 'objects' ? objectsText() : ''
     if (lens === 'motion' && specimen.source?.kind === 'still') {
       extra = t('กล้องนี้ส่งภาพนิ่งทุก ~20 วินาที การเคลื่อนไหวจะเห็นเมื่อภาพถัดไปมาถึง', 'This camera sends a still every ~20 s; motion shows when the next one arrives')

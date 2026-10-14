@@ -6,25 +6,27 @@
 <title>Face &amp; focus: a private camera experiment · ใบหน้าและสมาธิ — Vision</title>
 <meta name="description" content="An opt-in, on-device face-landmark experiment. Explore head direction and facial movements, calibrate your own position, and review a session without saving photos or guessing emotions.">
 </head>
-<body>
+<body data-level="judge">
 <!--#nav-->
+<!--#path-->
 <main id="main">
 <section class="page-head">
 <div>
 <span class="eyebrow label">
 <span class="th" lang="th">ทดลอง · ใบหน้าและสมาธิ</span>
-<span class="en" lang="en">Experiment · Face &amp; focus</span>
+<span class="en" lang="en">Experiment · Face &amp; focus</span><span class="zh" lang="zh-Hans">实验 · 人脸与专注</span>
 </span>
 <h1>
 <span class="th" lang="th">กล้องเห็นอะไรในช่วงที่คุณทำงาน</span>
-<span class="en" lang="en">What does a camera notice while you work?</span>
+<span class="en" lang="en">What does a camera notice while you work?</span><span class="zh" lang="zh-Hans">你工作时，摄像头会注意到什么？</span>
 </h1>
 </div>
 <div>
 <p class="lede">
 <span class="th" lang="th">ลองกับตัวเองเท่านั้น ตั้งท่านั่งปกติ แล้วดูช่วงที่หันออกจากหน้าจอ หลับตา หรือกล้องไม่เห็นใบหน้า ผลเป็นเพียงเบาะแส ไม่ใช่คะแนนสมาธิหรือการอ่านใจ</span>
-<span class="en" lang="en">Try this on yourself. Set your usual sitting position, then explore head turns, closed eyes and times the camera cannot see your face. These are clues, not a focus score or a way to read your mind.</span>
+<span class="en" lang="en">Try this on yourself. Set your usual sitting position, then explore head turns, closed eyes and times the camera cannot see your face. These are clues, not a focus score or a way to read your mind.</span><span class="zh" lang="zh-Hans">在自己身上试一试。先摆好平时的坐姿，再试着转头、闭眼，以及摄像头看不见你的脸的时候。这些是线索，不是专注分数，也不能读懂你的心思。</span>
 </p>
+<p class="micro">Model: <span class="th" lang="th">MediaPipe Face Landmarker, Apache-2.0 หาจุดบนใบหน้า ไม่ระบุว่าคุณเป็นใคร</span><span class="en" lang="en">MediaPipe Face Landmarker, Apache-2.0. Landmarks only — not who you are.</span><span class="zh" lang="zh-Hans">MediaPipe Face Landmarker，Apache-2.0。只找标志点，不识别你是谁。</span></p>
 </div>
 </section>
 <section class="focus-room" data-focus-room>
@@ -33,39 +35,39 @@
 <div class="bench-caption">
 <span class="label">
 <span class="th" lang="th">ภาพอยู่ในอุปกรณ์นี้</span>
-<span class="en" lang="en">Picture stays on this device</span>
+<span class="en" lang="en">Picture stays on this device</span><span class="zh" lang="zh-Hans">图像留在这台设备上</span>
 </span>
 <span class="num" data-clock>00:00</span>
 </div>
-<canvas data-face-view width="640" height="480" role="img" data-aria-th="ภาพกล้องของคุณพร้อมจุดบนใบหน้า" data-aria-en="Your camera preview with face landmarks">
+<canvas data-face-view width="640" height="480" role="img" data-aria-th="ภาพกล้องของคุณพร้อมจุดบนใบหน้า" data-aria-en="Your camera preview with face landmarks" data-aria-zh="你的摄像头预览，带有面部标记点">
 </canvas>
 <p class="session-state" data-status role="status">
 <span class="th" lang="th">กล้องปิด · ยังไม่เริ่ม</span>
-<span class="en" lang="en">Camera off · Not started</span>
+<span class="en" lang="en">Camera off · Not started</span><span class="zh" lang="zh-Hans">摄像头关闭 · 尚未开始</span>
 </p>
 <div class="controls">
 <button type="button" class="btn primary" data-start disabled>
 <span class="th" lang="th">ยินยอมและเริ่ม</span>
-<span class="en" lang="en">Agree &amp; start</span>
+<span class="en" lang="en">Agree &amp; start</span><span class="zh" lang="zh-Hans">同意并开始</span>
 </button>
 <button type="button" class="btn" data-pause disabled>
 <span class="th" lang="th">พักและปิดกล้อง</span>
-<span class="en" lang="en">Pause &amp; camera off</span>
+<span class="en" lang="en">Pause &amp; camera off</span><span class="zh" lang="zh-Hans">暂停并关闭摄像头</span>
 </button>
 <button type="button" class="btn" data-stop disabled>
 <span class="th" lang="th">จบและดูสรุป</span>
-<span class="en" lang="en">Finish &amp; review</span>
+<span class="en" lang="en">Finish &amp; review</span><span class="zh" lang="zh-Hans">结束并查看</span>
 </button>
 </div>
 </div>
 <div class="focus-setup">
 <h2>
 <span class="th" lang="th">1 · เลือกช่วงเวลา</span>
-<span class="en" lang="en">1 · Choose a session</span>
+<span class="en" lang="en">1 · Choose a session</span><span class="zh" lang="zh-Hans">1 · 选择会话</span>
 </h2>
 <label class="setting">
 <span class="th" lang="th">หยุดอัตโนมัติหลัง</span>
-<span class="en" lang="en">Stop automatically after</span>
+<span class="en" lang="en">Stop automatically after</span><span class="zh" lang="zh-Hans">多久之后自动停止</span>
 <select data-duration>
 <option value="15">15 min</option>
 <option value="60" selected>1 h</option>
@@ -75,7 +77,7 @@
 </label>
 <label class="setting">
 <span class="th" lang="th">นับการหันออกเมื่อเกิน</span>
-<span class="en" lang="en">Count a look-away after</span>
+<span class="en" lang="en">Count a look-away after</span><span class="zh" lang="zh-Hans">视线离开多久后开始计数</span>
 <select data-threshold>
 <option value="2">2 s</option>
 <option value="3" selected>3 s</option>
@@ -85,48 +87,48 @@
 </label>
 <h2>
 <span class="th" lang="th">2 · อ่านและยินยอม</span>
-<span class="en" lang="en">2 · Read &amp; agree</span>
+<span class="en" lang="en">2 · Read &amp; agree</span><span class="zh" lang="zh-Hans">2 · 阅读并同意</span>
 </h2>
 <p>
 <span class="th" lang="th">ใช้กล้องหน้า ไม่ใช้ไมโครโฟน ไม่บันทึกภาพ วิดีโอ หรือชื่อบุคคล ประมวลผลในแท็บนี้เท่านั้น สรุปเก็บในหน่วยความจำจนปิดหน้า คุณเลือกดาวน์โหลดได้</span>
-<span class="en" lang="en">Front camera only. No microphone, photos, video or identity records. Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span>
+<span class="en" lang="en">Front camera only. No microphone, photos, video or identity records. Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span><span class="zh" lang="zh-Hans">只用前置摄像头。没有麦克风、照片、视频或身份记录。分析留在这个标签页里。摘要留在内存中，直到你关闭页面；你可以选择下载它。</span>
 </p>
 <label class="consent">
 <input type="checkbox" data-consent>
 <span class="th" lang="th">ฉันยินยอมให้วิเคราะห์ใบหน้าของฉันเอง และรู้ว่าหยุดได้ทุกเมื่อ</span>
-<span class="en" lang="en">I agree to analyse my own face, and know I can stop at any time.</span>
+<span class="en" lang="en">I agree to analyse my own face, and know I can stop at any time.</span><span class="zh" lang="zh-Hans">我同意分析自己的脸，并且知道可以随时停止。</span>
 </label>
 <label class="consent">
 <input type="checkbox" data-awake>
 <span class="th" lang="th">ขอให้หน้าจอเปิดระหว่างทดลอง (ถ้าอุปกรณ์รองรับ)</span>
-<span class="en" lang="en">Keep the screen awake during this session (if supported)</span>
+<span class="en" lang="en">Keep the screen awake during this session (if supported)</span><span class="zh" lang="zh-Hans">在这次会话期间保持屏幕常亮（如果设备支持）</span>
 </label>
 <p class="micro">
 <span class="th" lang="th">เปิดแท็บนี้ไว้ด้านหน้า เมื่อซ่อนแท็บจะพักและปิดกล้อง คุณต้องกดเริ่มต่อเอง เวลาที่เลือกนับช่วงพักด้วย อุปกรณ์ที่หลับหรือช้าจะมีช่วงที่ไม่ได้วัด ไม่มีการนับช่วงเหล่านั้นว่าเสียสมาธิ</span>
-<span class="en" lang="en">Keep this tab visible. Hiding it pauses the session and turns the camera off; resume yourself when ready. The time limit includes pauses. Device sleep and slow processing leave unmeasured gaps. Those gaps are never counted as distraction.</span>
+<span class="en" lang="en">Keep this tab visible. Hiding it pauses the session and turns the camera off; resume yourself when ready. The time limit includes pauses. Device sleep and slow processing leave unmeasured gaps. Those gaps are never counted as distraction.</span><span class="zh" lang="zh-Hans">让这个标签页保持可见。隐藏它会暂停会话，并关闭摄像头；准备好后再自己继续。时间限制包含暂停。设备休眠和处理变慢，会留下没有测到的空隙。这些空隙绝不算作分心。</span>
 </p>
 <h2>
 <span class="th" lang="th">3 · ตั้งท่าปกติ</span>
-<span class="en" lang="en">3 · Set your usual position</span>
+<span class="en" lang="en">3 · Set your usual position</span><span class="zh" lang="zh-Hans">3 · 摆好平时的位置</span>
 </h2>
 <p>
 <span class="th" lang="th">หลังเริ่ม มองหน้าจอตามปกติประมาณ 5 วินาที มีใบหน้าเดียวและแสงสว่างเพียงพอ จากนั้นทดลองหันหน้าออกแล้วกลับมา ถ้าขยับที่นั่งให้ตั้งค่าใหม่</span>
-<span class="en" lang="en">After starting, look at the screen normally for about five seconds. Use good light and keep just one face in view. Then try turning away and coming back. Recalibrate if you move your seat.</span>
+<span class="en" lang="en">After starting, look at the screen normally for about five seconds. Use good light and keep just one face in view. Then try turning away and coming back. Recalibrate if you move your seat.</span><span class="zh" lang="zh-Hans">开始之后，正常看着屏幕大约五秒。光线要好，画面里只留一张脸。然后试着转开，再转回来。如果移动了座位，请重新校准。</span>
 </p>
 <button type="button" class="btn" data-calibrate disabled>
 <span class="th" lang="th">ตั้งท่าปกติใหม่</span>
-<span class="en" lang="en">Recalibrate</span>
+<span class="en" lang="en">Recalibrate</span><span class="zh" lang="zh-Hans">重新校准</span>
 </button>
 </div>
 </div>
 <div class="session-results">
 <h2>
 <span class="th" lang="th">สิ่งที่สังเกตได้</span>
-<span class="en" lang="en">What was observed</span>
+<span class="en" lang="en">What was observed</span><span class="zh" lang="zh-Hans">观察到了什么</span>
 </h2>
 <p class="micro">
 <span class="th" lang="th">หันออก ≠ เสียสมาธิ อาจกำลังคิด อ่านหนังสือ หรือคุยกับคนอื่น ไม่ใช้ผลเพื่อตัดสินการเรียนหรือการทำงาน</span>
-<span class="en" lang="en">Looking away ≠ being distracted. You might be thinking, reading a book or talking to someone. Do not use this experiment to grade study or work.</span>
+<span class="en" lang="en">Looking away ≠ being distracted. You might be thinking, reading a book or talking to someone. Do not use this experiment to grade study or work.</span><span class="zh" lang="zh-Hans">视线离开 ≠ 分心。你可能在思考、看书，或在和人说话。不要用这个实验给学习或工作打分。</span>
 </p>
 <div class="session-metrics" data-metrics>
 </div>
@@ -134,42 +136,42 @@
 </div>
 <h3>
 <span class="th" lang="th">แต่ละนาทีที่วัดได้</span>
-<span class="en" lang="en">Each measured minute</span>
+<span class="en" lang="en">Each measured minute</span><span class="zh" lang="zh-Hans">每一分钟的测量</span>
 </h3>
 <div class="session-timeline" data-timeline>
 </div>
 <p class="micro">
 <span class="th" lang="th">เขียวมะกอก = หันตรง · เหลือง = หันออก · เทา = ไม่เห็นใบหน้า</span>
-<span class="en" lang="en">Olive = facing forward · yellow = looking away · grey = no face seen</span>
+<span class="en" lang="en">Olive = facing forward · yellow = looking away · grey = no face seen</span><span class="zh" lang="zh-Hans">橄榄色 = 面向前方 · 黄色 = 视线离开 · 灰色 = 没有看到脸</span>
 </p>
 <h3>
 <span class="th" lang="th">คุณรู้สึกอย่างไร (เลือกเอง)</span>
-<span class="en" lang="en">How do you feel? (Your own note)</span>
+<span class="en" lang="en">How do you feel? (Your own note)</span><span class="zh" lang="zh-Hans">你感觉如何？（你自己的备注）</span>
 </h3>
 <p>
 <span class="th" lang="th">กล้องรู้ไม่ได้ว่าคุณรู้สึกอะไร คุณเป็นผู้บอกเอง ปุ่มนี้ไม่เปลี่ยนผลการวัด</span>
-<span class="en" lang="en">The camera cannot know your mood. You tell it yourself. These notes do not change the measurements.</span>
+<span class="en" lang="en">The camera cannot know your mood. You tell it yourself. These notes do not change the measurements.</span><span class="zh" lang="zh-Hans">摄像头无法知道你的心情。由你自己告诉它。这些备注不会改变测量结果。</span>
 </p>
 <div class="controls">
 <button type="button" class="btn" data-mood="okay" disabled>
 <span class="th" lang="th">สบายดี</span>
-<span class="en" lang="en">Okay</span>
+<span class="en" lang="en">Okay</span><span class="zh" lang="zh-Hans">还好</span>
 </button>
 <button type="button" class="btn" data-mood="happy" disabled>
 <span class="th" lang="th">มีความสุข</span>
-<span class="en" lang="en">Happy</span>
+<span class="en" lang="en">Happy</span><span class="zh" lang="zh-Hans">开心</span>
 </button>
 <button type="button" class="btn" data-mood="tired" disabled>
 <span class="th" lang="th">เหนื่อย</span>
-<span class="en" lang="en">Tired</span>
+<span class="en" lang="en">Tired</span><span class="zh" lang="zh-Hans">疲倦</span>
 </button>
 <button type="button" class="btn" data-mood="stressed" disabled>
 <span class="th" lang="th">เครียด</span>
-<span class="en" lang="en">Stressed</span>
+<span class="en" lang="en">Stressed</span><span class="zh" lang="zh-Hans">紧张</span>
 </button>
 <button type="button" class="btn" data-mood="unsure" disabled>
 <span class="th" lang="th">ไม่แน่ใจ</span>
-<span class="en" lang="en">Unsure</span>
+<span class="en" lang="en">Unsure</span><span class="zh" lang="zh-Hans">不确定</span>
 </button>
 </div>
 <p data-mood-notes>
@@ -177,11 +179,11 @@
 <div class="controls">
 <button type="button" class="btn" data-export disabled>
 <span class="th" lang="th">ดาวน์โหลดสรุป (JSON)</span>
-<span class="en" lang="en">Download summary (JSON)</span>
+<span class="en" lang="en">Download summary (JSON)</span><span class="zh" lang="zh-Hans">下载摘要（JSON）</span>
 </button>
 <button type="button" class="btn" data-clear>
 <span class="th" lang="th">ลบสรุป</span>
-<span class="en" lang="en">Clear summary</span>
+<span class="en" lang="en">Clear summary</span><span class="zh" lang="zh-Hans">清除摘要</span>
 </button>
 </div>
 </div>
@@ -191,26 +193,26 @@
 <span class="chapter-no">?</span>
 <h2>
 <span class="th" lang="th">เข้าใจผลก่อนใช้</span>
-<span class="en" lang="en">Understand the result</span>
+<span class="en" lang="en">Understand the result</span><span class="zh" lang="zh-Hans">理解这个结果</span>
 </h2>
 </header>
 <div class="chapter-body">
 <p>
 <span class="th" lang="th">ระบบหาจุดบนใบหน้าและการเคลื่อนไหว เช่น มุมปากยกขึ้น อ้าปาก หรือยกคิ้ว สิ่งเหล่านี้ไม่พิสูจน์ว่ามีความสุข ง่วง หรือโกรธ ไม่ได้ระบุตัวว่าเป็นใครและไม่ได้วินิจฉัยสุขภาพ</span>
-<span class="en" lang="en">The model finds face landmarks and movements such as raised mouth corners, an open mouth or raised brows. These do not prove happiness, sleepiness or anger. It does not identify who you are or diagnose health.</span>
+<span class="en" lang="en">The model finds face landmarks and movements such as raised mouth corners, an open mouth or raised brows. These do not prove happiness, sleepiness or anger. It does not identify who you are or diagnose health.</span><span class="zh" lang="zh-Hans">模型会找到面部特征点和动作，例如嘴角抬起、嘴巴张开或眉毛抬起。这些并不能证明开心、困倦或生气。它不会辨认你是谁，也不会做健康诊断。</span>
 </p>
 <p>
 <span class="th" lang="th">แว่นตา แสง มุมกล้อง การบังใบหน้า และความแตกต่างระหว่างบุคคลทำให้ผิดพลาดได้ การหันออกนับจากมุมศีรษะและการเคลื่อนไหวดวงตาที่ประมาณไว้ ไม่ใช่การติดตามจุดที่มองอย่างแม่นยำ</span>
-<span class="en" lang="en">Glasses, lighting, camera angles, occlusion and individual differences can cause errors. Look-away uses estimated head direction and eye movement; it is not precise gaze tracking.</span>
+<span class="en" lang="en">Glasses, lighting, camera angles, occlusion and individual differences can cause errors. Look-away uses estimated head direction and eye movement; it is not precise gaze tracking.</span><span class="zh" lang="zh-Hans">眼镜、光线、摄像头角度、遮挡和个人差异，都可能造成误差。视线离开用的是估计的头部方向和眼睛的运动；这不是精确的注视追踪。</span>
 </p>
 <p>
 <span class="th" lang="th">หนึ่งเหตุการณ์คือการหันออกหรือไม่เห็นใบหน้าต่อเนื่องเกินเวลาที่เลือก ไม่ใช่จำนวนภาพ หลับตาต่อเนื่องอย่างน้อยหนึ่งวินาทีนับแยกจากการกะพริบตา เวลาทุกประเภทเป็นค่าประมาณ</span>
-<span class="en" lang="en">One event is a continuous look-away or missing face longer than your chosen threshold, not a count of frames. Eyes closed for at least one second are counted separately from brief blinks. All durations are estimates.</span>
+<span class="en" lang="en">One event is a continuous look-away or missing face longer than your chosen threshold, not a count of frames. Eyes closed for at least one second are counted separately from brief blinks. All durations are estimates.</span><span class="zh" lang="zh-Hans">一次事件，是连续的视线离开，或脸消失的时间超过你选定的阈值，不是在数有多少帧。闭眼达到至少一秒的，会和短暂的眨眼分开计数。所有的时长都是估计。</span>
 </p>
 <p>
 <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker/web_js">Google MediaPipe Face Landmarker ↗</a> · <a href="/research#learning-kinds">
 <span class="th" lang="th">เรียนรู้เรื่องโมเดล</span>
-<span class="en" lang="en">Learn how models learn</span>
+<span class="en" lang="en">Learn how models learn</span><span class="zh" lang="zh-Hans">学习模型是如何学习的</span>
 </a>
 </p>
 </div>

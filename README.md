@@ -2,7 +2,7 @@
 
 **Live: [vision.nonarkara.org](https://vision.nonarkara.org)**
 
-A public, bilingual (ไทย / English) classroom for computer vision. Visitors point the machine at Thailand's open road cameras — or at **their own camera or photos** — and watch it go from pixels → numbers → edges → motion → "car 68%".
+A public classroom for computer vision, in Thai, English and Chinese. Visitors point the machine at Thailand's open road cameras — or at **their own camera or photos** — and watch it go from pixels → numbers → edges → motion → "car 68%".
 
 Every model runs in the visitor's browser (TensorFlow.js and MediaPipe, self-hosted weights). The server never looks at a picture: it serves the site, publishes the camera catalogue, and relays still frames from allow-listed hosts **in memory only**.
 
@@ -213,7 +213,7 @@ Bump `version` in `package.json` on every release (it stamps asset URLs and ETag
 
 ## Screens
 
-Every canvas instrument offers **Full screen**. Desktop browsers use native fullscreen; narrow screens use a viewport mode with an explicit exit and isolated background controls. Training keeps the camera and example controls together. Camera credits remain visible. Escape restores the previous view; live canvases redraw at their new size. The interface is checked in Thai and English from 360px phones to 1920px displays, including landscape.
+Every canvas instrument offers **Full screen**. Desktop browsers use native fullscreen; narrow screens use a viewport mode with an explicit exit and isolated background controls. Training keeps the camera and example controls together. Camera credits remain visible. Escape restores the previous view; live canvases redraw at their new size. The interface is checked in Thai, English and Chinese from 360px phones to 1920px displays, including landscape.
 
 ## Takedowns & contact
 

@@ -6,51 +6,52 @@
 <title>Train a machine yourself · ฝึกเครื่องด้วยตัวเอง — Vision</title>
 <meta name="description" content="Teach a computer-vision model with a few examples from your own camera or Thailand's public cameras, train it in seconds in your browser, then let it judge cameras across the country. Nothing is uploaded.">
 </head>
-<body>
+<body data-level="teach">
 <!--#nav-->
+<!--#path-->
 <main id="main">
 
   <section class="page-head" aria-labelledby="title">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 03 · ฝึกเอง</span><span class="en" lang="en">Room 03 · Train it yourself</span></span>
-      <h1 id="title"><span class="th" lang="th">ลองสอนเครื่องให้ทายภาพ</span><span class="en" lang="en">Teach it something new</span></h1>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 03 · ฝึกเอง</span><span class="en" lang="en">Room 03 · Train it yourself</span><span class="zh" lang="zh-Hans">第 03 室 · 自己来训练</span></span>
+      <h1 id="title"><span class="th" lang="th">ลองสอนเครื่องให้ทายภาพ</span><span class="en" lang="en">Teach it something new</span><span class="zh" lang="zh-Hans">教它一件新事</span></h1>
     </div>
     <div>
-<p class="lede"><span class="th" lang="th">วิดีโอเดียว เรียนรู้ได้สามแบบ เลือกวิธีด้านล่าง แล้วทำตามคำแนะนำข้างจอ เริ่มจากวิดีโอฝึกได้ทันที ไม่ต้องมีกล้อง</span><span class="en" lang="en">One video. Three ways to learn. Choose a method below, then follow the next step beside the screen. Start with the practice video — no camera needed.</span></p>    </div>
+<p class="lede"><span class="th" lang="th">วิดีโอเดียว เรียนรู้ได้สามแบบ เลือกวิธีด้านล่าง แล้วทำตามคำแนะนำข้างจอ เริ่มจากวิดีโอฝึกได้ทันที ไม่ต้องมีกล้อง</span><span class="en" lang="en">One video. Three ways to learn. Choose a method below, then follow the next step beside the screen. Start with the practice video — no camera needed.</span><span class="zh" lang="zh-Hans">一段视频。三种学法。在下面选一种方法，然后按屏幕旁边的下一步来做。先用练习视频——不需要摄像头。</span></p>    </div>
   </section>
 
   <div data-specimen-slot></div>
 <section class="video-lesson" data-video-lesson aria-labelledby="lesson-title">
-<header class="lesson-heading"><h2 id="lesson-title"><span class="th" lang="th">1 · เลือกวิดีโอ</span><span class="en" lang="en">1 · Choose your video</span></h2><p><span class="th" lang="th">วิดีโอฝึกสลับรถแน่นและถนนโล่งทุก 8 วินาที ถ้าใช้กล้องจริง ให้เลือกภาพที่เห็นความต่างชัด กล้องบางตัวส่งแค่ภาพนิ่ง เปลี่ยนได้เสมอ</span><span class="en" lang="en">The practice clip alternates busy and quiet traffic every 8 seconds. For real cameras, choose a clear view with changing traffic. Some public cameras send still images; switch whenever you need.</span></p></header>
-<div class="controls lesson-sources"><button class="btn primary" type="button" data-lesson-practice><span class="th" lang="th">วิดีโอฝึก</span><span class="en" lang="en">Practice video</span></button><button class="btn" type="button" data-lesson-camera><span class="th" lang="th">↻ กล้องสาธารณะอื่น</span><span class="en" lang="en">↻ Another public camera</span></button><label class="btn"><span class="th" lang="th">เปิดวิดีโอของฉัน</span><span class="en" lang="en">Open my video</span><input class="vh" type="file" accept="video/*" data-lesson-file></label></div>
-<h2><span class="th" lang="th">2 · เลือกวิธีเรียนรู้</span><span class="en" lang="en">2 · Choose how it learns</span></h2>
-<div class="lesson-methods" role="group" data-aria-th="วิธีเรียนรู้" data-aria-en="Learning method">
-<button class="training-choice" data-method="supervised" aria-pressed="true"><strong><span class="th" lang="th">บอกคำตอบ · Supervised</span><span class="en" lang="en">Give answers · Supervised</span></strong><span><span class="th" lang="th">คุณบอกว่าภาพนี้เป็นอะไร แล้วให้ทายภาพใหม่</span><span class="en" lang="en">You name examples. It guesses new frames.</span></span></button><button class="training-choice" data-method="unsupervised" aria-pressed="false"><strong><span class="th" lang="th">หาความคล้าย · Unsupervised</span><span class="en" lang="en">Find patterns · Unsupervised</span></strong><span><span class="th" lang="th">เก็บภาพโดยไม่ตั้งชื่อ แล้วให้แยกสองกลุ่ม</span><span class="en" lang="en">Collect unnamed frames. It finds two groups.</span></span></button><button class="training-choice" data-method="reinforcement" aria-pressed="false"><strong><span class="th" lang="th">ให้รางวัล · Reinforcement</span><span class="en" lang="en">Give rewards · Reinforcement</span></strong><span><span class="th" lang="th">ให้ลองเปิดหรือปิดการแจ้งเตือน แล้วให้คะแนน</span><span class="en" lang="en">It tries an alert action. You reward or correct it.</span></span></button>
+<header class="lesson-heading"><h2 id="lesson-title"><span class="th" lang="th">1 · เลือกวิดีโอ</span><span class="en" lang="en">1 · Choose your video</span><span class="zh" lang="zh-Hans">1 · 选择你的视频</span></h2><p><span class="th" lang="th">วิดีโอฝึกสลับรถแน่นและถนนโล่งทุก 8 วินาที ถ้าใช้กล้องจริง ให้เลือกภาพที่เห็นความต่างชัด กล้องบางตัวส่งแค่ภาพนิ่ง เปลี่ยนได้เสมอ</span><span class="en" lang="en">The practice clip alternates busy and quiet traffic every 8 seconds. For real cameras, choose a clear view with changing traffic. Some public cameras send still images; switch whenever you need.</span><span class="zh" lang="zh-Hans">这段练习每 8 秒交替一次：车多，然后车少。如果用真实的摄像头，请选画面清楚、车流会变化的。有些公共摄像头发来的是静止图像；需要的时候可以随时换。</span></p></header>
+<div class="controls lesson-sources"><button class="btn primary" type="button" data-lesson-practice><span class="th" lang="th">วิดีโอฝึก</span><span class="en" lang="en">Practice video</span><span class="zh" lang="zh-Hans">练习视频</span></button><button class="btn" type="button" data-lesson-camera><span class="th" lang="th">↻ กล้องสาธารณะอื่น</span><span class="en" lang="en">↻ Another public camera</span><span class="zh" lang="zh-Hans">↻ 另一个公共摄像头</span></button><label class="btn"><span class="th" lang="th">เปิดวิดีโอของฉัน</span><span class="en" lang="en">Open my video</span><span class="zh" lang="zh-Hans">打开我的视频</span><input class="vh" type="file" accept="video/*" data-lesson-file></label></div>
+<h2><span class="th" lang="th">2 · เลือกวิธีเรียนรู้</span><span class="en" lang="en">2 · Choose how it learns</span><span class="zh" lang="zh-Hans">2 · 选择它怎样学习</span></h2>
+<div class="lesson-methods" role="group" data-aria-th="วิธีเรียนรู้" data-aria-en="Learning method" data-aria-zh="学习方法">
+<button class="training-choice" data-method="supervised" aria-pressed="true"><strong><span class="th" lang="th">บอกคำตอบ · Supervised</span><span class="en" lang="en">Give answers · Supervised</span><span class="zh" lang="zh-Hans">给出答案 · 监督</span></strong><span><span class="th" lang="th">คุณบอกว่าภาพนี้เป็นอะไร แล้วให้ทายภาพใหม่</span><span class="en" lang="en">You name examples. It guesses new frames.</span><span class="zh" lang="zh-Hans">你来给例子起名字。它来猜新的帧。</span></span></button><button class="training-choice" data-method="unsupervised" aria-pressed="false"><strong><span class="th" lang="th">หาความคล้าย · Unsupervised</span><span class="en" lang="en">Find patterns · Unsupervised</span><span class="zh" lang="zh-Hans">找出规律 · 无监督</span></strong><span><span class="th" lang="th">เก็บภาพโดยไม่ตั้งชื่อ แล้วให้แยกสองกลุ่ม</span><span class="en" lang="en">Collect unnamed frames. It finds two groups.</span><span class="zh" lang="zh-Hans">收集没有名字的帧。它找出两个组。</span></span></button><button class="training-choice" data-method="reinforcement" aria-pressed="false"><strong><span class="th" lang="th">ให้รางวัล · Reinforcement</span><span class="en" lang="en">Give rewards · Reinforcement</span><span class="zh" lang="zh-Hans">给出奖励 · 强化</span></strong><span><span class="th" lang="th">ให้ลองเปิดหรือปิดการแจ้งเตือน แล้วให้คะแนน</span><span class="en" lang="en">It tries an alert action. You reward or correct it.</span><span class="zh" lang="zh-Hans">它会试一个警报动作。你来奖励，或者纠正。</span></span></button>
 </div>
 <div class="room-grid lesson-grid"><div class="bench lesson-bench">
-<div class="bench-caption"><span><span class="th" lang="th">วิดีโอเดียวกันสำหรับทั้งสามวิธี</span><span class="en" lang="en">The same video for all three methods</span></span><span data-lesson-source></span></div>
-<div class="bench-view"><canvas data-lesson-view role="img" data-aria-th="วิดีโอและคำตอบจากวิธีที่เลือก" data-aria-en="Video with the selected learner’s result"></canvas><div class="lesson-overlay" data-lesson-result></div></div>
+<div class="bench-caption"><span><span class="th" lang="th">วิดีโอเดียวกันสำหรับทั้งสามวิธี</span><span class="en" lang="en">The same video for all three methods</span><span class="zh" lang="zh-Hans">三种方法用同一段视频</span></span><span data-lesson-source></span></div>
+<div class="bench-view"><canvas data-lesson-view role="img" data-aria-th="วิดีโอและคำตอบจากวิธีที่เลือก" data-aria-en="Video with the selected learner’s result" data-aria-zh="视频，以及所选学习方法的结果"></canvas><div class="lesson-overlay" data-lesson-result></div></div>
 <p class="readout lesson-prediction" data-lesson-explain></p>
 </div><div class="lesson-actions field-black">
 <h3 data-lesson-step></h3><p data-lesson-help></p>
-<div data-method-panel="supervised"><p class="micro"><span class="th" lang="th">กดชื่อที่ตรงกับภาพตอนนี้ อย่างน้อยกลุ่มละ 3 ภาพ แนะนำกลุ่มละ 10 ภาพ เว้นช่วงเพื่อให้ภาพต่างกัน</span><span class="en" lang="en">Click the name that matches this frame. Get at least 3 per group; aim for 10. Wait between clicks for different pictures.</span></p>
-<div class="lesson-labels"><label><span class="th" lang="th">ชื่อกลุ่มแรก</span><span class="en" lang="en">First group name</span><input class="field-input" data-lesson-name="0" maxlength="40" value="Busy road"></label><label><span class="th" lang="th">ชื่อกลุ่มที่สอง</span><span class="en" lang="en">Second group name</span><input class="field-input" data-lesson-name="1" maxlength="40" value="Quiet road"></label></div>
-<div class="controls"><button class="btn primary" type="button" data-label-frame="0"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 1</span><span class="en" lang="en">Add frame to group 1</span></button><button class="btn primary" type="button" data-label-frame="1"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 2</span><span class="en" lang="en">Add frame to group 2</span></button></div>
-<p data-lesson-counts class="num"></p><button class="btn primary" type="button" data-lesson-learn><span class="th" lang="th">เรียนจากคำตอบของฉัน</span><span class="en" lang="en">Learn from my answers</span></button>
+<div data-method-panel="supervised"><p class="micro"><span class="th" lang="th">กดชื่อที่ตรงกับภาพตอนนี้ อย่างน้อยกลุ่มละ 3 ภาพ แนะนำกลุ่มละ 10 ภาพ เว้นช่วงเพื่อให้ภาพต่างกัน</span><span class="en" lang="en">Click the name that matches this frame. Get at least 3 per group; aim for 10. Wait between clicks for different pictures.</span><span class="zh" lang="zh-Hans">点击和这一帧相符的名字。每一组至少 3 个，最好到 10 个。两次点击之间等一等，图像才会不同。</span></p>
+<div class="lesson-labels"><label><span class="th" lang="th">ชื่อกลุ่มแรก</span><span class="en" lang="en">First group name</span><span class="zh" lang="zh-Hans">第一组的名字</span><input class="field-input" data-lesson-name="0" maxlength="40" value="Busy road"></label><label><span class="th" lang="th">ชื่อกลุ่มที่สอง</span><span class="en" lang="en">Second group name</span><span class="zh" lang="zh-Hans">第二组的名字</span><input class="field-input" data-lesson-name="1" maxlength="40" value="Quiet road"></label></div>
+<div class="controls"><button class="btn primary" type="button" data-label-frame="0"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 1</span><span class="en" lang="en">Add frame to group 1</span><span class="zh" lang="zh-Hans">把这一帧加入第 1 组</span></button><button class="btn primary" type="button" data-label-frame="1"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 2</span><span class="en" lang="en">Add frame to group 2</span><span class="zh" lang="zh-Hans">把这一帧加入第 2 组</span></button></div>
+<p data-lesson-counts class="num"></p><button class="btn primary" type="button" data-lesson-learn><span class="th" lang="th">เรียนจากคำตอบของฉัน</span><span class="en" lang="en">Learn from my answers</span><span class="zh" lang="zh-Hans">按我的答案来学</span></button>
 </div>
-<div data-method-panel="unsupervised" hidden><p><span class="th" lang="th">เก็บ 24 ภาพในประมาณ 24 วินาที แล้วจัดกลุ่มจากความคล้ายของภาพ คุณไม่ได้บอกชื่อหรือคำตอบ</span><span class="en" lang="en">Collect 24 frames over about 24 seconds, then group them by visual similarity. You supply no names or answers.</span></p><button class="btn primary" type="button" data-lesson-collect><span class="th" lang="th">เก็บภาพแล้วหาสองกลุ่ม</span><span class="en" lang="en">Collect frames &amp; find two groups</span></button><div class="lesson-groups" data-lesson-groups></div></div>
-<div data-method-panel="reinforcement" hidden><p><span class="th" lang="th">ตั้งเป้าหมาย: แจ้งเตือนเมื่อถนนรถแน่น กดให้เครื่องเลือกการกระทำ ภาพนั้นจะค้างไว้ให้คุณให้คะแนน จากนั้นลองเฟรมใหม่</span><span class="en" lang="en">Goal: raise an alert when traffic looks busy. Ask it to choose an action. That frame stays on screen while you give feedback. Then try a new frame.</span></p><button class="btn primary" type="button" data-lesson-act><span class="th" lang="th">ลองเลือกการกระทำ</span><span class="en" lang="en">Try an action</span></button><canvas class="lesson-held-frame" data-lesson-held width="224" height="126" hidden role="img" data-aria-th="ภาพที่ค้างไว้เพื่อให้คะแนนการกระทำ" data-aria-en="Held frame for rating this action"></canvas><p data-lesson-action></p><div class="controls"><button class="btn" type="button" data-reward="1" disabled><span class="th" lang="th">✓ เหมาะสม · +1</span><span class="en" lang="en">✓ Good choice · +1</span></button><button class="btn" type="button" data-reward="-1" disabled><span class="th" lang="th">× ไม่เหมาะ · −1</span><span class="en" lang="en">× Wrong choice · −1</span></button></div><p class="micro" data-lesson-rewards></p></div>
+<div data-method-panel="unsupervised" hidden><p><span class="th" lang="th">เก็บ 24 ภาพในประมาณ 24 วินาที แล้วจัดกลุ่มจากความคล้ายของภาพ คุณไม่ได้บอกชื่อหรือคำตอบ</span><span class="en" lang="en">Collect 24 frames over about 24 seconds, then group them by visual similarity. You supply no names or answers.</span><span class="zh" lang="zh-Hans">用大约 24 秒收集 24 帧，再按看起来像不像来分组。名字和答案都不用你给。</span></p><button class="btn primary" type="button" data-lesson-collect><span class="th" lang="th">เก็บภาพแล้วหาสองกลุ่ม</span><span class="en" lang="en">Collect frames &amp; find two groups</span><span class="zh" lang="zh-Hans">收集帧 &amp; 找出两个组</span></button><div class="lesson-groups" data-lesson-groups></div></div>
+<div data-method-panel="reinforcement" hidden><p><span class="th" lang="th">ตั้งเป้าหมาย: แจ้งเตือนเมื่อถนนรถแน่น กดให้เครื่องเลือกการกระทำ ภาพนั้นจะค้างไว้ให้คุณให้คะแนน จากนั้นลองเฟรมใหม่</span><span class="en" lang="en">Goal: raise an alert when traffic looks busy. Ask it to choose an action. That frame stays on screen while you give feedback. Then try a new frame.</span><span class="zh" lang="zh-Hans">目标：车流看起来繁忙的时候，发出警报。让它选一个动作。你反馈的时候，这一帧停在屏幕上。然后再试一帧新的。</span></p><button class="btn primary" type="button" data-lesson-act><span class="th" lang="th">ลองเลือกการกระทำ</span><span class="en" lang="en">Try an action</span><span class="zh" lang="zh-Hans">试一试这个动作</span></button><canvas class="lesson-held-frame" data-lesson-held width="224" height="126" hidden role="img" data-aria-th="ภาพที่ค้างไว้เพื่อให้คะแนนการกระทำ" data-aria-en="Held frame for rating this action" data-aria-zh="为这次动作打分而停住的画面"></canvas><p data-lesson-action></p><div class="controls"><button class="btn" type="button" data-reward="1" disabled><span class="th" lang="th">✓ เหมาะสม · +1</span><span class="en" lang="en">✓ Good choice · +1</span><span class="zh" lang="zh-Hans">✓ 选对了 · +1</span></button><button class="btn" type="button" data-reward="-1" disabled><span class="th" lang="th">× ไม่เหมาะ · −1</span><span class="en" lang="en">× Wrong choice · −1</span><span class="zh" lang="zh-Hans">× 选错了 · −1</span></button></div><p class="micro" data-lesson-rewards></p></div>
 <p class="readout" data-lesson-status role="status"></p>
-<button class="btn" type="button" data-lesson-reset><span class="th" lang="th">ล้างบทเรียนนี้แล้วเริ่มใหม่</span><span class="en" lang="en">Clear this lesson &amp; start again</span></button>
+<button class="btn" type="button" data-lesson-reset><span class="th" lang="th">ล้างบทเรียนนี้แล้วเริ่มใหม่</span><span class="en" lang="en">Clear this lesson &amp; start again</span><span class="zh" lang="zh-Hans">清除这一课 &amp; 重新开始</span></button>
 <p class="micro lesson-limit" data-lesson-limit></p>
 </div></div>
-<p class="micro"><span class="th" lang="th">ทุกวิธีใช้ MobileNet ที่ฝึกมาแล้วเพื่ออธิบายภาพ จากนั้นเรียนกฎเล็ก ๆ ของบทเรียนนี้ ไม่ได้ฝึกสมองใหญ่ใหม่ ไม่มีการตรวจนับรถหรือควบคุมรถจริง ข้อมูลอยู่ในแท็บนี้ ปิดหน้าแล้วหาย</span><span class="en" lang="en">All three methods borrow a pretrained MobileNet to describe each frame, then learn a small rule for this lesson. They do not retrain the large network, count vehicles, or control real cars. Learning stays in this tab and disappears when you leave.</span></p>
+<p class="micro"><span class="th" lang="th">ทุกวิธีใช้ MobileNet ที่ฝึกมาแล้วเพื่ออธิบายภาพ จากนั้นเรียนกฎเล็ก ๆ ของบทเรียนนี้ ไม่ได้ฝึกสมองใหญ่ใหม่ ไม่มีการตรวจนับรถหรือควบคุมรถจริง ข้อมูลอยู่ในแท็บนี้ ปิดหน้าแล้วหาย</span><span class="en" lang="en">All three methods borrow a pretrained MobileNet to describe each frame, then learn a small rule for this lesson. They do not retrain the large network, count vehicles, or control real cars. Learning stays in this tab and disappears when you leave.</span><span class="zh" lang="zh-Hans">三种方法都借用一个已经训练好的 MobileNet，来描述每一帧，然后只为这一课学一条小规则。它们不会重新训练那个大网络，不会去数车，也不会控制真正的汽车。学到的东西只在这个标签页里，离开就没了。</span></p>
 </section>
-<details class="advanced-training training-details"><summary><span class="th" lang="th">พร้อมลองต่อ? สอนสิ่งของของคุณ และดูข้างในโมเดล</span><span class="en" lang="en">Ready for more? Teach your own objects and look inside the model</span></summary>
-<section class="training-start" aria-labelledby="start-title"><h2 id="start-title"><span class="th" lang="th">อยากสอนอะไร?</span><span class="en" lang="en">What would you like to teach?</span></h2><div class="training-choices"><button class="training-choice" type="button" data-activity="demo" aria-pressed="false"><span class="label">01</span><strong><span class="th" lang="th">ลองเลย ไม่ต้องมีกล้อง</span><span class="en" lang="en">Try it without a camera</span></strong><span><span class="th" lang="th">สอนภาพถนนที่วาดไว้ แล้วสลับภาพดูคำตอบ</span><span class="en" lang="en">Teach with drawn roads, then switch pictures to test it</span></span></button><button class="training-choice" type="button" data-activity="hand" aria-pressed="false"><span class="label">02</span><strong><span class="th" lang="th">ยกมือ / มือลง</span><span class="en" lang="en">Hand up / hand down</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนท่าทางสองแบบ</span><span class="en" lang="en">Use your camera to teach two actions</span></span></button><button class="training-choice" type="button" data-activity="cup" aria-pressed="false"><span class="label">03</span><strong><span class="th" lang="th">มีแก้ว / ไม่มีแก้ว</span><span class="en" lang="en">Cup / no cup</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนให้เห็นความต่าง</span><span class="en" lang="en">Use your camera to spot a difference</span></span></button><button class="training-choice" type="button" data-activity="road" aria-pressed="false"><span class="label">04</span><strong><span class="th" lang="th">รถแน่น / ถนนโล่ง</span><span class="en" lang="en">Busy road / empty road</span></strong><span><span class="th" lang="th">เลือกกล้องถนน แล้วเก็บตัวอย่างเอง</span><span class="en" lang="en">Choose a road camera and collect examples</span></span></button><a class="training-choice" href="/gesture"><span class="label">05 → </span><strong><span class="th" lang="th">สอนท่ามือให้แล็ปท็อป</span><span class="en" lang="en">Teach your laptop a gesture</span></strong><span><span class="th" lang="th">นิ้วเดียว ฝ่ามือ หรือไม่ทำท่า — แล้วให้แต่ละท่าทำอะไรสักอย่าง (ห้อง 04)</span><span class="en" lang="en">One finger, a palm, or nothing — then make each one do something (room 04)</span></span></a></div><p class="prose" data-activity-help aria-live="polite"><span class="th" lang="th">เริ่มที่ “ลองเลย” ได้ทันที หรือเลือกกิจกรรมที่ใช้กล้องของคุณ</span><span class="en" lang="en">Start with “Try it without a camera”, or choose a camera activity.</span></p></section>
+<details class="advanced-training training-details"><summary><span class="th" lang="th">พร้อมลองต่อ? สอนสิ่งของของคุณ และดูข้างในโมเดล</span><span class="en" lang="en">Ready for more? Teach your own objects and look inside the model</span><span class="zh" lang="zh-Hans">还想继续吗？教它你自己的物体，并看看模型里面</span></summary>
+<section class="training-start" aria-labelledby="start-title"><h2 id="start-title"><span class="th" lang="th">อยากสอนอะไร?</span><span class="en" lang="en">What would you like to teach?</span><span class="zh" lang="zh-Hans">你想教什么？</span></h2><div class="training-choices"><button class="training-choice" type="button" data-activity="demo" aria-pressed="false"><span class="label">01</span><strong><span class="th" lang="th">ลองเลย ไม่ต้องมีกล้อง</span><span class="en" lang="en">Try it without a camera</span><span class="zh" lang="zh-Hans">试一试，不用摄像头</span></strong><span><span class="th" lang="th">สอนภาพถนนที่วาดไว้ แล้วสลับภาพดูคำตอบ</span><span class="en" lang="en">Teach with drawn roads, then switch pictures to test it</span><span class="zh" lang="zh-Hans">用画出来的路来教，再换图像测试</span></span></button><button class="training-choice" type="button" data-activity="hand" aria-pressed="false"><span class="label">02</span><strong><span class="th" lang="th">ยกมือ / มือลง</span><span class="en" lang="en">Hand up / hand down</span><span class="zh" lang="zh-Hans">手举起 / 手放下</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนท่าทางสองแบบ</span><span class="en" lang="en">Use your camera to teach two actions</span><span class="zh" lang="zh-Hans">用你的摄像头教两个动作</span></span></button><button class="training-choice" type="button" data-activity="cup" aria-pressed="false"><span class="label">03</span><strong><span class="th" lang="th">มีแก้ว / ไม่มีแก้ว</span><span class="en" lang="en">Cup / no cup</span><span class="zh" lang="zh-Hans">有杯子 / 没有杯子</span></strong><span><span class="th" lang="th">ใช้กล้องของคุณ สอนให้เห็นความต่าง</span><span class="en" lang="en">Use your camera to spot a difference</span><span class="zh" lang="zh-Hans">用你的摄像头看出一个差别</span></span></button><button class="training-choice" type="button" data-activity="road" aria-pressed="false"><span class="label">04</span><strong><span class="th" lang="th">รถแน่น / ถนนโล่ง</span><span class="en" lang="en">Busy road / empty road</span><span class="zh" lang="zh-Hans">繁忙的路 / 空着的路</span></strong><span><span class="th" lang="th">เลือกกล้องถนน แล้วเก็บตัวอย่างเอง</span><span class="en" lang="en">Choose a road camera and collect examples</span><span class="zh" lang="zh-Hans">选一个道路摄像头，收集例子</span></span></button><a class="training-choice" href="/gesture"><span class="label">05 → </span><strong><span class="th" lang="th">สอนท่ามือให้แล็ปท็อป</span><span class="en" lang="en">Teach your laptop a gesture</span><span class="zh" lang="zh-Hans">教你的笔记本电脑一个手势</span></strong><span><span class="th" lang="th">นิ้วเดียว ฝ่ามือ หรือไม่ทำท่า — แล้วให้แต่ละท่าทำอะไรสักอย่าง (ห้อง 04)</span><span class="en" lang="en">One finger, a palm, or nothing — then make each one do something (room 04)</span><span class="zh" lang="zh-Hans">一根手指、摊开的手掌，或者什么都没有——再让每一种去做一件事（第 04 室）</span></span></a></div><p class="prose" data-activity-help aria-live="polite"><span class="th" lang="th">เริ่มที่ “ลองเลย” ได้ทันที หรือเลือกกิจกรรมที่ใช้กล้องของคุณ</span><span class="en" lang="en">Start with “Try it without a camera”, or choose a camera activity.</span><span class="zh" lang="zh-Hans">从“试一试，不用摄像头”开始，或者选一项要用摄像头的活动。</span></p></section>
 
   <section class="training-start" aria-labelledby="how-title">
-    <h2 id="how-title"><span class="th" lang="th">มันทำงานยังไง</span><span class="en" lang="en">How it works</span></h2>
+    <h2 id="how-title"><span class="th" lang="th">มันทำงานยังไง</span><span class="en" lang="en">How it works</span><span class="zh" lang="zh-Hans">它如何工作</span></h2>
     <figure class="flow-fig pipe-scroll">
       <svg class="diagram flow" viewBox="0 0 1000 180">
         <rect class="stroke" x="86" y="34" width="56" height="42"/>
@@ -75,7 +76,7 @@
         <path class="stroke" d="M622 58 L648 80"/>
         <circle class="fill-signal" cx="622" cy="58" r="6"/>
         <rect class="fill-signal" x="796" y="42" width="128" height="28"/>
-        <text class="on-signal en" lang="en" x="806" y="61">Hand up 87%</text>
+        <text class="on-signal en" lang="en" x="806" y="61">Hand up 87%</text><text class="on-signal zh" lang="zh-Hans" x="806" y="61">手举起 87%</text>
         <text class="on-signal thai th" lang="th" x="806" y="61">ยกมือ 87%</text>
         <path class="stroke" d="M254 58 H266"/>
         <path class="stroke" d="M260 52 L267 58 L260 64"/>
@@ -83,24 +84,24 @@
         <path class="stroke" d="M500 52 L507 58 L500 64"/>
         <path class="stroke" d="M734 58 H746"/>
         <path class="stroke" d="M740 52 L747 58 L740 64"/>
-        <text class="big en" lang="en" x="140" y="128" text-anchor="middle">A few examples</text>
+        <text class="big en" lang="en" x="140" y="128" text-anchor="middle">A few examples</text><text class="big zh" lang="zh-Hans" x="140" y="128" text-anchor="middle">几个例子</text>
         <text class="big thai th" lang="th" x="140" y="128" text-anchor="middle">ตัวอย่างไม่กี่ภาพ</text>
-        <text class="en" lang="en" x="140" y="154" text-anchor="middle">yours, from any camera</text>
+        <text class="en" lang="en" x="140" y="154" text-anchor="middle">yours, from any camera</text><text class="zh" lang="zh-Hans" x="140" y="154" text-anchor="middle">你的例子，来自任何摄像头</text>
         <text class="thai th" lang="th" x="140" y="154" text-anchor="middle">ของคุณ จากกล้องใดก็ได้</text>
-        <text class="big en" lang="en" x="380" y="128" text-anchor="middle">A 1,280-number fingerprint</text>
+        <text class="big en" lang="en" x="380" y="128" text-anchor="middle">A 1,280-number fingerprint</text><text class="big zh" lang="zh-Hans" x="380" y="128" text-anchor="middle">1,280 个数字组成的指纹</text>
         <text class="big thai th" lang="th" x="380" y="128" text-anchor="middle">ลายนิ้วมือ 1,280 ตัวเลข</text>
-        <text class="en" lang="en" x="380" y="154" text-anchor="middle">same picture, same numbers</text>
+        <text class="en" lang="en" x="380" y="154" text-anchor="middle">same picture, same numbers</text><text class="zh" lang="zh-Hans" x="380" y="154" text-anchor="middle">同一幅图像，同一组数字</text>
         <text class="thai th" lang="th" x="380" y="154" text-anchor="middle">ภาพเดิม ได้เลขเดิมเสมอ</text>
-        <text class="big en" lang="en" x="620" y="128" text-anchor="middle">Neighbours vote</text>
+        <text class="big en" lang="en" x="620" y="128" text-anchor="middle">Neighbours vote</text><text class="big zh" lang="zh-Hans" x="620" y="128" text-anchor="middle">由邻居来投票</text>
         <text class="big thai th" lang="th" x="620" y="128" text-anchor="middle">เพื่อนบ้านโหวต</text>
-        <text class="en" lang="en" x="620" y="154" text-anchor="middle">which examples are closest?</text>
+        <text class="en" lang="en" x="620" y="154" text-anchor="middle">which examples are closest?</text><text class="zh" lang="zh-Hans" x="620" y="154" text-anchor="middle">哪些例子最接近？</text>
         <text class="thai th" lang="th" x="620" y="154" text-anchor="middle">ตัวอย่างไหนใกล้ที่สุด</text>
-        <text class="big en" lang="en" x="860" y="128" text-anchor="middle">A guess + confidence</text>
+        <text class="big en" lang="en" x="860" y="128" text-anchor="middle">A guess + confidence</text><text class="big zh" lang="zh-Hans" x="860" y="128" text-anchor="middle">一个猜测 + 置信度</text>
         <text class="big thai th" lang="th" x="860" y="128" text-anchor="middle">คำเดา + ความมั่นใจ</text>
-        <text class="en" lang="en" x="860" y="154" text-anchor="middle">it always shows the number</text>
+        <text class="en" lang="en" x="860" y="154" text-anchor="middle">it always shows the number</text><text class="zh" lang="zh-Hans" x="860" y="154" text-anchor="middle">它总会显示这个数字</text>
         <text class="thai th" lang="th" x="860" y="154" text-anchor="middle">บอกคะแนนเสมอ</text>
       </svg>
-      <figcaption><span class="th" lang="th">สี่ขั้นจากตัวอย่างของคุณสู่คำเดาที่บอกความมั่นใจเสมอ</span><span class="en" lang="en">Four steps from your examples to a guess that always shows its confidence.</span></figcaption>
+      <figcaption><span class="th" lang="th">สี่ขั้นจากตัวอย่างของคุณสู่คำเดาที่บอกความมั่นใจเสมอ</span><span class="en" lang="en">Four steps from your examples to a guess that always shows its confidence.</span><span class="zh" lang="zh-Hans">从你的例子，到一个总会显示置信度的猜测，一共四步。</span></figcaption>
     </figure>
   </section>
 
@@ -109,112 +110,113 @@
   <section id="training-room" class="room" aria-labelledby="room-title">
     <header class="room-head">
       <span class="chapter-no">01</span>
-      <h2 id="room-title"><span class="th" lang="th">ให้มันดูตัวอย่าง</span><span class="en" lang="en">Show it examples</span></h2>
-      <p class="prose"><span class="th" lang="th">ให้เครื่องดูภาพของแต่ละกลุ่ม กด “เพิ่มตัวอย่าง” ตอนที่เห็นสิ่งนั้น ลองเก็บกลุ่มละ 10 ภาพจากหลายมุม แล้วกด “ฝึกแล้วลองทาย”</span><span class="en" lang="en">Show it each group. Press “Add example” when that thing is in the picture. Aim for 10 pictures per group from different angles. Then press “Train and try it”.</span></p>
-      <ol class="howto" data-howto data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
-        <li data-step="examples"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละอย่างน้อยหนึ่งภาพ</span><span class="en" lang="en">Add examples to both groups</span></li>
-        <li data-step="guess"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ดูมันเริ่มเดาจากภาพสด</span><span class="en" lang="en">Watch it start guessing from the live picture</span></li>
-        <li data-step="train"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ฝึกแล้วลองภาพใหม่</span><span class="en" lang="en">Train it, then try a new picture</span></li>
-        <li data-step="judge"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ถ้าอยากลองต่อ: ทดสอบกับกล้องถนนอื่น</span><span class="en" lang="en">Optional: try other road cameras</span></li>
+      <h2 id="room-title"><span class="th" lang="th">ให้มันดูตัวอย่าง</span><span class="en" lang="en">Show it examples</span><span class="zh" lang="zh-Hans">把例子给它看</span></h2>
+      <p class="prose"><span class="th" lang="th">ให้เครื่องดูภาพของแต่ละกลุ่ม กด “เพิ่มตัวอย่าง” ตอนที่เห็นสิ่งนั้น ลองเก็บกลุ่มละ 10 ภาพจากหลายมุม แล้วกด “ฝึกแล้วลองทาย”</span><span class="en" lang="en">Show it each group. Press “Add example” when that thing is in the picture. Aim for 10 pictures per group from different angles. Then press “Train and try it”.</span><span class="zh" lang="zh-Hans">每一个组都给它看。那样东西在图像里的时候，按下「添加例子」。每一组最好有 10 幅图像，角度要不一样。然后按下「训练并试一试」。</span></p>
+      <ol class="howto" data-howto data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room" data-aria-zh="这个房间怎么用">
+        <li data-step="examples"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละอย่างน้อยหนึ่งภาพ</span><span class="en" lang="en">Add examples to both groups</span><span class="zh" lang="zh-Hans">两个组都要加例子</span></li>
+        <li data-step="guess"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ดูมันเริ่มเดาจากภาพสด</span><span class="en" lang="en">Watch it start guessing from the live picture</span><span class="zh" lang="zh-Hans">看它开始对实时的图像做猜测</span></li>
+        <li data-step="train"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ฝึกแล้วลองภาพใหม่</span><span class="en" lang="en">Train it, then try a new picture</span><span class="zh" lang="zh-Hans">先训练，再试一幅新的图像</span></li>
+        <li data-step="judge"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ถ้าอยากลองต่อ: ทดสอบกับกล้องถนนอื่น</span><span class="en" lang="en">Optional: try other road cameras</span><span class="zh" lang="zh-Hans">可选：再试别的道路摄像头</span></li>
       </ol>
     </header>
 
     <div class="room-grid">
-      <div class="bench room-bench" data-aria-th="สิ่งที่เครื่องเห็นตอนนี้" data-aria-en="What the machine sees now">
+      <div class="bench room-bench" data-aria-th="สิ่งที่เครื่องเห็นตอนนี้" data-aria-en="What the machine sees now" data-aria-zh="机器现在看见什么">
         <div class="bench-caption">
-          <span class="label"><span class="th" lang="th">ภาพที่เครื่องเห็นตอนนี้</span><span class="en" lang="en">What it sees now</span></span>
+          <span class="label"><span class="th" lang="th">ภาพที่เครื่องเห็นตอนนี้</span><span class="en" lang="en">What it sees now</span><span class="zh" lang="zh-Hans">它现在看见什么</span></span>
           <span class="num" data-model-state></span>
         </div>
         <div class="bench-view">
-          <canvas data-view role="img" data-aria-th="ภาพปัจจุบัน: กล้องของคุณ กล้องสาธารณะ หรือรูปถ่าย" data-aria-en="The current picture: your camera, a public camera or your photo"></canvas>
+          <canvas data-view role="img" data-aria-th="ภาพปัจจุบัน: กล้องของคุณ กล้องสาธารณะ หรือรูปถ่าย" data-aria-en="The current picture: your camera, a public camera or your photo" data-aria-zh="当前图像：你的摄像头、公共摄像头或你的照片"></canvas>
           <div class="bench-state" data-view-state>…</div>
         </div>
         <div class="controls">
-          <button class="btn primary" type="button" data-mine>● <span class="th" lang="th">สอนด้วยกล้องของฉัน</span><span class="en" lang="en">Teach it with my camera</span></button>
+          <button class="btn primary" type="button" data-mine>● <span class="th" lang="th">สอนด้วยกล้องของฉัน</span><span class="en" lang="en">Teach it with my camera</span><span class="zh" lang="zh-Hans">用我的摄像头来教</span></button>
         </div>
         <p class="readout" data-status aria-live="polite"></p>
             <div class="controls">
-              <button class="btn primary" type="button" data-train disabled>▶ <span class="th" lang="th">ฝึกแล้วลองทาย</span><span class="en" lang="en">Train and try it</span></button>
+              <button class="btn primary" type="button" data-train disabled>▶ <span class="th" lang="th">ฝึกแล้วลองทาย</span><span class="en" lang="en">Train and try it</span><span class="zh" lang="zh-Hans">训练并试一试</span></button>
             </div>
             <p class="readout" data-train-say aria-live="polite"></p>
         <div class="live">
-          <p class="micro live-key"><span class="th" lang="th">สองแถบนี้คือสองวิธีทายของเครื่อง แถบบนทำงานทันที ไม่ต้องฝึก แถบล่างมีชีวิตขึ้นมาก็ต่อเมื่อกด “ฝึกแล้วลองทาย” แล้วเท่านั้น</span><span class="en" lang="en">These two bars are two ways the machine guesses. The top one works at once, with no training. The bottom one comes alive only after you press “Train and try it”.</span></p>
-          <span class="label live-head"><span class="th" lang="th">ทายทันที — ดูภาพที่คล้ายกัน</span><span class="en" lang="en">Guesses right away — from similar examples</span></span>
+          <p class="micro live-key"><span class="th" lang="th">สองแถบนี้คือสองวิธีทายของเครื่อง แถบบนทำงานทันที ไม่ต้องฝึก แถบล่างมีชีวิตขึ้นมาก็ต่อเมื่อกด “ฝึกแล้วลองทาย” แล้วเท่านั้น</span><span class="en" lang="en">These two bars are two ways the machine guesses. The top one works at once, with no training. The bottom one comes alive only after you press “Train and try it”.</span><span class="zh" lang="zh-Hans">这两根柱子，是机器的两种猜法。上面一根马上就能用，不用训练。下面一根，要等你按下「训练并试一试」才开始工作。</span></p>
+          <span class="label live-head"><span class="th" lang="th">ทายทันที — ดูภาพที่คล้ายกัน</span><span class="en" lang="en">Guesses right away — from similar examples</span><span class="zh" lang="zh-Hans">马上就猜——靠相似的例子</span></span>
           <div class="bars" data-bars-knn></div>
-          <span class="label live-head"><span class="th" lang="th">ทายหลังกดฝึก</span><span class="en" lang="en">Guesses after you press Train</span> <span class="micro" data-layer-flag></span></span>
+          <span class="label live-head"><span class="th" lang="th">ทายหลังกดฝึก</span><span class="en" lang="en">Guesses after you press Train</span><span class="zh" lang="zh-Hans">按下「训练」之后才猜</span> <span class="micro" data-layer-flag></span></span>
           <div class="bars" data-bars-layer></div>
         </div>
-<div class="demo-test" data-demo-test hidden><p class="micro"><span class="th" lang="th">ลองภาพวาดใหม่ที่ไม่ได้ใช้ฝึก แล้วดูคำตอบด้านบน นี่เป็นภาพวาด ไม่ใช่การทดสอบกับถนนจริง</span><span class="en" lang="en">Try a new drawing it did not train on. Watch the answer above. These are drawings, not a test on real roads.</span></p><div class="controls"><button class="btn" type="button" data-test-scene="busy"><span class="th" lang="th">ลองถนนรถแน่น</span><span class="en" lang="en">Try a busy road</span></button><button class="btn" type="button" data-test-scene="empty"><span class="th" lang="th">ลองถนนโล่ง</span><span class="en" lang="en">Try an empty road</span></button></div></div>
-        <details class="training-curve"><summary><span class="th" lang="th">ดูว่ามันทายผิดน้อยลงยังไง</span><span class="en" lang="en">See how its mistakes shrink</span></summary>          <div class="bench">
-            <div class="bench-view curve-view"><canvas data-curve role="img" data-aria-th="เส้นฝึก: ค่าผิดพลาดและความแม่นในแต่ละรอบ" data-aria-en="Training curve: loss and accuracy per pass"></canvas></div>
+<div class="demo-test" data-demo-test hidden><p class="micro"><span class="th" lang="th">ลองภาพวาดใหม่ที่ไม่ได้ใช้ฝึก แล้วดูคำตอบด้านบน นี่เป็นภาพวาด ไม่ใช่การทดสอบกับถนนจริง</span><span class="en" lang="en">Try a new drawing it did not train on. Watch the answer above. These are drawings, not a test on real roads.</span><span class="zh" lang="zh-Hans">试一试一幅它训练时没见过的画。看上面的答案。这些是画，不是在真实的路上做的测试。</span></p><div class="controls"><button class="btn" type="button" data-test-scene="busy"><span class="th" lang="th">ลองถนนรถแน่น</span><span class="en" lang="en">Try a busy road</span><span class="zh" lang="zh-Hans">试一试繁忙的路</span></button><button class="btn" type="button" data-test-scene="empty"><span class="th" lang="th">ลองถนนโล่ง</span><span class="en" lang="en">Try an empty road</span><span class="zh" lang="zh-Hans">试一试空着的路</span></button></div></div>
+        <details class="training-curve"><summary><span class="th" lang="th">ดูว่ามันทายผิดน้อยลงยังไง</span><span class="en" lang="en">See how its mistakes shrink</span><span class="zh" lang="zh-Hans">看它错的地方怎样变少</span></summary>          <div class="bench">
+            <div class="bench-view curve-view"><canvas data-curve role="img" data-aria-th="เส้นฝึก: ค่าผิดพลาดและความแม่นในแต่ละรอบ" data-aria-en="Training curve: loss and accuracy per pass" data-aria-zh="训练曲线：每一轮的损失和准确率"></canvas></div>
 
           </div></details>
         <p class="readout live-say" data-live-say aria-live="polite"></p>
-        <p class="micro bench-note"><span class="th" lang="th">คะแนนบอกว่าภาพคล้ายกลุ่มไหน ไม่ได้แปลว่าเครื่องตอบถูกแน่นอน ลองของที่ไม่เคยสอน แล้วดูว่ามันสับสนไหม</span><span class="en" lang="en">The bars show which group looks most similar. A high score can still be wrong. Try something you never taught it and see what happens.</span></p>
+        <p class="micro bench-note"><span class="th" lang="th">คะแนนบอกว่าภาพคล้ายกลุ่มไหน ไม่ได้แปลว่าเครื่องตอบถูกแน่นอน ลองของที่ไม่เคยสอน แล้วดูว่ามันสับสนไหม</span><span class="en" lang="en">The bars show which group looks most similar. A high score can still be wrong. Try something you never taught it and see what happens.</span><span class="zh" lang="zh-Hans">这些柱子显示哪一组看起来最像。分数高，也仍然可能是错的。试一件你从没教过它的事，看看会怎样。</span></p>
       </div>
 
       <div class="room-classes">
         <div class="preset">
-          <label class="label" for="preset"><span class="th" lang="th">หรือเลือกกลุ่มแบบอื่น</span><span class="en" lang="en">Or pick another pair</span></label>
+          <label class="label" for="preset"><span class="th" lang="th">หรือเลือกกลุ่มแบบอื่น</span><span class="en" lang="en">Or pick another pair</span><span class="zh" lang="zh-Hans">或者换一对</span></label>
           <select id="preset" class="field-input" data-preset></select>
         </div>
-        <ol class="klasses" data-classes data-aria-th="กลุ่มทั้งหมด" data-aria-en="Groups"></ol>
+        <ol class="klasses" data-classes data-aria-th="กลุ่มทั้งหมด" data-aria-en="Groups" data-aria-zh="分组"></ol>
         <div class="controls room-more">
-          <button class="btn" type="button" data-add-class>+ <span class="th" lang="th">เพิ่มกลุ่ม</span><span class="en" lang="en">Add a group</span></button>
-          <button class="btn" type="button" data-demo><span class="th" lang="th">↻ เริ่มกิจกรรมภาพวาดถนน</span><span class="en" lang="en">↻ Start the drawn-road activity</span></button>
+          <button class="btn" type="button" data-add-class>+ <span class="th" lang="th">เพิ่มกลุ่ม</span><span class="en" lang="en">Add a group</span><span class="zh" lang="zh-Hans">添加一组</span></button>
+          <button class="btn" type="button" data-demo><span class="th" lang="th">↻ เริ่มกิจกรรมภาพวาดถนน</span><span class="en" lang="en">↻ Start the drawn-road activity</span><span class="zh" lang="zh-Hans">↻ 开始画出来的路</span></button>
         </div>
-        <p class="micro"><span class="th" lang="th">ปุ่มนี้วาดภาพถนนจำลอง “รถแน่น / ถนนโล่ง” ขึ้นมาเอง 16 ภาพ — ไม่ใช่ภาพถ่าย ไม่ได้ใช้กล้อง และไม่มีอะไรออกจากเครื่องคุณ ใช้ดูให้ทุกชิ้นส่วนของหน้านี้ทำงานได้ในคลิกเดียว</span><span class="en" lang="en">This button draws 16 synthetic “busy / empty road” frames itself — not photographs, not from a camera, and nothing leaves your device. It exists so every instrument on this page can move in one click.</span></p>
-        <p class="note"><strong><span class="th" lang="th">อยู่ในแท็บนี้เท่านั้น</span><span class="en" lang="en">This tab only.</span></strong> <span class="th" lang="th">ตัวอย่างทั้งหมดอยู่ในหน่วยความจำของแท็บนี้ ไม่ได้บันทึกและไม่ได้ส่งไปไหน โหลดหน้าใหม่เมื่อไรก็หายหมด ภาพจากกล้องของคุณประมวลผลในเครื่องนี้เท่านั้น</span><span class="en" lang="en">Your examples live in this tab's memory — not saved, not sent anywhere. Reload the page and they are gone. Your camera's picture is processed on this device only.</span></p>
-        <p class="micro tips"><span class="th" lang="th">เริ่มที่กลุ่มละ 10–20 ภาพ และให้ตัวอย่างหลากหลาย ทั้งมุม ระยะ และแสง ถ้าทุกภาพของ “ยกมือ” คุณใส่เสื้อแดง เครื่องอาจเรียนรู้เสื้อแดงแทนมือ</span><span class="en" lang="en">Start with 10–20 per class and vary them: angle, distance, light. If you wear a red shirt in every “hand up” example, it may learn the shirt instead of the hand.</span></p>
+        <p class="micro"><span class="th" lang="th">ปุ่มนี้วาดภาพถนนจำลอง “รถแน่น / ถนนโล่ง” ขึ้นมาเอง 16 ภาพ — ไม่ใช่ภาพถ่าย ไม่ได้ใช้กล้อง และไม่มีอะไรออกจากเครื่องคุณ ใช้ดูให้ทุกชิ้นส่วนของหน้านี้ทำงานได้ในคลิกเดียว</span><span class="en" lang="en">This button draws 16 synthetic “busy / empty road” frames itself — not photographs, not from a camera, and nothing leaves your device. It exists so every instrument on this page can move in one click.</span><span class="zh" lang="zh-Hans">这个按钮会自己画出 16 帧合成的“繁忙 / 空着的路”——不是照片，不是来自摄像头，也没有任何东西离开你的设备。它在这里，是为了让这一页上的每个工具，点一下就能动。</span></p>
+        <p class="note"><strong><span class="th" lang="th">อยู่ในแท็บนี้เท่านั้น</span><span class="en" lang="en">This tab only.</span><span class="zh" lang="zh-Hans">只在这个标签页里。</span></strong> <span class="th" lang="th">ตัวอย่างทั้งหมดอยู่ในหน่วยความจำของแท็บนี้ ไม่ได้บันทึกและไม่ได้ส่งไปไหน โหลดหน้าใหม่เมื่อไรก็หายหมด ภาพจากกล้องของคุณประมวลผลในเครื่องนี้เท่านั้น</span><span class="en" lang="en">Your examples live in this tab's memory — not saved, not sent anywhere. Reload the page and they are gone. Your camera's picture is processed on this device only.</span><span class="zh" lang="zh-Hans">你的例子只存在这个标签页的内存里——没有保存，也没有发送到任何地方。重新加载这一页，它们就没有了。你的摄像头的图像，只在这台设备上处理。</span></p>
+        <p class="micro tips"><span class="th" lang="th">เริ่มที่กลุ่มละ 10–20 ภาพ และให้ตัวอย่างหลากหลาย ทั้งมุม ระยะ และแสง ถ้าทุกภาพของ “ยกมือ” คุณใส่เสื้อแดง เครื่องอาจเรียนรู้เสื้อแดงแทนมือ</span><span class="en" lang="en">Start with 10–20 per class and vary them: angle, distance, light. If you wear a red shirt in every “hand up” example, it may learn the shirt instead of the hand.</span><span class="zh" lang="zh-Hans">每一类先准备 10–20 个，并让它们有所不同：角度、距离、光线。如果每一个“手举起”的例子里你都穿着红衬衫，它可能学到的是衬衫，不是手。</span></p>
       </div>
     </div>
   </section>
 
-  <details class="training-details"><summary><span class="th" lang="th">ดูข้างใน: เครื่องเรียนรู้ยังไง (ไม่บังคับ)</span><span class="en" lang="en">Look inside: how the machine learns (optional)</span></summary>
+  <details class="training-details"><summary><span class="th" lang="th">ดูข้างใน: เครื่องเรียนรู้ยังไง (ไม่บังคับ)</span><span class="en" lang="en">Look inside: how the machine learns (optional)</span><span class="zh" lang="zh-Hans">看看里面：机器是怎样学的（可选）</span></summary>
   <section class="idea field-quiet" aria-labelledby="idea-title">
-    <h2 id="idea-title" class="idea-title"><span class="th" lang="th">การเรียนรู้แบบถ่ายโอน</span><span class="en" lang="en">Transfer learning</span></h2>
+    <h2 id="idea-title" class="idea-title"><span class="th" lang="th">การเรียนรู้แบบถ่ายโอน</span><span class="en" lang="en">Transfer learning</span><span class="zh" lang="zh-Hans">迁移学习</span></h2>
     <ol class="steps">
-      <li><span class="th" lang="th">ภาพหนึ่งเฟรมจากกล้อง</span><span class="en" lang="en">One frame from the camera</span></li>
-      <li><span class="th" lang="th">MobileNetV2 — แช่แข็งไว้ ไม่ได้ฝึกใหม่</span><span class="en" lang="en">MobileNetV2 — frozen, never retrained</span></li>
-      <li><span class="th" lang="th">ตัวเลข 1,280 ตัว ลายนิ้วมือของภาพ</span><span class="en" lang="en">1,280 numbers: the picture's fingerprint</span></li>
-      <li><span class="th" lang="th">การตัดสินใจของคุณ — ส่วนเดียวที่เรียนรู้</span><span class="en" lang="en">Your decision — the only part that learns</span></li>
+      <li><span class="th" lang="th">ภาพหนึ่งเฟรมจากกล้อง</span><span class="en" lang="en">One frame from the camera</span><span class="zh" lang="zh-Hans">摄像头里的一帧</span></li>
+      <li><span class="th" lang="th">MobileNetV2 — แช่แข็งไว้ ไม่ได้ฝึกใหม่</span><span class="en" lang="en">MobileNetV2 — frozen, never retrained</span><span class="zh" lang="zh-Hans">MobileNetV2 — 冻结，不再重新训练</span></li>
+      <li><span class="th" lang="th">ตัวเลข 1,280 ตัว ลายนิ้วมือของภาพ</span><span class="en" lang="en">1,280 numbers: the picture's fingerprint</span><span class="zh" lang="zh-Hans">1,280 个数字：这幅图像的指纹</span></li>
+      <li><span class="th" lang="th">การตัดสินใจของคุณ — ส่วนเดียวที่เรียนรู้</span><span class="en" lang="en">Your decision — the only part that learns</span><span class="zh" lang="zh-Hans">你的判断——唯一会学习的部分</span></li>
     </ol>
-    <p class="prose th" lang="th">โครงข่ายนี้ถูกฝึกมาแล้วกับภาพจาก ImageNet กว่าล้านภาพ (Sandler และคณะ, 2018) ระหว่างทาง ชั้นต่าง ๆ ของมันเรียนรู้ที่จะเห็นขอบ ลวดลาย พื้นผิว และส่วนประกอบของสิ่งของ เราขอยืมความรู้นั้นมาทั้งก้อน แล้วฝึกเพียงชั้นสุดท้ายเล็ก ๆ ที่มีน้ำหนัก (ตัวเลขในโมเดลที่การฝึกคอยปรับ) แค่กลุ่มละ 1,280 ตัว บวกอีกหนึ่งตัว ตัวอย่างไม่กี่สิบภาพจึงพอ และฝึกเสร็จในไม่กี่วินาทีแม้บนโทรศัพท์</p>
-    <p class="prose en" lang="en">The network was already trained on more than a million ImageNet photos (Sandler et al., 2018). Along the way its layers learned to pick out edges, textures, patterns and parts of things. We borrow all of that as it is and train only a small last layer: 1,280 weights per class, plus one. A weight is one of the adjustable numbers inside the model that training nudges. That is why a few dozen examples are enough, and why training takes seconds, even on a phone.</p>
+    <p class="prose th" lang="th">โครงข่ายนี้ถูกฝึกมาแล้วกับภาพจาก ImageNet กว่าล้านภาพ (Deng และคณะ, 2009) ตัวโครงข่ายคือ MobileNetV2 (Sandler และคณะ, 2018) ระหว่างทาง ชั้นต่าง ๆ ของมันเรียนรู้ที่จะเห็นขอบ ลวดลาย พื้นผิว และส่วนประกอบของสิ่งของ เราขอยืมความรู้นั้นมาทั้งก้อน แล้วฝึกเพียงชั้นสุดท้ายเล็ก ๆ ที่มีน้ำหนัก (ตัวเลขในโมเดลที่การฝึกคอยปรับ) แค่กลุ่มละ 1,280 ตัว บวกอีกหนึ่งตัว ตัวอย่างไม่กี่สิบภาพจึงพอ และฝึกเสร็จในไม่กี่วินาทีแม้บนโทรศัพท์</p>
+    <p class="prose en" lang="en">The network was already trained on more than a million ImageNet photos (Deng et al., 2009). The network itself is MobileNetV2 (Sandler et al., 2018). Along the way its layers learned to pick out edges, textures, patterns and parts of things. We borrow all of that as it is and train only a small last layer: 1,280 weights per class, plus one. A weight is one of the adjustable numbers inside the model that training nudges. That is why a few dozen examples are enough, and why training takes seconds, even on a phone.</p>
+    <p class="prose zh" lang="zh-Hans">这个网络已经用一百多万张 ImageNet 照片训练过（Deng 等，2009）。网络本身是 MobileNetV2（Sandler 等，2018）。一路上，它的各层学会了找出边缘、纹理、图案和物体的部件。我们原样借用这一切，只训练最后一层很小的层：每个类别 1,280 个权重，再加一个。权重是模型里训练去微调的那些数字之一。所以几十个例子就够，而且即使在手机上，训练也只要几秒。</p>
   </section>
 
   <section class="chapter field-quiet" aria-labelledby="learn-title">
     <header>
       <span class="chapter-no">02</span>
-      <h2 id="learn-title"><span class="th" lang="th">สองวิธีเรียนรู้</span><span class="en" lang="en">Two ways to learn</span></h2>
+      <h2 id="learn-title"><span class="th" lang="th">สองวิธีเรียนรู้</span><span class="en" lang="en">Two ways to learn</span><span class="zh" lang="zh-Hans">两种学法</span></h2>
     </header>
     <div class="chapter-body">
       <div class="learners">
         <article class="learner">
-          <h3><span class="th" lang="th">เพื่อนบ้านใกล้สุด — ไม่ต้องฝึกเลย</span><span class="en" lang="en">Nearest neighbours — no training at all</span></h3>
+          <h3><span class="th" lang="th">เพื่อนบ้านใกล้สุด — ไม่ต้องฝึกเลย</span><span class="en" lang="en">Nearest neighbours — no training at all</span><span class="zh" lang="zh-Hans">最近邻——完全不用训练</span></h3>
           <p class="th" lang="th">จำตัวอย่างไว้ทุกภาพ เมื่อเจอภาพใหม่ ก็หาตัวอย่าง 5 ภาพที่ตัวเลข 1,280 ตัว “ชี้ไปทางเดียวกัน” มากที่สุด แล้วให้มันโหวต ภาพที่คล้ายกว่าได้เสียงมากกว่า วิธีนี้เก่าแก่มาก (Cover และ Hart, 1967) และใช้ได้ทันทีที่คุณเพิ่มตัวอย่าง</p>
-          <p class="en" lang="en">Remember every example. For a new picture, find the 5 examples whose 1,280 numbers point most nearly the same way, and let them vote — closer ones count more. The idea is old (Cover &amp; Hart, 1967) and works the instant you add an example.</p>
+          <p class="en" lang="en">Remember every example. For a new picture, find the 5 examples whose 1,280 numbers point most nearly the same way, and let them vote — closer ones count more. The idea is old (Cover &amp; Hart, 1967) and works the instant you add an example.</p><p class="zh" lang="zh-Hans">把每一个例子都记住。来了一幅新图像，就找出 5 个例子：它们那 1,280 个数字的方向，和这幅新图像最接近。然后让它们投票——更近的算得更多。这个想法很早就有了（Cover &amp; Hart, 1967）。你一加上例子，它马上就能用。</p>
           <div class="bench">
-            <span class="label bench-caption"><span class="th" lang="th">ทดสอบแบบเว้นทีละภาพ</span><span class="en" lang="en">Leave-one-out test</span></span>
+            <span class="label bench-caption"><span class="th" lang="th">ทดสอบแบบเว้นทีละภาพ</span><span class="en" lang="en">Leave-one-out test</span><span class="zh" lang="zh-Hans">留一测试</span></span>
             <p class="readout loo" data-loo>—</p>
             <p class="loo-grade" data-loo-grade hidden></p>
           </div>
-          <p class="micro"><span class="th" lang="th">ซ่อนตัวอย่างไว้หนึ่งภาพ ให้ภาพที่เหลือทายว่าเป็นกลุ่มไหน ทำแบบนี้ทีละภาพจนครบ สัดส่วนที่ทายถูกคือการเดาที่ซื่อตรงกว่าว่ามันจะทำได้ดีแค่ไหนกับภาพที่ไม่เคยเห็น แต่ก็ยังเป็นภาพแบบเดียวกับที่คุณถ่ายเท่านั้น</span><span class="en" lang="en">Hide one example, let the rest label it, and repeat for every example. The share it gets right is a fairer guess at how it will do on pictures it has not seen — though still only pictures like the ones you took.</span></p>
+          <p class="micro"><span class="th" lang="th">ซ่อนตัวอย่างไว้หนึ่งภาพ ให้ภาพที่เหลือทายว่าเป็นกลุ่มไหน ทำแบบนี้ทีละภาพจนครบ สัดส่วนที่ทายถูกคือการเดาที่ซื่อตรงกว่าว่ามันจะทำได้ดีแค่ไหนกับภาพที่ไม่เคยเห็น แต่ก็ยังเป็นภาพแบบเดียวกับที่คุณถ่ายเท่านั้น</span><span class="en" lang="en">Hide one example, let the rest label it, and repeat for every example. The share it gets right is a fairer guess at how it will do on pictures it has not seen — though still only pictures like the ones you took.</span><span class="zh" lang="zh-Hans">藏起一个例子，让其余的例子给它贴标签。每一个例子都这样做。它做对的那一部分，更能估计它在没见过的图像上会怎样——不过那些图像，仍然只是和你拍的差不多。</span></p>
         </article>
 
         <article class="learner">
-          <h3><span class="th" lang="th">ชั้นที่ฝึกขึ้นมา — ปรับทีละก้าว</span><span class="en" lang="en">A trained layer — gradient descent</span></h3>
+          <h3><span class="th" lang="th">ชั้นที่ฝึกขึ้นมา — ปรับทีละก้าว</span><span class="en" lang="en">A trained layer — gradient descent</span><span class="zh" lang="zh-Hans">训练出来的一层——梯度下降</span></h3>
           <p class="th" lang="th">ชั้นน้ำหนักเดียว (softmax regression — สูตรที่เปลี่ยนตัวเลขดิบเป็นคะแนนของแต่ละกลุ่ม) เริ่มจากค่าสุ่ม แล้วถูกปรับทีละนิด ซ้ำ ๆ ไปเรื่อย ๆ แบบที่เรียกว่าการลดตามความชัน (gradient descent) คือปรับตัวเลขทุกตัวเล็กน้อยในทิศทางที่ทำให้เดาผิดน้อยลง โดยมีวิธี Adam (Kingma และ Ba, 2015) คอยกำหนดว่าแต่ละครั้งจะปรับมากน้อยแค่ไหน จนแยกกลุ่มของคุณออกจากกันได้ กด “ฝึก” แล้วดูเส้นค่าผิดพลาดค่อย ๆ ลดลง ตลอด 200 รอบที่มันไล่ดูตัวอย่างทั้งหมด</p>
-          <p class="en" lang="en">One layer of weights (softmax regression — a formula that turns raw numbers into a score for each group) starts random and is nudged a little at a time, pass after pass, in the way called gradient descent: adjust every number a little in whichever direction makes it wrong less often. Adam (Kingma &amp; Ba, 2015) decides how big each nudge is, until it separates your classes. Press Train and watch the loss — one number saying how wrong it is right now — fall, over 200 passes of every example.</p>
-          <p><span class="th" lang="th">ใช้ปุ่มฝึกใต้จอ แล้วลองภาพใหม่เพื่อดูว่ามันเรียนรู้อะไร</span><span class="en" lang="en">Use the training button below the demonstration. Then try a new picture to see what it learned.</span></p>
-          <p class="micro"><span class="th" lang="th">ความแม่นตรงนี้วัดจากตัวอย่างชุดเดียวกับที่มันใช้เรียน จึงดูดีเกินจริง คะแนนแบบเว้นทีละภาพทางซ้ายเป็นการทดสอบที่ยุติธรรมกว่า</span><span class="en" lang="en">Accuracy here is measured on the very examples it learned from, so it flatters. The leave-one-out score is the fairer test.</span></p>
+          <p class="en" lang="en">One layer of weights (softmax regression — a formula that turns raw numbers into a score for each group) starts random and is nudged a little at a time, pass after pass, in the way called gradient descent: adjust every number a little in whichever direction makes it wrong less often. Adam (Kingma &amp; Ba, 2015) decides how big each nudge is, until it separates your classes. Press Train and watch the loss — one number saying how wrong it is right now — fall, over 200 passes of every example.</p><p class="zh" lang="zh-Hans">一层权重（softmax 回归——把原始数字变成每一组一个分数的公式）一开始是随机的。然后一遍一遍，每次只推一点。这种办法叫梯度下降：把每一个数字，朝让它少错一些的方向微调。Adam（Kingma &amp; Ba, 2015）决定每一次推多大，直到把你的类别分开。按下「训练」，看损失降下去。损失是一个数字，说明它现在错得有多厉害。每一个例子要过 200 遍。</p>
+          <p><span class="th" lang="th">ใช้ปุ่มฝึกใต้จอ แล้วลองภาพใหม่เพื่อดูว่ามันเรียนรู้อะไร</span><span class="en" lang="en">Use the training button below the demonstration. Then try a new picture to see what it learned.</span><span class="zh" lang="zh-Hans">用演示下面的那个训练按钮。再拿一幅新图像试一试，看它学到了什么。</span></p>
+          <p class="micro"><span class="th" lang="th">ความแม่นตรงนี้วัดจากตัวอย่างชุดเดียวกับที่มันใช้เรียน จึงดูดีเกินจริง คะแนนแบบเว้นทีละภาพทางซ้ายเป็นการทดสอบที่ยุติธรรมกว่า</span><span class="en" lang="en">Accuracy here is measured on the very examples it learned from, so it flatters. The leave-one-out score is the fairer test.</span><span class="zh" lang="zh-Hans">这里的准确率，是用它学过的例子来测的，所以这个分数会偏高。留一得到的分数，才是更公平的测试。</span></p>
         </article>
       </div>
 
       <figure class="bench map">
-        <div class="bench-view map-view"><canvas data-map role="img" data-aria-th="แผนที่ตัวอย่างของคุณในสองมิติ พร้อมภาพปัจจุบัน" data-aria-en="Map of your examples in two dimensions, with the current picture"></canvas></div>
+        <div class="bench-view map-view"><canvas data-map role="img" data-aria-th="แผนที่ตัวอย่างของคุณในสองมิติ พร้อมภาพปัจจุบัน" data-aria-en="Map of your examples in two dimensions, with the current picture" data-aria-zh="你的样本在二维上的地图，以及当前图像"></canvas></div>
         <div class="bench-caption"><span data-legend></span></div>
-        <figcaption class="bench-caption map-caption"><span class="th" lang="th">ตัวเลข 1,280 ตัวของตัวอย่างแต่ละภาพถูกบีบเหลือ 2 ตัวด้วยการวิเคราะห์องค์ประกอบหลัก (PCA) รูปทรงบอกกลุ่ม วงสีส้มคือภาพตอนนี้ เส้นบางชี้ไปยังเพื่อนบ้านที่กำลังโหวต นี่เป็นเพียงเงา จุดที่ใกล้กันใน 1,280 มิติอาจดูห่างกันบนแผนที่นี้</span><span class="en" lang="en">Each example's 1,280 numbers squeezed to 2 by principal component analysis (PCA). Shapes mark classes; the orange ring is the picture now; thin lines run to the neighbours currently voting. It is only a shadow — points close in 1,280 dimensions can look far apart here.</span></figcaption>
+        <figcaption class="bench-caption map-caption"><span class="th" lang="th">ตัวเลข 1,280 ตัวของตัวอย่างแต่ละภาพถูกบีบเหลือ 2 ตัวด้วยการวิเคราะห์องค์ประกอบหลัก (PCA) รูปทรงบอกกลุ่ม วงสีส้มคือภาพตอนนี้ เส้นบางชี้ไปยังเพื่อนบ้านที่กำลังโหวต นี่เป็นเพียงเงา จุดที่ใกล้กันใน 1,280 มิติอาจดูห่างกันบนแผนที่นี้</span><span class="en" lang="en">Each example's 1,280 numbers squeezed to 2 by principal component analysis (PCA). Shapes mark classes; the orange ring is the picture now; thin lines run to the neighbours currently voting. It is only a shadow — points close in 1,280 dimensions can look far apart here.</span><span class="zh" lang="zh-Hans">每个例子的 1,280 个数字，被主成分分析（PCA）压成 2 个。形状用来区分类别；橙色圆环是现在这幅图像；细线连到正在投票的那些邻居。这只是一个影子——在 1,280 维里靠近的点，画到这里可能离得很远。</span></figcaption>
       </figure>
     </div>
   </section>
@@ -223,40 +225,40 @@
   <section class="chapter" aria-labelledby="judge-title">
     <header>
       <span class="chapter-no">03</span>
-      <h2 id="judge-title"><span class="th" lang="th">ลองกับกล้องถนนอื่น</span><span class="en" lang="en">Try it on other road cameras</span></h2>
+      <h2 id="judge-title"><span class="th" lang="th">ลองกับกล้องถนนอื่น</span><span class="en" lang="en">Try it on other road cameras</span><span class="zh" lang="zh-Hans">换到别的道路摄像头上试一试</span></h2>
     </header>
     <div class="chapter-body">
       <div class="prose">
         <p class="th" lang="th">สอนเรื่องถนนแล้วใช่ไหม? ลองกล้องถนนอื่นอีก 24 ตัว แล้วดูว่ามันสับสนตรงไหน ถ้าสอนเรื่องมือหรือแก้ว ให้ลองภาพใหม่ของมือหรือแก้วก่อน ภาพถนนไม่ใช่ข้อสอบที่เหมาะกับสิ่งที่สอน</p>
-        <p class="en" lang="en">Taught it about roads? Try 24 other road cameras. Watch where it gets confused. If you taught it about hands or cups, road pictures will not be a fair test — try new pictures of those things first.</p>
-        <p class="micro"><span class="th" lang="th">ป้ายสีส้มคือคำตอบที่มั่นใจตั้งแต่ 70% ขึ้นไป ต่ำกว่านั้นเราเขียนว่า “ไม่แน่ใจ”</span><span class="en" lang="en">An orange tag means 70% or more for one class; below that we write “unsure”.</span></p>
+        <p class="en" lang="en">Taught it about roads? Try 24 other road cameras. Watch where it gets confused. If you taught it about hands or cups, road pictures will not be a fair test — try new pictures of those things first.</p><p class="zh" lang="zh-Hans">你教过它道路吗？试试另外 24 个道路摄像头。看它会在哪里弄混。如果你教的是手或杯子，拿道路图像来测就不公平——先拿那些东西的新图像来试。</p>
+        <p class="micro"><span class="th" lang="th">ป้ายสีส้มคือคำตอบที่มั่นใจตั้งแต่ 70% ขึ้นไป ต่ำกว่านั้นเราเขียนว่า “ไม่แน่ใจ”</span><span class="en" lang="en">An orange tag means 70% or more for one class; below that we write “unsure”.</span><span class="zh" lang="zh-Hans">橙色标签表示某一类达到 70% 或更高；低于这个，我们就写“不确定”。</span></p>
       </div>
 
       <aside class="challenge field-quiet" aria-labelledby="challenge-title">
-        <span class="label"><span class="th" lang="th">เกมต่อไป</span><span class="en" lang="en">Next game</span></span>
-        <h3 id="challenge-title"><span class="th" lang="th">ล่าทางลัด: แก้วอยู่ซ้ายหรือขวา?</span><span class="en" lang="en">Hunt the shortcut: is the cup on the left or the right?</span></h3>
+        <span class="label"><span class="th" lang="th">เกมต่อไป</span><span class="en" lang="en">Next game</span><span class="zh" lang="zh-Hans">下一个游戏</span></span>
+        <h3 id="challenge-title"><span class="th" lang="th">ล่าทางลัด: แก้วอยู่ซ้ายหรือขวา?</span><span class="en" lang="en">Hunt the shortcut: is the cup on the left or the right?</span><span class="zh" lang="zh-Hans">去找那条捷径：杯子在左边，还是在右边？</span></h3>
         <ol class="steps">
-          <li><span class="th" lang="th">กดปุ่มนี้เพื่อตั้งกลุ่ม “มีแก้ว / ไม่มีแก้ว” ให้</span><span class="en" lang="en">Press the button — it sets up Cup / No cup for you</span></li>
-          <li><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละ 10 ภาพ โดยถือแก้วไว้ “ซ้ายมือ” เท่านั้น อย่าขยับอย่างอื่นเลย</span><span class="en" lang="en">Add 10 examples of each, always holding the cup on the LEFT. Move nothing else</span></li>
-          <li><span class="th" lang="th">กด “ฝึก” ให้เสร็จ แล้วย้ายแก้วไป “ขวามือ” แล้วดูแถบคะแนน</span><span class="en" lang="en">Press Train, then slide the cup to the RIGHT and watch the bars</span></li>
-          <li><span class="th" lang="th">ถ้าคะแนนร่วงหรือสลับข้าง เครื่องเรียนรู้ “ข้างซ้าย” ไม่ใช่ “แก้ว”</span><span class="en" lang="en">If the score collapses or flips, it learned “left side”, not “cup”</span></li>
+          <li><span class="th" lang="th">กดปุ่มนี้เพื่อตั้งกลุ่ม “มีแก้ว / ไม่มีแก้ว” ให้</span><span class="en" lang="en">Press the button — it sets up Cup / No cup for you</span><span class="zh" lang="zh-Hans">按下按钮——它会帮你设成「有杯子 / 没有杯子」</span></li>
+          <li><span class="th" lang="th">เพิ่มตัวอย่างกลุ่มละ 10 ภาพ โดยถือแก้วไว้ “ซ้ายมือ” เท่านั้น อย่าขยับอย่างอื่นเลย</span><span class="en" lang="en">Add 10 examples of each, always holding the cup on the LEFT. Move nothing else</span><span class="zh" lang="zh-Hans">每一种加 10 个例子，杯子一直拿在左边。其他东西都不要动</span></li>
+          <li><span class="th" lang="th">กด “ฝึก” ให้เสร็จ แล้วย้ายแก้วไป “ขวามือ” แล้วดูแถบคะแนน</span><span class="en" lang="en">Press Train, then slide the cup to the RIGHT and watch the bars</span><span class="zh" lang="zh-Hans">按下「训练」，再把杯子移到右边，看这些柱子</span></li>
+          <li><span class="th" lang="th">ถ้าคะแนนร่วงหรือสลับข้าง เครื่องเรียนรู้ “ข้างซ้าย” ไม่ใช่ “แก้ว”</span><span class="en" lang="en">If the score collapses or flips, it learned “left side”, not “cup”</span><span class="zh" lang="zh-Hans">如果分数掉下去，或者反了过来，它学到的是“左边”，不是“杯子”</span></li>
         </ol>
-        <p class="micro"><span class="th" lang="th">นี่คือบทเรียนที่สำคัญที่สุดในวิชานี้ การให้คะแนน 100% กับตัวอย่างของตัวเองไม่ได้หมายความว่ามันเข้าใจสิ่งที่คุณตั้งใจสอน และทางแก้ไม่ใช่โมเดลที่ใหญ่ขึ้น แต่คือตัวอย่างที่หลากหลายในสิ่งที่ไม่ควรสำคัญ</span><span class="en" lang="en">This is the most important lesson here. A perfect score on its own examples does not mean it understood what you meant to teach — and the cure is not a bigger model, but examples that vary the things that should not matter.</span></p>
+        <p class="micro"><span class="th" lang="th">นี่คือบทเรียนที่สำคัญที่สุดในวิชานี้ การให้คะแนน 100% กับตัวอย่างของตัวเองไม่ได้หมายความว่ามันเข้าใจสิ่งที่คุณตั้งใจสอน และทางแก้ไม่ใช่โมเดลที่ใหญ่ขึ้น แต่คือตัวอย่างที่หลากหลายในสิ่งที่ไม่ควรสำคัญ</span><span class="en" lang="en">This is the most important lesson here. A perfect score on its own examples does not mean it understood what you meant to teach — and the cure is not a bigger model, but examples that vary the things that should not matter.</span><span class="zh" lang="zh-Hans">这是这里最重要的一课。它在自己的例子上全对，并不说明它懂了你想教的——解决的办法不是换一个更大的模型，而是在例子里，把那些不该起作用的东西变一变。</span></p>
         <div class="controls">
-          <button class="btn primary" type="button" data-challenge><span class="th" lang="th">▶ เริ่มเกมนี้</span><span class="en" lang="en">▶ Start this game</span></button>
+          <button class="btn primary" type="button" data-challenge><span class="th" lang="th">▶ เริ่มเกมนี้</span><span class="en" lang="en">▶ Start this game</span><span class="zh" lang="zh-Hans">▶ 开始这个游戏</span></button>
         </div>
         <p class="readout challenge-say" data-challenge-say aria-live="polite"></p>
       </aside>
 
       <div class="bench judge-bench">
-        <div class="controls" role="group" data-aria-th="ตัดสินด้วยวิธีใด" data-aria-en="Judge with">
-          <button class="btn" type="button" data-judge-mode="layer" aria-pressed="true"><span class="th" lang="th">ใช้คำตอบหลังฝึก</span><span class="en" lang="en">Use the trained layer</span></button>
-          <button class="btn" type="button" data-judge-mode="knn" aria-pressed="false"><span class="th" lang="th">ใช้ภาพที่คล้ายกัน</span><span class="en" lang="en">Use nearest neighbours</span></button>
-          <button class="btn" type="button" data-judge-mode="both" aria-pressed="false"><span class="th" lang="th">ทั้งสองวิธีเทียบกัน</span><span class="en" lang="en">Race both</span></button>
+        <div class="controls" role="group" data-aria-th="ตัดสินด้วยวิธีใด" data-aria-en="Judge with" data-aria-zh="用这个来检验">
+          <button class="btn" type="button" data-judge-mode="layer" aria-pressed="true"><span class="th" lang="th">ใช้คำตอบหลังฝึก</span><span class="en" lang="en">Use the trained layer</span><span class="zh" lang="zh-Hans">用训练出来的这一层</span></button>
+          <button class="btn" type="button" data-judge-mode="knn" aria-pressed="false"><span class="th" lang="th">ใช้ภาพที่คล้ายกัน</span><span class="en" lang="en">Use nearest neighbours</span><span class="zh" lang="zh-Hans">用最近邻</span></button>
+          <button class="btn" type="button" data-judge-mode="both" aria-pressed="false"><span class="th" lang="th">ทั้งสองวิธีเทียบกัน</span><span class="en" lang="en">Race both</span><span class="zh" lang="zh-Hans">两个一起比</span></button>
         </div>
         <div class="controls">
-          <button class="btn primary" type="button" data-judge-start>▶ <span class="th" lang="th">ตัดสิน 24 กล้อง</span><span class="en" lang="en">Judge 24 cameras</span></button>
-          <button class="btn" type="button" data-judge-stop>■ <span class="th" lang="th">หยุด</span><span class="en" lang="en">Stop</span></button>
+          <button class="btn primary" type="button" data-judge-start>▶ <span class="th" lang="th">ตัดสิน 24 กล้อง</span><span class="en" lang="en">Judge 24 cameras</span><span class="zh" lang="zh-Hans">判断 24 个摄像头</span></button>
+          <button class="btn" type="button" data-judge-stop>■ <span class="th" lang="th">หยุด</span><span class="en" lang="en">Stop</span><span class="zh" lang="zh-Hans">停止</span></button>
         </div>
         <p class="readout" data-judge-say aria-live="polite"></p>
       </div>
@@ -267,16 +269,16 @@
   <section class="chapter field-ink" aria-labelledby="keep-title">
     <header>
       <span class="chapter-no">04</span>
-      <h2 id="keep-title"><span class="th" lang="th">เก็บไว้ หรือปล่อยให้ลืม</span><span class="en" lang="en">Keep it, or let it forget</span></h2>
+      <h2 id="keep-title"><span class="th" lang="th">เก็บไว้ หรือปล่อยให้ลืม</span><span class="en" lang="en">Keep it, or let it forget</span><span class="zh" lang="zh-Hans">留下它，或者让它忘掉</span></h2>
     </header>
     <div class="chapter-body">
       <div class="prose">
         <p class="th" lang="th">อยากใช้สิ่งที่สอนอีกครั้งไหม? บันทึกเป็นไฟล์ไว้ แล้วเปิดกลับมาในหน้านี้ได้ ไฟล์เก็บชื่อกลุ่มและสิ่งที่เครื่องเรียนรู้ แต่ไม่เก็บรูปของคุณ และไม่มีอะไรถูกส่งไปที่อื่น</p>
-        <p class="en" lang="en">Want to use what you taught next time? Save it as a file, then open it here later. The file keeps the group names and what the computer learned. It does not keep your pictures. Nothing is uploaded.</p>
+        <p class="en" lang="en">Want to use what you taught next time? Save it as a file, then open it here later. The file keeps the group names and what the computer learned. It does not keep your pictures. Nothing is uploaded.</p><p class="zh" lang="zh-Hans">下次还想用你教过的东西吗？存成一个文件，以后在这里打开。文件里有各组的名字，以及计算机学到的东西。图像不会留在文件里。没有上传任何东西。</p>
       </div>
       <div class="controls keep">
-        <button class="btn" type="button" data-export disabled>↓ <span class="th" lang="th">บันทึกสิ่งที่สอนไว้</span><span class="en" lang="en">Save what it learned</span></button>
-        <label class="btn">↑ <span class="th" lang="th">เปิดสิ่งที่บันทึกไว้</span><span class="en" lang="en">Open saved learning</span><input type="file" accept="application/json,.json" class="vh" data-import></label>
+        <button class="btn" type="button" data-export disabled>↓ <span class="th" lang="th">บันทึกสิ่งที่สอนไว้</span><span class="en" lang="en">Save what it learned</span><span class="zh" lang="zh-Hans">保存它学到的</span></button>
+        <label class="btn">↑ <span class="th" lang="th">เปิดสิ่งที่บันทึกไว้</span><span class="en" lang="en">Open saved learning</span><span class="zh" lang="zh-Hans">打开已保存的学习</span><input type="file" accept="application/json,.json" class="vh" data-import></label>
       </div>
       <p class="readout keep-say" data-keep-say aria-live="polite"></p>
     </div>

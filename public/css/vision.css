@@ -52,6 +52,8 @@
 @font-face { font-family: "IBM Plex Sans Thai"; font-weight: 700; font-display: swap; src: url("/fonts/ibm-plex-sans-thai-thai-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: swap; src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: swap; src: url("/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 400; font-display: swap; src: url("/fonts/noto-sans-sc-chinese-simplified-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Noto Sans SC"; font-weight: 700; font-display: swap; src: url("/fonts/noto-sans-sc-chinese-simplified-700-normal.woff2") format("woff2"); }
 
 :root {
   color-scheme: light;
@@ -99,7 +101,8 @@
   --micro:    0.875rem;
   --fine:     0.78125rem;
 
-  --sans: "IBM Plex Sans", "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
+  --sans: "IBM Plex Sans", "IBM Plex Sans Thai", "Noto Sans SC", "Noto Sans Thai", system-ui, sans-serif;
+  --sc: "Noto Sans SC", "IBM Plex Sans", "Noto Sans Thai", system-ui, sans-serif;
   --thai: "IBM Plex Sans Thai", "IBM Plex Sans", "Noto Sans Thai", system-ui, sans-serif;
   --narrow: "Archivo Narrow", "IBM Plex Sans Thai", Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
@@ -146,10 +149,15 @@ body {
   font-kerning: normal;
 }
 [lang="th"] { font-family: var(--thai); line-height: 1.75; }
+[lang="zh-Hans"], [lang="zh"] { font-family: var(--sc); line-height: 1.7; }
 
-/* Language: both languages are in the markup; one is shown. */
+/* Language: three languages are in the markup; one is shown. */
 html[data-lang="th"] .en,
-html[data-lang="en"] .th { display: none !important; }
+html[data-lang="th"] .zh,
+html[data-lang="en"] .th,
+html[data-lang="en"] .zh,
+html[data-lang="zh"] .th,
+html[data-lang="zh"] .en { display: none !important; }
 
 img, canvas, video, svg { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; color: inherit; }
@@ -197,6 +205,14 @@ h1[lang="th"], h2[lang="th"] {
   line-height: 1.12;
   font-size: 0.82em;
 }
+h1 [lang="zh-Hans"], h2 [lang="zh-Hans"], .display [lang="zh-Hans"],
+h1[lang="zh-Hans"], h2[lang="zh-Hans"] {
+  font-family: var(--sc);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.18;
+  font-size: 0.78em;
+}
 h3 { font-size: var(--subtitle); font-weight: 600; line-height: 1.2; margin: 1.6em 0 0.5em; letter-spacing: -0.01em; }
 h4 { font-size: var(--body); font-weight: 600; line-height: 1.3; margin: 1.4em 0 0.4em; }
 .micro, .label, .fine {
@@ -208,6 +224,7 @@ h4 { font-size: var(--body); font-weight: 600; line-height: 1.3; margin: 1.4em 0
 .fine { font-size: var(--fine); letter-spacing: 0.08em; }
 .label { text-transform: uppercase; }
 .label [lang="th"], .label[lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
+.label [lang="zh-Hans"], .label[lang="zh-Hans"] { text-transform: none; letter-spacing: 0; font-family: var(--sc); }
 .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .lede { font-size: var(--lede); font-weight: 600; max-width: 34ch; }
 .prose { max-width: 62ch; }
@@ -231,6 +248,7 @@ em { font-style: italic; }
 }
 .stem .stem-label::after { content: ""; flex: 1 1 auto; height: 1px; background: currentColor; opacity: 0.55; }
 .stem .stem-label [lang="th"], .stem-label[lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
+.stem .stem-label [lang="zh-Hans"], .stem-label[lang="zh-Hans"] { text-transform: none; letter-spacing: 0; font-family: var(--sc); }
 
 /* MEASURE — a ghost numeral in the "structure" grey, sitting behind a heading.
    Gray is what the machine is unsure of, so it carries the count a reader is
@@ -252,6 +270,7 @@ em { font-style: italic; }
    Never inside a .field-* — signal-deep is paper-ground ink. */
 .mix { color: var(--signal-deep); font-family: var(--sans); font-size: 0.42em; font-weight: 600; letter-spacing: 0; white-space: nowrap; }
 .mix [lang="th"], .mix[lang="th"] { font-family: var(--thai); }
+.mix [lang="zh-Hans"], .mix[lang="zh-Hans"] { font-family: var(--sc); }
 
 /* ── Instrument rail (header) ────────────────────────────────────────── */
 
@@ -378,6 +397,7 @@ em { font-style: italic; }
 .index .num { font-size: var(--micro); }
 .index .title { font-family: var(--narrow); font-weight: 700; font-size: clamp(1.5rem, 2.2vw + 0.6rem, 2.5rem); line-height: 1; }
 .index .title [lang="th"], .index .title[lang="th"] { font-family: var(--thai); font-size: 0.85em; line-height: 1.25; }
+.index .title [lang="zh-Hans"], .index .title[lang="zh-Hans"] { font-family: var(--sc); font-size: 0.85em; line-height: 1.3; }
 .index .desc { max-width: 46ch; }
 @media (max-width: 760px) {
   .index a { grid-template-columns: 3rem minmax(0, 1fr); }
@@ -417,6 +437,7 @@ em { font-style: italic; }
   transition: background-color 160ms var(--ease), color 160ms var(--ease);
 }
 .btn [lang="th"], .btn[lang="th"] { font-family: var(--thai); letter-spacing: 0; }
+.btn [lang="zh-Hans"], .btn[lang="zh-Hans"] { font-family: var(--sc); letter-spacing: 0; }
 .btn:hover { background: var(--black); color: var(--white); }
 .btn[aria-pressed="true"], .btn.is-on { background: var(--signal); color: var(--black); }
 .btn:disabled { cursor: not-allowed; opacity: 0.5; }
@@ -581,6 +602,7 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 .lens-steps .btn .num { opacity: 0.6; }
 .lens-say { color: var(--naples); font-family: var(--sans); font-size: var(--micro); line-height: 1.55; min-height: 6.5em; }
 html[data-lang="th"] .lens-say { font-family: var(--thai); }
+html[data-lang="zh"] .lens-say { font-family: var(--sc); }
 .specimen-line { border-top: 0; align-items: flex-end; }
 .specimen-line .btn { flex: none; }
 @media (max-width: 900px) { .opening-stage .stage-view { aspect-ratio: 16 / 10; min-height: 0; } }
@@ -669,3 +691,70 @@ label.btn:focus-within { outline: 3px solid currentColor; outline-offset: -3px; 
 
 .instrument:is(:fullscreen, .is-expanded) .instrument-tools { position: sticky; top: 0; z-index: 2; min-height: 44px; }
 .room-grid:is(:fullscreen, .is-expanded) [data-fullscreen] { position: fixed; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); z-index: 3; }
+
+/* ── Learning path ───────────────────────────────────────────────────── */
+/* Four levels, one screen. The active level is a solid field. A rule sits
+   between levels, never around the rooms inside a level. Space is 8px. */
+.path {
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr 2fr;
+  background: var(--ground);
+  color: var(--text);
+}
+.path a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 44px;
+  padding: 16px 16px 16px 24px;
+  text-decoration: none;
+  border-inline-start: 1px solid var(--gray);
+}
+.path a:first-child { border-inline-start: 0; }
+.path .num { font-size: var(--fine); }
+.path-name { font-family: var(--narrow); font-weight: 700; font-size: var(--body); line-height: 1.1; }
+.path-name [lang="th"] { font-family: var(--thai); }
+.path-name [lang="zh-Hans"] { font-family: var(--sc); }
+.path-note { font-size: var(--fine); max-width: 28ch; }
+body[data-level] .path a[data-level] { background: transparent; }
+body[data-level="begin"] .path a[data-level="begin"],
+body[data-level="look"] .path a[data-level="look"],
+body[data-level="teach"] .path a[data-level="teach"],
+body[data-level="judge"] .path a[data-level="judge"] {
+  background: var(--olive);
+  color: var(--naples);
+}
+@media (max-width: 800px) {
+  .path { grid-template-columns: 1fr 1fr; }
+  .path a:nth-child(odd) { border-inline-start: 0; }
+  .path a { padding: 16px; }
+}
+
+/* Home: the four levels replace a flat menu. The name is the narrow column;
+   the rooms are the wide one. A rule separates levels, not the rooms. */
+.levels { padding-bottom: 48px; }
+.level {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 16px;
+  row-gap: 8px;
+  border-top: 1px solid var(--gray);
+  padding: 24px 0 16px;
+}
+.level > header { grid-column: 1 / span 4; padding-left: var(--gutter); }
+.level > header h3 { margin: 8px 0; font-family: var(--narrow); font-size: var(--subtitle); }
+.level > header h3 [lang="th"] { font-family: var(--thai); }
+.level > header h3 [lang="zh-Hans"] { font-family: var(--sc); }
+.level > header p { margin: 0; max-width: 28ch; font-size: var(--read); }
+.level > .index { grid-column: 5 / span 8; }
+.level > .index a { padding: 16px var(--gutter) 16px 0; }
+@media (max-width: 800px) {
+  .level { grid-template-columns: 1fr; padding: 24px var(--gutter); }
+  .level > header, .level > .index { grid-column: auto; padding-left: 0; }
+  .level > .index a { padding-right: 0; }
+}
+
+.idea { font-size: var(--lede); font-weight: 600; }
+.bridge { font-size: var(--micro); margin-top: 8px; }
+.credit { margin: 0; padding: 8px 16px 16px; color: var(--gray); font-size: var(--fine); max-width: none; }

@@ -1,20 +1,20 @@
 // Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
 
 import { lang, setLang, onLang } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.15.2'
+import { initFullscreen } from './fullscreen.js?v=1.16.0'
 
+const NEXT = { th: 'en', en: 'zh', zh: 'th' }
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
-  btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))
+  btn.addEventListener('click', () => setLang(NEXT[lang()] ?? 'en'))
 }
 
-// Accessible names are read aloud, not shown, so they need both languages too.
-// Any element carrying data-aria-th / data-aria-en gets its aria-label painted
-// now and repainted on every switch — a screen-reader user switching to Thai
-// should not keep hearing English.
+// Accessible names are read aloud, not shown, so they need every language too.
+// Any element carrying data-aria-th / data-aria-en / data-aria-zh gets its
+// aria-label painted now and repainted on every switch.
 function paintAria() {
-  const key = lang() === 'en' ? 'ariaEn' : 'ariaTh'
+  const key = { th: 'ariaTh', en: 'ariaEn', zh: 'ariaZh' }[lang()] ?? 'ariaTh'
   for (const el of document.querySelectorAll('[data-aria-th]')) {
-    const text = el.dataset[key]
+    const text = el.dataset[key] || (lang() === 'zh' ? el.dataset.ariaEn : '')
     if (text) el.setAttribute('aria-label', text)
   }
 }

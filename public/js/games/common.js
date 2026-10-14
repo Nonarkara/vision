@@ -6,9 +6,9 @@
 import { fitCanvas, containRect, clear, drawLabel, GRAY, BLACK } from '../cv/draw.js'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
 import { cocoName } from '../ml/labels.js'
-import { createSpecimen } from '../core/specimen.js?v=1.15.2'
+import { createSpecimen } from '../core/specimen.js?v=1.16.0'
 import { t, bi, lang, onLang } from '../core/i18n.js'
-import { sleep } from '../core/site.js?v=1.15.2'
+import { sleep } from '../core/site.js?v=1.16.0'
 
 // Low enough that "almost" boxes exist to be shown; every game filters upward.
 export const FLOOR_SCORE = 0.15
@@ -59,7 +59,7 @@ export function sayDetections(list) {
 
 /** Both-language class name as markup, for buttons that should survive a language switch. */
 export function biClass(cls) {
-  return bi(cocoName(cls, 'th'), cocoName(cls, 'en'))
+  return bi(cocoName(cls, 'th'), cocoName(cls, 'en'), cocoName(cls, 'zh'))
 }
 
 /** Load the detector, reporting progress through `say`. Throws with a readable message. */

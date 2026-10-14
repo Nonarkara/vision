@@ -6,52 +6,53 @@
 <title>How the system works · ระบบทำงานอย่างไร — Vision</title>
 <meta name="description" content="The whole design of vision.nonarkara.org: how a camera picture travels to your browser, the memory-only relay and its rules, rate limits and headers, where the models come from, live status, what we chose not to build, and credits.">
 </head>
-<body>
+<body data-level="judge">
 <!--#nav-->
+<!--#path-->
 <main id="main">
 
   <section class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 09 · ระบบ</span><span class="en" lang="en">Room 09 · The system</span></span>
-      <h1><span class="th" lang="th">ระบบ<br>ทำงานอย่างไร</span><span class="en" lang="en">How the<br>system works</span></h1>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 09 · ระบบ</span><span class="en" lang="en">Room 09 · The system</span><span class="zh" lang="zh-Hans">第 09 室 · 系统</span></span>
+      <h1><span class="th" lang="th">ระบบ<br>ทำงานอย่างไร</span><span class="en" lang="en">How the<br>system works</span><span class="zh" lang="zh-Hans">系统<br>如何工作</span></h1>
     </div>
     <p class="lede th" lang="th">ภาพเดินทางจากกล้องมาถึงคุณอย่างไร โมเดลมาจากไหน ใครเป็นเจ้าของอะไร และอะไรที่เราตั้งใจไม่สร้าง ทุกตัวเลขในหน้านี้มาจากโค้ดที่รันอยู่จริง</p>
-    <p class="lede en" lang="en">How a picture travels from a camera to you, where the models come from, who owns what, and what we chose not to build. Every number on this page comes from the code that is running.</p>
+    <p class="lede en" lang="en">How a picture travels from a camera to you, where the models come from, who owns what, and what we chose not to build. Every number on this page comes from the code that is running.</p><p class="lede zh" lang="zh-Hans">一幅图像怎样从摄像头传到你这里，模型从哪里来，什么归谁所有，以及我们选择不建造什么。本页上的每一个数字，都来自正在运行的代码。</p>
   </section>
 
   <section class="chapter sys" id="travel" aria-labelledby="travel-h">
-    <header><span class="chapter-no">01</span><h2 id="travel-h"><span class="th" lang="th">ภาพเดินทางอย่างไร</span><span class="en" lang="en">How a picture travels</span></h2></header>
+    <header><span class="chapter-no">01</span><h2 id="travel-h"><span class="th" lang="th">ภาพเดินทางอย่างไร</span><span class="en" lang="en">How a picture travels</span><span class="zh" lang="zh-Hans">图像怎样传来</span></h2></header>
     <div class="chapter-body split">
       <figure>
         <svg class="diagram flow" viewBox="0 0 400 470" role="img" aria-labelledby="d1-cap">
           <rect class="fill-black" x="0" y="0" width="400" height="60"/>
-          <text class="on-dark big en" lang="en" x="14" y="28">Public cameras</text>
+          <text class="on-dark big en" lang="en" x="14" y="28">Public cameras</text><text class="on-dark big zh" lang="zh-Hans" x="14" y="28">公共摄像头</text>
           <text class="on-dark big thai th" lang="th" x="14" y="28">กล้องสาธารณะ</text>
-          <text class="on-dark en" lang="en" x="14" y="48">owned by the agencies that run them</text>
+          <text class="on-dark en" lang="en" x="14" y="48">owned by the agencies that run them</text><text class="on-dark zh" lang="zh-Hans" x="14" y="48">归运行它们的机构所有</text>
           <text class="on-dark thai th" lang="th" x="14" y="48">เป็นของหน่วยงานที่ดูแลกล้อง</text>
 
           <path class="stroke" d="M95 60 V114"/><path class="stroke" d="M89 106 L95 115 L101 106"/>
           <path class="stroke" d="M305 60 V114"/><path class="stroke" d="M299 106 L305 115 L311 106"/>
-          <text class="en" lang="en" x="103" y="92">live video</text>
+          <text class="en" lang="en" x="103" y="92">live video</text><text class="zh" lang="zh-Hans" x="103" y="92">实时视频</text>
           <text class="thai th" lang="th" x="103" y="92">วิดีโอสด</text>
-          <text class="en" lang="en" x="313" y="92">still</text>
+          <text class="en" lang="en" x="313" y="92">still</text><text class="zh" lang="zh-Hans" x="313" y="92">静图</text>
           <text class="thai th" lang="th" x="313" y="92">ภาพนิ่ง</text>
 
           <rect class="fill-gray" x="0" y="118" width="190" height="92"/>
-          <text class="on-signal big en" lang="en" x="12" y="146">Direct</text>
+          <text class="on-signal big en" lang="en" x="12" y="146">Direct</text><text class="on-signal big zh" lang="zh-Hans" x="12" y="146">直接</text>
           <text class="on-signal big thai th" lang="th" x="12" y="146">ตรงถึงคุณ</text>
-          <text class="on-signal en" lang="en" x="12" y="170">HLS, owner allows</text>
-          <text class="on-signal en" lang="en" x="12" y="188">CORS · no server</text>
-          <text class="on-signal en" lang="en" x="12" y="204">of ours in between</text>
+          <text class="on-signal en" lang="en" x="12" y="170">HLS, owner allows</text><text class="on-signal zh" lang="zh-Hans" x="12" y="170">HLS，所有者允许</text>
+          <text class="on-signal en" lang="en" x="12" y="188">CORS · no server</text><text class="on-signal zh" lang="zh-Hans" x="12" y="188">CORS · 没有服务器</text>
+          <text class="on-signal en" lang="en" x="12" y="204">of ours in between</text><text class="on-signal zh" lang="zh-Hans" x="12" y="204">我们的，夹在中间</text>
           <text class="on-signal thai th" lang="th" x="12" y="172">HLS เจ้าของอนุญาต CORS</text>
           <text class="on-signal thai th" lang="th" x="12" y="194">ไม่ผ่านเซิร์ฟเวอร์ของเรา</text>
 
           <rect class="fill-gray" x="210" y="118" width="190" height="92"/>
-          <text class="on-signal big en" lang="en" x="222" y="146">Our relay</text>
+          <text class="on-signal big en" lang="en" x="222" y="146">Our relay</text><text class="on-signal big zh" lang="zh-Hans" x="222" y="146">我们的中继</text>
           <text class="on-signal big thai th" lang="th" x="222" y="146">รีเลย์ของเรา</text>
-          <text class="on-signal en" lang="en" x="222" y="170">memory only · 30 s</text>
-          <text class="on-signal en" lang="en" x="222" y="188">allow-listed hosts</text>
-          <text class="on-signal en" lang="en" x="222" y="204">nothing on disk</text>
+          <text class="on-signal en" lang="en" x="222" y="170">memory only · 30 s</text><text class="on-signal zh" lang="zh-Hans" x="222" y="170">只在内存 · 30 秒</text>
+          <text class="on-signal en" lang="en" x="222" y="188">allow-listed hosts</text><text class="on-signal zh" lang="zh-Hans" x="222" y="188">允许名单里的主机</text>
+          <text class="on-signal en" lang="en" x="222" y="204">nothing on disk</text><text class="on-signal zh" lang="zh-Hans" x="222" y="204">磁盘上不留</text>
           <text class="on-signal thai th" lang="th" x="222" y="172">ในหน่วยความจำ · 30 วิ</text>
           <text class="on-signal thai th" lang="th" x="222" y="194">ไม่บันทึกลงดิสก์</text>
 
@@ -59,26 +60,26 @@
           <path class="stroke" d="M200 240 V284"/><path class="stroke" d="M194 276 L200 285 L206 276"/>
 
           <rect class="fill-black" x="0" y="288" width="400" height="66"/>
-          <text class="on-dark big en" lang="en" x="14" y="316">Your browser</text>
+          <text class="on-dark big en" lang="en" x="14" y="316">Your browser</text><text class="on-dark big zh" lang="zh-Hans" x="14" y="316">你的浏览器</text>
           <text class="on-dark big thai th" lang="th" x="14" y="316">เบราว์เซอร์ของคุณ</text>
-          <text class="on-dark en" lang="en" x="14" y="340">pixels arrive in this tab only</text>
+          <text class="on-dark en" lang="en" x="14" y="340">pixels arrive in this tab only</text><text class="on-dark zh" lang="zh-Hans" x="14" y="340">像素只到达这个标签页</text>
           <text class="on-dark thai th" lang="th" x="14" y="340">พิกเซลมาถึงแท็บนี้เท่านั้น</text>
 
           <path class="stroke" d="M200 354 V384"/><path class="stroke" d="M194 376 L200 385 L206 376"/>
 
           <rect class="fill-signal" x="0" y="388" width="400" height="82"/>
-          <text class="on-signal big en" lang="en" x="14" y="416">Lenses &amp; models</text>
+          <text class="on-signal big en" lang="en" x="14" y="416">Lenses &amp; models</text><text class="on-signal big zh" lang="zh-Hans" x="14" y="416">镜头与模型</text>
           <text class="on-signal big thai th" lang="th" x="14" y="416">เลนส์และโมเดล</text>
-          <text class="on-signal en" lang="en" x="14" y="440">computed on your device</text>
-          <text class="on-signal en" lang="en" x="14" y="458">no answer is sent back</text>
+          <text class="on-signal en" lang="en" x="14" y="440">computed on your device</text><text class="on-signal zh" lang="zh-Hans" x="14" y="440">在你的设备上计算</text>
+          <text class="on-signal en" lang="en" x="14" y="458">no answer is sent back</text><text class="on-signal zh" lang="zh-Hans" x="14" y="458">答案不会送回去</text>
           <text class="on-signal thai th" lang="th" x="14" y="442">คำนวณบนอุปกรณ์ของคุณ</text>
           <text class="on-signal thai th" lang="th" x="14" y="462">ไม่มีคำตอบใดถูกส่งกลับ</text>
         </svg>
-        <figcaption id="d1-cap"><span class="th" lang="th">กล้องสาธารณะ: วิดีโอสดวิ่งตรงจากเจ้าของมาที่เบราว์เซอร์ของคุณ ภาพนิ่งผ่านรีเลย์ของเราที่ถือภาพไว้ในหน่วยความจำเท่านั้น สิ่งที่เครื่องเห็นถูกคำนวณบนอุปกรณ์ของคุณ</span><span class="en" lang="en">A public camera: live video flows straight from its owner to your browser; stills pass through our memory-only relay. What the machine sees is computed on your device.</span></figcaption>
+        <figcaption id="d1-cap"><span class="th" lang="th">กล้องสาธารณะ: วิดีโอสดวิ่งตรงจากเจ้าของมาที่เบราว์เซอร์ของคุณ ภาพนิ่งผ่านรีเลย์ของเราที่ถือภาพไว้ในหน่วยความจำเท่านั้น สิ่งที่เครื่องเห็นถูกคำนวณบนอุปกรณ์ของคุณ</span><span class="en" lang="en">A public camera: live video flows straight from its owner to your browser; stills pass through our memory-only relay. What the machine sees is computed on your device.</span><span class="zh" lang="zh-Hans">公共摄像头：实时视频从它的所有者直接传到你的浏览器；静图经过我们只放在内存里的中继。机器看见的内容，在你的设备上计算。</span></figcaption>
       </figure>
       <div class="prose">
         <p class="th" lang="th">คอมพิวเตอร์วิทัศน์ต้องการพิกเซล และเบราว์เซอร์จะยอมให้หน้าเว็บอ่านพิกเซลจากเว็บอื่นก็ต่อเมื่อเว็บนั้นอนุญาต (CORS) เราจึงแบ่งกล้องตามสิ่งที่ทำได้จริง</p>
-        <p class="en" lang="en">Computer vision needs pixels, and a browser only lets a page read pixels from another site when that site says so (CORS). So every camera is sorted by what is actually possible:</p>
+        <p class="en" lang="en">Computer vision needs pixels, and a browser only lets a page read pixels from another site when that site says so (CORS). So every camera is sorted by what is actually possible:</p><p class="zh" lang="zh-Hans">计算机视觉需要像素。浏览器只有在对方网站允许时，才让一个页面读取另一个网站的像素（CORS）。所以每一台摄像头，都按实际做得到的方式来分：</p>
         <ul class="th" lang="th">
           <li><strong>วิดีโอสด</strong> สตรีม HLS (รูปแบบมาตรฐานในการส่งวิดีโอสดผ่านอินเทอร์เน็ต) จากโฮสต์ที่ส่ง <code>Access-Control-Allow-Origin: *</code> เบราว์เซอร์ของคุณเล่นและอ่านเฟรมเองโดยตรง เซิร์ฟเวอร์ของเราไม่ได้แตะ</li>
           <li><strong>ภาพนิ่ง</strong> JPEG ที่หน่วยงานเผยแพร่ แต่ไม่มี CORS รีเลย์ของเราดึงภาพมาไว้ในหน่วยความจำแล้วส่งต่อ ไม่เขียนลงดิสก์</li>
@@ -90,69 +91,74 @@
           <li><strong>Still</strong> — a JPEG the agency publishes without CORS. Our relay fetches it into memory and passes it along. Never written to disk.</li>
           <li><strong>View at source</strong> — the owner only offers a viewer page. We link to it; no machine here can read its pixels.</li>
           <li><strong>Offline</strong> — FloodDash's own health probe found the stream down.</li>
+        </ul><ul class="zh" lang="zh-Hans">
+          <li><strong>实时视频</strong> — HLS (the standard format for live video on the internet) from a host that sends <code>Access-Control-Allow-Origin: *</code>. Your browser plays it and reads frames itself; our server never touches it.</li>
+          <li><strong>静图</strong> — a JPEG the agency publishes without CORS. Our relay fetches it into memory and passes it along. Never written to disk.</li>
+          <li><strong>View at source</strong> — the owner only offers a viewer page. We link to it; no machine here can read its pixels.</li>
+          <li><strong>离线</strong> — FloodDash's own health probe found the stream down.</li>
         </ul>
         <p class="th" lang="th">รายชื่อกล้องมาจาก <a href="https://flood.nonarkara.org/">FloodDash</a> ซึ่งรวบรวมกล้องสาธารณะจากเจ็ดแหล่งไว้แล้ว เซิร์ฟเวอร์ของเราอ่านรายชื่อนั้นทุก 10 นาที ถ้าอ่านไม่ได้ก็ใช้ฉบับล่าสุดที่ดีอยู่ แล้วเผยแพร่ที่ <code>/api/cameras</code> รายชื่อมีแค่ชื่อ ตำแหน่ง และประเภทกล้อง ไม่มีภาพ</p>
-        <p class="en" lang="en">The list of cameras comes from <a href="https://flood.nonarkara.org/">FloodDash</a>, which already gathers public cameras from seven sources. Our server reads that list every 10 minutes — keeping the last good copy if it cannot — and publishes it at <code>/api/cameras</code>. The list holds names, places and kinds. No pictures.</p>
+        <p class="en" lang="en">The list of cameras comes from <a href="https://flood.nonarkara.org/">FloodDash</a>, which already gathers public cameras from seven sources. Our server reads that list every 10 minutes — keeping the last good copy if it cannot — and publishes it at <code>/api/cameras</code>. The list holds names, places and kinds. No pictures.</p><p class="zh" lang="zh-Hans">摄像头列表来自 <a href="https://flood.nonarkara.org/">FloodDash</a>。它已经从七个来源把公共摄像头汇集到一起。我们的服务器每 10 分钟读一次这份列表——读不到时，就保留上一份完好的副本——并把它发布在 <code>/api/cameras</code>。列表里有名称、地点和种类。没有图像。</p>
       </div>
       <figure>
         <svg class="diagram flow" viewBox="0 0 400 300" role="img" aria-labelledby="d2-cap">
           <rect class="fill-black" x="0" y="0" width="400" height="62"/>
-          <text class="on-dark big en" lang="en" x="14" y="28">Your camera or photo</text>
+          <text class="on-dark big en" lang="en" x="14" y="28">Your camera or photo</text><text class="on-dark big zh" lang="zh-Hans" x="14" y="28">你的摄像头或照片</text>
           <text class="on-dark big thai th" lang="th" x="14" y="28">กล้องหรือรูปของคุณ</text>
-          <text class="on-dark en" lang="en" x="14" y="50">opened by your browser</text>
+          <text class="on-dark en" lang="en" x="14" y="50">opened by your browser</text><text class="on-dark zh" lang="zh-Hans" x="14" y="50">由你的浏览器打开</text>
           <text class="on-dark thai th" lang="th" x="14" y="50">เปิดโดยเบราว์เซอร์ของคุณ</text>
 
           <path class="stroke" d="M110 62 V110"/><path class="stroke" d="M104 102 L110 111 L116 102"/>
 
           <rect class="fill-black" x="0" y="114" width="220" height="70"/>
-          <text class="on-dark big en" lang="en" x="14" y="142">Your browser</text>
+          <text class="on-dark big en" lang="en" x="14" y="142">Your browser</text><text class="on-dark big zh" lang="zh-Hans" x="14" y="142">你的浏览器</text>
           <text class="on-dark big thai th" lang="th" x="14" y="142">เบราว์เซอร์ของคุณ</text>
-          <text class="on-dark en" lang="en" x="14" y="166">drawn into a canvas</text>
+          <text class="on-dark en" lang="en" x="14" y="166">drawn into a canvas</text><text class="on-dark zh" lang="zh-Hans" x="14" y="166">画进一块画布</text>
           <text class="on-dark thai th" lang="th" x="14" y="166">วาดลงบนแคนวาส</text>
 
           <path class="stroke-gray dash" d="M220 149 H260"/>
           <text class="big" x="231" y="141">×</text>
           <rect class="fill-gray" x="260" y="114" width="140" height="70"/>
-          <text class="on-signal big en" lang="en" x="272" y="142">Our server</text>
+          <text class="on-signal big en" lang="en" x="272" y="142">Our server</text><text class="on-signal big zh" lang="zh-Hans" x="272" y="142">我们的服务器</text>
           <text class="on-signal big thai th" lang="th" x="272" y="142">เซิร์ฟเวอร์เรา</text>
-          <text class="on-signal en" lang="en" x="272" y="166">gets nothing</text>
+          <text class="on-signal en" lang="en" x="272" y="166">gets nothing</text><text class="on-signal zh" lang="zh-Hans" x="272" y="166">什么都得不到</text>
           <text class="on-signal thai th" lang="th" x="272" y="166">ไม่ได้รับอะไร</text>
 
           <path class="stroke" d="M110 184 V226"/><path class="stroke" d="M104 218 L110 227 L116 218"/>
 
           <rect class="fill-signal" x="0" y="230" width="400" height="70"/>
-          <text class="on-signal big en" lang="en" x="14" y="258">Lenses &amp; models</text>
+          <text class="on-signal big en" lang="en" x="14" y="258">Lenses &amp; models</text><text class="on-signal big zh" lang="zh-Hans" x="14" y="258">镜头与模型</text>
           <text class="on-signal big thai th" lang="th" x="14" y="258">เลนส์และโมเดล</text>
-          <text class="on-signal en" lang="en" x="14" y="284">what the machine sees stays here</text>
+          <text class="on-signal en" lang="en" x="14" y="284">what the machine sees stays here</text><text class="on-signal zh" lang="zh-Hans" x="14" y="284">机器看见的留在这里</text>
           <text class="on-signal thai th" lang="th" x="14" y="284">สิ่งที่เครื่องเห็นอยู่ที่นี่เท่านั้น</text>
         </svg>
-        <figcaption id="d2-cap"><span class="th" lang="th">กล้องหรือรูปของคุณ: ภาพไม่เคยออกจากอุปกรณ์ ไม่มีโค้ดส่วนไหนของเว็บนี้อัปโหลดภาพ</span><span class="en" lang="en">Your camera or photo: the picture never leaves the device. No part of this site uploads it.</span></figcaption>
+        <figcaption id="d2-cap"><span class="th" lang="th">กล้องหรือรูปของคุณ: ภาพไม่เคยออกจากอุปกรณ์ ไม่มีโค้ดส่วนไหนของเว็บนี้อัปโหลดภาพ</span><span class="en" lang="en">Your camera or photo: the picture never leaves the device. No part of this site uploads it.</span><span class="zh" lang="zh-Hans">你的摄像头或照片：图像从不离开这台设备。本站没有任何一部分会把它上传。</span></figcaption>
       </figure>
       <div class="prose">
         <p class="th" lang="th">กล้องหน้าของโทรศัพท์จะแสดงแบบกระจก เพราะคนคุ้นกับหน้าตัวเองแบบนั้น การกลับด้านทำที่ต้นทาง เลนส์และโมเดลทุกตัวจึงเห็นภาพเดียวกับที่คุณเห็น</p>
-        <p class="en" lang="en">A front camera is shown as a mirror, because that is how people expect their own face. The flip happens at the source, so every lens and model downstream sees the same picture you do.</p>
+        <p class="en" lang="en">A front camera is shown as a mirror, because that is how people expect their own face. The flip happens at the source, so every lens and model downstream sees the same picture you do.</p><p class="zh" lang="zh-Hans">前置摄像头显示成镜像，因为人们看自己的脸时，预期的就是这样。翻转发生在源头，所以后面的每一个镜头和模型，看到的图像都和你看到的一样。</p>
         <p class="th" lang="th">ข้อควรรู้ตามตรง: เมื่อคุณดูวิดีโอสด เบราว์เซอร์ของคุณเชื่อมต่อกับเซิร์ฟเวอร์ของเจ้าของกล้องโดยตรง เจ้าของจึงเห็นที่อยู่เครือข่ายของคุณ เหมือนเว็บไซต์ทั่วไปที่คุณเปิด</p>
-        <p class="en" lang="en">One honest caveat: when you watch live video, your browser connects straight to the camera owner's server, so that server sees your network address — as any website you open would.</p>
+        <p class="en" lang="en">One honest caveat: when you watch live video, your browser connects straight to the camera owner's server, so that server sees your network address — as any website you open would.</p><p class="zh" lang="zh-Hans">有一句要直说：你看实时视频时，浏览器会直接连到摄像头所有者的服务器。所以那台服务器能看到你的网络地址——你打开任何一个网站，都会这样。</p>
       </div>
     </div>
   </section>
 
   <section class="chapter sys field-quiet" id="relay" aria-labelledby="relay-h">
-    <header><span class="chapter-no">02</span><h2 id="relay-h"><span class="th" lang="th">กติกาของรีเลย์</span><span class="en" lang="en">The relay's rules</span></h2>
-      <p class="micro"><span class="th" lang="th">ที่เดียวที่เซิร์ฟเวอร์ของเราแตะภาพจากกล้อง จึงเป็นที่ที่มีกติกามากที่สุด ทุกข้อบังคับใช้ในโค้ด ไม่ใช่แค่สัญญา</span><span class="en" lang="en">The one place our server touches camera imagery, so the place with the most rules — each enforced in code, not promised in prose.</span></p></header>
+    <header><span class="chapter-no">02</span><h2 id="relay-h"><span class="th" lang="th">กติกาของรีเลย์</span><span class="en" lang="en">The relay's rules</span><span class="zh" lang="zh-Hans">中继的规则</span></h2>
+      <p class="micro"><span class="th" lang="th">ที่เดียวที่เซิร์ฟเวอร์ของเราแตะภาพจากกล้อง จึงเป็นที่ที่มีกติกามากที่สุด ทุกข้อบังคับใช้ในโค้ด ไม่ใช่แค่สัญญา</span><span class="en" lang="en">The one place our server touches camera imagery, so the place with the most rules — each enforced in code, not promised in prose.</span><span class="zh" lang="zh-Hans">这是我们的服务器会接触摄像头图像的唯一地方，所以规则也最多——每一条都在代码里执行，而不是只写在文字里。</span></p></header>
     <div class="chapter-body">
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th><span class="th" lang="th">กติกา</span><span class="en" lang="en">Rule</span></th><th><span class="th" lang="th">ค่า</span><span class="en" lang="en">Value</span></th><th><span class="th" lang="th">ทำไม</span><span class="en" lang="en">Why</span></th></tr></thead>
+          <thead><tr><th><span class="th" lang="th">กติกา</span><span class="en" lang="en">Rule</span><span class="zh" lang="zh-Hans">规则</span></th><th><span class="th" lang="th">ค่า</span><span class="en" lang="en">Value</span><span class="zh" lang="zh-Hans">值</span></th><th><span class="th" lang="th">ทำไม</span><span class="en" lang="en">Why</span><span class="zh" lang="zh-Hans">为什么</span></th></tr></thead>
           <tbody>
-            <tr><td><span class="th" lang="th">ในหน่วยความจำเท่านั้น</span><span class="en" lang="en">Memory only</span></td><td class="num"><span class="th" lang="th">30 วินาที</span><span class="en" lang="en">30 s</span></td><td><span class="th" lang="th">ภาพหนึ่งภาพอยู่ในแคชไม่เกิน 30 วินาที ให้คนสิบคนที่ดูกล้องเดียวกันทำให้เจ้าของเสียแค่คำขอเดียว แล้วก็หายไป ไม่มีอะไรเขียนลงดิสก์ ภาพที่หมดอายุถูกล้างทุก 15 วินาที</span><span class="en" lang="en">A frame stays at most 30 s, so ten visitors watching one camera cost its owner one request; then it is gone. Nothing is written to disk. Expired frames are swept every 15 s.</span></td></tr>
-            <tr><td><span class="th" lang="th">จำนวนภาพในแคช</span><span class="en" lang="en">Frames held</span></td><td class="num">240</td><td><span class="th" lang="th">สูงสุด ภาพเก่าสุดออกก่อน</span><span class="en" lang="en">At most; the oldest leaves first.</span></td></tr>
-            <tr><td><span class="th" lang="th">ไม่ใช่พร็อกซีเปิด (ตัวกลางที่ใครก็สั่งให้ดึงอะไรก็ได้)</span><span class="en" lang="en">Not an open proxy (a middle-man anyone could aim anywhere)</span></td><td>—</td><td><span class="th" lang="th">รับแค่รหัสกล้องจากรายชื่อ เซิร์ฟเวอร์เป็นคนหา URL เอง ไม่เคยสร้าง URL จากสิ่งที่ผู้ขอส่งมา และดึงได้เฉพาะโฮสต์ในรายการอนุญาตเท่านั้น: cctv.maholan.net, www.thaiclouderp.com, *.ipcamlive.com และภาพกรมทรัพยากรน้ำผ่าน FloodDash บนเครื่องเดียวกัน</span><span class="en" lang="en">Only catalogue ids are accepted; the server looks up the URL itself and never builds one from the request. Only allow-listed hosts: cctv.maholan.net, www.thaiclouderp.com, *.ipcamlive.com, and Department of Water Resources stills via FloodDash on the same machine.</span></td></tr>
-            <tr><td><span class="th" lang="th">ไม่ตาม redirect</span><span class="en" lang="en">No redirects</span></td><td>—</td><td><span class="th" lang="th">ต้นทางที่สั่งให้ไปที่อื่นถือว่าล้มเหลว จึงพาเราออกนอกรายการอนุญาตไม่ได้</span><span class="en" lang="en">An upstream that points elsewhere is treated as a failure, so it cannot lead us off the allow-list.</span></td></tr>
-            <tr><td><span class="th" lang="th">ภาพเท่านั้น</span><span class="en" lang="en">Images only</span></td><td>JPEG · PNG · WebP</td><td><span class="th" lang="th">ต้องเล็กกว่า 4 MB ใหญ่กว่า 512 ไบต์ และตอบภายใน 9 วินาที</span><span class="en" lang="en">Under 4 MB, over 512 bytes, answered within 9 s.</span></td></tr>
-            <tr><td><span class="th" lang="th">สุภาพกับต้นทาง</span><span class="en" lang="en">Polite upstream</span></td><td class="num">4 · 2</td><td><span class="th" lang="th">ดึงพร้อมกันได้ไม่เกิน 4 ภาพรวม และไม่เกิน 2 ภาพต่อโฮสต์ ที่เหลือรอคิว</span><span class="en" lang="en">At most 4 fetches in flight overall and 2 per host; the rest wait their turn.</span></td></tr>
-            <tr><td><span class="th" lang="th">เบรกเกอร์</span><span class="en" lang="en">Circuit breaker</span></td><td class="num"><span class="th" lang="th">8 ครั้ง · 3 นาที</span><span class="en" lang="en">8 fails · 3 min</span></td><td><span class="th" lang="th">โฮสต์ที่ล้มเหลวติดกัน 8 ครั้งจะถูกปล่อยให้พัก 3 นาที แทนที่จะโดนทุกคนที่เปิดหน้าเว็บรุมขอ</span><span class="en" lang="en">A host that fails 8 times in a row is left alone for 3 minutes instead of being hammered by everyone who opens the page.</span></td></tr>
-            <tr><td><span class="th" lang="th">บันทึก</span><span class="en" lang="en">Logs</span></td><td>—</td><td><span class="th" lang="th">บันทึกแค่รหัสกล้อง สถานะ และเวลาที่ใช้ ไม่มีภาพ ไม่มีว่าใครดู</span><span class="en" lang="en">Camera id, status and timing only. No pictures, and not who looked.</span></td></tr>
+            <tr><td><span class="th" lang="th">ในหน่วยความจำเท่านั้น</span><span class="en" lang="en">Memory only</span><span class="zh" lang="zh-Hans">只在内存</span></td><td class="num"><span class="th" lang="th">30 วินาที</span><span class="en" lang="en">30 s</span><span class="zh" lang="zh-Hans">30 秒</span></td><td><span class="th" lang="th">ภาพหนึ่งภาพอยู่ในแคชไม่เกิน 30 วินาที ให้คนสิบคนที่ดูกล้องเดียวกันทำให้เจ้าของเสียแค่คำขอเดียว แล้วก็หายไป ไม่มีอะไรเขียนลงดิสก์ ภาพที่หมดอายุถูกล้างทุก 15 วินาที</span><span class="en" lang="en">A frame stays at most 30 s, so ten visitors watching one camera cost its owner one request; then it is gone. Nothing is written to disk. Expired frames are swept every 15 s.</span><span class="zh" lang="zh-Hans">一帧最多留 30 秒。所以十个人看同一台摄像头，对它的所有者只产生一次请求；然后这一帧就消失。什么都不写入磁盘。过期的帧每 15 秒清一次。</span></td></tr>
+            <tr><td><span class="th" lang="th">จำนวนภาพในแคช</span><span class="en" lang="en">Frames held</span><span class="zh" lang="zh-Hans">留着的帧</span></td><td class="num">240</td><td><span class="th" lang="th">สูงสุด ภาพเก่าสุดออกก่อน</span><span class="en" lang="en">At most; the oldest leaves first.</span><span class="zh" lang="zh-Hans">最多这么多；最旧的先离开。</span></td></tr>
+            <tr><td><span class="th" lang="th">ไม่ใช่พร็อกซีเปิด (ตัวกลางที่ใครก็สั่งให้ดึงอะไรก็ได้)</span><span class="en" lang="en">Not an open proxy (a middle-man anyone could aim anywhere)</span><span class="zh" lang="zh-Hans">不是开放代理（一个任何人都能指向任何地方的中间人）</span></td><td>—</td><td><span class="th" lang="th">รับแค่รหัสกล้องจากรายชื่อ เซิร์ฟเวอร์เป็นคนหา URL เอง ไม่เคยสร้าง URL จากสิ่งที่ผู้ขอส่งมา และดึงได้เฉพาะโฮสต์ในรายการอนุญาตเท่านั้น: cctv.maholan.net, www.thaiclouderp.com, *.ipcamlive.com และภาพกรมทรัพยากรน้ำผ่าน FloodDash บนเครื่องเดียวกัน</span><span class="en" lang="en">Only catalogue ids are accepted; the server looks up the URL itself and never builds one from the request. Only allow-listed hosts: cctv.maholan.net, www.thaiclouderp.com, *.ipcamlive.com, and Department of Water Resources stills via FloodDash on the same machine.</span><span class="zh" lang="zh-Hans">只接受目录里的 id。服务器自己去查 URL，从不照着请求拼出一个。只允许这些主机：cctv.maholan.net、www.thaiclouderp.com、*.ipcamlive.com，以及同一台机器上、经 FloodDash 传来的水资源厅静图。</span></td></tr>
+            <tr><td><span class="th" lang="th">ไม่ตาม redirect</span><span class="en" lang="en">No redirects</span><span class="zh" lang="zh-Hans">不跟随重定向</span></td><td>—</td><td><span class="th" lang="th">ต้นทางที่สั่งให้ไปที่อื่นถือว่าล้มเหลว จึงพาเราออกนอกรายการอนุญาตไม่ได้</span><span class="en" lang="en">An upstream that points elsewhere is treated as a failure, so it cannot lead us off the allow-list.</span><span class="zh" lang="zh-Hans">指到别处的上游，会被当成一次失败。这样它就不能把我们带出允许名单。</span></td></tr>
+            <tr><td><span class="th" lang="th">ภาพเท่านั้น</span><span class="en" lang="en">Images only</span><span class="zh" lang="zh-Hans">只接受图像</span></td><td>JPEG · PNG · WebP</td><td><span class="th" lang="th">ต้องเล็กกว่า 4 MB ใหญ่กว่า 512 ไบต์ และตอบภายใน 9 วินาที</span><span class="en" lang="en">Under 4 MB, over 512 bytes, answered within 9 s.</span><span class="zh" lang="zh-Hans">小于 4 MB，大于 512 字节，并且在 9 秒内应答。</span></td></tr>
+            <tr><td><span class="th" lang="th">สุภาพกับต้นทาง</span><span class="en" lang="en">Polite upstream</span><span class="zh" lang="zh-Hans">有节制地访问上游</span></td><td class="num">4 · 2</td><td><span class="th" lang="th">ดึงพร้อมกันได้ไม่เกิน 4 ภาพรวม และไม่เกิน 2 ภาพต่อโฮสต์ ที่เหลือรอคิว</span><span class="en" lang="en">At most 4 fetches in flight overall and 2 per host; the rest wait their turn.</span><span class="zh" lang="zh-Hans">正在进行的获取，总共最多 4 个，每台主机最多 2 个；其余的排队等。</span></td></tr>
+            <tr><td><span class="th" lang="th">เบรกเกอร์</span><span class="en" lang="en">Circuit breaker</span><span class="zh" lang="zh-Hans">失败后先停下</span></td><td class="num"><span class="th" lang="th">8 ครั้ง · 3 นาที</span><span class="en" lang="en">8 fails · 3 min</span><span class="zh" lang="zh-Hans">失败 8 次 · 3 分钟</span></td><td><span class="th" lang="th">โฮสต์ที่ล้มเหลวติดกัน 8 ครั้งจะถูกปล่อยให้พัก 3 นาที แทนที่จะโดนทุกคนที่เปิดหน้าเว็บรุมขอ</span><span class="en" lang="en">A host that fails 8 times in a row is left alone for 3 minutes instead of being hammered by everyone who opens the page.</span><span class="zh" lang="zh-Hans">一台主机如果连续失败 8 次，就先放着它 3 分钟，而不是让每一个打开页面的人反复去请求它。</span></td></tr>
+            <tr><td><span class="th" lang="th">บันทึก</span><span class="en" lang="en">Logs</span><span class="zh" lang="zh-Hans">日志</span></td><td>—</td><td><span class="th" lang="th">บันทึกแค่รหัสกล้อง สถานะ และเวลาที่ใช้ ไม่มีภาพ ไม่มีว่าใครดู</span><span class="en" lang="en">Camera id, status and timing only. No pictures, and not who looked.</span><span class="zh" lang="zh-Hans">只记摄像头 id、状态和用时。没有图像，也不记是谁在看。</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -160,44 +166,44 @@
   </section>
 
   <section class="chapter sys" id="limits" aria-labelledby="limits-h">
-    <header><span class="chapter-no">03</span><h2 id="limits-h"><span class="th" lang="th">ขีดจำกัดและเฮดเดอร์</span><span class="en" lang="en">Limits and headers</span></h2></header>
+    <header><span class="chapter-no">03</span><h2 id="limits-h"><span class="th" lang="th">ขีดจำกัดและเฮดเดอร์</span><span class="en" lang="en">Limits and headers</span><span class="zh" lang="zh-Hans">限制与标头</span></h2></header>
     <div class="chapter-body split">
       <div class="prose">
-        <h3><span class="th" lang="th">อัตราการขอ</span><span class="en" lang="en">Rate limits</span></h3>
+        <h3><span class="th" lang="th">อัตราการขอ</span><span class="en" lang="en">Rate limits</span><span class="zh" lang="zh-Hans">速率限制</span></h3>
         <p class="th" lang="th">ภาพนิ่ง: 150 ภาพต่อนาทีต่อผู้เยี่ยมชม ขอติดกันได้สูงสุด 60 ภาพ เกินนั้นได้คำตอบ 429 พร้อมขอให้รอ 20 วินาที เพราะกล้องเป็นของคนอื่น รายชื่อกล้อง: 60 ครั้งต่อนาที ติดกันได้ 20 ครั้ง ตัวนับใช้ที่อยู่เครือข่ายของคุณเป็นกุญแจ อยู่ในหน่วยความจำเท่านั้น และไม่ถูกเขียนลงบันทึก</p>
-        <p class="en" lang="en">Stills: 150 a minute per visitor, in bursts of up to 60; beyond that the answer is 429 and a request to wait 20 seconds, because the cameras belong to other people. The camera list: 60 a minute, bursts of 20. The counters are keyed by your network address, held in memory only, and never written to the logs.</p>
-        <h3><span class="th" lang="th">ทางผ่าน</span><span class="en" lang="en">The way in</span></h3>
+        <p class="en" lang="en">Stills: 150 a minute per visitor, in bursts of up to 60; beyond that the answer is 429 and a request to wait 20 seconds, because the cameras belong to other people. The camera list: 60 a minute, bursts of 20. The counters are keyed by your network address, held in memory only, and never written to the logs.</p><p class="zh" lang="zh-Hans">静图：每位访客每分钟 150 次，短时间里最多连着 60 次；超出之后，回答是 429，并请等待 20 秒，因为这些摄像头属于别人。摄像头列表：每分钟 60 次，短时间里最多 20 次。计数器用你的网络地址来区分，只放在内存里，从不写入日志。</p>
+        <h3><span class="th" lang="th">ทางผ่าน</span><span class="en" lang="en">The way in</span><span class="zh" lang="zh-Hans">入口</span></h3>
         <p class="th" lang="th">เว็บนี้ให้บริการผ่านอุโมงค์ของ Cloudflare ซึ่งจัดการการเชื่อมต่อของคุณเหมือนผู้ให้บริการเครือข่ายทั่วไป</p>
-        <p class="en" lang="en">The site is served through a Cloudflare tunnel, which handles your connection as any network carrier would.</p>
+        <p class="en" lang="en">The site is served through a Cloudflare tunnel, which handles your connection as any network carrier would.</p><p class="zh" lang="zh-Hans">本站通过一条 Cloudflare 隧道来提供。它像任何网络运营商一样，处理你的连接。</p>
       </div>
       <div class="prose">
-        <h3><span class="th" lang="th">นโยบายความปลอดภัยของเนื้อหา</span><span class="en" lang="en">Content Security Policy</span></h3>
+        <h3><span class="th" lang="th">นโยบายความปลอดภัยของเนื้อหา</span><span class="en" lang="en">Content Security Policy</span><span class="zh" lang="zh-Hans">内容安全策略</span></h3>
         <p class="th" lang="th">สคริปต์ สไตล์ ฟอนต์ และโมเดลทั้งหมดมาจากเว็บนี้เอง ไม่มีโค้ดที่ซ่อนอยู่ในตัวหน้าเอง (สคริปต์ในบรรทัด) ไม่มีการสั่งรันโค้ดที่แนบมากับคำขอ (eval) และไม่มีหน้าเว็บอื่นถูกฝังอยู่ในหน้านี้ (iframe) การเชื่อมต่อออกไปข้างนอกที่หน้าเว็บทำได้มีแค่วิดีโอจากโฮสต์ที่รายชื่อเรียกว่า “วิดีโอสด”</p>
-        <p class="en" lang="en">Every script, style, font and model is served from here. No code hidden inside the page itself (inline scripts), no running code sent in with a request (eval), and no other web page embedded inside this one (iframes). The only third-party traffic a page may make is camera video, and only to the hosts the catalogue calls “video”.</p>
+        <p class="en" lang="en">Every script, style, font and model is served from here. No code hidden inside the page itself (inline scripts), no running code sent in with a request (eval), and no other web page embedded inside this one (iframes). The only third-party traffic a page may make is camera video, and only to the hosts the catalogue calls “video”.</p><p class="zh" lang="zh-Hans">每一个脚本、样式、字体和模型，都从这里提供。页面里面不藏代码（内联脚本），请求里不夹带要运行的代码（eval），也不把别的网页嵌进这一页（iframe）。一个页面可以发往第三方的，只有摄像头视频，而且只发往目录里称作“video”的那些主机。</p>
         <ul>
           <li><code>script-src 'self'</code> · <code>style-src 'self'</code> · <code>font-src 'self'</code></li>
-          <li><code>media-src</code> · <code>connect-src</code>: <span class="th" lang="th">เว็บนี้ และ</span><span class="en" lang="en">this site, plus</span> camerai1.iticfoundation.org, camera1.iticfoundation.org, *.ipcamlive.com</li>
+          <li><code>media-src</code> · <code>connect-src</code>: <span class="th" lang="th">เว็บนี้ และ</span><span class="en" lang="en">this site, plus</span><span class="zh" lang="zh-Hans">本站，以及</span> camerai1.iticfoundation.org, camera1.iticfoundation.org, *.ipcamlive.com</li>
           <li><code>frame-src 'none'</code> · <code>object-src 'none'</code> · <code>frame-ancestors 'none'</code></li>
-          <li><code>Permissions-Policy: camera=(self), microphone=(), geolocation=()</code> <span class="th" lang="th">กล้องเปิดได้เฉพาะหน้าของเราและเมื่อคุณอนุญาต ไมโครโฟนและตำแหน่งปิดตาย</span><span class="en" lang="en">— the camera only for our own pages and only when you allow it; microphone and location are switched off entirely.</span></li>
+          <li><code>Permissions-Policy: camera=(self), microphone=(), geolocation=()</code> <span class="th" lang="th">กล้องเปิดได้เฉพาะหน้าของเราและเมื่อคุณอนุญาต ไมโครโฟนและตำแหน่งปิดตาย</span><span class="en" lang="en">— the camera only for our own pages and only when you allow it; microphone and location are switched off entirely.</span><span class="zh" lang="zh-Hans">— 摄像头只用于我们自己的页面，而且只在你允许的时候；麦克风和位置被完全关掉。</span></li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="chapter sys field-quiet" id="cache" aria-labelledby="cache-h">
-    <header><span class="chapter-no">04</span><h2 id="cache-h"><span class="th" lang="th">อะไรถูกเก็บไว้ที่ไหน</span><span class="en" lang="en">What is cached, where</span></h2></header>
+    <header><span class="chapter-no">04</span><h2 id="cache-h"><span class="th" lang="th">อะไรถูกเก็บไว้ที่ไหน</span><span class="en" lang="en">What is cached, where</span><span class="zh" lang="zh-Hans">缓存了什么，缓存在哪里</span></h2></header>
     <div class="chapter-body">
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th><span class="th" lang="th">อะไร</span><span class="en" lang="en">What</span></th><th><span class="th" lang="th">นานแค่ไหน</span><span class="en" lang="en">How long</span></th><th><span class="th" lang="th">หมายเหตุ</span><span class="en" lang="en">Note</span></th></tr></thead>
+          <thead><tr><th><span class="th" lang="th">อะไร</span><span class="en" lang="en">What</span><span class="zh" lang="zh-Hans">什么</span></th><th><span class="th" lang="th">นานแค่ไหน</span><span class="en" lang="en">How long</span><span class="zh" lang="zh-Hans">多久</span></th><th><span class="th" lang="th">หมายเหตุ</span><span class="en" lang="en">Note</span><span class="zh" lang="zh-Hans">说明</span></th></tr></thead>
           <tbody>
-            <tr><td><span class="th" lang="th">โมเดล ฟอนต์ ไลบรารี</span><span class="en" lang="en">Models, fonts, libraries</span></td><td><span class="th" lang="th">1 ปี</span><span class="en" lang="en">1 year</span></td><td><span class="th" lang="th">ไม่เปลี่ยนภายใต้ที่อยู่เดิม รุ่นใหม่ได้โฟลเดอร์ใหม่ ดาวน์โหลดครั้งแรกครั้งเดียว</span><span class="en" lang="en">Never change under the same path; a new version gets a new folder. Downloaded once.</span></td></tr>
-            <tr><td><span class="th" lang="th">รูปและข้อมูลประกอบ</span><span class="en" lang="en">Images, data files</span></td><td><span class="th" lang="th">1 ชั่วโมง</span><span class="en" lang="en">1 hour</span></td><td>—</td></tr>
-            <tr><td><span class="th" lang="th">หน้าเว็บ JS และ CSS ของเรา</span><span class="en" lang="en">Our pages, JS and CSS</span></td><td><span class="th" lang="th">ตรวจทุกครั้ง</span><span class="en" lang="en">Revalidated every load</span></td><td><span class="th" lang="th">ถ้าไม่เปลี่ยน ตอบสั้น ๆ ว่า 304</span><span class="en" lang="en">A cheap 304 when unchanged.</span></td></tr>
-            <tr><td><span class="th" lang="th">รายชื่อกล้อง</span><span class="en" lang="en">Camera list</span></td><td><span class="th" lang="th">60 วินาที</span><span class="en" lang="en">60 s</span></td><td><span class="th" lang="th">เหมือนกันสำหรับทุกคน</span><span class="en" lang="en">The same for everyone.</span></td></tr>
-            <tr><td><span class="th" lang="th">ภาพนิ่งจากรีเลย์</span><span class="en" lang="en">Relayed still</span></td><td><span class="th" lang="th">20 วินาที ในเบราว์เซอร์คุณ · 30 วินาที ในหน่วยความจำเซิร์ฟเวอร์</span><span class="en" lang="en">20 s in your browser · 30 s in server memory</span></td><td><span class="th" lang="th">“private” แคชที่ใช้ร่วมกันห้ามเก็บ</span><span class="en" lang="en">Marked private: shared caches may not keep it.</span></td></tr>
-            <tr><td><span class="th" lang="th">ภาษาที่คุณเลือก และคะแนนสูงสุดในเกม</span><span class="en" lang="en">Your language choice and best game scores</span></td><td><span class="th" lang="th">จนกว่าคุณจะลบ</span><span class="en" lang="en">Until you clear it</span></td><td><span class="th" lang="th">localStorage ในเบราว์เซอร์คุณ ไม่มีคุกกี้</span><span class="en" lang="en">localStorage in your browser. No cookies.</span></td></tr>
-            <tr><td><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณ</span><span class="en" lang="en">Your camera or photo</span></td><td><span class="th" lang="th">ไม่เก็บเลย</span><span class="en" lang="en">Never kept</span></td><td><span class="th" lang="th">อยู่ในแท็บระหว่างที่เปิด ปิดแท็บก็หายไป</span><span class="en" lang="en">Lives in the tab while open; gone when you close it.</span></td></tr>
+            <tr><td><span class="th" lang="th">โมเดล ฟอนต์ ไลบรารี</span><span class="en" lang="en">Models, fonts, libraries</span><span class="zh" lang="zh-Hans">模型、字体、库</span></td><td><span class="th" lang="th">1 ปี</span><span class="en" lang="en">1 year</span><span class="zh" lang="zh-Hans">1 年</span></td><td><span class="th" lang="th">ไม่เปลี่ยนภายใต้ที่อยู่เดิม รุ่นใหม่ได้โฟลเดอร์ใหม่ ดาวน์โหลดครั้งแรกครั้งเดียว</span><span class="en" lang="en">Never change under the same path; a new version gets a new folder. Downloaded once.</span><span class="zh" lang="zh-Hans">同一条路径下不会改变；新版本用一个新文件夹。只下载一次。</span></td></tr>
+            <tr><td><span class="th" lang="th">รูปและข้อมูลประกอบ</span><span class="en" lang="en">Images, data files</span><span class="zh" lang="zh-Hans">图像、数据文件</span></td><td><span class="th" lang="th">1 ชั่วโมง</span><span class="en" lang="en">1 hour</span><span class="zh" lang="zh-Hans">1 小时</span></td><td>—</td></tr>
+            <tr><td><span class="th" lang="th">หน้าเว็บ JS และ CSS ของเรา</span><span class="en" lang="en">Our pages, JS and CSS</span><span class="zh" lang="zh-Hans">我们的页面、JS 和 CSS</span></td><td><span class="th" lang="th">ตรวจทุกครั้ง</span><span class="en" lang="en">Revalidated every load</span><span class="zh" lang="zh-Hans">每次加载都重新核对</span></td><td><span class="th" lang="th">ถ้าไม่เปลี่ยน ตอบสั้น ๆ ว่า 304</span><span class="en" lang="en">A cheap 304 when unchanged.</span><span class="zh" lang="zh-Hans">没有改动时，返回一个开销很小的 304。</span></td></tr>
+            <tr><td><span class="th" lang="th">รายชื่อกล้อง</span><span class="en" lang="en">Camera list</span><span class="zh" lang="zh-Hans">摄像头列表</span></td><td><span class="th" lang="th">60 วินาที</span><span class="en" lang="en">60 s</span><span class="zh" lang="zh-Hans">60 秒</span></td><td><span class="th" lang="th">เหมือนกันสำหรับทุกคน</span><span class="en" lang="en">The same for everyone.</span><span class="zh" lang="zh-Hans">对每个人都一样。</span></td></tr>
+            <tr><td><span class="th" lang="th">ภาพนิ่งจากรีเลย์</span><span class="en" lang="en">Relayed still</span><span class="zh" lang="zh-Hans">中继过来的静图</span></td><td><span class="th" lang="th">20 วินาที ในเบราว์เซอร์คุณ · 30 วินาที ในหน่วยความจำเซิร์ฟเวอร์</span><span class="en" lang="en">20 s in your browser · 30 s in server memory</span><span class="zh" lang="zh-Hans">在你的浏览器里 20 秒 · 在服务器内存里 30 秒</span></td><td><span class="th" lang="th">“private” แคชที่ใช้ร่วมกันห้ามเก็บ</span><span class="en" lang="en">Marked private: shared caches may not keep it.</span><span class="zh" lang="zh-Hans">标为私有：共享缓存不可以留下它。</span></td></tr>
+            <tr><td><span class="th" lang="th">ภาษาที่คุณเลือก และคะแนนสูงสุดในเกม</span><span class="en" lang="en">Your language choice and best game scores</span><span class="zh" lang="zh-Hans">你的语言选择，以及游戏里的最高分</span></td><td><span class="th" lang="th">จนกว่าคุณจะลบ</span><span class="en" lang="en">Until you clear it</span><span class="zh" lang="zh-Hans">直到你把它清掉</span></td><td><span class="th" lang="th">localStorage ในเบราว์เซอร์คุณ ไม่มีคุกกี้</span><span class="en" lang="en">localStorage in your browser. No cookies.</span><span class="zh" lang="zh-Hans">在你浏览器里的 localStorage。没有 cookie。</span></td></tr>
+            <tr><td><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณ</span><span class="en" lang="en">Your camera or photo</span><span class="zh" lang="zh-Hans">你的摄像头或照片</span></td><td><span class="th" lang="th">ไม่เก็บเลย</span><span class="en" lang="en">Never kept</span><span class="zh" lang="zh-Hans">从不保留</span></td><td><span class="th" lang="th">อยู่ในแท็บระหว่างที่เปิด ปิดแท็บก็หายไป</span><span class="en" lang="en">Lives in the tab while open; gone when you close it.</span><span class="zh" lang="zh-Hans">标签页开着时，它留在里面；关掉标签页，它就消失。</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -205,34 +211,34 @@
   </section>
 
   <section class="chapter sys" id="models" aria-labelledby="models-h">
-    <header><span class="chapter-no">05</span><h2 id="models-h"><span class="th" lang="th">โมเดลมาจากไหน</span><span class="en" lang="en">Where the models come from</span></h2></header>
+    <header><span class="chapter-no">05</span><h2 id="models-h"><span class="th" lang="th">โมเดลมาจากไหน</span><span class="en" lang="en">Where the models come from</span><span class="zh" lang="zh-Hans">模型从哪里来</span></h2></header>
     <div class="chapter-body">
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th><span class="th" lang="th">โมเดล</span><span class="en" lang="en">Model</span></th><th><span class="th" lang="th">ทำอะไร</span><span class="en" lang="en">Does</span></th><th><span class="th" lang="th">ฝึกจาก</span><span class="en" lang="en">Trained on</span></th><th class="num"><span class="th" lang="th">ขนาด</span><span class="en" lang="en">Size</span></th><th><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Source</span></th></tr></thead>
+          <thead><tr><th><span class="th" lang="th">โมเดล</span><span class="en" lang="en">Model</span><span class="zh" lang="zh-Hans">模型</span></th><th><span class="th" lang="th">ทำอะไร</span><span class="en" lang="en">Does</span><span class="zh" lang="zh-Hans">做什么</span></th><th><span class="th" lang="th">ฝึกจาก</span><span class="en" lang="en">Trained on</span><span class="zh" lang="zh-Hans">训练数据</span></th><th class="num"><span class="th" lang="th">ขนาด</span><span class="en" lang="en">Size</span><span class="zh" lang="zh-Hans">大小</span></th><th><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Source</span><span class="zh" lang="zh-Hans">来源</span></th></tr></thead>
           <tbody>
-            <tr><td>SSDLite MobileNetV2</td><td><span class="th" lang="th">ตรวจจับวัตถุ: กรอบ ประเภท ความมั่นใจ</span><span class="en" lang="en">Object detection: box, class, confidence</span></td><td><span class="th" lang="th">COCO, 80 ประเภท</span><span class="en" lang="en">COCO, 80 categories</span></td><td class="num">18.0 MB</td><td><span class="th" lang="th">คลังโมเดล TensorFlow.js, Apache-2.0</span><span class="en" lang="en">TensorFlow.js model zoo, Apache-2.0</span></td></tr>
-            <tr><td>MobileNetV2 1.0 · 224</td><td><span class="th" lang="th">ลายนิ้วมือ 1,280 ตัวเลข และการเดา ImageNet</span><span class="en" lang="en">A 1,280-number fingerprint, and ImageNet guesses</span></td><td><span class="th" lang="th">ImageNet, 1,000 หมวด</span><span class="en" lang="en">ImageNet, 1,000 classes</span></td><td class="num">14.0 MB</td><td><span class="th" lang="th">คลังโมเดล TensorFlow.js, Apache-2.0</span><span class="en" lang="en">TensorFlow.js model zoo, Apache-2.0</span></td></tr>
+            <tr><td>SSDLite MobileNetV2</td><td><span class="th" lang="th">ตรวจจับวัตถุ: กรอบ ประเภท ความมั่นใจ</span><span class="en" lang="en">Object detection: box, class, confidence</span><span class="zh" lang="zh-Hans">物体检测：框、类别、置信度</span></td><td><span class="th" lang="th">COCO, 80 ประเภท</span><span class="en" lang="en">COCO, 80 categories</span><span class="zh" lang="zh-Hans">COCO，80 个类别</span></td><td class="num">18.0 MB</td><td><span class="th" lang="th">คลังโมเดล TensorFlow.js, Apache-2.0</span><span class="en" lang="en">TensorFlow.js model zoo, Apache-2.0</span><span class="zh" lang="zh-Hans">TensorFlow.js model zoo，Apache-2.0</span></td></tr>
+            <tr><td>MobileNetV2 1.0 · 224</td><td><span class="th" lang="th">ลายนิ้วมือ 1,280 ตัวเลข และการเดา ImageNet</span><span class="en" lang="en">A 1,280-number fingerprint, and ImageNet guesses</span><span class="zh" lang="zh-Hans">一条有 1,280 个数字的指纹，以及 ImageNet 的猜测</span></td><td><span class="th" lang="th">ImageNet, 1,000 หมวด</span><span class="en" lang="en">ImageNet, 1,000 classes</span><span class="zh" lang="zh-Hans">ImageNet，1,000 个类别</span></td><td class="num">14.0 MB</td><td><span class="th" lang="th">คลังโมเดล TensorFlow.js, Apache-2.0</span><span class="en" lang="en">TensorFlow.js model zoo, Apache-2.0</span><span class="zh" lang="zh-Hans">TensorFlow.js model zoo，Apache-2.0</span></td></tr>
           </tbody>
         </table>
       </div>
       <div class="prose">
         <p class="th" lang="th">น้ำหนักของโมเดลเก็บไว้บนเว็บนี้เองใต้ <code>/models</code> ไม่โหลดจากที่อื่น และจะโหลดก็ต่อเมื่อคุณกดปุ่มหรือเลื่อนมาถึงเครื่องมือที่ต้องใช้ ไลบรารี TensorFlow.js 4.22.0 (1.4 MB) คำนวณบนชิปกราฟิกผ่าน WebGL (วิธีที่เบราว์เซอร์ใช้การ์ดจอ) ถ้าไม่ได้ก็ใช้ CPU หลังการตรวจจับ กล่องสองกล่องอาจครอบทับสิ่งเดียวกัน ขั้นตอนที่เก็บเฉพาะกล่องที่ดีกว่าจึงเขียนใหม่ตาม <code>@tensorflow-models/coco-ssd</code> 2.2.3 (Apache-2.0) เพื่อให้มันทำงานบนชิปกราฟิกด้วย ชื่อหมวดของ ImageNet แสดงเป็นภาษาอังกฤษเท่านั้น เราเลือกแสดงตามจริงมากกว่าแปลด้วยเครื่องพันคำ งานวิจัยเบื้องหลังอยู่ที่<a href="/research#here">หน้างานวิจัย</a></p>
-        <p class="en" lang="en">The weights are hosted here under <code>/models</code>, never fetched from elsewhere, and load only when you press a button or scroll to a bench that needs them. TensorFlow.js 4.22.0 (1.4 MB) does the arithmetic on your graphics chip through WebGL (the browser’s way of using a graphics chip), or on the CPU if it must. After a detection, two boxes can cover the same thing; the step that keeps only the better one is rewritten from <code>@tensorflow-models/coco-ssd</code> 2.2.3 (Apache-2.0) so it, too, runs on the graphics chip. ImageNet's class names are shown in English only: we would rather say so than machine-translate a thousand nouns. The papers behind them are on <a href="/research#here">the research page</a>.</p>
+        <p class="en" lang="en">The weights are hosted here under <code>/models</code>, never fetched from elsewhere, and load only when you press a button or scroll to a bench that needs them. TensorFlow.js 4.22.0 (1.4 MB) does the arithmetic on your graphics chip through WebGL (the browser’s way of using a graphics chip), or on the CPU if it must. After a detection, two boxes can cover the same thing; the step that keeps only the better one is rewritten from <code>@tensorflow-models/coco-ssd</code> 2.2.3 (Apache-2.0) so it, too, runs on the graphics chip. ImageNet's class names are shown in English only: we would rather say so than machine-translate a thousand nouns. The papers behind them are on <a href="/research#here">the research page</a>.</p><p class="zh" lang="zh-Hans">权重放在这里的 <code>/models</code> 下面，从不从别处去取，并且只在你按下按钮，或滚到需要它们的实验台时，才加载。TensorFlow.js 4.22.0（1.4 MB）通过 WebGL（浏览器使用图形芯片的方式）在你的图形芯片上做运算；必须的话，就在 CPU 上做。一次检测之后，两个框可能盖住同一件东西；只留下较好那个框的这一步，改写自 <code>@tensorflow-models/coco-ssd</code> 2.2.3（Apache-2.0），所以这一步也在图形芯片上运行。ImageNet 的类别名称只显示英文：我们宁可这样说明，也不用机器去翻译一千个名词。它们背后的论文在<a href="/research#here">研究页面</a>。</p>
       </div>
     </div>
   </section>
 
   <section class="chapter sys field-ink" id="status" aria-labelledby="status-h">
-    <header><span class="chapter-no">06</span><h2 id="status-h"><span class="th" lang="th">สถานะตอนนี้</span><span class="en" lang="en">Live status</span></h2>
-      <p class="micro"><span class="th" lang="th">อ่านจาก <code>/api/health</code> และ <code>/api/cameras</code> ขณะที่คุณเปิดหน้านี้</span><span class="en" lang="en">Read from <code>/api/health</code> and <code>/api/cameras</code> as you open this page.</span></p></header>
+    <header><span class="chapter-no">06</span><h2 id="status-h"><span class="th" lang="th">สถานะตอนนี้</span><span class="en" lang="en">Live status</span><span class="zh" lang="zh-Hans">实时状态</span></h2>
+      <p class="micro"><span class="th" lang="th">อ่านจาก <code>/api/health</code> และ <code>/api/cameras</code> ขณะที่คุณเปิดหน้านี้</span><span class="en" lang="en">Read from <code>/api/health</code> and <code>/api/cameras</code> as you open this page.</span><span class="zh" lang="zh-Hans">你打开本页时，从 <code>/api/health</code> 和 <code>/api/cameras</code> 读取。</span></p></header>
     <div class="chapter-body">
       <div class="status-figures" data-figures>
-        <div class="figure"><span class="n" data-k="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ</span><span class="en" lang="en">cameras listed</span></span></div>
-        <div class="figure"><span class="n" data-k="video">—</span><span class="micro"><span class="th" lang="th">วิดีโอสด</span><span class="en" lang="en">live video</span></span></div>
-        <div class="figure"><span class="n" data-k="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่งผ่านรีเลย์</span><span class="en" lang="en">relayed stills</span></span></div>
-        <div class="figure"><span class="n" data-k="view">—</span><span class="micro"><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">view at source</span></span></div>
-        <div class="figure"><span class="n" data-k="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">offline</span></span></div>
+        <div class="figure"><span class="n" data-k="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ</span><span class="en" lang="en">cameras listed</span><span class="zh" lang="zh-Hans">列出的摄像头</span></span></div>
+        <div class="figure"><span class="n" data-k="video">—</span><span class="micro"><span class="th" lang="th">วิดีโอสด</span><span class="en" lang="en">live video</span><span class="zh" lang="zh-Hans">实时视频</span></span></div>
+        <div class="figure"><span class="n" data-k="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่งผ่านรีเลย์</span><span class="en" lang="en">relayed stills</span><span class="zh" lang="zh-Hans">中继的静图</span></span></div>
+        <div class="figure"><span class="n" data-k="view">—</span><span class="micro"><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">view at source</span><span class="zh" lang="zh-Hans">在来源处查看</span></span></div>
+        <div class="figure"><span class="n" data-k="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">offline</span><span class="zh" lang="zh-Hans">离线</span></span></div>
       </div>
       <div class="table-wrap">
         <table class="table">
@@ -241,55 +247,55 @@
       </div>
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span></th><th class="num"><span class="th" lang="th">ในรายชื่อ</span><span class="en" lang="en">Listed</span></th><th class="num"><span class="th" lang="th">วิดีโอ</span><span class="en" lang="en">Video</span></th><th class="num"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">Still</span></th><th class="num"><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">View</span></th><th class="num"><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">Off</span></th></tr></thead>
+          <thead><tr><th><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span><span class="zh" lang="zh-Hans">来源</span></th><th class="num"><span class="th" lang="th">ในรายชื่อ</span><span class="en" lang="en">Listed</span><span class="zh" lang="zh-Hans">已列出</span></th><th class="num"><span class="th" lang="th">วิดีโอ</span><span class="en" lang="en">Video</span><span class="zh" lang="zh-Hans">视频</span></th><th class="num"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">Still</span><span class="zh" lang="zh-Hans">静图</span></th><th class="num"><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">View</span><span class="zh" lang="zh-Hans">查看</span></th><th class="num"><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">Off</span><span class="zh" lang="zh-Hans">离线</span></th></tr></thead>
           <tbody data-sources><tr><td colspan="6">…</td></tr></tbody>
         </table>
       </div>
       <div class="controls status-controls">
-        <button class="btn" type="button" data-refresh>↻ <span class="th" lang="th">อ่านสถานะใหม่</span><span class="en" lang="en">Read again</span></button>
+        <button class="btn" type="button" data-refresh>↻ <span class="th" lang="th">อ่านสถานะใหม่</span><span class="en" lang="en">Read again</span><span class="zh" lang="zh-Hans">再读一次</span></button>
         <span class="micro status-at" data-at aria-live="polite"></span>
       </div>
     </div>
   </section>
 
   <section class="chapter sys" id="not-built" aria-labelledby="not-built-h">
-    <header><span class="chapter-no">07</span><h2 id="not-built-h"><span class="th" lang="th">สิ่งที่เราตั้งใจไม่สร้าง</span><span class="en" lang="en">What we chose not to build</span></h2></header>
+    <header><span class="chapter-no">07</span><h2 id="not-built-h"><span class="th" lang="th">สิ่งที่เราตั้งใจไม่สร้าง</span><span class="en" lang="en">What we chose not to build</span><span class="zh" lang="zh-Hans">我们选择不建造什么</span></h2></header>
     <div class="chapter-body">
       <ol class="refusals">
-        <li><strong><span class="th" lang="th">การจดจำใบหน้า</span><span class="en" lang="en">Face recognition</span></strong><span class="th" lang="th">ระบบนับได้ว่ามี “คน” อยู่ แต่ไม่มีโค้ดส่วนไหนพยายามบอกว่าคนนั้นเป็นใคร เครื่องมือที่ตามหาคนคนหนึ่งข้ามกล้องสาธารณะนับพันตัว ไม่ควรมีไว้ให้ใครก็ได้ใช้</span><span class="en" lang="en">It can count that a “person” is there. No code here tries to say who. A tool that finds one person across thousands of public cameras should not be available to anyone who opens a page.</span></li>
-        <li><strong><span class="th" lang="th">การอ่านป้ายทะเบียน</span><span class="en" lang="en">Number-plate reading</span></strong><span class="th" lang="th">ป้ายทะเบียนพาไปถึงตัวเจ้าของรถ เรานับรถได้โดยไม่ต้องรู้ว่าเป็นคันไหน</span><span class="en" lang="en">A plate leads to a person. We can count cars without knowing which car is which.</span></li>
-        <li><strong><span class="th" lang="th">การเก็บภาพ</span><span class="en" lang="en">Storing imagery</span></strong><span class="th" lang="th">ไม่มีคลังภาพ ไม่มีย้อนหลัง ไม่มีชุดข้อมูลที่แอบสะสมไว้ ภาพนิ่งอยู่ในหน่วยความจำ 30 วินาทีแล้วหายไป</span><span class="en" lang="en">No archive, no history, no dataset quietly accumulating. A still lives 30 s in memory and is gone.</span></li>
-        <li><strong><span class="th" lang="th">บัญชีผู้ใช้</span><span class="en" lang="en">Accounts</span></strong><span class="th" lang="th">ไม่ต้องสมัคร ไม่ต้องเข้าสู่ระบบ ไม่มีรหัสผ่านให้รั่ว</span><span class="en" lang="en">Nothing to sign up for, nothing to log in to, no passwords to leak.</span></li>
-        <li><strong><span class="th" lang="th">การวิเคราะห์และติดตามผู้ใช้</span><span class="en" lang="en">Analytics and tracking</span></strong><span class="th" lang="th">ไม่มีสคริปต์ของบุคคลที่สาม ไม่มีโฆษณา ไม่มีคุกกี้ เราไม่รู้ว่าคุณเป็นใครหรือดูอะไร และอยากให้เป็นแบบนั้น</span><span class="en" lang="en">No third-party scripts, no ads, no cookies. We do not know who you are or what you looked at, and prefer it that way.</span></li>
-        <li><strong><span class="th" lang="th">การประมวลผลบนเซิร์ฟเวอร์</span><span class="en" lang="en">Server-side inference</span></strong><span class="th" lang="th">เซิร์ฟเวอร์ไม่เคยดูภาพ มันแค่ส่งต่อบางภาพ การคำนวณทั้งหมดเกิดในเบราว์เซอร์ของคุณ</span><span class="en" lang="en">The server never looks at a picture; it only passes some along. Every computation happens in your browser.</span></li>
+        <li><strong><span class="th" lang="th">การจดจำใบหน้า</span><span class="en" lang="en">Face recognition</span><span class="zh" lang="zh-Hans">人脸识别</span></strong><span class="th" lang="th">ระบบนับได้ว่ามี “คน” อยู่ แต่ไม่มีโค้ดส่วนไหนพยายามบอกว่าคนนั้นเป็นใคร เครื่องมือที่ตามหาคนคนหนึ่งข้ามกล้องสาธารณะนับพันตัว ไม่ควรมีไว้ให้ใครก็ได้ใช้</span><span class="en" lang="en">It can count that a “person” is there. No code here tries to say who. A tool that finds one person across thousands of public cameras should not be available to anyone who opens a page.</span><span class="zh" lang="zh-Hans">它可以数出那里有一个“人”。这里的代码都不去说是谁。一个能在几千台公共摄像头里找出同一个人的工具，不应当交给任何一个打开页面的人。</span></li>
+        <li><strong><span class="th" lang="th">การอ่านป้ายทะเบียน</span><span class="en" lang="en">Number-plate reading</span><span class="zh" lang="zh-Hans">读取车牌</span></strong><span class="th" lang="th">ป้ายทะเบียนพาไปถึงตัวเจ้าของรถ เรานับรถได้โดยไม่ต้องรู้ว่าเป็นคันไหน</span><span class="en" lang="en">A plate leads to a person. We can count cars without knowing which car is which.</span><span class="zh" lang="zh-Hans">一块车牌会通向一个人。我们可以数汽车，而不必知道哪一辆是哪一辆。</span></li>
+        <li><strong><span class="th" lang="th">การเก็บภาพ</span><span class="en" lang="en">Storing imagery</span><span class="zh" lang="zh-Hans">保存图像</span></strong><span class="th" lang="th">ไม่มีคลังภาพ ไม่มีย้อนหลัง ไม่มีชุดข้อมูลที่แอบสะสมไว้ ภาพนิ่งอยู่ในหน่วยความจำ 30 วินาทีแล้วหายไป</span><span class="en" lang="en">No archive, no history, no dataset quietly accumulating. A still lives 30 s in memory and is gone.</span><span class="zh" lang="zh-Hans">没有存档，没有历史，也没有一份在悄悄变多的数据集。一张静图在内存里留 30 秒，然后就消失。</span></li>
+        <li><strong><span class="th" lang="th">บัญชีผู้ใช้</span><span class="en" lang="en">Accounts</span><span class="zh" lang="zh-Hans">账户</span></strong><span class="th" lang="th">ไม่ต้องสมัคร ไม่ต้องเข้าสู่ระบบ ไม่มีรหัสผ่านให้รั่ว</span><span class="en" lang="en">Nothing to sign up for, nothing to log in to, no passwords to leak.</span><span class="zh" lang="zh-Hans">没有要注册的，没有要登录的，也没有会泄露出去的密码。</span></li>
+        <li><strong><span class="th" lang="th">การวิเคราะห์และติดตามผู้ใช้</span><span class="en" lang="en">Analytics and tracking</span><span class="zh" lang="zh-Hans">分析与跟踪</span></strong><span class="th" lang="th">ไม่มีสคริปต์ของบุคคลที่สาม ไม่มีโฆษณา ไม่มีคุกกี้ เราไม่รู้ว่าคุณเป็นใครหรือดูอะไร และอยากให้เป็นแบบนั้น</span><span class="en" lang="en">No third-party scripts, no ads, no cookies. We do not know who you are or what you looked at, and prefer it that way.</span><span class="zh" lang="zh-Hans">没有第三方脚本，没有广告，没有 cookie。我们不知道你是谁，也不知道你看了什么，并且希望保持这样。</span></li>
+        <li><strong><span class="th" lang="th">การประมวลผลบนเซิร์ฟเวอร์</span><span class="en" lang="en">Server-side inference</span><span class="zh" lang="zh-Hans">在服务器上判断</span></strong><span class="th" lang="th">เซิร์ฟเวอร์ไม่เคยดูภาพ มันแค่ส่งต่อบางภาพ การคำนวณทั้งหมดเกิดในเบราว์เซอร์ของคุณ</span><span class="en" lang="en">The server never looks at a picture; it only passes some along. Every computation happens in your browser.</span><span class="zh" lang="zh-Hans">服务器从不看一幅图像；它只把其中一些传过去。每一次计算都发生在你的浏览器里。</span></li>
       </ol>
     </div>
   </section>
 
   <section class="chapter sys field-quiet" id="credits" aria-labelledby="credits-h">
-    <header><span class="chapter-no">08</span><h2 id="credits-h"><span class="th" lang="th">ที่มาและเครดิต</span><span class="en" lang="en">Sources and credits</span></h2></header>
+    <header><span class="chapter-no">08</span><h2 id="credits-h"><span class="th" lang="th">ที่มาและเครดิต</span><span class="en" lang="en">Sources and credits</span><span class="zh" lang="zh-Hans">来源与致谢</span></h2></header>
     <div class="chapter-body">
       <div class="prose">
-        <h3><span class="th" lang="th">เจ้าของกล้อง</span><span class="en" lang="en">The camera owners</span></h3>
+        <h3><span class="th" lang="th">เจ้าของกล้อง</span><span class="en" lang="en">The camera owners</span><span class="zh" lang="zh-Hans">摄像头的所有者</span></h3>
         <p class="th" lang="th">กล้องทุกตัวเป็นของหน่วยงานที่ติดตั้งและดูแล เราเพียงลิงก์ไปและส่งต่อภาพ ขอขอบคุณที่เปิดภาพเหล่านี้ให้สาธารณะ</p>
-        <p class="en" lang="en">Every camera belongs to the agency that installed and runs it. We only link to them and pass frames along. Thank you for making them public.</p>
+        <p class="en" lang="en">Every camera belongs to the agency that installed and runs it. We only link to them and pass frames along. Thank you for making them public.</p><p class="zh" lang="zh-Hans">每一台摄像头，都属于安装并运行它的机构。我们只链接到它们，并把帧传过去。感谢你们把它们公开。</p>
       </div>
       <div class="table-wrap">
         <table class="table">
-          <thead><tr><th><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span></th><th><span class="th" lang="th">ใคร</span><span class="en" lang="en">Who</span></th></tr></thead>
+          <thead><tr><th><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span><span class="zh" lang="zh-Hans">来源</span></th><th><span class="th" lang="th">ใคร</span><span class="en" lang="en">Who</span><span class="zh" lang="zh-Hans">谁</span></th></tr></thead>
           <tbody>
-            <tr><td>GISTDA</td><td><span class="th" lang="th">สำนักงานพัฒนาเทคโนโลยีอวกาศและภูมิสารสนเทศ (องค์การมหาชน) รวมกล้องถนนของกรุงเทพมหานคร กรมทางหลวง และ iTIC</span><span class="en" lang="en">Geo-Informatics and Space Technology Development Agency, carrying road cameras of the Bangkok Metropolitan Administration, the Department of Highways and iTIC</span></td></tr>
-            <tr><td>iTIC</td><td><span class="th" lang="th">มูลนิธิศูนย์ข้อมูลจราจรอัจฉริยะไทย</span><span class="en" lang="en">Intelligent Traffic Information Center Foundation</span></td></tr>
-            <tr><td>NST</td><td><span class="th" lang="th">เทศบาลนครนครศรีธรรมราช</span><span class="en" lang="en">Nakhon Si Thammarat City Municipality</span></td></tr>
-            <tr><td><span class="th" lang="th">ปากเกร็ด</span><span class="en" lang="en">Pak Kret</span></td><td><span class="th" lang="th">เทศบาลนครปากเกร็ด จังหวัดนนทบุรี</span><span class="en" lang="en">Pak Kret City Municipality, Nonthaburi</span></td></tr>
-            <tr><td><span class="th" lang="th">รังสิต</span><span class="en" lang="en">Rangsit</span></td><td><span class="th" lang="th">เทศบาลนครรังสิต จังหวัดปทุมธานี (ผ่าน IPCamLive)</span><span class="en" lang="en">Rangsit City Municipality, Pathum Thani (via IPCamLive)</span></td></tr>
-            <tr><td><span class="th" lang="th">กรมทรัพยากรน้ำ</span><span class="en" lang="en">DWR</span></td><td><span class="th" lang="th">กรมทรัพยากรน้ำ กล้องที่สถานีโทรมาตร</span><span class="en" lang="en">Department of Water Resources, telemetry-station cameras</span></td></tr>
-            <tr><td>cctv.maholan.net</td><td><span class="th" lang="th">รายชื่อกล้องน้ำท่วมที่รวมกล้องของกรมทางหลวง iTIC และเทศบาลต่าง ๆ</span><span class="en" lang="en">A flood-camera catalogue gathering Department of Highways, iTIC and municipal cameras</span></td></tr>
+            <tr><td>GISTDA</td><td><span class="th" lang="th">สำนักงานพัฒนาเทคโนโลยีอวกาศและภูมิสารสนเทศ (องค์การมหาชน) รวมกล้องถนนของกรุงเทพมหานคร กรมทางหลวง และ iTIC</span><span class="en" lang="en">Geo-Informatics and Space Technology Development Agency, carrying road cameras of the Bangkok Metropolitan Administration, the Department of Highways and iTIC</span><span class="zh" lang="zh-Hans">地理信息与空间技术发展局，收录曼谷市政府、公路厅和 iTIC 的道路摄像头</span></td></tr>
+            <tr><td>iTIC</td><td><span class="th" lang="th">มูลนิธิศูนย์ข้อมูลจราจรอัจฉริยะไทย</span><span class="en" lang="en">Intelligent Traffic Information Center Foundation</span><span class="zh" lang="zh-Hans">智能交通信息中心基金会</span></td></tr>
+            <tr><td>NST</td><td><span class="th" lang="th">เทศบาลนครนครศรีธรรมราช</span><span class="en" lang="en">Nakhon Si Thammarat City Municipality</span><span class="zh" lang="zh-Hans">洛坤市自治市</span></td></tr>
+            <tr><td><span class="th" lang="th">ปากเกร็ด</span><span class="en" lang="en">Pak Kret</span><span class="zh" lang="zh-Hans">巴革</span></td><td><span class="th" lang="th">เทศบาลนครปากเกร็ด จังหวัดนนทบุรี</span><span class="en" lang="en">Pak Kret City Municipality, Nonthaburi</span><span class="zh" lang="zh-Hans">巴革市自治市，暖武里</span></td></tr>
+            <tr><td><span class="th" lang="th">รังสิต</span><span class="en" lang="en">Rangsit</span><span class="zh" lang="zh-Hans">兰实</span></td><td><span class="th" lang="th">เทศบาลนครรังสิต จังหวัดปทุมธานี (ผ่าน IPCamLive)</span><span class="en" lang="en">Rangsit City Municipality, Pathum Thani (via IPCamLive)</span><span class="zh" lang="zh-Hans">兰实市自治市，巴吞他尼（经由 IPCamLive）</span></td></tr>
+            <tr><td><span class="th" lang="th">กรมทรัพยากรน้ำ</span><span class="en" lang="en">DWR</span><span class="zh" lang="zh-Hans">DWR</span></td><td><span class="th" lang="th">กรมทรัพยากรน้ำ กล้องที่สถานีโทรมาตร</span><span class="en" lang="en">Department of Water Resources, telemetry-station cameras</span><span class="zh" lang="zh-Hans">水资源厅，遥测站的摄像头</span></td></tr>
+            <tr><td>cctv.maholan.net</td><td><span class="th" lang="th">รายชื่อกล้องน้ำท่วมที่รวมกล้องของกรมทางหลวง iTIC และเทศบาลต่าง ๆ</span><span class="en" lang="en">A flood-camera catalogue gathering Department of Highways, iTIC and municipal cameras</span><span class="zh" lang="zh-Hans">一份洪水摄像头目录，汇集了公路厅、iTIC 和市政的摄像头</span></td></tr>
           </tbody>
         </table>
       </div>
       <div class="prose">
-        <h3><span class="th" lang="th">ซอฟต์แวร์ ข้อมูล และการออกแบบ</span><span class="en" lang="en">Software, data and design</span></h3>
+        <h3><span class="th" lang="th">ซอฟต์แวร์ ข้อมูล และการออกแบบ</span><span class="en" lang="en">Software, data and design</span><span class="zh" lang="zh-Hans">软件、数据与设计</span></h3>
         <ul class="th" lang="th">
           <li><a href="https://flood.nonarkara.org/">FloodDash</a> รวบรวมรายชื่อกล้องจากเจ็ดแหล่งให้ เราอ่านจากที่เดียวแทนการไปดึงซ้ำจากเจ็ดต้นทาง</li>
           <li><a href="https://www.tensorflow.org/js">TensorFlow.js</a> 4.22.0 โดย Google, Apache-2.0 พร้อมน้ำหนักโมเดลจากคลังโมเดลของ TensorFlow.js (Apache-2.0)</li>
@@ -307,9 +313,29 @@
           <li>Datasets: COCO (Lin et al., 2014) for the detector and ImageNet (Deng et al., 2009) for MobileNetV2, used through pretrained weights. No dataset images are on this site.</li>
           <li>Colour: Plate 303 of Sanzo Wada (1883–1967), as converted to digital values in <a href="https://colors.nonarkara.org/#plate-303">Palette</a>. Each of the four hues also carries a three-step tone ladder, built on one shared formula.</li>
           <li>The Drive room: the driving model of Treiber, Hennecke &amp; Helbing (2000) and the predict-then-check idea behind Frenetix · on human-labelled street imagery, see <a href="https://www.google.com/recaptcha/intro/">Google's own description of reCAPTCHA</a>, von Ahn et al. (2008) and Goodfellow et al. (2014)</li>
+        </ul><ul class="zh" lang="zh-Hans">          <li><a href="https://flood.nonarkara.org/">FloodDash</a> 从七个来源汇集摄像头列表，所以我们读这一个汇集处，而不是再去七个上游各收集一次。</li>
+          <li><a href="https://www.tensorflow.org/js">TensorFlow.js</a> 4.22.0，Google 出品，Apache-2.0，模型权重来自 TensorFlow.js model zoo（Apache-2.0）。</li>
+          <li><a href="https://github.com/video-dev/hls.js">hls.js</a> 1.5.20，Apache-2.0，用来播放实时视频。</li>
+          <li>字体使用 SIL Open Font License 1.1：Archivo Narrow（<a href="/fonts/OFL-Archivo-Narrow.txt">许可</a>）、IBM Plex Sans 和 IBM Plex Sans Thai（<a href="/fonts/OFL-IBM-Plex.txt">许可</a>）、JetBrains Mono（<a href="/fonts/OFL-JetBrains-Mono.txt">许可</a>）。</li>
+          <li>数据集：检测器使用 COCO（Lin et al., 2014），MobileNetV2 使用 ImageNet（Deng et al., 2009），都通过预训练好的权重来用。本站上没有数据集里的图像。</li>
+          <li>色彩：Sanzo Wada（1883–1967）的第 303 号色板，在 <a href="https://colors.nonarkara.org/#plate-303">Palette</a> 里换成了数字。四种色相还各自有一条三阶的深浅阶梯，用同一个公式做成。</li>
+          <li>驾驶室：Treiber, Hennecke &amp; Helbing（2000）的驾驶模型，以及 Frenetix 背后先预测、再核对的想法 · 关于由人标注的街道图像，见 <a href="https://www.google.com/recaptcha/intro/">Google 自己对 reCAPTCHA 的说明</a>、von Ahn et al.（2008）和 Goodfellow et al.（2014）</li>
+        </ul>
+        <h3><span class="th" lang="th">เพิ่มใน 1.16.0</span><span class="en" lang="en">Added in 1.16.0</span><span class="zh" lang="zh-Hans">1.16.0 新增</span></h3>
+        <ul class="th" lang="th">
+          <li>MediaPipe Face Landmarker ของ Google, Apache-2.0, ไฟล์ face_landmarker.task ใช้ในห้องใบหน้าและสมาธิ หาจุดบนใบหน้าว่าตาและศีรษะชี้ไปทางไหน ไม่ได้จำว่าเป็นใคร</li>
+          <li>Noto Sans SC ภายใต้ SIL Open Font License 1.1 สำหรับภาษาจีน (<a href="/fonts/OFL-Noto-Sans-SC.txt">สัญญาอนุญาต</a>)</li>
+        </ul>
+        <ul class="en" lang="en">
+          <li>MediaPipe Face Landmarker by Google, Apache-2.0, file face_landmarker.task, used by the Face &amp; focus experiment. It finds landmarks — where the eyes and head point — and does not recognise who you are.</li>
+          <li>Noto Sans SC, under the SIL Open Font License 1.1, for Chinese (<a href="/fonts/OFL-Noto-Sans-SC.txt">licence</a>).</li>
+        </ul>
+        <ul class="zh" lang="zh-Hans">
+          <li>Google 的 MediaPipe Face Landmarker，Apache-2.0，文件 face_landmarker.task，用于人脸与专注实验。它找的是标志点，眼睛和头朝向哪里，并不识别你是谁。</li>
+          <li>Noto Sans SC，SIL Open Font License 1.1，用于中文（<a href="/fonts/OFL-Noto-Sans-SC.txt">许可</a>）。</li>
         </ul>
         <p class="th" lang="th">สร้างและดูแลโดย ดร.นน อัครประเสริฐกุล เงื่อนไขการใช้และการขอถอดกล้องอยู่ที่<a href="/legal">หน้าข้อกฎหมาย</a></p>
-        <p class="en" lang="en">Made and run by Dr Non Arkaraprasertkul. Terms and takedowns are on <a href="/legal">the fine print</a>.</p>
+        <p class="en" lang="en">Made and run by Dr Non Arkaraprasertkul. Terms and takedowns are on <a href="/legal">the fine print</a>.</p><p class="zh" lang="zh-Hans">由 Dr Non Arkaraprasertkul 制作并运行。条款和下架说明在<a href="/legal">细则</a>。</p>
       </div>
     </div>
   </section>

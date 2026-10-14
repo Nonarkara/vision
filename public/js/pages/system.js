@@ -2,8 +2,8 @@
 // about itself right now. Everything from the network goes in by textContent:
 // source labels come from upstream and are not ours to trust.
 
-import '../core/site.js?v=1.15.2'
-import { t, n, lang, onLang } from '../core/i18n.js'
+import '../core/site.js?v=1.16.0'
+import { t, n, locale, onLang } from '../core/i18n.js'
 import { loadCatalog, SOURCES } from '../core/catalog.js'
 
 const KINDS = ['video', 'still', 'view', 'off']
@@ -22,7 +22,7 @@ function when(iso) {
   if (!iso) return '—'
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return '—'
-  return d.toLocaleString(lang() === 'th' ? 'th-TH' : 'en-GB', { timeZone: 'Asia/Bangkok', dateStyle: 'medium', timeStyle: 'short' })
+  return d.toLocaleString(locale(), { timeZone: 'Asia/Bangkok', dateStyle: 'medium', timeStyle: 'short' })
 }
 
 function duration(seconds) {
@@ -102,7 +102,7 @@ function paintSources() {
 }
 
 function paintAt() {
-  atEl.textContent = checkedAt ? `${t('อ่านเมื่อ', 'Read at')} ${checkedAt.toLocaleTimeString(lang() === 'th' ? 'th-TH' : 'en-GB', { hour12: false })}` : ''
+  atEl.textContent = checkedAt ? `${t('อ่านเมื่อ', 'Read at')} ${checkedAt.toLocaleTimeString(locale(), { hour12: false })}` : ''
 }
 
 async function readHealth() {

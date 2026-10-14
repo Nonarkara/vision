@@ -54,15 +54,17 @@ for (const route of Object.keys(PAGES)) {
   if (!/<title>[^<]+<\/title>/.test(html)) fail(route, 'missing <title>')
   if (!/<meta name="description"/.test(html)) fail(route, 'missing meta description')
   // Prose only: a diagram may set three English labels against two Thai ones
-  // and still lose nothing, so `<svg>` is not counted here. Exact equality is
-  // the point — one forgotten translation used to pass a tolerance of two.
+  // and still lose nothing, so `<svg>` is not counted here. Exact equality
+  // across Thai, English and Chinese is the point — one forgotten translation
+  // used to pass a tolerance of two.
   const prose = html.replace(/<svg[\s\S]*?<\/svg>/g, '')
   const span = (c) => (prose.match(new RegExp(`class="[^"]*\\b${c}\\b[^"]*"`, 'g')) ?? []).length
-  const th = span('th'), en = span('en')
-  if (th !== en) fail(route, `language parity: ${th} Thai vs ${en} English spans — a translation is missing`)
+  const th = span('th'), en = span('en'), zh = span('zh')
+  if (th !== en || en !== zh) fail(route, `language parity: ${th} Thai, ${en} English, ${zh} Chinese spans — a translation is missing`)
   const ariaTh = (html.match(/\bdata-aria-th=/g) ?? []).length
   const ariaEn = (html.match(/\bdata-aria-en=/g) ?? []).length
-  if (ariaTh !== ariaEn) fail(route, `aria parity: ${ariaTh} data-aria-th vs ${ariaEn} data-aria-en`)
+  const ariaZh = (html.match(/\bdata-aria-zh=/g) ?? []).length
+  if (ariaTh !== ariaEn || ariaEn !== ariaZh) fail(route, `aria parity: ${ariaTh} data-aria-th, ${ariaEn} data-aria-en, ${ariaZh} data-aria-zh`)
   if (!/property="og:title"/.test(html)) fail(route, 'missing og:title')
   if (!/rel="canonical"/.test(html)) fail(route, 'missing canonical')
   // Every route must say which page it is. assemblePage() can only mark a link

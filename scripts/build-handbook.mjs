@@ -265,33 +265,39 @@ function meta(md) {
 const chrome = {
   eyebrowTh: 'คู่มือ · อ่านเองทีละบท',
   eyebrowEn: 'Handbook · read it on your own',
+  eyebrowZh: '手册 · 自己读一章',
   ledeTh: 'อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง',
   ledeEn: 'Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.',
+  ledeZh: '一次读一章。每一章都有可以自己试的练习，以及用来核对的问题。想再深入时，回到这个网站上的房间，真的跑一遍。',
   tocTh: 'ในหน้านี้',
   tocEn: 'On this page',
+  tocZh: '本页内容',
   indexTh: 'หน้าคู่มือ',
   indexEn: 'Handbook index',
+  indexZh: '手册目录',
   prevTh: '← บทก่อน',
   prevEn: '← Previous chapter',
+  prevZh: '← 上一章',
   nextTh: 'บทถัดไป →',
   nextEn: 'Next chapter →',
+  nextZh: '下一章 →',
 }
 // `attrs` carries data-page, which assemblePage() turns into aria-current.
 // Without it the twelve handbook pages were the only routes that never said
 // which page you were on.
-const pair = (href, th, en, cls = '', attrs = '') =>
-  `<a${cls ? ` class="${cls}"` : ''}${attrs ? ` ${attrs}` : ''} href="${href}"><span class="th" lang="th">${th}</span><span class="en" lang="en">${en}</span></a>`
+const pair = (href, th, en, zh, cls = '', attrs = '') =>
+  `<a${cls ? ` class="${cls}"` : ''}${attrs ? ` ${attrs}` : ''} href="${href}"><span class="th" lang="th">${th}</span><span class="en" lang="en">${en}</span><span class="zh" lang="zh-Hans">${zh}</span></a>`
 
 function docNav(spec) {
   const links = []
   const n = spec.chapter ? CHAPTERS.findIndex((c) => c.chapter === spec.chapter) : -1
-  if (n > 0) links.push(pair(CHAPTERS[n - 1].route, chrome.prevTh, chrome.prevEn, 'doc-prev'))
-  links.push(pair('/handbook', chrome.indexTh, chrome.indexEn, 'doc-index', `data-page="${spec.route.replace(/^\//, '')}"`))
-  if (n >= 0 && n < CHAPTERS.length - 1) links.push(pair(CHAPTERS[n + 1].route, chrome.nextTh, chrome.nextEn, 'doc-next'))
-  if (spec.route === '/handbook/glossary') links.push(pair('/handbook/reading', 'รายการอ่าน', 'Reading list', 'doc-next'))
-  if (spec.route === '/handbook/reading') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', 'doc-next'))
-  if (spec.route === '/handbook/actions') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', 'doc-next'))
-  return `<nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages">${links.join('')}</nav>`
+  if (n > 0) links.push(pair(CHAPTERS[n - 1].route, chrome.prevTh, chrome.prevEn, chrome.prevZh, 'doc-prev'))
+  links.push(pair('/handbook', chrome.indexTh, chrome.indexEn, chrome.indexZh, 'doc-index', `data-page="${spec.route.replace(/^\//, '')}"`))
+  if (n >= 0 && n < CHAPTERS.length - 1) links.push(pair(CHAPTERS[n + 1].route, chrome.nextTh, chrome.nextEn, chrome.nextZh, 'doc-next'))
+  if (spec.route === '/handbook/glossary') links.push(pair('/handbook/reading', 'รายการอ่าน', 'Reading list', '阅读清单', 'doc-next'))
+  if (spec.route === '/handbook/reading') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', '术语表', 'doc-next'))
+  if (spec.route === '/handbook/actions') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', '术语表', 'doc-next'))
+  return `<nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages" data-aria-zh="手册的其他页面">${links.join('')}</nav>`
 }
 
 function tocBlock(toc) {
@@ -299,7 +305,7 @@ function tocBlock(toc) {
   const items = toc
     .map((t) => `<li><a href="#${attr(t.id)}"${langAttr(t.text)}>${inline(t.text, { dir: DOCS })}</a></li>`)
     .join('')
-  return `<details class="doc-toc"><summary><span class="th" lang="th">${chrome.tocTh}</span><span class="en" lang="en">${chrome.tocEn}</span></summary><ol>${items}</ol></details>`
+  return `<details class="doc-toc"><summary><span class="th" lang="th">${chrome.tocTh}</span><span class="en" lang="en">${chrome.tocEn}</span><span class="zh" lang="zh-Hans">${chrome.tocZh}</span></summary><ol>${items}</ol></details>`
 }
 
 function pageHtml(spec, body, { title, desc }, toc) {
@@ -316,12 +322,13 @@ function pageHtml(spec, body, { title, desc }, toc) {
 <main id="main">
   <header class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">${chrome.eyebrowTh}</span><span class="en" lang="en">${chrome.eyebrowEn}</span></span>
+      <span class="eyebrow label"><span class="th" lang="th">${chrome.eyebrowTh}</span><span class="en" lang="en">${chrome.eyebrowEn}</span><span class="zh" lang="zh-Hans">${chrome.eyebrowZh}</span></span>
       <h1>${esc(title)}</h1>
     </div>
     <div class="page-head-side">
       <p class="lede th" lang="th">${chrome.ledeTh}</p>
       <p class="lede en" lang="en">${chrome.ledeEn}</p>
+      <p class="lede zh" lang="zh-Hans">${chrome.ledeZh}</p>
       ${tocBlock(toc)}
     </div>
   </header>

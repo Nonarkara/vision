@@ -6,36 +6,37 @@
 <title>Drive: from two lanes to a busy city · ขับเอง: จากถนนเงียบสู่เมือง — Vision</title>
 <meta name="description" content="Explore two lanes, four lanes, a roundabout and a Bangkok-inspired city with 6, 12 or 24 vehicles — sedans, pickups, lorries and buses drawn at their real Thai sizes on 3.2 m lanes. Each one explains what it sees and why it brakes.">
 </head>
-<body>
+<body data-level="judge">
 <!--#nav-->
+<!--#path-->
 <main id="main">
 
   <section class="page-head" aria-labelledby="title">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 05 · ขับเอง</span><span class="en" lang="en">Room 05 · Drive</span></span>
-      <h1 id="title"><span class="th" lang="th">เริ่มถนนเงียบ แล้วลองเมืองที่วุ่นวาย</span><span class="en" lang="en">Start quiet. Build a busy city.</span></h1>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 05 · ขับเอง</span><span class="en" lang="en">Room 05 · Drive</span><span class="zh" lang="zh-Hans">房间 05 · 驾驶</span></span>
+      <h1 id="title"><span class="th" lang="th">เริ่มถนนเงียบ แล้วลองเมืองที่วุ่นวาย</span><span class="en" lang="en">Start quiet. Build a busy city.</span><span class="zh" lang="zh-Hans">从安静开始。再建成一座繁忙的城市。</span></h1>
     </div>
     <div>
       <p class="lede th" lang="th">เลือกถนน เพิ่มรถ แล้วแตะรถหนึ่งคัน ดูว่ากล้องจำลองเห็นอะไรและทำไมรถจึงชะลอ เริ่มจากสองช่องทาง แล้วลองแยกที่วุ่นวายแบบกรุงเทพฯ</p>
-      <p class="lede en" lang="en">Choose a road, add traffic, then tap a car. Watch what its simulated camera sees and why it slows down. Start with two lanes; work up to a crowded, Bangkok-inspired junction.</p>
+      <p class="lede en" lang="en">Choose a road, add traffic, then tap a car. Watch what its simulated camera sees and why it slows down. Start with two lanes; work up to a crowded, Bangkok-inspired junction.</p><p class="lede zh" lang="zh-Hans">选一条路，加上来往车辆，然后点一辆车。看它模拟的摄像头看见什么，以及它为什么减速。从两条车道开始；再做到一个拥挤的、受曼谷启发的路口。</p>
     </div>
   </section>
 
   <section class="gate" data-gate aria-labelledby="gate-h">
     <div class="gate-head">
-      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span></span>
-      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span></h2>
-      <p class="lede"><span class="th" lang="th">คุณทำสิ่งนี้มาทั้งชีวิตโดยไม่รู้ตัว ลองก่อน แล้วค่อยเข้าห้องขับรถ</span><span class="en" lang="en">You have been doing this your whole life without knowing. Try, then drive.</span></p>
+      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span><span class="zh" lang="zh-Hans">在房间 05 之前</span></span>
+      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span><span class="zh" lang="zh-Hans">多年来，你一直在训练机器</span></h2>
+      <p class="lede"><span class="th" lang="th">คุณทำสิ่งนี้มาทั้งชีวิตโดยไม่รู้ตัว ลองก่อน แล้วค่อยเข้าห้องขับรถ</span><span class="en" lang="en">You have been doing this your whole life without knowing. Try, then drive.</span><span class="zh" lang="zh-Hans">你一辈子都在做这件事，自己却不知道。先试一试，再去驾驶。</span></p>
       <p class="micro gate-taught" data-gate-taught hidden role="status"></p>
     </div>
     <div class="gate-replay">
-      <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span></button>
-      <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span></button>
+      <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span><span class="zh" lang="zh-Hans">试一试一个新挑战</span></button>
+      <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span><span class="zh" lang="zh-Hans">把我的标注教给机器</span></button>
     </div>
-    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares">
+    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares" data-aria-zh="选择方格">
       <p class="captcha-ask" data-captcha-target></p>
       <div class="captcha-pad">
-        <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for."></canvas>
+        <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for." data-aria-zh="九宫格图像。选出问题所问内容所在的方格。"></canvas>
         <div class="captcha-tiles">
           <button class="btn tile-pick" data-tile="0" aria-pressed="false">1</button>
           <button class="btn tile-pick" data-tile="1" aria-pressed="false">2</button>
@@ -49,96 +50,96 @@
         </div>
       </div>
       <div class="controls pad">
-        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span></button>
-        <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
-        <button class="btn" data-gate-skip><span class="th" lang="th">ข้ามไปก่อน — อยากเข้าห้องเลย</span><span class="en" lang="en">Skip — take me straight in</span></button>
+        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span><span class="zh" lang="zh-Hans">检查</span></button>
+        <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span><span class="zh" lang="zh-Hans">重新开始</span></button>
+        <button class="btn" data-gate-skip><span class="th" lang="th">ข้ามไปก่อน — อยากเข้าห้องเลย</span><span class="en" lang="en">Skip — take me straight in</span><span class="zh" lang="zh-Hans">跳过——直接进入</span></button>
       </div>
       <p class="micro warn-line" data-captcha-state role="status" aria-live="polite"></p>
     </div>
   </section>
 
   <section class="drive" data-drive aria-labelledby="track-title" hidden>
-    <h2 id="track-title" class="visually-hidden"><span class="th" lang="th">สนามทดสอบ</span><span class="en" lang="en">The test track</span></h2>
-    <div class="scenario-picks" role="group" data-aria-th="เลือกถนน" data-aria-en="Choose a road">
-      <button class="btn" data-set="layout" data-value="two" aria-pressed="true"><span class="th" lang="th">1 · สองช่องทาง</span><span class="en" lang="en">1 · Two lanes</span></button>
-      <button class="btn" data-set="layout" data-value="four" aria-pressed="false"><span class="th" lang="th">2 · สี่ช่องทาง</span><span class="en" lang="en">2 · Four lanes</span></button>
-      <button class="btn" data-set="layout" data-value="practice" aria-pressed="false"><span class="th" lang="th">3 · วงเวียนและแยก</span><span class="en" lang="en">3 · Roundabout &amp; junction</span></button>
-      <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
+    <h2 id="track-title" class="visually-hidden"><span class="th" lang="th">สนามทดสอบ</span><span class="en" lang="en">The test track</span><span class="zh" lang="zh-Hans">试验赛道</span></h2>
+    <div class="scenario-picks" role="group" data-aria-th="เลือกถนน" data-aria-en="Choose a road" data-aria-zh="选择一条路">
+      <button class="btn" data-set="layout" data-value="two" aria-pressed="true"><span class="th" lang="th">1 · สองช่องทาง</span><span class="en" lang="en">1 · Two lanes</span><span class="zh" lang="zh-Hans">1 · 两条车道</span></button>
+      <button class="btn" data-set="layout" data-value="four" aria-pressed="false"><span class="th" lang="th">2 · สี่ช่องทาง</span><span class="en" lang="en">2 · Four lanes</span><span class="zh" lang="zh-Hans">2 · 四条车道</span></button>
+      <button class="btn" data-set="layout" data-value="practice" aria-pressed="false"><span class="th" lang="th">3 · วงเวียนและแยก</span><span class="en" lang="en">3 · Roundabout &amp; junction</span><span class="zh" lang="zh-Hans">3 · 环岛与路口</span></button>
+      <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span><span class="zh" lang="zh-Hans">4 · 受曼谷启发的城市</span></button>
     </div>
-    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถยนต์ไม่ขับ และไม่มีแผนที่กรุงเทพฯ จริง รอบรถนี้มีถนน ไม้เท้า เสาไฟ ทางเท้า อาคารติดถนน รถจักรยานยนต์และจักรยานจอดข้างทาง หัวดับเพลิง ม้านั่ง และต้นไม้ในกระถาง ทุกชิ้นวางที่ตำแหน่งจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorbikes driving and no real Bangkok map. The road now has kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, fire hydrants, benches and planters — every one placed at its real size on a Thai road: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses, on lanes 3.2 m wide.</span></p>
-    <p class="micro"><span class="th" lang="th">กระจกหน้าด้านล่างคือมุมมองของรถที่เลือกไว้ เคลื่อนไหวตลอดเวลา แตะรถบนแผนที่หรือปุ่มรถเพื่อสลับคัน กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">The windshield below is the selected car’s own view, live and always on. Tap a car on the map or its numbered button to switch. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
+    <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถยนต์ไม่ขับ และไม่มีแผนที่กรุงเทพฯ จริง รอบรถนี้มีถนน ไม้เท้า เสาไฟ ทางเท้า อาคารติดถนน รถจักรยานยนต์และจักรยานจอดข้างทาง หัวดับเพลิง ม้านั่ง และต้นไม้ในกระถาง ทุกชิ้นวางที่ตำแหน่งจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorbikes driving and no real Bangkok map. The road now has kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, fire hydrants, benches and planters — every one placed at its real size on a Thai road: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses, on lanes 3.2 m wide.</span><span class="zh" lang="zh-Hans">更换道路或车流，就会重新开始一次。两条车道和四条车道的路有对向的车流，没有人行横道。城市会加上交叉的路线、24 辆车，以及更多的人和狗。也可以试一试雨天或夜晚。车遵循写下来的规则：这是一个教学模拟，车道是固定的，没有正在行驶的摩托车，也没有真实的曼谷地图。现在的路上有路缘石、人行道、它们后面的建筑、路灯、电线杆、停放的自行车和摩托车、消防栓、长椅和花箱——每一件都按泰国道路上的真实尺寸放置：4.4 × 1.8 m 的轿车，5.3 m 的皮卡，9.6 m 长、3.2 m 高的货车，12 m 的公共汽车，车道宽 3.2 m。</span></p>
+    <p class="micro"><span class="th" lang="th">กระจกหน้าด้านล่างคือมุมมองของรถที่เลือกไว้ เคลื่อนไหวตลอดเวลา แตะรถบนแผนที่หรือปุ่มรถเพื่อสลับคัน กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">The windshield below is the selected car’s own view, live and always on. Tap a car on the map or its numbered button to switch. The orange box marks what affects its speed. Try the roundabout for people crossing.</span><span class="zh" lang="zh-Hans">下面的挡风玻璃是所选车辆自己的视野，是实时的，并且一直开着。在地图上点一辆车，或者点它的编号按钮，即可切换。橙色框标出影响它速度的东西。可以在环岛试一试有人过马路的情况。</span></p>
 
     <div class="drive-hero">
       <div class="hero-bar">
-        <span class="label"><span class="th" lang="th">มองผ่านกระจกหน้าของรถคันนี้</span><span class="en" lang="en">Through this car’s windshield</span></span>
+        <span class="label"><span class="th" lang="th">มองผ่านกระจกหน้าของรถคันนี้</span><span class="en" lang="en">Through this car’s windshield</span><span class="zh" lang="zh-Hans">透过这辆车的挡风玻璃</span></span>
         <p class="hero-name" data-hero-name></p>
       </div>
-      <canvas class="hero-screen" data-hero role="img" data-aria-th="มุมมองคนขับจำลองที่เคลื่อนไหวตลอดเวลา พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="A continuously moving simulated windshield view, with detected-object boxes"></canvas>
+      <canvas class="hero-screen" data-hero role="img" data-aria-th="มุมมองคนขับจำลองที่เคลื่อนไหวตลอดเวลา พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="A continuously moving simulated windshield view, with detected-object boxes" data-aria-zh="持续移动的模拟挡风玻璃视野，带有检测到的物体框"></canvas>
       <div class="controls hero-controls">
-        <button class="btn" type="button" data-hero-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span></button>
-        <button class="btn" type="button" data-hero-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span></button>
-        <button class="btn" type="button" data-hero-weather><span class="th" lang="th">เปลี่ยนฟ้า</span><span class="en" lang="en">Change sky</span></button>
-        <button class="btn" type="button" data-hero-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span></button>
-        <button class="btn" type="button" data-hero-full><span class="th" lang="th">เต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span></button>
+        <button class="btn" type="button" data-hero-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span><span class="zh" lang="zh-Hans">← 上一辆车</span></button>
+        <button class="btn" type="button" data-hero-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span><span class="zh" lang="zh-Hans">下一辆车 →</span></button>
+        <button class="btn" type="button" data-hero-weather><span class="th" lang="th">เปลี่ยนฟ้า</span><span class="en" lang="en">Change sky</span><span class="zh" lang="zh-Hans">更换天空</span></button>
+        <button class="btn" type="button" data-hero-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span><span class="zh" lang="zh-Hans">遮住 / 露出摄像头</span></button>
+        <button class="btn" type="button" data-hero-full><span class="th" lang="th">เต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span><span class="zh" lang="zh-Hans">全屏 ↗</span></button>
       </div>
-      <p class="hero-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว</span><span class="en" lang="en">Drawn from the car’s real position on the map — a teaching simulation, not camera footage or a neural detector. Yellow box = detected or remembered. Orange = affects its speed.</span></p>
+      <p class="hero-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว</span><span class="en" lang="en">Drawn from the car’s real position on the map — a teaching simulation, not camera footage or a neural detector. Yellow box = detected or remembered. Orange = affects its speed.</span><span class="zh" lang="zh-Hans">按照这辆车在地图上的真实位置画出——这是教学模拟，不是摄像头拍到的画面，也不是神经检测器。黄色框 = 检测到的，或记住的。橙色 = 影响它的速度。</span></p>
     </div>
 
     <div class="drive-grid">
       <div class="bench">
         <div class="bench-caption">
-          <span class="label"><span class="th" lang="th">มองจากด้านบน</span><span class="en" lang="en">Seen from above</span></span>
+          <span class="label"><span class="th" lang="th">มองจากด้านบน</span><span class="en" lang="en">Seen from above</span><span class="zh" lang="zh-Hans">从上方看</span></span>
           <span class="num" data-totals aria-live="off"></span>
         </div>
-        <canvas class="track" data-track role="img" data-aria-th="ภาพจำลองถนนมองจากด้านบน เลือกถนนและรถ เพื่ออ่านสิ่งที่รถเห็นและการตัดสินใจในรายการข้าง ๆ" data-aria-en="A road simulation from above. Choose a layout and select a car to read what it sees and decides in the list beside it."></canvas>
+        <canvas class="track" data-track role="img" data-aria-th="ภาพจำลองถนนมองจากด้านบน เลือกถนนและรถ เพื่ออ่านสิ่งที่รถเห็นและการตัดสินใจในรายการข้าง ๆ" data-aria-en="A road simulation from above. Choose a layout and select a car to read what it sees and decides in the list beside it." data-aria-zh="从上往下看的道路模拟。选择一种布局，点一辆车，在旁边的列表里读它看见什么、如何决定。"></canvas>
         <div class="controls">
           <button class="btn primary" type="button" data-play aria-pressed="true"><span data-play-label></span></button>
           <button class="btn" type="button" data-set="speed" data-value="1" aria-pressed="true">1×</button>
           <button class="btn" type="button" data-set="speed" data-value="3" aria-pressed="false">3×</button>
-          <button class="btn" type="button" data-reset>↻ <span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
-          <button class="btn" type="button" data-all aria-pressed="false"><span class="th" lang="th">ดูขอบเขตกล้องทุกคัน</span><span class="en" lang="en">Show all detection cones</span></button>
+          <button class="btn" type="button" data-reset>↻ <span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span><span class="zh" lang="zh-Hans">重新开始</span></button>
+          <button class="btn" type="button" data-all aria-pressed="false"><span class="th" lang="th">ดูขอบเขตกล้องทุกคัน</span><span class="en" lang="en">Show all detection cones</span><span class="zh" lang="zh-Hans">显示全部检测锥</span></button>
         </div>
         <div class="knobs">
-          <div class="knob" role="group" data-aria-th="จำนวนรถ" data-aria-en="Traffic">
-            <span class="label"><span class="th" lang="th">รถ</span><span class="en" lang="en">Cars</span></span>
+          <div class="knob" role="group" data-aria-th="จำนวนรถ" data-aria-en="Traffic" data-aria-zh="车流">
+            <span class="label"><span class="th" lang="th">รถ</span><span class="en" lang="en">Cars</span><span class="zh" lang="zh-Hans">车</span></span>
             <button class="btn" data-set="traffic" data-value="6" aria-pressed="true">6</button>
             <button class="btn" data-set="traffic" data-value="12" aria-pressed="false">12</button>
             <button class="btn" data-set="traffic" data-value="24" aria-pressed="false">24</button>
           </div>
-          <div class="knob" role="group" data-aria-th="สภาพอากาศ" data-aria-en="Weather">
-            <span class="label"><span class="th" lang="th">ฟ้า</span><span class="en" lang="en">Sky</span></span>
-            <button class="btn" type="button" data-set="weather" data-value="day" aria-pressed="true"><span class="th" lang="th">กลางวัน</span><span class="en" lang="en">Day</span></button>
-            <button class="btn" type="button" data-set="weather" data-value="rain" aria-pressed="false"><span class="th" lang="th">ฝนตก</span><span class="en" lang="en">Rain</span></button>
-            <button class="btn" type="button" data-set="weather" data-value="night" aria-pressed="false"><span class="th" lang="th">กลางคืน</span><span class="en" lang="en">Night</span></button>
+          <div class="knob" role="group" data-aria-th="สภาพอากาศ" data-aria-en="Weather" data-aria-zh="天气">
+            <span class="label"><span class="th" lang="th">ฟ้า</span><span class="en" lang="en">Sky</span><span class="zh" lang="zh-Hans">天空</span></span>
+            <button class="btn" type="button" data-set="weather" data-value="day" aria-pressed="true"><span class="th" lang="th">กลางวัน</span><span class="en" lang="en">Day</span><span class="zh" lang="zh-Hans">白天</span></button>
+            <button class="btn" type="button" data-set="weather" data-value="rain" aria-pressed="false"><span class="th" lang="th">ฝนตก</span><span class="en" lang="en">Rain</span><span class="zh" lang="zh-Hans">雨</span></button>
+            <button class="btn" type="button" data-set="weather" data-value="night" aria-pressed="false"><span class="th" lang="th">กลางคืน</span><span class="en" lang="en">Night</span><span class="zh" lang="zh-Hans">夜晚</span></button>
           </div>
-          <div class="controls"><button class="btn" data-set="weather" data-value="sun" aria-pressed="false"><span class="th" lang="th">แดดจ้าและแสงแยงตา</span><span class="en" lang="en">Bright sun &amp; glare</span></button></div>
-          <div class="knob" role="group" data-aria-th="คนเดินถนน" data-aria-en="People">
-            <span class="label"><span class="th" lang="th">คน</span><span class="en" lang="en">People</span></span>
-            <button class="btn" type="button" data-set="people" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span></button>
-            <button class="btn" type="button" data-set="people" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span></button>
-            <button class="btn" type="button" data-set="people" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span></button>
+          <div class="controls"><button class="btn" data-set="weather" data-value="sun" aria-pressed="false"><span class="th" lang="th">แดดจ้าและแสงแยงตา</span><span class="en" lang="en">Bright sun &amp; glare</span><span class="zh" lang="zh-Hans">烈日与眩光</span></button></div>
+          <div class="knob" role="group" data-aria-th="คนเดินถนน" data-aria-en="People" data-aria-zh="行人">
+            <span class="label"><span class="th" lang="th">คน</span><span class="en" lang="en">People</span><span class="zh" lang="zh-Hans">行人</span></span>
+            <button class="btn" type="button" data-set="people" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span><span class="zh" lang="zh-Hans">无</span></button>
+            <button class="btn" type="button" data-set="people" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span><span class="zh" lang="zh-Hans">少</span></button>
+            <button class="btn" type="button" data-set="people" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span><span class="zh" lang="zh-Hans">多</span></button>
           </div>
-          <div class="knob" role="group" data-aria-th="สุนัขจรจัด" data-aria-en="Stray dogs">
-            <span class="label"><span class="th" lang="th">สุนัข</span><span class="en" lang="en">Dogs</span></span>
-            <button class="btn" type="button" data-set="dogs" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span></button>
-            <button class="btn" type="button" data-set="dogs" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span></button>
-            <button class="btn" type="button" data-set="dogs" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span></button>
+          <div class="knob" role="group" data-aria-th="สุนัขจรจัด" data-aria-en="Stray dogs" data-aria-zh="流浪狗">
+            <span class="label"><span class="th" lang="th">สุนัข</span><span class="en" lang="en">Dogs</span><span class="zh" lang="zh-Hans">狗</span></span>
+            <button class="btn" type="button" data-set="dogs" data-value="none" aria-pressed="false"><span class="th" lang="th">ไม่มี</span><span class="en" lang="en">None</span><span class="zh" lang="zh-Hans">无</span></button>
+            <button class="btn" type="button" data-set="dogs" data-value="few" aria-pressed="true"><span class="th" lang="th">น้อย</span><span class="en" lang="en">Few</span><span class="zh" lang="zh-Hans">少</span></button>
+            <button class="btn" type="button" data-set="dogs" data-value="many" aria-pressed="false"><span class="th" lang="th">เยอะ</span><span class="en" lang="en">Many</span><span class="zh" lang="zh-Hans">多</span></button>
           </div>
         </div>
       </div>
 
       <div class="drive-side">
         <div class="focus field-black" data-focus aria-live="off">
-          <span class="label"><span class="th" lang="th">มองผ่านตารถคันนี้</span><span class="en" lang="en">Looking through this car’s eyes</span></span>
+          <span class="label"><span class="th" lang="th">มองผ่านตารถคันนี้</span><span class="en" lang="en">Looking through this car’s eyes</span><span class="zh" lang="zh-Hans">透过这辆车的眼睛看</span></span>
           <p class="focus-name" data-focus-name></p>
-          <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span></span><span class="num" data-focus-sees></span></p>
-          <p class="focus-row unnamed" data-focus-unnamed-row hidden><span class="label"><span class="th" lang="th">เรียกไม่ถูก</span><span class="en" lang="en">Cannot name</span></span><span class="unnamed" data-focus-unnamed></span></p>
-          <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span></span><span data-focus-does></span></p>
-          <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดเต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span></button>
+          <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span><span class="zh" lang="zh-Hans">看见</span></span><span class="num" data-focus-sees></span></p>
+          <p class="focus-row unnamed" data-focus-unnamed-row hidden><span class="label"><span class="th" lang="th">เรียกไม่ถูก</span><span class="en" lang="en">Cannot name</span><span class="zh" lang="zh-Hans">无法命名</span></span><span class="unnamed" data-focus-unnamed></span></p>
+          <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span><span class="zh" lang="zh-Hans">决定</span></span><span data-focus-does></span></p>
+          <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดเต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span><span class="zh" lang="zh-Hans">全屏 ↗</span></button>
           <button class="btn" type="button" data-blind aria-pressed="false"></button>
         </div>
         <div class="cards" data-cards></div>
-        <p class="micro legend"><span class="th" lang="th">สีขาว = ระวัง · สีเทา = ปกติ · สีเหลือง = ใจร้อน · กรอบและพัดสีส้ม = สิ่งที่กล้องของรถเห็น · จุดขาว = คน · ตัวเหลืองเล็ก = สุนัข · แถบเทาคือทางเท้า แถบเขียวคืออาคาร · เสาไฟและเสาไฟฟ้าไม่มีกรอบ เพราะ COCO ไม่มีชื่อสิ่งเหล่านั้น</span><span class="en" lang="en">White = careful · grey = normal · yellow = hasty · orange boxes and fan = what a car’s camera sees · white dots = people · small yellow shapes = dogs · grey strip = footway · olive blocks = buildings · lamp posts and utility poles have no box, because COCO has no name for them</span></p>
+        <p class="micro legend"><span class="th" lang="th">สีขาว = ระวัง · สีเทา = ปกติ · สีเหลือง = ใจร้อน · กรอบและพัดสีส้ม = สิ่งที่กล้องของรถเห็น · จุดขาว = คน · ตัวเหลืองเล็ก = สุนัข · แถบเทาคือทางเท้า แถบเขียวคืออาคาร · เสาไฟและเสาไฟฟ้าไม่มีกรอบ เพราะ COCO ไม่มีชื่อสิ่งเหล่านั้น</span><span class="en" lang="en">White = careful · grey = normal · yellow = hasty · orange boxes and fan = what a car’s camera sees · white dots = people · small yellow shapes = dogs · grey strip = footway · olive blocks = buildings · lamp posts and utility poles have no box, because COCO has no name for them</span><span class="zh" lang="zh-Hans">白色 = 小心 · 灰色 = 正常 · 黄色 = 匆忙 · 橙色的框和扇形 = 一辆车的摄像头看见的范围 · 白点 = 人 · 小的黄色形状 = 狗 · 灰色长条 = 人行道 · 橄榄色块 = 建筑 · 路灯柱和电线杆没有框，因为 COCO 没有给它们名字</span></p>
       </div>
     </div>
   </section>
@@ -146,28 +147,28 @@
   <section class="chapter gate-note" id="lesson" aria-labelledby="note-h">
     <header>
       <span class="chapter-no">★</span>
-      <h2 id="note-h"><span class="th" lang="th">สิ่งที่เพิ่งเกิดขึ้น</span><span class="en" lang="en">What just happened</span></h2>
+      <h2 id="note-h"><span class="th" lang="th">สิ่งที่เพิ่งเกิดขึ้น</span><span class="en" lang="en">What just happened</span><span class="zh" lang="zh-Hans">刚才发生了什么</span></h2>
     </header>
     <div class="chapter-body prose">
-      <p><span class="th" lang="th">เมื่อปี 2007 หลุยส์ ฟอน อาน์ (Luis von Ahn) ที่มหาวิทยาลัยคาร์เนกีเมลลอนทำ reCAPTCHA เขาคิดว่า ๆ ถ้าคนต้องพิสูจน์ว่าตัวเองเป็นมนุษย์อยู่แล้ว ก็ให้เขาช่วยอ่านหนังสือที่คอมพิวเตอร์อ่านไม่ออกไปด้วย ต่อมาในปี 2012 เขาสลับมาใช้ภาพถนนจาก Street View แทน คนที่กด “ฉันไม่ใช่โรงหุ่นยนต์” จึงได้กลายเป็นผู้ติดป้ายภาพถนนให้กูเกิลโดยไม่รู้ตัว Google เขียนไว้เองว่าทุกครั้งที่แก้ CAPTCHAs “ช่วยทำดิจิทัลไซซ์ตัวอักษร ทำภาพและสร้างชุดข้อมูลสำหรับการเรียนรู้ของเครื่อง”</span><span class="en" lang="en">In 2007, Luis von Ahn at Carnegie Mellon had an idea for reCAPTCHA: if you are going to make someone prove they are human, make them read a word the computer cannot, while they are at it. By 2012 it had switched to Street View photographs, so that clicking “I'm not a robot” also produced human-labelled images of streets. Google puts it plainly: every solved CAPTCHA “helps digitize text, annotate images, and build machine learning datasets”.</span></p>
-      <p><span class="th" lang="th">สองข้อที่เราไม่อยากพูดเกินจริง: ป้ายที่ได้จากการท้าทายเหล่านั้นฝึกโมเดลของกูเกิล ไม่ใช่ของเว็บนี้ แต่ตอนนี้เรื่องนั้นจบครบในหน้านี้แล้ว ในขนาดของของเล่น: เมื่อคุณผ่าน ปุ่ม “สอนเครื่อง” จะเอาฉลากเก้าช่องที่คุณเพิ่งทำ ไปฝึกตัวเรียนรู้เล็ก ๆ ในแท็บนี้ — ตารางความสว่าง 8×8 กับตัวกรองสีสามสีที่คนเลือกให้มัน — แล้วให้มันทำแบบทดสอบชุดใหม่ที่ไม่เคยเห็นทันที คะแนนที่ได้คือขนาดจริงของฉลากเก้าช่อง ส่วนตัวเลขของ reCAPTCHA มาจากคนแก้วันละหลายล้านครั้ง ส่วนตัวที่รันในเบราว์เซอร์ของคุณคือ SSDLite บน MobileNetV2 ที่ฝึกด้วย COCO และ ImageNet ซึ่งก็มาจากคนเช่นกัน แต่คนที่ทำงานนั้นได้ค่าจ้างและใช้เวลาเป็นปี ๆ และวันที่เครื่องผ่านการท้าทายนั้นได้จริงก็มีบันทึกไว้: Goodfellow และคณะ (2014) อ่าน CAPTCHAs แบบบิดเบือนที่ยากที่สุดได้ 99.8% ขณะที่คนทำได้ 33%</span><span class="en" lang="en">Two limits we will not paper over. First: those challenge labels trained Google's models, not this site's — until this page learned to finish that story at toy scale. When you pass, the “Teach the machine” button hands your nine labels to a tiny learner inside this tab — an 8×8 grid of brightness plus three colour filters a human chose for it — and it immediately takes a grid it has never seen. Its score is the honest size of nine labels; reCAPTCHA's numbers came from millions of people solving one every day. The detector running in your browser is SSDLite on MobileNetV2, trained on COCO and ImageNet — also human-labelled, but by people who were paid, over years. And the moment the machine passed the test is on the record: Goodfellow and colleagues (2014) read the hardest distorted-text CAPTCHAs at 99.8%, while people managed 33%. That is why the challenges had to change shape each time.</span></p>
-      <p class="micro"><span class="th" lang="th">แหล่งอ้างอิง: <a href="https://www.google.com/recaptcha/intro/">Google reCAPTCHA — คำอธิบายของกูเกิลเอง</a> · von Ahn และคณะ (2008) <i>reCAPTCHA: Human-assisted OCR</i> · Goodfellow และคณะ (2014) <i>Multi-digit Number Recognition from Street View Imagery</i> · Lin และคณะ (2014) <i>Microsoft COCO</i></span><span class="en" lang="en">Sources: <a href="https://www.google.com/recaptcha/intro/">Google's own description of reCAPTCHA</a> · von Ahn et al. (2008), reCAPTCHA: Human-assisted character recognition · Goodfellow et al. (2014), Multi-digit Number Recognition from Street View Imagery · Lin et al. (2014), Microsoft COCO.</span></p>
-      <p class="micro"><span class="th" lang="th">ข้อสำคัญด้านการเข้าถึง: ปุ่ม “ข้าม” ใช้ได้เสมอ ไม่มีตัวจับเวลา และทุกช่องเลือกได้ด้วยแป้นพิมพ์ ถ้าคุณใช้โปรแกรมอ่านหน้าจอหรือไม่สะดวกกับภาพ ให้ข้ามไปได้เลย — ห้องข้างบนไม่ได้มีกุญแจที่คุณต้องผ่าน</span><span class="en" lang="en">On access: the Skip button is always there, there is no timer, and every square is reachable by keyboard. If you use a screen reader, or pictures are not how you take this in, skip it — the room above does not come with a key.</span></p>
+      <p><span class="th" lang="th">เมื่อปี 2007 หลุยส์ ฟอน อาน์ (Luis von Ahn) ที่มหาวิทยาลัยคาร์เนกีเมลลอนทำ reCAPTCHA เขาคิดว่า ๆ ถ้าคนต้องพิสูจน์ว่าตัวเองเป็นมนุษย์อยู่แล้ว ก็ให้เขาช่วยอ่านหนังสือที่คอมพิวเตอร์อ่านไม่ออกไปด้วย ต่อมาในปี 2012 เขาสลับมาใช้ภาพถนนจาก Street View แทน คนที่กด “ฉันไม่ใช่โรงหุ่นยนต์” จึงได้กลายเป็นผู้ติดป้ายภาพถนนให้กูเกิลโดยไม่รู้ตัว Google เขียนไว้เองว่าทุกครั้งที่แก้ CAPTCHAs “ช่วยทำดิจิทัลไซซ์ตัวอักษร ทำภาพและสร้างชุดข้อมูลสำหรับการเรียนรู้ของเครื่อง”</span><span class="en" lang="en">In 2007, Luis von Ahn at Carnegie Mellon had an idea for reCAPTCHA: if you are going to make someone prove they are human, make them read a word the computer cannot, while they are at it. By 2012 it had switched to Street View photographs, so that clicking “I'm not a robot” also produced human-labelled images of streets. Google puts it plainly: every solved CAPTCHA “helps digitize text, annotate images, and build machine learning datasets”.</span><span class="zh" lang="zh-Hans">2007 年，Carnegie Mellon 的 Luis von Ahn 为 reCAPTCHA 想到一个办法：既然要让一个人证明自己是人，那就让他顺手读出一个计算机读不出的词。到 2012 年，它改成了使用 Street View 的照片，于是点击“我不是机器人”，同时也会产生由人标注的街道图像。Google 说得很明白：每解出一次 CAPTCHA，“都有助于把文字数字化、给图像做标注，并建立机器学习的数据集”。</span></p>
+      <p><span class="th" lang="th">สองข้อที่เราไม่อยากพูดเกินจริง: ป้ายที่ได้จากการท้าทายเหล่านั้นฝึกโมเดลของกูเกิล ไม่ใช่ของเว็บนี้ แต่ตอนนี้เรื่องนั้นจบครบในหน้านี้แล้ว ในขนาดของของเล่น: เมื่อคุณผ่าน ปุ่ม “สอนเครื่อง” จะเอาฉลากเก้าช่องที่คุณเพิ่งทำ ไปฝึกตัวเรียนรู้เล็ก ๆ ในแท็บนี้ — ตารางความสว่าง 8×8 กับตัวกรองสีสามสีที่คนเลือกให้มัน — แล้วให้มันทำแบบทดสอบชุดใหม่ที่ไม่เคยเห็นทันที คะแนนที่ได้คือขนาดจริงของฉลากเก้าช่อง ส่วนตัวเลขของ reCAPTCHA มาจากคนแก้วันละหลายล้านครั้ง ส่วนตัวที่รันในเบราว์เซอร์ของคุณคือ SSDLite บน MobileNetV2 ที่ฝึกด้วย COCO และ ImageNet ซึ่งก็มาจากคนเช่นกัน แต่คนที่ทำงานนั้นได้ค่าจ้างและใช้เวลาเป็นปี ๆ และวันที่เครื่องผ่านการท้าทายนั้นได้จริงก็มีบันทึกไว้: Goodfellow และคณะ (2014) อ่าน CAPTCHAs แบบบิดเบือนที่ยากที่สุดได้ 99.8% ขณะที่คนทำได้ 33%</span><span class="en" lang="en">Two limits we will not paper over. First: those challenge labels trained Google's models, not this site's — until this page learned to finish that story at toy scale. When you pass, the “Teach the machine” button hands your nine labels to a tiny learner inside this tab — an 8×8 grid of brightness plus three colour filters a human chose for it — and it immediately takes a grid it has never seen. Its score is the honest size of nine labels; reCAPTCHA's numbers came from millions of people solving one every day. The detector running in your browser is SSDLite on MobileNetV2, trained on COCO and ImageNet — also human-labelled, but by people who were paid, over years. And the moment the machine passed the test is on the record: Goodfellow and colleagues (2014) read the hardest distorted-text CAPTCHAs at 99.8%, while people managed 33%. That is why the challenges had to change shape each time.</span><span class="zh" lang="zh-Hans">有两个限度，我们不会掩盖。第一：那些挑战里的标注训练的是 Google 的模型，不是这个网站的——直到这个页面学会用一个很小的规模，把这个故事做完。你通过之后，“教给机器”按钮会把你的九个标注交给这个标签页里的一个很小的学习程序——一个 8×8 的亮度网格，加上人替它选好的三个颜色滤波器——然后它立刻处理一个它从未见过的网格。它的分数对应的就是九个标注这一真实规模；reCAPTCHA 的数字来自每天几百万人各解一次。在你的浏览器里运行的检测器，是 MobileNetV2 上的 SSDLite，用 COCO 和 ImageNet 训练——同样是人标注的，但是由获得报酬的人，花了许多年。机器通过这项测试的那一刻也有记录：Goodfellow 及其同事（2014）读那些最难的扭曲文字 CAPTCHA，正确率是 99.8%，而人只达到 33%。所以这些挑战每次都必须换成另一种样子。</span></p>
+      <p class="micro"><span class="th" lang="th">แหล่งอ้างอิง: <a href="https://www.google.com/recaptcha/intro/">Google reCAPTCHA — คำอธิบายของกูเกิลเอง</a> · von Ahn และคณะ (2008) <i>reCAPTCHA: Human-assisted OCR</i> · Goodfellow และคณะ (2014) <i>Multi-digit Number Recognition from Street View Imagery</i> · Lin และคณะ (2014) <i>Microsoft COCO</i></span><span class="en" lang="en">Sources: <a href="https://www.google.com/recaptcha/intro/">Google's own description of reCAPTCHA</a> · von Ahn et al. (2008), reCAPTCHA: Human-assisted character recognition · Goodfellow et al. (2014), Multi-digit Number Recognition from Street View Imagery · Lin et al. (2014), Microsoft COCO.</span><span class="zh" lang="zh-Hans">来源：<a href="https://www.google.com/recaptcha/intro/">Google 自己对 reCAPTCHA 的说明</a> · von Ahn et al. (2008), reCAPTCHA: Human-assisted character recognition · Goodfellow et al. (2014), Multi-digit Number Recognition from Street View Imagery · Lin et al. (2014), Microsoft COCO.</span></p>
+      <p class="micro"><span class="th" lang="th">ข้อสำคัญด้านการเข้าถึง: ปุ่ม “ข้าม” ใช้ได้เสมอ ไม่มีตัวจับเวลา และทุกช่องเลือกได้ด้วยแป้นพิมพ์ ถ้าคุณใช้โปรแกรมอ่านหน้าจอหรือไม่สะดวกกับภาพ ให้ข้ามไปได้เลย — ห้องข้างบนไม่ได้มีกุญแจที่คุณต้องผ่าน</span><span class="en" lang="en">On access: the Skip button is always there, there is no timer, and every square is reachable by keyboard. If you use a screen reader, or pictures are not how you take this in, skip it — the room above does not come with a key.</span><span class="zh" lang="zh-Hans">关于无障碍：跳过按钮一直在，没有计时，每一个方块都可以用键盘到达。如果你使用屏幕阅读器，或者你不是靠图像来理解这些，就跳过——上面的房间不需要这把钥匙。</span></p>
     </div>
   </section>
 
   <section class="chapter" id="decide" aria-labelledby="decide-h">
     <header>
       <span class="chapter-no">01</span>
-      <h2 id="decide-h"><span class="th" lang="th">รถตัดสินใจอย่างไร</span><span class="en" lang="en">How a car decides</span></h2>
+      <h2 id="decide-h"><span class="th" lang="th">รถตัดสินใจอย่างไร</span><span class="en" lang="en">How a car decides</span><span class="zh" lang="zh-Hans">一辆车如何做决定</span></h2>
     </header>
     <div class="chapter-body">
       <figure class="flow-fig pipe-scroll" id="decide-figure">
         <ol class="steps drive-stack">
-          <li><strong class="en" lang="en">See</strong><strong class="th" lang="th">มอง</strong> <span class="en" lang="en">Boxes, labels and confidence. Far, small or dark things are missed more often.</span><span class="th" lang="th">กรอบ ชื่อ และความมั่นใจ สิ่งที่ไกล เล็ก หรือมืดจะพลาดบ่อยขึ้น</span></li>
-          <li><strong class="en" lang="en">Remember</strong><strong class="th" lang="th">จำไว้</strong> <span class="en" lang="en">Keeps a thing for 0.7 s after the camera loses it.</span><span class="th" lang="th">จำสิ่งที่เห็นไว้ 0.7 วินาที แม้กล้องจะมองไม่เห็นแล้ว</span></li>
-          <li><strong class="en" lang="en">Predict</strong><strong class="th" lang="th">คาดเดา</strong> <span class="en" lang="en">Where will it be in 3 s — inside my lane, or not?</span><span class="th" lang="th">อีก 3 วินาทีมันจะอยู่ตรงไหน จะเข้ามาในเลนของฉันไหม</span></li>
-          <li><strong class="en" lang="en">Choose a speed</strong><strong class="th" lang="th">เลือกความเร็ว</strong> <span class="en" lang="en">Each thing asks for one speed. The most careful request wins.</span><span class="th" lang="th">ทุกสิ่งขอความเร็วของมัน ฟังคำขอที่ระวังที่สุด</span></li>
+          <li><strong class="en" lang="en">See</strong><strong class="zh" lang="zh-Hans">看</strong><strong class="th" lang="th">มอง</strong> <span class="en" lang="en">Boxes, labels and confidence. Far, small or dark things are missed more often.</span><span class="zh" lang="zh-Hans">框、标注和置信度。远的、小的或暗的东西，更容易被漏掉。</span><span class="th" lang="th">กรอบ ชื่อ และความมั่นใจ สิ่งที่ไกล เล็ก หรือมืดจะพลาดบ่อยขึ้น</span></li>
+          <li><strong class="en" lang="en">Remember</strong><strong class="zh" lang="zh-Hans">记住</strong><strong class="th" lang="th">จำไว้</strong> <span class="en" lang="en">Keeps a thing for 0.7 s after the camera loses it.</span><span class="zh" lang="zh-Hans">摄像头失去这个东西之后，还会保留 0.7 s。</span><span class="th" lang="th">จำสิ่งที่เห็นไว้ 0.7 วินาที แม้กล้องจะมองไม่เห็นแล้ว</span></li>
+          <li><strong class="en" lang="en">Predict</strong><strong class="zh" lang="zh-Hans">预测</strong><strong class="th" lang="th">คาดเดา</strong> <span class="en" lang="en">Where will it be in 3 s — inside my lane, or not?</span><span class="zh" lang="zh-Hans">3 s 后它会在哪里——在我的车道里面，还是不在？</span><span class="th" lang="th">อีก 3 วินาทีมันจะอยู่ตรงไหน จะเข้ามาในเลนของฉันไหม</span></li>
+          <li><strong class="en" lang="en">Choose a speed</strong><strong class="zh" lang="zh-Hans">选择速度</strong><strong class="th" lang="th">เลือกความเร็ว</strong> <span class="en" lang="en">Each thing asks for one speed. The most careful request wins.</span><span class="zh" lang="zh-Hans">每样东西都要求一个速度。最小心的那个要求会胜出。</span><span class="th" lang="th">ทุกสิ่งขอความเร็วของมัน ฟังคำขอที่ระวังที่สุด</span></li>
         </ol>
         <svg class="diagram flow" viewBox="0 0 1000 200">
           <path class="stroke" d="M60 30 L60 90 L130 60 Z"/>
@@ -189,36 +190,36 @@
           <path class="stroke" d="M254 60 H274 M266 52 L275 60 L266 68"/>
           <path class="stroke" d="M474 60 H494 M486 52 L495 60 L486 68"/>
           <path class="stroke" d="M714 60 H734 M726 52 L735 60 L726 68"/>
-          <text class="big en" lang="en" x="140" y="132" text-anchor="middle">1 · See</text>
+          <text class="big en" lang="en" x="140" y="132" text-anchor="middle">1 · See</text><text class="big zh" lang="zh-Hans" x="140" y="132" text-anchor="middle">1 · 看</text>
           <text class="big thai th" lang="th" x="140" y="132" text-anchor="middle">1 · มอง</text>
-          <text class="en" lang="en" x="140" y="156" text-anchor="middle">boxes, labels, confidence</text>
+          <text class="en" lang="en" x="140" y="156" text-anchor="middle">boxes, labels, confidence</text><text class="zh" lang="zh-Hans" x="140" y="156" text-anchor="middle">框、标注、置信度</text>
           <text class="thai th" lang="th" x="140" y="156" text-anchor="middle">กรอบ ชื่อ และความมั่นใจ</text>
-          <text class="en" lang="en" x="140" y="178" text-anchor="middle">far, small, dark = missed more</text>
+          <text class="en" lang="en" x="140" y="178" text-anchor="middle">far, small, dark = missed more</text><text class="zh" lang="zh-Hans" x="140" y="178" text-anchor="middle">远、小、暗 = 更容易漏掉</text>
           <text class="thai th" lang="th" x="140" y="178" text-anchor="middle">ไกล เล็ก มืด = พลาดบ่อยขึ้น</text>
-          <text class="big en" lang="en" x="370" y="132" text-anchor="middle">2 · Remember</text>
+          <text class="big en" lang="en" x="370" y="132" text-anchor="middle">2 · Remember</text><text class="big zh" lang="zh-Hans" x="370" y="132" text-anchor="middle">2 · 记住</text>
           <text class="big thai th" lang="th" x="370" y="132" text-anchor="middle">2 · จำไว้</text>
-          <text class="en" lang="en" x="370" y="156" text-anchor="middle">keeps a thing for 0.7 s</text>
+          <text class="en" lang="en" x="370" y="156" text-anchor="middle">keeps a thing for 0.7 s</text><text class="zh" lang="zh-Hans" x="370" y="156" text-anchor="middle">把一个东西保留 0.7 s</text>
           <text class="thai th" lang="th" x="370" y="156" text-anchor="middle">จำสิ่งที่เห็นไว้ 0.7 วินาที</text>
-          <text class="en" lang="en" x="370" y="178" text-anchor="middle">after the camera loses it</text>
+          <text class="en" lang="en" x="370" y="178" text-anchor="middle">after the camera loses it</text><text class="zh" lang="zh-Hans" x="370" y="178" text-anchor="middle">在摄像头失去它之后</text>
           <text class="thai th" lang="th" x="370" y="178" text-anchor="middle">แม้กล้องจะมองไม่เห็นแล้ว</text>
-          <text class="big en" lang="en" x="610" y="132" text-anchor="middle">3 · Predict</text>
+          <text class="big en" lang="en" x="610" y="132" text-anchor="middle">3 · Predict</text><text class="big zh" lang="zh-Hans" x="610" y="132" text-anchor="middle">3 · 预测</text>
           <text class="big thai th" lang="th" x="610" y="132" text-anchor="middle">3 · คาดเดา</text>
-          <text class="en" lang="en" x="610" y="156" text-anchor="middle">where will it be in 3 s?</text>
+          <text class="en" lang="en" x="610" y="156" text-anchor="middle">where will it be in 3 s?</text><text class="zh" lang="zh-Hans" x="610" y="156" text-anchor="middle">3 s 后它会在哪里？</text>
           <text class="thai th" lang="th" x="610" y="156" text-anchor="middle">อีก 3 วินาทีมันจะอยู่ตรงไหน</text>
-          <text class="en" lang="en" x="610" y="178" text-anchor="middle">inside my lane, or not?</text>
+          <text class="en" lang="en" x="610" y="178" text-anchor="middle">inside my lane, or not?</text><text class="zh" lang="zh-Hans" x="610" y="178" text-anchor="middle">在我的车道里面，还是不在？</text>
           <text class="thai th" lang="th" x="610" y="178" text-anchor="middle">จะเข้ามาในเลนของฉันไหม</text>
-          <text class="big en" lang="en" x="860" y="132" text-anchor="middle">4 · Choose a speed</text>
+          <text class="big en" lang="en" x="860" y="132" text-anchor="middle">4 · Choose a speed</text><text class="big zh" lang="zh-Hans" x="860" y="132" text-anchor="middle">4 · 选择速度</text>
           <text class="big thai th" lang="th" x="860" y="132" text-anchor="middle">4 · เลือกความเร็ว</text>
-          <text class="en" lang="en" x="860" y="156" text-anchor="middle">each thing asks for one</text>
+          <text class="en" lang="en" x="860" y="156" text-anchor="middle">each thing asks for one</text><text class="zh" lang="zh-Hans" x="860" y="156" text-anchor="middle">每样东西要求一个</text>
           <text class="thai th" lang="th" x="860" y="156" text-anchor="middle">ทุกสิ่งขอความเร็วของมัน</text>
-          <text class="en" lang="en" x="860" y="178" text-anchor="middle">the most careful one wins</text>
+          <text class="en" lang="en" x="860" y="178" text-anchor="middle">the most careful one wins</text><text class="zh" lang="zh-Hans" x="860" y="178" text-anchor="middle">最小心的那个胜出</text>
           <text class="thai th" lang="th" x="860" y="178" text-anchor="middle">ฟังคำขอที่ระวังที่สุด</text>
         </svg>
-        <figcaption><span class="th" lang="th">สิบครั้งต่อวินาที รถทุกคันทำสี่ขั้นนี้ แล้วบอกคุณว่าสิ่งไหนทำให้มันชะลอ</span><span class="en" lang="en">Ten times a second, every car runs these four steps — then tells you which thing made it slow down.</span></figcaption>
+        <figcaption><span class="th" lang="th">สิบครั้งต่อวินาที รถทุกคันทำสี่ขั้นนี้ แล้วบอกคุณว่าสิ่งไหนทำให้มันชะลอ</span><span class="en" lang="en">Ten times a second, every car runs these four steps — then tells you which thing made it slow down.</span><span class="zh" lang="zh-Hans">每秒十次，每辆车都走完这四步——然后告诉你，是哪样东西让它减速。</span></figcaption>
       </figure>
       <div class="prose">
-        <p><span class="th" lang="th">ทุกสิ่งที่รถเชื่อว่ามีอยู่ — รถคันหน้า ไฟแดง คนบนทางม้าลาย สุนัขที่กำลังวิ่ง — ถูกถามคำถามเดียวกัน: “ถ้าบนถนนมีแค่สิ่งนี้ ฉันควรเร่งหรือเบรกแค่ไหน” รถเชื่อคำตอบที่ระวังที่สุด และสิ่งนั้นคือเหตุผลที่มันบอกคุณ</span><span class="en" lang="en">Everything the car believes is there — the car ahead, a red light, a person on the zebra, a running dog — is asked the same question: “if you were the only thing on the road, how hard should I speed up or brake?” The car obeys the most careful answer, and that thing is the reason it gives you.</span></p>
-        <p><span class="th" lang="th">สังเกตว่าบางครั้งสุนัขไกล ๆ ถูกเรียกว่า “แมว?” แต่รถก็ยังเบรก สำหรับการขับรถ สิ่งสำคัญคือ “มีอะไรอยู่ตรงนั้น” ไม่ใช่ “มันชื่ออะไร”</span><span class="en" lang="en">Notice that a far-away dog is sometimes called “cat?” — and the car brakes anyway. For driving, what matters is “something is there”, not “what is it called”.</span></p>
+        <p><span class="th" lang="th">ทุกสิ่งที่รถเชื่อว่ามีอยู่ — รถคันหน้า ไฟแดง คนบนทางม้าลาย สุนัขที่กำลังวิ่ง — ถูกถามคำถามเดียวกัน: “ถ้าบนถนนมีแค่สิ่งนี้ ฉันควรเร่งหรือเบรกแค่ไหน” รถเชื่อคำตอบที่ระวังที่สุด และสิ่งนั้นคือเหตุผลที่มันบอกคุณ</span><span class="en" lang="en">Everything the car believes is there — the car ahead, a red light, a person on the zebra, a running dog — is asked the same question: “if you were the only thing on the road, how hard should I speed up or brake?” The car obeys the most careful answer, and that thing is the reason it gives you.</span><span class="zh" lang="zh-Hans">这辆车相信路上存在的每一样东西——前面的车、红灯、斑马线上的一个人、一只正在跑的狗——都被问同一个问题：“如果路上只有你一样东西，我应该用多大力加速，或者用多大力刹车？”车服从最小心的那个回答，那样东西就是它告诉你的原因。</span></p>
+        <p><span class="th" lang="th">สังเกตว่าบางครั้งสุนัขไกล ๆ ถูกเรียกว่า “แมว?” แต่รถก็ยังเบรก สำหรับการขับรถ สิ่งสำคัญคือ “มีอะไรอยู่ตรงนั้น” ไม่ใช่ “มันชื่ออะไร”</span><span class="en" lang="en">Notice that a far-away dog is sometimes called “cat?” — and the car brakes anyway. For driving, what matters is “something is there”, not “what is it called”.</span><span class="zh" lang="zh-Hans">请注意，远处的狗有时会被叫做“猫？”——车仍然会刹车。对驾驶来说，要紧的是“那里有东西”，而不是“它叫什么”。</span></p>
       </div>
     </div>
   </section>
@@ -226,28 +227,28 @@
   <section class="chapter field-quiet" id="drivers" aria-labelledby="drivers-h">
     <header>
       <span class="chapter-no">02</span>
-      <h2 id="drivers-h"><span class="th" lang="th">นิสัยสามแบบ</span><span class="en" lang="en">Three habits</span></h2>
+      <h2 id="drivers-h"><span class="th" lang="th">นิสัยสามแบบ</span><span class="en" lang="en">Three habits</span><span class="zh" lang="zh-Hans">三种习惯</span></h2>
     </header>
     <div class="chapter-body">
       <table class="table habits">
-        <thead><tr><th></th><th><span class="th" lang="th">ระวัง</span><span class="en" lang="en">Careful</span></th><th><span class="th" lang="th">ปกติ</span><span class="en" lang="en">Normal</span></th><th><span class="th" lang="th">ใจร้อน</span><span class="en" lang="en">Hasty</span></th></tr></thead>
+        <thead><tr><th></th><th><span class="th" lang="th">ระวัง</span><span class="en" lang="en">Careful</span><span class="zh" lang="zh-Hans">谨慎</span></th><th><span class="th" lang="th">ปกติ</span><span class="en" lang="en">Normal</span><span class="zh" lang="zh-Hans">正常</span></th><th><span class="th" lang="th">ใจร้อน</span><span class="en" lang="en">Hasty</span><span class="zh" lang="zh-Hans">急躁</span></th></tr></thead>
         <tbody>
-          <tr><th><span class="th" lang="th">มองเห็นไกล (กลางวัน)</span><span class="en" lang="en">Sees as far as (daylight)</span></th><td class="num">50 m</td><td class="num">40 m</td><td class="num">28 m</td></tr>
-          <tr><th><span class="th" lang="th">ความเร็วสูงสุด</span><span class="en" lang="en">Top speed</span></th><td class="num">45 km/h</td><td class="num">50 km/h</td><td class="num">60 km/h</td></tr>
-          <tr><th><span class="th" lang="th">เว้นระยะจากคันหน้า</span><span class="en" lang="en">Gap to the car ahead</span></th><td class="num">1.8 s</td><td class="num">1.2 s</td><td class="num">0.6 s</td></tr>
-          <tr><th><span class="th" lang="th">หยุดให้คนที่รอข้าม</span><span class="en" lang="en">Stops for people waiting to cross</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
-          <tr><th><span class="th" lang="th">ชะลอเมื่อเห็นสุนัขข้างทาง</span><span class="en" lang="en">Slows for a dog by the road</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
-          <tr><th><span class="th" lang="th">ไม่ขับเร็วเกินระยะที่มองเห็น</span><span class="en" lang="en">Never faster than it can see</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span></td></tr>
+          <tr><th><span class="th" lang="th">มองเห็นไกล (กลางวัน)</span><span class="en" lang="en">Sees as far as (daylight)</span><span class="zh" lang="zh-Hans">能看多远（白天）</span></th><td class="num">50 m</td><td class="num">40 m</td><td class="num">28 m</td></tr>
+          <tr><th><span class="th" lang="th">ความเร็วสูงสุด</span><span class="en" lang="en">Top speed</span><span class="zh" lang="zh-Hans">最高速度</span></th><td class="num">45 km/h</td><td class="num">50 km/h</td><td class="num">60 km/h</td></tr>
+          <tr><th><span class="th" lang="th">เว้นระยะจากคันหน้า</span><span class="en" lang="en">Gap to the car ahead</span><span class="zh" lang="zh-Hans">和前车的间距</span></th><td class="num">1.8 s</td><td class="num">1.2 s</td><td class="num">0.6 s</td></tr>
+          <tr><th><span class="th" lang="th">หยุดให้คนที่รอข้าม</span><span class="en" lang="en">Stops for people waiting to cross</span><span class="zh" lang="zh-Hans">会为等着过马路的人停车</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span><span class="zh" lang="zh-Hans">是</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span><span class="zh" lang="zh-Hans">是</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span><span class="zh" lang="zh-Hans">否</span></td></tr>
+          <tr><th><span class="th" lang="th">ชะลอเมื่อเห็นสุนัขข้างทาง</span><span class="en" lang="en">Slows for a dog by the road</span><span class="zh" lang="zh-Hans">会为路边的狗减速</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span><span class="zh" lang="zh-Hans">是</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span><span class="zh" lang="zh-Hans">否</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span><span class="zh" lang="zh-Hans">否</span></td></tr>
+          <tr><th><span class="th" lang="th">ไม่ขับเร็วเกินระยะที่มองเห็น</span><span class="en" lang="en">Never faster than it can see</span><span class="zh" lang="zh-Hans">从不超过能看见的速度</span></th><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span><span class="zh" lang="zh-Hans">是</span></td><td><span class="th" lang="th">ใช่</span><span class="en" lang="en">Yes</span><span class="zh" lang="zh-Hans">是</span></td><td><span class="th" lang="th">ไม่</span><span class="en" lang="en">No</span><span class="zh" lang="zh-Hans">否</span></td></tr>
         </tbody>
       </table>
       <div class="prose">
-        <h3><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try this</span></h3>
-        <p class="micro"><span class="th" lang="th">ทุกข้อใช้สนาม “วงเวียนและแยก” ปุ่มจะตั้งสนาม ฟ้า และรถให้ แล้วพาคุณกลับขึ้นไปดู</span><span class="en" lang="en">Each one uses the Roundabout &amp; junction track. The button sets the track, sky and car for you, then takes you back up to watch.</span></p>
+        <h3><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try this</span><span class="zh" lang="zh-Hans">试一试这个</span></h3>
+        <p class="micro"><span class="th" lang="th">ทุกข้อใช้สนาม “วงเวียนและแยก” ปุ่มจะตั้งสนาม ฟ้า และรถให้ แล้วพาคุณกลับขึ้นไปดู</span><span class="en" lang="en">Each one uses the Roundabout &amp; junction track. The button sets the track, sky and car for you, then takes you back up to watch.</span><span class="zh" lang="zh-Hans">每一项都使用“环岛与路口”这条赛道。这个按钮会替你设好赛道、天空和车辆，然后带你回到上面去看。</span></p>
         <ol>
-          <li><span class="th" lang="th">เปลี่ยนเป็น “กลางคืน” แล้วดูรถคันที่ 3 และ 6 มันมองเห็นแค่ 17 เมตร แต่ยังขับ 60 กม./ชม. — ต้องใช้ราว 14 เมตรแค่เพื่อเบรก</span><span class="en" lang="en">Switch to Night and watch cars 3 and 6. They can see only 17 m but still drive at 60 km/h — braking alone takes about 14 m.</span> <button class="btn try-go" type="button" data-try="night"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span></button></li>
-          <li><span class="th" lang="th">ปิดกล้องของรถคันที่ 1 มันจะฝ่าไฟแดงเพราะมองไม่เห็นไฟ แล้วดูว่าใครต้องหลบให้มัน — ความปลอดภัยบนถนนไม่ได้มาจากรถคันเดียว</span><span class="en" lang="en">Cover car 1’s camera. It runs the red light because it cannot see it — watch who has to dodge it. Safety on a road never comes from one car alone.</span> <button class="btn try-go" type="button" data-try="blind"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span></button></li>
-          <li><span class="th" lang="th">ตั้งสุนัขเป็น “เยอะ” รถคันไหนชะลอก่อนที่สุนัขจะวิ่ง</span><span class="en" lang="en">Set dogs to Many. Which cars slow down before the dog runs?</span> <button class="btn try-go" type="button" data-try="dogs"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span></button></li>
-          <li><span class="th" lang="th">ใครได้รอบมากที่สุด และคุ้มกับการชนไหม คนที่รอข้ามถนนคิดอย่างไร</span><span class="en" lang="en">Who gets the most laps — and is it worth the crashes? What would the person waiting at the zebra say?</span> <button class="btn try-go" type="button" data-try="laps"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span></button></li>
+          <li><span class="th" lang="th">เปลี่ยนเป็น “กลางคืน” แล้วดูรถคันที่ 3 และ 6 มันมองเห็นแค่ 17 เมตร แต่ยังขับ 60 กม./ชม. — ต้องใช้ราว 14 เมตรแค่เพื่อเบรก</span><span class="en" lang="en">Switch to Night and watch cars 3 and 6. They can see only 17 m but still drive at 60 km/h — braking alone takes about 14 m.</span><span class="zh" lang="zh-Hans">切换到夜晚，看第 3 辆和第 6 辆车。它们只能看见 17 m，却仍然以 60 km/h 行驶——只是刹车就要大约 14 m。</span> <button class="btn try-go" type="button" data-try="night"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span><span class="zh" lang="zh-Hans">设好 ▶</span></button></li>
+          <li><span class="th" lang="th">ปิดกล้องของรถคันที่ 1 มันจะฝ่าไฟแดงเพราะมองไม่เห็นไฟ แล้วดูว่าใครต้องหลบให้มัน — ความปลอดภัยบนถนนไม่ได้มาจากรถคันเดียว</span><span class="en" lang="en">Cover car 1’s camera. It runs the red light because it cannot see it — watch who has to dodge it. Safety on a road never comes from one car alone.</span><span class="zh" lang="zh-Hans">遮住 1 号车的摄像头。它会闯过红灯，因为它看不见灯——看谁不得不躲开它。路上的安全从来不是只靠一辆车。</span> <button class="btn try-go" type="button" data-try="blind"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span><span class="zh" lang="zh-Hans">设好 ▶</span></button></li>
+          <li><span class="th" lang="th">ตั้งสุนัขเป็น “เยอะ” รถคันไหนชะลอก่อนที่สุนัขจะวิ่ง</span><span class="en" lang="en">Set dogs to Many. Which cars slow down before the dog runs?</span><span class="zh" lang="zh-Hans">把狗设为“多”。哪些车会在狗跑起来之前减速？</span> <button class="btn try-go" type="button" data-try="dogs"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span><span class="zh" lang="zh-Hans">设好 ▶</span></button></li>
+          <li><span class="th" lang="th">ใครได้รอบมากที่สุด และคุ้มกับการชนไหม คนที่รอข้ามถนนคิดอย่างไร</span><span class="en" lang="en">Who gets the most laps — and is it worth the crashes? What would the person waiting at the zebra say?</span><span class="zh" lang="zh-Hans">谁的圈数最多——为此发生的碰撞值得吗？在斑马线旁等待的人会说什么？</span> <button class="btn try-go" type="button" data-try="laps"><span class="th" lang="th">ตั้งให้เลย ▶</span><span class="en" lang="en">Set it up ▶</span><span class="zh" lang="zh-Hans">设好 ▶</span></button></li>
         </ol>
       </div>
     </div>
@@ -256,22 +257,22 @@
   <section class="chapter" id="honest" aria-labelledby="honest-h">
     <header>
       <span class="chapter-no">03</span>
-      <h2 id="honest-h"><span class="th" lang="th">ตรงไหนจริง ตรงไหนจำลอง</span><span class="en" lang="en">What is real, what is pretend</span></h2>
+      <h2 id="honest-h"><span class="th" lang="th">ตรงไหนจริง ตรงไหนจำลอง</span><span class="en" lang="en">What is real, what is pretend</span><span class="zh" lang="zh-Hans">哪些是真的，哪些是假装的</span></h2>
     </header>
     <div class="chapter-body prose">
-      <p><span class="th" lang="th">กล้องในห้องนี้เป็นการจำลอง ไม่ใช่โครงข่ายประสาทเทียม: สิ่งที่อยู่ในพัดสีส้มถูก “เห็น” ด้วยโอกาสที่ลดลงตามระยะ ขนาด และแสง — รูปแบบเดียวกับที่ตัวตรวจจับจริงพลาด ถ้าอยากเห็นตัวตรวจจับจริงทำงาน ไปที่ <a href="/games">ห้องเกม</a></span><span class="en" lang="en">The camera in this room is simulated, not a neural network: whatever is inside the orange fan is “seen” with a chance that falls with distance, size and light — the same shape of mistake a real detector makes. To watch the real detector at work, go to <a href="/games">the games room</a>.</span></p>
-      <p><span class="th" lang="th">การเลือกความเร็วใช้แบบจำลองผู้ขับขี่อัจฉริยะ (Intelligent Driver Model; Treiber, Hennecke &amp; Helbing, 2000) ส่วนการคาดว่าใครจะเข้ามาในเลน ยืมแนวคิดจากตัววางแผนแบบสุ่มตัวอย่างเส้นทาง เช่น Frenetix ของทีม TUM-AVS มหาวิทยาลัยเทคนิคมิวนิก (Trauth et al., 2024) แต่ย่อลงเหลือไม่กี่สิบบรรทัด</span><span class="en" lang="en">Choosing a speed uses the Intelligent Driver Model (Treiber, Hennecke &amp; Helbing, 2000). Predicting who will enter the lane borrows the idea behind sampling planners such as Frenetix from TUM’s autonomous-vehicle group (Trauth et al., 2024) — shrunk to a few dozen lines.</span></p>
-      <p><span class="th" lang="th">รถจริงใช้ทั้งกล้อง เรดาร์ ไลดาร์ และแผนที่ละเอียด ถูกทดสอบเป็นล้านกิโลเมตร และยังพลาดได้ ห้องนี้ไม่ได้เรียนรู้อะไรเอง กติกาทุกข้อเขียนด้วยมือ — เพื่อให้คุณอ่านเหตุผลของมันได้ทุกครั้ง</span><span class="en" lang="en">Real cars combine cameras, radar, lidar and detailed maps, are tested over millions of kilometres, and still make mistakes. Nothing in this room learns by itself; every rule is written by hand — so that you can always read its reason.</span></p>
+      <p><span class="th" lang="th">กล้องในห้องนี้เป็นการจำลอง ไม่ใช่โครงข่ายประสาทเทียม: สิ่งที่อยู่ในพัดสีส้มถูก “เห็น” ด้วยโอกาสที่ลดลงตามระยะ ขนาด และแสง — รูปแบบเดียวกับที่ตัวตรวจจับจริงพลาด ถ้าอยากเห็นตัวตรวจจับจริงทำงาน ไปที่ <a href="/games">ห้องเกม</a></span><span class="en" lang="en">The camera in this room is simulated, not a neural network: whatever is inside the orange fan is “seen” with a chance that falls with distance, size and light — the same shape of mistake a real detector makes. To watch the real detector at work, go to <a href="/games">the games room</a>.</span><span class="zh" lang="zh-Hans">这个房间里的摄像头是模拟的，不是神经网络：橙色扇形里面的东西会以一定的概率被“看见”，这个概率随着距离、大小和光线而下降——错误的形态和真实的检测器一样。要看真实的检测器怎样工作，请到 <a href="/games">游戏房间</a>。</span></p>
+      <p><span class="th" lang="th">การเลือกความเร็วใช้แบบจำลองผู้ขับขี่อัจฉริยะ (Intelligent Driver Model; Treiber, Hennecke &amp; Helbing, 2000) ส่วนการคาดว่าใครจะเข้ามาในเลน ยืมแนวคิดจากตัววางแผนแบบสุ่มตัวอย่างเส้นทาง เช่น Frenetix ของทีม TUM-AVS มหาวิทยาลัยเทคนิคมิวนิก (Trauth et al., 2024) แต่ย่อลงเหลือไม่กี่สิบบรรทัด</span><span class="en" lang="en">Choosing a speed uses the Intelligent Driver Model (Treiber, Hennecke &amp; Helbing, 2000). Predicting who will enter the lane borrows the idea behind sampling planners such as Frenetix from TUM’s autonomous-vehicle group (Trauth et al., 2024) — shrunk to a few dozen lines.</span><span class="zh" lang="zh-Hans">选择速度时使用的是智能驾驶员模型 Intelligent Driver Model（Treiber, Hennecke &amp; Helbing, 2000）。预测谁会进入车道，借用了采样规划器的想法，例如 TUM 自动驾驶研究组的 Frenetix（Trauth et al., 2024）——被缩成了几十行代码。</span></p>
+      <p><span class="th" lang="th">รถจริงใช้ทั้งกล้อง เรดาร์ ไลดาร์ และแผนที่ละเอียด ถูกทดสอบเป็นล้านกิโลเมตร และยังพลาดได้ ห้องนี้ไม่ได้เรียนรู้อะไรเอง กติกาทุกข้อเขียนด้วยมือ — เพื่อให้คุณอ่านเหตุผลของมันได้ทุกครั้ง</span><span class="en" lang="en">Real cars combine cameras, radar, lidar and detailed maps, are tested over millions of kilometres, and still make mistakes. Nothing in this room learns by itself; every rule is written by hand — so that you can always read its reason.</span><span class="zh" lang="zh-Hans">真实的汽车会把摄像头、雷达、激光雷达和详细的地图合在一起，经过数百万公里的测试，仍然会出错。这个房间里没有任何东西会自己学习；每一条规则都是人手写下的——这样你总能读到它的理由。</span></p>
     </div>
   </section>
 
 <dialog class="driver-dialog" data-driver-dialog aria-labelledby="driver-title">
   <div class="driver-shell">
-    <header class="driver-head"><h2 id="driver-title" data-driver-title></h2><button class="btn" data-driver-close><span class="th" lang="th">ปิด ×</span><span class="en" lang="en">Close ×</span></button></header>
-    <div class="driver-screen"><canvas data-windshield role="img" data-aria-th="มุมมองคนขับจำลอง พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="Simulated moving windshield view with detected-object boxes"></canvas></div>
+    <header class="driver-head"><h2 id="driver-title" data-driver-title></h2><button class="btn" data-driver-close><span class="th" lang="th">ปิด ×</span><span class="en" lang="en">Close ×</span><span class="zh" lang="zh-Hans">关闭 ×</span></button></header>
+    <div class="driver-screen"><canvas data-windshield role="img" data-aria-th="มุมมองคนขับจำลอง พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="Simulated moving windshield view with detected-object boxes" data-aria-zh="模拟移动的挡风玻璃视野，带有检测到的物体框"></canvas></div>
     <div class="driver-dashboard"><p data-driver-speed class="num"></p><p data-driver-action></p><p data-driver-math class="micro"></p></div>
-    <div class="controls"><button class="btn" data-driver-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span></button><button class="btn" data-driver-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span></button><button class="btn" data-driver-pause><span class="th" lang="th">หยุด / เล่นต่อ</span><span class="en" lang="en">Pause / resume</span></button><button class="btn" data-driver-weather><span class="th" lang="th">เปลี่ยนอากาศ</span><span class="en" lang="en">Change weather</span></button><button class="btn" data-driver-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span></button></div>
-    <p class="driver-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว เส้นประ = จำจากเฟรมก่อน สิ่งที่พลาดจะไม่มีกรอบ อุปสรรคด้านข้างอาจอยู่นอกจอนี้</span><span class="en" lang="en">Drawn from the actual map positions; this is a teaching simulation, not real camera footage or a neural detector. Yellow = detected or remembered. Orange = affects speed. Dashed = remembered from an earlier frame. Missed objects have no box. Side-camera detections may be outside this front view.</span></p>
+    <div class="controls"><button class="btn" data-driver-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span><span class="zh" lang="zh-Hans">← 上一辆车</span></button><button class="btn" data-driver-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span><span class="zh" lang="zh-Hans">下一辆车 →</span></button><button class="btn" data-driver-pause><span class="th" lang="th">หยุด / เล่นต่อ</span><span class="en" lang="en">Pause / resume</span><span class="zh" lang="zh-Hans">暂停 / 继续</span></button><button class="btn" data-driver-weather><span class="th" lang="th">เปลี่ยนอากาศ</span><span class="en" lang="en">Change weather</span><span class="zh" lang="zh-Hans">更换天气</span></button><button class="btn" data-driver-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span><span class="zh" lang="zh-Hans">遮住 / 露出摄像头</span></button></div>
+    <p class="driver-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว เส้นประ = จำจากเฟรมก่อน สิ่งที่พลาดจะไม่มีกรอบ อุปสรรคด้านข้างอาจอยู่นอกจอนี้</span><span class="en" lang="en">Drawn from the actual map positions; this is a teaching simulation, not real camera footage or a neural detector. Yellow = detected or remembered. Orange = affects speed. Dashed = remembered from an earlier frame. Missed objects have no box. Side-camera detections may be outside this front view.</span><span class="zh" lang="zh-Hans">按照地图上的实际位置画出；这是教学模拟，不是真实的摄像头画面，也不是神经检测器。黄色 = 检测到的，或记住的。橙色 = 影响速度。虚线 = 从较早的一帧里记住的。被漏掉的物体没有框。侧面摄像头的检测结果，可能在这个前方视野之外。</span></p>
   </div>
 </dialog>
 </main>

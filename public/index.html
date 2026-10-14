@@ -3,7 +3,7 @@
 <head>
 <!--#head-->
 <title>Vision — How a computer sees · คอมพิวเตอร์มองเห็นอย่างไร</title>
-<meta name="description" content="A public classroom for computer vision, built on Thailand's open cameras. Learn, train your own model, play — in Thai and English. Everything runs in your browser.">
+<meta name="description" content="A public classroom for computer vision, built on Thailand's open cameras. Learn, train your own model, play — in Thai, English and Chinese. Everything runs in your browser.">
 </head>
 <body>
 <!--#nav-->
@@ -12,23 +12,23 @@
   <section class="opening" aria-labelledby="title">
     <div class="opening-text">
       <div>
-        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์ · กล้องจริง ถนนจริง</span><span class="en" lang="en">A computer-vision classroom · real cameras, real roads</span></span>
-        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์<br>มองเห็น<br>อย่างไร</span><span class="en" lang="en">How a<br>computer<br>sees</span></h1>
+        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์ · กล้องจริง ถนนจริง</span><span class="en" lang="en">A computer-vision classroom · real cameras, real roads</span><span class="zh" lang="zh-Hans">一间计算机视觉教室 · 真实的摄像头，真实的道路</span></span>
+        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์<br>มองเห็น<br>อย่างไร</span><span class="en" lang="en">How a<br>computer<br>sees</span><span class="zh" lang="zh-Hans">计算机<br>如何<br>看见</span></h1>
       </div>
       <div>
         <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
-        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
+        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p><p class="lede zh" lang="zh-Hans">图像变成数字、边缘、运动，然后是一个猜测。在泰国的公共摄像头上、在你自己的摄像头上，或在一张照片上，跟着每一步走。</p>
         <div class="cta">
-          <a class="btn primary big" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
-          <button class="btn big" type="button" data-mine><span class="th" lang="th">กล้องของคุณ</span><span class="en" lang="en">Your camera</span></button>
+          <a class="btn primary big" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span><span class="zh" lang="zh-Hans">开始学习 →</span></a>
+          <button class="btn big" type="button" data-mine><span class="th" lang="th">กล้องของคุณ</span><span class="en" lang="en">Your camera</span><span class="zh" lang="zh-Hans">你的摄像头</span></button>
         </div>
-        <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+        <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span><span class="zh" lang="zh-Hans">你的摄像头拍下的图像只在这个浏览器里处理。不会发送到任何地方，也不会保存。</span></p>
       </div>
     </div>
 
     <div class="opening-stage bench" aria-label="The machine's eye">
       <div class="bench-caption">
-        <span class="label"><span class="th" lang="th">ตาของเครื่อง</span><span class="en" lang="en">The machine's eye</span></span>
+        <span class="label"><span class="th" lang="th">ตาของเครื่อง</span><span class="en" lang="en">The machine's eye</span><span class="zh" lang="zh-Hans">机器的眼睛</span></span>
         <span class="num" data-clock></span>
       </div>
       <div class="bench-view stage-view">
@@ -36,14 +36,14 @@
         <div class="bench-state" data-eye-state>…</div>
       </div>
       <div class="controls lens-steps" role="group" aria-label="Lenses">
-        <button class="btn" type="button" data-lens="picture" aria-pressed="true"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span></button>
-        <button class="btn" type="button" data-lens="numbers" aria-pressed="false"><span class="num">2</span> <span class="th" lang="th">ตัวเลข</span><span class="en" lang="en">Numbers</span></button>
-        <button class="btn" type="button" data-lens="edges" aria-pressed="false"><span class="num">3</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span></button>
-        <button class="btn" type="button" data-lens="motion" aria-pressed="false"><span class="num">4</span> <span class="th" lang="th">ขยับ</span><span class="en" lang="en">Motion</span></button>
-        <button class="btn" type="button" data-lens="objects" aria-pressed="false"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span></button>
+        <button class="btn" type="button" data-lens="picture" aria-pressed="true"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span><span class="zh" lang="zh-Hans">图像</span></button>
+        <button class="btn" type="button" data-lens="numbers" aria-pressed="false"><span class="num">2</span> <span class="th" lang="th">ตัวเลข</span><span class="en" lang="en">Numbers</span><span class="zh" lang="zh-Hans">数字</span></button>
+        <button class="btn" type="button" data-lens="edges" aria-pressed="false"><span class="num">3</span> <span class="th" lang="th">ขอบ</span><span class="en" lang="en">Edges</span><span class="zh" lang="zh-Hans">边缘</span></button>
+        <button class="btn" type="button" data-lens="motion" aria-pressed="false"><span class="num">4</span> <span class="th" lang="th">ขยับ</span><span class="en" lang="en">Motion</span><span class="zh" lang="zh-Hans">运动</span></button>
+        <button class="btn" type="button" data-lens="objects" aria-pressed="false"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span><span class="zh" lang="zh-Hans">物体</span></button>
       </div>
       <div class="slider lens-line" data-lens-line hidden>
-        <label for="lens-min"><span class="th" lang="th">วาดกรอบเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Draw a box only when this sure</span></label>
+        <label for="lens-min"><span class="th" lang="th">วาดกรอบเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Draw a box only when this sure</span><span class="zh" lang="zh-Hans">只有达到这个把握才画框</span></label>
         <output for="lens-min" data-lens-min-out>30%</output>
         <input id="lens-min" type="range" min="5" max="90" step="5" value="30" data-lens-min>
       </div>
@@ -51,10 +51,10 @@
       <div class="bench-caption specimen-line" data-specimen>
         <span><span class="who" data-specimen-name>…</span><br><span data-specimen-meta></span></span>
         <span class="controls">
-          <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
-          <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
-          <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span></button>
-          <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
+          <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span><span class="zh" lang="zh-Hans">公共摄像头</span></button>
+          <button class="btn" type="button" data-specimen-webcam aria-pressed="false">● <span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span><span class="zh" lang="zh-Hans">我的摄像头</span></button>
+          <button class="btn" type="button" data-specimen-flip hidden>⇄ <span class="th" lang="th">สลับกล้อง</span><span class="en" lang="en">Switch</span><span class="zh" lang="zh-Hans">切换</span></button>
+          <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><span class="zh" lang="zh-Hans">我的照片</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
           <button class="btn" type="button" data-fullscreen aria-label="Full screen" title="Full screen">⛶</button>
         </span>
       </div>
@@ -63,9 +63,9 @@
 
   <section aria-labelledby="pipe-title">
     <div class="page-head">
-      <h2 id="pipe-title"><span class="th" lang="th">คอมพิวเตอร์มองเห็นอย่างไร ในห้าขั้น</span><span class="en" lang="en">How a computer sees, in five steps</span></h2>
+      <h2 id="pipe-title"><span class="th" lang="th">คอมพิวเตอร์มองเห็นอย่างไร ในห้าขั้น</span><span class="en" lang="en">How a computer sees, in five steps</span><span class="zh" lang="zh-Hans">计算机如何看见，一共五步</span></h2>
       <p class="lede th" lang="th">เครื่องไม่เห็นแบบคน มันเดินทางจากแสงไปสู่ตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดา พร้อมบอกความมั่นใจเสมอ</p>
-      <p class="lede en" lang="en">A machine does not see the way you do. It walks from light to numbers, edges, motion — then a guess, always with its confidence attached.</p>
+      <p class="lede en" lang="en">A machine does not see the way you do. It walks from light to numbers, edges, motion — then a guess, always with its confidence attached.</p><p class="lede zh" lang="zh-Hans">机器看见的方式和你不一样。它从光走到数字、边缘、运动——然后是一个猜测，并且总带着置信度。</p>
     </div>
     <figure class="flow-fig pipe-figure">
       <div class="pipe-scroll">
@@ -77,11 +77,11 @@
             <path class="stroke" d="M16 40 L50 48"/>
             <path class="stroke" d="M12 53 L50 53"/>
             <path class="stroke" d="M16 66 L50 58"/>
-            <text class="big en" lang="en" x="90" y="132" text-anchor="middle">Light enters</text>
+            <text class="big en" lang="en" x="90" y="132" text-anchor="middle">Light enters</text><text class="big zh" lang="zh-Hans" x="90" y="132" text-anchor="middle">光进来</text>
             <text class="big thai th" lang="th" x="90" y="132" text-anchor="middle">แสงเข้ากล้อง</text>
-            <text class="en" lang="en" x="90" y="156" text-anchor="middle">a picture arrives</text>
+            <text class="en" lang="en" x="90" y="156" text-anchor="middle">a picture arrives</text><text class="zh" lang="zh-Hans" x="90" y="156" text-anchor="middle">一幅图像到达</text>
             <text class="thai th" lang="th" x="90" y="156" text-anchor="middle">ภาพมาถึงเครื่อง</text>
-            <text class="en" lang="en" x="90" y="182" text-anchor="middle">Chapter 01</text>
+            <text class="en" lang="en" x="90" y="182" text-anchor="middle">Chapter 01</text><text class="zh" lang="zh-Hans" x="90" y="182" text-anchor="middle">第 01 章</text>
             <text class="thai th" lang="th" x="90" y="182" text-anchor="middle">บทที่ 01</text>
           </a>
           <a href="/learn#colour">
@@ -99,49 +99,49 @@
             <text x="278" y="31">9</text>
             <text x="299" y="31">80</text>
             <text x="320" y="31">44</text>
-            <text class="big en" lang="en" x="295" y="132" text-anchor="middle">Pixels are numbers</text>
+            <text class="big en" lang="en" x="295" y="132" text-anchor="middle">Pixels are numbers</text><text class="big zh" lang="zh-Hans" x="295" y="132" text-anchor="middle">像素是数字</text>
             <text class="big thai th" lang="th" x="295" y="132" text-anchor="middle">พิกเซลคือตัวเลข</text>
-            <text class="en" lang="en" x="295" y="156" text-anchor="middle">every dot carries a value</text>
+            <text class="en" lang="en" x="295" y="156" text-anchor="middle">every dot carries a value</text><text class="zh" lang="zh-Hans" x="295" y="156" text-anchor="middle">每一个点都带着一个值</text>
             <text class="thai th" lang="th" x="295" y="156" text-anchor="middle">ทุกจุดมีตัวเลขของมัน</text>
-            <text class="en" lang="en" x="295" y="182" text-anchor="middle">Chapter 02</text>
+            <text class="en" lang="en" x="295" y="182" text-anchor="middle">Chapter 02</text><text class="zh" lang="zh-Hans" x="295" y="182" text-anchor="middle">第 02 章</text>
             <text class="thai th" lang="th" x="295" y="182" text-anchor="middle">บทที่ 02</text>
           </a>
           <a href="/learn#convolution">
             <path class="stroke" d="M432 96 L474 40 L516 96 Z"/>
             <rect class="stroke-signal" x="459" y="53" width="30" height="30" stroke-dasharray="4 3"/>
             <path class="stroke-signal" d="M540 96 L566 60 L592 96"/>
-            <text class="big en" lang="en" x="500" y="132" text-anchor="middle">A window finds edges</text>
+            <text class="big en" lang="en" x="500" y="132" text-anchor="middle">A window finds edges</text><text class="big zh" lang="zh-Hans" x="500" y="132" text-anchor="middle">一个窗口找出边缘</text>
             <text class="big thai th" lang="th" x="500" y="132" text-anchor="middle">หน้าต่างเลื่อนหาขอบ</text>
-            <text class="en" lang="en" x="500" y="156" text-anchor="middle">outlines replace colour</text>
+            <text class="en" lang="en" x="500" y="156" text-anchor="middle">outlines replace colour</text><text class="zh" lang="zh-Hans" x="500" y="156" text-anchor="middle">轮廓代替色彩</text>
             <text class="thai th" lang="th" x="500" y="156" text-anchor="middle">ขอบแทนสี</text>
-            <text class="en" lang="en" x="500" y="182" text-anchor="middle">Chapters 04–05</text>
+            <text class="en" lang="en" x="500" y="182" text-anchor="middle">Chapters 04–05</text><text class="zh" lang="zh-Hans" x="500" y="182" text-anchor="middle">第 04–05 章</text>
             <text class="thai th" lang="th" x="500" y="182" text-anchor="middle">บทที่ 04–05</text>
           </a>
           <a href="/learn#motion">
             <rect class="stroke" x="645" y="20" width="64" height="46"/>
             <rect class="stroke" x="665" y="42" width="64" height="46"/>
             <rect class="fill-signal" x="701" y="58" width="26" height="28"/>
-            <text class="big en" lang="en" x="705" y="132" text-anchor="middle">Catches what moves</text>
+            <text class="big en" lang="en" x="705" y="132" text-anchor="middle">Catches what moves</text><text class="big zh" lang="zh-Hans" x="705" y="132" text-anchor="middle">抓住运动的东西</text>
             <text class="big thai th" lang="th" x="705" y="132" text-anchor="middle">จับอะไรขยับ</text>
-            <text class="en" lang="en" x="705" y="156" text-anchor="middle">two frames, one difference</text>
+            <text class="en" lang="en" x="705" y="156" text-anchor="middle">two frames, one difference</text><text class="zh" lang="zh-Hans" x="705" y="156" text-anchor="middle">两帧，一个差值</text>
             <text class="thai th" lang="th" x="705" y="156" text-anchor="middle">สองภาพ เทียบความต่าง</text>
-            <text class="en" lang="en" x="705" y="182" text-anchor="middle">Chapter 06</text>
+            <text class="en" lang="en" x="705" y="182" text-anchor="middle">Chapter 06</text><text class="zh" lang="zh-Hans" x="705" y="182" text-anchor="middle">第 06 章</text>
             <text class="thai th" lang="th" x="705" y="182" text-anchor="middle">บทที่ 06</text>
           </a>
           <a href="/learn#detector">
             <rect class="stroke-signal" x="852" y="26" width="116" height="66"/>
             <rect class="fill-signal" x="852" y="8" width="74" height="20"/>
-            <text class="on-signal en" lang="en" x="858" y="22">car 92%</text>
+            <text class="on-signal en" lang="en" x="858" y="22">car 92%</text><text class="on-signal zh" lang="zh-Hans" x="858" y="22">汽车 92%</text>
             <text class="on-signal thai th" lang="th" x="858" y="22">รถ 92%</text>
             <rect class="stroke" x="872" y="56" width="76" height="22"/>
             <path class="stroke" d="M884 56 L894 42 L926 42 L936 56"/>
             <circle class="stroke" cx="888" cy="82" r="8"/>
             <circle class="stroke" cx="932" cy="82" r="8"/>
-            <text class="big en" lang="en" x="910" y="132" text-anchor="middle">A guess + confidence</text>
+            <text class="big en" lang="en" x="910" y="132" text-anchor="middle">A guess + confidence</text><text class="big zh" lang="zh-Hans" x="910" y="132" text-anchor="middle">一个猜测 + 置信度</text>
             <text class="big thai th" lang="th" x="910" y="132" text-anchor="middle">คำเดา พร้อมความมั่นใจ</text>
-            <text class="en" lang="en" x="910" y="156" text-anchor="middle">never a certainty</text>
+            <text class="en" lang="en" x="910" y="156" text-anchor="middle">never a certainty</text><text class="zh" lang="zh-Hans" x="910" y="156" text-anchor="middle">从不是确定的事</text>
             <text class="thai th" lang="th" x="910" y="156" text-anchor="middle">ไม่ใช่ความแน่นอน</text>
-            <text class="en" lang="en" x="910" y="182" text-anchor="middle">Chapter 07</text>
+            <text class="en" lang="en" x="910" y="182" text-anchor="middle">Chapter 07</text><text class="zh" lang="zh-Hans" x="910" y="182" text-anchor="middle">第 07 章</text>
             <text class="thai th" lang="th" x="910" y="182" text-anchor="middle">บทที่ 07</text>
           </a>
           <path class="stroke" d="M184 58 H201"/>
@@ -154,64 +154,100 @@
           <path class="stroke" d="M810 52 L817 58 L810 64"/>
         </svg>
       </div>
-      <figcaption id="pipe-cap"><span class="th" lang="th">จากแสงสู่คำเดา ห้าขั้นนี้คือทางเดินของเครื่องมองเห็น กดแต่ละขั้นเพื่อเปิดเครื่องมือจริงในห้องเรียน</span><span class="en" lang="en">From light to a guess: the machine's walk in five steps. Tap a step to open its live instrument.</span></figcaption>
+      <figcaption id="pipe-cap"><span class="th" lang="th">จากแสงสู่คำเดา ห้าขั้นนี้คือทางเดินของเครื่องมองเห็น กดแต่ละขั้นเพื่อเปิดเครื่องมือจริงในห้องเรียน</span><span class="en" lang="en">From light to a guess: the machine's walk in five steps. Tap a step to open its live instrument.</span><span class="zh" lang="zh-Hans">从光到一个猜测：机器走的五步。点一步，打开它的实时仪器。</span></figcaption>
     </figure>
   </section>
 
   <section class="figures field-quiet" aria-label="The system today">
-    <div class="figure"><span class="n" data-fig="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ จาก 7 แหล่ง</span><span class="en" lang="en">cameras listed, from 7 sources</span></span></div>
-    <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">กล้องที่เครื่องอ่านพิกเซลได้</span><span class="en" lang="en">cameras a machine can read</span></span></div>
-    <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">สตรีมที่ต้นทางรายงานว่าสด</span><span class="en" lang="en">streams the camera’s own system reports as live</span></span></div>
-    <div class="figure"><span class="n">0</span><span class="micro"><span class="th" lang="th">ภาพที่เราเก็บไว้</span><span class="en" lang="en">pictures we keep</span></span></div>
+    <div class="figure"><span class="n" data-fig="total">—</span><span class="micro"><span class="th" lang="th">กล้องในรายชื่อ จาก 7 แหล่ง</span><span class="en" lang="en">cameras listed, from 7 sources</span><span class="zh" lang="zh-Hans">列出的摄像头，来自 7 个来源</span></span></div>
+    <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">กล้องที่เครื่องอ่านพิกเซลได้</span><span class="en" lang="en">cameras a machine can read</span><span class="zh" lang="zh-Hans">机器读得了的摄像头</span></span></div>
+    <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">สตรีมที่ต้นทางรายงานว่าสด</span><span class="en" lang="en">streams the camera’s own system reports as live</span><span class="zh" lang="zh-Hans">摄像头自己的系统报告为正在直播的视频流</span></span></div>
+    <div class="figure"><span class="n">0</span><span class="micro"><span class="th" lang="th">ภาพที่เราเก็บไว้</span><span class="en" lang="en">pictures we keep</span><span class="zh" lang="zh-Hans">我们留着的图像</span></span></div>
   </section>
 
   <section class="story-teaser" aria-labelledby="story-title">
     <div class="page-head">
       <div>
-        <span class="eyebrow label"><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Why this exists</span></span>
-        <h2 id="story-title"><span class="th" lang="th">กล้องเต็มเมือง แต่ไม่มีใครดูอยู่</span><span class="en" lang="en">Cameras everywhere. Eyes nowhere.</span></h2>
+        <span class="eyebrow label"><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Why this exists</span><span class="zh" lang="zh-Hans">为什么会有这里</span></span>
+        <h2 id="story-title"><span class="th" lang="th">กล้องเต็มเมือง แต่ไม่มีใครดูอยู่</span><span class="en" lang="en">Cameras everywhere. Eyes nowhere.</span><span class="zh" lang="zh-Hans">摄像头到处都是。没有人在看。</span></h2>
         <figure class="teaser-shot">
           <img src="/img/ioc/shenzhen.jpg" alt="A control room in Shenzhen: a wall of CCTV feeds above a row of empty chairs" width="1600" height="1200" loading="lazy">
-          <figcaption class="micro"><span class="th" lang="th">เซินเจิ้น · จอเต็มผนัง เก้าอี้ว่างทั้งแถว</span><span class="en" lang="en">Shenzhen · full wall, empty chairs</span></figcaption>
+          <figcaption class="micro"><span class="th" lang="th">เซินเจิ้น · จอเต็มผนัง เก้าอี้ว่างทั้งแถว</span><span class="en" lang="en">Shenzhen · full wall, empty chairs</span><span class="zh" lang="zh-Hans">深圳 · 整面墙，空着的椅子</span></figcaption>
         </figure>
       </div>
       <div>
         <p class="lede th" lang="th">ในห้องควบคุมของเมืองหลายแห่ง ดร.นน อัครประเสริฐกุล เห็นผนังจอนับร้อยกับเจ้าหน้าที่ที่สัปหงก เล่นมือถือ หรือลุกไปพัก แล้วถามว่า เราจะรู้ได้อย่างไรว่าคนไม่ได้พลาดอะไรไป คำถามนั้นพาเขาไปศึกษาคอมพิวเตอร์วิทัศน์ด้วยตัวเอง และสร้างห้องเรียนนี้ขึ้นมา</p>
-        <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to teach himself computer vision, and to build this classroom.</p>
-        <p class="cta"><a class="btn big" href="/story"><span class="th" lang="th">อ่านเรื่องเล่า →</span><span class="en" lang="en">Read the story →</span></a></p>
+        <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to teach himself computer vision, and to build this classroom.</p><p class="lede zh" lang="zh-Hans">在城市的控制室里，Dr Non Arkaraprasertkul 看见整面墙的屏幕，操作员在打盹、发消息、走开——于是他问：人漏看的那些，要怎样才会有人知道。这个问题使他自学了计算机视觉，并建起这间教室。</p>
+        <p class="cta"><a class="btn big" href="/story"><span class="th" lang="th">อ่านเรื่องเล่า →</span><span class="en" lang="en">Read the story →</span><span class="zh" lang="zh-Hans">读这个故事 →</span></a></p>
       </div>
     </div>
   </section>
 
-  <section aria-labelledby="rooms-title">
+    <section class="levels" aria-labelledby="rooms-title">
     <div class="page-head">
-      <h2 id="rooms-title"><span class="th" lang="th">สิบห้อง</span><span class="en" lang="en">Ten rooms</span></h2>
-      <p class="lede th" lang="th">เดินตามลำดับก็ได้ กระโดดไปห้องที่สนใจก็ได้ เกือบทุกห้องใช้กล้องจริง</p>
-      <p class="lede en" lang="en">Walk them in order or jump to the one you want. Almost every room runs on real cameras.</p>
+      <h2 id="rooms-title"><span class="th" lang="th">เส้นทาง</span><span class="en" lang="en">The path</span><span class="zh" lang="zh-Hans">路径</span></h2>
+      <p class="lede th" lang="th">สี่ขั้น จากความคิดหนึ่งข้อไปจนถึงจุดที่เครื่องพลาด เกือบทุกห้องใช้กล้องจริง เดินตามลำดับหรือกระโดดไปห้องที่สนใจ</p>
+      <p class="lede en" lang="en">Four steps, from one idea to where the machine fails. Almost every room runs on real cameras. Walk them in order, or jump.</p>
+      <p class="lede zh" lang="zh-Hans">四步，从一个想法走到机器会出错的地方。几乎每个房间都用真实摄像头。可以按顺序走，也可以直接跳。</p>
     </div>
+  <div class="level">
+    <header>
+      <span class="num">01</span>
+      <h3><span class="th" lang="th">เริ่ม</span><span class="en" lang="en">Begin</span><span class="zh" lang="zh-Hans">入门</span></h3>
+      <p><span class="th" lang="th">หนึ่งความคิด แล้วดูภาพจริง แล้วลองเอง</span><span class="en" lang="en">One idea, the live picture, then you try</span><span class="zh" lang="zh-Hans">一个想法，现场图像，然后你来试</span></p>
+    </header>
     <ol class="index">
-      <li><a href="/learn"><span class="num">01</span><span class="title"><span class="th" lang="th">เรียนรู้ว่ามันมองอย่างไร</span><span class="en" lang="en">Learn how it looks</span></span><span class="desc"><span class="th" lang="th">แปดบท ตั้งแต่ “ภาพคือตัวเลข” จนถึง “สิ่งที่มันทำไม่ได้” ทุกบทมีเครื่องมือให้ลองกับกล้องสด</span><span class="en" lang="en">Eight chapters, from “a picture is numbers” to “what it cannot do”, each with a live instrument.</span></span></a></li>
-      <li><a href="/cameras"><span class="num">02</span><span class="title"><span class="th" lang="th">กล้องทุกตัว</span><span class="en" lang="en">Every camera</span></span><span class="desc"><span class="th" lang="th">แผนที่กล้องทั้งหมด เลือกกล้องไหนก็ได้ให้เครื่องวิเคราะห์ หรือนับรถทั้งประเทศพร้อมกัน</span><span class="en" lang="en">A map of them all. Point the machine at any one, or run a census across the country.</span></span></a></li>
-      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span></span><span class="desc"><span class="th" lang="th">เลือกกิจกรรม ให้ตัวอย่าง แล้วลองภาพใหม่ ไม่มีกล้องก็เริ่มด้วยภาพวาดได้</span><span class="en" lang="en">Choose an activity, teach with examples, then try new pictures. Start with drawings if you have no camera.</span></span></a></li>
-      <li><a href="/gesture"><span class="num">04</span><span class="title"><span class="th" lang="th">สั่งสิ่งเล็ก ๆ ด้วยท่ามือ</span><span class="en" lang="en">Gestures that do things</span></span><span class="desc"><span class="th" lang="th">สอนกล้องจำท่าไม่กี่ท่า แล้วให้แต่ละท่าสั่งสิ่งเล็ก ๆ ในเบราว์เซอร์ พร้อมรายการตรง ๆ ว่าเบราว์เซอร์ไม่ยอมให้ทำอะไร</span><span class="en" lang="en">Teach a few gestures, then let each one run a small action in the browser — with an honest list of what a browser will not allow.</span></span></a></li>
-      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร เลือกสองช่องทาง สี่ช่องทาง หรือเมืองที่มีรถถึง 24 คัน และดูเหตุผลที่แต่ละคันเบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Choose two lanes, four lanes or a crowded city with up to 24 cars — and hear why each car brakes.</span></span></a></li>
-      <li><a href="/focus"><span class="num">EX</span><span class="title"><span class="th" lang="th">ใบหน้าและสมาธิ: ทดลองกับตัวเอง</span><span class="en" lang="en">Face &amp; focus: try it on yourself</span></span><span class="desc"><span class="th" lang="th">ยินยอมเปิดกล้อง ตั้งท่าปกติ แล้วดูช่วงที่หันออกหรือไม่เห็นใบหน้า ภาพอยู่ในอุปกรณ์ อารมณ์ให้คุณบอกเอง</span><span class="en" lang="en">Opt in, set your usual position, and review look-away and face-absent periods. Pictures stay on your device; mood notes come from you.</span></span></a></li>
-      <li><a href="/games"><span class="num">06</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง ทายภาพจากพิกเซลน้อยที่สุด และหาทางหลอกตาเครื่อง</span><span class="en" lang="en">Out-count it, out-guess it from the fewest pixels, and find ways to fool it.</span></span></a></li>
-      <li><a href="/everyday"><span class="num">07</span><span class="title"><span class="th" lang="th">ในชีวิตประจำวัน</span><span class="en" lang="en">In everyday life</span></span><span class="desc"><span class="th" lang="th">ปลดล็อกมือถือ สแกน QR ตรวจเอกซเรย์ รถช่วยเลี้ยว ทำงานอย่างไร และอะไรผิดพลาดได้</span><span class="en" lang="en">Phone unlock, QR codes, X-rays, lane keeping — how each works and what can go wrong.</span></span></a></li>
-      <li><a href="/research"><span class="num">08</span><span class="title"><span class="th" lang="th">วิจัย · เกี่ยวกับ</span><span class="en" lang="en">Research · About</span></span><span class="desc"><span class="th" lang="th">หลักฐานที่ห้องเรียนนี้ยืนอยู่ สี่ก้าวสำคัญของประวัติศาสตร์ กรณีศึกษาในไทย และงานที่เว็บนี้ใช้จริง</span><span class="en" lang="en">The live evidence this classroom stands on, four landmarks of the field, a Thai case study, and the work this site actually runs.</span></span></a></li>
-      <li><a href="/system"><span class="num">09</span><span class="title"><span class="th" lang="th">ระบบทำงานอย่างไร</span><span class="en" lang="en">How the system works</span></span><span class="desc"><span class="th" lang="th">แผนผังทั้งระบบ ภาพเดินทางอย่างไร โมเดลมาจากไหน และอะไรที่เราตั้งใจไม่ทำ</span><span class="en" lang="en">The whole design: how a picture travels, where models come from, and what we chose not to build.</span></span></a></li>
-      <li><a href="/legal"><span class="num">10</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span></span><span class="desc"><span class="th" lang="th">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล กล้องเป็นของใคร สิ่งที่ห้ามทำ และการขอถอดกล้อง</span><span class="en" lang="en">Thai data-protection law, who owns the cameras, what you must not do, and takedowns.</span></span></a></li>
+      <li><a href="/learn"><span class="num">01</span><span class="title"><span class="th" lang="th">เรียนรู้ว่ามันมองอย่างไร</span><span class="en" lang="en">Learn how it looks</span><span class="zh" lang="zh-Hans">学习它是什么样子</span></span><span class="desc"><span class="th" lang="th">แปดบท ตั้งแต่ “ภาพคือตัวเลข” จนถึง “สิ่งที่มันทำไม่ได้” ทุกบทมีเครื่องมือให้ลองกับกล้องสด</span><span class="en" lang="en">Eight chapters, from “a picture is numbers” to “what it cannot do”, each with a live instrument.</span><span class="zh" lang="zh-Hans">八章，从“图像是数字”到“它做不到的事”，每一章都有一个实时仪器。</span></span></a></li>
+      <li><a href="/handbook"><span class="num">HB</span><span class="title"><span class="th" lang="th">คู่มือ: ทฤษฎีและแบบฝึกหัด</span><span class="en" lang="en">Handbook: theory &amp; exercises</span><span class="zh" lang="zh-Hans">手册：理论与练习</span></span><span class="desc"><span class="th" lang="th">อ่านทั้งแปดบทแบบเต็ม พร้อมแบบฝึกหัดให้ลองทำเอง คำถามท้ายบท และอภิธานศัพท์ไทย–อังกฤษ</span><span class="en" lang="en">All eight chapters in full, with exercises you can try yourself, questions to check yourself, and a Thai–English glossary.</span><span class="zh" lang="zh-Hans">完整的八章，带有你可以自己试一试的练习、用来自己检查的问题，以及一份泰语–英语词汇表。</span></span></a></li>
     </ol>
+  </div>
+  <div class="level">
+    <header>
+      <span class="num">02</span>
+      <h3><span class="th" lang="th">มอง</span><span class="en" lang="en">Look</span><span class="zh" lang="zh-Hans">观看</span></h3>
+      <p><span class="th" lang="th">ความคิดเดียวกัน บนกล้องถนนจริง</span><span class="en" lang="en">The same idea, on real road cameras</span><span class="zh" lang="zh-Hans">同一个想法，用在真实路况摄像头上</span></p>
+    </header>
+    <ol class="index">
+      <li><a href="/cameras"><span class="num">02</span><span class="title"><span class="th" lang="th">กล้องทุกตัว</span><span class="en" lang="en">Every camera</span><span class="zh" lang="zh-Hans">每一台摄像头</span></span><span class="desc"><span class="th" lang="th">แผนที่กล้องทั้งหมด เลือกกล้องไหนก็ได้ให้เครื่องวิเคราะห์ หรือนับรถทั้งประเทศพร้อมกัน</span><span class="en" lang="en">A map of them all. Point the machine at any one, or run a census across the country.</span><span class="zh" lang="zh-Hans">一张放着全部摄像头的地图。把机器指向任意一台，或在全国做一次普查。</span></span></a></li>
+    </ol>
+  </div>
+  <div class="level">
+    <header>
+      <span class="num">03</span>
+      <h3><span class="th" lang="th">สอน</span><span class="en" lang="en">Teach</span><span class="zh" lang="zh-Hans">教授</span></h3>
+      <p><span class="th" lang="th">คุณเป็นคนให้คำตอบ</span><span class="en" lang="en">You give the answers</span><span class="zh" lang="zh-Hans">答案由你来给</span></p>
+    </header>
+    <ol class="index">
+      <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span><span class="zh" lang="zh-Hans">自己训练一台机器</span></span><span class="desc"><span class="th" lang="th">เลือกกิจกรรม ให้ตัวอย่าง แล้วลองภาพใหม่ ไม่มีกล้องก็เริ่มด้วยภาพวาดได้</span><span class="en" lang="en">Choose an activity, teach with examples, then try new pictures. Start with drawings if you have no camera.</span><span class="zh" lang="zh-Hans">选一项活动，用例子来教，然后试一试新的图像。没有摄像头，就从画开始。</span></span></a></li>
+      <li><a href="/gesture"><span class="num">04</span><span class="title"><span class="th" lang="th">สั่งสิ่งเล็ก ๆ ด้วยท่ามือ</span><span class="en" lang="en">Gestures that do things</span><span class="zh" lang="zh-Hans">能做成事情的手势</span></span><span class="desc"><span class="th" lang="th">สอนกล้องจำท่าไม่กี่ท่า แล้วให้แต่ละท่าสั่งสิ่งเล็ก ๆ ในเบราว์เซอร์ พร้อมรายการตรง ๆ ว่าเบราว์เซอร์ไม่ยอมให้ทำอะไร</span><span class="en" lang="en">Teach a few gestures, then let each one run a small action in the browser — with an honest list of what a browser will not allow.</span><span class="zh" lang="zh-Hans">教几个手势，然后让每一个手势在浏览器里做一个小动作——并诚实列出浏览器不会允许的事。</span></span></a></li>
+    </ol>
+  </div>
+  <div class="level">
+    <header>
+      <span class="num">04</span>
+      <h3><span class="th" lang="th">ตัดสิน</span><span class="en" lang="en">Judge</span><span class="zh" lang="zh-Hans">判断</span></h3>
+      <p><span class="th" lang="th">หาจุดที่เครื่องพลาด</span><span class="en" lang="en">Find where the machine fails</span><span class="zh" lang="zh-Hans">找出机器会错在哪里</span></p>
+    </header>
+    <ol class="index">
+      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span><span class="zh" lang="zh-Hans">驾驶：会说出自己看见了什么的车</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร เลือกสองช่องทาง สี่ช่องทาง หรือเมืองที่มีรถถึง 24 คัน และดูเหตุผลที่แต่ละคันเบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Choose two lanes, four lanes or a crowded city with up to 24 cars — and hear why each car brakes.</span><span class="zh" lang="zh-Hans">一条试验路，有环岛、一盏灯、斑马线、人和流浪狗。可以选择两车道、四车道，或一座最多有 24 辆车的拥挤城市——并听到每一辆车为什么刹车。</span></span></a></li>
+      <li><a href="/focus"><span class="num">EX</span><span class="title"><span class="th" lang="th">ใบหน้าและสมาธิ: ทดลองกับตัวเอง</span><span class="en" lang="en">Face &amp; focus: try it on yourself</span><span class="zh" lang="zh-Hans">面部与专注：在你自己身上试一试</span></span><span class="desc"><span class="th" lang="th">ยินยอมเปิดกล้อง ตั้งท่าปกติ แล้วดูช่วงที่หันออกหรือไม่เห็นใบหน้า ภาพอยู่ในอุปกรณ์ อารมณ์ให้คุณบอกเอง</span><span class="en" lang="en">Opt in, set your usual position, and review look-away and face-absent periods. Pictures stay on your device; mood notes come from you.</span><span class="zh" lang="zh-Hans">选择加入，设好你平时的位置，再回看视线移开、以及脸不在画面里的时段。图像留在你的设备上；关于心情的笔记，由你自己来写。</span></span></a></li>
+      <li><a href="/games"><span class="num">06</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span><span class="zh" lang="zh-Hans">游戏：你对机器</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง ทายภาพจากพิกเซลน้อยที่สุด และหาทางหลอกตาเครื่อง</span><span class="en" lang="en">Out-count it, out-guess it from the fewest pixels, and find ways to fool it.</span><span class="zh" lang="zh-Hans">比它数得更准，用最少的像素比它猜得更准，并找出骗过它的办法。</span></span></a></li>
+      <li><a href="/everyday"><span class="num">07</span><span class="title"><span class="th" lang="th">ในชีวิตประจำวัน</span><span class="en" lang="en">In everyday life</span><span class="zh" lang="zh-Hans">在日常生活里</span></span><span class="desc"><span class="th" lang="th">ปลดล็อกมือถือ สแกน QR ตรวจเอกซเรย์ รถช่วยเลี้ยว ทำงานอย่างไร และอะไรผิดพลาดได้</span><span class="en" lang="en">Phone unlock, QR codes, X-rays, lane keeping — how each works and what can go wrong.</span><span class="zh" lang="zh-Hans">手机解锁、QR 码、X 光、车道保持——每一种如何工作，以及哪里会出错。</span></span></a></li>
+      <li><a href="/research"><span class="num">08</span><span class="title"><span class="th" lang="th">วิจัย · เกี่ยวกับ</span><span class="en" lang="en">Research · About</span><span class="zh" lang="zh-Hans">研究 · 关于</span></span><span class="desc"><span class="th" lang="th">หลักฐานที่ห้องเรียนนี้ยืนอยู่ สี่ก้าวสำคัญของประวัติศาสตร์ กรณีศึกษาในไทย และงานที่เว็บนี้ใช้จริง</span><span class="en" lang="en">The live evidence this classroom stands on, four landmarks of the field, a Thai case study, and the work this site actually runs.</span><span class="zh" lang="zh-Hans">这间教室所依靠的实时证据、这个领域的四个里程碑、一个泰国案例，以及本站真正在运行的工作。</span></span></a></li>
+      <li><a href="/system"><span class="num">09</span><span class="title"><span class="th" lang="th">ระบบทำงานอย่างไร</span><span class="en" lang="en">How the system works</span><span class="zh" lang="zh-Hans">系统如何工作</span></span><span class="desc"><span class="th" lang="th">แผนผังทั้งระบบ ภาพเดินทางอย่างไร โมเดลมาจากไหน และอะไรที่เราตั้งใจไม่ทำ</span><span class="en" lang="en">The whole design: how a picture travels, where models come from, and what we chose not to build.</span><span class="zh" lang="zh-Hans">整个设计：一幅图像怎样传来，模型从哪里来，以及我们选择不建造什么。</span></span></a></li>
+      <li><a href="/legal"><span class="num">10</span><span class="title"><span class="th" lang="th">ข้อกฎหมายฉบับเต็ม</span><span class="en" lang="en">The fine print</span><span class="zh" lang="zh-Hans">细则</span></span><span class="desc"><span class="th" lang="th">พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล กล้องเป็นของใคร สิ่งที่ห้ามทำ และการขอถอดกล้อง</span><span class="en" lang="en">Thai data-protection law, who owns the cameras, what you must not do, and takedowns.</span><span class="zh" lang="zh-Hans">泰国的数据保护法律、摄像头归谁所有、你不可以做什么，以及下架。</span></span></a></li>
+    </ol>
+  </div>
   </section>
 
   <section class="field-ink promises" aria-labelledby="promise-title">
     <div class="page-head">
-      <h2 id="promise-title"><span class="th" lang="th">สามข้อที่เราไม่ต่อรอง</span><span class="en" lang="en">Three things we do not bend</span></h2>
+      <h2 id="promise-title"><span class="th" lang="th">สามข้อที่เราไม่ต่อรอง</span><span class="en" lang="en">Three things we do not bend</span><span class="zh" lang="zh-Hans">三件我们不让步的事</span></h2>
     </div>
     <ol class="promise-list">
-      <li><span class="num">i</span><strong><span class="th" lang="th">ทำงานในเครื่องของคุณ</span><span class="en" lang="en">It runs on your device</span></strong><span class="th" lang="th">โมเดล (โปรแกรมที่ฝึกแล้ว ซึ่งแปลงรูปเป็นคำตอบเดา) ทุกตัวคำนวณในเบราว์เซอร์ของคุณ กล้องของคุณและรูปของคุณไม่ถูกส่งออกไปไหน</span><span class="en" lang="en">Every model — a trained program that turns a picture into a guess — computes in your browser. Your camera and your photos never leave your device.</span></li>
-      <li><span class="num">ii</span><strong><span class="th" lang="th">ไม่ระบุตัวบุคคล</span><span class="en" lang="en">It never identifies anyone</span></strong><span class="th" lang="th">ระบบนับว่ามี “คน” ได้ แต่ไม่รู้ว่าเป็นใคร ไม่อ่านทะเบียนรถ และไม่เก็บภาพ แม้ในห้องทดลองใบหน้าที่คุณเลือกเปิดเอง มันหาตำแหน่งตาและการหันหน้าของคุณ ไม่ใช่ตัวตนของคุณ</span><span class="en" lang="en">It can count that a “person” is there, but never who. It does not read number plates or keep pictures. Even in the face experiment you choose to open, it finds where your eyes and head point — not who you are.</span></li>
-      <li><span class="num">iii</span><strong><span class="th" lang="th">บอกความมั่นใจเสมอ</span><span class="en" lang="en">It always shows its confidence</span></strong><span class="th" lang="th">ทุกคำตอบของเครื่องมาพร้อมตัวเลขความมั่นใจ และ “ไม่เห็น” ไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">Every answer carries a confidence number — and “not detected” never means “not there”.</span></li>
+      <li><span class="num">i</span><strong><span class="th" lang="th">ทำงานในเครื่องของคุณ</span><span class="en" lang="en">It runs on your device</span><span class="zh" lang="zh-Hans">它在你的设备上运行</span></strong><span class="th" lang="th">โมเดล (โปรแกรมที่ฝึกแล้ว ซึ่งแปลงรูปเป็นคำตอบเดา) ทุกตัวคำนวณในเบราว์เซอร์ของคุณ กล้องของคุณและรูปของคุณไม่ถูกส่งออกไปไหน</span><span class="en" lang="en">Every model — a trained program that turns a picture into a guess — computes in your browser. Your camera and your photos never leave your device.</span><span class="zh" lang="zh-Hans">每一个模型——一个经过训练、把图像变成猜测的程序——都在你的浏览器里计算。你的摄像头和你的照片，从不离开你的设备。</span></li>
+      <li><span class="num">ii</span><strong><span class="th" lang="th">ไม่ระบุตัวบุคคล</span><span class="en" lang="en">It never identifies anyone</span><span class="zh" lang="zh-Hans">它从不识别任何人</span></strong><span class="th" lang="th">ระบบนับว่ามี “คน” ได้ แต่ไม่รู้ว่าเป็นใคร ไม่อ่านทะเบียนรถ และไม่เก็บภาพ แม้ในห้องทดลองใบหน้าที่คุณเลือกเปิดเอง มันหาตำแหน่งตาและการหันหน้าของคุณ ไม่ใช่ตัวตนของคุณ</span><span class="en" lang="en">It can count that a “person” is there, but never who. It does not read number plates or keep pictures. Even in the face experiment you choose to open, it finds where your eyes and head point — not who you are.</span><span class="zh" lang="zh-Hans">它可以数出那里有一个“人”，但从不确定是谁。它不读取车牌，也不保留图像。即使在你选择打开的面部实验里，它找的也是你的眼睛和头指向哪里——不是你是谁。</span></li>
+      <li><span class="num">iii</span><strong><span class="th" lang="th">บอกความมั่นใจเสมอ</span><span class="en" lang="en">It always shows its confidence</span><span class="zh" lang="zh-Hans">它始终显示出置信度</span></strong><span class="th" lang="th">ทุกคำตอบของเครื่องมาพร้อมตัวเลขความมั่นใจ และ “ไม่เห็น” ไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">Every answer carries a confidence number — and “not detected” never means “not there”.</span><span class="zh" lang="zh-Hans">每一个答案都带着一个置信度数字——“未检测到”从不意味着“不在那里”。</span></li>
     </ol>
   </section>
 

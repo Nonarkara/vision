@@ -53,6 +53,16 @@ export const onChange = (fn) => { listeners.add(fn); return () => listeners.dele
 
 export function nameOf(c, l) {
   if (c.custom) return c.custom
+  if (l === 'zh') {
+    const zh = {
+      'One finger': '一根手指', Palm: '手掌', Nothing: '不做动作',
+      'Hand up': '举手', 'Hand down': '手放下', Cup: '杯子', 'No cup': '没有杯子',
+      'Someone there': '有人', Nobody: '没有人', Rock: '石头', Paper: '布', Scissors: '剪刀',
+      'Busy road': '繁忙的路', 'Empty road': '空路', 'Rain, wet road': '下雨，路是湿的',
+      'Dry road': '干路', Day: '白天', Night: '夜晚',
+    }
+    return zh[c.en] ?? c.en
+  }
   return l === 'en' ? c.en : c.th
 }
 
