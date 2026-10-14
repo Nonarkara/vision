@@ -1,5 +1,5 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.16.0'
+import '../core/site.js?v=1.16.1'
 import { evidence } from '../core/catalog.js'
 
 // The evidence strip: live numbers from the same catalogue the map reads, so
@@ -8,20 +8,27 @@ import { evidence } from '../core/catalog.js'
 // writes the answer down.
 function paintFigures() {
   return fetch('/api/cameras').then((r) => r.json()).then((d) => {
-    const figures = evidence(d)
-    if (!figures) return
-    for (const [k, v] of Object.entries(figures)) {
-      const el = document.querySelector(`[data-fig="${k}"]`)
-      // n(), not toLocaleString(): a bare call formats in the BROWSER's locale,
-      // so a Thai-locale browser showed Thai numerals on the English page while
-      // every other figure on the site followed the page's own language.
-      if (el) el.textContent = typeof v === 'number' ? n(v) : '—'
-    }
+    latestCameras = d
+    renderFigures(d)
   }).catch(() => {})
+}
+// The catalogue is a few thousand cameras; re-render the numbers from the last
+// answer instead of refetching the whole list just to reformat it.
+let latestCameras = null
+function renderFigures(d) {
+  const figures = evidence(d)
+  if (!figures) return
+  for (const [k, v] of Object.entries(figures)) {
+    const el = document.querySelector(`[data-fig="${k}"]`)
+    // n(), not toLocaleString(): a bare call formats in the BROWSER's locale,
+    // so a Thai-locale browser showed Thai numerals on the English page while
+    // every other figure on the site followed the page's own language.
+    if (el) el.textContent = typeof v === 'number' ? n(v) : '—'
+  }
 }
 paintFigures()
 // The numbers are written once, at load. Redraw them when the language changes.
-document.addEventListener('langchange', paintFigures)
+document.addEventListener('langchange', () => (latestCameras ? renderFigures(latestCameras) : paintFigures()))
 
 const choices = [...document.querySelectorAll('[data-history-choice]')]
 const panels = [...document.querySelectorAll('[data-history-panel]')]
@@ -36,8 +43,8 @@ if (choices.length) {
 }
 
 // Three teaching illustrations; only the one-step reward example learns values.
-import { t, bi, n, onLang } from '../core/i18n.js'
-import { createRewardLearner } from '../research/reward.js'
+import { bi, n, onLang } from '../core/i18n.js'
+import { createRewardLearner, describeReward } from '../research/reward.js'
 for (const interaction of document.querySelectorAll('.learning-interaction')) interaction.hidden = false
 const labelButton = document.querySelector('[data-reveal-labels]')
 labelButton.addEventListener('click', () => {
@@ -46,11 +53,16 @@ labelButton.addEventListener('click', () => {
   for (const answer of document.querySelectorAll('.learning-answer')) answer.hidden = !show
 })
 const grouped = document.querySelector('[data-grouped-objects]')
+// The list items themselves, in their original order: grouping MOVES them into
+// new lists, so the flat view is rebuilt from this array rather than kept.
 const objects = [...grouped.querySelectorAll('li')]
 for (const button of document.querySelectorAll('[data-group-by]')) {
   button.addEventListener('click', () => {
     const feature = button.dataset.groupBy
     for (const choice of document.querySelectorAll('[data-group-by]')) choice.setAttribute('aria-pressed', String(choice === button))
+    const flat = document.createElement('ul')
+    flat.className = 'learning-objects'
+    if (feature === 'none') { flat.append(...objects); grouped.replaceChildren(flat); return }
     const keys = feature === 'shape' ? ['circle', 'square'] : ['red', 'yellow']
     const names = feature === 'shape' ? [['วงกลม', 'Circles'], ['สี่เหลี่ยม', 'Squares']] : [['สีส้ม', 'Orange'], ['สีเหลือง', 'Yellow']]
     const groups = document.createElement('div')
@@ -71,12 +83,9 @@ for (const button of document.querySelectorAll('[data-group-by]')) {
 let rewardLearner = createRewardLearner()
 let lastAction = null
 function paintReward() {
-  const results = rewardLearner.snapshot()
-  const score = result => result.count ? `${result.value >= 0 ? '+' : ''}${result.value.toFixed(2)}` : t('ยังไม่รู้', 'unknown')
-  document.querySelector('[data-reward-values]').textContent = t(`คะแนนเฉลี่ยที่เรียนรู้: ซ้าย ${score(results[0])} / ขวา ${score(results[1])}`, `Learned average rewards: left ${score(results[0])} / right ${score(results[1])}`)
-  document.querySelector('[data-reward-readout]').textContent = lastAction === null
-    ? t('ยังไม่ได้ลองทางไหน ลองทั้งสองทาง แล้วให้หุ่นยนต์เลือกดู', 'No paths tried yet. Try both, then let the robot choose.')
-    : t(`ครั้งล่าสุด: ทาง${lastAction === 0 ? 'ซ้าย +1' : 'ขวา −1'} · ลองซ้าย ${results[0].count} ครั้ง ขวา ${results[1].count} ครั้ง`, `Last try: ${lastAction === 0 ? 'left +1' : 'right −1'} · Left tried ${results[0].count} times, right ${results[1].count} times.`)
+  const { values, readout } = describeReward(rewardLearner.snapshot(), lastAction)
+  document.querySelector('[data-reward-values]').textContent = values
+  document.querySelector('[data-reward-readout]').textContent = readout
 }
 function tryPath(index) {
   lastAction = index
