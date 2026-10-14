@@ -144,3 +144,40 @@ test('queued requests respect a breaker opened while waiting', async () => {
   assert.ok(f.calls.length <= BREAKER_FAILS + 1)
   assert.equal(relay.stats().inflight, 0)
 })
+
+test('the wait queue is bounded per host, not only in the global queue', async () => {
+  // The one shape the bound exists for: many ids on a SINGLE allow-listed host.
+  // Per-host concurrency (2) is below the global limit (4), so every one of these
+  // parks on the host semaphore and global.waiting never moves — the old guard
+  // saw zero waiters and admitted all twelve.
+  let open
+  const gate = new Promise((r) => { open = r })
+  const f = fakeFetch(async () => { await gate; return ok() })
+  const relay = createRelay({ fetchImpl: f, maxQueue: 3 })
+  const url = (id) => `https://cctv.maholan.net/${id}.jpg`
+
+  // Handlers attached on the spot, so the ones the bound refuses are not
+  // reported as unhandled while the rest are still queued.
+  const pending = Array.from({ length: 12 }, (_, i) => relay.frame(`cam${i}`, url).then(() => 'served', (e) => `refused ${e.status}`))
+  await new Promise((r) => setImmediate(r))   // let the queue form before the gate opens
+  open()
+
+  const settled = await Promise.all(pending)
+  const refused = settled.filter((x) => x !== 'served')
+  assert.ok(refused.length >= 5, `the queue bound refused ${refused.length} of 12; it should refuse most of them`)
+  for (const x of refused) assert.match(x, /^refused 503$/)
+})
+
+test('the breaker counts one host, not one port', async () => {
+  // STILL_HOSTS allow-lists hostnames. Keying the breaker on URL.host gave
+  // :8443 its own failure budget, so a broken host could be fetched on two ports
+  // with 2 × BREAKER_FAILS attempts before anything rested.
+  const f = fakeFetch(() => new Response('nope', { status: 500 }))
+  const relay = createRelay({ fetchImpl: f })
+  const plain = (id) => `https://cctv.maholan.net/${id}.jpg`
+  const ported = (id) => `https://cctv.maholan.net:8443/${id}.jpg`
+
+  for (let i = 0; i < BREAKER_FAILS; i++) await relay.frame(`p${i}`, plain).catch(() => {})
+  const last = await relay.frame('x', ported).then(() => 'served', (e) => e.status)
+  assert.equal(last, 503, 'the same host on another port must share the breaker')
+})

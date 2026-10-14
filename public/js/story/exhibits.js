@@ -61,6 +61,13 @@ export function createExhibits(root) {
     document.addEventListener('modelprogress', onProgress)
     try {
       await loadDetector()
+    } catch {
+      document.removeEventListener('modelprogress', onProgress)
+      btn.disabled = false
+      say.textContent = t('โหลดโครงข่ายประสาทเทียมไม่ได้ ลองอีกครั้ง', 'Could not load the neural network — try again')
+      return
+    }
+    try {
       for (const shot of shots) {
         const img = shot.querySelector('img')
         if (!img.complete) await img.decode().catch(() => {})
@@ -78,7 +85,10 @@ export function createExhibits(root) {
         summary()
       }
     } catch {
-      say.textContent = t('โหลดโครงข่ายประสาทเทียมไม่ได้ ลองอีกครั้ง', 'Could not load the neural network — try again')
+      // Deliberately NOT "could not load the network": the model is already in
+      // memory by this point. A WebGL context loss or a tensor error is a
+      // different failure and this page does not blur the two.
+      say.textContent = `${t('ดูได้แค่', 'Only')} ${results.size}/${shots.length} ${t('ภาพ ก่อนที่เครื่องจะหยุดทำงาน — ส่วนที่เหลือยังไม่ได้ดู', 'were read before the machine stopped working — the rest were not looked at')}`
     } finally {
       document.removeEventListener('modelprogress', onProgress)
       btn.disabled = false

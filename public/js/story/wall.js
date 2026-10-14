@@ -7,9 +7,9 @@
 // operations centre is not to understand, but to not blink.
 
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js'
-import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.13.4'
+import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.15.1'
 import { runLens, createLensState } from '../cv/lenses.js'
-import { t, esc, pct } from '../core/i18n.js'
+import { t, esc, pct, onLang } from '../core/i18n.js'
 
 const SCREENS = 6
 const STILL_REFRESH_MS = 20_000
@@ -38,6 +38,21 @@ export function createWall(root) {
     return () => ({ name: watching ? 'motion' : 'picture' })
   }
 
+  /**
+   * A tile's name is written once, when its source is filled — but the language
+   * can change long after that, and a wall still labelled in the other language
+   * reads as broken rather than translated.
+   */
+  function paintWho(s) {
+    const who = s.el.querySelector('.who')
+    if (!who || !s.src) return
+    if (s.src.kind === 'webcam') {
+      who.innerHTML = esc(t('กล้องของคุณ · อยู่ในเครื่องนี้เท่านั้น', 'Your camera · stays on this device'))
+      return
+    }
+    who.innerHTML = `${esc(camName(s.src.cam))}<br><span class="micro">${esc(sourceName(s.src.cam.src))}</span>`
+  }
+
   function mount(i, src) {
     const s = screens[i]
     s.src?.close()
@@ -45,9 +60,7 @@ export function createWall(root) {
     s.src = src
     s.state.prevGray = null
     s.state.motion = null
-    const who = s.el.querySelector('.who')
-    if (src.kind === 'webcam') who.innerHTML = esc(t('กล้องของคุณ · อยู่ในเครื่องนี้เท่านั้น', 'Your camera · stays on this device'))
-    else who.innerHTML = `${esc(camName(src.cam))}<br><span class="micro">${esc(sourceName(src.cam.src))}</span>`
+    paintWho(s)
     if (src.kind === 'still') {
       s.refresh = setInterval(() => { if (!document.hidden) src.refresh().catch(() => { /* keep last frame */ }) }, STILL_REFRESH_MS + i * 1500)
     }
@@ -75,6 +88,8 @@ export function createWall(root) {
   }
 
   /** Which screen should the human look at? The one with the most change, if any. */
+  onLang(() => { for (const s of screens) paintWho(s); attend() })
+
   function attend() {
     let best = null
     for (const s of screens) {

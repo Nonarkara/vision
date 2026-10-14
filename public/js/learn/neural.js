@@ -2,7 +2,7 @@
 // both benches and loads only when someone presses the button — 18 MB is a
 // real cost on a phone, and nobody should pay it just for scrolling past.
 
-import { t, lang, onLang } from '../core/i18n.js'
+import { t, lang, onLang, count } from '../core/i18n.js'
 import * as ops from '../cv/ops.js'
 import { clear, containRect, drawDetections } from '../cv/draw.js'
 import { detect, loadDetector, tally, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
@@ -110,7 +110,7 @@ export function detectorChapter(chapter, getSource) {
     const above = sorted.filter((d) => d.score >= cut).length
     const below = sorted.length - above
     const none = above ? '' : `\n${t(`ไม่มีอะไรที่มั่นใจถึง ${min.value}% ซึ่งไม่ได้แปลว่าไม่มีอะไรอยู่ตรงนั้น`, `Nothing at ${min.value}% or more — which does not mean nothing is there`)}`
-    write(`${above} ${t('กรอบผ่านเส้น', 'boxes pass the line')} · ${below} ${t('อยู่ใต้เส้น (ไม่แสดงบนภาพ)', 'below it (not drawn)')} · ${Math.round(run.ms)} ms · ${backend()}${none}`, true)
+    write(`${count(above, t('กรอบผ่านเส้น', 'box above the line'), t('กรอบผ่านเส้น', 'boxes above the line'))} · ${below} ${t('อยู่ใต้เส้น (ไม่แสดงบนภาพ)', 'below it (not drawn)')} · ${Math.round(run.ms)} ms · ${backend()}${none}`, true)
   }
 
   const bench = runBench(canvas, getSource, (ctx, src) => {

@@ -1,35 +1,67 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.13.4'
-import { t, lang, n, onLang } from '../core/i18n.js'
+import '../core/site.js?v=1.15.1'
+import { t, lang, n, count, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.13.4'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.15.1'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
 import { cocoName } from '../ml/labels.js'
 
 const canvas = document.querySelector('[data-eye]')
 const stateEl = document.querySelector('[data-eye-state]')
 const sayEl = document.querySelector('[data-lens-say]')
+const lineEl = document.querySelector('[data-lens-line]')
+const lineInput = document.querySelector('[data-lens-min]')
+const lineOut = document.querySelector('[data-lens-min-out]')
 const buttons = [...document.querySelectorAll('[data-lens]')]
 const specimen = createSpecimen({ bar: document.querySelector('[data-specimen]'), prefer: 'video' })
 
 let lens = 'picture'
 let modelNote = ''
+let modelSeen = false   // has this page ever finished a detection?
 const lensState = createLensState()
+
+/** The confidence line: what the network was asked for, and what the page draws. */
+function showLine(on) {
+  if (lineEl) lineEl.hidden = !on
+  if (!on) return
+  const pct = Math.round(lensState.minScore * 100)
+  if (lineInput && Number(lineInput.value) !== pct) lineInput.value = String(pct)
+  if (lineOut) lineOut.textContent = `${pct}%`
+}
+
+lineInput?.addEventListener('input', () => {
+  lensState.minScore = Number(lineInput.value) / 100
+  showLine(true)
+  say()
+})
 
 function say() {
   const [name, text] = LENS_TEXT[lens][lang()]
   let extra = ''
+  // The confidence line is a control for a working detector. When detection is
+  // down, offering a slider that changes nothing is worse than offering nothing.
   if (lens === 'objects') {
+    showLine(!lensState.error)
     if (lensState.error) extra = `\n${t('เปิดการตรวจจับไม่ได้ ลองเลือกสิ่งของอีกครั้ง หรือใช้เลนส์อื่น', 'Detection is unavailable. Try Objects again, or use another lens.')}`
     else if (modelNote) extra = `\n${modelNote}`
-    else if (lensState.detections.length) {
-      const counts = {}
-      for (const d of lensState.detections) counts[d.cls] = (counts[d.cls] ?? 0) + 1
-      const list = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([c, k]) => `${cocoName(+c, lang())} ×${k}`).join(' · ')
-      extra = `\n${t('เห็น', 'Sees')}: ${list} — ${Math.round(lensState.detectMs)} ms`
-    } else if (lensState.detectedAt) {
-      extra = `\n${t('ไม่พบอะไรที่มั่นใจเกิน 30% — ซึ่งไม่ได้แปลว่าไม่มีอะไร', 'Nothing above 30% confidence — which does not mean nothing is there')}`
+    else if (lensState.detectedAt) {
+      const all = lensState.detections
+      const above = all.filter((d) => d.score >= lensState.minScore)
+      const at = Math.round(lensState.minScore * 100)
+      if (above.length) {
+        const counts = {}
+        for (const d of above) counts[d.cls] = (counts[d.cls] ?? 0) + 1
+        const list = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([c, k]) => `${cocoName(+c, lang())} ×${k}`).join(' · ')
+        const below = all.length - above.length
+        const tail = below ? ` · ${t(`อีก ${n(below)} กรอบอยู่ใต้เส้น`, `${n(below)} below the line`)}` : ''
+        extra = `\n${t('เห็น', 'Sees')}: ${list} — ${Math.round(lensState.detectMs)} ms${tail}`
+      } else {
+        // The honest sentence, plus the thing that makes it a lesson instead of a
+        // dead end: the network did answer, and its weaker answers are one drag away.
+        extra = `\n${t(`ไม่มีอะไรที่มั่นใจ ${at}% ขึ้นไป — ซึ่งไม่ได้แปลว่าไม่มีอะไร`, `Nothing at ${at}% or more — which does not mean nothing is there`)}`
+        if (all.length) extra += `\n${t(`อีก ${n(all.length)} กรอบอยู่ใต้เส้น ลากเส้นลงมาดูว่าเครื่องเดาอะไรไว้`, `${count(all.length, 'box sits below the line', 'boxes sit below the line')} — drag it down and watch the machine guess`)}`
+      }
     }
   }
   if (lens === 'motion' && specimen.source?.kind === 'still') {
@@ -43,7 +75,14 @@ for (const b of buttons) {
     lens = b.dataset.lens
     for (const x of buttons) x.setAttribute('aria-pressed', String(x === b))
     if (lens === 'objects') { lensState.error = null; lensState.detectedAt = 0; lensState.detectedFrame = null }
-    if (lens === 'objects' && !lensState.detectedAt) modelNote = t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+    // "first time only" is a promise about this visitor's browser. Once the network
+    // has answered once, switching camera or lens must not repeat it.
+    if (lens === 'objects' && !lensState.detectedAt) {
+      modelNote = modelSeen
+        ? t('กำลังอ่านภาพใหม่…', 'Reading the new picture…')
+        : t('กำลังโหลดโครงข่ายประสาทเทียม (18 MB ครั้งแรกเท่านั้น)…', 'Loading the neural network (18 MB, first time only)…')
+    }
+    showLine(lens === 'objects')
     say()
   })
 }
@@ -59,7 +98,7 @@ runLens(canvas, () => specimen.source, () => ({ name: lens }), {
   state: lensState,
   onFrame: () => {
     stateEl.hidden = true
-    if (lens === 'objects') say()
+    if (lens === 'objects') { if (lensState.detectedAt && !lensState.error) modelSeen = true; say() }
   },
 })
 

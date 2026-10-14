@@ -3,10 +3,10 @@
 // scores. Neither side is the answer key: you referee each round after a
 // second, slower look — which is, not by accident, how training labels get made.
 
-import { t, bi, n, onLang } from '../core/i18n.js'
+import { t, bi, n, count, onLang } from '../core/i18n.js'
 import { STREET } from '../ml/labels.js'
 import { drawDetections } from '../cv/draw.js'
-import { startSpecimen } from '../core/specimen.js?v=1.13.4'
+import { startSpecimen } from '../core/specimen.js?v=1.15.1'
 import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js'
 
 const ROUNDS = 5
@@ -67,7 +67,7 @@ export function initCount(root) {
     if (machine < you) lines.push(t('เครื่องนับได้น้อยกว่า ลองหา: คันที่ถูกคันอื่นบังอยู่ คันเล็ก ๆ ที่ไกลออกไป และกรอบสีเทา — สิ่งที่มันเห็นครึ่ง ๆ กลาง ๆ แต่ให้คะแนนต่ำกว่าเกณฑ์', 'The machine counted fewer. Look for ones hidden behind others, tiny ones far down the road, and grey boxes — things it half-saw but scored below the threshold.'))
     else if (machine > you) lines.push(t('เครื่องนับได้มากกว่า ลองดูว่า: มีคันไหนถูกตีกรอบซ้ำสองครั้ง มีรถจอดที่คุณไม่ได้นับ หรือมีเงา ป้าย แสงสะท้อน ที่มันคิดว่าเป็นรถ', 'The machine counted more. Check for one thing boxed twice, parked ones you skipped, or shadows, signs and reflections it took for the real thing.'))
     else lines.push(t('ได้เท่ากัน แต่ยังไม่ได้แปลว่าถูกทั้งคู่ ดูว่ากรอบอยู่บนสิ่งเดียวกับที่คุณนับหรือเปล่า', 'Same number — which does not prove you are both right. Check the boxes sit on the same things you counted.'))
-    if (unsure().length) lines.push(t(`กรอบสีเทา ${n(unsure().length)} กรอบ: เครื่องเห็นแต่ไม่มั่นใจพอ ลองเลื่อนเกณฑ์ดู ตัวเลขของเครื่องจะเปลี่ยน`, `${n(unsure().length)} grey box(es): seen but not sure enough. Move the threshold and watch the machine's count change.`))
+    if (unsure().length) lines.push(t(`กรอบสีเทา ${n(unsure().length)} กรอบ: เครื่องเห็นแต่ไม่มั่นใจพอ ลองเลื่อนเกณฑ์ดู ตัวเลขของเครื่องจะเปลี่ยน`, `${count(unsure().length, 'grey box', 'grey boxes')}: seen but not sure enough. Move the threshold and watch the machine's count change.`))
     return lines.join('\n')
   }
 

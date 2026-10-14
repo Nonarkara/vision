@@ -137,9 +137,23 @@ export const SITE = 'https://vision.nonarkara.org'
 const ROUTE_OF = new Map(Object.entries(PAGES).map(([route, name]) => [name, route]))
 export function routeOf(pageName) { return ROUTE_OF.get(pageName) ?? null }
 
-/** True only when this client told us it can read gzip. */
+/**
+ * True only when this client told us it can read gzip.
+ *
+ * A bare /\bgzip\b/ test used to answer this, which matched the token whatever
+ * its quality: "gzip;q=0" means "not acceptable" (RFC 9110 §12.5.3), and those
+ * clients were served a gzipped body with a compressed Content-Length anyway.
+ */
 export function wantsGzip(req) {
-  return /\bgzip\b/.test(String(req.headers?.['accept-encoding'] ?? ''))
+  const header = String(req.headers?.['accept-encoding'] ?? '')
+  for (const part of header.split(',')) {
+    const [name, ...params] = part.trim().split(';')
+    if (!/^(gzip|x-gzip)$/i.test(name.trim())) continue
+    const q = params.map((p) => p.trim().toLowerCase()).find((p) => p.startsWith('q='))
+    const quality = q ? Number.parseFloat(q.slice(2)) : 1
+    return Number.isFinite(quality) && quality > 0
+  }
+  return false
 }
 
 /**
@@ -192,7 +206,11 @@ export function createStatic({ root, version, log = () => {} }) {
     const type = TYPES[path.extname(full)] ?? 'application/octet-stream'
     const gz = COMPRESSIBLE.test(type) && body.length > 1024 ? zlib.gzipSync(body, { level: 9 }) : null
     const entry = { body, gz, type, etag }
-    // Large binaries (model shards) are streamed from the page cache, not memo'd.
+    // Large binaries (model shards) are NOT memoised, so they cost a full read per
+    // request instead of one heap copy. The comment here used to claim they were
+    // "streamed from the page cache", which nothing did — load() read the whole
+    // file synchronously and send() ended with it. The skip itself is real and
+    // worth keeping: it is what stops an 11 MB WASM blob from being held twice.
     if (body.length < 2 * 1024 * 1024) memo.set(key, entry)
     return entry
   }
@@ -231,7 +249,11 @@ export function createStatic({ root, version, log = () => {} }) {
     const found = safeResolve(root, pathname)
     if (!found) return false
     // Originals live under public/ for the repo; visitors get the resized copies in img/ioc/.
-    if (PRIVATE_DIRS.some((d) => found.full.startsWith(path.join(root, d) + path.sep))) return false
+    // Compared case-insensitively and Unicode-normalised, because safeResolve used
+    // statSync — on APFS that resolves "cctv photos/…" and "CCTV PHOTOS/…" to the same
+    // directory, so a case-sensitive startsWith let the full-size originals out.
+    const here = found.full.normalize('NFC').toLowerCase()
+    if (PRIVATE_DIRS.some((d) => here.startsWith(path.join(root, d).normalize('NFC').toLowerCase() + path.sep))) return false
     // Page templates are only ever served assembled, under their clean URL.
     if (found.full.endsWith('.html')) return false
     // Memo by the resolved file, not the request path: `/a//b` and `/a/b` are one file, one entry.

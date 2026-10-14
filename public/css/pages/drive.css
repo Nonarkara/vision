@@ -18,6 +18,18 @@
 .drive-grid { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr); gap: var(--gap); align-items: start; }
 @media (max-width: 1000px) { .drive-grid { grid-template-columns: 1fr; } }
 
+/* The windshield is the hero: the car's own moving view, on first look, above
+   the map. Big and cinematic, but capped so it never eats the page. */
+.drive-hero { display: grid; gap: 2px; margin-bottom: var(--gap); background: var(--black); color: var(--white); }
+.hero-bar { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 14px 6px; }
+.hero-bar .label { color: var(--gray); }
+.hero-name { margin: 0; text-align: right; font-weight: 600; color: var(--naples); }
+.hero-screen { display: block; width: 100%; height: clamp(220px, 34vw, 460px); background: #0b0f14; }
+.hero-controls { padding: 8px 14px; }
+.hero-controls .btn { flex: 1; white-space: nowrap; }
+.hero-note { margin: 0; padding: 6px 14px 12px; color: var(--gray); }
+@media (max-width: 700px) { .hero-controls { display: grid; grid-template-columns: 1fr 1fr; } .hero-controls .btn { white-space: normal; } .hero-controls .btn:last-child { grid-column: 1 / -1; } }
+
 .track { display: block; width: 100%; aspect-ratio: 200 / 140; cursor: pointer; background: var(--black-1); }
 
 .knobs { display: grid; gap: 2px; padding-top: 2px; }

@@ -119,3 +119,32 @@ test('only face worker may compile WASM; documents keep strict script policy', a
   statics.serve({method:'HEAD',headers:{}},res,'/vendor/mediapipe-0.10.32/wasm/vision_wasm_internal.wasm')
   assert.equal(headers['Content-Type'],'application/wasm')
 })
+
+test('a client that refuses gzip with q=0 is not served a gzipped body', async () => {
+  const { wantsGzip } = await import('../server/http.js')
+  const at = (header) => wantsGzip({ headers: { 'accept-encoding': header } })
+  assert.equal(at('gzip;q=0'), false, 'q=0 means not acceptable (RFC 9110)')
+  assert.equal(at('gzip;q=0.0'), false)
+  assert.equal(at('br, gzip;q=0'), false)
+  assert.equal(at('x-gzip;q=0'), false)
+  assert.equal(at('gzip;q=0.001'), true, 'a tiny positive quality is still acceptable')
+  assert.equal(at('gzip'), true)
+  assert.equal(at('GZIP'), true)
+  assert.equal(at('br'), false)
+  assert.equal(at(''), false)
+})
+
+test('the private photo directory cannot be reached by respelling its case', async () => {
+  // statSync resolves any spelling on a case-insensitive filesystem, so the guard
+  // has to compare case-insensitively too.
+  const { createStatic } = await import('../server/http.js')
+  const statics = createStatic({ root: PUBLIC, version: 't' })
+  const res = { writeHead() {}, end() {} }
+  for (const dir of ['CCTV photos', 'cctv photos', 'CCTV PHOTOS', 'Cctv Photos']) {
+    assert.equal(
+      statics.serve({ method: 'GET', headers: {} }, res, `/${encodeURIComponent(dir)}/Rawai,%20Phuket%20Municipality.jpg`),
+      false,
+      `${dir} must not serve the full-size original`,
+    )
+  }
+})

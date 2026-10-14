@@ -125,6 +125,19 @@ export function motion(ctx, src, state, { width = 192, delta = 22, minArea = 10 
 }
 
 /**
+ * The lowest confidence the network is ever asked for.
+ *
+ * The Objects lens used to ask for exactly what it drew, so a camera with nothing
+ * above the line produced no candidate boxes at all and the page could only say
+ * "nothing above 30%". The candidates were already computed and thrown away: the
+ * interesting part of the lesson is what sits *below* the line and how wrong it
+ * looks, which is the same device chapter 07 of /learn already teaches. The floor
+ * is 5% because both confidence sliders reach lower than that, and a slider that
+ * cannot reveal anything is worse than no slider.
+ */
+export const DETECT_FLOOR = 0.05
+
+/**
  * Detector overlay. Detection runs asynchronously; the lens always paints
  * the current frame with the most recent boxes, and starts a new detection
  * when the last one has finished and the frame is new enough.
@@ -143,7 +156,7 @@ export function objects(ctx, src, state, { every = 700, onResult = null } = {}) 
     frame.width = from.width
     frame.height = from.height
     frame.getContext('2d').drawImage(from, 0, 0)
-    detect(frame, { minScore: state.minScore })
+    detect(frame, { minScore: DETECT_FLOOR })
       .then(({ detections, ms }) => {
         if (src.closed || state.source !== src) return
         state.detections = detections

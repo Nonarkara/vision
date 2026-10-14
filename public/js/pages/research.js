@@ -1,19 +1,27 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.13.4'
+import '../core/site.js?v=1.15.1'
 import { evidence } from '../core/catalog.js'
 
 // The evidence strip: live numbers from the same catalogue the map reads, so
 // the about chapter's claims and the cameras page's dots can never disagree.
 // The counting rule lives in catalog.js next to isReadable; this file only
 // writes the answer down.
-fetch('/api/cameras').then((r) => r.json()).then((d) => {
-  const figures = evidence(d)
-  if (!figures) return
-  for (const [k, v] of Object.entries(figures)) {
-    const el = document.querySelector(`[data-fig="${k}"]`)
-    if (el) el.textContent = typeof v === 'number' ? v.toLocaleString() : '—'
-  }
-}).catch(() => {})
+function paintFigures() {
+  return fetch('/api/cameras').then((r) => r.json()).then((d) => {
+    const figures = evidence(d)
+    if (!figures) return
+    for (const [k, v] of Object.entries(figures)) {
+      const el = document.querySelector(`[data-fig="${k}"]`)
+      // n(), not toLocaleString(): a bare call formats in the BROWSER's locale,
+      // so a Thai-locale browser showed Thai numerals on the English page while
+      // every other figure on the site followed the page's own language.
+      if (el) el.textContent = typeof v === 'number' ? n(v) : '—'
+    }
+  }).catch(() => {})
+}
+paintFigures()
+// The numbers are written once, at load. Redraw them when the language changes.
+document.addEventListener('langchange', paintFigures)
 
 const choices = [...document.querySelectorAll('[data-history-choice]')]
 const panels = [...document.querySelectorAll('[data-history-panel]')]
@@ -28,7 +36,7 @@ if (choices.length) {
 }
 
 // Three teaching illustrations; only the one-step reward example learns values.
-import { t, bi, onLang } from '../core/i18n.js'
+import { t, bi, n, onLang } from '../core/i18n.js'
 import { createRewardLearner } from '../research/reward.js'
 for (const interaction of document.querySelectorAll('.learning-interaction')) interaction.hidden = false
 const labelButton = document.querySelector('[data-reveal-labels]')

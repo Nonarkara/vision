@@ -98,6 +98,36 @@
       <div class="tiles wall" data-wall aria-live="off"></div>
       <p class="readout" data-wall-say aria-live="polite"></p>
       <p class="micro wall-note"><span class="th" lang="th">ภาพนิ่งจากกล้องส่วนใหญ่มาใหม่ทุก ~20 วินาที เครื่องจึงเห็นการเปลี่ยนแปลงเมื่อภาพถัดไปมาถึง กล้องของคุณอยู่ในเครื่องนี้เท่านั้น ไม่ถูกส่งไปไหน เครื่องไม่รู้ว่าใครเป็นใคร มันรู้แค่ว่าพิกเซลเปลี่ยน</span><span class="en" lang="en">Most cameras send a still every ~20 seconds, so the machine sees a change when the next one arrives. Your camera stays on this device; nothing is sent anywhere. The machine does not know who anyone is — only that pixels changed.</span></p>
+    <div class="drill" data-drill>
+      <header class="drill-head">
+        <h3><span class="th" lang="th">แล้วคุณล่ะ</span><span class="en" lang="en">And you?</span></h3>
+        <p class="th" lang="th">ข้างต้นเป็นคำบอกเล่าจากห้องควบคุมจริง ส่วนนี้คือการทดสอบจริงกับคุณ เครื่องไม่ได้เล่าให้ฟัง — คุณต้องรู้ด้วยตัวเอง</p>
+        <p class="en" lang="en">The room above is a story told after the fact. This part is the test, run on you. The machine does not get to narrate — you find out for yourself.</p>
+        <p class="micro"><span class="th" lang="th">วิธีเล่น: ภาพห้องควบคุมจริงหกภาพจะถูกตรึงไว้นิ่ง ทุกครั้งจะมีจอหนึ่งจอกะพริบ — จุดหนึ่งจุดขนาดเท่าฝ่ามือเปลี่ยนไปเล็กน้อย แค่ไม่กี่สิบมิลลิวินาที แล้วกลับเป็นเดิม คุณมีเวลา 3 วินาทีกดจอที่คิดว่ากะพริบ (ปุ่มเลข 1–6 ก็ได้) เครื่องทำงานเหมือนกันทุกเฟรม</span><span class="en" lang="en">How it runs: six real control-room photographs are frozen. Each trial flashes one screen — a palm-sized patch of pixels nudged by a few grey levels, for a few tens of milliseconds, then back. You have three seconds to press the screen you think flashed (number keys 1–6 work too). The machine compares every pixel on every frame.</span></p>
+        <p class="micro drill-fair"><span class="th" lang="th">พูดตรงๆ ก่อนเล่น: ข้อนี้เป็นโจทย์ง่าย ๆ ที่เครื่องทำได้ถูกทุกครั้ง เพราะมีจอเดียวเท่านั้นที่เปลี่ยน “จอที่พิกเซลขยับมากที่สุด” จึงเป็นคำตอบที่ถูกเสมอ เราเลือกจอไว้ให้ คุณไม่ได้แข่งกับปัญญาที่ฉลาดกว่า คุณแข่งกับข้อจำกัดจริงของสายตาคน ส่วนความฉลาดของเครื่อง ความจริงที่เครื่องพลาดเสมอ อยู่ด้านบนแล้ว</span><span class="en" lang="en">Said plainly before you start: this is an easy problem, and the machine gets it right every time — only one screen changes, so “most pixels moved” is always the correct answer. You are not competing with a cleverer mind. You are meeting the real limit of a human eye. For what a machine still gets wrong, scroll back up.</span></p>
+      </header>
+      <div class="controls drill-controls">
+        <button class="btn primary" type="button" data-drill-start><span class="th" lang="th">เริ่มแบบฝึก</span><span class="en" lang="en">Take the test</span></button>
+        <button class="btn" type="button" data-drill-next hidden><span class="th" lang="th">ครั้งต่อไป →</span><span class="en" lang="en">Next trial →</span></button>
+        <button class="btn" type="button" data-drill-again hidden><span class="th" lang="th">เล่นอีกครั้ง</span><span class="en" lang="en">Take it again</span></button>
+      </div>
+      <div class="drill-wall" data-drill-wall></div>
+      <p class="readout drill-say" data-drill-say aria-live="polite"></p>
+      <table class="drill-log" data-drill-log hidden>
+        <caption class="micro"><span class="th" lang="th">บันทึกการทดลองของคุณ — เก็บไว้ในหน้านี้เท่านั้น ไม่ถูกส่งไปที่ไหน ไม่ถูกบันทึกข้ามการเปิดหน้าใหม่</span><span class="en" lang="en">Your trial log — kept on this page only. Nothing is sent anywhere, and nothing survives a reload.</span></caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="th" lang="th">ครั้ง</span><span class="en" lang="en">Trial</span></th>
+            <th scope="col"><span class="th" lang="th">Δ · มิลลิวินาที</span><span class="en" lang="en">Δ · ms</span></th>
+            <th scope="col"><span class="th" lang="th">จอที่กะพริบจริง</span><span class="en" lang="en">Really flashed</span></th>
+            <th scope="col"><span class="th" lang="th">คุณกด</span><span class="en" lang="en">You pressed</span></th>
+            <th scope="col"><span class="th" lang="th">พิกเซลที่ขยับ</span><span class="en" lang="en">Pixels moved</span></th>
+            <th scope="col"><span class="th" lang="th">เครื่อง</span><span class="en" lang="en">Machine</span></th>
+          </tr>
+        </thead>
+        <tbody data-drill-rows></tbody>
+      </table>
+    </div>
     </div>
   </section>
 

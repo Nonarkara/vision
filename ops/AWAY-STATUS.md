@@ -373,3 +373,93 @@ Window: 2026-10-05 through 2026-10-12 23:59 Asia/Bangkok, ending earlier if the 
 - **To finish it, one of:** toggle zone `nonarkara.org` → Analytics & Logs → Web Analytics off in the dashboard (about thirty seconds, works now, no code change); or add the RUM/Web Analytics **write** permission to the token and I can do it and verify the beacon disappears from a live browser.
 
 - **Until then nothing is wrong with the site.** The CSP blocks the beacon, no cookie is set, nothing is collected, `/legal` documents it in both languages, and `check-privacy.mjs` fails the build if anyone widens `script-src` to silence the console.
+
+## 2026-10-13 · Shipability audit by use, not by gate (Asia/Bangkok)
+
+- The away window closed on the 12th; the user is back and asked for a shipability audit that makes the site make sense **to use, learn and enjoy**. Production was healthy throughout the audit: 1.13.3, `ok: true` locally and publicly, catalogue ~3,430 cameras refreshing on the ten-minute cadence, relay idle, memory 25 MB. The workspace carried an uncommitted tree (server hardening in `catalog/http/relay`, the story exhibits rework, and the new `story/blink.js`) which was preserved and audited as-is.
+
+- **The build was already green** — 155 tests, 25 pages, no forks, privacy, docs and tone ladder — so this audit drove the real pages in a real browser instead of reading diffs: 26 routes × {390, 1280} × {ไทย, English}, then every interactive room pressed by hand. No console error, no horizontal overflow, one `h1` per page, 25 pages and 87 references intact. The interesting findings were not in the gate.
+
+### The blink drill had never run. Four separate bugs, one feature.
+
+`/story`'s drill — advertised in the README as "the blink drill — six frozen screens, one flashes…" — answered every press with *"This page still has fewer than six control-room photographs."* It looked complete in review and could not play:
+
+1. **Wrong scope.** `specimenImages()` asked `root.querySelectorAll('.shots [data-shot] img')`, and the drill is mounted on `#try` while the photographs live in the exhibits section above it. The query found nothing, always. Now queried from the document.
+2. **A trial that threw.** `const s = screens[pickTile()]` — `pickTile()` returns a *screen*, so this indexed `screens` with an object and produced `undefined`; the run died with "Cannot read properties of undefined (reading 'i')".
+3. **A frame that could not be painted.** `new ImageData(grayToRgba(...), w, h)` handed the three-argument constructor the `{data,width,height}` wrapper instead of the pixel array, so every screen threw on every frame. Now one reused `ImageData` per screen, filled in place.
+4. **The last trial was never answerable and never logged.** The loop broke out before the final trial and called `reveal()` itself; the scheduled reveal then found the phase already `over` and returned. The score silently counted four trials out of five. `playTrial` now waits out the answer window, and the loop simply plays every trial in turn.
+
+Also fixed on the way: number keys 1–6 were listened for on `#try`, but pressing the start button hides that button and focus falls back to `<body>`, which is not inside `#try` — so the keys announced in the instructions did nothing for anyone who had not tabbed back in (now on `document`, ignoring form fields); and the lazily-loaded exhibits could leave the drill waiting forever on "Opening the control-room photographs…", since `decode()` never settles on an image the browser has not begun fetching (now explicitly requested, with an eight-second bound).
+
+**Tests, because this is the part that failed.** The fifteen existing blink tests all passed while the feature could not run: they cover arithmetic, not the thing. Added a DOM-level pair that builds a page shaped like `story.html` — photographs **outside** the drill — and plays a whole drill with the keyboard. Four mutations were then tried against it: the scoped query, the double-indexed screen, the `ImageData` wrapper and the dropped last trial. Three went red immediately; the fourth exposed that my `ImageData` stub was lenient enough to accept the wrapper, so the stub was made strict and it went red too. A fifth mutation (removing the answer wait) fails with "answered 4". A green check that cannot go red is not a check.
+
+### The home page's fifth lens was a dead end
+
+A visitor who presses **5 Objects** on a road full of cars was told *"Nothing above 30% confidence."* Measured, not guessed: the lens asked the network for exactly what it drew, and on that camera the network returned nothing at any input size — the stream is 352×288 and the model is a 300×300 one. The page was honest and useless at once, on its central claim ("watch it go … to 'car 68%'"), on the one camera it picks first.
+
+Chapter 07 of `/learn` already had the right instrument: ask low, let the visitor draw the line, and show what sits below it. The Objects lens now does the same — `DETECT_FLOOR = 0.05`, a confidence slider under the lens buttons, and readouts that say how many candidates are below the line. The worst camera is now the best lesson rather than the worst first impression: at 5% it returns 50 guesses, 46 of them "person" on a road with no one on it. Live: 30% → 14 boxes; 10% → 25 cars and 12 traffic lights; 90% → *"Nothing at 90% or more — 50 more sit below the line — drag it down and watch the machine guess."*
+
+### Smaller things a person notices
+
+- **English number agreement.** "1 boxes pass the line", "1 moving regions", "9 grey box(es)" — the machine-ese that gives away an unedited page. Added `count()` to i18n with English plural rules ("box" would otherwise become "boxs"), used at the three sites.
+- **"18 MB, first time only"** was repeated every time the source changed, long after the network was in memory. It now says so only before the first completed detection, and "Reading the new picture…" after.
+- `/cameras` map verified live: ~7,800 lit pixels, tapping a square opens the real card with owner, kind and coordinates. `/focus`'s gate verified to refuse the start button until both consent boxes are ticked, and to say "The camera is busy in another app — close it and try again" with a Resume button rather than going quiet (tested with Chrome's fake device; no private camera was opened).
+
+### Gates
+
+`npm run check` green: **162 tests** (7 new — 2 drill integration, 5 for the confidence line and `count()`), 25 pages, 87 references, no module forks, privacy, docs, tone ladder. Nothing was committed or deployed; production still runs 1.13.3.
+
+### Published 1.14.0 (same day, after the audit above)
+
+- `npm run deploy` re-ran the whole gate inside the script, kept one rollback generation (not needed), restarted `org.nonarkara.vision` and waited for the new version to answer healthy. Public health `ok`, version 1.14.0, uptime 5 s at the check, catalogue 3,427 cameras loaded seconds earlier.
+- Version bumped in `package.json` and all 83 `?v=` import stamps moved 1.13.3 → 1.14.0 across 33 files, so no module is served under two URLs. Cache census on the live site: `/`, `/learn`, `/story`, `/train`, `/drive`, `/games` each report exactly one distinct stamp, 1.14.0.
+- Verified **against production, not the local build**: the blink drill builds its six screens (192×144 / ×108 / ×128 / ×192, real pixel range), plays practice plus four scored trials, logs five rows, and finished "You caught 1/4 · the machine caught 4/4" against scripted keypresses; the Objects lens reported 14 boxes at 30% with "36 below the line", 30 cars at 10%, and "Nothing at 90% or more — 50 more sit below the line" at 90%. Console clean on both rooms.
+- One thing worth recording because it nearly became a false alarm: a first live run flashed screen 3 on all five trials with an identical pixel share. A second run gave 2, 3, 5, 2, 1 with three different shares, and `Math.random()` in that page returns six distinct values, so it was a coincidence — the alternative reading, six screens collapsing to one, would have meant the drill's honest "all six or none" guard was not holding. Checked rather than assumed.
+- Runtime files compared against the workspace for the seven changed modules and `index.html`: all identical. Still uncommitted, together with the rest of the tree.
+
+### Self-audit pass and 1.14.1 (same day)
+
+The 1.14.0 audit was then audited itself. Two real defects survived the first pass, both in the confidence-line work, and one copy slip:
+
+1. **A dead control on the error path.** The Objects lens shows "Detection is unavailable. Try Objects again, or use another lens." when the model fails to load — but the confidence slider stayed visible and draggable the whole time, changing nothing. The control is now hidden whenever `lensState.error` is set, so the only thing the page offers when detection is down is the sentence that explains what to do. Verified against production by blocking the model's `model.json` and shards with CDP: slider hidden on error, restored on retry.
+2. **A false "first time only" promise.** `modelSeen` was set from `lensState.detectedAt`, but the error path *also* sets `detectedAt` (future-dated, as a retry backoff). So a visitor whose first load failed was told "Reading the new picture…" on the next click while an 18 MB download still had not happened — a small lie in a site whose whole argument is that it tells you the truth. Now `modelSeen` flips only on a detection that completed without error.
+3. Thai copy unified: the below-the-line sentence now uses the same short construction as its sibling ("อีก 33 กรอบอยู่ใต้เส้น ลากเส้นลงมาดูว่าเครื่องเดาอะไรไว้") instead of a longer variant that drifted mid-page.
+
+Also re-checked, since the original 26-page sweep ran *before* the slider was added: the new control at 390 px (full-bleed, 390×93, range target 358×44, no horizontal overflow), the drill's six tiles at 390 (178×134 and 178×178, labels intact), and both languages. The claim that the drill tests go red under mutation was re-tested rather than trusted: reintroducing the double-indexed `pickTile()` fails both integration tests, and restoring it returns 18/18.
+
+`npm run deploy` published 1.14.1. Health ok, one stamp (`?v=1.14.1`) per page, and the live site re-verified end to end: error path hides the slider, retry restores it, Objects reported "Sees: car ×8 — 1149 ms · 42 below the line", the blink drill still plays to "You caught 1/4 · the machine caught 4/4" with five log rows, console clean. Runtime `home.js` byte-identical to the workspace.
+
+### Third pass: the plural bug the fix itself introduced, and four more of its kind · 1.14.2
+
+The 1.14.1 release fixed "1 boxes pass the line" by routing the count through `count()`. The third audit read the diff instead of the changelog and found the fix had traded one grammar error for another: the noun was now singular but the verb outside `count()` still read "1 box **pass** the line", and the Thai — which was already a complete phrase, "กรอบผ่านเส้น" — had been split so the same words appeared twice, "1 กรอบผ่านเส้น ผ่านเส้น". The same latent bug sat on the home page ("1 more **sit** below the line").
+
+A sweep for the whole class — a number followed by a hardcoded English noun or verb — then turned up four more instances the first two passes had never looked at, all reachable in normal play:
+
+- `/drive`: a first-timer who hits one dog is told "1 dogs hit"; one crash reads "1 crashes caused" (per-car cards and the totals row)
+- `/train`: stopping the judge after one camera reads "Judged 1 cameras"; two learners agreeing on a single label read "the two agreed 1 times"
+
+Every count now goes through `count()` with an explicit singular and plural, including the irregulars ("person"/"people"), and "agreed 1 times" became "once". The Thai in every one of these strings was already correct — Thai classifiers do not vary — so only the English branches moved. Nineteen singular/plural/zero cases pin the exact phrases the pages emit.
+
+`npm run deploy` published 1.14.2. Health ok, gate green (162 tests), and the live site re-verified: `/drive` reads "0 laps · 0 crashes caused · 0 people · 0 dogs hit" at rest; the chapter-07 bench reads "5 boxes above the line · 34 below it (not drawn) · 1126 ms · cpu" and "0 boxes above the line … Nothing at 90% or more" at the top of the slider; home Objects and the blink drill still pass their regressions; console clean. Runtime files byte-identical to the workspace.
+
+### Fourth pass: the drawn roads, and the windshield moved to the front · 1.15.0
+
+Two things the room was asked for, both about what a visitor actually sees.
+
+**The drawn roads were rebuilt on a real projection.** The `/train` demo exists so the room works with no camera, no working public camera and no patience — sixteen scenes the page draws for itself, busy and empty. The old renderer drew each car as a body rectangle with a narrower cabin rectangle stacked on top, and laid the road down with an ad-hoc `lane × width` and a `scale` that grew with depth but never converged. That is why the perspective read as wrong and the cars read as cakes: there was no vanishing point and no box. `train/demo.js` now projects the whole scene through one pinhole — a single vanishing point on the horizon, a focal length and camera height that vary per frame, road edges and lane dashes that converge with distance, and every vehicle a solid box (lower body, cabin, glasshouse, taillights, two wheels, a ground shadow) at its true relative metres. A sedan is 4.3 m; a lorry 7.4 m and 2.9 m tall; a bus 9.8 m. The demo still varies on purpose (sky, light, camera height, two or four lanes, road tone, number and colour and spacing of vehicles) and is still pure arithmetic — no photograph, no camera, no upload, and the same seed draws the same frame on every machine. `tests/train-demo.test.js` gained the ops the new renderer uses and a guard that every projected coordinate is finite; five tests green.
+
+**Drive's windshield is now the hero.** The projection was already real — a moving driver's-eye view of the same world the top map draws — but it lived inside a dialog you had to open. It is now a large, permanently visible band above the map, the first thing the room shows, with its own car name and sight-range readout, and controls to step cars, change the sky, cover the camera, and open the same view full-screen. A card or map tap now simply selects the car and lets the hero follow, instead of throwing a modal at you. The same painter (`blitView`) feeds both the band and the dialog, so there is one drawing path, not two. The night sky gained stars and a moon and the day sky a few clouds, because a view that is always on screen should not have an empty sky.
+
+Verified against production, not the local build: `/drive?go=1` opens the room with a 1198×435 hero band whose pixels are genuinely varied (mean 119.6, std 35 in daylight; std 13.5 at night), the name readout follows the selection and the weather ("Car 1 · sees 50 m" → "Car 2 · sees 24 m" at night), and the console is clean. The `/train` demo button builds its sixteen frames and finishes without an exception. `npm run deploy` published 1.15.0; health ok, catalogue 3,430 cameras, one `?v=1.15.0` stamp per page (all 33 stamped files moved 1.14.2 → 1.15.0). Still uncommitted, together with the rest of the tree.
+
+### Fifth pass: an audit of 1.15.0 itself · 1.15.1
+
+Three lenses — shipability, communication/UX, technicality — over everything 1.15.0 touched, then the whole site.
+
+**The audit caught a regression in the previous release.** 1.15.0's refactor of the driver dialog left a duplicated text gate inside `paintDriver`: `driverTextAt = now` followed immediately by `if (now - driverTextAt < 250) return`, which returns forever. The full-screen dialog therefore drew its picture but never its words — no title, no speed, no decision, no math. Found by opening the dialog in a browser and reading the heading: it was empty. One deleted pair fixed it; verified live in both languages ("Car 1 · Careful" / "รถ 1 · ระวัง", action and math populated).
+
+Also fixed: the hero control strip overflowed its box by 1 px at 390 px (nowrap labels inside a two-column grid), now zero; and the projection itself was put on trial rather than trusted — a probe recorded all 532 polygons one drawn scene emits: every one of the 10 ground polygons converges (top width under 25% of bottom, the road's under 1%), axial strips pass within a pixel of x=160 at the horizon, and the lateral facades approach from the sides offset by the camera's lateral position, exactly as a pinhole camera draws them. Pixel stats agree: sky brighter than road, seeds differ, busy differs from empty, 19–20 wheel arcs per busy frame.
+
+Cleared without changes: the sweep ran 25 routes × {390, 1280} × {th, en} — 100 combinations, zero console errors, zero horizontal overflow, no dead controls, every page with title and h1; hero at 1198×435 holds 60 fps with both canvases live at city/24; blind toggle verified working; 7 rapid car switches wrap correctly; reset keeps the hero readout in sync; the Thai aria-label repaints with the language (an early false alarm — headless Chrome's locale is English, so the English label was correct behaviour). Recorded, not fixed: the hero repaints at ~30 fps even when the sim is paused; harmless, and the same trade the dialog always made.
+
+`npm run deploy` published 1.15.1; health ok, 3,430 cameras, one `?v=1.15.1` stamp per page. **Shipability note that outlives this pass: the working tree is 79 files of uncommitted changes spanning four releases — everything from 1.14.0 to 1.15.1 is live in production but exists in no commit.** One bad `git checkout` or disk hiccup and the only copy of the last five days is the deployed runtime directory. Committing is one command away whenever it is asked for.

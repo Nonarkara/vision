@@ -83,7 +83,7 @@ The rule the room is built on: **the simulated camera may only name things the s
 |---|---|---|
 | `/` | Home | One live camera, five lenses: picture · numbers · edges · motion · objects. "Try it on your own camera." |
 | `/learn` | 01 Learn | Eight chapters, each with a live instrument: pixels, colour channels, thresholds/Otsu, 3×3 convolution, Sobel edges, frame differencing, a detector with a confidence slider, and what it cannot do. |
-| `/cameras` | 02 Cameras | Tile-free dot map of ~4,000 cameras from 7 sources; filter, study any readable camera, run a polite census. |
+| `/cameras` | 02 Cameras | Tile-free dot map of ~3,400 cameras from 7 sources; filter, study any readable camera, run a polite census. |
 | `/train` | 03 Train | Guided lessons on one video: label frames (supervised nearest neighbours), group unnamed frames (two-cluster k-means), reward alert actions (one-step contextual bandit). Drawn practice clip, public-camera switching and local video files; optional object teaching, trained layer and diagnostic tools. |
 | `/gesture` | 04 Gestures | Teach 2–4 gestures (one finger, palm, …), bind each to a small in-browser action (beep, buzz, flash, lamps, tone, link); honest limits of what a page may do. |
 | `/drive` | 05 Drive | A real street, not a bare track: kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, hydrants, benches, planters, people and dogs. Two/four lanes, roundabout or Bangkok-inspired city; 6–24 cars. Click any car for its moving driver's view, with detection boxes and computed acceleration. Day, rain, night, sun glare. Written rules and simulated detections, not a trained driving system. Behind a CAPTCHA that explains where the training data came from. |
@@ -92,7 +92,7 @@ The rule the room is built on: **the simulated camera may only name things the s
 | `/research` | 08 Research | Sixty years of papers, the ones this site runs on, open questions. |
 | `/system` | 09 System | Diagrams, relay rules, CSP, models, live health, credits. |
 | `/legal` | 10 Fine print | PDPA (B.E. 2562), ownership, what not to do, takedowns. |
-| `/story` | The story | The IOC photos (with the detector counting screens vs people), a live six-camera wall the machine watches, the maker. |
+| `/story` | The story | The IOC photos (with the detector counting screens vs people), a live six-camera wall the machine watches, **the blink drill — six frozen screens, one flashes for a few tens of milliseconds, and you are told your own hit rate against the machine's**, and the maker. |
 
 ---
 
@@ -188,7 +188,7 @@ No dependencies. Node ≥ 22. Webcam access needs a secure context: `localhost` 
 | `public/models/` | weights, cached immutable for a year — a new model gets a new folder |
 | `public/CCTV photos/` | original IOC photographs (with EXIF); web copies live in `public/img/ioc/` |
 | `ops/` | launchd services and tunnel routing template |
-| `tests/` | eleven `node --test` files: server, relay, CV ops, learner, sources, layer races, the street and its COCO classes, and the handbook's quoted numbers |
+| `tests/` | twenty-one `node --test` files: server, relay, CV ops, learner, sources, layer races, the street and its COCO classes, and the handbook's quoted numbers |
 | `scripts/` | `build-handbook.mjs` (renders `docs/*.md` to the site's `/handbook` section; `--check` fails when stale) · `slug.mjs` (shared heading slugs) · `check-site.mjs` (pages, links, reachability, imports, CSP, parity, robots/sitemap, model shards) · `check-docs.mjs` (handbook links and anchors) · `palette-measure.mjs` (prints the tone ladder and proves every colour pairing) · `deploy-local.mjs` |
 | `data/` | `cameras.json` — the last catalogue FloodDash handed us; gitignored, recreated on first run |
 | `docs/` | the handbook: eight chapters, system design, reference; `docs/img/` figures and diagrams |

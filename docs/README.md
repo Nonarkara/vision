@@ -60,7 +60,7 @@ cd vision
 node examples/01-pixels.mjs          # Node 22+, no install, no packages
 ```
 
-Each example prints its working in the terminal (as text art, tables and charts) and writes pictures to `examples/out/`. Six of the eight import the **same** functions the website runs — `public/js/cv/ops.js` and `public/js/ml/learner.js` — so what you learn here is what runs there; `05` and `06` simulate detection on synthetic scenes and `08` reads the live catalogue. See [`examples/README.md`](../examples/README.md).
+Each example prints its working in the terminal (as text art, tables and charts) and writes pictures to `examples/out/`. Five of the eight import the **same** functions the website runs — `public/js/cv/ops.js` and `public/js/ml/learner.js` — so what you learn here is what runs there; `05` and `06` simulate detection on synthetic scenes and `08` reads the live catalogue. See [`examples/README.md`](../examples/README.md).
 
 ---
 

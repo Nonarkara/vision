@@ -125,7 +125,7 @@ const STILL_EVERY_S = 20 // matches the specimen's refresh of still cameras
 function describeMotion(state, src) {
   const m = state.motion
   const found = m
-    ? `${pct(m.changed, 1)} ${t('ของพิกเซลเปลี่ยน', 'of pixels changed')} · ${m.found.length} ${t('กลุ่มที่ขยับ', 'moving regions')}`
+    ? `${pct(m.changed, 1)} ${t('ของพิกเซลเปลี่ยน', 'of pixels changed')} · ${count(m.found.length, t('กลุ่มที่ขยับ', 'moving region'), t('กลุ่มที่ขยับ', 'moving regions'))}`
     : t('ยังไม่มีภาพก่อนหน้าให้เทียบ', 'No earlier picture to compare with yet')
   if (src.moving) return found
   if (src.kind === 'photo') return t('รูปถ่ายไม่เปลี่ยน จึงไม่มีอะไรขยับ ลองกล้องของคุณแล้วโบกมือ', 'A photo never changes, so nothing moves. Try your own camera and wave.')

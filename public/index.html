@@ -42,6 +42,11 @@
         <button class="btn" type="button" data-lens="motion" aria-pressed="false"><span class="num">4</span> <span class="th" lang="th">ขยับ</span><span class="en" lang="en">Motion</span></button>
         <button class="btn" type="button" data-lens="objects" aria-pressed="false"><span class="num">5</span> <span class="th" lang="th">สิ่งของ</span><span class="en" lang="en">Objects</span></button>
       </div>
+      <div class="slider lens-line" data-lens-line hidden>
+        <label for="lens-min"><span class="th" lang="th">วาดกรอบเมื่อมั่นใจอย่างน้อย</span><span class="en" lang="en">Draw a box only when this sure</span></label>
+        <output for="lens-min" data-lens-min-out>30%</output>
+        <input id="lens-min" type="range" min="5" max="90" step="5" value="30" data-lens-min>
+      </div>
       <p class="readout lens-say" data-lens-say aria-live="polite"></p>
       <div class="bench-caption specimen-line" data-specimen>
         <span><span class="who" data-specimen-name>…</span><br><span data-specimen-meta></span></span>

@@ -1,13 +1,15 @@
 // The story: control-room photographs the machine can count, a live wall it
 // can watch, and the people who made this.
 
-import '../core/site.js?v=1.13.4'
+import '../core/site.js?v=1.15.1'
 import { lang } from '../core/i18n.js'
 import { createWall } from '../story/wall.js'
 import { createExhibits } from '../story/exhibits.js'
+import { createDrill } from '../story/blink.js'
 
 createExhibits(document.querySelector('.exhibits'))
 createWall(document.getElementById('try'))
+createDrill(document.getElementById('try'))
 
 const clock = document.querySelector('[data-rec-clock]')
 const tick = () => {

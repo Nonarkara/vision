@@ -43,8 +43,12 @@ export class RelayError extends Error {
   }
 }
 
+// The host KEY for the breaker and per-host concurrency. Deliberately the
+// hostname and not `URL.host`: STILL_HOSTS allow-lists hostnames, so keying on
+// host:port gave cctv.maholan.net and cctv.maholan.net:8443 separate semaphores
+// and separate failure budgets — politeness that stopped at the port.
 function hostOf(url) {
-  try { return new URL(url).host } catch { return '?' }
+  try { return new URL(url).hostname } catch { return '?' }
 }
 
 /** A tiny counting semaphore. Waiters are served in arrival order. */
@@ -92,7 +96,13 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     if (hs.openUntil > now()) throw new RelayError(503, `upstream ${host} is resting after repeated failures`)
     // Rule 5: the wait queue is bounded. A slow upstream plus a fast client
     // must not turn this process into a socket warehouse.
-    if (global.waiting >= maxQueue) throw new RelayError(503, 'relay is busy — too many frames already queued, try again shortly')
+    //
+    // Both queues count. A request parked on the per-host semaphore has not yet
+    // reached the global one, and per-host concurrency (2) is smaller than the
+    // global limit (4) — so a flood of ids on a SINGLE allow-listed host used to
+    // park without limit while global.waiting stayed pinned at zero, which is the
+    // one shape the guard existed to refuse.
+    if (global.waiting + hs.sem.waiting >= maxQueue) throw new RelayError(503, 'relay is busy — too many frames already queued, try again shortly')
     const releaseHost = await hs.sem.acquire()
     const releaseGlobal = await global.acquire()
     const t0 = now()
@@ -186,7 +196,14 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     }
   }
 
-  /** Purge expired frames. Called on a timer so idle memory returns to zero. */
+  /**
+   * Purge expired frames. Called on a timer.
+   *
+   * Frames are dropped; `health` is not, and the docstring used to promise that
+   * "idle memory returns to zero", which was never true of this process. health
+   * is bounded by the catalogue size rather than by time, so it grows to a ceiling
+   * and stays there. That is acceptable, but it should be a choice on record.
+   */
   function sweep() {
     const cutoff = now() - FRAME_TTL_MS
     for (const [id, e] of cache) if (e.at < cutoff) cache.delete(id)

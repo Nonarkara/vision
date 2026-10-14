@@ -132,7 +132,11 @@ async function openVideo(cam) {
         clearTimeout(timer)
         reject(new SourceError('สตรีมจากต้นทางขาด', 'The upstream stream failed'))
         // After the stream has started, a fatal error means it dropped mid-viewing.
-        if (src && !src.closed) { src.closed = true; src.onended?.() }
+        // Close the source properly rather than flipping the flag by hand: hls.js
+        // runs a worker (enableWorker: true) and keeps pulling a third party's
+        // stream until it is destroyed, so the old version went on fetching after
+        // the page had declared the source dead.
+        if (src && !src.closed) { src.close(); src.onended?.() }
       })
       hls.loadSource(cam.v)
       hls.attachMedia(video)

@@ -65,6 +65,12 @@ for (const route of Object.keys(PAGES)) {
   if (ariaTh !== ariaEn) fail(route, `aria parity: ${ariaTh} data-aria-th vs ${ariaEn} data-aria-en`)
   if (!/property="og:title"/.test(html)) fail(route, 'missing og:title')
   if (!/rel="canonical"/.test(html)) fail(route, 'missing canonical')
+  // Every route must say which page it is. assemblePage() can only mark a link
+  // the nav or footer already carries, so a route nobody remembered to label —
+  // every handbook page, then / and /story — silently rendered with no
+  // aria-current at all, and nothing here noticed for eleven releases.
+  const currents = (html.match(/\baria-current="page"/g) ?? []).length
+  if (currents !== 1) fail(route, `${currents} aria-current="page" markers — exactly one link must be marked as the current page`)
   // Cache-key census, scoped to this site's OWN assets. A naive `?v=` grep is
   // wrong here and was wrong once already: /research links two YouTube videos
   // whose URLs carry `watch?v=<video-id>`, which is theirs, not a version of

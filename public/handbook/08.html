@@ -34,13 +34,13 @@
 <h2 id="3-the-first-limit-is-plumbing-not-ai" lang="en">3. The first limit is plumbing, not AI</h2>
 <p lang="en">Before any model runs, a city-scale system must be <em>able</em> to see. A sample run of <code>node examples/08-catalogue.mjs</code> (the counts move by tens a day; run it for today's):</p>
 <pre class="code" lang="en"><code>video     53  live video from a host that allows reading (CORS)
-still   2675  a still JPEG without CORS — relayed through server memory
-view     857  viewable only on the owner's own page — no machine here can read its pixels
-off      477  the owner's stream was found down by FloodDash's health probe
+still   2676  a still JPEG without CORS — relayed through server memory
+view     225  viewable only on the owner's own page — no machine here can read its pixels
+off      476  the owner's stream was found down by FloodDash's health probe
 
-67% of listed cameras are machine-readable IN PRINCIPLE. In practice fewer: on
+79% of listed cameras are machine-readable IN PRINCIPLE. In practice fewer: on
 one sample, only 22 of 40 cctv.maholan.net stills answered (the rest 502).</code></pre>
-<p lang="en">Of ~4,000 public cameras, one in three offers no readable pixels; many of the rest answer intermittently; about 50 offer live video a browser may analyse. <strong>Coverage, uptime and permission bound what any vision system can know — long before accuracy does.</strong> When someone presents a "city-wide AI camera network", the first questions are: how many cameras, readable how often, with whose permission?</p>
+<p lang="en">Of ~3,400 public cameras, one in five offers no readable pixels; many of the rest answer intermittently; about 50 offer live video a browser may analyse. <strong>Coverage, uptime and permission bound what any vision system can know — long before accuracy does.</strong> When someone presents a "city-wide AI camera network", the first questions are: how many cameras, readable how often, with whose permission?</p>
 <h2 id="4-bias-who-the-errors-fall-on" lang="en">4. Bias: who the errors fall on</h2>
 <p lang="en">Errors are never evenly spread. The best-known measurement, <em>Gender Shades</em> (Buolamwini &amp; Gebru, 2018), tested commercial gender classifiers on faces: error rates were as low as <strong>0.8%</strong> for lighter-skinned men and as high as <strong>34.7%</strong> for darker-skinned women. The models were not "biased" by intent; their training data and benchmarks under-represented some people, and nobody had measured.</p>
 <p lang="en">For road cameras the same mechanism applies to places, not just people:</p>
@@ -73,12 +73,12 @@ one sample, only 22 of 40 cctv.maholan.net stills answered (the rest 502).</code
 <hr>
 <h3 id="สรุปภาษาไทย" lang="th">สรุปภาษาไทย</h3>
 <p lang="th"><strong>กฎความซื่อตรง:</strong> สิ่งที่เครื่อง "เห็น" คือข้อสรุปเกี่ยวกับภาพ เผยแพร่ได้ แต่ "ไม่เห็น" จะกลายเป็นข้อสรุปเกี่ยวกับโลก ซึ่งเราไม่เผยแพร่ เพราะรถติดนิ่ง เลนส์ฝ้า กล้องค้าง หรือรถที่เล็กเกินไป ล้วนให้ความเงียบแบบเดียวกัน</p>
-<p lang="th"><strong>จุดที่ระบบพลาด:</strong> วัตถุเล็กหรือไกล กลางคืน หมอก ฝนบนเลนส์ ฝูงชน และพาหนะที่ COCO ไม่รู้จักอย่าง ตุ๊กตุ๊ก หรือ สองแถว และข้อจำกัดแรกไม่ใช่ AI แต่เป็น <strong>การเข้าถึงภาพ</strong>: จากกล้องสาธารณะราว 4,000 ตัว หนึ่งในสามไม่มีภาพที่เครื่องอ่านได้เลย</p>
+<p lang="th"><strong>จุดที่ระบบพลาด:</strong> วัตถุเล็กหรือไกล กลางคืน หมอก ฝนบนเลนส์ ฝูงชน และพาหนะที่ COCO ไม่รู้จักอย่าง ตุ๊กตุ๊ก หรือ สองแถว และข้อจำกัดแรกไม่ใช่ AI แต่เป็น <strong>การเข้าถึงภาพ</strong>: จากกล้องสาธารณะราว 3,400 ตัว หนึ่งในห้าไม่มีภาพที่เครื่องอ่านได้เลย</p>
 <p lang="th"><strong>อคติ:</strong> ความผิดพลาดไม่เคยกระจายเท่ากัน งาน Gender Shades (2018) พบความผิดพลาด 0.8% กับชายผิวขาว แต่สูงถึง 34.7% กับหญิงผิวเข้ม ทางแก้คือวัดความแม่นยำแยกตามสภาพและพื้นที่ที่สำคัญ และให้คนตัดสินใจขั้นสุดท้าย</p>
 <p lang="th"><strong>ความเป็นส่วนตัวด้วยสถาปัตยกรรม:</strong> เราไม่เก็บภาพ ไม่รับภาพจากกล้องของคุณ ไม่จดจำใบหน้า ไม่อ่านทะเบียนรถ ไม่ติดตามบุคคล และตั้งใจไม่สร้างสิ่งเหล่านี้ ตาม <strong>พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</strong> ข้อมูลชีวภาพ (biometric) เช่นการจดจำใบหน้า เป็นข้อมูลอ่อนไหวตามมาตรา 26 ที่ต้องได้รับความยินยอมโดยชัดแจ้ง (เอกสารนี้ไม่ใช่คำแนะนำทางกฎหมาย)</p>
 <p lang="en"><strong>Back to:</strong> <a href="/handbook">the handbook</a> · Next: <a href="/system">System architecture →</a></p>
   </article>
-  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/07"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a></nav>
+  <nav class="doc-nav" data-aria-th="ไปยังหน้าอื่นในคู่มือ" data-aria-en="Other handbook pages"><a class="doc-prev" href="/handbook/07"><span class="th" lang="th">← บทก่อน</span><span class="en" lang="en">← Previous chapter</span></a><a class="doc-index" data-page="handbook/08" href="/handbook"><span class="th" lang="th">หน้าคู่มือ</span><span class="en" lang="en">Handbook index</span></a></nav>
 </main>
 <!--#foot-->
 </body>

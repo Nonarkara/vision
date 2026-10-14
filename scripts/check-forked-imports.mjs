@@ -30,7 +30,13 @@ function walk(dir) {
 }
 walk(JS)
 
-const IMPORT = /(?:^|[\s;])import\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]/g
+// `import … from` AND `export … from`. Re-exports used to slip past this check
+// entirely — the regex required the literal keyword `import` — so a module pulled
+// in by one file as './x.js?v=1.2.3' and by another as './x.js' through a
+// re-export was reported as consistent. There are two live re-exports today
+// (drive/sim.js, games/common.js); both are stamped consistently, which is what
+// this now proves rather than assumes.
+const IMPORT = /(?:^|[\s;])(?:import|export)\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)['"]/g
 
 for (const file of files) {
   const src = fs.readFileSync(file, 'utf8')

@@ -2,18 +2,21 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.13.4'
-import { lang, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.13.4'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.13.4'
-import { drawWindshield } from '../drive/perspective.js?v=1.13.4'
-import { sightRange } from '../drive/perceive.js?v=1.13.4'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.13.4'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.13.4'
+import '../core/site.js?v=1.15.1'
+import { lang, count, onLang } from '../core/i18n.js'
+import { mountGate } from './captcha.js?v=1.15.1'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.15.1'
+import { drawWindshield } from '../drive/perspective.js?v=1.15.1'
+import { sightRange } from '../drive/perceive.js?v=1.15.1'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.15.1'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.15.1'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
 const ctx = canvas.getContext('2d')
+const hero = root.querySelector('[data-hero]')
+const hg = hero.getContext('2d')
+const heroName = root.querySelector('[data-hero-name]')
 
 // ── The gate ──────────────────────────────────────────────────────────
 // Nothing is blocked: the room is behind the challenge, and the Skip button is
@@ -95,7 +98,7 @@ root.addEventListener('click', (e) => {
     syncFocus()
   } else if (b.dataset.car) {
     selected = Number(b.dataset.car)
-    syncFocus(); openDriver()
+    syncFocus(); syncHeroName()
   }
 })
 
@@ -126,7 +129,7 @@ canvas.addEventListener('click', (e) => {
   const scale = canvas.width / r.width
   const x = ((e.clientX - r.left) * scale) / k, y = ((e.clientY - r.top) * scale) / k
   const near = world.cars.reduce((best, c) => (Math.hypot(c.x - x, c.y - y) < Math.hypot(best.x - x, best.y - y) ? c : best))
-  if (Math.hypot(near.x - x, near.y - y) < 8) { selected = near.id; syncFocus(); openDriver() }
+  if (Math.hypot(near.x - x, near.y - y) < 8) { selected = near.id; syncFocus(); syncHeroName() }
 })
 
 function syncPlay() {
@@ -163,14 +166,14 @@ function syncCards() {
     el.setAttribute('aria-pressed', String(c.id === selected))
     el.classList.toggle('is-crashed', c.frozen > 0)
     el.querySelector('[data-score]').textContent = l === 'en'
-      ? `${c.laps} laps · ${c.crashes} crashes caused · ${c.hitPeople} people · ${c.hitDogs} dogs hit${c.wasHit ? ` · hit by others ${c.wasHit}` : ''}`
+      ? `${count(c.laps, 'lap')} · ${count(c.crashes, 'crash caused', 'crashes caused')} · ${count(c.hitPeople, 'person', 'people')} · ${count(c.hitDogs, 'dog hit', 'dogs hit')}${c.wasHit ? ` · hit by others ${c.wasHit}` : ''}`
       : `${c.laps} รอบ · ก่อเหตุชน ${c.crashes} · ชนคน ${c.hitPeople} · ชนสุนัข ${c.hitDogs}${c.wasHit ? ` · ถูกชน ${c.wasHit}` : ''}`
     el.querySelector('[data-say]').textContent = sayDecision(c, world, l)
   }
   const sum = (f) => world.cars.reduce((n, c) => n + f(c), 0)
   const mm = String(Math.floor(world.t / 60)).padStart(2, '0'), ss = String(Math.floor(world.t % 60)).padStart(2, '0')
   totalsEl.textContent = l === 'en'
-    ? `${mm}:${ss} · ${sum((c) => c.laps)} laps · ${sum((c) => c.crashes)} crashes · ${sum((c) => c.hitPeople)} people hit · ${sum((c) => c.hitDogs)} dogs hit`
+    ? `${mm}:${ss} · ${count(sum((c) => c.laps), 'lap')} · ${count(sum((c) => c.crashes), 'crash')} · ${count(sum((c) => c.hitPeople), 'person hit', 'people hit')} · ${count(sum((c) => c.hitDogs), 'dog hit', 'dogs hit')}`
     : `${mm}:${ss} · ${sum((c) => c.laps)} รอบ · ชน ${sum((c) => c.crashes)} · ชนคน ${sum((c) => c.hitPeople)} · ชนสุนัข ${sum((c) => c.hitDogs)}`
 }
 
@@ -195,29 +198,56 @@ function syncFocus() {
   cardsEl.querySelectorAll('[data-car]').forEach((el) => el.setAttribute('aria-pressed', String(Number(el.dataset.car) === selected)))
 }
 
+function syncHeroName() {
+  const c = world.cars[selected - 1], l = lang()
+  heroName.textContent = l === 'en'
+    ? `Car ${c.id} · ${speedKmh(c)} km/h · sees ${Math.round(sightRange(c, world.weather))} m`
+    : `รถคันที่ ${c.id} · ${speedKmh(c)} กม./ชม. · มองเห็น ${Math.round(sightRange(c, world.weather))} ม.`
+}
+
 const dialog = document.querySelector('[data-driver-dialog]')
 const windshield = dialog.querySelector('[data-windshield]')
 const wg = windshield.getContext('2d')
+const SKIES = ['day', 'rain', 'night', 'sun']
+function cycleCar(delta) { selected = (selected - 1 + delta + world.cars.length) % world.cars.length + 1; syncFocus(); syncHeroName() }
+function cycleWeather() { settings.weather = world.weather = SKIES[(SKIES.indexOf(world.weather) + 1) % SKIES.length]; press('weather', world.weather); syncHeroName() }
+// One painter for both the hero band and the full-screen dialog: size the
+// backing store to the element, then let perspective.js draw the same frame.
+function blitView(cv, c2d) {
+  if (!cv.clientWidth) return
+  const c = world.cars[selected - 1], w = Math.max(1, cv.clientWidth), h = Math.max(1, cv.clientHeight), ratio = Math.min(3, devicePixelRatio || 1)
+  if (cv.width !== Math.round(w * ratio) || cv.height !== Math.round(h * ratio)) { cv.width = Math.round(w * ratio); cv.height = Math.round(h * ratio) }
+  c2d.setTransform(ratio, 0, 0, ratio, 0, 0)
+  drawWindshield(c2d, c, world, w, h, lang())
+}
 function openDriver() { if (!dialog.open) dialog.showModal(); paintDriver() }
 root.querySelector('[data-driver-open]').addEventListener('click', openDriver)
+root.querySelector('[data-hero-full]').addEventListener('click', openDriver)
+root.querySelector('[data-hero-prev]').addEventListener('click', () => cycleCar(-1))
+root.querySelector('[data-hero-next]').addEventListener('click', () => cycleCar(1))
+root.querySelector('[data-hero-weather]').addEventListener('click', cycleWeather)
+root.querySelector('[data-hero-blind]').addEventListener('click', () => root.querySelector('[data-blind]').click())
 dialog.querySelector('[data-driver-close]').addEventListener('click', () => dialog.close())
 dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() })
-for (const [sel, delta] of [['prev', -1], ['next', 1]]) dialog.querySelector(`[data-driver-${sel}]`).addEventListener('click', () => { selected = (selected - 1 + delta + world.cars.length) % world.cars.length + 1; syncFocus(); paintDriver() })
+for (const [sel, delta] of [['prev', -1], ['next', 1]]) dialog.querySelector(`[data-driver-${sel}]`).addEventListener('click', () => { cycleCar(delta); paintDriver() })
 dialog.querySelector('[data-driver-pause]').addEventListener('click', () => { playing = !playing; syncPlay(); paintDriver() })
 dialog.querySelector('[data-driver-blind]').addEventListener('click', () => root.querySelector('[data-blind]').click())
-dialog.querySelector('[data-driver-weather]').addEventListener('click', () => { const skies = ['day','rain','night','sun']; settings.weather = world.weather = skies[(skies.indexOf(world.weather)+1)%skies.length]; press('weather',world.weather) })
-let driverFrameAt = 0, driverTextAt = 0
+dialog.querySelector('[data-driver-weather]').addEventListener('click', () => { cycleWeather(); paintDriver() })
+let driverFrameAt = 0, driverTextAt = 0, heroFrameAt = 0
+function paintHero(now) {
+  if (now - heroFrameAt < 33) return
+  heroFrameAt = now
+  blitView(hero, hg)
+}
 function paintDriver() {
   if (!dialog.open) return
   const now = performance.now()
   if (now - driverFrameAt < 33) return
   driverFrameAt = now
-  const c = world.cars[selected-1], en = lang()==='en', d = c.decision
-  const w = Math.max(1, windshield.clientWidth), h = windshield.clientHeight, ratio=Math.min(3,devicePixelRatio||1)
-  if(windshield.width!==Math.round(w*ratio)||windshield.height!==Math.round(h*ratio)){windshield.width=Math.round(w*ratio);windshield.height=Math.round(h*ratio)}
-  wg.setTransform(ratio,0,0,ratio,0,0); drawWindshield(wg,c,world,w,h,lang())
+  blitView(windshield, wg)
   if (now - driverTextAt < 250) return
   driverTextAt = now
+  const c = world.cars[selected - 1], en = lang() === 'en', d = c.decision
   dialog.querySelector('[data-driver-title]').textContent = en ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]}` : `รถ ${c.id} · ${STYLE_NAME[c.styleName][0]}`
   dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${en?'km/h':'กม./ชม.'} · ${en?'view':'มองเห็น'} ${Math.round(sightRange(c,world.weather))} m · ${({day:en?'Day':'กลางวัน',rain:en?'Rain':'ฝน',night:en?'Night':'กลางคืน',sun:en?'Sun glare':'แดดจ้า'})[world.weather]} ${playing?'':'⏸'}`
   dialog.querySelector('[data-driver-action]').textContent=sayDecision(c,world,lang())
@@ -238,8 +268,9 @@ function render() {
   drawWorld(ctx, k, world, colours, { selected, showAll, lang: lang() })
 }
 
-let inView = true
+let inView = true, heroInView = true
 new IntersectionObserver(([entry]) => { inView = entry.isIntersecting }).observe(canvas)
+new IntersectionObserver(([entry]) => { heroInView = entry.isIntersecting }).observe(hero)
 let last = performance.now(), acc = 0, textT = 0
 function frame(now) {
   const dt = Math.min(0.1, (now - last) / 1000)
@@ -254,8 +285,9 @@ function frame(now) {
     if (inView && canvas.clientWidth) render()
     paintDriver()
   }
+  if (!document.hidden && heroInView && hero.clientWidth) paintHero(now)
   textT += dt
-  if (textT > 0.25 && !document.hidden && (inView || dialog.open)) { textT = 0; syncCards(); syncFocus() }
+  if (textT > 0.25 && !document.hidden && (inView || heroInView || dialog.open)) { textT = 0; syncCards(); syncFocus(); syncHeroName() }
   requestAnimationFrame(frame)
 }
 
@@ -268,4 +300,5 @@ root.querySelectorAll('[data-set="people"]').forEach((b) => { b.disabled = !worl
 syncPlay()
 syncCards()
 syncFocus()
+syncHeroName()
 requestAnimationFrame(frame)

@@ -4,11 +4,11 @@
 // is 4.4 × 1.8 m with a 1.5 m roof, a 6-wheel lorry 9.6 × 2.5 m and 3.2 m
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
-import { at, LANE, STEP } from './track.js?v=1.13.4'
-import { sightRange } from './perceive.js?v=1.13.4'
-import { VEHICLES } from './sim.js?v=1.13.4'
-import { ITEMS, STREET } from './street.js?v=1.13.4'
-import { labelName } from './draw.js?v=1.13.4'
+import { at, LANE, STEP } from './track.js?v=1.15.1'
+import { sightRange } from './perceive.js?v=1.15.1'
+import { VEHICLES } from './sim.js?v=1.15.1'
+import { ITEMS, STREET } from './street.js?v=1.15.1'
+import { labelName } from './draw.js?v=1.15.1'
 
 export function relative(car, point) {
   const dx = point.x - car.x,
@@ -402,6 +402,27 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
   sky.addColorStop(1, night ? '#283346' : rain ? '#99a5a9' : '#e4ded0')
   g.fillStyle = sky
   g.fillRect(0, 0, w, h)
+  // The hero view is on screen all the time, so an empty sky reads as unfinished:
+  // stars and a moon at night, a few clouds by day.
+  if (night) {
+    g.fillStyle = 'rgba(226,233,255,.8)'
+    for (let i = 0; i < 70; i++) {
+      const x = (((i * 89 + 13) % 1000) / 1000) * w
+      const y = (((i * 53 + 7) % 1000) / 1000) * h * 0.36
+      g.fillRect(x, y, 1.4, 1.4)
+    }
+    g.fillStyle = '#e9edf5'
+    g.beginPath()
+    g.arc(w * 0.8, h * 0.13, h * 0.035, 0, Math.PI * 2)
+    g.fill()
+  } else if (!rain) {
+    g.fillStyle = 'rgba(255,255,255,.5)'
+    for (const [fx, fy, fw] of [[0.18, 0.12, 0.08], [0.5, 0.08, 0.06], [0.34, 0.2, 0.05]]) {
+      g.beginPath()
+      g.ellipse(w * fx, h * fy, w * fw, h * 0.022, 0, 0, Math.PI * 2)
+      g.fill()
+    }
+  }
   if (!night && !rain) {
     g.fillStyle = sun ? '#ffe3a0' : '#f0e6b7'
     g.beginPath()

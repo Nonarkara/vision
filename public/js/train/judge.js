@@ -7,12 +7,12 @@
 // nearest neighbours over the same 24 cameras is how you find out whether
 // training actually bought you anything.
 
-import { t, esc, n, pct, lang, onLang } from '../core/i18n.js'
+import { t, esc, n, count, pct, lang, onLang } from '../core/i18n.js'
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js'
-import { openCamera } from '../core/source.js?v=1.13.4'
-import { sleep } from '../core/site.js?v=1.13.4'
+import { openCamera } from '../core/source.js?v=1.15.1'
+import { sleep } from '../core/site.js?v=1.15.1'
 import { snapshot, shrink, embed } from './eye.js'
-import { GLYPHS, nameOf } from './store.js?v=1.13.4'
+import { GLYPHS, nameOf } from './store.js?v=1.15.1'
 
 export const JUDGE_COUNT = 24
 const PAUSE_MS = 700
@@ -96,7 +96,7 @@ export function createJudge(els, getModels, onDone) {
     const done = results.length
     const lines = [
       note,
-      done || failed ? t(`ตัดสินแล้ว ${n(done)} กล้อง · ไม่ตอบ ${n(failed)} กล้อง`, `Judged ${done} cameras · ${failed} did not answer`) : '',
+      done || failed ? t(`ตัดสินแล้ว ${n(done)} กล้อง · ไม่ตอบ ${n(failed)} กล้อง`, `Judged ${count(done, 'camera')} · ${failed} did not answer`) : '',
       models.length ? `${t('ใช้', 'Using')}: ${models.map((m) => m.how).join(models.length > 1 ? ` ${t('เทียบกับ', 'vs')} ` : '')}` : '',
       models.length > 1 && done ? agreement(done) : '',
     ]

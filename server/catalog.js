@@ -53,6 +53,9 @@ export function relaySource(snapshotUrl, floodDashBase) {
   const dwr = snapshotUrl.match(DWR_PUBLIC)
   if (dwr) return `${floodDashBase}${dwr[1]}`
   if (!snapshotUrl.startsWith('https://')) return null
+  // STILL_HOSTS is a list of hostNAMES, so on its own it allowed every port on an
+  // allow-listed host. Pin the port to https, or say which one you mean.
+  try { if (new URL(snapshotUrl).port && new URL(snapshotUrl).port !== '443') return null } catch { return null }
   return matches(STILL_HOSTS, hostOf(snapshotUrl)) ? snapshotUrl : null
 }
 

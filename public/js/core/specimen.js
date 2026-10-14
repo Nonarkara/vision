@@ -3,9 +3,9 @@
 // stream. The bar that controls it always names the camera and its owner.
 
 import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.13.4'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.15.1'
 import { t, bi, esc, onLang } from './i18n.js'
-import { toast } from './site.js?v=1.13.4'
+import { toast } from './site.js?v=1.15.1'
 
 const STILL_REFRESH_MS = 20_000
 
@@ -174,7 +174,11 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     if (source.kind === 'localvideo') return { name: t('วิดีโอของคุณ', 'Your video'), meta: t('เปิดในเครื่อง ไม่อัปโหลด', 'Played locally; not uploaded') }
     const c = source.cam
     const kind = c.k === 'video' ? t('วิดีโอสด', 'live video') : t('ภาพนิ่ง ส่งต่อผ่านหน่วยความจำ', 'still, relayed in memory')
-    return { name: camName(c), meta: `${t('ภาพจาก', 'Image')}: ${sourceName(c.src)} · ${kind}`, link: c.w }
+    // c.w comes from the catalogue, which we do not control: web links only.
+    // esc() stops it breaking out of the attribute but says nothing about the
+    // scheme, so javascript: would still be a live href without this.
+    const link = typeof c.w === 'string' && /^https?:\/\//i.test(c.w) ? c.w : ''
+    return { name: camName(c), meta: `${t('ภาพจาก', 'Image')}: ${sourceName(c.src)} · ${kind}`, link }
   }
 
   function render() {

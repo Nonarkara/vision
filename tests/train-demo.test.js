@@ -15,10 +15,16 @@ function fakeCanvas() {
     get fillStyle() { return style },
     createLinearGradient: () => ({ addColorStop: (...a) => ops.push(['grad', ...a]) }),
     createRadialGradient: () => ({ addColorStop: (...a) => ops.push(['grad', ...a]) }),
+    set strokeStyle(v) { ops.push(['strokeStyle', String(v)]) },
     fillRect: (...a) => ops.push(['fillRect', ...a]),
     beginPath: () => ops.push(['beginPath']),
+    moveTo: (...a) => ops.push(['moveTo', ...a]),
+    lineTo: (...a) => ops.push(['lineTo', ...a]),
+    closePath: () => ops.push(['closePath']),
     arc: (...a) => ops.push(['arc', ...a]),
+    ellipse: (...a) => ops.push(['ellipse', ...a]),
     fill: () => ops.push(['fill']),
+    stroke: () => ops.push(['stroke']),
     getImageData: (x, y, w, h) => ({ data: new Uint8ClampedArray(w * h * 4), width: w, height: h }),
     putImageData: (d) => ops.push(['putImageData', d.width, d.height]),
   }
@@ -69,4 +75,16 @@ test('busy frames carry more vehicles than empty ones', () => {
 
 test('the two classes do not draw the same picture for one seed', () => {
   assert.notDeepEqual(roadScene('busy', 7).ops, roadScene('empty', 7).ops)
+})
+
+test('every coordinate the projection emits is a finite number', () => {
+  for (const seed of [42, 777, 9001]) {
+    for (const kind of ['busy', 'empty']) {
+      for (const op of roadScene(kind, seed).ops) {
+        for (const v of op) {
+          if (typeof v === 'number') assert.ok(Number.isFinite(v), `${kind}/${seed}: ${op[0]} produced ${v}`)
+        }
+      }
+    }
+  }
 })

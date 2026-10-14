@@ -39,6 +39,25 @@ export function n(x) {
   return nf[lang()].format(x)
 }
 
+/**
+ * A count in front of an English noun. "1 boxes pass the line" is the kind of
+ * sentence that tells a reader a machine wrote the page; Thai has no plural, so
+ * only the English form changes.
+ *
+ * The plural is built the way English builds it rather than by tacking an "s"
+ * on: "box" would otherwise come out as "boxs". Words that need something else
+ * still pass their own form.
+ */
+export function count(x, one, many = plural(one)) {
+  return lang() === 'en' ? `${n(x)} ${x === 1 ? one : many}` : `${n(x)} ${one}`
+}
+
+function plural(one) {
+  if (/(s|x|z|ch|sh)$/.test(one)) return `${one}es`
+  if (/[^aeiou]y$/.test(one)) return `${one.slice(0, -1)}ies`
+  return `${one}s`
+}
+
 export function pct(x, digits = 0) {
   return `${(x * 100).toFixed(digits)}%`
 }

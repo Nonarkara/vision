@@ -4,6 +4,13 @@
 // prints them, so the claim is checkable instead of asserted — the same rule the
 // handbook follows with its worked numbers.
 //
+// SCOPE, stated plainly because it was overstated here too: this measures the
+// ladder defined below, not public/css/vision.css. A colour token added to the CSS
+// that is not on the ladder is invisible to --check. (vision.css does declare
+// --black-2 and --black-3, which are not ladder values.) Reading the CSS and
+// measuring what the site actually ships is the honest version of this check and
+// is still open.
+//
 //   node scripts/palette-measure.mjs           print the table
 //   node scripts/palette-measure.mjs --check   fail if a pairing drops below its floor
 //

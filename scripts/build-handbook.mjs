@@ -276,14 +276,17 @@ const chrome = {
   nextTh: 'บทถัดไป →',
   nextEn: 'Next chapter →',
 }
-const pair = (href, th, en, cls = '') =>
-  `<a${cls ? ` class="${cls}"` : ''} href="${href}"><span class="th" lang="th">${th}</span><span class="en" lang="en">${en}</span></a>`
+// `attrs` carries data-page, which assemblePage() turns into aria-current.
+// Without it the twelve handbook pages were the only routes that never said
+// which page you were on.
+const pair = (href, th, en, cls = '', attrs = '') =>
+  `<a${cls ? ` class="${cls}"` : ''}${attrs ? ` ${attrs}` : ''} href="${href}"><span class="th" lang="th">${th}</span><span class="en" lang="en">${en}</span></a>`
 
 function docNav(spec) {
   const links = []
   const n = spec.chapter ? CHAPTERS.findIndex((c) => c.chapter === spec.chapter) : -1
   if (n > 0) links.push(pair(CHAPTERS[n - 1].route, chrome.prevTh, chrome.prevEn, 'doc-prev'))
-  links.push(pair('/handbook', chrome.indexTh, chrome.indexEn, 'doc-index'))
+  links.push(pair('/handbook', chrome.indexTh, chrome.indexEn, 'doc-index', `data-page="${spec.route.replace(/^\//, '')}"`))
   if (n >= 0 && n < CHAPTERS.length - 1) links.push(pair(CHAPTERS[n + 1].route, chrome.nextTh, chrome.nextEn, 'doc-next'))
   if (spec.route === '/handbook/glossary') links.push(pair('/handbook/reading', 'รายการอ่าน', 'Reading list', 'doc-next'))
   if (spec.route === '/handbook/reading') links.push(pair('/handbook/glossary', 'อภิธานศัพท์', 'Glossary', 'doc-next'))

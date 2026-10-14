@@ -82,3 +82,45 @@
 @media (max-width: 480px) { .creator { grid-template-columns: 1fr; } }
 /* On-screen display: where and when the photo was taken, from its own metadata. */
 .shot-osd { position: absolute; right: 0; bottom: 0; padding: 4px 8px; font-size: 0.75rem; letter-spacing: 0.04em; background: var(--black); color: var(--naples); }
+
+/* ── The blink drill: now it is your turn ───────────────────────────── */
+.drill { border-top: 1px solid var(--rule); margin-top: clamp(32px, 4vw, 56px); padding-top: clamp(24px, 3vw, 40px); }
+.drill-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 68ch; }
+.drill-head h3 { font-family: var(--narrow); font-size: clamp(2rem, 3vw + 0.75rem, 4rem); line-height: 1; margin: 0; }
+.drill-head h3 [lang="th"] { font-family: var(--thai); font-size: 0.8em; line-height: 1.25; }
+.drill-head p { margin: 0; }
+.drill-fair { border-left: 3px solid var(--signal); padding-left: 12px; }
+.drill-controls { background: transparent; margin-bottom: 2px; }
+
+.drill-wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+@media (max-width: 760px) { .drill-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.drill-tile {
+  position: relative; display: block; width: 100%; padding: 0; border: 0;
+  background: var(--black-1); cursor: pointer; appearance: none;
+}
+.drill-tile canvas { display: block; width: 100%; height: auto; }
+.drill-num {
+  position: absolute; top: 0; left: 0; padding: 3px 7px;
+  font-size: 0.7rem; letter-spacing: 0.1em; background: var(--black); color: var(--white);
+}
+.drill-tile.is-open { cursor: pointer; }
+.drill-tile:not(.is-open) { cursor: default; }
+/* Peach Red still means one thing only: the machine found something. */
+.drill-tile.is-machine { outline: 3px solid var(--signal); outline-offset: -3px; }
+.drill-tile.is-machine .drill-num { background: var(--signal); color: var(--black); }
+.drill-tile.is-yours .drill-num { background: var(--naples); color: var(--black); }
+.drill-tile:focus-visible { outline: 3px solid var(--naples); outline-offset: 2px; }
+
+.drill-say { white-space: pre-line; color: var(--text); }
+.drill-log { width: 100%; border-collapse: collapse; margin-top: var(--gap); font-size: var(--micro); }
+.drill-log caption { text-align: start; padding-bottom: 8px; color: var(--gray); }
+.drill-log th, .drill-log td { padding: 6px 10px; text-align: start; border-bottom: 1px solid var(--rule); }
+.drill-log th { font-weight: 600; color: var(--text); white-space: nowrap; }
+.drill-log td { font-family: var(--mono); color: var(--gray); }
+.drill-log td.ok { color: var(--naples); }
+.drill-log td.miss { color: var(--signal); }
+@media (max-width: 560px) {
+  .drill-log thead { display: none; }
+  .drill-log tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+  .drill-log td { border: 0; padding: 0; }
+}

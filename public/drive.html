@@ -66,7 +66,24 @@
       <button class="btn" data-set="layout" data-value="city" aria-pressed="false"><span class="th" lang="th">4 · เมืองแบบกรุงเทพฯ</span><span class="en" lang="en">4 · Bangkok-inspired city</span></button>
     </div>
     <p class="micro"><span class="th" lang="th">เปลี่ยนถนนหรือจำนวนรถจะเริ่มรอบใหม่ สองและสี่ช่องทางมีรถสวนกันและไม่มีทางข้ามคนเดิน เมืองมีเส้นทางตัดกัน รถ 24 คัน คนและสุนัขมาก ลองเพิ่มฝนหรือกลางคืน รถใช้กฎที่เขียนไว้ ไม่ใช่รถจริงหรือ AI ที่ฝึกขับ: ยังไม่มีการเปลี่ยนเลน รถยนต์ไม่ขับ และไม่มีแผนที่กรุงเทพฯ จริง รอบรถนี้มีถนน ไม้เท้า เสาไฟ ทางเท้า อาคารติดถนน รถจักรยานยนต์และจักรยานจอดข้างทาง หัวดับเพลิง ม้านั่ง และต้นไม้ในกระถาง ทุกชิ้นวางที่ตำแหน่งจริงบนถนนไทย: รถเก๋ง 4.4×1.8 ม. กระบะ 5.3 ม. รถบรรทุก 9.6 ม. สูง 3.2 ม. รถโดยสาร 12 ม. บนเลนกว้าง 3.2 ม.</span><span class="en" lang="en">Changing road or traffic starts a new run. Two- and four-lane roads have opposing traffic, without pedestrian crossings. City adds crossing routes, 24 cars and more people and dogs. Try rain or night too. Cars follow written rules: this is a teaching simulation, with fixed lanes, no motorbikes driving and no real Bangkok map. The road now has kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, fire hydrants, benches and planters — every one placed at its real size on a Thai road: 4.4 × 1.8 m sedans, 5.3 m pickups, 9.6 m lorries 3.2 m tall, 12 m buses, on lanes 3.2 m wide.</span></p>
-    <p class="micro"><span class="th" lang="th">แตะรถบนแผนที่ หรือเลือกปุ่มรถ เพื่อเปิดจอคนขับที่เคลื่อนไหว กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">Tap a car on the map or choose its numbered button to open its moving windshield view. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
+    <p class="micro"><span class="th" lang="th">กระจกหน้าด้านล่างคือมุมมองของรถที่เลือกไว้ เคลื่อนไหวตลอดเวลา แตะรถบนแผนที่หรือปุ่มรถเพื่อสลับคัน กรอบสีส้มชี้สิ่งที่ทำให้รถชะลอ ลองวงเวียนเพื่อดูคนข้ามถนน</span><span class="en" lang="en">The windshield below is the selected car’s own view, live and always on. Tap a car on the map or its numbered button to switch. The orange box marks what affects its speed. Try the roundabout for people crossing.</span></p>
+
+    <div class="drive-hero">
+      <div class="hero-bar">
+        <span class="label"><span class="th" lang="th">มองผ่านกระจกหน้าของรถคันนี้</span><span class="en" lang="en">Through this car’s windshield</span></span>
+        <p class="hero-name" data-hero-name></p>
+      </div>
+      <canvas class="hero-screen" data-hero role="img" data-aria-th="มุมมองคนขับจำลองที่เคลื่อนไหวตลอดเวลา พร้อมกรอบสิ่งที่ตรวจพบ" data-aria-en="A continuously moving simulated windshield view, with detected-object boxes"></canvas>
+      <div class="controls hero-controls">
+        <button class="btn" type="button" data-hero-prev><span class="th" lang="th">← คันก่อน</span><span class="en" lang="en">← Previous car</span></button>
+        <button class="btn" type="button" data-hero-next><span class="th" lang="th">คันถัดไป →</span><span class="en" lang="en">Next car →</span></button>
+        <button class="btn" type="button" data-hero-weather><span class="th" lang="th">เปลี่ยนฟ้า</span><span class="en" lang="en">Change sky</span></button>
+        <button class="btn" type="button" data-hero-blind><span class="th" lang="th">ปิด / เปิดกล้อง</span><span class="en" lang="en">Cover / uncover camera</span></button>
+        <button class="btn" type="button" data-hero-full><span class="th" lang="th">เต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span></button>
+      </div>
+      <p class="hero-note micro"><span class="th" lang="th">ภาพจำลองจากตำแหน่งจริงในแผนที่ ไม่ใช่วิดีโอกล้องหรือ AI ตรวจจับจริง กรอบเหลือง = ตรวจพบหรือจำไว้ กรอบส้ม = มีผลต่อความเร็ว</span><span class="en" lang="en">Drawn from the car’s real position on the map — a teaching simulation, not camera footage or a neural detector. Yellow box = detected or remembered. Orange = affects its speed.</span></p>
+    </div>
+
     <div class="drive-grid">
       <div class="bench">
         <div class="bench-caption">
@@ -117,7 +134,7 @@
           <p class="focus-row"><span class="label"><span class="th" lang="th">เห็น</span><span class="en" lang="en">Sees</span></span><span class="num" data-focus-sees></span></p>
           <p class="focus-row unnamed" data-focus-unnamed-row hidden><span class="label"><span class="th" lang="th">เรียกไม่ถูก</span><span class="en" lang="en">Cannot name</span></span><span class="unnamed" data-focus-unnamed></span></p>
           <p class="focus-row"><span class="label"><span class="th" lang="th">ตัดสินใจ</span><span class="en" lang="en">Decides</span></span><span data-focus-does></span></p>
-          <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดมุมมองคนขับ ↗</span><span class="en" lang="en">Open driver’s view ↗</span></button>
+          <button class="btn primary" type="button" data-driver-open><span class="th" lang="th">เปิดเต็มจอ ↗</span><span class="en" lang="en">Full screen ↗</span></button>
           <button class="btn" type="button" data-blind aria-pressed="false"></button>
         </div>
         <div class="cards" data-cards></div>

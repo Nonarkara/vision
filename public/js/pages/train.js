@@ -5,17 +5,17 @@
 //
 // Everything — examples, weights, predictions — lives in this tab's memory.
 
-import '../core/site.js?v=1.13.4'
-import { mountVideoLesson } from '../train/video-lesson.js?v=1.13.4'
-import { t, n, pct, lang, onLang } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js?v=1.13.4'
-import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.13.4'
-import { canUseWebcam } from '../core/source.js?v=1.13.4'
+import '../core/site.js?v=1.15.1'
+import { mountVideoLesson } from '../train/video-lesson.js?v=1.15.1'
+import { t, n, count, pct, lang, onLang } from '../core/i18n.js'
+import { toast, confirmBox } from '../core/site.js?v=1.15.1'
+import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.15.1'
+import { canUseWebcam } from '../core/source.js?v=1.15.1'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { knnPredict, leaveOneOutAsync } from '../ml/learner.js'
-import * as store from '../train/store.js?v=1.13.4'
+import * as store from '../train/store.js?v=1.15.1'
 import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js'
-import { createClassList } from '../train/classes-ui.js?v=1.13.4'
+import { createClassList } from '../train/classes-ui.js?v=1.15.1'
 import { createBars } from '../train/bars.js'
 import { trainLayer, drawCurve, EPOCHS, layerFile, download, parseLayerFile, fileReason } from '../train/layer.js'
 import { createMap } from '../train/map.js'
@@ -528,12 +528,12 @@ for (const b of modeBtns) {
 
 function judgeModels() {
   const classes = store.getClasses()
-  const count = classes.length
+  const nClasses = classes.length
   const frozenSet = set
-  const layer = trained?.classes === count ? trained.layer : null
+  const layer = trained?.classes === nClasses ? trained.layer : null
   const viaLayer = layer && { predict: (x) => layer.predict(x), classes, how: t('ชั้นที่ฝึกแล้ว', 'the trained layer') }
   const viaKnn = store.filledClasses() >= 2 && {
-    predict: (x) => knnPredict(frozenSet, x, count, K).probs,
+    predict: (x) => knnPredict(frozenSet, x, nClasses, K).probs,
     classes,
     how: t('ภาพที่คล้ายกัน', 'similar examples'),
   }
@@ -558,8 +558,8 @@ createJudge(
       ? results.filter((r) => r.top === r.probs[1].indexOf(Math.max(...r.probs[1]))).length
       : null
     toast(same == null
-      ? t(`ตัดสินครบ ${n(results.length)} กล้อง — ดูกลุ่มด้านล่าง`, `Judged all ${n(results.length)} cameras — see the groups below`)
-      : t(`ตัดสินครบ ${n(results.length)} กล้อง · สองวิธีเห็นตรงกัน ${n(same)} ครั้ง`, `Judged all ${n(results.length)} cameras · the two agreed ${n(same)} times`))
+      ? t(`ตัดสินครบ ${n(results.length)} กล้อง — ดูกลุ่มด้านล่าง`, `Judged ${count(results.length, 'camera')} — see the groups below`)
+      : t(`ตัดสินครบ ${n(results.length)} กล้อง · สองวิธีเห็นตรงกัน ${n(same)} ครั้ง`, `Judged ${count(results.length, 'camera')} · the two agreed ${same === 1 ? 'once' : `${n(same)} times`}`))
   },
 )
 

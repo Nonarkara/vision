@@ -36,15 +36,15 @@ Before any model runs, a city-scale system must be *able* to see. A sample run o
 
 ```
 video     53  live video from a host that allows reading (CORS)
-still   2675  a still JPEG without CORS — relayed through server memory
-view     857  viewable only on the owner's own page — no machine here can read its pixels
-off      477  the owner's stream was found down by FloodDash's health probe
+still   2676  a still JPEG without CORS — relayed through server memory
+view     225  viewable only on the owner's own page — no machine here can read its pixels
+off      476  the owner's stream was found down by FloodDash's health probe
 
-67% of listed cameras are machine-readable IN PRINCIPLE. In practice fewer: on
+79% of listed cameras are machine-readable IN PRINCIPLE. In practice fewer: on
 one sample, only 22 of 40 cctv.maholan.net stills answered (the rest 502).
 ```
 
-Of ~4,000 public cameras, one in three offers no readable pixels; many of the rest answer intermittently; about 50 offer live video a browser may analyse. **Coverage, uptime and permission bound what any vision system can know — long before accuracy does.** When someone presents a "city-wide AI camera network", the first questions are: how many cameras, readable how often, with whose permission?
+Of ~3,400 public cameras, one in five offers no readable pixels; many of the rest answer intermittently; about 50 offer live video a browser may analyse. **Coverage, uptime and permission bound what any vision system can know — long before accuracy does.** When someone presents a "city-wide AI camera network", the first questions are: how many cameras, readable how often, with whose permission?
 
 ## 4. Bias: who the errors fall on
 
@@ -143,7 +143,7 @@ Any of: running models in the browser (no upload path exists); relaying stills f
 
 **กฎความซื่อตรง:** สิ่งที่เครื่อง "เห็น" คือข้อสรุปเกี่ยวกับภาพ เผยแพร่ได้ แต่ "ไม่เห็น" จะกลายเป็นข้อสรุปเกี่ยวกับโลก ซึ่งเราไม่เผยแพร่ เพราะรถติดนิ่ง เลนส์ฝ้า กล้องค้าง หรือรถที่เล็กเกินไป ล้วนให้ความเงียบแบบเดียวกัน
 
-**จุดที่ระบบพลาด:** วัตถุเล็กหรือไกล กลางคืน หมอก ฝนบนเลนส์ ฝูงชน และพาหนะที่ COCO ไม่รู้จักอย่าง ตุ๊กตุ๊ก หรือ สองแถว และข้อจำกัดแรกไม่ใช่ AI แต่เป็น **การเข้าถึงภาพ**: จากกล้องสาธารณะราว 4,000 ตัว หนึ่งในสามไม่มีภาพที่เครื่องอ่านได้เลย
+**จุดที่ระบบพลาด:** วัตถุเล็กหรือไกล กลางคืน หมอก ฝนบนเลนส์ ฝูงชน และพาหนะที่ COCO ไม่รู้จักอย่าง ตุ๊กตุ๊ก หรือ สองแถว และข้อจำกัดแรกไม่ใช่ AI แต่เป็น **การเข้าถึงภาพ**: จากกล้องสาธารณะราว 3,400 ตัว หนึ่งในห้าไม่มีภาพที่เครื่องอ่านได้เลย
 
 **อคติ:** ความผิดพลาดไม่เคยกระจายเท่ากัน งาน Gender Shades (2018) พบความผิดพลาด 0.8% กับชายผิวขาว แต่สูงถึง 34.7% กับหญิงผิวเข้ม ทางแก้คือวัดความแม่นยำแยกตามสภาพและพื้นที่ที่สำคัญ และให้คนตัดสินใจขั้นสุดท้าย
 
