@@ -197,12 +197,14 @@ export function createStatic({ root, version, log = () => {} }) {
     return out
   }
 
-  function load(key, full, st, transform) {
+  function load(key, full, st) {
     const etag = `W/"${st.size.toString(36)}-${Math.floor(st.mtimeMs).toString(36)}-${version}"`
     const hit = memo.get(key)
     if (hit && hit.etag === etag) return hit
-    let body = fs.readFileSync(full)
-    if (transform) body = Buffer.from(transform(body.toString('utf8')))
+    // The body used to be passed through a `transform` callback here. Nothing
+    // ever supplied one — the transform branch was unreachable, and a reader
+    // could reasonably believe page assembly happened inside it.
+    const body = fs.readFileSync(full)
     const type = TYPES[path.extname(full)] ?? 'application/octet-stream'
     const gz = COMPRESSIBLE.test(type) && body.length > 1024 ? zlib.gzipSync(body, { level: 9 }) : null
     const entry = { body, gz, type, etag }
@@ -264,14 +266,21 @@ export function createStatic({ root, version, log = () => {} }) {
   return { serve, page }
 }
 
-/** JSON response, gzipped when the client allows it. */
-export function json(req, res, status, data, extra = {}) {
-  const body = Buffer.from(JSON.stringify(data))
+/**
+ * JSON response, gzipped when the client allows it.
+ *
+ * `encoded` is an optional `{ body, gz }` pair for a route that serves the same
+ * large document to everyone. Passing it skips both the JSON.stringify and the
+ * gzipSync, which on the camera catalogue cost ~19 ms of blocked event loop per
+ * request — paid on the one thread that also serves frames.
+ */
+export function json(req, res, status, data, extra = {}, encoded = null) {
+  const body = encoded ? encoded.body : Buffer.from(JSON.stringify(data))
   // Vary always: a cache must not hand a gzipped copy to a client that never asked for one.
   const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Vary: 'Accept-Encoding', ...securityHeaders(), ...extra }
   let out = body
-  if (body.length > 1024 && wantsGzip(req)) {
-    out = zlib.gzipSync(body)
+  if ((encoded?.gz ?? (body.length > 1024 ? zlib.gzipSync(body) : null)) && wantsGzip(req)) {
+    out = encoded ? encoded.gz : zlib.gzipSync(body)
     headers['Content-Encoding'] = 'gzip'
   }
   headers['Content-Length'] = out.length
@@ -284,16 +293,26 @@ export function json(req, res, status, data, extra = {}) {
  * Cloudflare header is the only signal — but it is trusted ONLY when the
  * socket really is loopback; a direct client could otherwise forge it.
  */
+// A header we only trust from the tunnel has to still LOOK like an address
+// before it becomes a rate-limiter key. Length alone let any loopback caller
+// (the dev server, or anything else on the host) write arbitrary strings into
+// the buckets and the logs.
+const IPV4 = /^(?:\d{1,3}\.){3}\d{1,3}$/
+const IPV6 = /^[0-9a-f:]{2,45}$/i
+
 export function clientIp(req) {
   const remote = req.socket?.remoteAddress ?? ''
   const loopback = remote === '127.0.0.1' || remote === '::1' || remote === '::ffff:127.0.0.1'
   const cf = req.headers['cf-connecting-ip']
-  if (loopback && typeof cf === 'string' && cf.length < 64) return cf
+  if (loopback && typeof cf === 'string') {
+    const value = cf.trim()
+    if (value.length < 64 && (IPV4.test(value) || (value.includes(':') && IPV6.test(value)))) return value
+  }
   return remote
 }
 
 /** Token bucket per key. `rate` tokens per minute, burst of `burst`. */
-export function createLimiter({ rate, burst, now = () => Date.now() }) {
+export function createLimiter({ rate, burst, now = () => Date.now(), max = 20_000 }) {
   const buckets = new Map()
   return {
     take(key) {
@@ -303,9 +322,18 @@ export function createLimiter({ rate, burst, now = () => Date.now() }) {
       b.at = t
       const ok = b.tokens >= 1
       if (ok) b.tokens -= 1
+      // Re-insert so Map iteration order is least-recently-USED first. It used to
+      // be insertion-ordered, so the bucket evicted at the cap could be the
+      // busiest one on the server.
+      buckets.delete(key)
       buckets.set(key, b)
-      if (buckets.size > 20_000) buckets.delete(buckets.keys().next().value)
+      while (buckets.size > max) buckets.delete(buckets.keys().next().value)
       return ok
     },
+    // Read-only introspection. Which bucket the cap evicts is the whole point of
+    // this object and was otherwise impossible to observe without spending tokens
+    // and evicting further keys while you looked.
+    has: (key) => buckets.has(key),
+    get size() { return buckets.size },
   }
 }

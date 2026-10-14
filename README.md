@@ -156,7 +156,7 @@ sequenceDiagram
 
 - **Privacy:** webcam and photos never leave the tab; no uploads, no accounts, no analytics, no cookies (localStorage holds only the language choice and game best scores). No face recognition, no plate reading, no stored imagery.
 - **Not an open proxy:** relay serves only catalogue ids on allow-listed https hosts, rejects redirects, non-images, tiny or > 4 MB bodies; per-host circuit breaker.
-- **Strict CSP:** `script-src 'self'`, no inline script/style, no eval (TF.js's regenerator fallback is pre-empted in `ml/tf.js`), media only from the two CORS video hosts.
+- **Strict CSP:** `script-src 'self'`, no inline script/style, no eval (TF.js's regenerator fallback is pre-empted in `ml/tf.js`), media only from the three CORS video hosts the catalogue classifies as `video` (the allow-list is a suffix pattern, so its count moves with the catalogue — the CSP is built from that list, and `?v` stamps are kept uniform on purpose even where a host serves no video).
 - **Honesty in the UI:** every machine answer carries its confidence; "not detected ≠ not there".
 
 ---
@@ -167,7 +167,7 @@ sequenceDiagram
 npm run dev        # http://localhost:8431 (reads cameras from FloodDash on :8340)
 npm test           # unit tests: catalogue + store, relay, http, routes,
                    # sources, layer races, fullscreen, and the handbook's numbers
-npm run check          # build-handbook --check + tests + scripts/check-site.mjs (pages, links, reachability, imports, CSP hazards, language parity, robots and sitemap, model shards) + scripts/check-docs.mjs (handbook links and anchors)
+npm run check          # build-handbook --check (staleness AND orphaned outputs) + node --test + check-site.mjs (pages, links, reachability, imports, CSP hazards, language parity, robots and sitemap, model shards, raw path safety, /api/health) + check-forked-imports.mjs + check-privacy.mjs + check-docs.mjs (handbook links, anchors, mermaid, handbook lang + emphasis) + palette-measure.mjs --check
 npm run build:handbook # re-render docs/*.md as the site's /handbook section
 npm run figures    # regenerate the handbook's figures from examples/
 npm run deploy     # checks, stages the release, restarts the production app

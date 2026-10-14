@@ -37,9 +37,17 @@ export const BREAKER_OPEN_MS = 3 * 60_000
 export const MAX_QUEUE = 100
 
 export class RelayError extends Error {
-  constructor(status, message) {
+  /**
+   * `hostFault` says whether this failure says something about the HOST or only
+   * about this one camera. A 404 for a camera whose still was taken down, or a
+   * response that is not an image, is a fact about that id — counting it toward
+   * the host breaker let one client rest every still on the host for 3 minutes
+   * just by asking for eight ids that were already dead.
+   */
+  constructor(status, message, { hostFault = true } = {}) {
     super(message)
     this.status = status
+    this.hostFault = hostFault
   }
 }
 
@@ -114,11 +122,12 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
         signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
         headers: { 'User-Agent': 'vision.nonarkara.org frame relay (education; memory-only)', Accept: 'image/*' },
       })
-      async function refuse(message) {
+      async function refuse(message, { hostFault = false } = {}) {
         await res.body?.cancel().catch(() => {})
-        throw new RelayError(502, message)
+        throw new RelayError(502, message, { hostFault })
       }
-      if (!res.ok) await refuse(`upstream answered ${res.status}`)
+      // A 5xx is the host misbehaving; a 404/410 is one camera being gone.
+      if (!res.ok) await refuse(`upstream answered ${res.status}`, { hostFault: res.status >= 500 })
       const type = String(res.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase()
       if (!/^image\/(jpeg|png|webp)$/.test(type)) await refuse(`upstream sent ${type || 'no type'}, not an image`)
       const declared = Number(res.headers.get('content-length') ?? 0)
@@ -135,14 +144,14 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
             size += value.byteLength
             if (size > MAX_FRAME_BYTES) {
               await reader.cancel().catch(() => {})
-              throw new RelayError(502, 'frame too large')
+              throw new RelayError(502, 'frame too large', { hostFault: false })
             }
             chunks.push(Buffer.from(value))
           }
         } finally { reader.releaseLock() }
       }
       const body = Buffer.concat(chunks, size)
-      if (body.length < 512) throw new RelayError(502, 'frame too small to be a picture')
+      if (body.length < 512) throw new RelayError(502, 'frame too small to be a picture', { hostFault: false })
       hs.fails = 0
       const entry = { body, type, at: now() }
       remember(id, entry)
@@ -150,7 +159,9 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
       return entry
     } catch (err) {
       if (err instanceof RelayError && err.status === 503) throw err
-      hs.fails++
+      // Only host-level faults may rest the host. Per-camera refusals still get
+      // their own health entry and their own 502, but they leave the breaker alone.
+      if (!(err instanceof RelayError) || err.hostFault) hs.fails++
       if (hs.fails >= BREAKER_FAILS) {
         hs.openUntil = now() + BREAKER_OPEN_MS
         hs.fails = 0

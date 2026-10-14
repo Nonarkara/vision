@@ -44,6 +44,32 @@ function matches(list, host) {
 }
 
 /**
+ * The catalogue is ~2.4 MB and `res.json()` had no ceiling on it — a wedged or
+ * substituted upstream could stream an unbounded body into the heap. Read it in
+ * chunks and refuse past the cap, the way the frame relay already does.
+ */
+export const MAX_CATALOGUE_BYTES = 32 * 1024 * 1024
+/** How much of the last good catalogue a new one must keep, or it is refused. */
+export const MIN_KEEP_RATIO = 0.25
+
+export async function readCapped(res, max = MAX_CATALOGUE_BYTES) {
+  const declared = Number(res.headers?.get?.('content-length') ?? NaN)
+  if (Number.isFinite(declared) && declared > max) throw new Error(`catalogue is ${declared} bytes, over the ${max} cap`)
+  if (!res.body?.getReader) return res.json()
+  const reader = res.body.getReader()
+  const chunks = []
+  let total = 0
+  for (;;) {
+    const { done, value } = await reader.read()
+    if (done) break
+    total += value.length
+    if (total > max) { await reader.cancel().catch(() => {}); throw new Error(`catalogue exceeded the ${max} byte cap`) }
+    chunks.push(value)
+  }
+  return JSON.parse(Buffer.concat(chunks.map((c) => Buffer.from(c))).toString('utf8'))
+}
+
+/**
  * Turn a FloodDash snapshot URL into the URL our relay should fetch, or null
  * when the host is not on the allow-list. DWR is rewritten to the local
  * FloodDash server so the frame never makes a round trip through Cloudflare.
@@ -143,10 +169,25 @@ export function countKinds(cameras) {
 export function createCatalogStore({ floodDashBase, cacheFile, refreshMs = 10 * 60_000, timeoutMs = 60_000, log = () => {} }) {
   let state = { cameras: [], relayMap: new Map(), sources: [], upstreamAt: null, loadedAt: null, origin: 'empty' }
   let timer = null
+  let busy = false
 
   function adopt(payload, origin) {
     const built = buildCatalog(payload, { floodDashBase })
     if (built.cameras.length === 0) throw new Error('catalogue empty')
+    // Refuse an implausible COLLAPSE, not just an empty catalogue. On 14 Oct 2026
+    // FloodDash returned a partial catalogue for two refreshes — 131 cameras with
+    // five of seven sources marked failed, against 3,425 good ones. 131 is not
+    // empty, so the empty guard waved it through and the site showed 4% of its
+    // cameras to visitors for 29 minutes until the next clean tick.
+    //
+    // The bound is relative to what we already believe, so it needs no world
+    // knowledge and cannot go stale: a genuine change in the source list moves
+    // the number gradually, not 96% in one tick. 25% is deliberately far below
+    // any plausible real swing, so the guard fires on breakage, not on news.
+    if (state.cameras.length > 200 && built.cameras.length < state.cameras.length * MIN_KEEP_RATIO) {
+      const failed = built.sources.filter((s) => s.status !== 'live').map((s) => s.id)
+      throw new Error(`catalogue collapsed from ${state.cameras.length} to ${built.cameras.length} cameras (${Math.round((built.cameras.length / state.cameras.length) * 100)}%); sources not live: ${failed.join(', ') || 'none'}`)
+    }
     state = { ...built, loadedAt: new Date().toISOString(), origin }
     return state
   }
@@ -162,12 +203,23 @@ export function createCatalogStore({ floodDashBase, cacheFile, refreshMs = 10 * 
   }
 
   async function refresh() {
+    // Two refreshes overlapping would interleave their writes to the SAME
+    // `${cacheFile}.tmp`, and one rename could publish the other's half-written
+    // file. It needs a ~10-minute event-loop stall to reach today (interval
+    // 10 min, timeout 60 s), but the guard costs one boolean.
+    if (busy) {
+      log('warn', 'catalogue refresh already running; skipping this tick')
+      return state
+    }
+    busy = true
     try {
       const res = await fetch(`${floodDashBase}/api/cctv/all`, { signal: AbortSignal.timeout(timeoutMs) })
       if (!res.ok) throw new Error(`FloodDash answered ${res.status}`)
-      const payload = await res.json()
+      const payload = await readCapped(res, MAX_CATALOGUE_BYTES)
       adopt(payload, 'flooddash')
-      const tmp = `${cacheFile}.tmp`
+      // A temp name per run, so even a bug in the guard above cannot have two
+      // writers meeting on one path.
+      const tmp = `${cacheFile}.${process.pid}.tmp`
       await fs.promises.mkdir(path.dirname(cacheFile), { recursive: true })
       // Async write + rename: the catalogue is ~2.4 MB and a synchronous
       // write blocked the event loop for tens of milliseconds every
@@ -177,6 +229,8 @@ export function createCatalogStore({ floodDashBase, cacheFile, refreshMs = 10 * 
       log('info', 'catalogue refreshed', { cameras: state.cameras.length, ...countKinds(state.cameras) })
     } catch (err) {
       log('warn', 'catalogue refresh failed; keeping last good copy', { error: String(err.message ?? err), cameras: state.cameras.length })
+    } finally {
+      busy = false
     }
     return state
   }

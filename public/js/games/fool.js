@@ -173,10 +173,21 @@ export function initFool(root) {
     }
     const src = await cam
     loading = false
+    // useWebcam() resolves null on failure rather than rejecting. Marking the
+    // game started anyway let say() take the "started" branch and settle on
+    // "The machine is looking…" — a second readout contradicting the honest
+    // failure below it, with no source that could ever produce a result — and
+    // enabled Capture, which then returned silently.
+    if (!src) {
+      go.hidden = false
+      go.disabled = false
+      captureBtn.disabled = true
+      state(t('เปิดกล้องของคุณไม่ได้ ใช้ “รูปของฉัน” หรือ “กล้องสาธารณะ” ด้านล่างแทนได้', 'Your camera did not open — use “My photo” or “Public camera” below instead'))
+      return
+    }
     started = true
     go.hidden = true
     captureBtn.disabled = false
-    if (!src) state(t('เปิดกล้องของคุณไม่ได้ ใช้ “รูปของฉัน” หรือ “กล้องสาธารณะ” ด้านล่างแทนได้', 'Your camera did not open — use “My photo” or “Public camera” below instead'))
     say()
   }
 

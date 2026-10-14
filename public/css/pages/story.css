@@ -108,6 +108,10 @@
 /* Peach Red still means one thing only: the machine found something. */
 .drill-tile.is-machine { outline: 3px solid var(--signal); outline-offset: -3px; }
 .drill-tile.is-machine .drill-num { background: var(--signal); color: var(--black); }
+/* Which screen actually flashed. This rule did not exist: the class was set on
+   every reveal and nothing ever drew it, so the one on-wall statement of the
+   truth was invisible and only the log table carried it. */
+.drill-tile.is-truth { outline: 3px solid var(--signal); outline-offset: -3px; }
 .drill-tile.is-yours .drill-num { background: var(--naples); color: var(--black); }
 .drill-tile:focus-visible { outline: 3px solid var(--naples); outline-offset: 2px; }
 

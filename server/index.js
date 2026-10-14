@@ -11,6 +11,7 @@
 import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
+import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import { createCatalogStore, countKinds } from './catalog.js'
 import { createRelay, RelayError } from './relay.js'
@@ -48,7 +49,12 @@ const frameLimiter = createLimiter({ rate: 600, burst: 200 })
 const apiLimiter = createLimiter({ rate: 300, burst: 120 })
 
 // The serialised catalogue is the same for everyone; build it once per minute.
+// The ENCODED form is memoised too. Holding only the object meant json() did
+// Buffer.from(JSON.stringify(...)) and gzipSync on every single request — ~19 ms
+// of blocked event loop on a 400-camera catalogue, from the same single thread
+// that serves frames. The limiter's burst of 120 could pin it for over a second.
 let catalogBody = null
+let catalogEncoded = null
 let catalogBuiltAt = 0
 function catalogPayload() {
   const state = catalog.get()
@@ -68,6 +74,8 @@ function catalogPayload() {
     sources: state.sources,
     cameras,
   }
+  const body = Buffer.from(JSON.stringify(catalogBody))
+  catalogEncoded = { body, gz: body.length > 1024 ? zlib.gzipSync(body) : null }
   catalogBuiltAt = Date.now()
   return catalogBody
 }
@@ -75,7 +83,8 @@ function catalogPayload() {
 const ROUTES = {
   'GET /api/cameras': (req, res) => {
     if (!apiLimiter.take(clientIp(req))) return json(req, res, 429, { error: 'too many requests' }, { 'Retry-After': '10' })
-    json(req, res, 200, catalogPayload(), { 'Cache-Control': 'public, max-age=60' })
+    const payload = catalogPayload()
+    json(req, res, 200, payload, { 'Cache-Control': 'public, max-age=60' }, catalogEncoded)
   },
 
   'GET /api/frame': async (req, res, url) => {
@@ -132,7 +141,10 @@ export function handler(req, res) {
   if (route) {
     Promise.resolve(route(req, res, url)).catch((err) => {
       log('error', 'route failed', { path: url.pathname, error: String(err?.stack ?? err) })
-      if (!res.headersSent) json(req, res, 500, { error: 'internal error' })
+      // Headers already on the wire: there is no status left to send, so writing
+      // nothing leaves the socket open until the client gives up on it. Close it.
+      if (res.headersSent) res.destroy()
+      else json(req, res, 500, { error: 'internal error' })
     })
     return
   }
@@ -155,6 +167,14 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   sweeper.unref()
   const server = http.createServer(handler)
   server.keepAliveTimeout = 65_000
+  // An EADDRINUSE arrives as an 'error' event, not a throw. With only the
+  // uncaughtException backstop installed it was swallowed and the process exited
+  // 0 having never listened — launchd then retried happily while a deploy waited
+  // 60 s for a server that was never coming, and rolled back a good release.
+  server.on('error', (err) => {
+    log('error', 'server failed to start', { error: String(err?.message ?? err) })
+    process.exit(1)
+  })
   server.listen(PORT, HOST, () => log('info', 'vision listening', { host: HOST, port: PORT, version: VERSION }))
   const shutdown = (sig) => {
     log('info', 'shutting down', { sig })

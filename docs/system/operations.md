@@ -71,11 +71,11 @@ curl -sS https://vision.nonarkara.org/api/health | python3 -m json.tool
 ```json
 {
   "ok": true,
-  "version": "1.2.0",
-  "uptime_s": 14395,
-  "catalogue": { "origin": "flooddash", "loadedAt": "2026-10-05T09:31:12.257Z",
-                 "upstreamAt": "2026-10-05T09:29:02.059Z",
-                 "video": 53, "still": 2675, "view": 857, "off": 477, "total": 4062 },
+  "version": "1.15.2",
+  "uptime_s": 18941,
+  "catalogue": { "origin": "flooddash", "loadedAt": "2026-10-14T11:46:20.626Z",
+                 "upstreamAt": "2026-10-14T11:46:20.492Z",
+                 "video": 53, "still": 2676, "view": 219, "off": 476, "total": 3424 },
   "relay": { "cached_frames": 0, "inflight": 0, "waiting": 0, "checked_cameras": 0,
              "last_ok": 0, "last_failed": 0, "resting_hosts": [] },
   "memory_mb": 21

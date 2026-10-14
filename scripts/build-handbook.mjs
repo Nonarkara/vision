@@ -45,6 +45,85 @@ function langAttr(text) {
   return th > en ? ' lang="th"' : ' lang="en"'
 }
 
+/** The dominant script of a fragment: 'th', 'en', or null when it carries neither. */
+function scriptOf(s) {
+  const th = (s.match(/[\u0E00-\u0E7F]/g) ?? []).length
+  const en = (s.match(/[A-Za-z]/g) ?? []).length
+  if (th > en) return 'th'
+  if (en > 0) return 'en'
+  return null
+}
+
+/**
+ * Split a bilingual line into its two halves, or return null if it is not one.
+ *
+ * The handbook prints both languages at once, so unlike the room pages there is
+ * no `.th`/`.en` class for CSS to switch on — `lang` is the only thing that tells
+ * a screen reader which language it is about to read. A single `lang=` on an
+ * element holding both scripts is right about half of it by construction, and
+ * picking by character count was tagging Thai-only headings as English.
+ *
+ * Deliberately conservative, because mangling a sentence is worse than a wrong
+ * hint: it splits only on a spaced em dash or spaced slash, and only when the
+ * halves are genuinely one Thai and one Latin. "run / walk" (both Latin) and
+ * "มอง / จำ / เดา" (both Thai) are left alone.
+ */
+function splitBilingual(text) {
+  // Capturing the separator keeps it in the output. An earlier version split and
+  // rejoined with a plain space, which silently deleted the em dash that divides
+  // the two halves — a visible change to every exercise line in the handbook.
+  // Separators seen in the handbook: em dash for full sentences, middle dot for
+  // short bilingual labels ("Try it yourself · ลองทำเอง"), slash for fragments.
+  // Only split at separators that are OUTSIDE emphasis and code spans. A line
+  // like "**เป้าหมาย · Goal:**" has a bold label straddling the separator;
+  // splitting there hands each half an unpaired "**" and the bold silently stops
+  // rendering, leaving literal asterisks in the handbook.
+  const guards = []
+  for (const re of [/\*\*[^*]+\*\*/g, /`[^`]+`/g, /\[[^\]]*\]\([^)]*\)/g]) {
+    for (const m of text.matchAll(re)) guards.push([m.index, m.index + m[0].length])
+  }
+  const inside = (i) => guards.some(([a, b]) => i >= a && i < b)
+  const cuts = []
+  for (const m of text.matchAll(/\s+(?:—|·|\/)\s+/g)) if (!inside(m.index)) cuts.push(m)
+  if (!cuts.length) return null
+
+  const parts = []
+  let at = 0
+  for (const m of cuts) {
+    parts.push(text.slice(at, m.index), m[0])
+    at = m.index + m[0].length
+  }
+  parts.push(text.slice(at))
+  const contents = []
+  for (let i = 0; i < parts.length; i += 2) contents.push(parts[i])
+  const tags = contents.map(scriptOf)
+  if (tags.includes(null)) return null
+  if (!tags.includes('th') || !tags.includes('en')) return null
+  const out = []
+  let c = 0
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 0) out.push({ lang: tags[c++], text: parts[i].trim() })
+    else out.push({ sep: parts[i] })
+  }
+  return out
+}
+
+
+/**
+ * Render a block's text, splitting a bilingual line into per-language spans.
+ * Returns the html plus the `lang` the ELEMENT itself should carry: null when the
+ * text was split (the element no longer has one language) or when it is single
+ * language and the caller should keep using langAttr.
+ */
+function body(text, ctx) {
+  const halves = splitBilingual(text)
+  if (!halves) return { html: inline(text, ctx), lang: langAttr(text) }
+  return {
+    html: halves.map((h) => (h.sep ? esc(h.sep) : `<span lang="${h.lang}">${inline(h.text, ctx)}</span>`)).join(''),
+    lang: '',
+  }
+}
+
 /** A path relative to docs/ → where it lives on this site, or null for the repository. */
 function routeFor(rel) {
   if (rel === 'README.md') return '/handbook'
@@ -115,13 +194,14 @@ function renderList(items, ctx, start, indent) {
   while (i < items.length && items[i].indent >= indent) {
     if (items[i].indent > indent) break
     const item = items[i++]
-    let inner = inline(item.text, ctx)
+    const rendered = body(item.text, ctx)
+    let inner = rendered.html
     if (i < items.length && items[i].indent > indent) {
       const nested = renderList(items, ctx, i, items[i].indent)
       inner += nested.html
       i = nested.i
     }
-    html += `<li${langAttr(item.text)}>${inner}</li>`
+    html += `<li${rendered.lang}>${inner}</li>`
   }
   return { html: html + `</${tag}>`, i }
 }
@@ -179,7 +259,8 @@ function renderMarkdown(md, ctx) {
       const buf = []
       while (i < lines.length && lines[i].startsWith('>')) buf.push(lines[i++].replace(/^>\s?/, ''))
       const text = buf.join(' ').trim()
-      out.push(`<blockquote${langAttr(text)}>${inline(text, ctx)}</blockquote>`)
+      const quote = body(text, ctx)
+      out.push(`<blockquote${quote.lang}>${quote.html}</blockquote>`)
       continue
     }
 
@@ -236,14 +317,16 @@ function renderMarkdown(md, ctx) {
       const cap = (lines[j] ?? '').trim()
       if (/^\*[^*]+\*$/.test(cap)) {
         const caption = cap.slice(1, -1)
-        out.push(`<figure>${inline(text, ctx)}<figcaption${langAttr(caption)}>${inline(caption, ctx)}</figcaption></figure>`)
+        const capBody = body(caption, ctx)
+        out.push(`<figure>${inline(text, ctx)}<figcaption${capBody.lang}>${capBody.html}</figcaption></figure>`)
         i = j + 1
       } else {
         out.push(`<figure>${inline(text, ctx)}</figure>`)
       }
       continue
     }
-    out.push(`<p${langAttr(text)}>${inline(text, ctx)}</p>`)
+    const b = body(text, ctx)
+    out.push(`<p${b.lang}>${b.html}</p>`)
   }
   return out.join('\n')
 }
@@ -297,7 +380,10 @@ function docNav(spec) {
 function tocBlock(toc) {
   if (toc.length < 2) return ''
   const items = toc
-    .map((t) => `<li><a href="#${attr(t.id)}"${langAttr(t.text)}>${inline(t.text, { dir: DOCS })}</a></li>`)
+    .map((t) => {
+      const entry = body(t.text, { dir: DOCS })
+      return `<li><a href="#${attr(t.id)}"${entry.lang}>${entry.html}</a></li>`
+    })
     .join('')
   return `<details class="doc-toc"><summary><span class="th" lang="th">${chrome.tocTh}</span><span class="en" lang="en">${chrome.tocEn}</span></summary><ol>${items}</ol></details>`
 }
@@ -373,6 +459,27 @@ for (const [file, content] of outputs) {
     }
   }
 }
+// ── Orphans: outputs this build no longer produces ─────────────────────────
+// `stale` only ever lists files the build WANTS. Delete a chapter from PAGES,
+// rename a docs/*.md, or drop a figure and its generated page stayed in public/
+// forever, --check still printed "✓ handbook pages match docs/", and the deploy
+// shipped it. The on-disk set has to be compared, not just the wanted set.
+if (check) {
+  const generatedDirs = [path.join(PUBLIC, 'handbook'), path.join(PUBLIC, 'img', 'handbook')]
+  for (const dir of generatedDirs) {
+    if (!fs.existsSync(dir)) continue
+    const rel = path.relative(ROOT, dir)
+    for (const name of fs.readdirSync(dir)) {
+      // Dotfiles are not ours. The first run of this check failed on a
+      // .DS_Store that Finder had dropped in public/handbook/ — the deploy
+      // excludes those too, so they are not orphans by this measure.
+      if (name.startsWith('.')) continue
+      if (!fs.statSync(path.join(dir, name)).isFile()) continue
+      if (!outputs.has(path.join(dir, name))) stale.push(`${rel}/${name} — nothing generates this file any more`)
+    }
+  }
+}
+
 if (check && stale.length) {
   console.error(`✗ handbook pages out of date — run "npm run build:handbook":\n  ${stale.join('\n  ')}`)
   process.exit(1)

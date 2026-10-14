@@ -72,8 +72,16 @@ if (!legal.includes('No analytics, no advertising, no third-party tracking scrip
 const beacon = /static\.cloudflareinsights\.com/
 const injected = (await (await fetch(base + '/index.html')).text()).match(beacon)
 console.log('privacy:')
-console.log(`  script-src closed on ${sample.length} pages — no third-party code can run`)
-console.log(`  origin serves no third-party script`)
+// These two lines used to print unconditionally. A page with no CSP, a wildcard
+// or unsafe-inline was recorded by fail() and the script STILL said "no
+// third-party code can run" — the exit code was right, the report an operator
+// read was not.
+if (problems.length) {
+  console.log(`  ${problems.length} problem(s) found — see below; the claims below are NOT true`)
+} else {
+  console.log(`  script-src closed on ${sample.length} pages — no third-party code can run`)
+  console.log(`  origin serves no third-party script`)
+}
 if (injected) console.log('  ! a Cloudflare beacon is present in this response — investigate')
 else console.log('  origin response carries no Cloudflare beacon (any tag seen in a browser is added at the edge)')
 

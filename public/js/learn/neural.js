@@ -174,13 +174,16 @@ export function limitsChapter(chapter, getSource) {
   async function start(src, cols) {
     run.busy = true
     run.key = keyOf(src, cols)
-    const full = copyFrame(src, fullIn)
-    const big = src.grab(DETECTOR_INPUT_WIDTH)
-    const low = ops.pixelate(big, Math.max(1, Math.round(DETECTOR_INPUT_WIDTH / cols)))
-    lowIn.width = low.width
-    lowIn.height = low.height
-    lowIn.getContext('2d').putImageData(new ImageData(low.data, low.width, low.height), 0, 0)
     try {
+      // The frame capture used to sit ABOVE this try. Any throw in copyFrame,
+      // grab or pixelate left run.busy true forever, and nothing re-armed it —
+      // the chapter went permanently silent with no error anywhere.
+      const full = copyFrame(src, fullIn)
+      const big = src.grab(DETECTOR_INPUT_WIDTH)
+      const low = ops.pixelate(big, Math.max(1, Math.round(DETECTOR_INPUT_WIDTH / cols)))
+      lowIn.width = low.width
+      lowIn.height = low.height
+      lowIn.getContext('2d').putImageData(new ImageData(low.data, low.width, low.height), 0, 0)
       run.full = (await detect(full, { minScore: LIMIT_SCORE })).detections
       run.low = (await detect(lowIn, { minScore: LIMIT_SCORE })).detections
       run.cols = cols

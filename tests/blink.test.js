@@ -383,3 +383,34 @@ test('a full drill answers every trial — including the last — and the machin
   assert.match(page.say.textContent, /You caught \d+\/4 · the machine caught 4\/4/)
   drill.stop()
 })
+
+// The DOM harness above can drive buildWall() twice, which is exactly what a
+// visitor did by pressing Start again after a first press could not decode all
+// six photographs.
+test('rebuilding the wall does not duplicate the screens', async () => {
+  const page = storyPage()
+  installGlobals(page.document)
+  const { createDrill } = await import('../public/js/story/blink.js')
+  const drill = createDrill(page.drill, { lead: () => 0, respondMs: 20 })
+
+  // The real trigger: one exhibit photograph is still undecodable on the first
+  // press, so the drill refuses to start, and the visitor presses again — which
+  // is what makes it rebuild. `screens` is closure-scoped, so without a reset
+  // the rebuild PUSHED six more entries onto the old six.
+  const late = page.images[3]
+  late.naturalWidth = 0
+  const first = page.startBtn.fire('click')
+  await settle(); globalThis.__pump(); await settle()
+  assert.equal(page.wall.children.length, 6)
+
+  // The photograph turns up on the second attempt.
+  late.naturalWidth = 320
+  const second = page.startBtn.fire('click')
+  await settle(); globalThis.__pump(); await settle()
+
+  assert.equal(page.wall.children.length, 6, 'the wall must not accumulate tiles')
+  const labels = page.wall.children.map((t) => t.attrs['aria-label'])
+  assert.equal(new Set(labels).size, labels.length, 'no duplicated screens')
+  drill.stop()
+  await Promise.allSettled([first, second])
+})

@@ -163,8 +163,12 @@ async function openVideo(cam) {
   const onPause = () => setTimeout(resume, 500)
   video.addEventListener('pause', onPause)
   document.addEventListener('visibilitychange', resume)
-  // A native-HLS player (Safari) reports drops on the element instead.
-  video.addEventListener('error', () => { if (!src.closed) { src.closed = true; src.onended?.() } })
+  // A native-HLS player (Safari) reports drops on the element instead. This has
+  // to go through close(), not just set `closed`: the override below removes the
+  // visibilitychange/pause listeners, detaches the source and drops the <video>
+  // out of the holder. Setting the flag by hand skipped all of it, so a dropped
+  // Safari stream left a live element and two listeners behind.
+  video.addEventListener('error', () => { if (!src.closed) { src.close(); src.onended?.() } })
   const close = src.close.bind(src)
   src.close = () => {
     close()
@@ -327,7 +331,10 @@ export async function openWebcam({ facing = 'user' } = {}) {
   const src = new FrameSource('webcam', video, { mirror: (actual ?? facing) !== 'environment' })
   src.facing = facing
   // If the person revokes permission or unplugs the camera, say so instead of freezing.
-  for (const track of stream.getVideoTracks()) track.addEventListener('ended', () => { src.closed = true; src.onended?.() }, { once: true })
+  // Same shape as above, and the same reason: when the visitor revokes permission
+  // or unplugs the camera, `closed = true` alone left the tracks running, the
+  // <video> attached and `activeWebcam` still pointing at a dead source.
+  for (const track of stream.getVideoTracks()) track.addEventListener('ended', () => { src.close(); src.onended?.() }, { once: true })
   activeWebcam = src
   const resume = () => { if (!src.closed && video.paused && !document.hidden) video.play().catch(() => {}) }
   document.addEventListener('visibilitychange', resume)

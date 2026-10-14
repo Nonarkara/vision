@@ -6,6 +6,7 @@
 //   node scripts/check-site.mjs
 
 import http from 'node:http'
+import net from 'node:net'
 import fs from 'node:fs'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
@@ -60,6 +61,9 @@ for (const route of Object.keys(PAGES)) {
   const span = (c) => (prose.match(new RegExp(`class="[^"]*\\b${c}\\b[^"]*"`, 'g')) ?? []).length
   const th = span('th'), en = span('en')
   if (th !== en) fail(route, `language parity: ${th} Thai vs ${en} English spans — a translation is missing`)
+  // 0 == 0 satisfies the line above. A page that lost every bilingual span — a
+  // stripped partial, a partial rewrite — would sail through on equality alone.
+  if (th + en === 0) fail(route, 'language parity: the page carries no Thai/English spans at all, so parity is being satisfied by having nothing to compare')
   const ariaTh = (html.match(/\bdata-aria-th=/g) ?? []).length
   const ariaEn = (html.match(/\bdata-aria-en=/g) ?? []).length
   if (ariaTh !== ariaEn) fail(route, `aria parity: ${ariaTh} data-aria-th vs ${ariaEn} data-aria-en`)
@@ -147,8 +151,14 @@ for (const file of walk(path.join(PUBLIC, 'js'), '.js')) {
 // 6. Models: every weight shard the manifests name is present.
 for (const manifest of walk(path.join(PUBLIC, 'models'), 'model.json')) {
   const m = JSON.parse(fs.readFileSync(manifest, 'utf8'))
-  for (const group of m.weightsManifest ?? []) for (const p of group.paths) {
-    if (!fs.existsSync(path.join(path.dirname(manifest), p))) fail(path.relative(ROOT, manifest), `missing shard ${p}`)
+  // `?? []` meant a manifest with no weightsManifest at all passed silently, which
+  // is the opposite of what "all model shards present" claims to mean.
+  if (!Array.isArray(m.weightsManifest)) { fail(path.relative(ROOT, manifest), 'no weightsManifest array — cannot confirm its shards are present'); continue }
+  for (const group of m.weightsManifest) {
+    if (!Array.isArray(group.paths)) { fail(path.relative(ROOT, manifest), 'a weightsManifest group has no paths array'); continue }
+    for (const p of group.paths) {
+      if (!fs.existsSync(path.join(path.dirname(manifest), p))) fail(path.relative(ROOT, manifest), `missing shard ${p}`)
+    }
   }
 }
 
@@ -156,10 +166,32 @@ for (const manifest of walk(path.join(PUBLIC, 'models'), 'model.json')) {
 const health = await fetch(base + '/api/health')
 if (health.status !== 200) fail('/api/health', `HTTP ${health.status}`)
 if (!health.headers.get('content-security-policy')) fail('/api/health', 'no CSP header')
-// fetch() normalises dot segments, so send the raw path with http.get.
-for (const raw of ['/%2e%2e/package.json', '/js/%2e%2e/%2e%2e/server/index.js', '/partials/nav.html']) {
-  const code = await new Promise((resolve) => http.get(base + raw, (r) => { r.resume(); resolve(r.statusCode) }).on('error', () => resolve(0)))
-  if (code !== 404) fail('path safety', `${raw} → ${code}`)
+// 200 only proves the process is up. Report what it actually says: a server with
+// an empty catalogue answers 200 with ok:false, and reading only the status made
+// that indistinguishable from healthy. This is a warning, not a failure — the
+// catalogue comes from FloodDash, and a gate that hard-fails when FloodDash is
+// down would block deploys for a reason no deploy can fix.
+const payload = await health.json().catch(() => null)
+if (!payload || typeof payload.version !== 'string') fail('/api/health', 'response is not a health payload')
+else if (payload.ok !== true) console.warn(`  ! /api/health reports ok:false (${payload.catalogue?.total ?? 0} cameras, origin ${payload.catalogue?.origin ?? '?'}) — the server is up but has no catalogue`)
+
+// Path safety. fetch() normalises dot segments and http.get() parses through
+// new URL(), which does the same — so both arrived at the server as /package.json
+// and the 404 proved the file was absent, not that safeResolve refused %2e%2e.
+// The bytes have to go out raw for this probe to mean anything.
+const rawRequest = (rawPath) => new Promise((resolve) => {
+  const { hostname, port } = new URL(base)
+  const socket = net.connect({ host: hostname, port: Number(port) || 80 })
+  let buf = ''
+  socket.setTimeout(5000, () => socket.destroy())
+  socket.on('connect', () => socket.write(`GET ${rawPath} HTTP/1.1\r\nHost: ${hostname}\r\nConnection: close\r\n\r\n`))
+  socket.on('data', (d) => { buf += d })
+  socket.on('close', () => resolve(Number(/^HTTP\/1\.[01] (\d{3})/.exec(buf)?.[1] ?? 0)))
+  socket.on('error', () => resolve(0))
+})
+for (const raw of ['/%2e%2e/package.json', '/js/%2e%2e/%2e%2e/server/index.js', '/partials/nav.html', '/CCTV%20photos/x.jpg']) {
+  const code = await rawRequest(raw)
+  if (code !== 404) fail('path safety', `${raw} → ${code} (sent raw, unnormalised)`)
 }
 
 server.close()

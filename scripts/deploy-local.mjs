@@ -48,7 +48,13 @@ function prune(srcDir, dstDir) {
 
 function restorePrevious() {
   if (!fs.existsSync(path.join(previous, 'server'))) return false
-  for (const dir of shipped) fs.cpSync(path.join(previous, dir), path.join(runtime, dir), { recursive: true })
+  // Copy AND prune. Copying alone left every file the failed release had added
+  // sitting in the runtime next to the restored code, still web-servable: the
+  // rollback restored the old tree but not the old file set.
+  for (const dir of shipped) {
+    fs.cpSync(path.join(previous, dir), path.join(runtime, dir), { recursive: true })
+    prune(path.join(previous, dir), path.join(runtime, dir))
+  }
   const pkg = path.join(previous, 'package.json')
   if (fs.existsSync(pkg)) fs.copyFileSync(pkg, path.join(runtime, 'package.json'))
   return true
@@ -96,8 +102,19 @@ if (health) {
 }
 if (hadPrevious && restorePrevious()) {
   restart()
-  const back = await waitHealthy(null)
-  console.error(`Release ${expected} did not become healthy — restored the previous runtime${back ? ` (${back.version})` : ''}.`)
+  // Wait for the PREVIOUS version specifically, not for any healthy version.
+  // `null` accepted the still-running bad build and then printed "restored the
+  // previous runtime" while the bad build kept serving. The exit code was right;
+  // the message an operator reads was not.
+  const previousVersion = (() => {
+    try { return JSON.parse(fs.readFileSync(path.join(previous, 'package.json'), 'utf8')).version } catch { return null }
+  })()
+  const back = await waitHealthy(previousVersion)
+  console.error(
+    back
+      ? `Release ${expected} did not become healthy — restored ${back.version}.`
+      : `Release ${expected} did not become healthy, and the rollback did not come back up either${previousVersion ? ` (waited for ${previousVersion})` : ''}. This needs a human.`,
+  )
   process.exit(1)
 }
 throw new Error(`The production service did not become healthy${hadPrevious ? '' : ' (no previous runtime to restore)'}`)

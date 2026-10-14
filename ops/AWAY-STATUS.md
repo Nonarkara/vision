@@ -470,7 +470,7 @@ Five releases had shipped from a tree that existed in no commit. Committing surf
 
 The commit was rebased onto origin/main: 39 files had been touched by both sides, almost all of them `?v=` stamp conflicts (remote went to 1.13.4, this line to 1.15.1). The remote's JavaScript changes were verified stamps-only before our side was taken wholesale; `drive.css`, `drive.html`, the READMEs and the handbook merged by hand and were then checked to contain **both** sides — the stacked-steps markup and the hero band, `.gstep` foreignObjects and the hero controls. One lesson recorded the hard way: in a rebase, `--ours` is origin/main, so the first pass of `package.json` briefly read 1.13.4 — caught by the stamp audit, fixed to 1.15.2.
 
-The merged tree was then proven in a browser at 390 px: Drive shows the four-step stacked list instead of the 780 px SVG (hidden), zero document overflow, hero intact (358×220, readouts live); Gesture's SVG is hidden, its steps stack one column, four `.gstep` labels wrap; console clean on both. Gate green (163 tests, 25 pages, 87 references, no forked imports).
+The merged tree was then proven in a browser at 390 px: Drive shows the four-step stacked list instead of the 780 px SVG (hidden), zero document overflow, hero intact (358×220, readouts live); Gesture's SVG is hidden, its steps stack one column, four `.gstep` labels wrap; console clean on both. Gate green (171 tests, 25 pages, 87 references, no forked imports).
 
 Published as 1.15.2 — the release that finally ships v1.13.4's phone fixes to production alongside everything since.
 
@@ -481,3 +481,36 @@ MiniMax independently verified the 1.15.2 push line by line — history, gate, l
 Its one correction of this line's work is fair: the README's test-file count was restaled by the blink drill's own test file. Rather than write 22 and wait to be bitten a third time, the count is gone and the roster now points at `ls tests/*.test.js` with the reason in the cell. Committed and pushed here, since a verified edit sitting uncommitted is the exact failure mode the last pass recorded.
 
 One judgement call left open on purpose: the camera figures in `docs/08` and `architecture.md` trail production by a few (225→221 view, 3,430→3,426 total). They stay dated snapshots — chapter 08 already says the counts move by tens a day, and wiring prose to live numbers would churn documents on every deploy. If the docs should instead track live, that is a design change worth its own decision, not a passing fix.
+
+### Closed in this pass · the parked list, emptied
+
+Everything in the previous parked list is either fixed or explicitly kept with a reason. The fixes that mattered most were the ones where a green gate was saying nothing:
+
+- **Rollback now prunes.** `restorePrevious()` copies the old tree back but never called `prune()`, which the forward path does — so every file a FAILED release added stayed in the runtime and stayed web-servable next to the restored code. Only bites when the failed release added an asset, which is exactly when you are already in trouble.
+- **Rollback now waits for a version.** It called `waitHealthy(null)`, so if the restart did not take, `/api/health` still answered with the bad build and the script printed "restored the previous runtime" while it had not. Exit code was right; the message an operator read was not.
+- **The catalogue cannot interleave on itself.** `refresh()` had no in-flight guard and every run wrote the same `${cacheFile}.tmp`. Needs a ten-minute event-loop stall to reach — now a `busy` flag plus a per-run temp name.
+- **The catalogue fetch is capped.** `res.json()` had a 60-second timeout and no ceiling on a payload the code calls ~2.4 MB. Now read in chunks with a 32 MB cap, refused before a byte is read when content-length says so.
+- **The catalogue cannot collapse the site.** See the incident below.
+- **`/api/cameras` no longer re-encodes on every request.** Only the OBJECT was memoised, so `JSON.stringify` + `gzipSync` ran per request on a ~250 KB document — ~19 ms of blocked event loop each time, on the thread that also serves frames. The encoded pair is built once: measured 1.68 ms → 0.005 ms.
+- **The relay breaker counts host faults only.** A 404 for a camera whose still was taken down is a fact about that id. `/api/cameras` is public and ids are enumerable, so asking for eight dead ids opened the host breaker and made EVERY still on that host answer "resting" for three minutes.
+- **A failed `listen()` exits 1.** EADDRINUSE arrives as an `error` event; with only the `uncaughtException` backstop it was swallowed and the process exited 0 having never listened, so launchd retried happily and a deploy waited 60 s for a server that was not coming.
+- **Limiter eviction is LRU**, not insertion-ordered — the old code could evict the busiest key on the server — and `cf-connecting-ip` must now look like an address before it becomes a limiter key.
+- **The checks stopped claiming things they cannot see.** The traversal probe sent normalised paths (both `fetch` and `http.get` collapse `%2e%2e`), so it proved nothing; it now writes raw bytes on a `net.Socket` and the server receives the literal path. `/api/health` 200 no longer stands in for `ok: true` (a warning, not a failure, so the gate is not held hostage to FloodDash). Language parity no longer passes at 0 == 0. A manifest with no `weightsManifest` is now reported rather than silently passing.
+- **`build-handbook --check` sees orphans.** It only listed files the build WANTS, so a removed chapter's page sat in `public/handbook/` forever while the check printed "✓ handbook pages match docs/".
+- **`check-privacy` and `palette-measure` no longer print a success claim on a failing path.** Both recorded the problem and then said the reassuring sentence anyway.
+- **The handbook names the language it is written in.** `lang` was chosen per element by character count, which got it wrong on 134 lines across the eight chapters. Bilingual lines are now split into per-language spans by the generator — while preserving the separator, and never splitting inside `**bold**`, a code span or a link, because an earlier version of that splitter did exactly that and shipped literal asterisks. Visible text is byte-identical to before; only the markup changed. Two guards now keep it that way.
+- **The drill cannot lie twice.** `buildWall()` never cleared its state, so a rebuild pushed six more screens onto the old six: twelve tiles, both copies of the flashed screen lit, and the page said one flashed. `.is-truth` had a class but no CSS rule, so the truth marker was invisible; and it was keyed to the machine's catch, which reads as a claim about the machine instead of about the camera.
+
+#### The 29-minute outage, and the guard it bought
+
+At 11:17 UTC on 14 Oct 2026 FloodDash returned a partial catalogue — 131 cameras with five of seven sources marked `failed`, against 3,425 good ones. `adopt()` refused only an EMPTY catalogue, and 131 is not empty, so the site published 4% of its cameras to visitors until the 11:46 refresh, 29 minutes later. FloodDash was healthy throughout (3,424 cameras, all sources live) — the partial was transient.
+
+The guard added is relative, not absolute: a new catalogue must keep at least 25% of the last good one, so it needs no world knowledge and cannot go stale. It is deliberately loose — the log's real movement is under 10% — and the test pins both halves: a 6% dip (3,425 → 3,211, observed) is ADOPTED, and the 96% collapse is REFUSED with the failed sources named in the log.
+
+#### Still open, on purpose
+
+- **Large binaries are not streamed.** The memo correctly skips files over 2 MB, but `load()` still `readFileSync`s them: an 11.5 MB WASM shard blocks the event loop ~87 ms per request. Browser-cached for a year, so the cost is small, and a real streaming rewrite carries regression risk against pinned cache/etag/HEAD behaviour. The comment now says what happens instead of what used to be claimed.
+- **Evicting a limiter key returns it at full burst.** Now named in a test as a known property rather than left for the next reader to discover.
+- **`check-docs` validates handbook anchors with the same `slug()` that minted them.** That proves self-consistency, not agreement with GitHub's heading-id algorithm. Cheap to harden, no live breakage.
+- **Dead design-system CSS.** `.stem`, `.stem-label`, `.measure`, `.measure-n`, `.mix` and `.field-signal` have zero uses. They are documented vocabulary in the `vision.css` header, so removing them is a design decision rather than a clear-cut deletion — and `.stem-label` does appear once in `drive.html`, where it currently matches no rule.
+- **Suspected, trigger never found:** the HLS native-fallback path, where `loadHls()` awaits `canPlayType` and a non-rejecting "unsupported" result falls through to the `<video>` path. Worth confirming the two paths cannot both attach a source to one element.

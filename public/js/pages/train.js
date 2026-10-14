@@ -198,8 +198,12 @@ presetEl.addEventListener('change', async () => {
 const demoBtn = $('[data-demo]')
 demoBtn.addEventListener('click', async () => {
   if (demoBtn.disabled) return
-  if (store.hasSamples() && !(await confirmBox(t('โหลดตัวอย่างที่หน้านี้วาดให้แทน? ตัวอย่างปัจจุบันจะหายไป', 'Load the examples this page draws instead? Your current examples will be cleared.'), { ok: t('โหลดเลย', 'Load them'), cancel: t('ยกเลิก', 'Cancel') }))) return
+  // Disable BEFORE awaiting the confirm. It used to be set after, and the
+  // activity button calls demoBtn.click() without its own disabled check — so a
+  // double click stacked two dialogs, and confirming both ran two demo loops
+  // that interleaved their progress text and both wrote to the same store.
   demoBtn.disabled = true
+  if (store.hasSamples() && !(await confirmBox(t('โหลดตัวอย่างที่หน้านี้วาดให้แทน? ตัวอย่างปัจจุบันจะหายไป', 'Load the examples this page draws instead? Your current examples will be cleared.'), { ok: t('โหลดเลย', 'Load them'), cancel: t('ยกเลิก', 'Cancel') }))) { demoBtn.disabled = false; return }
   const frames = demoFrames()
   try {
     presetChosen = true

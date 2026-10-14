@@ -181,3 +181,35 @@ test('the breaker counts one host, not one port', async () => {
   const last = await relay.frame('x', ported).then(() => 'served', (e) => e.status)
   assert.equal(last, 503, 'the same host on another port must share the breaker')
 })
+
+test('dead cameras cannot be used to rest a whole host', async () => {
+  // /api/cameras is public and the catalogue is built from snapshot_url EXISTING,
+  // not from a successful fetch, so ids whose upstream stills are gone are
+  // enumerable. Eight 404s used to open the host breaker and make every still on
+  // cctv.maholan.net answer "resting" for three minutes.
+  const f = fakeFetch(() => new Response('gone', { status: 404 }))
+  const relay = createRelay({ fetchImpl: f })
+  const url = (id) => `https://cctv.maholan.net/${id}.jpg`
+  for (let i = 0; i < BREAKER_FAILS + 4; i++) await relay.frame(`dead${i}`, url).catch(() => {})
+
+  // Every one of those ids still reports its own 502, not a breaker refusal.
+  const after = await relay.frame('dead0', url).then(() => 'served', (e) => e.status)
+  assert.equal(after, 502, 'a dead camera reports its own 502')
+
+  // And a camera that IS alive still works — the host is not resting.
+  const good = fakeFetch(() => ok())
+  const relay2 = createRelay({ fetchImpl: good })
+  const frame = await relay2.frame('alive', url)
+  assert.equal(frame.type, 'image/jpeg', 'the host must not be resting because of dead ids')
+})
+
+test('a host that really is broken still opens the breaker', async () => {
+  // The other side of the same distinction: a 5xx says something about the host,
+  // so it must still be able to rest it.
+  const failing = fakeFetch(() => new Response('boom', { status: 502 }))
+  const relay = createRelay({ fetchImpl: failing })
+  const url = (id) => `https://cctv.maholan.net/${id}.jpg`
+  for (let i = 0; i < BREAKER_FAILS; i++) await relay.frame(`b${i}`, url).catch(() => {})
+  const last = await relay.frame('x', url).then(() => 'served', (e) => e.status)
+  assert.equal(last, 503, 'repeated host-level failures must still rest the host')
+})

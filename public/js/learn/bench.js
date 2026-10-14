@@ -21,11 +21,15 @@ export function runBench(canvas, getSource, paint, { fps = 12, onError = null } 
     if (!visible || document.hidden || now - last < 1000 / fps) return
     const src = getSource()
     if (!src?.ready) return
+    // Charge the frame BEFORE deciding there is nothing to paint. This line used
+    // to sit below the early return, so a still whose frame had not changed paid
+    // a getBoundingClientRect and a string build on every single frame, and the
+    // fps gate never engaged for exactly the case that does no work.
+    last = now
     const ctx = fitCanvas(canvas)
     const key = `${src.frameAt}|${canvas.width}|${canvas.height}|${version}`
     if (!src.moving && key === painted) return
     painted = key
-    last = now
     try {
       paint(ctx, src)
     } catch (err) {

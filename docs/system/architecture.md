@@ -146,7 +146,7 @@ sequenceDiagram
 | | |
 |---|---|
 | Catalogue refresh | every 10 min; 60 s timeout; disk fallback |
-| Catalogue response | ~3,400 rows, gzip; built once per minute |
+| Catalogue response | ~3,400 rows, gzip; re-fetched from FloodDash every 10 min and the encoded form (plain + gzip) rebuilt with it |
 | Relay frame life | 30 s in memory, max 240 frames, max 4 MB each |
 | Relay politeness | ≤ 4 upstream fetches at once, ≤ 2 per host, 9 s timeout |
 | Detector | 18 MB · input squashed to 300 × 300 · 1,917 anchors · 90 classes |

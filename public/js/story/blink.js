@@ -205,6 +205,12 @@ export function createDrill(root, { lead = pickLead, respondMs = RESPOND_MS } = 
   }
 
   function buildWall() {
+    // Clear first. `screens` is closure-scoped, and a rebuild after a first press
+    // that could not decode every image used to PUSH six more entries onto the
+    // old six. The wall then rendered twelve tiles — and because draw() and the
+    // class toggles match on index, BOTH copies of the flashed screen lit up,
+    // while the copy said one screen flashed. A duplicated answer is still a lie.
+    screens.length = 0
     const imgs = specimenImages()
     if (imgs.length < SCREENS) return false
     for (let i = 0; i < SCREENS; i++) {
@@ -356,7 +362,7 @@ export function createDrill(root, { lead = pickLead, respondMs = RESPOND_MS } = 
     for (const s of screens) {
       s.btn.disabled = phase !== 'respond'
       s.btn.classList.toggle('is-open', phase === 'respond')
-      s.btn.classList.toggle('is-truth', phase === 'reveal' && caught !== null && s.i === caught.screen)
+      s.btn.classList.toggle('is-truth', phase === 'reveal' && s.i === flashTile)
       s.btn.classList.toggle('is-yours', phase === 'reveal' && picked !== null && s.i === picked)
       s.btn.classList.remove('is-machine')
     }

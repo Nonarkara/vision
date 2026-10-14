@@ -153,5 +153,7 @@ if (isMain) {
     console.error(`  ${failed.length} claim(s) broken: ${failed.map((f) => `${f.name} ${f.ratio.toFixed(2)}:1`).join(', ')}\n`)
     process.exit(1)
   }
+  // Never printed on the failing path — this sentence is the claim, and printing
+  // it while `failed` is non-empty would state the opposite of what was measured.
   console.log(`  ${req} required pairings clear their floor · ${rows.length - req} forbidden pairings stay illegible.\n`)
 }

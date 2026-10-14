@@ -148,3 +148,36 @@ test('the private photo directory cannot be reached by respelling its case', asy
     )
   }
 })
+
+test('the limiter evicts the least recently used bucket, not the oldest inserted', () => {
+  const lim = createLimiter({ rate: 0, burst: 1, max: 3 })
+  lim.take('a'); lim.take('b'); lim.take('c')
+  lim.take('a')               // refused, but 'a' is now the most recently used
+  lim.take('d')               // a fourth key forces an eviction
+  // Insertion order was a, b, c, so the old code dropped 'a' — the one key that
+  // had just been used. Order of use is b, c, a, so 'b' is the coldest.
+  assert.equal(lim.has('b'), false, 'the coldest bucket is the one evicted')
+  assert.equal(lim.has('a'), true, 'a key in use must not be evicted')
+  assert.equal(lim.has('c'), true)
+  assert.equal(lim.size, 3)
+})
+
+test('an evicted bucket starts full again — and that is now a known property', () => {
+  const lim = createLimiter({ rate: 0, burst: 1, max: 1 })
+  assert.equal(lim.take('x'), true)
+  lim.take('y')               // evicts x
+  assert.equal(lim.take('x'), true, 'x is rebuilt at full burst when it returns')
+})
+
+test('a forwarded client address must look like an address before it becomes a key', () => {
+  const loop = { socket: { remoteAddress: '127.0.0.1' }, headers: {} }
+  assert.equal(clientIp({ ...loop, headers: { 'cf-connecting-ip': '203.0.113.9' } }), '203.0.113.9')
+  assert.equal(clientIp({ ...loop, headers: { 'cf-connecting-ip': '2001:db8::1' } }), '2001:db8::1')
+  // Not an address: rejected, and the real peer is used instead.
+  for (const junk of ['not-an-ip', 'x'.repeat(80), '1.2.3.4; DROP', '<script>', '']) {
+    assert.equal(clientIp({ ...loop, headers: { 'cf-connecting-ip': junk } }), '127.0.0.1', `${junk} must not become a key`)
+  }
+  // A non-loopback peer may not set it at all.
+  const remote = { socket: { remoteAddress: '198.51.100.7' }, headers: { 'cf-connecting-ip': '203.0.113.9' } }
+  assert.equal(clientIp(remote), '198.51.100.7')
+})
