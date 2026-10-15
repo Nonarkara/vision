@@ -1,8 +1,8 @@
-import { t, onLang } from '../core/i18n.js'
+import { t, onLang, count } from '../core/i18n.js'
 import { runLens, createLensState } from '../cv/lenses.js'
-import { snapshot, shrink, embed, isBusy } from './eye.js'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js'
 import { classify, cluster, groupOf, policy } from './video-learning.js'
-import { practiceVideo } from './practice-video.js'
+import { practiceVideo } from './practice-video.js?v=1.16.7'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
@@ -23,7 +23,8 @@ export function mountVideoLesson(specimen) {
     prediction = null,
     rounds = 0,
     stopped = false,
-    timer = null
+    timer = null,
+    statusText = null
   const names = [t('ถนนรถแน่น', 'Busy road'), t('ถนนโล่ง', 'Quiet road')],
     named = [false, false]
   root.querySelectorAll('[data-lesson-name]').forEach((el, i) => {
@@ -35,6 +36,7 @@ export function mountVideoLesson(specimen) {
     })
   })
   function status(th, en) {
+    statusText = [th, en]
     $('[data-lesson-status]').textContent = t(th, en)
   }
   const reviewingSource = {
@@ -76,8 +78,9 @@ export function mountVideoLesson(specimen) {
       b.textContent = t('เพิ่มภาพ: ', 'Add frame: ') + names[y]
     })
     $('[data-lesson-counts]').textContent = names
-      .map((name, i) => `${name}: ${counts[i]} / 10`)
+      .map((name, i) => counts[i] < 3 ? `${name}: ${counts[i]} / 3 ${t("ภาพเริ่มต้น", "to get started")}` : `${name}: ${counts[i]} ${t("ภาพ · พร้อม", "examples · ready")}`)
       .join(' · ')
+    paintSamples()
     $('[data-lesson-learn]').disabled = busy || counts.some((n) => n < 3)
     $('[data-lesson-collect]').disabled = busy
     $('[data-lesson-act]').disabled = busy || !!pending
@@ -102,8 +105,20 @@ export function mountVideoLesson(specimen) {
     $('[data-lesson-help]').textContent =
       mode === 'supervised'
         ? t(
-            'เลือกปุ่มชื่อที่ตรงกับภาพ เก็บทั้งสองกลุ่ม แล้วกดเรียน ดูว่ามันทายวิดีโอที่เคลื่อนไหวถูกหรือไม่',
-            'Choose the name matching the picture. Collect both groups, then press Learn. Watch whether it gets new moving frames right.',
+            learned
+              ? 'สอนแล้ว! เปลี่ยนฉากรถแน่นหรือถนนโล่ง แล้วดูคำทายบนวิดีโอ ถ้าผิด ให้เพิ่มตัวอย่างแล้วกดเรียนอีกครั้ง'
+              : counts[0] < 3
+                ? `ต่อไป: เพิ่มภาพที่ตรงกับ “${names[0]}” อีก ${3 - counts[0]} ภาพ${specimen.source?.kind === 'practice' ? ' เลือกฉากรถแน่นได้ใต้จอ' : ''}`
+                : counts[1] < 3
+                  ? `ต่อไป: เปลี่ยนฉาก แล้วเพิ่มภาพที่ตรงกับ “${names[1]}” อีก ${3 - counts[1]} ภาพ`
+                  : 'พร้อมแล้ว! กด “เรียนจากคำตอบของฉัน” แล้วสลับฉากเพื่อทดสอบ',
+            learned
+              ? 'You taught it! Switch between busy and quiet scenes and watch its guess. If it is wrong, add examples and press Learn again.'
+              : counts[0] < 3
+                ? `Next: add ${count(3 - counts[0], "more frame", "more frames")} matching “${names[0]}”.${specimen.source?.kind === 'practice' ? ' Choose the busy scene below the video.' : ''}`
+                : counts[1] < 3
+                  ? `Next: switch scene, then add ${count(3 - counts[1], "more frame", "more frames")} matching “${names[1]}”.`
+                  : 'Ready! Press “Learn from my answers”, then switch scenes to test it.',
           )
         : mode === 'unsupervised'
           ? t(
@@ -130,6 +145,12 @@ export function mountVideoLesson(specimen) {
               'This is a one-step contextual bandit: alert or stay quiet. It learns from your rewards. It does not change traffic or train a multi-step driving policy.',
             )
     const src = specimen.source
+    $('[data-practice-controls]').hidden = src?.kind !== 'practice'
+    $('[data-lesson-practice]').setAttribute('aria-pressed', String(src?.kind === 'practice'))
+    root.querySelectorAll('[data-practice-scene]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.practiceScene === src?.sceneMode))
+      button.disabled = busy || !!pending
+    })
     $('[data-lesson-source]').textContent =
       src?.kind === 'still' || src?.kind === 'photo'
         ? t(
@@ -141,7 +162,7 @@ export function mountVideoLesson(specimen) {
           : t('ยังไม่มีภาพ', 'No source')
     $('[data-lesson-rewards]').textContent = t(
       `ให้คะแนนแล้ว ${rounds} ครั้ง · เครื่องยังลองอีกทางเป็นระยะ`,
-      `Rated ${rounds} choices · it still explores the other action sometimes`,
+      `Rated ${count(rounds, "choice")} · it still explores the other action sometimes`,
     )
     $('[data-lesson-action]').textContent = pending
       ? t(
@@ -161,11 +182,45 @@ export function mountVideoLesson(specimen) {
     }
     paintResult()
   }
+  function paintSamples() {
+    const el = $('[data-lesson-samples]')
+    el.replaceChildren()
+    for (let y = 0; y < 2; y++) {
+      const samples = labels.filter(sample => sample.y === y)
+      if (!samples.length) continue
+      const group = document.createElement('div')
+      const caption = document.createElement('p')
+      caption.className = 'micro'
+      caption.textContent = t('ภาพที่คุณตั้งชื่อ: ', 'Your examples: ') + names[y]
+      const strip = document.createElement('div')
+      strip.className = 'lesson-sample-strip'
+      for (const sample of samples.slice(-3)) {
+        sample.thumb.setAttribute('role', 'img')
+        sample.thumb.setAttribute('aria-label', t('ตัวอย่างที่คุณตั้งชื่อว่า ', 'Example you labelled ') + names[y])
+        strip.append(sample.thumb)
+      }
+      const undo = document.createElement('button')
+      undo.type = 'button'
+      undo.className = 'btn'
+      undo.textContent = t('ลบภาพล่าสุด: ', 'Undo last: ') + names[y]
+      undo.disabled = busy
+      undo.addEventListener('click', () => {
+        job++
+        labels.splice(labels.lastIndexOf(samples.at(-1)), 1)
+        learned = false
+        prediction = null
+        status('ลบภาพล่าสุดแล้ว ตรวจตัวอย่าง แล้วกดเรียนเมื่อพร้อม', 'Last example removed. Check your examples, then Learn when ready.')
+        paint()
+      })
+      group.append(caption, strip, undo)
+      el.append(group)
+    }
+  }
   function paintResult() {
     let text = t('ยังไม่ได้สอน', 'Waiting for your lesson'),
       explain = t(
-        'เริ่มที่ปุ่มข้างจอ ผลลัพธ์จะปรากฏตรงนี้',
-        'Use the buttons beside the screen. Its result will appear here.',
+        mode === 'supervised' ? 'เพิ่มตัวอย่างด้วยปุ่มสอน กดเรียน แล้วคำทายจะปรากฏตรงนี้' : mode === 'unsupervised' ? 'กดเก็บภาพ แล้วกลุ่มที่พบจะปรากฏตรงนี้' : 'กดลองทำ แล้วให้คะแนนการกระทำที่แสดงตรงนี้',
+        mode === 'supervised' ? 'Add examples with the buttons. After Learn, its guess appears here.' : mode === 'unsupervised' ? 'Collect frames, then its group will appear here.' : 'Press Try an action, then rate the action shown here.',
       )
     if (review && pending) {
       text = t(
@@ -222,6 +277,13 @@ export function mountVideoLesson(specimen) {
       paint()
     }),
   )
+  root.querySelectorAll('[data-practice-scene]').forEach(button => button.addEventListener('click', () => {
+    const source = specimen.source
+    if (source?.kind !== 'practice' || busy || pending) return
+    source.setScene(button.dataset.practiceScene)
+    lastResult = ''
+    paint()
+  }))
   $('[data-lesson-practice]').addEventListener('click', () => {
     specimen.useLocal(practiceVideo())
   })
@@ -246,8 +308,8 @@ export function mountVideoLesson(specimen) {
     const c = snapshot(specimen.source)
     if (!c) throw Error('No frame')
     status(
-      'กำลังอ่านภาพ ครั้งแรกโหลดโมเดล 14 MB…',
-      'Reading the frame. First use loads a 14 MB model…',
+      isLoaded() ? 'กำลังอ่านภาพ…' : 'กำลังโหลดโมเดล 14 MB ครั้งแรก… ภาพที่เลือกถูกเก็บไว้แล้ว',
+      isLoaded() ? 'Reading the frame…' : 'Loading the 14 MB model for first use… Your chosen frame is already held.',
     )
     return { x: await embed(c), thumb: shrink(c), canvas: c }
   }
@@ -255,7 +317,7 @@ export function mountVideoLesson(specimen) {
     b.addEventListener('click', async () => {
       if (busy) return
       const y = Number(b.dataset.labelFrame),
-        ticket = job
+        ticket = ++job
       busy = true
       paint()
       try {
@@ -299,7 +361,7 @@ export function mountVideoLesson(specimen) {
         title = document.createElement('strong')
       title.textContent = t(
         `กลุ่ม ${y + 1} · ${groups.groups.filter((v) => v === y).length} ภาพ`,
-        `Group ${y + 1} · ${groups.groups.filter((v) => v === y).length} frames`,
+        `Group ${y + 1} · ${count(groups.groups.filter((v) => v === y).length, "frame")}`,
       )
       group.append(title)
       frames
@@ -318,6 +380,7 @@ export function mountVideoLesson(specimen) {
       )
       return
     }
+    if (specimen.source.kind === 'practice') specimen.source.setScene('auto')
     const ticket = ++job
     busy = true
     collecting = true
@@ -492,6 +555,7 @@ export function mountVideoLesson(specimen) {
     if (!stopped) timer = setTimeout(tick, 750)
   }
   onLang(() => {
+    if (statusText) status(...statusText)
     for (let i = 0; i < 2; i++)
       if (!named[i]) {
         names[i] = i ? t('ถนนโล่ง', 'Quiet road') : t('ถนนรถแน่น', 'Busy road')
@@ -516,8 +580,8 @@ export function mountVideoLesson(specimen) {
   )
   specimen.useLocal(practiceVideo())
   status(
-    'เริ่มเลย: เก็บภาพรถแน่น แล้วรอช่วงถนนโล่งเพื่อเก็บอีกกลุ่ม',
-    'Start here: add busy frames, then wait for quiet traffic and add that group.',
+    'เริ่มเลย: เลือกฉากรถแน่น แล้วเก็บ 3 ภาพ จากนั้นเลือกถนนโล่งเพื่อเก็บอีกกลุ่ม',
+    'Start here: choose busy traffic and add 3 frames. Then choose quiet traffic and add that group.',
   )
   paint()
   tick()

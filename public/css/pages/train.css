@@ -166,3 +166,31 @@ a.training-choice { text-decoration: none; }
 .video-lesson:is(:fullscreen,.is-expanded) > .lesson-heading { display:none; }
 .video-lesson:is(:fullscreen,.is-expanded) [data-fullscreen] { position:sticky; top:0; z-index:3; float:right; }
 @media(max-width:600px){.lesson-actions { gap:8px; } .lesson-labels { grid-template-columns:1fr; } .lesson-methods .training-choice > span { line-height:1.3; } }
+
+/* A learner must see the picture while choosing its label. */
+.specimen-bar { position: static; }
+.lesson-source-picker > summary { cursor: pointer; min-height: var(--target); padding: 12px 0; }
+.lesson-source-picker[open] { padding-bottom: 12px; }
+.lesson-scenes { padding: 8px 12px; background: var(--black); color: var(--white); }
+.lesson-scenes > p { margin: 0 0 8px; }
+.lesson-scenes .controls { padding: 0; flex-wrap: wrap; gap: 2px; }
+.lesson-scenes .btn { flex: 1; white-space: normal; padding: 8px; }
+.lesson-scenes .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
+.lesson-samples { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lesson-samples:empty { display: none; }
+.lesson-samples .btn { width: 100%; white-space: normal; padding: 8px; font-size: var(--micro); }
+.lesson-sample-strip { display: flex; gap: 3px; padding: 6px 0; }
+.lesson-sample-strip canvas { width: calc((100% - 6px) / 3); height: auto; }
+#teach-video { scroll-margin-top: calc(var(--rail-height) + 12px); }
+@media (max-width: 1000px) and (min-height: 700px) {
+  .lesson-bench { position: sticky; top: var(--rail-height); z-index: 4; align-self: start; background: var(--black); }
+  .lesson-actions :is(button,input) { scroll-margin-top: calc(var(--rail-height) + 300px); }
+  .lesson-bench > [data-fullscreen] { position: absolute; top: 0; right: 0; z-index: 5; }
+  .video-lesson:is(:fullscreen,.is-expanded) .lesson-bench { top: 0; }
+  .lesson-bench .bench-caption { display: none; }
+  .lesson-bench .bench-view { height: clamp(100px, 16dvh, 140px); aspect-ratio: auto; }
+  .lesson-bench .lesson-prediction { min-height: 0; padding: 6px 12px; font-size: var(--micro); }
+  .lesson-scenes > p { font-size: 0.75rem; margin-bottom: 4px; }
+  .lesson-scenes .btn { min-height: 44px; font-size: 0.8rem; }
+  .lesson-overlay { padding: 4px 8px; font-size: var(--micro); }
+}

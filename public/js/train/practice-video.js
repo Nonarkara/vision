@@ -6,10 +6,14 @@ export function practiceVideo() {
   const g = canvas.getContext('2d')
   let closed = false,
     t = 0,
+    fixedScene = null,
     last = performance.now()
+  const syncVisibility = () => { last = performance.now() }
+  document.addEventListener('visibilitychange', syncVisibility)
+  const scene = () => fixedScene ?? (Math.floor(t / 8) % 2 === 0 ? 'busy' : 'quiet')
   function draw(now) {
     if (closed) return
-    const dt = Math.min(0.2, (now - last) / 1000)
+    const dt = Math.max(0, (now - last) / 1000)
     last = now
     if (!document.hidden) t += dt
     g.fillStyle = '#b7c9cf'
@@ -27,7 +31,7 @@ export function practiceVideo() {
       g.lineTo(x, 360)
       g.stroke()
     }
-    const busy = Math.floor(t / 8) % 2 === 0,
+    const busy = scene() === 'busy',
       n = busy ? 12 : 1
     for (let i = 0; i < n; i++) {
       const z = (t * 0.13 + i / n) % 1,
@@ -46,6 +50,9 @@ export function practiceVideo() {
   return {
     kind: 'practice',
     moving: true,
+    get scene() { return scene() },
+    get sceneMode() { return fixedScene ?? 'auto' },
+    setScene(next) { fixedScene = next === 'busy' || next === 'quiet' ? next : null },
     get ready() {
       return !closed
     },
@@ -64,6 +71,7 @@ export function practiceVideo() {
     },
     close() {
       closed = true
+      document.removeEventListener('visibilitychange', syncVisibility)
     },
   }
 }
