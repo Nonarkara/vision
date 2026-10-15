@@ -2,7 +2,7 @@ import { t, onLang, count } from '../core/i18n.js'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js'
 import { classify, cluster, groupOf, policy } from './video-learning.js'
-import { practiceVideo } from './practice-video.js?v=1.16.7'
+import { practiceVideo } from './practice-video.js?v=1.16.8'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
@@ -75,7 +75,12 @@ export function mountVideoLesson(specimen) {
     root.querySelectorAll('[data-label-frame]').forEach((b) => {
       const y = Number(b.dataset.labelFrame)
       b.disabled = busy || counts[y] >= 30
-      b.textContent = t('เพิ่มภาพ: ', 'Add frame: ') + names[y]
+      const title = document.createElement('strong')
+      title.textContent = names[y]
+      const progress = document.createElement('small')
+      progress.textContent = t(`+ เพิ่มภาพ · ${counts[y]} / 3 ภาพเริ่มต้น`, `+ Add example · ${counts[y]} / 3 to start`)
+      if (counts[y] >= 3) progress.textContent = t(`+ เพิ่มอีก · เก็บแล้ว ${counts[y]} ภาพ`, `+ Add more · ${count(counts[y], 'example')} saved`)
+      b.replaceChildren(title, progress)
     })
     $('[data-lesson-counts]').textContent = names
       .map((name, i) => counts[i] < 3 ? `${name}: ${counts[i]} / 3 ${t("ภาพเริ่มต้น", "to get started")}` : `${name}: ${counts[i]} ${t("ภาพ · พร้อม", "examples · ready")}`)
@@ -87,37 +92,34 @@ export function mountVideoLesson(specimen) {
     root
       .querySelectorAll('[data-reward]')
       .forEach((b) => (b.disabled = !pending))
-    // Steps 1 (video) and 2 (method) are in the page; the lesson continues at 3.
-    const done = mode === 'supervised' ? learned : mode === 'unsupervised' ? groups : feedback.length
-    const step = done ? 4 : 3
     $('[data-lesson-step]').textContent =
       mode === 'supervised'
         ? t(
-            `${step} · ${learned ? 'ลองกับภาพใหม่' : 'บอกคำตอบให้ภาพ'}`,
-            `${step} · ${learned ? 'Test on new frames' : 'Name some frames'}`,
+            `${learned ? 'ลองกับภาพใหม่' : 'บอกคำตอบที่ถูกต้อง'}`,
+            `${learned ? 'Test on new frames' : 'Show it the right answer'}`,
           )
         : mode === 'unsupervised'
           ? t(
-              `${step} · ${groups ? 'สำรวจกลุ่มที่พบ' : 'เก็บภาพโดยไม่ตั้งชื่อ'}`,
-              `${step} · ${groups ? 'Explore its groups' : 'Collect without labels'}`,
+              `${groups ? 'สำรวจกลุ่มที่พบ' : 'เก็บภาพโดยไม่ตั้งชื่อ'}`,
+              `${groups ? 'Explore its groups' : 'Collect without labels'}`,
             )
-          : t(`${step} · ให้รางวัลกับการเลือก`, `${step} · Reward its choices`)
+          : t(`ให้รางวัลกับการเลือก`, `Reward its choices`)
     $('[data-lesson-help]').textContent =
       mode === 'supervised'
         ? t(
             learned
               ? 'สอนแล้ว! เปลี่ยนฉากรถแน่นหรือถนนโล่ง แล้วดูคำทายบนวิดีโอ ถ้าผิด ให้เพิ่มตัวอย่างแล้วกดเรียนอีกครั้ง'
               : counts[0] < 3
-                ? `ต่อไป: เพิ่มภาพที่ตรงกับ “${names[0]}” อีก ${3 - counts[0]} ภาพ${specimen.source?.kind === 'practice' ? ' เลือกฉากรถแน่นได้ใต้จอ' : ''}`
+                ? `กดปุ่ม “${names[0]}” เพื่อเก็บภาพที่ตรงกันอีก ${3 - counts[0]} ภาพ${specimen.source?.kind === 'practice' ? ' เลือกฉากที่ตรงกันใต้จอ' : ''}`
                 : counts[1] < 3
-                  ? `ต่อไป: เปลี่ยนฉาก แล้วเพิ่มภาพที่ตรงกับ “${names[1]}” อีก ${3 - counts[1]} ภาพ`
+                  ? `เปลี่ยนเป็นอีกฉากใต้จอ แล้วกดปุ่ม “${names[1]}” เพื่อเก็บอีก ${3 - counts[1]} ภาพ`
                   : 'พร้อมแล้ว! กด “เรียนจากคำตอบของฉัน” แล้วสลับฉากเพื่อทดสอบ',
             learned
               ? 'You taught it! Switch between busy and quiet scenes and watch its guess. If it is wrong, add examples and press Learn again.'
               : counts[0] < 3
-                ? `Next: add ${count(3 - counts[0], "more frame", "more frames")} matching “${names[0]}”.${specimen.source?.kind === 'practice' ? ' Choose the busy scene below the video.' : ''}`
+                ? `Save ${count(3 - counts[0], "more picture", "more pictures")} of “${names[0]}” with its button.${specimen.source?.kind === 'practice' ? ' Choose a matching scene below.' : ''}`
                 : counts[1] < 3
-                  ? `Next: switch scene, then add ${count(3 - counts[1], "more frame", "more frames")} matching “${names[1]}”.`
+                  ? `Switch to the other scene below the video. Save ${count(3 - counts[1], "more picture", "more pictures")} of “${names[1]}” with its button.`
                   : 'Ready! Press “Learn from my answers”, then switch scenes to test it.',
           )
         : mode === 'unsupervised'
@@ -285,7 +287,9 @@ export function mountVideoLesson(specimen) {
     paint()
   }))
   $('[data-lesson-practice]').addEventListener('click', () => {
-    specimen.useLocal(practiceVideo())
+    const clip = practiceVideo()
+    clip.setScene('busy')
+    specimen.useLocal(clip)
   })
   $('[data-lesson-camera]').addEventListener('click', () => {
     specimen.next()
@@ -578,11 +582,11 @@ export function mountVideoLesson(specimen) {
     },
     { once: true },
   )
-  specimen.useLocal(practiceVideo())
-  status(
-    'เริ่มเลย: เลือกฉากรถแน่น แล้วเก็บ 3 ภาพ จากนั้นเลือกถนนโล่งเพื่อเก็บอีกกลุ่ม',
-    'Start here: choose busy traffic and add 3 frames. Then choose quiet traffic and add that group.',
-  )
+  const clip = practiceVideo()
+  clip.setScene('busy')
+  specimen.useLocal(clip)
+  statusText = null
+  $('[data-lesson-status]').textContent = ''
   paint()
   tick()
 }

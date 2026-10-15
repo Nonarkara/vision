@@ -10,8 +10,8 @@
 // straight line, cars along their loop) and checked against my lane — the
 // predict-then-check idea behind sampling planners such as TUM's Frenetix.
 
-import { at, alongMyLane, LANE } from './track.js?v=1.16.7'
-import { sightRange } from './perceive.js?v=1.16.7'
+import { at, alongMyLane, LANE } from './track.js?v=1.16.8'
+import { sightRange } from './perceive.js?v=1.16.8'
 
 export const CAR_LEN = 4.6
 export const MAX_BRAKE = 9            // m/s², an emergency stop on dry tarmac
