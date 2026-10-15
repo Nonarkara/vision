@@ -2,7 +2,7 @@ import { t, onLang, count } from '../core/i18n.js'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js'
 import { classify, cluster, groupOf, policy } from './video-learning.js'
-import { practiceVideo } from './practice-video.js?v=1.16.8'
+import { practiceVideo } from './practice-video.js?v=1.16.9'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
@@ -154,14 +154,16 @@ export function mountVideoLesson(specimen) {
       button.disabled = busy || !!pending
     })
     $('[data-lesson-source]').textContent =
-      src?.kind === 'still' || src?.kind === 'photo'
-        ? t(
-            'ภาพนิ่ง — เปลี่ยนกล้องเพื่อให้เห็นความต่าง',
-            'Still image — change source for varied examples',
-          )
-        : src
-          ? t('วิดีโอ / ภาพเคลื่อนไหว', 'Moving video')
-          : t('ยังไม่มีภาพ', 'No source')
+      src?.kind === 'practice'
+        ? t('ภาพจากกล้องสาธารณะ', 'Public-camera footage')
+        : src?.kind === 'still' || src?.kind === 'photo'
+          ? t(
+              'ภาพนิ่ง — เปลี่ยนกล้องเพื่อให้เห็นความต่าง',
+              'Still image — change source for varied examples',
+            )
+          : src
+            ? t('วิดีโอ / ภาพเคลื่อนไหว', 'Moving video')
+            : t('ยังไม่มีภาพ', 'No source')
     $('[data-lesson-rewards]').textContent = t(
       `ให้คะแนนแล้ว ${rounds} ครั้ง · เครื่องยังลองอีกทางเป็นระยะ`,
       `Rated ${count(rounds, "choice")} · it still explores the other action sometimes`,

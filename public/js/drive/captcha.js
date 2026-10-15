@@ -1,73 +1,83 @@
-// A CAPTCHA, built out of the same street simulator the room teaches with.
+// The Drive gate: nine real camera crops, and a known answer.
 //
-// The point is not security. Nobody is being protected here; the server stores
-// no score and there is nothing to attack. The point is that a visitor who
-// passes this has just done, for thirty seconds and without being told, exactly
-// the job that built the detectors: looking at pictures of streets and saying
-// which ones contain a traffic light.
+// A visitor has to select every tile that contains a car, a motorbike, or a
+// person. The crops are public iTIC frames (see footage/library.js). The
+// answer is the label checked against that crop, not a drawing and not a
+// guess the page invents at click time. A wrong set is not a partial pass:
+// the page deals a new grid.
 //
-// That job has a name and a history. From 2007, Luis von Ahn's reCAPTCHA put
-// scanned words into a security check, so that proving you were human also
-// digitised books. From 2012 it put Street View photographs into a security
-// check, so that proving you were human also produced human-labelled images of
-// streets — sold on as machine-learning training data. Google's own description
-// says so plainly: every solved CAPTCHA "helps digitize text, annotate images,
-// and build machine learning datasets."
-//
-// Two honest limits, stated on the page rather than hidden:
-//   1. The labels from those challenges trained Google's models, not this
-//      site's. The detectors running in your browser here are SSDLite +
-//      MobileNetV2 trained on COCO (Lin et al., 2014) and ImageNet — also
-//      human-labelled, by people who were paid, over years.
-//   2. The point at which the machine passed the test is documented: Goodfellow
-//      et al. (2014) read the hardest distorted-text reCAPTCHAs at 99.8%, while
-//      people managed 33%. That is why the challenges changed shape each time.
+// This is the job supervised labelling actually is. reCAPTCHA put the same
+// job in front of people so the clicks could train vision models. The
+// reveal on the page says so. The labels stay in this tab.
 
-import { rng } from './rand.js?v=1.16.8'
+import { rng } from './rand.js?v=1.16.9'
+import { GATE_TILES } from '../footage/library.js?v=1.16.9'
 
 export const GRID = 3
 export const TILES = GRID * GRID
 
-/** What a challenge can ask you to find. All real COCO categories. */
+/** What a challenge can ask you to find. Thai names match ml/labels.js. */
 export const TARGETS = [
-  { key: 'light', coco: 10, label: ['ไฟจราจร', 'traffic lights'] },
-  { key: 'bicycle', coco: 2, label: ['จักรยาน', 'bicycles'] },
-  { key: 'person', coco: 1, label: ['คน', 'people'] },
-  { key: 'motorcycle', coco: 4, label: ['รถจักรยานยนต์', 'motorbikes'] },
+  { key: 'car', coco: 3, label: ['รถยนต์', 'a car'] },
+  { key: 'motorcycle', coco: 4, label: ['รถจักรยานยนต์', 'a motorbike'] },
+  { key: 'person', coco: 1, label: ['คน', 'a person'] },
 ]
 
-/**
- * One challenge: which tiles contain the target, and how many.
- *
- * Deterministic for a seed, so a test can assert the answer and a visitor who
- * reloads sees the same grid rather than a new one each time.
- */
-export function makeChallenge(seed = 1, targetIndex = 0) {
-  const r = rng(seed * 7919 + 13)
-  const target = TARGETS[((targetIndex % TARGETS.length) + TARGETS.length) % TARGETS.length]
-  // Between two and six of the nine tiles must contain it: too few and there is
-  // nothing to find, too many and the challenge is a formality.
-  const count = 2 + Math.floor(r() * 5)
-  const order = [...Array(TILES).keys()]
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = Math.floor(r() * (i + 1))
-    ;[order[i], order[j]] = [order[j], order[i]]
+export const GATE_KEY = 'vision_drive_gate_v1'
+
+function shuffle(list, rand) {
+  const bag = list.slice()
+  for (let i = bag.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1))
+    ;[bag[i], bag[j]] = [bag[j], bag[i]]
   }
-  const hits = new Set(order.slice(0, count))
-  const others = TARGETS.filter((t) => t.key !== target.key)
-  const tiles = order.map((slot) => {
-    const rr = rng(seed * 1000 + slot + 5)
-    return {
-      slot,
-      has: hits.has(slot),
-      // Distractors, so a tile is never empty and never trivially "no".
-      also: others.filter(() => rr() < 0.5),
-    }
-  })
-  return { seed, target, tiles, answer: [...hits].sort((a, b) => a - b) }
+  return bag
 }
 
-/** Did the visitor pick exactly the right tiles? No partial credit, no penalty. */
+/**
+ * One challenge. Deterministic for a seed, so a reload of the same seed is
+ * the same grid, and a retry passes a new seed to get a new one.
+ * Between two and six of the nine tiles contain the asked-for class.
+ */
+export function makeChallenge(seed = 1, targetIndex = 0) {
+  const r = rng((seed >>> 0) * 7919 + 13)
+  const target = TARGETS[((targetIndex % TARGETS.length) + TARGETS.length) % TARGETS.length]
+  const yes = GATE_TILES.filter((t) => t.labels.includes(target.key))
+  const no = GATE_TILES.filter((t) => !t.labels.includes(target.key))
+  const count = 2 + Math.floor(r() * Math.min(5, yes.length - 1))
+  const picked = [...shuffle(yes, r).slice(0, count), ...shuffle(no, r).slice(0, TILES - count)]
+  const tiles = shuffle(picked, r).map((tile, i) => ({
+    slot: i,
+    id: tile.id,
+    src: tile.src,
+    camera: tile.camera,
+    labels: tile.labels,
+    has: tile.labels.includes(target.key),
+  }))
+  return {
+    seed: seed >>> 0,
+    target,
+    targetIndex: ((targetIndex % TARGETS.length) + TARGETS.length) % TARGETS.length,
+    tiles,
+    answer: tiles.filter((t) => t.has).map((t) => t.slot),
+  }
+}
+
+/** A failed check deals again. The new grid is not the one just missed. */
+export function retryChallenge(previous, step = 1) {
+  let seed = ((previous?.seed ?? 1) + step * 104729) >>> 0
+  let next = makeChallenge(seed, previous?.targetIndex ?? 0)
+  const same = (c) => c.tiles.map((t) => t.id).join('|')
+  let guard = 0
+  while (previous && same(next) === same(previous) && guard < 8) {
+    seed = (seed + 7919) >>> 0
+    next = makeChallenge(seed, previous.targetIndex ?? 0)
+    guard++
+  }
+  return next
+}
+
+/** Did the visitor pick exactly the right tiles? No partial credit. */
 export function check(challenge, picked) {
   const want = challenge.answer
   const got = [...new Set(picked)].sort((a, b) => a - b)
@@ -75,9 +85,18 @@ export function check(challenge, picked) {
   return got.every((v, i) => v === want[i])
 }
 
-/** How many were right and how many were missed, for an honest explanation. */
+/** How many were right and how many were missed. */
 export function score(challenge, picked) {
   const got = new Set(picked)
   const right = challenge.answer.filter((s) => got.has(s)).length
   return { right, missed: challenge.answer.length - right, extra: [...got].filter((s) => !challenge.answer.includes(s)).length }
+}
+
+/** 'passed' waits on the reveal. 'entered' has gone through to Drive. */
+export function readGate(storage) {
+  try { return storage?.getItem(GATE_KEY) || '' } catch { return '' }
+}
+
+export function writeGate(storage, value) {
+  try { storage?.setItem(GATE_KEY, value) } catch { /* private mode: this tab only, and even that can refuse */ }
 }

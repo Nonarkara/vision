@@ -2,14 +2,15 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.16.8'
+import '../core/site.js?v=1.16.9'
 import { lang, count, onLang } from '../core/i18n.js'
-import { mountGate } from './captcha.js?v=1.16.8'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.16.8'
-import { drawWindshield } from '../drive/perspective.js?v=1.16.8'
-import { sightRange } from '../drive/perceive.js?v=1.16.8'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.16.8'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.16.8'
+import { mountGate } from './captcha.js?v=1.16.9'
+import { readGate, writeGate } from '../drive/captcha.js?v=1.16.9'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.16.9'
+import { drawWindshield } from '../drive/perspective.js?v=1.16.9'
+import { sightRange } from '../drive/perceive.js?v=1.16.9'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.16.9'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.16.9'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -19,9 +20,8 @@ const hg = hero.getContext('2d')
 const heroName = root.querySelector('[data-hero-name]')
 
 // ── The gate ──────────────────────────────────────────────────────────
-// Nothing is blocked: the room is behind the challenge, and the Skip button is
-// always there. Passing the challenge unlocks it early and teaches why it is
-// there at all.
+// Drive stays hidden until this tab has passed the frame check. Passing is
+// remembered for the session, after the reveal.
 const gateEl = document.querySelector('[data-gate]')
 const replay = gateEl?.querySelector('[data-gate-replay]')
 let through = false
@@ -33,25 +33,23 @@ function openRoom() {
   gateEl?.setAttribute('data-open', 'true')
   replay?.setAttribute('aria-expanded', 'false')
 }
-// The gate is a lesson, never a lock: if it fails to draw, the room opens.
+if (readGate(sessionStorage) === 'entered') openRoom()
 let gate = null
 try {
-  gate = mountGate(gateEl, { onPass: openRoom, lang, onLang })
+  gate = mountGate(gateEl, {
+    onEnter: () => { writeGate(sessionStorage, 'entered'); openRoom() },
+    lang,
+    onLang,
+    storage: sessionStorage,
+  })
 } catch {
-  openRoom()
+  /* a broken gate stays shut; it does not wave the visitor through */
 }
-gateEl?.querySelector('[data-gate-skip]')?.addEventListener('click', openRoom)
-// The gate collapses to a receipt once you are through. Reopening it does NOT
-// re-lock the room — the lesson has already been had, and taking the road away
-// again would be a punishment for looking back.
 replay?.addEventListener('click', () => {
   gateEl.removeAttribute('data-open')
   replay.setAttribute('aria-expanded', 'true')
   gate?.replay()
 })
-// Someone who arrived with the room already open (a deep link from a "try this"
-// experiment) should not meet a wall they did not ask for.
-if (new URLSearchParams(location.search).has('go')) openRoom()
 const cardsEl = root.querySelector('[data-cards]')
 const totalsEl = root.querySelector('[data-totals]')
 const focusEl = root.querySelector('[data-focus]')

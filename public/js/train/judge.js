@@ -9,10 +9,10 @@
 
 import { t, esc, n, count, pct, lang, onLang } from '../core/i18n.js'
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js'
-import { openCamera } from '../core/source.js?v=1.16.8'
-import { sleep } from '../core/site.js?v=1.16.8'
+import { openCamera } from '../core/source.js?v=1.16.9'
+import { sleep } from '../core/site.js?v=1.16.9'
 import { snapshot, shrink, embed } from './eye.js'
-import { GLYPHS, nameOf } from './store.js?v=1.16.8'
+import { GLYPHS, nameOf } from './store.js?v=1.16.9'
 
 export const JUDGE_COUNT = 24
 const PAUSE_MS = 700

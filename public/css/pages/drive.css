@@ -91,71 +91,71 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .try-go { min-height: 36px; margin: 6px 0 4px; padding: 0 12px; }
 
 /* ── The gate ────────────────────────────────────────────────────────── */
-/* A teaching device, not a security control. It has to stay a BAND: the room
-   itself must still be on the first screen, or the gate has eaten the thing it
-   was introducing. Budget is roughly 300 px — the track has to start under it.
-   The long explanation lives under the room, not above it. */
+/* A real check in front of Drive. The room is hidden until the visitor
+   passes, so this band can take the first screen. Nine photographs, then
+   the reveal, then the road. */
 .gate {
-  display: grid; gap: var(--gap);
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  padding: clamp(14px, 1.6vw, 22px) var(--gutter);
+  display: grid; gap: 14px;
+  justify-items: start;
+  padding: clamp(16px, 2vw, 28px) var(--gutter) 28px;
   background: var(--field); color: var(--field-text);
 }
-.gate-head h2 { font-size: var(--subtitle); line-height: 1.08; }
-.gate-head .lede { margin: 6px 0 0; max-width: 46ch; font-size: var(--micro); font-weight: 400; }
+.gate-head h2 { font-size: var(--subtitle); line-height: 1.08; margin: 0; }
+.gate-head .lede { margin: 8px 0 0; max-width: 58ch; }
 .gate .stem-label { color: var(--naples); margin-bottom: 6px; }
-.captcha { display: grid; gap: 8px; align-content: center; }
-/* The nine buttons sit ON the drawn squares rather than in a row beneath them.
-   It saves a strip of height, and it means you click the square you mean. */
-.captcha-pad { position: relative; width: min(58vw, 248px); }
+.captcha { display: grid; gap: 10px; align-content: start; max-width: 70ch; }
+.captcha-pad { position: relative; width: min(92vw, 420px); }
 .captcha-grid {
   position: relative; z-index: 0;
   width: 100%; aspect-ratio: 1;
-  background: var(--black); border: 0; display: block;
-  /* The nine buttons are the hit targets. A canvas on top swallows the click
-     and the squares look dead while Skip, which sits outside it, still works. */
+  background: var(--olive); border: 0; display: block;
   pointer-events: none;
 }
 .captcha-tiles {
   position: absolute; inset: 0; z-index: 2; display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(44px, 1fr));
+  grid-template-rows: repeat(3, minmax(44px, 1fr));
   gap: 2px;
 }
 .captcha-tiles .btn {
   position: relative; z-index: 1; pointer-events: auto;
-  min-height: 0; min-width: 0; padding: 0;
-  background: transparent; color: transparent; font-size: 0.6875rem;
+  min-height: 44px; min-width: 44px; padding: 0;
+  background: transparent; color: transparent; font-size: 0;
 }
-.captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); color: transparent; }
+.captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); }
 .captcha-tiles .btn[aria-pressed="true"] {
-  background: rgba(241, 90, 48, 0.3); color: var(--naples);
+  background: rgba(241, 90, 48, 0.28);
   outline: 3px solid var(--signal); outline-offset: -3px;
 }
-.captcha-ask { margin: 0; font-size: var(--micro); font-weight: 600; }
-.captcha .controls { background: transparent; gap: 2px; }
-.captcha .controls .btn { min-height: 36px; padding: 0 12px; }
-.gate-replay { display: none; margin-left: auto; }
-.gate-replay .btn { min-height: 34px; padding: 0 12px; }
+.captcha-ask { margin: 0; font-size: var(--body); font-weight: 600; }
+.captcha .controls { gap: 2px; }
+.captcha .controls .btn,
+.gate-reveal .btn,
+.gate-replay .btn { min-height: 44px; }
+.gate .btn { background: var(--black-2); color: var(--white); }
+.gate .btn.primary { background: var(--signal); color: var(--black); }
+.gate .btn:hover { background: var(--black); color: var(--white); }
+.gate .captcha-tiles .btn { background: transparent; color: transparent; }
+.gate .captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); color: transparent; }
+.gate .captcha-tiles .btn[aria-pressed="true"] { background: rgba(241, 90, 48, 0.28); color: transparent; }
+.gate-replay { display: none; }
 .captcha [data-captcha-state]:empty { display: none; }
-/* The machine's report card, once it has taken a fresh grid. */
 .gate-taught { margin: 6px 0 0; max-width: 78ch; color: var(--naples); }
-/* Once you are through, the gate stops being a wall and becomes a receipt.
-   It has done its job, and the room needs its pixels back: 370px of black band
-   sitting on top of a road you cannot see is the same defect as the essay was.
-   The headline stays — it is the line this page exists to make — and the
-   challenge stays one click away, because removing the only way back to it
-   would be a small theft of its own. */
-.gate[data-open="true"] { padding: 8px var(--gutter); align-items: center; }
+.gate-reveal { display: grid; gap: 12px; max-width: 62ch; }
+.gate-reveal p { margin: 0; }
+.gate[data-open="true"] {
+  padding: 8px var(--gutter);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
 .gate[data-open="true"] .captcha,
+.gate[data-open="true"] .gate-reveal,
 .gate[data-open="true"] .gate-head .lede { display: none; }
 .gate[data-open="true"] .gate-head h2 { font-size: var(--body); line-height: 1.2; }
 .gate[data-open="true"] .stem-label { display: none; }
 .gate[data-open="true"] .gate-replay { display: inline-flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
-/* The long-form story, now sitting under the room as an ordinary chapter. */
 .chapter.gate-note { background: var(--quiet); color: var(--quiet-text); }
 @media (max-width: 900px) {
-  .gate { grid-template-columns: 1fr; }
-  .captcha-pad { width: min(88vw, 320px); }
+  .gate[data-open="true"] { grid-template-columns: 1fr; }
+  .captcha-pad { width: min(92vw, 420px); }
 }
