@@ -147,11 +147,16 @@ function resetWorld() {
 
 // ── Cards: one per car, the text twin of the picture ─────────────────
 
+function L(th, en, zh) {
+  const l = lang()
+  return l === 'zh' ? zh : l === 'en' ? en : th
+}
+
 function buildCards() {
   cardsEl.innerHTML = world.cars.map((c) => `
     <button class="car-card" type="button" data-car="${c.id}" data-style="${c.styleName}">
       <span class="car-id num">${c.id}</span>
-      <span class="car-name"><span class="th" lang="th">${STYLE_NAME[c.styleName][0]} · วง ${c.route.id}</span><span class="en" lang="en">${STYLE_NAME[c.styleName][1]} · loop ${c.route.id}</span></span>
+      <span class="car-name"><span class="th" lang="th">${STYLE_NAME[c.styleName][0]} · วง ${c.route.id}</span><span class="en" lang="en">${STYLE_NAME[c.styleName][1]} · loop ${c.route.id}</span><span class="zh" lang="zh-Hans">${STYLE_NAME[c.styleName][2]} · 环线 ${c.route.id}</span></span>
       <span class="car-score num" data-score></span>
       <span class="car-say" data-say></span>
     </button>`).join('')
@@ -163,23 +168,31 @@ function syncCards() {
     const el = cardsEl.querySelector(`[data-car="${c.id}"]`)
     el.setAttribute('aria-pressed', String(c.id === selected))
     el.classList.toggle('is-crashed', c.frozen > 0)
+    const hit = c.wasHit ? L(` · ถูกชน ${c.wasHit}`, ` · hit by others ${c.wasHit}`, ` · 被撞 ${c.wasHit}`) : ''
     el.querySelector('[data-score]').textContent = l === 'en'
-      ? `${count(c.laps, 'lap')} · ${count(c.crashes, 'crash caused', 'crashes caused')} · ${count(c.hitPeople, 'person', 'people')} · ${count(c.hitDogs, 'dog hit', 'dogs hit')}${c.wasHit ? ` · hit by others ${c.wasHit}` : ''}`
-      : `${c.laps} รอบ · ก่อเหตุชน ${c.crashes} · ชนคน ${c.hitPeople} · ชนสุนัข ${c.hitDogs}${c.wasHit ? ` · ถูกชน ${c.wasHit}` : ''}`
+      ? `${count(c.laps, 'lap')} · ${count(c.crashes, 'crash caused', 'crashes caused')} · ${count(c.hitPeople, 'person', 'people')} · ${count(c.hitDogs, 'dog hit', 'dogs hit')}${hit}`
+      : l === 'zh'
+        ? `${c.laps} 圈 · 造成碰撞 ${c.crashes} · 撞到人 ${c.hitPeople} · 撞到狗 ${c.hitDogs}${hit}`
+        : `${c.laps} รอบ · ก่อเหตุชน ${c.crashes} · ชนคน ${c.hitPeople} · ชนสุนัข ${c.hitDogs}${hit}`
     el.querySelector('[data-say]').textContent = sayDecision(c, world, l)
   }
   const sum = (f) => world.cars.reduce((n, c) => n + f(c), 0)
   const mm = String(Math.floor(world.t / 60)).padStart(2, '0'), ss = String(Math.floor(world.t % 60)).padStart(2, '0')
+  const laps = sum((c) => c.laps), crashes = sum((c) => c.crashes), people = sum((c) => c.hitPeople), dogs = sum((c) => c.hitDogs)
   totalsEl.textContent = l === 'en'
-    ? `${mm}:${ss} · ${count(sum((c) => c.laps), 'lap')} · ${count(sum((c) => c.crashes), 'crash')} · ${count(sum((c) => c.hitPeople), 'person hit', 'people hit')} · ${count(sum((c) => c.hitDogs), 'dog hit', 'dogs hit')}`
-    : `${mm}:${ss} · ${sum((c) => c.laps)} รอบ · ชน ${sum((c) => c.crashes)} · ชนคน ${sum((c) => c.hitPeople)} · ชนสุนัข ${sum((c) => c.hitDogs)}`
+    ? `${mm}:${ss} · ${count(laps, 'lap')} · ${count(crashes, 'crash')} · ${count(people, 'person hit', 'people hit')} · ${count(dogs, 'dog hit', 'dogs hit')}`
+    : l === 'zh'
+      ? `${mm}:${ss} · ${laps} 圈 · 碰撞 ${crashes} · 撞到人 ${people} · 撞到狗 ${dogs}`
+      : `${mm}:${ss} · ${laps} รอบ · ชน ${crashes} · ชนคน ${people} · ชนสุนัข ${dogs}`
 }
 
 function syncFocus() {
   const c = world.cars[selected - 1], l = lang()
-  focusEl.querySelector('[data-focus-name]').textContent = l === 'en'
-    ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]} · ${speedKmh(c)} km/h`
-    : `รถคันที่ ${c.id} · ${STYLE_NAME[c.styleName][0]} · ${speedKmh(c)} กม./ชม.`
+  focusEl.querySelector('[data-focus-name]').textContent = L(
+    `รถคันที่ ${c.id} · ${STYLE_NAME[c.styleName][0]} · ${speedKmh(c)} กม./ชม.`,
+    `Car ${c.id} · ${STYLE_NAME[c.styleName][1]} · ${speedKmh(c)} km/h`,
+    `第 ${c.id} 辆车 · ${STYLE_NAME[c.styleName][2]} · ${speedKmh(c)} 公里/小时`,
+  )
   focusEl.querySelector('[data-focus-sees]').textContent = saySeen(c, l)
   const unnamed = sayUnnamed(c, world, l)
   const unnamedRow = focusEl.querySelector('[data-focus-unnamed-row]')
@@ -191,16 +204,19 @@ function syncFocus() {
   const blind = focusEl.querySelector('[data-blind]')
   blind.setAttribute('aria-pressed', String(c.blind))
   blind.innerHTML = c.blind
-    ? '<span class="th" lang="th">เปิดกล้องคืน</span><span class="en" lang="en">Uncover its camera</span>'
-    : '<span class="th" lang="th">ปิดกล้องคันนี้</span><span class="en" lang="en">Cover this car’s camera</span>'
+    ? '<span class="th" lang="th">เปิดกล้องคืน</span><span class="en" lang="en">Uncover its camera</span><span class="zh" lang="zh-Hans">重新打开摄像头</span>'
+    : '<span class="th" lang="th">ปิดกล้องคันนี้</span><span class="en" lang="en">Cover this car’s camera</span><span class="zh" lang="zh-Hans">盖住这辆车的摄像头</span>'
   cardsEl.querySelectorAll('[data-car]').forEach((el) => el.setAttribute('aria-pressed', String(Number(el.dataset.car) === selected)))
 }
 
 function syncHeroName() {
-  const c = world.cars[selected - 1], l = lang()
-  heroName.textContent = l === 'en'
-    ? `Car ${c.id} · ${speedKmh(c)} km/h · sees ${Math.round(sightRange(c, world.weather))} m`
-    : `รถคันที่ ${c.id} · ${speedKmh(c)} กม./ชม. · มองเห็น ${Math.round(sightRange(c, world.weather))} ม.`
+  const c = world.cars[selected - 1]
+  const range = Math.round(sightRange(c, world.weather))
+  heroName.textContent = L(
+    `รถคันที่ ${c.id} · ${speedKmh(c)} กม./ชม. · มองเห็น ${range} ม.`,
+    `Car ${c.id} · ${speedKmh(c)} km/h · sees ${range} m`,
+    `第 ${c.id} 辆车 · ${speedKmh(c)} 公里/小时 · 看见 ${range} 米`,
+  )
 }
 
 const dialog = document.querySelector('[data-driver-dialog]')
@@ -245,12 +261,16 @@ function paintDriver() {
   blitView(windshield, wg)
   if (now - driverTextAt < 250) return
   driverTextAt = now
-  const c = world.cars[selected - 1], en = lang() === 'en', d = c.decision
-  dialog.querySelector('[data-driver-title]').textContent = en ? `Car ${c.id} · ${STYLE_NAME[c.styleName][1]}` : `รถ ${c.id} · ${STYLE_NAME[c.styleName][0]}`
-  dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${en?'km/h':'กม./ชม.'} · ${en?'view':'มองเห็น'} ${Math.round(sightRange(c,world.weather))} m · ${({day:en?'Day':'กลางวัน',rain:en?'Rain':'ฝน',night:en?'Night':'กลางคืน',sun:en?'Sun glare':'แดดจ้า'})[world.weather]} ${playing?'':'⏸'}`
-  dialog.querySelector('[data-driver-action]').textContent=sayDecision(c,world,lang())
-  const gap=d.dist==null?(en?'No stopping obstacle selected':'ยังไม่มีอุปสรรคที่ต้องหยุด'):`${en?'Gap to obstacle':'ระยะถึงอุปสรรค'} ${d.dist.toFixed(1)} m`
-  dialog.querySelector('[data-driver-math]').textContent=`${gap} · ${en?'preferred gap':'ระยะที่ต้องการ'} ${(d.desiredGap??0).toFixed(1)} m · ${en?'speed change':'ปรับความเร็ว'} ${(d.acc*3.6).toFixed(1)} ${en?'km/h each second':'กม./ชม. ต่อวินาที'}\n${en?'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.':'คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด'}`
+  const c = world.cars[selected - 1], d = c.decision
+  const range = Math.round(sightRange(c, world.weather))
+  const sky = { day: ['กลางวัน', 'Day', '白天'], rain: ['ฝน', 'Rain', '雨'], night: ['กลางคืน', 'Night', '夜晚'], sun: ['แดดจ้า', 'Sun glare', '强光'] }[world.weather]
+  dialog.querySelector('[data-driver-title]').textContent = L(`รถ ${c.id} · ${STYLE_NAME[c.styleName][0]}`, `Car ${c.id} · ${STYLE_NAME[c.styleName][1]}`, `第 ${c.id} 辆车 · ${STYLE_NAME[c.styleName][2]}`)
+  dialog.querySelector('[data-driver-speed]').textContent = `${speedKmh(c)} ${L('กม./ชม.', 'km/h', '公里/小时')} · ${L('มองเห็น', 'view', '视野')} ${range} ${L('ม.', 'm', '米')} · ${L(...sky)} ${playing ? '' : '⏸'}`
+  dialog.querySelector('[data-driver-action]').textContent = sayDecision(c, world, lang())
+  const gap = d.dist == null
+    ? L('ยังไม่มีอุปสรรคที่ต้องหยุด', 'No stopping obstacle selected', '尚未选定需要停下的障碍')
+    : `${L('ระยะถึงอุปสรรค', 'Gap to obstacle', '与障碍的距离')} ${d.dist.toFixed(1)} ${L('ม.', 'm', '米')}`
+  dialog.querySelector('[data-driver-math]').textContent = `${gap} · ${L('ระยะที่ต้องการ', 'preferred gap', '期望间距')} ${(d.desiredGap ?? 0).toFixed(1)} ${L('ม.', 'm', '米')} · ${L('ปรับความเร็ว', 'speed change', '速度变化')} ${(d.acc * 3.6).toFixed(1)} ${L('กม./ชม. ต่อวินาที', 'km/h each second', '公里/小时每秒')}\n${L('คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด', 'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.', '速度由距离、接近速度和安全间距算出。最谨慎的刹车请求胜出。')}`
 }
 
 // ── The loop ──────────────────────────────────────────────────────────

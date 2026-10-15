@@ -76,26 +76,26 @@ export const STREET_ID_BASE = 50000
  * drawing and the physics cannot drift apart.
  */
 export const ITEMS = {
-  lamp: { label: ['เสาไฟ', 'street lamp'], coco: null, dims: { L: 0.3, W: 0.3, H: STREET.lampHeight }, detectable: false },
-  pole: { label: ['เสาไฟฟ้า', 'utility pole'], coco: null, dims: { L: 0.24, W: 0.24, H: STREET.poleHeight }, detectable: false },
-  building: { label: ['อาคาร', 'building'], coco: null, dims: { L: 12, W: 9, H: 8 }, detectable: false },
-  car: { label: ['รถยนต์', 'car'], coco: 3, dims: { L: 4.4, W: 1.8, H: 1.5 }, detectable: true },
-  truck: { label: ['รถบรรทุก', 'truck'], coco: 8, dims: { L: 9.6, W: 2.5, H: 3.2 }, detectable: true },
-  bus: { label: ['รถบัส', 'bus'], coco: 6, dims: { L: 11.95, W: 2.5, H: 3.3 }, detectable: true },
-  person: { label: ['คน', 'person'], coco: 1, dims: STREET.person, detectable: true },
-  dog: { label: ['สุนัข', 'dog'], coco: 18, dims: STREET.dog, detectable: true },
-  bicycle: { label: ['จักรยาน', 'bicycle'], coco: 2, dims: STREET.bicycle, detectable: true },
-  motorcycle: { label: ['รถจักรยานยนต์', 'motorcycle'], coco: 4, dims: STREET.motorcycle, detectable: true },
-  hydrant: { label: ['หัวดับเพลิง', 'fire hydrant'], coco: 11, dims: STREET.hydrant, detectable: true },
-  bench: { label: ['ม้านั่ง', 'bench'], coco: 15, dims: STREET.bench, detectable: true },
-  planter: { label: ['ต้นไม้ในกระถาง', 'potted plant'], coco: 64, dims: STREET.planter, detectable: true },
-  stopSign: { label: ['ป้ายหยุด', 'stop sign'], coco: 13, dims: STREET.stopSign, detectable: true },
-  light: { label: ['ไฟจราจร', 'traffic light'], coco: 10, dims: { L: 0.4, W: 0.4, H: 3.3 }, detectable: true },
-  pedSignal: { label: ['ไฟคนข้าม', 'pedestrian signal'], coco: null, dims: STREET.pedSignal, detectable: false },
+  lamp: { label: ['เสาไฟ', 'street lamp', '路灯'], coco: null, dims: { L: 0.3, W: 0.3, H: STREET.lampHeight }, detectable: false },
+  pole: { label: ['เสาไฟฟ้า', 'utility pole', '电线杆'], coco: null, dims: { L: 0.24, W: 0.24, H: STREET.poleHeight }, detectable: false },
+  building: { label: ['อาคาร', 'building', '建筑'], coco: null, dims: { L: 12, W: 9, H: 8 }, detectable: false },
+  car: { label: ['รถยนต์', 'car', '汽车'], coco: 3, dims: { L: 4.4, W: 1.8, H: 1.5 }, detectable: true },
+  truck: { label: ['รถบรรทุก', 'truck', '卡车'], coco: 8, dims: { L: 9.6, W: 2.5, H: 3.2 }, detectable: true },
+  bus: { label: ['รถบัส', 'bus', '公交车'], coco: 6, dims: { L: 11.95, W: 2.5, H: 3.3 }, detectable: true },
+  person: { label: ['คน', 'person', '人'], coco: 1, dims: STREET.person, detectable: true },
+  dog: { label: ['สุนัข', 'dog', '狗'], coco: 18, dims: STREET.dog, detectable: true },
+  bicycle: { label: ['จักรยาน', 'bicycle', '自行车'], coco: 2, dims: STREET.bicycle, detectable: true },
+  motorcycle: { label: ['รถจักรยานยนต์', 'motorcycle', '摩托车'], coco: 4, dims: STREET.motorcycle, detectable: true },
+  hydrant: { label: ['หัวดับเพลิง', 'fire hydrant', '消防栓'], coco: 11, dims: STREET.hydrant, detectable: true },
+  bench: { label: ['ม้านั่ง', 'bench', '长椅'], coco: 15, dims: STREET.bench, detectable: true },
+  planter: { label: ['ต้นไม้ในกระถาง', 'potted plant', '盆栽'], coco: 64, dims: STREET.planter, detectable: true },
+  stopSign: { label: ['ป้ายหยุด', 'stop sign', '停车标志'], coco: 13, dims: STREET.stopSign, detectable: true },
+  light: { label: ['ไฟจราจร', 'traffic light', '红绿灯'], coco: 10, dims: { L: 0.4, W: 0.4, H: 3.3 }, detectable: true },
+  pedSignal: { label: ['ไฟคนข้าม', 'pedestrian signal', '行人信号灯'], coco: null, dims: STREET.pedSignal, detectable: false },
   // Never placed, never detected — only ever the wrong name for a dog. The
   // question mark is the camera's own uncertainty, not part of the class name,
   // so it is the one label here that is not byte-identical to labels.js.
-  cat: { label: ['แมว?', 'cat?'], coco: 17, dims: STREET.dog, detectable: false },
+  cat: { label: ['แมว?', 'cat?', '猫?'], coco: 17, dims: STREET.dog, detectable: false },
 }
 
 /** A point `lat` metres to the left of the centreline sample `p`. */

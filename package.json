@@ -2,7 +2,7 @@
   "name": "vision",
   "version": "1.17.0",
   "private": true,
-  "description": "vision.nonarkara.org \u2014 a public classroom for computer vision on Thailand's open cameras. TH/EN.",
+  "description": "vision.nonarkara.org \u2014 a public classroom for computer vision on Thailand's open cameras. TH/EN/ZH.",
   "type": "module",
   "engines": {
     "node": ">=22"

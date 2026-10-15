@@ -26,7 +26,7 @@ export function palette() {
 /** The localised name a detection label prints. Keys come from ITEMS in street.js. */
 export function labelName(label, lang) {
   const row = ITEMS[label]
-  return row ? row.label[lang === 'en' ? 1 : 0] : label
+  return row ? row.label[lang === 'en' ? 1 : lang === 'zh' ? 2 : 0] : label
 }
 
 /** Size the canvas to its box (sharp on high-DPI screens); returns metres → pixels. */
