@@ -8,10 +8,15 @@
 
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createWorld, run } from '../public/js/drive/sim.js'
 import { buildStreet, detectable, unnameable, ITEMS, STREET_ID_BASE, STREET } from '../public/js/drive/street.js'
 import { buildTrack, LANE, at } from '../public/js/drive/track.js'
 import { makeChallenge, check, score, TARGETS, TILES } from '../public/js/drive/captcha.js'
+import { sayDecision, saySeen, STYLE_NAME } from '../public/js/drive/say.js'
+import { labelName } from '../public/js/drive/draw.js'
 import { COCO } from '../public/js/ml/labels.js'
 
 const layouts = ['two', 'four', 'practice', 'city']
@@ -180,6 +185,32 @@ test('a wrong answer explains itself without scolding anyone', () => {
   assert.equal(all.right, c.answer.length)
   assert.equal(all.missed, 0)
   assert.equal(all.extra, TILES - c.answer.length)
+})
+
+test('Drive cards, totals and focus speak Simplified Chinese, not Thai, when lang is zh', () => {
+  const src = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../public/js/pages/drive.js'), 'utf8')
+  for (const line of ['造成碰撞', '撞到狗', '第 ${c.id} 辆车', '环线', '盖住这辆车的摄像头']) {
+    assert.match(src, new RegExp(line.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')))
+  }
+  assert.equal(STYLE_NAME.careful[2], '谨慎')
+  assert.equal(labelName('person', 'zh'), '人')
+  assert.equal(labelName('person', 'th'), 'คน')
+  const car = {
+    style: { range: 40 },
+    blind: false,
+    x: 0,
+    y: 0,
+    tracks: new Map([[1, { label: 'car', conf: 0.9, obj: { x: 12, y: 0 } }]]),
+    decision: { reason: 'person_in_lane', action: 'braking_hard', dist: 12.4, label: 'person' },
+  }
+  const zh = sayDecision(car, { weather: 'day' }, 'zh')
+  assert.match(zh, /急刹车/)
+  assert.match(zh, /车道前方有人/)
+  assert.match(zh, /米/)
+  assert.doesNotMatch(zh, /[ก-๙]/)
+  assert.match(sayDecision(car, { weather: 'day' }, 'th'), /เบรกแรง/)
+  assert.match(saySeen(car, 'zh'), /汽车/)
+  assert.match(saySeen({ ...car, blind: true }, 'zh'), /摄像头被盖住/)
 })
 
 test('every challenge asks about a class COCO really has', () => {
