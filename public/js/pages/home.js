@@ -1,13 +1,14 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.16.2'
+import '../core/site.js?v=1.16.3'
 import { t, lang, n, count, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.16.2'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.16.3'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
-import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.16.2'
-import { onSpotted } from '../cv/spotted.js?v=1.16.2'
+import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.16.3'
+import { onSpotted } from '../cv/spotted.js?v=1.16.3'
 import { cocoName } from '../ml/labels.js'
+import { detectorFailureSentence } from '../ml/failure.js'
 
 const canvas = document.querySelector('[data-eye]')
 const stateEl = document.querySelector('[data-eye-state]')
@@ -53,7 +54,7 @@ function say() {
   // down, offering a slider that changes nothing is worse than offering nothing.
   if (lens === 'objects') {
     showLine(!lensState.error)
-    if (lensState.error) extra = `\n${t('เปิดการตรวจจับไม่ได้ ลองเลือกสิ่งของอีกครั้ง หรือใช้เลนส์อื่น', 'Detection is unavailable. Try Objects again, or use another lens.')}`
+    if (lensState.error) extra = `\n${t('เปิดการตรวจจับไม่ได้ ', 'Detection could not start. ')}${detectorFailureSentence(lensState.error, t)}`
     else if (modelNote) extra = `\n${modelNote}`
     else if (lensState.detectedAt) {
       const all = lensState.detections
