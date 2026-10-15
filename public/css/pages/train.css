@@ -180,7 +180,8 @@ a.training-choice { text-decoration: none; }
 .lesson-samples { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .lesson-samples:empty { display:none; }
 .lesson-samples .micro { font-size:.75rem; }
-.lesson-samples .btn { min-height:36px; white-space:normal; padding:4px; font-size:.75rem; width:100%; }
+.lesson-samples .btn { min-height:44px; white-space:normal; padding:8px; font-size:.75rem; width:100%; }
+.lesson-credit { margin: 0; padding: 8px 12px 0; max-width: 70ch; }
 .lesson-sample-strip { display:flex; gap:3px; padding:6px 0; }
 .lesson-sample-strip canvas { width:calc((100% - 6px)/3); height:auto; }
 .lesson-groups { display:grid; grid-template-columns:1fr 1fr; gap:8px; }

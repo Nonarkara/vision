@@ -23,19 +23,19 @@
 
   <section class="gate" data-gate aria-labelledby="gate-h">
     <div class="gate-head">
-      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span></span>
-      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span></h2>
-      <p class="lede"><span class="th" lang="th">คุณทำสิ่งนี้มาทั้งชีวิตโดยไม่รู้ตัว ลองก่อน แล้วค่อยเข้าห้องขับรถ</span><span class="en" lang="en">You have been doing this your whole life without knowing. Try, then drive.</span></p>
+      <span class="eyebrow stem-label"><span class="th" lang="th">ก่อนเข้าห้อง 05</span><span class="en" lang="en">Before room 05</span><span class="zh" lang="zh-Hans">进入 05 室之前</span></span>
+      <h2 id="gate-h"><span class="th" lang="th">คุณเคยฝึกเครื่องให้เรามากกว่าที่คิด</span><span class="en" lang="en">You have been training a machine for years</span><span class="zh" lang="zh-Hans">你已经帮机器训练了很多年</span></h2>
+      <p class="lede"><span class="th" lang="th">ก่อนเข้าห้อง ต้องเลือกช่องภาพจากกล้องจริงให้ครบ ผิดแล้วได้ตารางใหม่ พอผ่าน จะมีคำอธิบายสั้น ๆ แล้วจึงเข้าได้</span><span class="en" lang="en">Before the room, select every real-camera tile the question asks for. A miss deals a new grid. After you pass, a short note explains what you just did, and then the road opens.</span><span class="zh" lang="zh-Hans">进入房间之前，请选出题目要求的每一格真实摄像头画面。选错会换上一组新格子。通过之后会有一段简短说明，然后道路才会打开。</span></p>
       <p class="micro gate-taught" data-gate-taught hidden role="status"></p>
     </div>
     <div class="gate-replay">
-      <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span></button>
-      <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span></button>
+      <button class="btn" type="button" data-gate-replay aria-expanded="false"><span class="th" lang="th">ทำแบบทดสอบใหม่</span><span class="en" lang="en">Try a new challenge</span><span class="zh" lang="zh-Hans">再做一题</span></button>
+      <button class="btn" type="button" data-gate-teach hidden><span class="th" lang="th">สอนเครื่องด้วยฉลากของฉัน</span><span class="en" lang="en">Teach the machine my labels</span><span class="zh" lang="zh-Hans">用我的标签教这台机器</span></button>
     </div>
-    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares">
+    <div class="captcha" data-captcha role="group" data-aria-th="เลือกช่องภาพ" data-aria-en="Select squares" data-aria-zh="选择格子">
       <p class="captcha-ask" data-captcha-target></p>
       <div class="captcha-pad">
-        <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for."></canvas>
+        <canvas class="captcha-grid" data-captcha-grid role="img" data-aria-th="ช่องภาพเก้าช่อง กดที่ช่องที่มีสิ่งที่ถามหา" data-aria-en="A nine-square image grid. Select the squares that contain what the question asks for." data-aria-zh="九格画面。选出含有题目所问事物的格子。"></canvas>
         <div class="captcha-tiles">
           <button class="btn tile-pick" type="button" data-tile="0" aria-pressed="false">1</button>
           <button class="btn tile-pick" type="button" data-tile="1" aria-pressed="false">2</button>
@@ -49,11 +49,15 @@
         </div>
       </div>
       <div class="controls pad">
-        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span></button>
-        <button class="btn" data-captcha-reset><span class="th" lang="th">เริ่มใหม่</span><span class="en" lang="en">Start over</span></button>
-        <button class="btn" data-gate-skip><span class="th" lang="th">ข้ามไปก่อน — อยากเข้าห้องเลย</span><span class="en" lang="en">Skip — take me straight in</span></button>
+        <button class="btn primary" data-captcha-pass><span class="th" lang="th">ตรวจสอบ</span><span class="en" lang="en">Check</span><span class="zh" lang="zh-Hans">检查</span></button>
+        <button class="btn" data-captcha-reset><span class="th" lang="th">ล้างที่เลือก</span><span class="en" lang="en">Clear selection</span><span class="zh" lang="zh-Hans">清除所选</span></button>
       </div>
       <p class="micro warn-line" data-captcha-state role="status" aria-live="polite"></p>
+      <p class="micro"><span class="th" lang="th">ช่องภาพตัดจากกล้องสาธารณะของมูลนิธิ iTIC ที่แคตตาล็อกนี้เปิดอยู่แล้ว: ถนนพระราม 4, รัชดาภิเษก–วงศ์สว่าง, บิ๊กซีวงศ์สว่าง, ประชานุกูล และบางนา–ตราด คำตอบคือป้ายที่ตรวจกับภาพนั้น ไม่ใช่ภาพวาด</span><span class="en" lang="en">Tiles are crops of public iTIC cameras this catalogue already plays: Rama IV, Ratchadaphisek–Wongsawang, Big C Wongsawang, Prachanukul and Bang Na–Trat. The answer is a label checked against that frame, not a drawing.</span><span class="zh" lang="zh-Hans">这些格子裁自本目录已在播放的 iTIC 公共摄像头：拉玛四路、拉差达披色–翁沙旺、Big C 翁沙旺、巴差努功，以及邦纳–达叻。答案是对照该画面核对过的标签，不是图画。</span></p>
+    </div>
+    <div class="gate-reveal" data-gate-reveal hidden>
+      <p><span class="th" lang="th">สิ่งที่คุณเพิ่งทำคือการติดป้ายแบบมีผู้สอน คนดูภาพจากกล้องจริง แล้วบอกว่าช่องไหนมีรถยนต์ รถจักรยานยนต์ หรือคน งานนี้คือวิธีที่คนสร้างข้อมูลสอนโมเดลมองเห็นของรถขับเอง และเป็นงานเดียวกับที่ reCAPTCHA ให้คนทำตอนพิสูจน์ว่าไม่ใช่หุ่นยนต์</span><span class="en" lang="en">What you just did is supervised labelling. You looked at real camera frames and said which tiles contain a car, a motorbike, or a person. That is how people build the training sets behind self-driving vision, and it is the same job reCAPTCHA gave people while they proved they were not a robot.</span><span class="zh" lang="zh-Hans">你刚才做的就是有监督标注。你看了真实摄像头画面，并指出哪些格子里有汽车、摩托车或人。人们就是这样为自动驾驶的视觉模型制作训练集的，这也是 reCAPTCHA 让人在证明自己不是机器人时做的同一件事。</span></p>
+      <button class="btn primary" type="button" data-gate-enter><span class="th" lang="th">เข้าห้องขับ</span><span class="en" lang="en">Enter Drive</span><span class="zh" lang="zh-Hans">进入驾驶</span></button>
     </div>
   </section>
 
@@ -152,7 +156,7 @@
       <p><span class="th" lang="th">เมื่อปี 2007 หลุยส์ ฟอน อาน์ (Luis von Ahn) ที่มหาวิทยาลัยคาร์เนกีเมลลอนทำ reCAPTCHA เขาคิดว่า ๆ ถ้าคนต้องพิสูจน์ว่าตัวเองเป็นมนุษย์อยู่แล้ว ก็ให้เขาช่วยอ่านหนังสือที่คอมพิวเตอร์อ่านไม่ออกไปด้วย ต่อมาในปี 2012 เขาสลับมาใช้ภาพถนนจาก Street View แทน คนที่กด “ฉันไม่ใช่โรงหุ่นยนต์” จึงได้กลายเป็นผู้ติดป้ายภาพถนนให้กูเกิลโดยไม่รู้ตัว Google เขียนไว้เองว่าทุกครั้งที่แก้ CAPTCHAs “ช่วยทำดิจิทัลไซซ์ตัวอักษร ทำภาพและสร้างชุดข้อมูลสำหรับการเรียนรู้ของเครื่อง”</span><span class="en" lang="en">In 2007, Luis von Ahn at Carnegie Mellon had an idea for reCAPTCHA: if you are going to make someone prove they are human, make them read a word the computer cannot, while they are at it. By 2012 it had switched to Street View photographs, so that clicking “I'm not a robot” also produced human-labelled images of streets. Google puts it plainly: every solved CAPTCHA “helps digitize text, annotate images, and build machine learning datasets”.</span></p>
       <p><span class="th" lang="th">สองข้อที่เราไม่อยากพูดเกินจริง: ป้ายที่ได้จากการท้าทายเหล่านั้นฝึกโมเดลของกูเกิล ไม่ใช่ของเว็บนี้ แต่ตอนนี้เรื่องนั้นจบครบในหน้านี้แล้ว ในขนาดของของเล่น: เมื่อคุณผ่าน ปุ่ม “สอนเครื่อง” จะเอาฉลากเก้าช่องที่คุณเพิ่งทำ ไปฝึกตัวเรียนรู้เล็ก ๆ ในแท็บนี้ — ตารางความสว่าง 8×8 กับตัวกรองสีสามสีที่คนเลือกให้มัน — แล้วให้มันทำแบบทดสอบชุดใหม่ที่ไม่เคยเห็นทันที คะแนนที่ได้คือขนาดจริงของฉลากเก้าช่อง ส่วนตัวเลขของ reCAPTCHA มาจากคนแก้วันละหลายล้านครั้ง ส่วนตัวที่รันในเบราว์เซอร์ของคุณคือ SSDLite บน MobileNetV2 ที่ฝึกด้วย COCO และ ImageNet ซึ่งก็มาจากคนเช่นกัน แต่คนที่ทำงานนั้นได้ค่าจ้างและใช้เวลาเป็นปี ๆ และวันที่เครื่องผ่านการท้าทายนั้นได้จริงก็มีบันทึกไว้: Goodfellow และคณะ (2014) อ่าน CAPTCHAs แบบบิดเบือนที่ยากที่สุดได้ 99.8% ขณะที่คนทำได้ 33%</span><span class="en" lang="en">Two limits we will not paper over. First: those challenge labels trained Google's models, not this site's — until this page learned to finish that story at toy scale. When you pass, the “Teach the machine” button hands your nine labels to a tiny learner inside this tab — an 8×8 grid of brightness plus three colour filters a human chose for it — and it immediately takes a grid it has never seen. Its score is the honest size of nine labels; reCAPTCHA's numbers came from millions of people solving one every day. The detector running in your browser is SSDLite on MobileNetV2, trained on COCO and ImageNet — also human-labelled, but by people who were paid, over years. And the moment the machine passed the test is on the record: Goodfellow and colleagues (2014) read the hardest distorted-text CAPTCHAs at 99.8%, while people managed 33%. That is why the challenges had to change shape each time.</span></p>
       <p class="micro"><span class="th" lang="th">แหล่งอ้างอิง: <a href="https://www.google.com/recaptcha/intro/">Google reCAPTCHA — คำอธิบายของกูเกิลเอง</a> · von Ahn และคณะ (2008) <i>reCAPTCHA: Human-assisted OCR</i> · Goodfellow และคณะ (2014) <i>Multi-digit Number Recognition from Street View Imagery</i> · Lin และคณะ (2014) <i>Microsoft COCO</i></span><span class="en" lang="en">Sources: <a href="https://www.google.com/recaptcha/intro/">Google's own description of reCAPTCHA</a> · von Ahn et al. (2008), reCAPTCHA: Human-assisted character recognition · Goodfellow et al. (2014), Multi-digit Number Recognition from Street View Imagery · Lin et al. (2014), Microsoft COCO.</span></p>
-      <p class="micro"><span class="th" lang="th">ข้อสำคัญด้านการเข้าถึง: ปุ่ม “ข้าม” ใช้ได้เสมอ ไม่มีตัวจับเวลา และทุกช่องเลือกได้ด้วยแป้นพิมพ์ ถ้าคุณใช้โปรแกรมอ่านหน้าจอหรือไม่สะดวกกับภาพ ให้ข้ามไปได้เลย — ห้องข้างบนไม่ได้มีกุญแจที่คุณต้องผ่าน</span><span class="en" lang="en">On access: the Skip button is always there, there is no timer, and every square is reachable by keyboard. If you use a screen reader, or pictures are not how you take this in, skip it — the room above does not come with a key.</span></p>
+      <p class="micro"><span class="th" lang="th">การเข้าถึง: ไม่มีตัวจับเวลา ช่องทั้งเก้าเป็นปุ่ม กดด้วยแป้นพิมพ์ได้ และมีตัวเลข 1–9 ผ่านครั้งหนึ่งจำไว้ในเซสชันนี้ ไม่ต้องทำซ้ำจนกว่าจะปิดแท็บ</span><span class="en" lang="en">On access: there is no timer. All nine squares are buttons, reachable from the keyboard, and numbered 1–9. One pass is remembered for this session, so you are not asked again until the tab closes.</span><span class="zh" lang="zh-Hans">无障碍：没有计时。九个格子都是按钮，可用键盘到达，并标有 1–9。通过一次会在本次会话中记住，关闭标签页之前不会再问。</span></p>
     </div>
   </section>
 

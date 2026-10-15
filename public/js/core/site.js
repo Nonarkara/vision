@@ -1,11 +1,11 @@
-// Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
+// Shared page behaviour: the language switch and one toast. Imported by every page.
 
-import { lang, setLang, onLang, t } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.16.8'
-import { konamiStep } from './konami.js?v=1.16.8'
+import { lang, setLang, nextLang, onLang, t } from './i18n.js'
+import { initFullscreen } from './fullscreen.js?v=1.16.9'
+import { konamiStep } from './konami.js?v=1.16.9'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
-  btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))
+  btn.addEventListener('click', () => setLang(nextLang(lang())))
 }
 
 // Accessible names are read aloud, not shown, so they need both languages too.
@@ -13,9 +13,9 @@ for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
 // now and repainted on every switch — a screen-reader user switching to Thai
 // should not keep hearing English.
 function paintAria() {
-  const key = lang() === 'en' ? 'ariaEn' : 'ariaTh'
+  const l = lang()
   for (const el of document.querySelectorAll('[data-aria-th]')) {
-    const text = el.dataset[key]
+    const text = l === 'zh' ? (el.dataset.ariaZh || el.dataset.ariaEn) : l === 'en' ? el.dataset.ariaEn : el.dataset.ariaTh
     if (text) el.setAttribute('aria-label', text)
   }
 }

@@ -1,21 +1,33 @@
-// Two languages, one argument. Static prose carries both languages in the
-// markup and CSS shows one; dynamic text asks t() at render time and
-// re-renders on 'langchange'.
+// Three languages. Static prose carries Thai, English and, where the line is
+// new, Simplified Chinese; CSS shows one. Untranslated English stays visible
+// in Chinese mode when no Chinese span follows it. Dynamic text asks t() at
+// render time and re-renders on 'langchange'.
 
 const KEY = 'vision_lang_v1'
+const LANGS = ['th', 'en', 'zh']
 
 export function lang() {
-  return document.documentElement.dataset.lang === 'en' ? 'en' : 'th'
+  const l = document.documentElement.dataset.lang
+  return LANGS.includes(l) ? l : 'th'
 }
 
-export function t(th, en) {
-  return lang() === 'en' ? en : th
+export function t(th, en, zh = en) {
+  const l = lang()
+  if (l === 'en') return en
+  if (l === 'zh') return zh
+  return th
+}
+
+/** The language button walks Thai → English → Simplified Chinese. */
+export function nextLang(current) {
+  const i = LANGS.indexOf(current)
+  return LANGS[i < 0 ? 0 : (i + 1) % LANGS.length]
 }
 
 export function setLang(next) {
-  const l = next === 'en' ? 'en' : 'th'
+  const l = LANGS.includes(next) ? next : 'th'
   document.documentElement.dataset.lang = l
-  document.documentElement.lang = l
+  document.documentElement.lang = l === 'zh' ? 'zh-Hans' : l
   try { localStorage.setItem(KEY, l) } catch { /* private mode: choice lasts this page only */ }
   document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: l } }))
 }
@@ -29,12 +41,14 @@ export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ESC[c])
 }
 
-/** Both languages as markup, so a language switch needs no re-render. */
-export function bi(th, en) {
-  return `<span class="th" lang="th">${esc(th)}</span><span class="en" lang="en">${esc(en)}</span>`
+/** Both languages as markup, so a language switch needs no re-render.
+ *  A third argument adds Simplified Chinese after the English span. */
+export function bi(th, en, zh) {
+  const zhSpan = zh == null ? '' : `<span class="zh" lang="zh-Hans">${esc(zh)}</span>`
+  return `<span class="th" lang="th">${esc(th)}</span><span class="en" lang="en">${esc(en)}</span>${zhSpan}`
 }
 
-const nf = { th: new Intl.NumberFormat('th-TH'), en: new Intl.NumberFormat('en-GB') }
+const nf = { th: new Intl.NumberFormat('th-TH'), en: new Intl.NumberFormat('en-GB'), zh: new Intl.NumberFormat('zh-CN') }
 export function n(x) {
   return nf[lang()].format(x)
 }
