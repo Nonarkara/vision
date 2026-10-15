@@ -40,6 +40,7 @@ export const PAGES = {
   '/gesture': 'gesture',
   '/drive': 'drive',
   '/focus': 'focus',
+  '/reconstruct': 'reconstruct',
   '/games': 'games',
   '/everyday': 'everyday',
   '/colour': 'colour',
@@ -65,6 +66,8 @@ export const PAGES = {
  * The page's Content-Security-Policy. Camera video is the only third-party
  * traffic a page makes, and only to the hosts the catalogue calls `video`.
  * Everything else — models, fonts, scripts — is served from here.
+ * The one framed page is the Instagram reel on /reconstruct. script-src stays
+ * closed, so Instagram's embed script is never added to our own pages.
  */
 export const CSP = [
   "default-src 'self'",
@@ -75,7 +78,7 @@ export const CSP = [
   "connect-src 'self' https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com",
   "worker-src 'self' blob:",
   "font-src 'self'",
-  "frame-src 'none'",
+  "frame-src https://www.instagram.com https://instagram.com",
   "object-src 'none'",
   "base-uri 'none'",
   "form-action 'self'",

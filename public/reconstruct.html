@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/reconstruct.css?v={{v}}">
+<title>Reconstruct: many pictures, one shape · หลายภาพ รูปเดียว — Vision</title>
+<meta name="description" content="Structure-from-Motion in plain language: find features, match them, estimate cameras and triangulate, then refine. An on-device head cloud from face landmarks. Nothing is uploaded.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+<div class="recon" data-reconstruct>
+
+  <header class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">สร้างภาพสามมิติ</span><span class="en" lang="en">Reconstruct</span><span class="zh" lang="zh">重建</span></span>
+      <h1><span class="th" lang="th">หลายภาพ<br>รูปเดียว</span><span class="en" lang="en">Many pictures,<br>one shape</span><span class="zh" lang="zh">许多张照片，<br>一个形状</span></h1>
+    </div>
+    <div>
+      <p class="lede th" lang="th">โดรนบินรอบปราสาทหนึ่งรอบ แล้วกลับมาพร้อมรูปทรง โปรแกรมที่สร้างรูปทรงนั้นชื่อ COLMAP มันไม่ได้เรียนจำใบหน้า มันหามุม ตกลงว่ามุมไหนคือที่เดียวกัน หาว่ากล้องเคยอยู่ตรงไหน แล้วขยับทั้งหมดจนมันเข้ากัน ห้องนี้อธิบายสี่ขั้นนั้น แสดงรีลที่เป็นตัวอย่าง และให้คุณสะสมแบบจำลองศีรษะเล็ก ๆ บนเครื่องนี้ ภาพไม่ถูกส่งออกไป</p>
+      <p class="lede en" lang="en">A drone flew once around a castle and came home with a shape. The program that built it is COLMAP. It did not learn a face. It found corners, agreed which corners were the same place, worked out where the camera had been, and nudged all of that until it held together. This room walks those four steps, shows the reel they come from, and lets you grow a small head model on this device. The pictures stay here.</p>
+      <p class="lede zh" lang="zh">一架无人机绕城堡飞了一圈，带回一个形状。做出这个形状的程序叫 COLMAP。它没有在学习一张脸。它找出角落，认定哪些角落是同一个地方，算出相机当时在哪里，再把这些一起挪到能对上为止。这个房间讲这四步，放出那段示例短片，并让你在这台设备上长出一个小的头部模型。画面留在这里。</p>
+      <div class="copy-switch" role="group" data-copy-switch data-aria-th="ภาษาของห้องนี้" data-aria-en="Language for this room" data-aria-zh="本页语言">
+        <button type="button" data-copy-lang="th" lang="th" aria-pressed="false">ไทย</button>
+        <button type="button" data-copy-lang="en" lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-copy-lang="zh" lang="zh" aria-pressed="false">中文</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="recon-toc" data-aria-th="สารบัญห้องนี้" data-aria-en="On this page">
+    <a href="#steps"><span class="num">01</span> <span class="th" lang="th">สี่ขั้น</span><span class="en" lang="en">Four steps</span><span class="zh" lang="zh">四步</span></a>
+    <a href="#after"><span class="num">02</span> <span class="th" lang="th">หลังจากจุดกระจัดกระจาย</span><span class="en" lang="en">After the sparse cloud</span><span class="zh" lang="zh">稀疏点之后</span></a>
+    <a href="#basics"><span class="num">03</span> <span class="th" lang="th">ความคิดพื้นฐาน</span><span class="en" lang="en">The basic idea</span><span class="zh" lang="zh">基本想法</span></a>
+    <a href="#reel"><span class="num">04</span> <span class="th" lang="th">รีล</span><span class="en" lang="en">The reel</span><span class="zh" lang="zh">短片</span></a>
+    <a href="#try"><span class="num">05</span> <span class="th" lang="th">ลองบนเครื่องนี้</span><span class="en" lang="en">Try it here</span><span class="zh" lang="zh">在这台设备上试</span></a>
+    <a href="#credits"><span class="num">06</span> <span class="th" lang="th">เครดิต</span><span class="en" lang="en">Credits</span><span class="zh" lang="zh">署名</span></a>
+  </nav>
+
+  <section class="chapter" id="steps" aria-labelledby="steps-h">
+    <header>
+      <span class="chapter-no">01</span>
+      <h2 id="steps-h"><span class="th" lang="th">โครงสร้างจากการเคลื่อนที่</span><span class="en" lang="en">Structure from motion</span><span class="zh" lang="zh">从运动恢复结构</span></h2>
+    </header>
+    <div class="chapter-body">
+      <ol class="steps" data-aria-th="สี่ขั้นของ Structure-from-Motion" data-aria-en="The four Structure-from-Motion steps">
+        <li><strong><span class="th" lang="th">หาจุดเด่น</span><span class="en" lang="en">Find features</span><span class="zh" lang="zh">找出特征</span></strong><br><span class="th" lang="th">มุมและขอบที่ยังจำได้เมื่อกล้องขยับ</span><span class="en" lang="en">Corners and edges you can find again after the camera moves</span><span class="zh" lang="zh">相机移动后仍能再找到的角和边</span></li>
+        <li><strong><span class="th" lang="th">จับคู่ข้ามภาพ</span><span class="en" lang="en">Match across views</span><span class="zh" lang="zh">跨视图匹配</span></strong><br><span class="th" lang="th">จุดเดียวกันในคนละเฟรม คู่ที่เรขาคณิตไม่ยอมรับคือคู่ผิด</span><span class="en" lang="en">The same place in two frames. Geometry throws out the rest</span><span class="zh" lang="zh">同一处出现在两帧里。几何关系淘汰其余配对</span></li>
+        <li><strong><span class="th" lang="th">ประมาณกล้อง แล้วหาจุดตัด</span><span class="en" lang="en">Cameras, then points</span><span class="zh" lang="zh">先相机，再交点</span></strong><br><span class="th" lang="th">เส้นสายตาสองเส้นที่เหลื่อมกัน ตัดกันที่จุดสามมิติ</span><span class="en" lang="en">Two sight-lines with a gap between them meet at a 3D point</span><span class="zh" lang="zh">两条隔开的视线交于一个三维点</span></li>
+        <li><strong><span class="th" lang="th">ปรับให้เข้ากัน</span><span class="en" lang="en">Refine</span><span class="zh" lang="zh">一起修正</span></strong><br><span class="th" lang="th">bundle adjustment ขยับกล้องและจุดพร้อมกัน</span><span class="en" lang="en">Bundle adjustment moves the cameras and the points together</span><span class="zh" lang="zh">光束法平差同时移动相机和点</span></li>
+      </ol>
+      <div class="prose">
+        <p class="th" lang="th">ภาพคือตารางตัวเลข ตัวเลขส่วนใหญ่เรียบ คือท้องฟ้า กำแพง ผิวหนัง ขยับกล้องนิดเดียวมันก็หน้าตาเดิม จุดเด่นคือหย่อมเล็ก ๆ ที่ไม่เป็นอย่างนั้น มุมหน้าต่าง ขอบกระเบื้อง รอยบากของเปลือกตา ในขั้นตอนคลาสสิกของ COLMAP ตัวตรวจจับ (SIFT) จดหย่อมนั้นเป็นชุดตัวเลขที่ยังคล้ายเดิมเมื่อหย่อมหมุนเล็กน้อยหรือแสงเปลี่ยน</p>
+        <p class="en" lang="en">A picture is a grid of numbers. Most of those numbers are smooth — sky, wall, skin — and they look the same if the camera shifts a little. A feature is a small patch that does not: a window corner, a tile edge, the notch of an eyelid. In COLMAP’s classic pipeline the detector (SIFT) writes that patch down as a list of numbers that stays similar when the patch turns a little or the light changes.</p>
+        <p class="zh" lang="zh">一张照片是一格格数字。大多数数字是平滑的，天空、墙、皮肤，相机稍稍一移，看起来还是一样。特征是一小块不平滑的地方：窗角、砖缝、眼睑的缺口。在 COLMAP 的经典流程里，检测器（SIFT）把那一小块写成一串数字。小块稍稍转动，或光线变了，这串数字仍然相近。</p>
+        <p class="th" lang="th">มุมเดียวกันโผล่ในหลายเฟรม การจับคู่ถามว่า ชุดตัวเลขในเฟรมที่ 12 แถวไหนคือที่เดียวกับเฟรมที่ 13 ส่วนใหญ่เดาผิด เรขาคณิตทิ้งคู่เหล่านั้น กล้องสองตัวที่มองโลกใบเดียวกันต้องยอมรับเส้นเดียวกัน (เส้นอีพิโพลาร์) คู่ที่ไม่อยู่บนเส้นนั้นไม่ใช่คู่จริง</p>
+        <p class="en" lang="en">The same corner shows up in many frames. Matching asks which list of numbers in frame 12 is the same place as which list in frame 13. Most guesses are wrong. Geometry throws them out. Two cameras looking at one world must agree on a line, the epipolar line. A match that misses the line is not a match.</p>
+        <p class="zh" lang="zh">同一个角会出现在很多帧里。匹配问的是：第 12 帧里的哪一串数字，和第 13 帧里的哪一串，是同一个地方。大多数猜测是错的。几何关系把它们丢掉。两台相机看同一个世界，必须在一条线上达成一致，那是极线。对不上这条线的配对，就不是配对。</p>
+        <p class="th" lang="th">เมื่อมีคู่ที่อยู่รอดมากพอ โปรแกรมประมาณว่ากล้องแต่ละตัวอยู่ที่ไหน ทั้งตำแหน่งและทิศที่มันมอง แล้วจากเส้นสายตาสองเส้นขึ้นไป หาจุดสามมิติที่เส้นเหล่านั้นตัดกัน นั่นคือการหาจุดตัดด้วยสามเหลี่ยม เฟรมเดียวไม่มีความลึก สองเฟรมที่มีช่องว่างระหว่างกันมีความลึก COLMAP สร้างทีละน้อย เริ่มจากคู่หนึ่ง แล้วเพิ่มทีละภาพ</p>
+        <p class="en" lang="en">Once enough matches hold, the program estimates where each camera was — its place and the direction it looked — and, from two or more sight-lines, the 3D point where they cross. That crossing is triangulation. One frame has no depth. Two frames with a gap between them do. COLMAP builds this gradually: a first pair, then one picture at a time.</p>
+        <p class="zh" lang="zh">足够多的配对站得住之后，程序估计每台相机在哪里，包括位置和朝向，再从两条或更多视线求出它们相交的三维点。这个交点就是三角化。单帧没有深度。隔开的两帧才有。COLMAP 是慢慢建的：先用一对，然后一次加进一张照片。</p>
+        <p class="th" lang="th">ค่าแรกยังหยาบ bundle adjustment ขยับกล้องและจุดพร้อมกัน จนจุดที่ฉายกลับเข้าไปในทุกภาพตกบนจุดเด่นที่อ้างถึงมัน มันคือการปรับกำลังสองน้อยที่สุดก้อนใหญ่ก้อนเดียว เมฆจุดกระจัดกระจายคือผลลัพธ์ เป็นจุด ไม่ใช่ผิวทึบ</p>
+        <p class="en" lang="en">The first estimate is rough. Bundle adjustment moves the cameras and the points together until each point, projected back into every picture, lands on the feature that claimed it. It is one large least-squares fit. The sparse cloud is the result: points, not a solid surface.</p>
+        <p class="zh" lang="zh">第一次的估计是粗的。光束法平差把相机和点一起移动，直到每个点被投回每张照片时，落在声称它的那个特征上。这是一次大的最小二乘拟合。稀疏点云就是结果：是点，不是一块实心的表面。</p>
+      </div>
+      <figure class="flow-fig">
+        <div class="pipe-scroll">
+          <svg class="diagram" viewBox="0 0 720 200" aria-hidden="true">
+            <path class="stroke-gray" d="M78 46 L280 96 M78 100 L300 112 M78 154 L318 132"/>
+            <rect class="fill-olive" x="24" y="30" width="56" height="32"/>
+            <rect class="fill-olive" x="24" y="84" width="56" height="32"/>
+            <rect class="fill-olive" x="24" y="138" width="56" height="32"/>
+            <rect class="fill-signal" x="280" y="92" width="10" height="10"/>
+            <rect class="fill-signal" x="304" y="108" width="10" height="10"/>
+            <rect class="fill-signal" x="292" y="124" width="10" height="10"/>
+            <rect class="fill-signal" x="322" y="98" width="10" height="10"/>
+            <rect class="fill-signal" x="338" y="118" width="10" height="10"/>
+            <rect class="fill-gray" x="360" y="70" width="10" height="10"/>
+            <rect class="fill-gray" x="378" y="86" width="10" height="10"/>
+            <rect class="fill-gray" x="368" y="102" width="10" height="10"/>
+            <text class="en" lang="en" x="52" y="192" text-anchor="middle">cameras</text>
+            <text class="thai th" lang="th" x="52" y="192" text-anchor="middle">กล้อง</text>
+            <text class="zh" lang="zh" x="52" y="192" text-anchor="middle">相机</text>
+            <text class="en" lang="en" x="314" y="168" text-anchor="middle">sparse points</text>
+            <text class="thai th" lang="th" x="314" y="168" text-anchor="middle">จุดกระจัดกระจาย</text>
+            <text class="zh" lang="zh" x="314" y="168" text-anchor="middle">稀疏点</text>
+            <text class="en" lang="en" x="400" y="64" text-anchor="middle">not a surface</text>
+            <text class="thai th" lang="th" x="400" y="64" text-anchor="middle">ยังไม่ใช่ผิว</text>
+            <text class="zh" lang="zh" x="400" y="64" text-anchor="middle">还不是表面</text>
+          </svg>
+        </div>
+        <figcaption><span class="th" lang="th">กล้องหลายตำแหน่งมองจุดชุดเดียวกัน จุดสีพีชคือสิ่งที่โปรแกรมยอมรับว่าเห็นมากกว่าหนึ่งครั้ง จุดเทาคือที่ว่างที่ยังไม่มีผิว</span><span class="en" lang="en">Several camera positions look at one set of points. Peach marks a place the program accepted more than once. Grey is empty space, not a surface yet.</span><span class="zh" lang="zh">几个相机位置看着同一组点。桃色是程序接受为见过不止一次的地方。灰色是空处，还不是表面。</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="chapter field-quiet" id="after" aria-labelledby="after-h">
+    <header>
+      <span class="chapter-no">02</span>
+      <h2 id="after-h"><span class="th" lang="th">หลังจากจุดกระจัดกระจาย</span><span class="en" lang="en">After the sparse cloud</span><span class="zh" lang="zh">稀疏点之后</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p class="th" lang="th">multi-view stereo เริ่มตรงที่ขั้นตอนนี้หยุด เมฆจุดกระจัดกระจายบอกว่า “มีจุดอยู่ที่นี่” สเตอริโอถามทุกพิกเซล ในบรรดาภาพที่มองเห็นมันได้ว่า “ความลึกตรงนี้เท่าไร” Schönberger, Zheng, Frahm และ Pollefeys (ECCV 2016) คือขั้นถัดไป และเป็นเหตุที่การรัน COLMAP มักต่อไปเป็นเมฆจุดหนา จุด 69,316 จุดในรีลคือขั้นกระจัดกระจาย ไม่ใช่ขั้นหนา</p>
+      <p class="en" lang="en">Multi-view stereo starts where this stops. The sparse cloud says “a point is here.” Stereo asks every pixel, across the views that can see it, “what is the depth here?” Schönberger, Zheng, Frahm and Pollefeys (ECCV 2016) is that next step, and it is why a COLMAP run often continues into a dense cloud. The 69,316 points in the reel are the sparse step, not the dense one.</p>
+      <p class="zh" lang="zh">多视图立体从这里停下的地方开始。稀疏点云说“这里有一个点”。立体匹配问每一个像素，在能看见它的那些视图里，“这里的深度是多少？”Schönberger、Zheng、Frahm 和 Pollefeys（ECCV 2016）就是下一步，也是 COLMAP 的一次运行常常继续做出稠密点云的原因。短片里的 69,316 个点是稀疏那一步，不是稠密那一步。</p>
+      <p class="th" lang="th">NeRF และ Gaussian splatting ต้องการสิ่งที่เมฆจุดกระจัดกระจายมีอยู่แล้ว คือท่าของกล้องในทุกภาพ neural radiance field เรียนปริมาตรต่อเนื่องที่เมื่อเรนเดอร์จากท่าเหล่านั้นแล้วตรงกับภาพถ่าย Gaussian splatting เก็บเมฆที่ระบุได้ชัด เป็นก้อนที่มีตำแหน่ง ขนาด สี และความทึบ มักเริ่มจากจุดกระจัดกระจาย แล้วปรับจนภาพที่เรนเดอร์ตรงกับของจริง Structure-from-Motion ไม่ได้ระบายฉาก มันวัดว่ากล้องอยู่ที่ไหน และจุดจำนวนหนึ่งอยู่ที่ไหน วิธีที่ใหม่กว่ายืมการวัดนั้น แล้วจึงสร้างผิว</p>
+      <p class="en" lang="en">NeRF and Gaussian splatting both want the thing the sparse cloud already has: a camera pose for every picture. A neural radiance field learns a continuous volume that, rendered from those poses, matches the photos. Gaussian splatting keeps an explicit cloud — blobs with position, size, colour and opacity — often started from the sparse points, and fits them until the rendered views match. Structure-from-Motion does not paint the scene. It measures where the cameras were and where a modest set of points sat. The newer methods borrow that measurement, and only then invent a surface.</p>
+      <p class="zh" lang="zh">NeRF 和高斯溅射都要稀疏点云已经有的东西：每张照片的相机姿态。神经辐射场学一个连续的体积，从这些姿态渲染出来要和照片一致。高斯溅射保留一团明确的云，每个团块有位置、大小、颜色和不透明度，常常从稀疏点出发，再拟合到渲染结果和照片一致。从运动恢复结构并不涂绘场景。它量的是相机在哪里，以及不多的一批点在哪里。较新的方法借用这次测量，然后才发明一个表面。</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="basics" aria-labelledby="basics-h">
+    <header>
+      <span class="chapter-no">03</span>
+      <h2 id="basics-h"><span class="th" lang="th">ความคิดพื้นฐาน</span><span class="en" lang="en">The basic idea</span><span class="zh" lang="zh">基本想法</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <p class="th" lang="th">พิกเซลคือการวัด ไม่ใช่สิ่งของ จุดเด่นคือการวัดที่หาได้อีก การจับคู่คือคำกล่าวอ้างว่าการวัดสองครั้งคือที่เดียวกัน กล้องคือแบบจำลองว่าจุดสามมิติกลายเป็นพิกเซลอย่างไร การหาจุดตัดคือทางกลับ และมันต้องการเส้นฐาน กล้องต้องขยับ การปรับแก้คือการยอมว่าคำตอบแรกเป็นค่าประมาณ ไม่มีขั้นไหนบอกชื่อของสิ่งนั้น มันตกลงกันแค่เรื่องตำแหน่ง</p>
+      <p class="en" lang="en">A pixel is a measurement, not a thing. A feature is a measurement you can find again. A match is a claim that two measurements are the same place. A camera is a model of how a 3D point becomes a pixel. Triangulation is the reverse, and it needs a baseline: the cameras must have moved. Refinement is admitting the first answer was approximate. None of these steps names the thing. They only agree on where it is.</p>
+      <p class="zh" lang="zh">像素是一次测量，不是一个东西。特征是你能再找到的测量。匹配是一个说法：两次测量是同一个地方。相机是一个模型，说明三维点怎样变成像素。三角化是反过来的那一步，它需要基线：相机必须移动过。修正就是承认第一个答案只是近似。这些步骤都不给东西起名字。它们只约定它在哪里。</p>
+    </div>
+  </section>
+
+  <section class="chapter" id="reel" aria-labelledby="reel-h">
+    <header>
+      <span class="chapter-no">04</span>
+      <h2 id="reel-h"><span class="th" lang="th">เก้าสิบหกเฟรม</span><span class="en" lang="en">Ninety-six frames</span><span class="zh" lang="zh">九十六帧</span></h2>
+    </header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">รีลด้านล่างเป็นของ @index.opensource คัดโดย @hyun2xyz ภาพโดรนคือปราสาท Chapultepec เก้าสิบหกเฟรมกลายเป็นจุดสามมิติกระจัดกระจาย 69,316 จุด เราไม่ดาวน์โหลดรีลและไม่เก็บสำเนาไว้ที่นี่ เฟรมที่คุณเห็นมาจากหน้าของ Instagram</p>
+        <p class="en" lang="en">The reel below is by @index.opensource, curated by @hyun2xyz. The drone pictures are Chapultepec Castle. Ninety-six frames became 69,316 sparse 3D points. We do not download the reel and we do not keep a copy here. The frames you see come from Instagram’s own page.</p>
+        <p class="zh" lang="zh">下面的短片来自 @index.opensource，由 @hyun2xyz 编选。无人机画面是查普尔特佩克城堡。九十六帧变成 69,316 个稀疏三维点。我们不下载这段短片，也不在这里留副本。你看到的画面来自 Instagram 自己的页面。</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="reel-block">
+    <div class="figures">
+      <div class="figure"><span class="n">96</span><span class="th" lang="th">เฟรมจากโดรน</span><span class="en" lang="en">drone frames</span><span class="zh" lang="zh">无人机帧</span></div>
+      <div class="figure"><span class="n">69,316</span><span class="th" lang="th">จุดสามมิติกระจัดกระจาย</span><span class="en" lang="en">sparse 3D points</span><span class="zh" lang="zh">稀疏三维点</span></div>
+    </div>
+    <figure>
+      <iframe class="reel" data-reel src="https://www.instagram.com/reel/Deav1B_ANwB/embed/" title="Instagram reel of a COLMAP reconstruction, 96 drone frames to 69,316 points" data-aria-th="รีลอินสตาแกรม การสร้างภาพสามมิติด้วย COLMAP จาก 96 เฟรมเป็น 69,316 จุด" data-aria-en="Instagram reel of a COLMAP reconstruction, 96 drone frames to 69,316 points" data-aria-zh="Instagram 短片：COLMAP 重建，96 帧无人机画面到 69,316 个点" loading="lazy"></iframe>
+      <figcaption>
+        <span class="th" lang="th">รีลโดย <a href="https://www.instagram.com/index.opensource/">@index.opensource</a> คัดโดย <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a> · <a href="https://www.instagram.com/reel/Deav1B_ANwB/">เปิดรีลบน Instagram ↗</a></span>
+        <span class="en" lang="en">Reel by <a href="https://www.instagram.com/index.opensource/">@index.opensource</a>, curated by <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a> · <a href="https://www.instagram.com/reel/Deav1B_ANwB/">Open the reel on Instagram ↗</a></span>
+        <span class="zh" lang="zh">短片作者 <a href="https://www.instagram.com/index.opensource/">@index.opensource</a>，编选 <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a> · <a href="https://www.instagram.com/reel/Deav1B_ANwB/">在 Instagram 上打开短片 ↗</a></span>
+      </figcaption>
+    </figure>
+    <p class="micro">
+      <span class="th" lang="th">เฟรมนี้เป็นหน้าของ Instagram การเปิดมันบอก Instagram ว่าห้องนี้ขอรีลนั้น ภาพจากกล้องของคุณไม่ถูกส่งไปที่นั่น</span>
+      <span class="en" lang="en">This frame is Instagram’s page. Opening it tells Instagram that this room asked for that reel. Your camera pictures are not sent there.</span>
+      <span class="zh" lang="zh">这个框是 Instagram 的页面。打开它会让 Instagram 知道这个房间请求了那段短片。你的相机画面不会被送到那里。</span>
+    </p>
+  </div>
+
+  <section class="chapter try" id="try" aria-labelledby="try-h">
+    <header>
+      <span class="chapter-no">05</span>
+      <h2 id="try-h"><span class="th" lang="th">ลองความคิดเดียวกันกับศีรษะของคุณ</span><span class="en" lang="en">The same idea, on your head</span><span class="zh" lang="zh">同一个想法，用在你的头上</span></h2>
+    </header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">นี่ไม่ใช่ COLMAP และไม่ใช่การสแกนกะโหลก MediaPipe Face Landmarker หาจุด 478 จุดบนใบหน้าที่มันเห็น ตา จมูก ปาก คาง ขอบหน้าผาก มันไม่เห็นผม และไม่เห็นหนังศีรษะ เมื่อคุณเอียงจนกระหม่อมจะเข้าเฟรม หน้านี้ต่อหมวกของจุดออกไปพ้นหน้าผาก จุดเหล่านั้นเป็นรูปทรงที่เรากำหนด วาดด้วยสีเทา จุดสีพีชคือจุดที่โมเดลส่งกลับมาจริง ๆ สะสมขณะคุณหัน พวกมันอยู่ในแท็บนี้ ไม่ถูกบันทึก ไม่ถูกอัปโหลด และไม่ใช่บันทึกว่าคุณเป็นใคร</p>
+        <p class="en" lang="en">This is not COLMAP, and it is not a scan of your skull. MediaPipe Face Landmarker finds 478 points on the face it can see: eyes, nose, mouth, jaw, the edge of the forehead. It does not see hair, and it does not see the scalp. When you tilt far enough that the crown would be in frame, this page extends a cap of points past the forehead. Those points are a shape we assumed, drawn in grey. The peach points are the landmarks the model actually returned, gathered as you turn. They stay in this tab. They are not saved, not uploaded, and not a record of who you are.</p>
+        <p class="zh" lang="zh">这不是 COLMAP，也不是对你头骨的扫描。MediaPipe Face Landmarker 在它看得见的脸上找 478 个点：眼、鼻、嘴、下颌、额头的边缘。它看不见头发，也看不见头皮。当你歪到头顶会进入画面时，这一页把一顶点组成的帽子延伸到额头之外。那些点是我们假设的形状，画成灰色。桃色的点才是模型真正返回的特征点，在你转动时累积。它们留在这个标签页里。不被保存，不被上传，也不是一份关于你是谁的记录。</p>
+      </div>
+      <div class="note">
+        <p class="th" lang="th">จุดแลนด์มาร์กคลุมใบหน้า หนังศีรษะเป็นการประมาณ โดยต่อจากจุดที่สะสมไว้ ไม่ใช่การวัดผมหรือกะโหลก</p>
+        <p class="en" lang="en">Face landmarks cover the face. The scalp is approximated, extended from the accumulated points. It is not a measurement of hair or bone.</p>
+        <p class="zh" lang="zh">人脸特征点覆盖的是脸。头顶是近似的，由累积的点向外延伸。它不是对头发或骨头的测量。</p>
+      </div>
+      <div class="bench">
+        <div class="demo-grid">
+          <div class="stage">
+            <canvas class="stage-camera" data-camera width="640" height="480" tabindex="-1" role="img" data-aria-th="ภาพกล้องของคุณ จุดสีพีชคือแลนด์มาร์กบนใบหน้า" data-aria-en="Your camera, with peach dots on the face landmarks"></canvas>
+            <p class="stage-note" data-camera-note><span class="th" lang="th">กล้องปิด</span><span class="en" lang="en">Camera off</span><span class="zh" lang="zh">相机已关闭</span></p>
+          </div>
+          <div class="stage">
+            <canvas class="stage-cloud" data-cloud width="640" height="640" tabindex="0" role="img" data-aria-th="เมฆจุดสามมิติของศีรษะ ลากเพื่อหมุน ใช้ปุ่มลูกศรได้" data-aria-en="A 3D head point cloud. Drag to turn it. Arrow keys work too."></canvas>
+            <p class="stage-note" data-cloud-note><span class="th" lang="th">ยังไม่มีจุด · เริ่มเมื่อคุณยินยอม</span><span class="en" lang="en">No points yet · They start after you agree</span><span class="zh" lang="zh">还没有点 · 同意之后才开始</span></p>
+          </div>
+        </div>
+        <ul class="cover" data-aria-th="มุมที่ยังขาด" data-aria-en="Angles still missing">
+          <li data-angle="left"><span><span class="th" lang="th">หันซ้าย</span><span class="en" lang="en">Turn left</span><span class="zh" lang="zh">向左转</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+          <li data-angle="right"><span><span class="th" lang="th">หันขวา</span><span class="en" lang="en">Turn right</span><span class="zh" lang="zh">向右转</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+          <li data-angle="up"><span><span class="th" lang="th">เงยหน้า</span><span class="en" lang="en">Look up</span><span class="zh" lang="zh">抬头</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+          <li data-angle="down"><span><span class="th" lang="th">ก้มหน้า</span><span class="en" lang="en">Look down</span><span class="zh" lang="zh">低头</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+          <li data-angle="tilt"><span><span class="th" lang="th">เอียงให้เห็นศีรษะ</span><span class="en" lang="en">Tilt for the scalp</span><span class="zh" lang="zh">歪头露出头顶</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+          <li data-angle="front"><span><span class="th" lang="th">หันตรง</span><span class="en" lang="en">Face forward</span><span class="zh" lang="zh">正对</span></span><span class="angle-state"><span class="when-missing"><span class="th" lang="th">ยังไม่มี</span><span class="en" lang="en">missing</span><span class="zh" lang="zh">还没有</span></span><span class="when-seen"><span class="th" lang="th">มีแล้ว</span><span class="en" lang="en">seen</span><span class="zh" lang="zh">已看到</span></span></span></li>
+        </ul>
+        <p class="readout" data-status role="status"></p>
+        <p class="readout pose-line num" data-pose></p>
+        <p class="readout num" data-counts></p>
+        <p class="vh" data-missing></p>
+        <div class="bench-caption legend">
+          <span><i class="swatch face" aria-hidden="true"></i> <span class="th" lang="th">จุดที่โมเดลวัดได้บนใบหน้า</span><span class="en" lang="en">Landmarks the model measured on the face</span><span class="zh" lang="zh">模型在脸上测到的点</span></span>
+          <span><i class="swatch scalp" aria-hidden="true"></i> <span class="th" lang="th">หนังศีรษะที่ประมาณไว้ ไม่ได้วัด</span><span class="en" lang="en">Approximated scalp, not measured</span><span class="zh" lang="zh">近似的头顶，不是测到的</span></span>
+        </div>
+        <label class="consent">
+          <input type="checkbox" data-consent>
+          <span class="th" lang="th">ฉันยินยอมให้ใช้กล้องหน้ากับใบหน้าของฉันเอง จุดอยู่แค่ในแท็บนี้ ฉันหยุดได้ทุกเมื่อ</span>
+          <span class="en" lang="en">I agree to use the front camera on my own face. Points stay in this tab. I can stop at any time.</span>
+          <span class="zh" lang="zh">我同意用前置相机看我自己的脸。点只留在这个标签页。我可以随时停止。</span>
+        </label>
+        <div class="controls">
+          <button type="button" class="btn primary" data-start disabled><span class="th" lang="th">ยินยอมและเริ่ม</span><span class="en" lang="en">Agree and start</span><span class="zh" lang="zh">同意并开始</span></button>
+          <button type="button" class="btn" data-stop disabled><span class="th" lang="th">หยุดและปิดกล้อง</span><span class="en" lang="en">Stop and camera off</span><span class="zh" lang="zh">停止并关闭相机</span></button>
+          <button type="button" class="btn" data-clear disabled><span class="th" lang="th">ล้างจุด</span><span class="en" lang="en">Clear points</span><span class="zh" lang="zh">清除点</span></button>
+        </div>
+        <p class="bench-caption">
+          <span class="th" lang="th">หันซ้าย ขวา เงย ก้ม แล้วเอียงจนเห็นกระหม่อม รายการด้านบนบอกมุมที่ยังขาด ลากเมฆจุดเพื่อหมุน หรือใช้ปุ่มลูกศรเมื่อโฟกัสอยู่ที่ภาพนั้น ซ่อนแท็บแล้วกล้องจะปิด ไม่มีไมโครโฟน</span>
+          <span class="en" lang="en">Turn left, right, up and down, then tilt until the crown shows. The list above says which angle is still missing. Drag the cloud to turn it, or use the arrow keys while that picture is focused. Hiding the tab turns the camera off. There is no microphone.</span>
+          <span class="zh" lang="zh">向左转、向右转、抬头、低头，再歪到头顶出现。上面的列表告诉你哪个角度还缺。拖动点云来旋转，焦点在那幅图上时也可以用方向键。隐藏标签页会关闭相机。没有麦克风。</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="credits" aria-labelledby="credits-h">
+    <header>
+      <span class="chapter-no">06</span>
+      <h2 id="credits-h"><span class="th" lang="th">เครดิต</span><span class="en" lang="en">Credits</span><span class="zh" lang="zh">署名</span></h2>
+    </header>
+    <div class="chapter-body prose">
+      <ul class="th" lang="th">
+        <li>รีลโดย <a href="https://www.instagram.com/index.opensource/">@index.opensource</a> คัดโดย <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a> แสดงผ่านเพจฝังของ Instagram เท่านั้น ไม่ได้ดาวน์โหลดหรือเก็บสำเนาในเว็บนี้</li>
+        <li>COLMAP โดย Johannes L. Schönberger และคณะ, ETH Zurich และ University of North Carolina at Chapel Hill สัญญาอนุญาต new BSD · <a href="https://colmap.github.io/">colmap.github.io</a> · <a href="https://github.com/colmap/colmap">github.com/colmap/colmap</a></li>
+        <li>Schönberger และ Frahm, “Structure-from-Motion Revisited”, CVPR 2016 · <a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Schonberger_Structure-from-Motion_Revisited_CVPR_2016_paper.html">ฉบับเปิด</a></li>
+        <li>Schönberger, Zheng, Frahm และ Pollefeys, “Pixelwise View Selection for Unstructured Multi-View Stereo”, ECCV 2016 · <a href="https://openaccess.thecvf.com/content_eccv_2016/html/Johannes_L_Schonberger_Pixelwise_View_Selection_ECCV_2016_paper.html">ฉบับเปิด</a></li>
+        <li>ภาพโดรน: ProtoplasmaKid, CC0, Wikimedia Commons, <a href="https://commons.wikimedia.org/wiki/File:Sobrevuelo_Castillo_de_Chapultepec.webm">Sobrevuelo Castillo de Chapultepec</a> ไฟล์นั้นไม่ถูกเก็บในเว็บนี้</li>
+        <li>จุดบนใบหน้าในการลองใช้มาจาก MediaPipe Face Landmarker ชุดเดียวกับห้องใบหน้าและสมาธิ รันในเบราว์เซอร์นี้ เป็นแลนด์มาร์ก ไม่ใช่การระบุตัวบุคคล</li>
+      </ul>
+      <ul class="en" lang="en">
+        <li>Reel by <a href="https://www.instagram.com/index.opensource/">@index.opensource</a>, curated by <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a>. Shown only through Instagram’s embed. Not downloaded and not copied onto this site.</li>
+        <li>COLMAP by Johannes L. Schönberger and colleagues, ETH Zurich and the University of North Carolina at Chapel Hill. New BSD license. <a href="https://colmap.github.io/">colmap.github.io</a> · <a href="https://github.com/colmap/colmap">github.com/colmap/colmap</a></li>
+        <li>Schönberger and Frahm, “Structure-from-Motion Revisited”, CVPR 2016. <a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Schonberger_Structure-from-Motion_Revisited_CVPR_2016_paper.html">Open copy</a></li>
+        <li>Schönberger, Zheng, Frahm and Pollefeys, “Pixelwise View Selection for Unstructured Multi-View Stereo”, ECCV 2016. <a href="https://openaccess.thecvf.com/content_eccv_2016/html/Johannes_L_Schonberger_Pixelwise_View_Selection_ECCV_2016_paper.html">Open copy</a></li>
+        <li>Drone footage: ProtoplasmaKid, CC0, Wikimedia Commons, <a href="https://commons.wikimedia.org/wiki/File:Sobrevuelo_Castillo_de_Chapultepec.webm">Sobrevuelo Castillo de Chapultepec</a>. That file is not stored on this site.</li>
+        <li>The face points in the demo come from the MediaPipe Face Landmarker already used by the face-and-focus room. It runs in this browser. Landmarks, not identity.</li>
+      </ul>
+      <ul class="zh" lang="zh">
+        <li>短片作者 <a href="https://www.instagram.com/index.opensource/">@index.opensource</a>，编选 <a href="https://www.instagram.com/hyun2xyz/">@hyun2xyz</a>。只通过 Instagram 的嵌入页面显示。没有下载，也没有复制到本站。</li>
+        <li>COLMAP，Johannes L. Schönberger 及其同事，苏黎世联邦理工学院与北卡罗来纳大学教堂山分校。new BSD 许可证。<a href="https://colmap.github.io/">colmap.github.io</a> · <a href="https://github.com/colmap/colmap">github.com/colmap/colmap</a></li>
+        <li>Schönberger 与 Frahm，《Structure-from-Motion Revisited》，CVPR 2016。<a href="https://openaccess.thecvf.com/content_cvpr_2016/html/Schonberger_Structure-from-Motion_Revisited_CVPR_2016_paper.html">开放版本</a></li>
+        <li>Schönberger、Zheng、Frahm 与 Pollefeys，《Pixelwise View Selection for Unstructured Multi-View Stereo》，ECCV 2016。<a href="https://openaccess.thecvf.com/content_eccv_2016/html/Johannes_L_Schonberger_Pixelwise_View_Selection_ECCV_2016_paper.html">开放版本</a></li>
+        <li>无人机影像：ProtoplasmaKid，CC0，Wikimedia Commons，<a href="https://commons.wikimedia.org/wiki/File:Sobrevuelo_Castillo_de_Chapultepec.webm">Sobrevuelo Castillo de Chapultepec</a>。该文件不存放在本站。</li>
+        <li>演示里的脸部点来自人脸与专注房间已经在用的 MediaPipe Face Landmarker。它在这个浏览器里运行。是特征点，不是身份识别。</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+<!--#foot-->
+</main>
+<script type="module" src="/js/pages/reconstruct.js?v={{v}}"></script>
+</body>
+</html>
