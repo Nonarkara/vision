@@ -271,7 +271,15 @@ function renderMarkdown(md, ctx) {
       const headCells = cells(rows[0])
       const body = rows.slice(2).map(cells)
       const th = headCells.map((c) => `<th${langAttr(c)}>${inline(c, ctx)}</th>`).join('')
-      const tr = body.map((r) => `<tr>${r.map((c) => `<td${langAttr(c)}>${inline(c, ctx)}</td>`).join('')}</tr>`).join('')
+      // The glossary is the one table whose rows are worth addressing: a reader
+      // who meets "confidence score" in a room should be able to follow a link
+      // straight to that row. Slug the first cell (the English term) into an id.
+      const isGlossary = headCells.some((c) => /plain meaning/i.test(c))
+      const slug = (s) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+      const tr = body.map((r) => {
+        const id = isGlossary ? ` id="${slug(r[0])}"` : ''
+        return `<tr${id}>${r.map((c) => `<td${langAttr(c)}>${inline(c, ctx)}</td>`).join('')}</tr>`
+      }).join('')
       out.push(`<div class="table-wrap"><table class="table"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`)
       continue
     }

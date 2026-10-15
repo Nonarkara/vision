@@ -388,6 +388,10 @@ em { font-style: italic; }
   align-items: end;
 }
 .page-head .lede { margin: 0; }
+/* The terms footnote: quiet, but the links must read as links. */
+.page-head .terms { margin: 0; opacity: .85; }
+.page-head .terms a { color: var(--gray); }
+.page-head .terms a:hover, .page-head .terms a:focus-visible { color: var(--white); }
 @media (max-width: 900px) { .page-head { grid-template-columns: 1fr; } }
 
 .eyebrow { display: block; margin-bottom: 12px; }
