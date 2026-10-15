@@ -8,7 +8,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { TEACH, GATE_TILES, CAMERAS, FOOTAGE_OWNER } from '../public/js/footage/library.js'
-import { makeChallenge, retryChallenge, check, TARGETS, readGate, writeGate, TILES } from '../public/js/drive/captcha.js'
+import { makeChallenge, retryChallenge, check, TARGETS, readGate, writeGate, TILES, phrase, GATE_TEXT, taughtSentence } from '../public/js/drive/captcha.js'
+import { nextLang } from '../public/js/core/i18n.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicFile = (url) => path.join(root, 'public', url.replace(/^\//, ''))
@@ -66,6 +67,43 @@ test('a wrong answer is not a pass, and the retry is a new grid of the same clas
       assert.ok(tile.labels.includes(again.target.key))
     }
   }
+})
+
+const HAN = /\p{Script=Han}/u
+
+function classes(html, name) {
+  return (html.match(new RegExp(`class="${name}"`, 'g')) ?? []).length
+}
+
+test('new Teach, Drive-gate, reveal and credit lines are Thai, English and Simplified Chinese', () => {
+  const drive = fs.readFileSync(path.join(root, 'public/drive.html'), 'utf8')
+  const train = fs.readFileSync(path.join(root, 'public/train.html'), 'utf8')
+  const system = fs.readFileSync(path.join(root, 'public/system.html'), 'utf8')
+  const lesson = fs.readFileSync(path.join(root, 'public/js/train/video-lesson.js'), 'utf8')
+  const gate = drive.slice(drive.indexOf('<section class="gate"'), drive.indexOf('<section class="drive"'))
+  assert.ok(classes(gate, 'th') > 0)
+  assert.equal(classes(gate, 'th'), classes(gate, 'en'))
+  assert.equal(classes(gate, 'en'), classes(gate, 'zh'))
+  for (const span of gate.matchAll(/<span class="zh"[^>]*>([\s\S]*?)<\/span>/g)) {
+    assert.match(span[1], HAN, span[1])
+  }
+  assert.match(drive, /无障碍/)
+  assert.match(train, /拉玛四路/)
+  assert.match(train, /练习视频是真实的公共摄像头画面/)
+  assert.match(system, /泰国智能交通信息中心基金会/)
+  assert.match(lesson, /公共摄像头画面/)
+  for (const target of TARGETS) {
+    assert.equal(target.label.length, 3)
+    assert.match(phrase('zh', target.label), HAN)
+    assert.notEqual(phrase('zh', target.label), phrase('en', target.label))
+  }
+  assert.match(phrase('zh', GATE_TEXT.miss), /还不对/)
+  assert.match(phrase('th', GATE_TEXT.miss), /ยังไม่ตรง/)
+  assert.match(phrase('en', GATE_TEXT.ask), /Select every tile/)
+  assert.match(taughtSentence('zh', { picks: 2, right: 1, missed: 1, extra: 0 }), /你的 9 个标签/)
+  assert.equal(nextLang('th'), 'en')
+  assert.equal(nextLang('en'), 'zh')
+  assert.equal(nextLang('zh'), 'th')
 })
 
 test('passing is remembered in the session store and is not remembered before that', () => {

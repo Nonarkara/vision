@@ -16,12 +16,38 @@ import { GATE_TILES } from '../footage/library.js?v=1.16.9'
 export const GRID = 3
 export const TILES = GRID * GRID
 
-/** What a challenge can ask you to find. Thai names match ml/labels.js. */
+/** What a challenge can ask you to find. Thai names match ml/labels.js.
+ *  label is [Thai, English, Simplified Chinese]. */
 export const TARGETS = [
-  { key: 'car', coco: 3, label: ['รถยนต์', 'a car'] },
-  { key: 'motorcycle', coco: 4, label: ['รถจักรยานยนต์', 'a motorbike'] },
-  { key: 'person', coco: 1, label: ['คน', 'a person'] },
+  { key: 'car', coco: 3, label: ['รถยนต์', 'a car', '汽车'] },
+  { key: 'motorcycle', coco: 4, label: ['รถจักรยานยนต์', 'a motorbike', '摩托车'] },
+  { key: 'person', coco: 1, label: ['คน', 'a person', '人'] },
 ]
+
+/** Gate sentences that are built in script, not in the HTML. */
+export const GATE_TEXT = {
+  ask: ['เลือกทุกช่องที่มี', 'Select every tile with ', '选出每一格含有'],
+  miss: [
+    'ยังไม่ตรง ชุดที่เลือกไม่ใช่คำตอบ นี่คือตารางใหม่',
+    'Not quite — that set does not match. Here is a new grid.',
+    '还不对，这组选择与答案不符。这是一组新格子。',
+  ],
+}
+
+/** Index 0 Thai, 1 English, 2 Simplified Chinese. */
+export function phrase(lang, triple) {
+  if (lang === 'en') return triple[1]
+  if (lang === 'zh') return triple[2]
+  return triple[0]
+}
+
+export function taughtSentence(lang, { picks, right, missed, extra }) {
+  return phrase(lang, [
+    `จากฉลาก 9 ช่องของคุณ ในตารางที่มันไม่เคยเห็น มันเลือก ${picks} ช่อง — ถูก ${right} · พลาด ${missed} · เกิน ${extra}`,
+    `Your 9 labels taught it. On a grid it had never seen it picked ${picks} squares — ${right} right · ${missed} missed · ${extra} wrong.`,
+    `你的 9 个标签教会了它。在它没见过的格子图上，它选了 ${picks} 格——对 ${right} · 漏 ${missed} · 多 ${extra}。`,
+  ])
+}
 
 export const GATE_KEY = 'vision_drive_gate_v1'
 

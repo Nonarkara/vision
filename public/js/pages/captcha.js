@@ -4,7 +4,7 @@
 // opens the room. A miss deals a new grid from the same labels. The nine
 // squares are buttons; the canvas only shows the photographs.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate } from '../drive/captcha.js?v=1.16.9'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.16.9'
 import { features, train, pick } from '../drive/teach.js?v=1.16.9'
 
 const images = new Map()
@@ -78,9 +78,7 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
   function ask() {
     l = lang()
     if (!targetEl) return
-    targetEl.innerHTML = l === 'en'
-      ? `Select every tile with <b>${challenge.target.label[1]}</b>`
-      : `เลือกทุกช่องที่มี<b>${challenge.target.label[0]}</b>`
+    targetEl.innerHTML = `${phrase(l, GATE_TEXT.ask)}<b>${phrase(l, challenge.target.label)}</b>`
   }
 
   function showReveal() {
@@ -173,10 +171,12 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
 
   function renderResult() {
     if (!result || !taughtLine) return
-    const en = l === 'en'
-    taughtLine.textContent = en
-      ? `Your 9 labels taught it. On a grid it had never seen it picked ${result.picks} squares — ${result.s.right} right · ${result.s.missed} missed · ${result.s.extra} wrong.`
-      : `จากฉลาก 9 ช่องของคุณ ในตารางที่มันไม่เคยเห็น มันเลือก ${result.picks} ช่อง — ถูก ${result.s.right} · พลาด ${result.s.missed} · เกิน ${result.s.extra}`
+    taughtLine.textContent = taughtSentence(l, {
+      picks: result.picks,
+      right: result.s.right,
+      missed: result.s.missed,
+      extra: result.s.extra,
+    })
     taughtLine.hidden = false
   }
 
@@ -194,10 +194,7 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
         writeGate(storage, 'passed')
         showReveal()
       } else {
-        const note = l === 'en'
-          ? 'Not quite — that set does not match. Here is a new grid.'
-          : 'ยังไม่ตรง ชุดที่เลือกไม่ใช่คำตอบ นี่คือตารางใหม่'
-        deal(retryChallenge(challenge, ++round), note)
+        deal(retryChallenge(challenge, ++round), phrase(l, GATE_TEXT.miss))
       }
     } else if (e.target.closest('[data-captcha-reset]')) {
       clearSelection()

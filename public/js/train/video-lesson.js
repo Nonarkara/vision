@@ -155,7 +155,7 @@ export function mountVideoLesson(specimen) {
     })
     $('[data-lesson-source]').textContent =
       src?.kind === 'practice'
-        ? t('ภาพจากกล้องสาธารณะ', 'Public-camera footage')
+        ? t('ภาพจากกล้องสาธารณะ', 'Public-camera footage', '公共摄像头画面')
         : src?.kind === 'still' || src?.kind === 'photo'
           ? t(
               'ภาพนิ่ง — เปลี่ยนกล้องเพื่อให้เห็นความต่าง',

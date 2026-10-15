@@ -225,7 +225,7 @@ Camera owners: open an issue at [github.com/Nonarkara/vision/issues](https://git
 
 ## Credits
 
-Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex Sans, IBM Plex Sans Thai and IBM Plex Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
+Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex Sans, IBM Plex Sans Thai and IBM Plex Mono (OFL). Simplified Chinese on the new Teach and Drive-gate lines uses a subset of WenQuanYi Micro Hei (Apache-2.0). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
 
 © 2026 Dr Non Arkaraprasertkul. All rights reserved.
 
