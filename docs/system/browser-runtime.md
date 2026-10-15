@@ -81,10 +81,10 @@ The site's policy (from [`server/http.js`](../../server/http.js)):
 default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:;
 media-src 'self' blob: https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com;
 connect-src 'self' <same three video hosts>; worker-src 'self' blob:; font-src 'self';
-frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+frame-src https://www.instagram.com https://instagram.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
 ```
 
-No inline scripts, no inline `style=""` attributes (instruments set sizes through the CSSOM instead), no third-party anything except the video hosts.
+No inline scripts, no inline `style=""` attributes (instruments set sizes through the CSSOM instead). The only framed page is the Instagram reel on `/reconstruct`. No third-party scripts. The only other third-party traffic is the video hosts.
 
 **The catch:** `tf.min.js` bundles `regenerator-runtime`, which assigns a bare global and, when strict mode refuses, falls back to `Function("r", "regeneratorRuntime = r")` — an `eval`, which this CSP blocks. Rather than weaken the policy with `'unsafe-eval'`, `getTf()` declares the global first:
 

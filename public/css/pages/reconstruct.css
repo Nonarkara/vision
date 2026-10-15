@@ -1,0 +1,76 @@
+/* /reconstruct — four steps, one reel, one on-device cloud.
+   Plate 303. Four hues. Fields, alignment and type do the grouping. */
+
+.recon-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding: 0 var(--gutter) 12px;
+  font-family: var(--mono);
+  font-size: var(--micro);
+}
+.recon-toc a { text-decoration: none; }
+.recon-toc a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+
+/* Chinese follows the site language. vision.css shows .zh when
+   html[data-lang=zh], and hides an English span that sits immediately
+   before a Chinese one. Hiding .zh in this file blanks the room while
+   the rail is already on 中文. */
+.recon h1 [lang|="zh"],
+.recon h2 [lang|="zh"] { letter-spacing: 0; line-height: 1.15; font-size: 0.78em; }
+
+.recon .chapter,
+.recon .chapter > header,
+.recon .chapter-body,
+.recon .flow-fig,
+.recon .pipe-scroll { min-width: 0; }
+.recon .pipe-scroll { margin-top: 8px; max-width: 100%; }
+.recon .diagram { color: var(--olive); }
+
+.reel-block { padding: 0 var(--gutter) clamp(28px, 4vw, 48px); display: grid; gap: 18px; }
+.reel-block .figures { background: var(--olive); color: var(--naples); }
+.reel {
+  width: min(100%, 540px);
+  height: min(72vh, 640px);
+  border: 0;
+  background: var(--black);
+}
+
+.try { padding: 0 var(--gutter) clamp(48px, 6vw, 88px); }
+.try .bench { margin-top: 8px; }
+.consent { display: flex; align-items: flex-start; gap: 12px; max-width: 62ch; }
+.consent input { flex: 0 0 auto; width: 22px; height: 22px; margin-top: 4px; accent-color: var(--olive); }
+
+.demo-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 2px; align-items: start; }
+.stage { position: relative; background: var(--black); }
+.stage canvas { width: 100%; display: block; background: var(--black); }
+.stage-camera { aspect-ratio: 4 / 3; }
+.stage-cloud { aspect-ratio: 1 / 1; touch-action: none; }
+.stage-note {
+  position: absolute; left: 16px; right: 16px; bottom: 16px; margin: 0;
+  color: var(--gray); font-family: var(--mono); font-size: var(--micro);
+}
+
+.cover { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; list-style: none; margin: 0; padding: 2px 0 0; }
+.cover li {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  min-height: var(--target); margin: 0; padding: 12px 14px;
+  background: var(--quiet); color: var(--olive);
+}
+.cover li.is-seen { background: var(--signal); color: var(--black); }
+.cover .when-seen { display: none; }
+.cover li.is-seen .when-missing { display: none; }
+.cover li.is-seen .when-seen { display: inline; }
+.cover .angle-state { font-family: var(--mono); font-size: var(--fine); letter-spacing: 0.06em; text-transform: uppercase; }
+.cover .angle-state [lang="th"] { font-family: var(--thai); letter-spacing: 0; text-transform: none; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.swatch { display: inline-block; width: 0.8em; height: 0.8em; background: var(--gray); }
+.swatch.face { background: var(--signal); }
+.pose-line { color: var(--gray); }
+
+@media (max-width: 800px) {
+  .demo-grid { grid-template-columns: 1fr; }
+  .stage-camera { aspect-ratio: 3 / 4; }
+  .cover { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
