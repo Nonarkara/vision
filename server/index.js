@@ -1,10 +1,12 @@
 // vision.nonarkara.org — a public classroom for computer vision, built on the
 // cameras of the FloodDash wall.
 //
-// This process does three things and nothing else:
+// This process does four things and nothing else:
 //   1. serves the static site (pages assembled from partials),
 //   2. publishes the camera catalogue (/api/cameras),
-//   3. relays still frames from allow-listed hosts, memory only (/api/frame).
+//   3. relays still frames from allow-listed hosts, memory only (/api/frame),
+//   4. counts colour-study answers — one word from a fixed list, never anything
+//      that could describe a person (/api/colour).
 // Every model runs in the visitor's browser. This server never looks at a
 // picture; it only passes some of them along.
 
@@ -14,6 +16,7 @@ import path from 'node:path'
 import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 import { createCatalogStore, countKinds } from './catalog.js'
+import { createColourStore, validateAnswer, readBody, FEELINGS } from './colour.js'
 import { createRelay, RelayError } from './relay.js'
 import { createStatic, json, clientIp, createLimiter, securityHeaders } from './http.js'
 
@@ -37,6 +40,7 @@ const catalog = createCatalogStore({
   log,
 })
 const relay = createRelay({ log })
+const colour = createColourStore({ file: path.join(ROOT, 'data', 'colour.json'), log })
 const statics = createStatic({ root: path.join(ROOT, 'public'), version: VERSION, log })
 
 // Frames: generous enough for a wall of 24 tiles refreshing, tight enough
@@ -47,6 +51,11 @@ const statics = createStatic({ root: path.join(ROOT, 'public'), version: VERSION
 // the relay's own cache and per-host concurrency protect them further.
 const frameLimiter = createLimiter({ rate: 600, burst: 200 })
 const apiLimiter = createLimiter({ rate: 300, burst: 120 })
+// The colour study is a public write endpoint. Answers are opt-in and the schema is
+// two closed enums, so the worst a flood can do is make a cell look busier than it
+// is — which the page already says in plain words rather than hiding. The limiter
+// exists to keep that from being cheap.
+const writeLimiter = createLimiter({ rate: 30, burst: 20 })
 
 // The serialised catalogue is the same for everyone; build it once per minute,
 // and again as soon as a frame changes what we know about a camera — a retry of
@@ -125,6 +134,47 @@ const ROUTES = {
     }
   },
 
+  // ── The colour study ──────────────────────────────────────────────────────
+  // GET returns the whole board; the page filters to the plate it is showing. The
+  // payload is counts keyed by two enums, so it stays a few kilobytes and is safe
+  // to cache briefly at the edge even though it grows over time.
+  'GET /api/colour': (req, res) => {
+    if (!apiLimiter.take(clientIp(req))) return json(req, res, 429, { error: 'too many requests' }, { 'Retry-After': '10' })
+    json(req, res, 200, {
+      feelings: FEELINGS,
+      total: colour.total,
+      shared: colour.shared,
+      board: colour.board(),
+    }, { 'Cache-Control': 'public, max-age=30' })
+  },
+
+  // One answer. Opt-in, whitelisted, and the only thing about a visitor this
+  // process keeps is the increment it just made.
+  'POST /api/colour': async (req, res) => {
+    if (!writeLimiter.take(clientIp(req))) {
+      return json(req, res, 429, { error: 'enough for now — the study counts answers, not urgency' }, { 'Retry-After': '30' })
+    }
+    let body
+    try {
+      body = await readBody(req)
+    } catch (err) {
+      return json(req, res, err.status ?? 400, { error: err.status === 413 ? 'answer too large' : 'bad request' })
+    }
+    const verdict = validateAnswer(body)
+    if (!verdict.ok) return json(req, res, 400, { error: verdict.error })
+    const total = colour.record(verdict)
+    json(req, res, 200, { ok: true, total, ...colour.summary(verdict.assignment) })
+  },
+
+  // Roll the one plate everybody is looking at. A POST because it changes shared
+  // state — the same reason a GET should not be able to spend.
+  'POST /api/colour/share': (req, res) => {
+    if (!writeLimiter.take(clientIp(req))) {
+      return json(req, res, 429, { error: 'enough for now' }, { 'Retry-After': '30' })
+    }
+    json(req, res, 200, { ok: true, shared: colour.dealShared(true) })
+  },
+
   'GET /api/health': (req, res) => {
     const state = catalog.get()
     json(req, res, 200, {
@@ -133,6 +183,7 @@ const ROUTES = {
       uptime_s: Math.round((Date.now() - STARTED) / 1000),
       catalogue: { origin: state.origin, loadedAt: state.loadedAt, upstreamAt: state.upstreamAt, ...countKinds(state.cameras) },
       relay: relay.stats(),
+      colour: { answers: colour.total, plates: colour.board().length },
       memory_mb: Math.round(process.memoryUsage().rss / 1e6),
     })
   },

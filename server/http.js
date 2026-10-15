@@ -42,6 +42,7 @@ export const PAGES = {
   '/focus': 'focus',
   '/games': 'games',
   '/everyday': 'everyday',
+  '/colour': 'colour',
   '/research': 'research',
   '/system': 'system',
   '/legal': 'legal',

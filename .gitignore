@@ -1,5 +1,8 @@
 logs/
 data/cameras.json
+# The colour study's answers are runtime state, not source. They are published at
+# /api/colour; committing them would freeze one night's result into git history.
+data/colour.json
 data/*.tmp
 node_modules/
 .DS_Store

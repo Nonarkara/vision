@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="th" data-lang="th">
+<head>
+<!--#head-->
+<link rel="stylesheet" href="/css/pages/colour.css?v={{v}}">
+<title>What colour does to us · สีทำอะไรกับเรา — Vision</title>
+<meta name="description" content="The same four colours, dealt onto different jobs. A machine reads four numbers and a ratio. A person reads a feeling. Deal the colours, answer one question, and see what people say.">
+</head>
+<body>
+<!--#nav-->
+<main id="main">
+
+  <section class="page-head">
+    <div>
+      <span class="eyebrow label"><span class="th" lang="th">ห้องสี · การทดลอง</span><span class="en" lang="en">Colour room · a study</span></span>
+      <h1><span class="th" lang="th">สีทำอะไร<br>กับเรา</span><span class="en" lang="en">What colour<br>does to us</span></h1>
+    </div>
+    <p class="lede th" lang="th">เว็บนี้มีสีสี่เฉดตลอดมา เหลืองนีเปิล มะกอกเขียว เทา และแดงพีช และแต่ละเฉดมีงานของมัน: เหลืองเป็นกระดาษ มะกอกเป็นหมึก เทาคือสิ่งที่เครื่องยังไม่มั่นใจ และแดงพีชมีไว้บอกว่า “นี่คือสิ่งที่เครื่องเห็น” ทั้งหมดนั้นเป็นการตัดสินของคน ไม่ใช่ของตัวเลข</p>
+    <p class="lede en" lang="en">This site has had four colours all along — Naples yellow, olive green, grey, and peach red — and each one has a job: the yellow is the paper, the olive is the ink, the grey is what the machine is not yet sure of, and the peach red only ever marks what the machine sees. All of that is a human decision. None of it is in the numbers.</p>
+  </section>
+
+  <section class="chapter" id="study" aria-labelledby="study-h">
+    <header><span class="chapter-no">01</span><h2 id="study-h"><span class="th" lang="th">สับสีใหม่แล้วดูว่ารู้สึกอย่างไร</span><span class="en" lang="en">Deal the colours again, then notice</span></h2></header>
+    <div class="chapter-body">
+
+      <div class="deal">
+        <button class="btn" type="button" data-deal><span class="th" lang="th">↻ สับอีกจาน</span><span class="en" lang="en">↻ Deal another</span></button>
+        <button class="btn" type="button" data-deal-shared aria-pressed="false"><span class="th" lang="th">จานเดียวสำหรับทุกคน</span><span class="en" lang="en">One plate for everyone</span></button>
+        <button class="btn btn-quiet" type="button" data-deal-illegal><span class="th" lang="th">ขอจานที่เครื่องอ่านไม่ออก</span><span class="en" lang="en">Show me one the machine refuses</span></button>
+      </div>
+
+      <div class="plate-frame">
+        <div class="plate" id="plate" role="img" aria-labelledby="plate-desc">
+          <p class="plate-quiet"><span class="th" lang="th">ส่วนที่ไม่ได้อ่านก่อน</span><span class="en" lang="en">the part nobody reads first</span></p>
+          <h3 class="plate-ink"><span class="th" lang="th">คำพูดของคน</span><span class="en" lang="en">a sentence a person wrote</span></h3>
+          <p class="plate-body"><span class="th" lang="th">เครื่องนับได้ว่ามีรถอยู่ตรงนี้ แต่ไม่รู้ว่ารถคันนี้กำลังจะเลี้ยวหรือกำลังจะจอ</span><span class="en" lang="en">The machine can count that a car is here. It does not know whether that car is turning or stopping.</span></p>
+          <div class="plate-signal">
+            <p><span class="th" lang="th">สิ่งที่เครื่องเห็น · ความมั่นใจ 0.41</span><span class="en" lang="en">what the machine sees · confidence 0.41</span></p>
+            <span class="plate-bar" aria-hidden="true"></span>
+          </div>
+          <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's bar a third.</span></p>
+        </div>
+      </div>
+
+      <p class="machine-line" id="machine-line" role="status"></p>
+      <p class="gloss-line" id="gloss-line"></p>
+      <p class="illegal-warn" id="illegal-warn" hidden></p>
+
+      <form class="feel" id="feel" aria-labelledby="feel-h">
+        <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
+        <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
+        <label class="consent">
+          <input type="checkbox" data-consent>
+          <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
+          <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
+        </label>
+        <p class="feel-status" id="feel-status" role="status"></p>
+      </form>
+
+    </div>
+  </section>
+
+  <section class="chapter" id="result" aria-labelledby="result-h">
+    <header><span class="chapter-no">02</span><h2 id="result-h"><span class="th" lang="th">คนอื่นตอบว่าอะไร</span><span class="en" lang="en">What other people said</span></h2></header>
+    <div class="chapter-body">
+      <p class="result-intro th" lang="th">นี่ไม่ใช่ผลการวิจัย และไม่ควรถูกอ่านแบบนั้น ไม่มีบัญชี ไม่มีการสุ่มตัวอย่าง และใครก็ทำให้ตัวเลขเอียงได้ ที่เก็บไว้มีแค่จำนวนคำตอบของแต่ละคำในแต่ละจาน นี่คือคำบอกเล่าของคนที่เผลอเข้ามา ไม่ใช่หลักฐาน</p>
+      <p class="result-intro en" lang="en">This is not a research finding and should not be read as one. There are no accounts, no sampling, and anyone can skew a cell. What is kept is a count of words per plate — a description of the people who happened to arrive, not evidence.</p>
+      <div id="board" class="board"></div>
+      <p class="board-empty" id="board-empty"><span class="th" lang="th">ยังไม่มีคำตอบสักคำ เริ่มได้เลย</span><span class="en" lang="en">No answers yet. Be the first.</span></p>
+    </div>
+  </section>
+
+  <section class="chapter" id="why" aria-labelledby="why-h">
+    <header><span class="chapter-no">03</span><h2 id="why-h"><span class="th" lang="th">ทำไมต้องถามคน</span><span class="en" lang="en">Why ask a person</span></h2></header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">เครื่องคำนวณความต่างของความสว่างได้อย่างเดียว มันแปลงสีเป็นค่าความสว่างเชิงสัมพัทธ์ แล้วหารสองค่าเข้าด้วยกัน ได้อัตราส่วนอย่าง 10.98 ต่อ 1 นั่นคือทั้งหมดที่มันรู้เกี่ยวกับจานสีนี้ มันไม่รู้ว่าสีหนึ่งคือ “อันตราย” สีหนึ่งคือ “กระดาษ” หรือสีไหนทำให้เราไว้ใจ</p>
+        <p class="en" lang="en">A machine can compute one thing here: relative luminance, divided. Two numbers, one ratio, something like 10.98 to 1. That is the whole of what it knows about this plate. It does not know that one of these colours is supposed to mean danger, that another is supposed to be paper, or which one makes you trust it.</p>
+        <p class="th" lang="th">แต่เราอ่านสีไม่ใช่แบบนั้น เราอ่านความหมายก่อนอ่านความต่าง แดงคืออันตราย ฟ้าคือความสงบ เหลืองคือกระดาษ ไม่ใช่เพราะเราเรียนรู้มา แต่เพราะร่างกายเราทำงานแบบนั้นตั้งแต่ก่อนมีภาษา ความหมายของสีจึงไม่ได้อยู่ในตัวเลข แต่อยู่ในคน</p>
+        <p class="en" lang="en">We do not read colour that way. We read meaning before we read difference. Red is danger. Blue is calm. Yellow is paper — not because anyone decided it, but because our bodies have worked that way since before language. So the meaning of a colour is not in the numbers. It is in the people looking.</p>
+        <p class="th" lang="th">ห้องนี้จึงเป็นการเก็บความรู้จากคนในรูปแบบที่เรียบง่ายที่สุดเท่าที่จะเป็นไปได้ ไม่มีแบบสอบถาม ไม่มีสมัครสมาชิก ไม่มีการระบุตัวตน แค่คำถามเดียวต่อหนึ่งจาน แล้วนับ</p>
+        <p class="en" lang="en">So this room learns from people in the simplest way that can honestly be done: no survey, no membership, no identity. One question per plate, and a count.</p>
+        <p class="th" lang="th">จานที่เครื่องปฏิเสธมีอยู่หกจานจากยี่สิบสี่จาน และทั้งหกคือจานที่มีแดงพีชเป็นพื้นหลัง ไม่มีเฉดไหนเลยที่จะได้ค่าความต่างถึง 4.5 ต่อ 1 บนพื้นนั้นได้ ไม่ว่าจะปรับโทนไปกี่ขั้น คนอ่านแดงพีชแล้วรู้สึกว่าเตือนภัยทันที ส่วนเครื่องบอกแค่ว่าอ่านไม่ออก ทั้งสองอย่างถูกทั้งคู่ และไม่มีอันไหนแก้ตัวอีกอันได้</p>
+        <p class="en" lang="en">Six of the twenty-four plates are ones the machine refuses, and all six are plates where peach red is the paper. No hue reaches 4.5 to 1 against it at any tone. A person sees peach red and feels an alarm at once. The machine says only that it cannot read it. Both are right, and neither one can correct the other.</p>
+        <p class="th" lang="th"><a href="/system#not-built">สิ่งที่เว็บนี้ตั้งใจไม่เก็บ</a> — ไม่มีคุกกี้ ไม่มีบัญชี ไม่มีการติดตาม ไม่มีสคริปต์บุคคลที่สาม คำตอบหนึ่งคำที่คุณเลือกส่งเข้ามาที่เซิร์ฟเวอร์ของเว็บนี้เท่านั้น และเซิร์ฟเวอร์เก็บได้แค่ตัวเลขนับ ดูรายละเอียดว่าทำไมถึงเป็นไปได้ที่ <a href="/system">หน้าระบบ</a></p>
+        <p class="en" lang="en"><a href="/system#not-built">What this site does not keep</a> — no cookies, no accounts, no tracking, no third-party scripts. The single word you choose goes to this site's own server and nowhere else, and the server has nowhere to put anything else. The reasoning is on the <a href="/system">system page</a>.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script type="module" src="/js/pages/colour.js?v={{v}}"></script>
+</body>
+</html>

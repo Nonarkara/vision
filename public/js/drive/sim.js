@@ -2,14 +2,14 @@
 // Pure state and arithmetic — no drawing, no DOM — so the same world runs in
 // the page and in the tests, and a seed makes every run repeatable.
 
-import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.16.5'
-import { perceive } from './perceive.js?v=1.16.5'
-import { decide } from './decide.js?v=1.16.5'
-import { buildStreet, stepStreet, detectable } from './street.js?v=1.16.5'
-import { rng } from './rand.js?v=1.16.5'
+import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.16.6'
+import { perceive } from './perceive.js?v=1.16.6'
+import { decide } from './decide.js?v=1.16.6'
+import { buildStreet, stepStreet, detectable } from './street.js?v=1.16.6'
+import { rng } from './rand.js?v=1.16.6'
 
 // Re-exported so anything that used to reach for sim.js still finds it.
-export { rng } from './rand.js?v=1.16.5'
+export { rng } from './rand.js?v=1.16.6'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack

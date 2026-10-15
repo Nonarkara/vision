@@ -1,0 +1,110 @@
+/* /colour — the colour study.
+   Same plate rules as the rest of the site: no radius, no shadow, no gradient, no
+   border. Grouping is solid fields, weight and space.
+
+   The plate takes four colours at runtime through custom properties set from
+   JavaScript. That is the only way to hand a value to a stylesheet on a page whose
+   own CSP forbids inline styles — and it means there is no rule per plate, so the
+   24 deals cannot drift out of sync with each other or with the contrast code. */
+
+.deal { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--gap); }
+.deal .btn { min-width: 0; }
+.btn-quiet { background: var(--gray); color: var(--black); }
+.btn-quiet:hover { background: var(--gray-deep); color: var(--white); }
+.btn[aria-pressed="true"] { background: var(--signal); color: var(--black); }
+
+.plate-frame { padding: 0; }
+
+.plate {
+  --pg: var(--naples); --pi: var(--olive); --pq: var(--gray); --ps: var(--signal);
+  background: var(--pg);
+  color: var(--pi);
+  padding: clamp(20px, 3vw, 40px);
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  min-height: 260px;
+}
+.plate-quiet { color: var(--pq); font-family: var(--mono); font-size: var(--fine); letter-spacing: 0.14em; text-transform: uppercase; margin: 0; }
+.plate-quiet [lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
+.plate-ink { font-size: var(--subtitle); font-weight: 700; line-height: 1.2; margin: 0; color: var(--pi); }
+.plate-ink [lang="th"] { font-family: var(--thai); }
+.plate-body { margin: 0; max-width: 44ch; line-height: 1.5; color: var(--pi); }
+.plate-body [lang="th"] { font-family: var(--thai); line-height: 1.75; }
+
+/* The machine's finding. The words stay on the paper in the ink, and the colour
+   itself is a bar — a mark, which is the only job Peach Red ever had here. An
+   earlier version set the words on the bar, which cleared nothing: ink-on-signal
+   was under 4.5:1 on all twenty-four plates. */
+.plate-signal { margin-top: 6px; display: grid; gap: 8px; }
+.plate-signal p { margin: 0; font-family: var(--mono); font-size: var(--micro); color: var(--pi); }
+.plate-signal [lang="th"] { font-family: var(--thai); }
+.plate-bar { display: block; height: 12px; background: var(--ps); }
+
+.plate[data-illegal] { outline: 3px solid var(--signal); outline-offset: -3px; }
+
+.machine-line, .gloss-line, .illegal-warn { max-width: 68ch; }
+/* The machine's own line, in the site's readout idiom: Naples on Black is 17.45:1
+   and neither colour is re-themed, so this stays legible in both schemes. It was
+   first set in gray-deep, which is 1.1:1 on the dark ground — the same class of
+   "it renders, so it is fine" error the palette instrument exists to catch. */
+.machine-line {
+  font-family: var(--mono); font-size: var(--micro);
+  background: var(--black); color: var(--naples);
+  padding: 12px 16px; margin: 18px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.machine-line [lang="th"] { font-family: var(--thai); }
+
+/* The gloss is the lesson, so it is set quietly — small, in the reading voice, and
+   never in signal. A note that shouted would prove its own point badly. */
+.gloss-line { font-size: var(--read); color: var(--text); margin: 10px 0 0; }
+.gloss-line [lang="th"] { font-family: var(--thai); line-height: 1.75; }
+.illegal-warn { margin: 14px 0 0; padding: 12px 14px; background: var(--signal-pale); color: var(--signal-deep); font-size: var(--read); }
+.illegal-warn[hidden] { display: none; }
+.illegal-warn [lang="th"] { font-family: var(--thai); line-height: 1.7; }
+
+.feel { margin-top: clamp(28px, 4vw, 48px); }
+.feel h3 { margin: 0 0 12px; font-size: var(--subtitle); }
+.feel h3 [lang="th"] { font-family: var(--thai); }
+.feel-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.feel-btn { min-width: 0; padding: 10px 14px; background: transparent; color: var(--text); border: 2px solid var(--text); }
+.feel-btn:hover { background: var(--black-2); color: var(--white); }
+.feel-btn[aria-pressed="true"] { background: var(--text); color: var(--white); }
+.feel-btn [lang="th"] { font-family: var(--thai); }
+
+.consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; max-width: 68ch; font-size: var(--read); cursor: pointer; }
+.consent input { margin-top: 0.35em; width: 20px; height: 20px; flex: none; accent-color: var(--signal); }
+.consent [lang="th"] { font-family: var(--thai); line-height: 1.7; }
+
+.feel-status { margin-top: 12px; font-size: var(--read); color: var(--text); min-height: 1.5em; }
+.feel-status [lang="th"] { font-family: var(--thai); }
+
+.result-intro { max-width: 62ch; }
+.result-intro.en, .result-intro.th { font-family: var(--read); }
+
+.board { display: grid; gap: var(--gap); }
+.board:empty { display: none; }
+.board-row { padding: 16px 0; border-top: 1px solid var(--gray); }
+.board-row[data-legible="0"] { opacity: 0.72; }
+.board-row h3 { margin: 0 0 4px; font-size: var(--body); }
+.board-row h3 [lang="th"] { font-family: var(--thai); }
+.board-n { margin: 0 0 12px; font-family: var(--mono); font-size: var(--micro); color: var(--text); }
+.board-n [lang="th"] { font-family: var(--thai); }
+
+.feel-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-width: 52ch; }
+.feel-bars li { display: grid; grid-template-columns: 9em 1fr 3em; align-items: center; gap: 10px; }
+.feel-label { font-family: var(--mono); font-size: var(--micro); }
+.feel-label [lang="th"] { font-family: var(--thai); }
+/* Width arrives from JS by CSSOM — an inline style attribute is blocked here by
+   the site's own CSP, which is the same reason the plate works this way. */
+.feel-bar { display: block; height: 10px; background: var(--signal); width: 2%; }
+.feel-n { font-family: var(--mono); font-size: var(--micro); font-variant-numeric: tabular-nums; text-align: right; color: var(--text); }
+
+.board-empty { color: var(--quiet-text); margin-top: var(--gap); }
+.board-empty[hidden] { display: none; }
+.board-empty [lang="th"] { font-family: var(--thai); }
+
+@media (max-width: 620px) {
+  .feel-bars li { grid-template-columns: 7em 1fr 2.6em; }
+}

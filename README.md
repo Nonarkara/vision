@@ -91,6 +91,7 @@ The rule the room is built on: **the simulated camera may only name things the s
 | `/drive` | 05 Drive | A real street, not a bare track: kerbs, footways, buildings behind them, street lamps, utility poles, parked bicycles and motorbikes, hydrants, benches, planters, people and dogs. Two/four lanes, roundabout or Bangkok-inspired city; 6–24 cars. Click any car for its moving driver's view, with detection boxes and computed acceleration. Day, rain, night, sun glare. Written rules and simulated detections, not a trained driving system. Behind a CAPTCHA that explains where the training data came from. |
 | `/games` | 06 Games | Count race vs the detector, fewest-pixels guessing, and "fool the machine" on your own webcam. |
 | `/everyday` | 07 Everyday | Face unlock, QR, OCR, X-rays, lane keeping, self-checkout, crop apps, traffic cameras — how each works and fails. |
+| `/colour` | Colour room | The four plate hues dealt onto four jobs, 24 ways. A machine reads four numbers and a ratio; a person reads a feeling. Deal, answer one word, see what people say. Six plates the machine refuses are behind an explicit button. |
 | `/research` | 08 Research | Sixty years of papers, the ones this site runs on, open questions. |
 | `/system` | 09 System | Diagrams, relay rules, CSP, models, live health, credits. |
 | `/legal` | 10 Fine print | PDPA (B.E. 2562), ownership, what not to do, takedowns. |
@@ -157,6 +158,7 @@ sequenceDiagram
 ### Rules the code enforces
 
 - **Privacy:** webcam and photos never leave the tab; no uploads, no accounts, no analytics, no cookies (localStorage holds only the language choice and game best scores). No face recognition, no plate reading, no stored imagery.
+- **The colour study is the one exception, and it is narrow on purpose:** `/colour` can send one word from a fixed list of ten, plus which of the 24 plates you were looking at. Both fields are enums the server fixes in advance, so the request has nowhere to carry a name, an address, or a sentence — the privacy property is structural, not a promise. Consent is a checkbox ticked per answer and it is never stored. No cookie, no identifier, no IP retained (the rate limiter is in memory and is never written down). Counts are published at `/api/colour`; the raw file is gitignored. The refusal on `/system` states this precisely rather than claiming "no analytics" outright, which would no longer be true.
 - **Not an open proxy:** relay serves only catalogue ids on allow-listed https hosts, rejects redirects, non-images, tiny or > 4 MB bodies; per-host circuit breaker.
 - **Strict CSP:** `script-src 'self'`, no inline script/style, no eval (TF.js's regenerator fallback is pre-empted in `ml/tf.js`), media only from the three CORS video hosts the catalogue classifies as `video` (the allow-list is a suffix pattern, so its count moves with the catalogue — the CSP is built from that list, and `?v` stamps are kept uniform on purpose even where a host serves no video).
 - **Honesty in the UI:** every machine answer carries its confidence; "not detected ≠ not there".
