@@ -92,7 +92,7 @@ Note what is **absent**: no image, no face, no plate, no track id, no person att
 | Model weights (SSDLite MobileNetV2, MobileNetV2) | Apache-2.0 (TF model zoo) | permitted with notice |
 | COCO (detector training data) | annotations CC BY 4.0; images under their Flickr owners' licences | weights are generally treated as usable; confirm with counsel |
 | ImageNet (embedder training data) | images for **non-commercial research** under ImageNet's terms of access | **open question** whether models trained on it may be sold; many companies do, but it is unsettled — get advice, or retrain the backbone on licensed data |
-| Fonts (IBM Plex, Archivo Narrow, JetBrains Mono) | SIL OFL 1.1 | permitted |
+| Fonts (IBM Plex Sans, IBM Plex Sans Thai, IBM Plex Mono) | SIL OFL 1.1 | permitted |
 | Popular YOLO implementations (if ever adopted) | several are **AGPL-3.0** | would oblige releasing the service's source; avoid or buy a commercial licence |
 | **Public camera feeds** | owned by each agency | **the classroom's terms forbid commercial use without the owner's permission.** A commercial service needs written agreements with each camera owner, or must run only on the customer's own cameras |
 | Colour (Wada Plate 303 via Palette) | historical combination; Palette's digital conversion credited | attribution kept |

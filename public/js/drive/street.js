@@ -21,8 +21,8 @@
 // kerb is always 3.2 m from the middle of the road and a sedan really is 4.4 m
 // long beside it.
 
-import { LANE, STEP, at } from './track.js?v=1.16.4'
-import { rng } from './rand.js?v=1.16.4'
+import { LANE, STEP, at } from './track.js?v=1.16.5'
+import { rng } from './rand.js?v=1.16.5'
 
 /** Everything a Thai urban street puts next to the carriageway, in metres. */
 export const STREET = {

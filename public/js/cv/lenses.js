@@ -6,7 +6,7 @@
 import * as ops from './ops.js'
 import { paintImageData, drawDetections, drawBlobs, drawMask, clear, NAPLES } from './draw.js'
 import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
-import { noteVehicles } from './spotted.js?v=1.16.4'
+import { noteVehicles } from './spotted.js?v=1.16.5'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
@@ -53,7 +53,7 @@ export function numbers(ctx, src, state, { cols = 40, values = 'luma' } = {}) {
   const dpr = W / Math.max(1, ctx.canvas.clientWidth)
   const showDigits = cell >= 20 * dpr
   const fontPx = Math.max(8, Math.floor(cell * 0.34))
-  ctx.font = `${fontPx}px "JetBrains Mono", monospace`
+  ctx.font = `${fontPx}px "IBM Plex Mono", monospace`
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
   for (let y = 0; y < img.height; y++) {

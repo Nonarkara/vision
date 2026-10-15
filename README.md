@@ -69,7 +69,7 @@ The ladder buys one real freedom: base Peach Red on Naples is 2.7:1 and was alwa
 
 Machine light is the other freedom, and it is still the same hue. Peach Red may glow — a soft shadow of `#f15a30`, never a fifth colour and never a gradient fill — only on what the machine sees: a detection, a motion mark, the lens that is reporting one. A trail fades by opacity. `prefers-reduced-motion` keeps the mark and drops the pulse. `npm run palette` does not gain a pairing from that glow.
 
-Type is eight steps rather than three, and the playfulness comes from mixing the three families — Archivo Narrow for display Latin, IBM Plex Sans/Thai for reading, JetBrains Mono for every number — in named pairings (`.stem`, `.measure`, `.mix`) rather than from arbitrary sizes.
+Type is eight steps rather than three, and the playfulness comes from mixing two voices cut from one superfamily — IBM Plex Sans and IBM Plex Sans Thai for everything a person wrote, IBM Plex Mono for every number, label and confidence the machine reported — in named pairings (`.stem`, `.measure`, `.mix`) rather than from arbitrary sizes. A proportional letter and a fixed-pitch letter are one alphabet read two ways, which is the argument of the site made in the typeface rather than in a caption under it. Because the Thai face is a member of the same family, a bilingual heading is one design instead of a condensed Latin poster stacked above a wide Thai sans.
 
 ## The Drive room's street
 
@@ -223,7 +223,7 @@ Camera owners: open an issue at [github.com/Nonarkara/vision/issues](https://git
 
 ## Credits
 
-Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex, Archivo Narrow, JetBrains Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
+Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex Sans, IBM Plex Sans Thai and IBM Plex Mono (OFL). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
 
 © 2026 Dr Non Arkaraprasertkul. All rights reserved.
 

@@ -30,9 +30,14 @@
  * read · micro · fine, each with one job. Type feels playful because the sizes
  * vary and the pairings are mixed, not because the sizes are arbitrary.
  *
- * Three families, and the combinations between them are named so the mixing
- * stays a system: Archivo Narrow for display Latin, IBM Plex Sans / IBM Plex
- * Sans Thai for reading, JetBrains Mono for every number, label and confidence.
+ * Two voices, one alphabet. Every proportional letter on this site is what a
+ * person wrote, set in IBM Plex Sans or IBM Plex Sans Thai — one superfamily,
+ * so the two scripts never disagree about weight or width inside a bilingual
+ * heading. Every fixed-pitch letter is what the machine reported, in IBM Plex
+ * Mono: same x-height, same stroke contrast as the reading face, for numbers,
+ * labels, confidences and readouts. That is the argument of the site made in
+ * the typeface — one alphabet, read two ways — and it is why the reading face
+ * and the machine face came from one family instead of two foundries.
  * Thai never receives Latin tracking or uppercase.
  *
  * PAIRINGS — `.stem` label-over-heading, `.measure` ghost numeral, `.mix` a
@@ -42,16 +47,23 @@
  * prefers-reduced-motion.
  */
 
-@font-face { font-family: "Archivo Narrow"; font-weight: 600; font-display: swap; src: url("/fonts/archivo-narrow-latin-600-normal.woff2") format("woff2"); }
-@font-face { font-family: "Archivo Narrow"; font-weight: 700; font-display: swap; src: url("/fonts/archivo-narrow-latin-700-normal.woff2") format("woff2"); }
+/* The human voice — one superfamily, two scripts. IBM Plex Sans Thai is the Thai
+   member of the same family, so a bilingual heading is one design rather than a
+   condensed Latin poster set above a wide Thai sans. */
 @font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url("/fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-style: italic; font-display: swap; src: url("/fonts/ibm-plex-sans-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url("/fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 700; font-display: swap; src: url("/fonts/ibm-plex-sans-latin-700-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans Thai"; font-weight: 400; font-display: swap; src: url("/fonts/ibm-plex-sans-thai-thai-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans Thai"; font-weight: 600; font-display: swap; src: url("/fonts/ibm-plex-sans-thai-thai-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans Thai"; font-weight: 700; font-display: swap; src: url("/fonts/ibm-plex-sans-thai-thai-700-normal.woff2") format("woff2"); }
-@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: swap; src: url("/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "JetBrains Mono"; font-weight: 600; font-display: swap; src: url("/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
+
+/* The machine voice — Plex Mono is this family's mono, so it shares the reading
+   face's x-height and stroke contrast. The contrast between the two voices is
+   then who is speaking, not who drew it. Fixed pitch also gives every readout a
+   real column, which is what the numbers here are actually doing. */
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 600; font-display: swap; src: url("/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); }
 
 :root {
   color-scheme: light;
@@ -99,10 +111,14 @@
   --micro:    0.875rem;
   --fine:     0.78125rem;
 
+  /* One superfamily, two scripts. `--thai` exists so Thai can drop Latin tracking
+     and uppercase; the two faces come from the same family, so they agree.
+     There is deliberately no display *family* token: display used to be a different
+     family, now it is this family at a heavier weight, and a token that merely
+     equals another token is a second place for the truth to go stale. */
   --sans: "IBM Plex Sans", "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
   --thai: "IBM Plex Sans Thai", "IBM Plex Sans", "Noto Sans Thai", system-ui, sans-serif;
-  --narrow: "Archivo Narrow", "IBM Plex Sans Thai", Arial, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
   --gutter: clamp(16px, 3.2vw, 52px);
   --gap: clamp(16px, 1.8vw, 28px);
@@ -174,7 +190,7 @@ p, li, dd, h1, h2, h3, a, figcaption { overflow-wrap: break-word; }
 /* h1 is the page. h2 is a section of it. They were the same size for a year,
    which is why the pages read as one long shout. */
 h1, .display {
-  font-family: var(--narrow);
+  font-family: var(--sans);
   font-size: var(--display);
   font-weight: 700;
   line-height: 0.94;
@@ -182,7 +198,7 @@ h1, .display {
   margin: 0;
 }
 h2 {
-  font-family: var(--narrow);
+  font-family: var(--sans);
   font-size: var(--title);
   font-weight: 700;
   line-height: 1;
@@ -238,7 +254,7 @@ em { font-style: italic; }
 .measure { position: relative; isolation: isolate; }
 .measure .measure-n {
   position: absolute; z-index: -1; top: -0.34em; left: -0.06em;
-  font-family: var(--narrow); font-weight: 700; font-size: 4.2em; line-height: 0.8;
+  font-family: var(--sans); font-weight: 700; font-size: 4.2em; line-height: 0.8;
   color: var(--gray); opacity: 0.42; pointer-events: none; user-select: none;
   font-variant-numeric: lining-nums;
 }
@@ -266,7 +282,7 @@ em { font-style: italic; }
   display: flex; align-items: center; gap: 12px;
   padding: 0 16px 0 var(--gutter);
   min-height: 56px; flex: 0 0 auto;
-  font-family: var(--narrow); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.02em;
+  font-family: var(--sans); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.02em;
 }
 .mark svg { width: 28px; height: 28px; flex: none; }
 .rooms {
@@ -424,7 +440,7 @@ em { font-style: italic; }
 }
 .index a:hover, .index a:focus-visible { background: var(--field); color: var(--field-text); outline-offset: -3px; }
 .index .num { font-size: var(--micro); }
-.index .title { font-family: var(--narrow); font-weight: 700; font-size: clamp(1.5rem, 2.2vw + 0.6rem, 2.5rem); line-height: 1; }
+.index .title { font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem, 2.2vw + 0.6rem, 2.5rem); line-height: 1; }
 .index .title [lang="th"], .index .title[lang="th"] { font-family: var(--thai); font-size: 0.85em; line-height: 1.25; }
 .index .desc { max-width: 46ch; }
 @media (max-width: 760px) {
@@ -533,7 +549,7 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 .diagram { width: 100%; height: auto; }
 .diagram text { font-family: var(--mono); font-size: 13px; fill: currentColor; }
 .diagram .thai { font-family: var(--thai); }
-.diagram .big { font-family: var(--narrow); font-size: 22px; font-weight: 700; }
+.diagram .big { font-family: var(--sans); font-size: 22px; font-weight: 700; }
 .diagram .fill-ink { fill: var(--olive); }
 .diagram .fill-naples { fill: var(--naples); }
 .diagram .fill-gray { fill: var(--gray); }
@@ -679,7 +695,10 @@ html[data-lang="th"] .lens-say { font-family: var(--thai); }
   .specimen-bar { position: static; }
 }
 .specimen-line .controls { background: transparent; }
-.mine-note { margin: 12px 0 0; max-width: 46ch; }
+/* A promise about your picture, not a readout. It keeps .micro's size and
+   spacing but hands it back to the reading voice — the one sentence on this
+   page a person most needs to read as a person saying it. */
+.mine-note { margin: 12px 0 0; max-width: 46ch; font-family: var(--sans); letter-spacing: 0; }
 .opening-stage:fullscreen { width: 100vw; height: 100vh; }
 .opening-stage:fullscreen .stage-view { flex: 1 1 auto; }
 @media (max-width: 560px) {

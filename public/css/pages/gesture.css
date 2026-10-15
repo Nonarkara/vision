@@ -13,7 +13,7 @@
   .start-block .steps { grid-template-columns: 1fr; }
 }
 /* Step names live in their own column so a long line cannot run into the next step. */
-.gstep { display: block; width: 220px; box-sizing: border-box; overflow-wrap: break-word; text-align: center; color: inherit; font-family: var(--narrow); font-weight: 700; font-size: 16px; line-height: 1.15; }
+.gstep { display: block; width: 220px; box-sizing: border-box; overflow-wrap: break-word; text-align: center; color: inherit; font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.15; }
 .gstep strong, .gstep span { display: block; }
 .gstep span { margin-top: 4px; font-family: var(--mono); font-weight: 400; font-size: 11px; line-height: 1.35; }
 html[data-lang="th"] .gstep { font-family: var(--thai); }

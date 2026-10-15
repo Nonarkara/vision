@@ -23,14 +23,14 @@
 .handbook .doc > details { max-width: 74ch; }
 
 .handbook .doc h2 {
-  font-family: var(--narrow);
+  font-family: var(--sans);
   font-size: clamp(1.6rem, 1.8vw + 1rem, 2.5rem);
   line-height: 1.05;
   margin: clamp(40px, 5vw, 72px) 0 12px;
   scroll-margin-top: calc(var(--rail-height) + 20px);
 }
 .handbook .doc h3 {
-  font-family: var(--narrow);
+  font-family: var(--sans);
   font-size: clamp(1.15rem, 0.7vw + 1rem, 1.5rem);
   line-height: 1.2;
   margin: clamp(28px, 3vw, 40px) 0 8px;
@@ -132,7 +132,7 @@
   justify-content: space-between;
   gap: 4px 24px;
   padding: clamp(20px, 3vw, 36px) var(--gutter) clamp(32px, 4vw, 64px);
-  font-family: var(--narrow);
+  font-family: var(--sans);
   font-size: clamp(1.05rem, 0.6vw + 1rem, 1.35rem);
 }
 .handbook .doc-nav a {

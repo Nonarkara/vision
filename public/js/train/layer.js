@@ -65,7 +65,7 @@ export function drawCurve(canvas, history, epochs = EPOCHS) {
   const X = (i) => pad.l + (i / Math.max(1, epochs - 1)) * pw
   const Y = (v) => pad.t + ph - (v / yMax) * ph
 
-  ctx.font = `${Math.round(11 * dpr)}px "JetBrains Mono", "IBM Plex Sans Thai", monospace`
+  ctx.font = `${Math.round(11 * dpr)}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
   ctx.fillStyle = GRAY
   ctx.textBaseline = 'middle'
   ctx.fillRect(pad.l, pad.t + ph, pw, Math.max(1, dpr))

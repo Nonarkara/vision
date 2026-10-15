@@ -4,11 +4,11 @@
 // is 4.4 × 1.8 m with a 1.5 m roof, a 6-wheel lorry 9.6 × 2.5 m and 3.2 m
 // tall — so what towers over you in this view is what would tower over you
 // on the road.
-import { at, LANE, STEP } from './track.js?v=1.16.4'
-import { sightRange } from './perceive.js?v=1.16.4'
-import { VEHICLES } from './sim.js?v=1.16.4'
-import { ITEMS, STREET } from './street.js?v=1.16.4'
-import { labelName } from './draw.js?v=1.16.4'
+import { at, LANE, STEP } from './track.js?v=1.16.5'
+import { sightRange } from './perceive.js?v=1.16.5'
+import { VEHICLES } from './sim.js?v=1.16.5'
+import { ITEMS, STREET } from './street.js?v=1.16.5'
+import { labelName } from './draw.js?v=1.16.5'
 
 export function relative(car, point) {
   const dx = point.x - car.x,
@@ -583,7 +583,9 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
       g.strokeRect(p.x - bw / 2 - 3, p.y - bh - 3, bw + 6, bh + 6)
       g.setLineDash([])
       const label = `${labelName(tr.label, language)} ${Math.round(tr.conf * 100)}% · ${Math.round(Math.hypot(o.x - car.x, o.y - car.y))} m`
-      g.font = `${Math.max(11, Math.min(15, w / 55))}px sans-serif`
+      // A detection, a confidence and a distance in metres — the machine's own
+      // numbers, so they are set in its voice, not in a generic sans.
+      g.font = `${Math.max(11, Math.min(15, w / 55))}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
       const tw = g.measureText(label).width + 10,
         lx = Math.max(2, Math.min(w - tw - 2, p.x - bw / 2 - 3)),
         ly = Math.max(18, p.y - bh - 5)
@@ -636,7 +638,9 @@ export function drawWindshield(g, car, world, w, h, language = 'en') {
     g.fillStyle = 'rgba(12,18,23,.94)'
     g.fillRect(0, 0, w, h)
     g.fillStyle = '#f0e6ce'
-    g.font = '20px sans-serif'
+    // A sentence a person wrote, in the reading face. Thai falls through to the
+    // Thai member of the same family rather than to a generic.
+    g.font = '20px "IBM Plex Sans", "IBM Plex Sans Thai", system-ui, sans-serif'
     g.textAlign = 'center'
     g.fillText(
       language === 'th'

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
   <title>Transfer learning on /train: a frozen network makes 1,280 numbers; you train only a small layer on top</title>
   <rect width="960" height="280" fill="#fbe6a0"/>
-  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">TRANSFER LEARNING ON /TRAIN · ยืมตาที่ฝึกมาแล้ว สอนแค่การตัดสินใจ</text>
+  <text x="24" y="34" font-size="13" font-family="IBM Plex Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">TRANSFER LEARNING ON /TRAIN · ยืมตาที่ฝึกมาแล้ว สอนแค่การตัดสินใจ</text>
   <g font-size="15">
     <rect x="24" y="64" width="150" height="130" fill="#f7f5ef"/>
     <text x="40" y="94" font-weight="600" fill="#253122">Your example</text>

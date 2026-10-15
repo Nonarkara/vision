@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
   <title>From one frame to a box list: the eight steps of the detector</title>
   <rect width="960" height="430" fill="#fbe6a0"/>
-  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE FRAME TO A BOX LIST · จากภาพหนึ่งสู่รายการกรอบ</text>
+  <text x="24" y="34" font-size="13" font-family="IBM Plex Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE FRAME TO A BOX LIST · จากภาพหนึ่งสู่รายการกรอบ</text>
   <g font-size="15">
     <!-- row 1 -->
     <rect x="24" y="56" width="200" height="120" fill="#b6bfc1"/>
@@ -44,7 +44,7 @@
 
     <rect x="714" y="246" width="200" height="120" fill="#f15a30"/>
     <text x="726" y="274" font-weight="600" fill="#101010">8 Answer</text>
-    <text x="726" y="310" font-size="22" font-family="JetBrains Mono, ui-monospace, monospace" font-weight="600" fill="#101010">car 71%</text>
+    <text x="726" y="310" font-size="22" font-family="IBM Plex Mono, ui-monospace, monospace" font-weight="600" fill="#101010">car 71%</text>
     <text x="726" y="350" font-size="13" fill="#101010">≈ 0–50 boxes left</text>
   </g>
   <!-- row 1 arrows -->

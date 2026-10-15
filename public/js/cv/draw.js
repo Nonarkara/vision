@@ -54,7 +54,7 @@ export function paintImageData(ctx, img, { smooth = false } = {}) {
 function label(ctx, text, x, y, { fill = SIGNAL, ink = BLACK } = {}) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   const size = Math.round(12 * dpr)
-  ctx.font = `600 ${size}px "JetBrains Mono", "IBM Plex Sans Thai", monospace`
+  ctx.font = `600 ${size}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
   const pad = Math.round(4 * dpr)
   const w = ctx.measureText(text).width + pad * 2
   const h = size + pad * 2

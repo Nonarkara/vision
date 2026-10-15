@@ -2,10 +2,10 @@
 // only ever what a machine sees — the cones and the boxes. The traffic light
 // is the one exception, because a red light has to look red.
 
-import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.16.4'
-import { FOV, sightRange } from './perceive.js?v=1.16.4'
-import { VEHICLES } from './sim.js?v=1.16.4'
-import { ITEMS, STREET, offset } from './street.js?v=1.16.4'
+import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.16.5'
+import { FOV, sightRange } from './perceive.js?v=1.16.5'
+import { VEHICLES } from './sim.js?v=1.16.5'
+import { ITEMS, STREET, offset } from './street.js?v=1.16.5'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -241,7 +241,7 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
       if (car.id !== selected) continue
       const text = `${labelName(tr.label, lang)} ${Math.round(tr.conf * 100)}%`
-      ctx.font = `600 ${Math.max(10, 1.9 * k)}px "JetBrains Mono", monospace`
+      ctx.font = `600 ${Math.max(10, 1.9 * k)}px "IBM Plex Mono", monospace`
       const tw = ctx.measureText(text).width
       ctx.fillStyle = c.signal
       ctx.fillRect(o.x * k - half, o.y * k - half - 2.4 * k, tw + 0.8 * k, 2.4 * k)
@@ -304,7 +304,10 @@ function drawCar(ctx, k, car, c, sel) {
     ctx.strokeRect(-L / 2 - 3, -W / 2 - 3, L + 6, W + 6)
   }
   ctx.restore()
-  ctx.font = `700 ${Math.max(10, 2.2 * k)}px "Archivo Narrow", sans-serif`
+  // A car id is a number the machine reported, so it is set in the machine's
+  // voice. 600, not 700: Plex Mono ships 400 and 600, and asking for a weight
+  // we do not ship just lets the browser guess.
+  ctx.font = `600 ${Math.max(10, 2.2 * k)}px "IBM Plex Mono", monospace`
   ctx.fillStyle = c.white
   ctx.textAlign = 'center'
   ctx.fillText(String(car.id), car.x * k, car.y * k - 2.2 * k)

@@ -41,7 +41,7 @@
 .focus { display: grid; gap: 8px; padding: 16px; }
 .focus p { margin: 0; }
 .focus .label { color: var(--gray); }
-.focus-name { font-family: var(--narrow); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--naples); }
+.focus-name { font-family: var(--sans); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--naples); }
 html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .focus-row { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 8px; font-size: var(--micro); min-height: 2.9em; }
 /* The unnamed row: the lesson of the room, so it reads as its own line. */

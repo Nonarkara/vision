@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="IBM Plex Sans, IBM Plex Sans Thai, Noto Sans Thai, Helvetica, Arial, sans-serif">
   <title>One convolution step at the white car's left edge: neighbourhood times kernel, summed, equals 588</title>
   <rect width="960" height="380" fill="#fbe6a0"/>
-  <text x="24" y="34" font-size="13" font-family="JetBrains Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE CONVOLUTION STEP · หน้าต่าง 3×3 หนึ่งก้าว</text>
-  <g font-family="JetBrains Mono, ui-monospace, monospace" font-size="15" text-anchor="middle">
+  <text x="24" y="34" font-size="13" font-family="IBM Plex Mono, ui-monospace, monospace" fill="#253122" letter-spacing="1">ONE CONVOLUTION STEP · หน้าต่าง 3×3 หนึ่งก้าว</text>
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="15" text-anchor="middle">
     <!-- neighbourhood: real numbers from examples/03-convolution.mjs at (190,104) -->
     <text x="114" y="74" font-family="IBM Plex Sans, sans-serif" font-size="14" fill="#253122">brightness around (190, 104)</text>
     <rect x="24" y="86" width="60" height="60" fill="#4a4a4a"/><text x="54" y="122" fill="#f7f5ef">74</text>

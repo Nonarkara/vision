@@ -44,7 +44,7 @@ export function createMap(canvas) {
     clear(ctx)
     const W = canvas.width, H = canvas.height
     const dpr = canvasScale(canvas)
-    ctx.font = `${Math.round(11 * dpr)}px "JetBrains Mono", "IBM Plex Sans Thai", monospace`
+    ctx.font = `${Math.round(11 * dpr)}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
     ctx.textBaseline = 'top'
     if (!proj) {
       ctx.fillStyle = GRAY

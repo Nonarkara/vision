@@ -120,7 +120,7 @@ export function writer(el) {
 export function tag(ctx, text, x, y) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   const size = Math.round(12 * dpr), pad = Math.round(4 * dpr)
-  ctx.font = `600 ${size}px "JetBrains Mono", "IBM Plex Sans Thai", monospace`
+  ctx.font = `600 ${size}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
   ctx.textBaseline = 'top'
   const w = ctx.measureText(text).width + pad * 2
   ctx.fillStyle = '#101010'
