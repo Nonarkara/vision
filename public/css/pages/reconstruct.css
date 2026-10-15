@@ -34,7 +34,12 @@
 .copy-switch button[lang="th"] { font-family: var(--thai); letter-spacing: 0; }
 .copy-switch button[aria-pressed="true"] { background: var(--black); color: var(--naples); }
 
-.recon .pipe-scroll { margin-top: 8px; }
+.recon .chapter,
+.recon .chapter > header,
+.recon .chapter-body,
+.recon .flow-fig,
+.recon .pipe-scroll { min-width: 0; }
+.recon .pipe-scroll { margin-top: 8px; max-width: 100%; }
 .recon .diagram { color: var(--olive); }
 
 .reel-block { padding: 0 var(--gutter) clamp(28px, 4vw, 48px); display: grid; gap: 18px; }
