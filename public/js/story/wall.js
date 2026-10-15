@@ -7,7 +7,7 @@
 // operations centre is not to understand, but to not blink.
 
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js'
-import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.16.9'
+import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.17.0'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { t, esc, pct, onLang } from '../core/i18n.js'
 

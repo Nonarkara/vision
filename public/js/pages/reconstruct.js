@@ -4,7 +4,7 @@
 // The landmark worker is the focus room's worker. WASM compilation stays on
 // that one URL. Nothing in this file uploads, writes storage, or keeps a picture.
 
-import { onLang, setLang } from '../core/i18n.js'
+import { onLang } from '../core/i18n.js'
 
 const SIGNAL = '#f15a30'
 const GRAY = '#b6bfc1'
@@ -93,6 +93,12 @@ export function phrase(row, lang) {
   if (lang === 'zh') return row.zh
   if (lang === 'en') return row.en
   return row.th
+}
+
+/** The rail owns the language. Chinese is html[data-lang=zh], not a second switch on this room. */
+export function copyLang(current) {
+  const l = current ?? (typeof document !== 'undefined' ? document.documentElement.dataset.lang : 'th')
+  return l === 'en' || l === 'zh' ? l : 'th'
 }
 
 /** Column-major 4×4. R = Rz(roll) Rx(pitch) Ry(yaw), the same reading the focus room uses. */
@@ -292,7 +298,7 @@ export function loopEdges(loops = LOOPS) {
 const EDGES = loopEdges()
 
 async function boot() {
-  await import('../core/site.js?v=1.16.8')
+  await import('../core/site.js?v=1.17.0')
   const root = document.querySelector('[data-reconstruct]')
   if (!root) return
   const el = (name) => root.querySelector(`[data-${name}]`)
@@ -317,11 +323,6 @@ async function boot() {
   let userMoved = false
   let pointer = null
 
-  function copyLang() {
-    const chosen = root.dataset.copy
-    if (chosen === 'zh' || chosen === 'th' || chosen === 'en') return chosen
-    return document.documentElement.dataset.lang === 'en' ? 'en' : 'th'
-  }
   function say(row) {
     return phrase(row, copyLang())
   }
@@ -337,19 +338,10 @@ async function boot() {
 
   function paintCopy() {
     const lang = copyLang()
-    for (const btn of root.querySelectorAll('[data-copy-lang]')) {
-      btn.setAttribute('aria-pressed', String(btn.dataset.copyLang === lang))
-    }
     const iframe = el('reel')
-    if (iframe) {
-      const name = lang === 'zh' ? iframe.dataset.ariaZh : lang === 'en' ? iframe.dataset.ariaEn : iframe.dataset.ariaTh
-      if (name) iframe.setAttribute('aria-label', name)
-    }
-    const group = el('copy-switch')
-    if (group) {
-      const name = lang === 'zh' ? group.dataset.ariaZh : lang === 'en' ? group.dataset.ariaEn : group.dataset.ariaTh
-      if (name) group.setAttribute('aria-label', name)
-    }
+    if (!iframe) return
+    const name = lang === 'zh' ? iframe.dataset.ariaZh : lang === 'en' ? iframe.dataset.ariaEn : iframe.dataset.ariaTh
+    if (name) iframe.setAttribute('aria-label', name)
   }
 
   function paint() {
@@ -463,7 +455,7 @@ async function boot() {
     const mine = ++ticket
     let opened = null
     try {
-      const { openWebcam } = await import('../core/source.js?v=1.16.8')
+      const { openWebcam } = await import('../core/source.js?v=1.17.0')
       const w = worker = new Worker('/js/focus/worker.js')
       await new Promise((resolve, reject) => {
         const watchdog = setTimeout(() => reject(new Error('timeout')), 45000)
@@ -570,18 +562,6 @@ async function boot() {
     paint()
     drawCloud()
   })
-  for (const btn of root.querySelectorAll('[data-copy-lang]')) {
-    btn.addEventListener('click', () => {
-      const next = btn.dataset.copyLang
-      if (next === 'zh') root.dataset.copy = 'zh'
-      else {
-        delete root.dataset.copy
-        setLang(next)
-      }
-      paint()
-    })
-  }
-
   cloudCanvas.addEventListener('pointerdown', (event) => {
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, yaw: view.yaw, pitch: view.pitch }
     userMoved = true

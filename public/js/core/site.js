@@ -1,8 +1,8 @@
 // Shared page behaviour: the language switch and one toast. Imported by every page.
 
 import { lang, setLang, nextLang, onLang, t } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.16.9'
-import { konamiStep } from './konami.js?v=1.16.9'
+import { initFullscreen } from './fullscreen.js?v=1.17.0'
+import { konamiStep } from './konami.js?v=1.17.0'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(nextLang(lang())))

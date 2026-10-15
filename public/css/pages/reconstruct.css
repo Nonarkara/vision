@@ -12,27 +12,12 @@
 .recon-toc a { text-decoration: none; }
 .recon-toc a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
 
-.recon .zh { display: none; }
-.recon[data-copy="zh"] .th,
-.recon[data-copy="zh"] .en { display: none !important; }
-.recon[data-copy="zh"] .zh { display: revert; }
-.recon h1 [lang="zh"],
-.recon h2 [lang="zh"] { letter-spacing: 0; line-height: 1.15; font-size: 0.78em; }
-
-.copy-switch { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 18px; }
-.copy-switch button {
-  min-height: var(--target);
-  min-width: var(--target);
-  padding: 0 14px;
-  border: 0;
-  background: var(--quiet);
-  color: var(--olive);
-  font-family: var(--mono);
-  font-size: var(--micro);
-  cursor: pointer;
-}
-.copy-switch button[lang="th"] { font-family: var(--thai); letter-spacing: 0; }
-.copy-switch button[aria-pressed="true"] { background: var(--black); color: var(--naples); }
+/* Chinese follows the site language. vision.css shows .zh when
+   html[data-lang=zh], and hides an English span that sits immediately
+   before a Chinese one. Hiding .zh in this file blanks the room while
+   the rail is already on 中文. */
+.recon h1 [lang|="zh"],
+.recon h2 [lang|="zh"] { letter-spacing: 0; line-height: 1.15; font-size: 0.78em; }
 
 .recon .chapter,
 .recon .chapter > header,

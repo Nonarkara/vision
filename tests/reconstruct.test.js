@@ -9,7 +9,7 @@ import {
   matrixFromEuler, poseFromMatrix, applyRotation, applyTranspose,
   markCoverage, missingAngles, crownVisible, faceWidth,
   canonicalLandmarks, scalpCap, createCloud, observeHead,
-  projectPoint, loopEdges, phrase,
+  projectPoint, loopEdges, phrase, copyLang,
 } from '../public/js/pages/reconstruct.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -134,6 +134,10 @@ test('every dynamic phrase exists in Thai, English and Chinese', () => {
   }
   assert.equal(phrase(PHRASES.idle, 'th'), PHRASES.idle.th)
   assert.equal(phrase(PHRASES.idle, 'xx'), PHRASES.idle.th)
+  assert.equal(copyLang('zh'), 'zh')
+  assert.equal(copyLang('en'), 'en')
+  assert.equal(copyLang('th'), 'th')
+  assert.equal(copyLang('xx'), 'th')
 })
 
 test('the room page carries Thai, English and Chinese, and only the official reel embed', () => {
@@ -163,6 +167,8 @@ test('the room page carries Thai, English and Chinese, and only the official ree
   assert.match(html, /CC0/)
   assert.match(html, /face landmarks cover the face/i)
   assert.doesNotMatch(html, /localStorage|indexedDB/)
+  assert.doesNotMatch(html, /data-copy|copy-switch/)
+  assert.match(html, /class="en" lang="en" x="52" y="192"[^>]*>cameras<\/text>\s*<text class="zh"/)
 })
 
 test('the demo script does not store or upload, and stays inside the plate', () => {
@@ -174,6 +180,8 @@ test('the demo script does not store or upload, and stays inside the plate', () 
   assert.doesNotMatch(css, /#[0-9a-fA-F]{3,8}/)
   const rules = css.replace(/\/\*[\s\S]*?\*\//g, '')
   assert.doesNotMatch(rules, /gradient|box-shadow|border-radius/i)
+  assert.doesNotMatch(rules, /\.recon \.zh\s*\{[^}]*display:\s*none/)
+  assert.doesNotMatch(rules, /data-copy/)
 })
 
 test('the route exists and the frame policy is only the Instagram reel', () => {
