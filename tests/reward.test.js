@@ -45,3 +45,15 @@ test('before anything is tried, the readout invites both paths', () => {
   const { readout } = describeReward(createRewardLearner().snapshot(), null)
   assert.match(readout, /No paths tried yet/)
 })
+
+test('the next-choice explanation distinguishes exploration, learned preference and ties', () => {
+  asLang('en')
+  const learner = createRewardLearner()
+  assert.match(describeReward(learner.snapshot(), null).next, /left: it has not tried/)
+  learner.observe(0, 1)
+  assert.match(describeReward(learner.snapshot(), 0).next, /right: it has not tried/)
+  learner.observe(1, -1)
+  assert.match(describeReward(learner.snapshot(), 1).next, /left: it has the better average/)
+  learner.observe(0, -3)
+  assert.match(describeReward(learner.snapshot(), 0).next, /scores are tied/)
+})

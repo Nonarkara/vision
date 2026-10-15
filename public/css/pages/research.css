@@ -108,3 +108,28 @@
 .reward-paths strong { display: block; color: var(--naples); font-size: 1.4rem; margin-top: 6px; }
 .learning-interaction .readout { padding: 12px 0; color: inherit; }
 @media (max-width: 1100px) { .learning-cards { grid-template-columns: 1fr; gap: 32px; } }
+
+/* One question at a time; keep all three readable when scripts are unavailable. */
+.catalogue-note { padding: 12px var(--gutter); display: flex; align-items: center; flex-wrap: wrap; gap: 8px 20px; background: var(--field); color: var(--field-text); }
+.catalogue-note p { margin: 0; }
+.learning-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 20px; }
+.learning-choices .btn { white-space: normal; height: auto; justify-content: flex-start; text-align: left; gap: 12px; padding: 14px; }
+.learning-choices .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
+.learning-cards.is-guided { grid-template-columns: 1fr; margin-top: 0; }
+.learning-cards.is-guided article { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--gap); padding-top: 24px; }
+.learning-copy, .learning-demo { min-width: 0; }
+.learning-copy > p { max-width: 54ch; }
+.learning-task { margin-top: 0; font-weight: 600; }
+.learning-demo .learning-objects { min-height: 100px; align-items: center; justify-content: space-around; }
+.learning-demo .learning-answer { font-size: var(--body); }
+.learning-demo > a { display: inline-flex; min-height: var(--target); align-items: center; }
+.reward-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.reward-paths > div { border: 3px solid transparent; }
+.reward-paths > div[data-chosen="true"] { border-color: var(--signal); }
+.reward-marker { font-size: 2rem; display: block; }
+.reward-paths strong { font-size: var(--body); }
+.history-panel, .learning-cards article, .learning-cards h3 { scroll-margin-top: 100px; }
+@media (max-width: 900px) { .learning-cards.is-guided article { grid-template-columns: 1fr; gap: 12px; } }
+@media (max-width: 520px) { .learning-choices { grid-template-columns: 1fr; } .learning-choices .btn { padding: 10px 12px; } }
+.learning-continue { margin: 12px 0 0; }
+.learning-continue .btn { white-space: normal; text-align: left; }

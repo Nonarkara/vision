@@ -1,8 +1,8 @@
 // Shared page behaviour: the TH/EN switch and one toast. Imported by every page.
 
 import { lang, setLang, onLang, t } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.16.1'
-import { konamiStep } from './konami.js?v=1.16.1'
+import { initFullscreen } from './fullscreen.js?v=1.16.2'
+import { konamiStep } from './konami.js?v=1.16.2'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(lang() === 'th' ? 'en' : 'th'))
