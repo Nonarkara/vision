@@ -40,11 +40,22 @@ export const TEACH = {
 }
 
 /** One crop of a real frame. `labels` is what a person can see in that crop. */
-function tile(id, camera, labels) {
-  return { id, src: `/footage/tiles/${id}.jpg`, camera, labels }
+function tile(id, camera, labels, gate = false) {
+  return { id, src: `/footage/tiles/${id}.jpg`, camera, labels, gate }
 }
 
-export const GATE_TILES = [
+// Tiles a person can answer at a glance on a phone. Most crops are night
+// frames where a car is a few pixels of headlight and a person or motorbike
+// is not visible at all, so those stay in the library but never in the gate.
+const GATE_CLEAR = new Set([
+  // a car is plainly visible
+  'rama4-3', 'rama4-4', 'rama4-6', 'rama4-7', 'rama4-8', 'bigc-7',
+  // plainly no car: buildings, skyline, blank night sky
+  'bangna-3', 'bangna-5', 'bangna-6', 'bigc-0', 'bigc-1', 'bigc-2', 'bigc-3', 'bigc-8',
+  'ratchada-0', 'ratchada-1', 'ratchada-2', 'ratchada-7',
+])
+
+export const LIBRARY_TILES = [
   tile('rama4-3', 'rama4', ['car']),
   tile('rama4-4', 'rama4', ['car']),
   tile('rama4-5', 'rama4', ['car']),
@@ -80,3 +91,6 @@ export const GATE_TILES = [
   tile('bangna-6', 'bangna', ['car']),
   tile('bangna-7', 'bangna', ['person']),
 ]
+
+/** The tiles the Drive gate may deal. */
+export const GATE_TILES = LIBRARY_TILES.filter((t) => GATE_CLEAR.has(t.id)).map((t) => ({ ...t, gate: true }))

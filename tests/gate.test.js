@@ -7,8 +7,8 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { TEACH, GATE_TILES, CAMERAS, FOOTAGE_OWNER } from '../public/js/footage/library.js'
-import { makeChallenge, retryChallenge, check, TARGETS, readGate, writeGate, TILES, phrase, GATE_TEXT, taughtSentence } from '../public/js/drive/captcha.js'
+import { TEACH, GATE_TILES, LIBRARY_TILES, CAMERAS, FOOTAGE_OWNER } from '../public/js/footage/library.js'
+import { makeChallenge, retryChallenge, check, SLIPS, TARGETS, readGate, writeGate, TILES, phrase, GATE_TEXT, taughtSentence } from '../public/js/drive/captcha.js'
 import { nextLang } from '../public/js/core/i18n.js'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -32,7 +32,7 @@ test('teach scenes are real, distinct public-camera sequences', () => {
 test('every gate tile is a real crop with a known label', () => {
   const allowed = new Set(['car', 'motorcycle', 'person'])
   const ids = new Set()
-  for (const tile of GATE_TILES) {
+  for (const tile of LIBRARY_TILES) {
     assert.equal(ids.has(tile.id), false, `duplicate tile ${tile.id}`)
     ids.add(tile.id)
     assert.ok(CAMERAS[tile.camera], `${tile.id} names an unknown camera`)
@@ -41,32 +41,37 @@ test('every gate tile is a real crop with a known label', () => {
     const bytes = fs.statSync(publicFile(tile.src)).size
     assert.ok(bytes > 2000, `${tile.src} is too small to be a crop`)
   }
-  for (const key of allowed) {
+  for (const tile of GATE_TILES) assert.ok(ids.has(tile.id), tile.id)
+  for (const { key } of TARGETS) {
     const n = GATE_TILES.filter((t) => t.labels.includes(key)).length
     const negatives = GATE_TILES.filter((t) => !t.labels.includes(key)).length
-    assert.ok(n >= 2, `${key} needs at least two tiles, has ${n}`)
+    assert.ok(n >= 3, `${key} needs at least three clear tiles, has ${n}`)
     assert.ok(negatives >= TILES - 2, `${key} needs negatives for a nine-tile grid, has ${negatives}`)
   }
 })
 
-test('a wrong answer is not a pass, and the retry is a new grid of the same class', () => {
-  for (let index = 0; index < TARGETS.length; index++) {
-    const first = makeChallenge(11 + index, index)
-    assert.equal(check(first, first.answer), true)
-    const wrong = first.answer.slice(0, Math.max(0, first.answer.length - 1))
-    if (wrong.length !== first.answer.length) assert.equal(check(first, wrong), false)
-    const spare = [...Array(TILES).keys()].find((n) => !first.answer.includes(n))
-    assert.equal(check(first, [...first.answer, spare]), false)
-    const again = retryChallenge(first)
-    assert.equal(again.target.key, first.target.key)
-    assert.notEqual(again.tiles.map((t) => t.id).join('|'), first.tiles.map((t) => t.id).join('|'))
-    assert.equal(check(again, again.answer), true)
-    const marked = again.tiles.filter((t) => t.has).map((t) => t.id)
-    for (const id of marked) {
-      const tile = GATE_TILES.find((t) => t.id === id)
-      assert.ok(tile.labels.includes(again.target.key))
-    }
+test('the gate only asks for what a person can see in a night crop', () => {
+  assert.deepEqual(TARGETS.map((t) => t.key), ['car'])
+})
+
+test('one slip passes, two do not, and a blank or random guess does not', () => {
+  assert.equal(SLIPS, 1)
+  for (let seed = 1; seed < 400; seed++) {
+    const c = makeChallenge(seed, 0)
+    assert.ok(c.answer.length >= 2 && c.answer.length <= 6)
+    assert.equal(check(c, c.answer), true)
+    assert.equal(check(c, []), false)
+    const spares = [...Array(TILES).keys()].filter((n) => !c.answer.includes(n))
+    assert.equal(check(c, c.answer.slice(1)), true, 'one missed car still passes')
+    assert.equal(check(c, [...c.answer, spares[0]]), true, 'one extra square still passes')
+    assert.equal(check(c, c.answer.slice(2)), false, 'two missed cars do not pass')
+    assert.equal(check(c, [...c.answer, spares[0], spares[1]]), false, 'two extra squares do not pass')
+    assert.equal(check(c, [...Array(TILES).keys()]), false, 'select-all does not pass')
+    for (const t of c.tiles) assert.equal(t.has, GATE_TILES.find((g) => g.id === t.id).labels.includes('car'))
   }
+  const first = makeChallenge(11, 0)
+  const again = retryChallenge(first)
+  assert.notEqual(again.tiles.map((t) => t.id).join('|'), first.tiles.map((t) => t.id).join('|'))
 })
 
 const HAN = /\p{Script=Han}/u

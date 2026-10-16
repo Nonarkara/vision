@@ -31,7 +31,8 @@ function drawTile(g, tile, x, y, w, h) {
   g.fillRect(x, y, w, h)
   const img = photo(tile.src)
   if (!img || !img.complete || !img.naturalWidth) return false
-  const s = Math.max(w / img.naturalWidth, h / img.naturalHeight)
+  // Contain, not cover: a cover crop cut cars off the edge of wide frames.
+  const s = Math.min(w / img.naturalWidth, h / img.naturalHeight)
   const dw = img.naturalWidth * s
   const dh = img.naturalHeight * s
   g.save()
@@ -194,7 +195,8 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
         writeGate(storage, 'passed')
         showReveal()
       } else {
-        deal(retryChallenge(challenge, ++round), phrase(l, GATE_TEXT.miss))
+        // Same grid, same picks: let the person correct it rather than start over.
+        if (state) state.textContent = phrase(l, GATE_TEXT.miss)
       }
     } else if (e.target.closest('[data-captcha-reset]')) {
       clearSelection()

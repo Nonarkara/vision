@@ -104,10 +104,10 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate-head .lede { margin: 8px 0 0; max-width: 58ch; }
 .gate .stem-label { color: var(--naples); margin-bottom: 6px; }
 .captcha { display: grid; gap: 10px; align-content: start; max-width: 70ch; }
-.captcha-pad { position: relative; width: min(92vw, 420px); }
+.captcha-pad { position: relative; width: min(92vw, 640px); }
 .captcha-grid {
   position: relative; z-index: 0;
-  width: 100%; aspect-ratio: 1;
+  width: 100%; aspect-ratio: 16 / 10; /* the crops are wide night frames; a square cut cars off */
   background: var(--olive); border: 0; display: block;
   pointer-events: none;
 }
@@ -157,5 +157,5 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .chapter.gate-note { background: var(--quiet); color: var(--quiet-text); }
 @media (max-width: 900px) {
   .gate[data-open="true"] { grid-template-columns: 1fr; }
-  .captcha-pad { width: min(92vw, 420px); }
+  .captcha-pad { width: min(92vw, 640px); }
 }
