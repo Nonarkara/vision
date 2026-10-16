@@ -595,3 +595,13 @@ Branch reconciliation first. Ten branches had been worked on across three agents
 Verification. 284 tests pass, up from 244: `tests/learn-course.test.js` covers the reading-line arithmetic, the bilingual titles, resume and the hostile-stored-value cases; `tests/learning-path.test.js` covers the rail, the step marking and the coverage threshold. Browser-checked on the isolated preview at 8431 in both languages at 390×844 and 1280×900: the rail marks begin/look/teach/judge on the right room, scrolling to chapter 05 marks chapter 05 (the first implementation compared a document offset against a viewport one and reported chapter 08), progress and the resume link survive a reload, and the Chinese note appears on /learn and not on /reconstruct. The first Next button printed the English chapter title inside the Thai view — the contents link's last child was the English span — so both languages are now read from their own spans and checked as such. No camera was opened and no private imagery used.
 
 Gate green: 284 tests, 27 pages, 93 references, fonts/imports/privacy/docs/palette.
+
+### The gate a person can actually pass · 1.17.3 · 2026-10-16
+
+PR #12 (Cursor, from the maker's own testing: "no human can pass it") made the Drive gate passable: only crops where a car is plainly visible or plainly absent, cars-only, one slip forgiven, a miss keeps the grid for correcting, wide frames drawn with contain instead of a square cover-crop that cut cars off the edges.
+
+Review found one defect before merging: bangna-5 and bangna-6 were grouped as "plainly no car" while still carrying the car label — and the label is the answer key, so the gate demanded clicks a person could see no reason for, on roughly one grid in four, where one forgivable slip is not two. The label records what was in the crop; the gate needs what a person can see; those are different jobs. Both tiles left both hand-picked lists, the grouping is exported (GATE_PLAIN_CAR / GATE_PLAIN_NONE), and a new test holds the grouping and the labels in agreement — re-adding bangna-5 to the no-car list fails it, mutation-verified. The header comment still claimed a miss deals a new grid; that went too.
+
+Also this turn: Codex's 1.17.2 colour-room release was reviewed and kept (it was pushed but never deployed — live stayed on 1.17.1 until now), and the three stale PRs were reconciled: #5 and #6 carry work already committed to main directly in the 1.16.0/1.17.0 releases (verified file-by-file), and #9's one unreconciled idea — the path you walk — shipped as 1.17.1; its branch is preserved as archive/classroom-1.16.0-zh and deleted from the branch list.
+
+Gate green: 293 tests, 27 pages, 93 references, fonts/imports/privacy/docs/palette. Deployed 1.17.3; public health verified.

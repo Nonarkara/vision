@@ -1,5 +1,5 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.17.2'
+import '../core/site.js?v=1.17.3'
 import { evidence, loadCatalog } from '../core/catalog.js'
 
 // Share the catalogue loader: language changes also reuse an in-flight request.
@@ -93,7 +93,7 @@ followSectionLink()
 
 // Three teaching illustrations; only the one-step reward example learns values.
 import { bi, n, onLang, t, lang } from '../core/i18n.js'
-import { createRewardLearner, describeReward } from '../research/reward.js?v=1.17.2'
+import { createRewardLearner, describeReward } from '../research/reward.js?v=1.17.3'
 for (const interaction of document.querySelectorAll('.learning-interaction')) interaction.hidden = false
 const labelButton = document.querySelector('[data-reveal-labels]')
 labelButton.addEventListener('click', () => {
