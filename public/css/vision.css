@@ -237,7 +237,12 @@ h4 { font-size: var(--body); font-weight: 600; line-height: 1.3; margin: 1.4em 0
 .label { text-transform: uppercase; }
 .label [lang="th"], .label[lang="th"] { text-transform: none; letter-spacing: 0; font-family: var(--thai); }
 .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.lede { font-size: var(--lede); font-weight: 600; max-width: 34ch; }
+/* A lede is a lede. At 600 it stopped being an introduction and became a second
+   headline — on /colour and /learn the right-hand lede was competing with the
+   title at nearly the same visual weight, which is a hierarchy defect and not a
+   preference. The opening already asked for 400 and had to override this rule to
+   get it; the override is now the default and the exception is gone. */
+.lede { font-size: var(--lede); font-weight: 400; max-width: 34ch; }
 .prose { max-width: 62ch; }
 .prose ul, .prose ol { padding-left: 1.2em; }
 .prose li { margin-bottom: 0.5em; }
@@ -788,7 +793,7 @@ html[data-lang="th"] .lens-say { font-family: var(--thai); }
 
 /* The picture gets the larger half of the opening; copy stays at reading scale. */
 .opening h1 { font-size: clamp(3.5rem, 6vw, 6rem); }
-.opening-text .lede { font-weight: 400; font-size: clamp(1.125rem, 1.4vw, 1.25rem); max-width: 36ch; }
+.opening-text .lede { font-size: clamp(1.125rem, 1.4vw, 1.25rem); max-width: 36ch; }
 .opening-text .cta { margin-top: 24px; }
 .opening-text .btn.big { font-size: 1.125rem; padding: 0 18px; }
 .opening-stage .lens-say { min-height: 0; margin: 0; padding-block: 12px; }

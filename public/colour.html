@@ -19,8 +19,27 @@
     <p class="lede en" lang="en">This site has had four colours all along — Naples yellow, olive green, grey, and peach red — and each one has a job: the yellow is the paper, the olive is the ink, the grey is what the machine is not yet sure of, and the peach red only ever marks what the machine sees. All of that is a human decision. None of it is in the numbers.</p>
   </section>
 
-  <section class="chapter" id="study" aria-labelledby="study-h">
+  <section class="chapter study-chapter" id="study" aria-labelledby="study-h">
     <header><span class="chapter-no">01</span><h2 id="study-h"><span class="th" lang="th">สับสีใหม่แล้วดูว่ารู้สึกอย่างไร</span><span class="en" lang="en">Deal the colours again, then notice</span></h2></header>
+
+      <!-- The deal, at page scale. Four bands of solid colour, no ornament and no
+           words: a word on a dealt hue is a pairing nothing has certified, and
+           this study is the last place that should invent one. The bands run the
+           full height of the study, because a plate is not a rectangle in the
+           middle of a page — it is the page. Their heights are the house rule
+           made visible: the paper is most of the sheet, and what the machine
+           sees is a mark on it, not a field. -->
+      <div class="bands">
+        <div class="band-stack" id="bands" aria-hidden="true">
+          <span class="band" data-band="ground"></span>
+          <span class="seam" data-seam="1"></span>
+          <span class="band" data-band="ink"></span>
+          <span class="seam" data-seam="2"></span>
+          <span class="band" data-band="quiet"></span>
+          <span class="seam" data-seam="3"></span>
+          <span class="band" data-band="signal"></span>
+        </div>
+      </div>
     <div class="chapter-body">
 
       <div class="deal">
@@ -41,6 +60,13 @@
           <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's bar a third.</span></p>
         </div>
       </div>
+
+      <ol class="band-key">
+        <li data-key="ground"><span class="th" lang="th">พื้นกระดาษ</span><span class="en" lang="en">the paper</span></li>
+        <li data-key="ink"><span class="th" lang="th">หมึกที่เขียนด้วย</span><span class="en" lang="en">the ink</span></li>
+        <li data-key="quiet"><span class="th" lang="th">ส่วนที่ไม่ได้อ่านก่อน</span><span class="en" lang="en">the part nobody reads first</span></li>
+        <li data-key="signal"><span class="th" lang="th">สิ่งที่เครื่องเห็น</span><span class="en" lang="en">what the machine sees</span></li>
+      </ol>
 
       <p class="machine-line" id="machine-line" role="status"></p>
       <p class="gloss-line" id="gloss-line"></p>
