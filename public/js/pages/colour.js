@@ -14,7 +14,7 @@
  * exactly two values — a plate id and one word from a fixed list of ten. The page
  * never sends anything else, and the server has nowhere to put anything else.
  */
-import { assignments, contrast, ladder } from '../core/palette.js?v=1.17.1'
+import { assignments, contrast, ladder } from '../core/palette.js?v=1.17.2'
 
 const PLATES = assignments()
 const BY_ID = new Map(PLATES.map((p) => [p.id, p]))

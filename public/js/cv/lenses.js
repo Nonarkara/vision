@@ -6,7 +6,7 @@
 import * as ops from './ops.js'
 import { paintImageData, drawDetections, drawBlobs, drawMask, clear, NAPLES } from './draw.js'
 import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
-import { noteVehicles } from './spotted.js?v=1.17.1'
+import { noteVehicles } from './spotted.js?v=1.17.2'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
