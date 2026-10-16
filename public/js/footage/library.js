@@ -40,11 +40,28 @@ export const TEACH = {
 }
 
 /** One crop of a real frame. `labels` is what a person can see in that crop. */
-function tile(id, camera, labels) {
-  return { id, src: `/footage/tiles/${id}.jpg`, camera, labels }
+function tile(id, camera, labels, gate = false) {
+  return { id, src: `/footage/tiles/${id}.jpg`, camera, labels, gate }
 }
 
-export const GATE_TILES = [
+// Tiles a person can answer at a glance on a phone. Most crops are night
+// frames where a car is a few pixels of headlight and a person or motorbike
+// is not visible at all, so those stay in the library but never in the gate.
+//
+// The two lists are the hand-picked grouping, and a tile may only be in one of
+// them if its label agrees: a "plainly a car" tile must carry the car label,
+// a "plainly no car" tile must not. bangna-5 and bangna-6 carry a car label
+// but a car is not plainly visible in them, so they are in neither — the
+// label records what was in the crop, and the gate needs what a person can
+// see, and the two are not the same job.
+export const GATE_PLAIN_CAR = ['rama4-3', 'rama4-4', 'rama4-6', 'rama4-7', 'rama4-8', 'bigc-7']
+export const GATE_PLAIN_NONE = [
+  'bangna-3', 'bigc-0', 'bigc-1', 'bigc-2', 'bigc-3', 'bigc-8',
+  'ratchada-0', 'ratchada-1', 'ratchada-2', 'ratchada-7',
+]
+const GATE_CLEAR = new Set([...GATE_PLAIN_CAR, ...GATE_PLAIN_NONE])
+
+export const LIBRARY_TILES = [
   tile('rama4-3', 'rama4', ['car']),
   tile('rama4-4', 'rama4', ['car']),
   tile('rama4-5', 'rama4', ['car']),
@@ -80,3 +97,6 @@ export const GATE_TILES = [
   tile('bangna-6', 'bangna', ['car']),
   tile('bangna-7', 'bangna', ['person']),
 ]
+
+/** The tiles the Drive gate may deal. */
+export const GATE_TILES = LIBRARY_TILES.filter((t) => GATE_CLEAR.has(t.id)).map((t) => ({ ...t, gate: true }))

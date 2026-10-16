@@ -1,10 +1,11 @@
 // The Drive gate: nine real camera crops, and a known answer.
 //
-// A visitor has to select every tile that contains a car, a motorbike, or a
-// person. The crops are public iTIC frames (see footage/library.js). The
-// answer is the label checked against that crop, not a drawing and not a
-// guess the page invents at click time. A wrong set is not a partial pass:
-// the page deals a new grid.
+// A visitor selects every tile that contains a car. Only crops where the
+// answer is obvious are dealt (see GATE_PLAIN_CAR and GATE_PLAIN_NONE in
+// footage/library.js), one slip is forgiven, and a miss keeps the same grid
+// so people can fix their picks. The crops are public iTIC frames (see
+// footage/library.js). The answer is the label checked against that crop,
+// not a drawing and not a guess the page invents at click time.
 //
 // This is the job supervised labelling actually is. reCAPTCHA put the same
 // job in front of people so the clicks could train vision models. The
@@ -20,17 +21,15 @@ export const TILES = GRID * GRID
  *  label is [Thai, English, Simplified Chinese]. */
 export const TARGETS = [
   { key: 'car', coco: 3, label: ['รถยนต์', 'a car', '汽车'] },
-  { key: 'motorcycle', coco: 4, label: ['รถจักรยานยนต์', 'a motorbike', '摩托车'] },
-  { key: 'person', coco: 1, label: ['คน', 'a person', '人'] },
 ]
 
 /** Gate sentences that are built in script, not in the HTML. */
 export const GATE_TEXT = {
   ask: ['เลือกทุกช่องที่มี', 'Select every tile with ', '选出每一格含有'],
   miss: [
-    'ยังไม่ตรง ชุดที่เลือกไม่ใช่คำตอบ นี่คือตารางใหม่',
-    'Not quite — that set does not match. Here is a new grid.',
-    '还不对，这组选择与答案不符。这是一组新格子。',
+    'ยังไม่ตรง ลองดูอีกครั้ง ช่องที่มีรถยนต์ให้เลือก ช่องที่ไม่มีให้เว้นไว้ หรือกด “ทำแบบทดสอบใหม่”',
+    'Not quite. Look again: select the squares with a car and leave the rest, or press “Try a new challenge”.',
+    '还不对。再看一次：选出有汽车的格子，其余留空，或按“再做一题”。',
   ],
 }
 
@@ -103,12 +102,13 @@ export function retryChallenge(previous, step = 1) {
   return next
 }
 
-/** Did the visitor pick exactly the right tiles? No partial credit. */
+/** How many slips (a missed car or an extra square) still pass. */
+export const SLIPS = 1
+
+/** Did the visitor pick the right tiles? At least one car, at most one slip. */
 export function check(challenge, picked) {
-  const want = challenge.answer
-  const got = [...new Set(picked)].sort((a, b) => a - b)
-  if (got.length !== want.length) return false
-  return got.every((v, i) => v === want[i])
+  const s = score(challenge, picked)
+  return s.right > 0 && s.missed + s.extra <= SLIPS
 }
 
 /** How many were right and how many were missed. */

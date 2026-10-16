@@ -164,16 +164,15 @@ test('the same seed always produces the same challenge — reloading is not a ne
   assert.deepEqual(makeChallenge(42).tiles, makeChallenge(42).tiles)
 })
 
-test('you pass only by selecting exactly the right squares', () => {
+test('you pass with the right squares or one slip, not two', () => {
   const c = makeChallenge(7)
   assert.equal(check(c, c.answer), true)
   assert.equal(check(c, [...c.answer, c.answer[0]]), true, 'selecting a square twice is still selecting it once')
-  const missing = c.answer.slice(1)
-  if (missing.length) assert.equal(check(c, missing), false, 'missing one square is a fail')
-  // A square the answer does not contain. Picking a slot next to a correct one
-  // can land on another correct one, which is not an over-selection at all.
-  const spare = [...Array(TILES).keys()].find((n) => !c.answer.includes(n))
-  assert.equal(check(c, [...c.answer, spare]), false, 'one square too many is a fail, not a pass')
+  const spare = [...Array(TILES).keys()].filter((n) => !c.answer.includes(n))
+  assert.equal(check(c, c.answer.slice(1)), true, 'one missed square is forgiven')
+  assert.equal(check(c, [...c.answer, spare[0]]), true, 'one extra square is forgiven')
+  assert.equal(check(c, c.answer.slice(2)), false, 'two missed squares is a fail')
+  assert.equal(check(c, [...c.answer, spare[0], spare[1]]), false, 'two extra squares is a fail')
 })
 
 test('a wrong answer explains itself without scolding anyone', () => {
