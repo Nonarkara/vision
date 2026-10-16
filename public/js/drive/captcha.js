@@ -1,11 +1,11 @@
 // The Drive gate: nine real camera crops, and a known answer.
 //
 // A visitor selects every tile that contains a car. Only crops where the
-// answer is obvious are dealt (see GATE_CLEAR in footage/library.js), one
-// slip is forgiven, and a miss keeps the same grid so people can fix it. The crops are public iTIC frames (see footage/library.js). The
-// answer is the label checked against that crop, not a drawing and not a
-// guess the page invents at click time. A wrong set is not a partial pass:
-// the page deals a new grid.
+// answer is obvious are dealt (see GATE_PLAIN_CAR and GATE_PLAIN_NONE in
+// footage/library.js), one slip is forgiven, and a miss keeps the same grid
+// so people can fix their picks. The crops are public iTIC frames (see
+// footage/library.js). The answer is the label checked against that crop,
+// not a drawing and not a guess the page invents at click time.
 //
 // This is the job supervised labelling actually is. reCAPTCHA put the same
 // job in front of people so the clicks could train vision models. The

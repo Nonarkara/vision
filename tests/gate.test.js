@@ -7,7 +7,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { TEACH, GATE_TILES, LIBRARY_TILES, CAMERAS, FOOTAGE_OWNER } from '../public/js/footage/library.js'
+import { TEACH, GATE_TILES, LIBRARY_TILES, GATE_PLAIN_CAR, GATE_PLAIN_NONE, CAMERAS, FOOTAGE_OWNER } from '../public/js/footage/library.js'
 import { makeChallenge, retryChallenge, check, SLIPS, TARGETS, readGate, writeGate, TILES, phrase, GATE_TEXT, taughtSentence } from '../public/js/drive/captcha.js'
 import { nextLang } from '../public/js/core/i18n.js'
 
@@ -52,6 +52,26 @@ test('every gate tile is a real crop with a known label', () => {
 
 test('the gate only asks for what a person can see in a night crop', () => {
   assert.deepEqual(TARGETS.map((t) => t.key), ['car'])
+})
+
+test('the hand-picked grouping and the labels agree', () => {
+  // A tile was once grouped by eye as "plainly no car" while its label still
+  // said car — and the label is the answer key, so the gate demanded a click a
+  // person could not see a reason for. The grouping is a human judgement about
+  // a photograph; this test is the part a machine can hold: whichever way the
+  // eye groups a tile, the label must agree, or the tile belongs in neither
+  // list until someone looks again.
+  const byId = new Map(LIBRARY_TILES.map((t) => [t.id, t]))
+  assert.equal(GATE_PLAIN_CAR.length + GATE_PLAIN_NONE.length, GATE_TILES.length, 'a gate tile outside both lists would be dealt without anyone vouching for it')
+  for (const id of GATE_PLAIN_CAR) {
+    assert.ok(byId.has(id), `${id} is grouped as plainly-a-car but is not in the library`)
+    assert.ok(byId.get(id).labels.includes('car'), `${id} is grouped as plainly-a-car but its label does not say car`)
+  }
+  for (const id of GATE_PLAIN_NONE) {
+    assert.ok(byId.has(id), `${id} is grouped as plainly-no-car but is not in the library`)
+    assert.equal(byId.get(id).labels.includes('car'), false, `${id} is grouped as plainly-no-car but its label says car — the gate would demand a click nobody can see a reason for`)
+  }
+  assert.equal(new Set([...GATE_PLAIN_CAR, ...GATE_PLAIN_NONE]).size, GATE_PLAIN_CAR.length + GATE_PLAIN_NONE.length, 'a tile listed in both groups would be both answer and decoy')
 })
 
 test('one slip passes, two do not, and a blank or random guess does not', () => {
