@@ -386,7 +386,59 @@ em { font-style: italic; }
   .more-list a { white-space: normal; }
 }
 
+/* ── The learning path ───────────────────────────────────────────────────
+   Four steps a person walks: begin, look, teach, judge. The step you are
+   standing on is the step the page itself belongs to, so the rail is read by
+   position as well as by colour — colour alone fails anyone who cannot
+   separate olive from naples, and this bar sits directly under another one. */
+
+.path {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background: var(--quiet);
+  color: var(--quiet-text);
+  border-bottom: 1px solid var(--gray);
+}
+.path a {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 16px 16px var(--gutter);
+  text-decoration: none;
+  border-inline-start: 1px solid var(--gray);
+}
+.path a:first-child { border-inline-start: 0; }
+.path .num { font-size: var(--fine); font-family: var(--mono); }
+.step-name { font-weight: 700; font-size: var(--body); line-height: 1.15; }
+.step-name [lang="th"] { font-family: var(--thai); }
+.step-note { font-size: var(--fine); max-width: 30ch; }
+/* The step you are on. Font weight says it too, so the state survives a
+   monochrome print and a screen reader that never sees the colour. */
+.path a[data-step][aria-current="step"] {
+  background: var(--olive); color: var(--naples);
+  box-shadow: inset 0 -4px 0 var(--signal);
+}
+.path a[data-step][aria-current="step"] .num { color: var(--naples); }
+.path a[data-step]:hover, .path a[data-step]:focus-visible { background: var(--naples); }
+.path a[data-step][aria-current="step"]:hover { background: var(--olive); }
+@media (max-width: 800px) {
+  .path { grid-template-columns: 1fr 1fr; }
+  .path a { padding: 12px 14px 14px; }
+  .path a:nth-child(odd) { border-inline-start: 0; }
+  .path a:nth-child(n + 3) { border-top: 1px solid var(--gray); }
+  .step-note { max-width: none; }
+}
+
 /* ── Fields ──────────────────────────────────────────────────────────── */
+
+/* A room with no Chinese says so, in Chinese, before the English it falls back
+   to. Quiet, at the top, and never in the way of the page itself. */
+.lang-note {
+  margin: 0;
+  padding: 10px var(--gutter);
+  background: var(--signal);
+  color: var(--black);
+  font-size: var(--micro);
+  font-family: var(--zh);
+}
 
 .field-ink { background: var(--field); color: var(--field-text); }
 .field-quiet { background: var(--quiet); color: var(--quiet-text); }

@@ -8,6 +8,7 @@
 </head>
 <body>
 <!--#nav-->
+<!--#path-->
 <main id="main" class="learn">
 
   <header class="page-head">
@@ -37,6 +38,7 @@
     <a href="#detector"><span class="num">07</span> <span class="th" lang="th">โครงข่ายที่ฝึกแล้ว</span><span class="en" lang="en">A trained network</span></a>
     <a href="#limits"><span class="num">08</span> <span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></a>
   </nav>
+  <p class="learn-progress" data-progress role="status"></p>
 
   <figure class="flow-fig learn-map pipe-scroll">
     <svg class="diagram flow" viewBox="0 0 1000 130">
@@ -109,8 +111,8 @@
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่าพิกเซล คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
-        <p class="en" lang="en">A picture on a screen is made of tiny squares called pixels. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
+        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่า<a href="/handbook/glossary#pixel">พิกเซล</a> คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
+        <p class="en" lang="en">A picture on a screen is made of tiny squares called <a href="/handbook/glossary#pixel">pixels</a>. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
         <p class="th" lang="th">เลื่อนแถบให้เหลือช่องน้อยลง แล้วตัวเลขจะปรากฏในช่อง ภาพจากกล้องจริงหนึ่งภาพมีตัวเลขแบบนี้หลายล้านตัว ทุกอย่างที่เหลือในหน้านี้คือการคิดเลขกับตารางนี้</p>
         <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p>
         <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
@@ -162,10 +164,10 @@
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">วิธีที่ง่ายที่สุดในการแยกสิ่งของออกจากพื้นหลัง คือเลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่ง พิกเซลที่สว่างกว่าเส้นนี้นับเป็น “สว่าง” ที่เหลือนับเป็น “มืด” วิธีนี้เรียกว่าการตัดด้วยค่าขีดแบ่ง (thresholding)</p>
-        <p class="en" lang="en">The simplest way to separate something from its background: pick one number as a line. Pixels brighter than the line count as “light”, the rest as “dark”. This is called thresholding.</p>
-        <p class="th" lang="th">กราฟใต้ภาพคือฮิสโตแกรม นับว่ามีพิกเซลกี่จุดในแต่ละระดับความสว่าง ปุ่ม “อัตโนมัติ” ใช้วิธีของโอตสึ (Otsu, 1979) หาเส้นแบ่งที่แยกพิกเซลเป็นสองกลุ่มได้ชัดที่สุด เครื่องสแกนเอกสารยังใช้หลักนี้อยู่ทุกวันนี้</p>
-        <p class="en" lang="en">The chart under the picture is a histogram: how many pixels sit at each brightness. “Automatic” uses Otsu's method (Otsu, 1979) to find the line that splits the pixels most cleanly into two groups. Document scanners still work this way.</p>
+        <p class="th" lang="th">วิธีที่ง่ายที่สุดในการแยกสิ่งของออกจากพื้นหลัง คือเลือกตัวเลขหนึ่งตัวเป็นเส้นแบ่ง พิกเซลที่สว่างกว่าเส้นนี้นับเป็น “สว่าง” ที่เหลือนับเป็น “มืด” วิธีนี้เรียกว่าการตัดด้วยค่าขีดแบ่ง (<a href="/handbook/glossary#threshold">thresholding</a>)</p>
+        <p class="en" lang="en">The simplest way to separate something from its background: pick one number as a line. Pixels brighter than the line count as “light”, the rest as “dark”. This is called <a href="/handbook/glossary#threshold">thresholding</a>.</p>
+        <p class="th" lang="th">กราฟใต้ภาพคือ<a href="/handbook/glossary#histogram">ฮิสโตแกรม</a> นับว่ามีพิกเซลกี่จุดในแต่ละระดับความสว่าง ปุ่ม “อัตโนมัติ” ใช้วิธีของ<a href="/handbook/glossary#otsus-method">โอตสึ (Otsu, 1979)</a> หาเส้นแบ่งที่แยกพิกเซลเป็นสองกลุ่มได้ชัดที่สุด เครื่องสแกนเอกสารยังใช้หลักนี้อยู่ทุกวันนี้</p>
+        <p class="en" lang="en">The chart under the picture is a <a href="/handbook/glossary#histogram">histogram</a>: how many pixels sit at each brightness. “Automatic” uses <a href="/handbook/glossary#otsus-method">Otsu’s method</a> (Otsu, 1979) to find the line that splits the pixels most cleanly into two groups. Document scanners still work this way.</p>
         <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">ส่องกล้องไปที่กระดาษที่มีตัวหนังสือ แล้วกด “อัตโนมัติ”</span><span class="en" lang="en">Point your camera at a page of writing and press “Automatic”.</span></p>
       </div>
       <div class="bench">
@@ -192,8 +194,8 @@
     </header>
     <div class="chapter-body split">
       <div class="prose">
-        <p class="th" lang="th">วางหน้าต่างขนาด 3×3 ช่องลงบนภาพ เอาตัวเลขเก้าตัวใต้หน้าต่างคูณกับตัวเลขเก้าตัวของ “เคอร์เนล” แล้วบวกกันทั้งหมด ได้พิกเซลใหม่หนึ่งจุด จากนั้นเลื่อนไปหนึ่งช่องแล้วทำซ้ำจนทั่วภาพ ขั้นตอนนี้เรียกว่าคอนโวลูชัน (convolution)</p>
-        <p class="en" lang="en">Lay a 3×3 window on the picture. Multiply the nine numbers under it by the nine numbers of a “kernel”, and add them all up: that is one new pixel. Slide one step and repeat, across the whole picture. This is called convolution.</p>
+        <p class="th" lang="th">วางหน้าต่างขนาด 3×3 ช่องลงบนภาพ เอาตัวเลขเก้าตัวใต้หน้าต่างคูณกับตัวเลขเก้าตัวของ “เคอร์เนล” แล้วบวกกันทั้งหมด ได้พิกเซลใหม่หนึ่งจุด จากนั้นเลื่อนไปหนึ่งช่องแล้วทำซ้ำจนทั่วภาพ ขั้นตอนนี้เรียกว่า<a href="/handbook/glossary#convolution">คอนโวลูชัน (convolution)</a></p>
+        <p class="en" lang="en">Lay a 3×3 window on the picture. Multiply the nine numbers under it by the nine numbers of a “<a href="/handbook/glossary#kernel-filter">kernel</a>”, and add them all up: that is one new pixel. Slide one step and repeat, across the whole picture. This is called <a href="/handbook/glossary#convolution">convolution</a>.</p>
         <p class="th" lang="th">เปลี่ยนตัวเลขเก้าตัว ผลก็เปลี่ยน ภาพอาจเบลอ คมขึ้น หรือเหลือแต่ขอบ แตะที่ภาพเพื่อย้ายหน้าต่าง แล้วดูการคำนวณจริงด้านล่าง</p>
         <p class="en" lang="en">Change the nine numbers and the result changes: blur, sharpen, or nothing but edges. Tap the picture to move the window and watch the real arithmetic below it.</p>
         <p class="th" lang="th">นี่คือเมล็ดพันธุ์ของโครงข่ายประสาทเทียมแบบคอนโวลูชัน (CNN) ต่างกันเพียงว่าไม่มีใครเลือกตัวเลขให้ CNN มันเรียนรู้ตัวเลขเองจากภาพตัวอย่าง และซ้อนหน้าต่างแบบนี้หลายพันอันเป็นชั้น ๆ (LeCun และคณะ, 1998; Krizhevsky และคณะ, 2012)</p>

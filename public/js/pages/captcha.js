@@ -4,8 +4,8 @@
 // opens the room. A miss deals a new grid from the same labels. The nine
 // squares are buttons; the canvas only shows the photographs.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.0'
-import { features, train, pick } from '../drive/teach.js?v=1.17.0'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.1'
+import { features, train, pick } from '../drive/teach.js?v=1.17.1'
 
 const images = new Map()
 function photo(src) {

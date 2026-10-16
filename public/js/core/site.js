@@ -1,8 +1,8 @@
 // Shared page behaviour: the language switch and one toast. Imported by every page.
 
-import { lang, setLang, nextLang, onLang, t } from './i18n.js'
-import { initFullscreen } from './fullscreen.js?v=1.17.0'
-import { konamiStep } from './konami.js?v=1.17.0'
+import { lang, setLang, nextLang, onLang, t, noteMissingTranslation } from './i18n.js'
+import { initFullscreen } from './fullscreen.js?v=1.17.1'
+import { konamiStep } from './konami.js?v=1.17.1'
 
 for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(nextLang(lang())))
@@ -21,6 +21,12 @@ function paintAria() {
 }
 paintAria()
 onLang(paintAria)
+
+// Chinese is being written room by room. Where a room has none, the English
+// stays visible — and the reader is told that, rather than left to wonder
+// whether an English page is simply what Chinese looks like.
+noteMissingTranslation()
+onLang(() => noteMissingTranslation())
 
 // A room link that straddles the scroller is a half word against the chevron
 // (08–10 at 1024–1280). Hide that link. Scrolling it away would walk the rail

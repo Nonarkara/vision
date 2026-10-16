@@ -36,6 +36,41 @@ export function onLang(fn) {
   document.addEventListener('langchange', () => fn(lang()))
 }
 
+/**
+ * Say so when this page has no Chinese, instead of quietly showing English.
+ *
+ * Every room is written in Thai and English. Chinese is being added room by
+ * room, and where it is missing CSS keeps the English visible so the page is
+ * never blank — which is the right behaviour for the content and the wrong
+ * behaviour for the reader, because nothing says what is happening. A visitor
+ * who asked for Chinese and silently received English has been told, by
+ * implication, that this is what Chinese looks like.
+ *
+ * "Has Chinese" is counted rather than declared, because a page can carry a
+ * few Chinese lines without being a Chinese page: the learning-path rail is
+ * written in all three languages and appears on four rooms, and eight Chinese
+ * spans do not make a room translated. A room is treated as translated once
+ * at least half its lines have a Chinese span beside them — the rooms that are
+ * finished score 1.00, the rest score below 0.02, so the line is nowhere near
+ * either. The note is a status line, not an error, and never blocks the page.
+ */
+export function noteMissingTranslation(root = document.body) {
+  // Called at module scope, so the body may not be a real element yet — or may
+  // not be one at all, under a test harness. Nothing to say to nobody.
+  if (typeof root?.querySelector !== 'function') return
+  const existing = root.querySelector('.lang-note')
+  if (existing) existing.remove()
+  if (lang() !== 'zh') return
+  const th = root.querySelectorAll('[lang="th"]').length
+  const zh = root.querySelectorAll('[lang|="zh"]').length
+  if (th > 0 && zh >= th / 2) return
+  const note = document.createElement('p')
+  note.className = 'lang-note'
+  note.setAttribute('role', 'status')
+  note.innerHTML = '<span lang="zh-Hans">这一页还没有中文，下面是英文内容。中文正在逐个房间补上。</span>'
+  root.prepend(note)
+}
+
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
 export function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ESC[c])

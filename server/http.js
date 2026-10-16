@@ -114,10 +114,21 @@ export function safeResolve(root, urlPath) {
   } catch { return null }
 }
 
-/** Assemble a page: partials in, current page marked, version stamped. */
-export function assemblePage(html, { partials, page, version }) {
+/**
+ * The four rooms of the path a person walks, in order. A page that is one of
+ * them marks its own step, so "where am I" is answered by the markup rather
+ * than by a colour only a sighted reader can see.
+ */
+const PATH_STEP = { '/learn': 'begin', '/cameras': 'look', '/train': 'teach', '/games': 'judge' }
+
+/** Assemble a page: partials in, current page and path step marked, version stamped. */
+export function assemblePage(html, { partials, page, version, route }) {
   let out = html.replace(/<!--#(\w+)-->/g, (m, name) => partials[name] ?? m)
   out = out.replace(`data-page="${page}"`, `data-page="${page}" aria-current="page"`)
+  // `data-step` values are words, never page names, so this can only ever
+  // touch the learning-path rail and not some other element's attribute.
+  const step = PATH_STEP[route]
+  if (step) out = out.replaceAll(`data-step="${step}"`, `data-step="${step}" aria-current="step"`)
   return out.replaceAll('{{v}}', version)
 }
 
@@ -238,7 +249,7 @@ export function createStatic({ root, version, log = () => {} }) {
   function page(req, res, pageName, status = 200) {
     const found = safeResolve(root, `/${pageName}.html`)
     if (!found) return false
-    const html = socialMeta(assemblePage(fs.readFileSync(found.full, 'utf8'), { partials: partials(), page: pageName, version }), routeOf(pageName), status)
+    const html = socialMeta(assemblePage(fs.readFileSync(found.full, 'utf8'), { partials: partials(), page: pageName, version, route: routeOf(pageName) }), routeOf(pageName), status)
     const body = Buffer.from(html)
     // Compress only when this client said it can read gzip — never for the rest.
     const gz = wantsGzip(req) ? zlib.gzipSync(body) : null

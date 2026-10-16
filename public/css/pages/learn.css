@@ -20,6 +20,42 @@
   transition: background-color 160ms var(--ease), color 160ms var(--ease);
 }
 .learn-toc a:hover, .learn-toc a:focus-visible { background: var(--field); color: var(--field-text); }
+/* Read, and being read now. The tick is a character, not a colour, so the
+   state survives a monochrome screen; the bar marks the current chapter
+   without hiding its own label. */
+.learn-toc a.is-read::before { content: "✓"; font-size: 0.9em; opacity: 0.75; }
+.learn-toc a[aria-current="location"] { background: var(--field); color: var(--field-text); box-shadow: inset 0 -3px 0 var(--signal); }
+
+/* How far someone has come, and where they stopped. One quiet line. */
+.learn-progress {
+  display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline;
+  padding: 10px var(--gutter) 0; margin: 0;
+  font-size: var(--micro); color: var(--quiet-text);
+}
+.learn-resume { color: inherit; text-decoration-thickness: 1px; }
+.learn-resume:hover, .learn-resume:focus-visible { color: var(--text); }
+
+/* The foot of every chapter: where you came from, and the one button that
+   takes you on. The next chapter is named on the button, so the step forward
+   is a choice rather than a guess. */
+.chapter-step {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center;
+  padding: 0 var(--gutter) 40px;
+}
+.chapter-step a {
+  display: inline-flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  min-height: var(--target); padding: 6px 14px;
+  border: 1px solid currentColor;
+  font-size: var(--micro); text-decoration: none;
+}
+.chapter-step a:hover, .chapter-step a:focus-visible { background: var(--field); color: var(--field-text); }
+.chapter-next { margin-inline-start: auto; }
+.chapter-next .next-name { font-weight: 700; }
+.chapter-back { opacity: 0.85; }
+@media (max-width: 560px) {
+  .chapter-step { padding-bottom: 32px; }
+  .chapter-next { margin-inline-start: 0; width: 100%; justify-content: center; }
+}
 
 /* The journey map: the eight chapters as one path, drawn, tappable. */
 .learn-map { padding: 16px var(--gutter) 8px; }
