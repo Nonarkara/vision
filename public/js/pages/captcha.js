@@ -4,8 +4,8 @@
 // opens the room. A miss deals a new grid from the same labels. The nine
 // squares are buttons; the canvas only shows the photographs.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.3'
-import { features, train, pick } from '../drive/teach.js?v=1.17.3'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.4'
+import { features, train, pick } from '../drive/teach.js?v=1.17.4'
 
 const images = new Map()
 function photo(src) {
@@ -68,6 +68,11 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
   const taughtLine = root.querySelector('[data-gate-taught]')
   const reveal = root.querySelector('[data-gate-reveal]')
   const captcha = root.querySelector('[data-captcha]')
+  // The skip lives OUTSIDE the captcha block on purpose. Everything inside that
+  // block is hidden when the reveal opens, so a skip placed there would vanish
+  // at exactly the moment someone who has struggled with the grid needs it.
+  const skip = root.querySelector('[data-gate-skip]')
+  const skipNote = root.querySelector('.gate-skip-note')
 
   let l = lang()
   let round = 0
@@ -186,6 +191,21 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
     if (tile && !captcha?.hasAttribute('hidden')) { select(Number(tile.dataset.tile)); return }
     if (e.target.closest('[data-gate-teach]')) { teach(); return }
     if (e.target.closest('[data-gate-enter]')) { onEnter?.(); return }
+    // Skip goes straight into the room. It does NOT show the reveal, because the
+    // reveal says "what you just did is supervised labelling" — and whoever skips
+    // did not do it. Passing through the reveal would put a false note in front of
+    // them, which is the one thing this gate must never do.
+    //
+    // Note on the stored value: this writes 'skipped' and then calls onEnter(),
+    // which itself writes 'entered'. 'entered' is what wins, and that is correct
+    // — it is the state that reopens the room on reload — but it does mean the
+    // tab cannot afterwards distinguish a skip from a pass. That is a limit of
+    // this design, not a claim that the gate records which door you used.
+    if (e.target.closest('[data-gate-skip]')) {
+      writeGate(storage, 'skipped')
+      onEnter?.()
+      return
+    }
     if (e.target.closest('[data-captcha-pass]')) {
       const ok = check(challenge, [...picked])
       if (ok) {

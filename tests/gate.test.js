@@ -3,6 +3,7 @@
 // without a browser.
 
 import { test } from 'node:test'
+import { readFileSync } from 'node:fs'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -143,4 +144,42 @@ test('passing is remembered in the session store and is not remembered before th
   writeGate(storage, 'entered')
   assert.equal(readGate(storage), 'entered')
   assert.equal(readGate({ getItem() { throw new Error('blocked') } }), '')
+})
+
+// ── The way out ────────────────────────────────────────────────────────────
+// A gate that cannot be opened is a wall. This one asks a question a person
+// might simply not be able to answer — small dark crops, a crowded phone, eyes
+// that are not what they were — and locking a CLASSROOM behind that would be
+// the exact opposite of what this site argues.
+
+test('the gate offers a way past it, and the way out is reachable while shut', () => {
+  const html = readFileSync(new URL('../public/drive.html', import.meta.url), 'utf8')
+  // Outside .gate-replay, which is display:none until the gate has been passed.
+  // Inside it, the skip would be invisible precisely when someone needs it.
+  const gateOut = html.indexOf('class="gate-out"')
+  assert.ok(gateOut > -1, 'there is no .gate-out block on the page')
+  const replay = html.indexOf('class="gate-replay"')
+  assert.ok(replay > -1 && replay < gateOut, 'the way out must come after, not inside, .gate-replay')
+  assert.ok(html.includes('data-gate-skip'), 'there is no control that opens the room without the question')
+
+  const css = readFileSync(new URL('../public/css/pages/drive.css', import.meta.url), 'utf8')
+  assert.match(css, /\.gate\[data-open="true"\]\s*\.gate-out\s*\{\s*display:\s*none/, 'the way out should disappear once you are through')
+  // The BASE rule must not hide it. Matching a bare `.gate-out { … display:none }`
+  // would also match inside the data-open rule above, which hides it only after
+  // you are through — so look at the base rule on its own.
+  const baseRule = /\.gate-out\s*\{([^}]*)\}/.exec(css)
+  assert.ok(baseRule, '.gate-out has no rule of its own')
+  assert.doesNotMatch(baseRule[1], /display:\s*none/, '.gate-out is hidden while the gate is shut')
+})
+
+test('the way out is offered in all three languages, and says it is not a lock', () => {
+  const html = readFileSync(new URL('../public/drive.html', import.meta.url), 'utf8')
+  for (const lang of ['th', 'en', 'zh-Hans']) {
+    const i = html.indexOf('data-gate-skip')
+    const block = html.slice(i, i + 400)
+    assert.ok(block.includes(`lang="${lang}"`), `the skip button has no ${lang} label`)
+  }
+  const note = html.slice(html.indexOf('gate-skip-note'), html.indexOf('gate-skip-note') + 900)
+  assert.match(note, /not a lock/, 'the page does not say plainly that this is not a lock')
+  assert.match(note, /stores nothing/, 'the page does not say plainly that nothing is stored')
 })

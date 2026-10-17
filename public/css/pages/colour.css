@@ -191,27 +191,34 @@
 .feel { margin-top: clamp(28px, 4vw, 48px); }
 .feel h3 { margin: 0 0 12px; font-size: var(--subtitle); }
 .feel h3 [lang="th"] { font-family: var(--thai); }
-/* Ten loose chips read as noise. Grouped into one bordered field they read as
-   one question with ten answers. The seams are the field's own background
-   showing through a 2px gap, so the grouping survives any number of chips and
-   any wrap — no "remove the last row's right border" rule to keep in step with
-   however many feelings the server happens to be offering.
+/* Ten chips, each a solid field, spaced. No box around the group and no rule
+   between them.
 
-   Every chip keeps the same weight and the same size on purpose. Ranking them
-   by size or emphasis would tell a visitor that "calm" matters more than
-   "anxious", and nothing here knows that. Equal is not a lack of design; on
-   this question equal is the finding. */
-.feel-grid { display: flex; flex-wrap: wrap; gap: 2px; background: var(--text); border: 2px solid var(--text); }
-.feel-btn { min-width: 0; padding: 10px 14px; background: var(--ground); color: var(--text); border: 0; }
-.feel-btn:hover { background: var(--black-2); color: var(--white); }
-/* Pressed inverts ground and text. That is safe in BOTH schemes, and by design:
-   the pairings it relies on — naples on olive, olive on naples — are the two the
+   The group was first tried as one bordered field with 2px seams — a box drawn
+   to fill a slot in the layout, which is exactly the filler-component habit this
+   design does not have. Nothing about the question needed it: ten equal fields
+   with air between them already read as one question with ten answers, and a
+   frame around them only added an edge the page does not otherwise have.
+
+   Solid grey carries black at 10.16:1, a pairing the palette instrument already
+   certifies, so the chip needs no border to be legible or to look clickable. */
+.feel-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.feel-btn {
+  min-width: 0; padding: 10px 16px;
+  background: var(--quiet); color: var(--black);
+  border: 0;
+}
+.feel-btn:hover { background: var(--gray-deep); color: var(--white); }
+/* Pressed inverts ground and text. Safe in BOTH schemes, and by design: the
+   pairings it relies on — naples on olive, olive on naples — are the two the
    palette instrument certifies as required text. The previous white-on-text rule
-   was not: in dark mode --text is naples and --white is #f7f5ef, which is 1.02:1
-   — a selection that became invisible exactly where the machine's eye already
-   darkens the page. */
+   was not: in dark mode --text is naples and --white is #f7f5ef, which is
+   1.14:1 — a selection that became invisible exactly where the machine's eye
+   already darkens the page. */
 .feel-btn[aria-pressed="true"] { background: var(--text); color: var(--ground); }
-.feel-btn:focus-visible { outline: 3px solid var(--signal); outline-offset: -3px; }
+/* The only outline on this page, and it is the one that has to be there: without
+   it a keyboard user cannot tell which chip they are on. */
+.feel-btn:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
 .feel-btn [lang="th"] { font-family: var(--thai); }
 
 .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; max-width: 68ch; font-size: var(--read); cursor: pointer; }

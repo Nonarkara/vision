@@ -139,6 +139,14 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate .captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); color: transparent; }
 .gate .captcha-tiles .btn[aria-pressed="true"] { background: rgba(241, 90, 48, 0.28); color: transparent; }
 .gate-replay { display: none; }
+/* The way out. Deliberately outside .gate-replay, which is display:none until
+   the gate has been passed — placing the skip there would hide it at exactly the
+   moment someone who cannot pass it looks for it. Gone once you are through,
+   because by then there is nothing to get past. */
+.gate-out { display: grid; gap: 8px; justify-items: start; }
+.gate-out .btn { min-height: 44px; }
+.gate-skip-note { margin: 0; max-width: 62ch; }
+.gate[data-open="true"] .gate-out { display: none; }
 .captcha [data-captcha-state]:empty { display: none; }
 .gate-taught { margin: 6px 0 0; max-width: 78ch; color: var(--naples); }
 .gate-reveal { display: grid; gap: 12px; max-width: 62ch; }

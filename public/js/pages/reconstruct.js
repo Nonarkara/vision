@@ -298,7 +298,7 @@ export function loopEdges(loops = LOOPS) {
 const EDGES = loopEdges()
 
 async function boot() {
-  await import('../core/site.js?v=1.17.3')
+  await import('../core/site.js?v=1.17.4')
   const root = document.querySelector('[data-reconstruct]')
   if (!root) return
   const el = (name) => root.querySelector(`[data-${name}]`)
@@ -455,7 +455,7 @@ async function boot() {
     const mine = ++ticket
     let opened = null
     try {
-      const { openWebcam } = await import('../core/source.js?v=1.17.3')
+      const { openWebcam } = await import('../core/source.js?v=1.17.4')
       const w = worker = new Worker('/js/focus/worker.js')
       await new Promise((resolve, reject) => {
         const watchdog = setTimeout(() => reject(new Error('timeout')), 45000)
