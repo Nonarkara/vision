@@ -1,11 +1,13 @@
 // The Drive gate, drawn from real camera crops.
 //
 // Passing shows the reveal — this click is supervised labelling — and then
-// opens the room. A miss deals a new grid from the same labels. The nine
-// squares are buttons; the canvas only shows the photographs.
+// opens the room. A miss keeps the grid and the picks so a person can correct
+// them; "Try a new challenge" is what deals another. The nine squares are
+// buttons; the canvas only shows the photographs. There is also a way past the
+// whole thing, below the grid, for anyone who would rather not answer.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.4'
-import { features, train, pick } from '../drive/teach.js?v=1.17.4'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.17.5'
+import { features, train, pick } from '../drive/teach.js?v=1.17.5'
 
 const images = new Map()
 function photo(src) {
@@ -72,7 +74,6 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
   // block is hidden when the reveal opens, so a skip placed there would vanish
   // at exactly the moment someone who has struggled with the grid needs it.
   const skip = root.querySelector('[data-gate-skip]')
-  const skipNote = root.querySelector('.gate-skip-note')
 
   let l = lang()
   let round = 0

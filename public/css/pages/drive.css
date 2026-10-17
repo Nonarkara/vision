@@ -146,7 +146,12 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate-out { display: grid; gap: 8px; justify-items: start; }
 .gate-out .btn { min-height: 44px; }
 .gate-skip-note { margin: 0; max-width: 62ch; }
-.gate[data-open="true"] .gate-out { display: none; }
+/* Two ways to be through. data-open is the collapse and "Try a new challenge"
+   takes it away again; data-through is permanent. The way out answers to the
+   second, so coming back for another grid does not resurrect a button that can
+   no longer open anything. */
+.gate[data-open="true"] .gate-out,
+.gate[data-through="true"] .gate-out { display: none; }
 .captcha [data-captcha-state]:empty { display: none; }
 .gate-taught { margin: 6px 0 0; max-width: 78ch; color: var(--naples); }
 .gate-reveal { display: grid; gap: 12px; max-width: 62ch; }

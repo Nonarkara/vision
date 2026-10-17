@@ -8,7 +8,7 @@ import { runLens, createLensState } from '../cv/lenses.js'
 import { drawDetections } from '../cv/draw.js'
 import { cocoName } from '../ml/labels.js'
 import { detect } from '../ml/detector.js'
-import { toast } from '../core/site.js?v=1.17.4'
+import { toast } from '../core/site.js?v=1.17.5'
 import { readyDetector, benchSpecimen, freeze, paint, sayDetections, biClass, readBest, writeBest, FLOOR_SCORE } from './common.js'
 
 const MAX_CAPTURES = 12

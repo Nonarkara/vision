@@ -163,7 +163,14 @@ test('the gate offers a way past it, and the way out is reachable while shut', (
   assert.ok(html.includes('data-gate-skip'), 'there is no control that opens the room without the question')
 
   const css = readFileSync(new URL('../public/css/pages/drive.css', import.meta.url), 'utf8')
-  assert.match(css, /\.gate\[data-open="true"\]\s*\.gate-out\s*\{\s*display:\s*none/, 'the way out should disappear once you are through')
+  // Matched loosely on purpose: the way out is hidden by a keyed rule, and the
+  // key may be either the collapse or the permanent state. What this must not
+  // allow is the way out surviving entry.
+  assert.match(
+    css,
+    /\.gate\[data-(open|through)="true"\][^{]*\.gate-out\s*\{[^}]*display:\s*none/,
+    'the way out should disappear once you are through',
+  )
   // The BASE rule must not hide it. Matching a bare `.gate-out { … display:none }`
   // would also match inside the data-open rule above, which hides it only after
   // you are through — so look at the base rule on its own.
@@ -181,5 +188,36 @@ test('the way out is offered in all three languages, and says it is not a lock',
   }
   const note = html.slice(html.indexOf('gate-skip-note'), html.indexOf('gate-skip-note') + 900)
   assert.match(note, /not a lock/, 'the page does not say plainly that this is not a lock')
-  assert.match(note, /stores nothing/, 'the page does not say plainly that nothing is stored')
+  // It writes one flag to sessionStorage when you get through, so "it stores
+  // nothing" was false. The claim now names the one thing that is kept.
+  assert.doesNotMatch(note, /stores nothing|保存任何东西/, 'the note claims nothing is stored, but a session flag is written')
+  assert.match(note, /keeps no record of the squares/, 'the note does not say that the picks are not kept')
+  assert.match(note, /this tab&rsquo;s note that you have been through/, 'the note does not say what IS kept, only what is not')
+})
+
+test('the way out stays gone once you are through, even after asking for another challenge', () => {
+  // "Try a new challenge" deliberately removes data-open so the grid can come
+  // back. The way out answered to data-open alone, so it came back too — as a
+  // button that opens a room which is already open, and therefore does nothing
+  // when pressed. data-through is the state that cannot be undone.
+  const css = readFileSync(new URL('../public/css/pages/drive.css', import.meta.url), 'utf8')
+  assert.match(
+    css,
+    /\.gate\[data-through="true"\]\s*\.gate-out\s*\{\s*display:\s*none/,
+    'the way out must be hidden by the permanent state, not only by the collapse',
+  )
+  const drive = readFileSync(new URL('../public/js/pages/drive.js', import.meta.url), 'utf8')
+  const openRoom = /function openRoom\(\)[\s\S]*?\n}/.exec(drive)?.[0] ?? ''
+  assert.match(openRoom, /setAttribute\('data-through', 'true'\)/, 'nothing sets the permanent state, so the way out returns after a replay')
+  // …and the replay must not clear it.
+  const replay = /replay\?\.addEventListener\('click'[\s\S]*?\n\}\)/.exec(drive)?.[0] ?? ''
+  assert.doesNotMatch(replay, /removeAttribute\('data-through'\)/, 'replay must not take back the permanent state')
+})
+
+test('the skip button names the note that explains it', () => {
+  // A screen reader that lands on the button has to be able to hear why it is
+  // there, without hunting for the paragraph under it.
+  const html = readFileSync(new URL('../public/drive.html', import.meta.url), 'utf8')
+  assert.match(html, /data-gate-skip aria-describedby="gate-skip-note"/)
+  assert.match(html, /id="gate-skip-note"/)
 })

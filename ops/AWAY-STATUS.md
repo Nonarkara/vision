@@ -605,3 +605,23 @@ Review found one defect before merging: bangna-5 and bangna-6 were grouped as "p
 Also this turn: Codex's 1.17.2 colour-room release was reviewed and kept (it was pushed but never deployed — live stayed on 1.17.1 until now), and the three stale PRs were reconciled: #5 and #6 carry work already committed to main directly in the 1.16.0/1.17.0 releases (verified file-by-file), and #9's one unreconciled idea — the path you walk — shipped as 1.17.1; its branch is preserved as archive/classroom-1.16.0-zh and deleted from the branch list.
 
 Gate green: 293 tests, 27 pages, 93 references, fonts/imports/privacy/docs/palette. Deployed 1.17.3; public health verified.
+
+### The way out, walked through and repaired · 1.17.5 · 2026-10-17
+
+1.17.4 (from the other agent) added a way past the Drive gate and removed the box around the colour chips. Both were audited here rather than accepted.
+
+The chips hold up: ten solid grey fields with air between them, no frame, no seams; black-on-grey is 10.16:1 in both schemes, and grey reads as a distinct field against the naples ground in each. The spine's seams stay — they separate bands at 3:1 and a deal that puts the page's ground on the ground shows three bands instead of four without them.
+
+The skip works: drawn when the gate is shut (199×44), opens the room, never shows the reveal, and is gone afterwards, including after a reload.
+
+Three defects found in it, none mentioned in the report:
+
+1. **A dead control.** "Try a new challenge" removes `data-open`, which is what hid the skip. So after passing, entering, and asking for another grid, the skip came back — pointing at a room that was already open, and doing nothing when pressed, because `openRoom()` had already run. Reproduced in a browser before fixing (`changed: false`). `data-through` is now set once in `openRoom()` and never taken back; the way out answers to that, not to the collapse.
+2. **A false claim.** The note under the skip said the gate "stores nothing". It writes `vision_drive_gate_v1 = entered` to sessionStorage — confirmed by reading storage after a skip. The note now says what is kept (one note that you have been through, in this tab) and what is not (your picks). On a site whose standard is "the answer is a label checked against that crop, not a drawing", an untrue storage claim is the same error.
+3. **Dead code and a stale comment.** `skipNote` was queried and never used; the gate header still said a miss deals a new grid, untrue since #12 kept the grid and the picks.
+
+Also: the skip button now names its note via `aria-describedby`, so a screen-reader user hears why it is there instead of hunting for the paragraph below it.
+
+Verified in the browser at 390×844 and 1280×900: cold visit → grid and skip both drawn, room shut; honest answer → reveal shown, enter opens the room, skip gone, `data-through` set; "try again" → grid returns, skip stays gone; skip → room opens, reveal never shown, still through after reload; no console errors. Three new tests, each mutation-checked (removing the data-through rule, not setting data-through, restoring "stores nothing", dropping aria-describedby — all four fail the suite).
+
+Gate green: 297 tests, 27 pages, 93 references, fonts/imports/privacy/docs/palette.

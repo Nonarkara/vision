@@ -2,7 +2,7 @@ import { t, onLang, count } from '../core/i18n.js'
 import { runLens, createLensState } from '../cv/lenses.js'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js'
 import { classify, cluster, groupOf, policy } from './video-learning.js'
-import { practiceVideo } from './practice-video.js?v=1.17.4'
+import { practiceVideo } from './practice-video.js?v=1.17.5'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
