@@ -30,7 +30,7 @@
 .learn-progress {
   display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline;
   padding: 10px var(--gutter) 0; margin: 0;
-  font-size: var(--micro); color: var(--quiet-text);
+  font-size: var(--micro); color: var(--text);
 }
 .learn-resume { color: inherit; text-decoration-thickness: 1px; }
 .learn-resume:hover, .learn-resume:focus-visible { color: var(--text); }

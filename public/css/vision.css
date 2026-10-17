@@ -751,7 +751,11 @@ html[data-lang="th"] .lens-say { font-family: var(--thai); }
 
 .promise-list { list-style: none; margin: 0; padding: 0 var(--gutter) clamp(48px, 7vw, 112px); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
 .promise-list li { display: flex; flex-direction: column; gap: 8px; max-width: 36ch; }
-.promise-list .num { font-size: var(--micro); color: var(--text); }
+/* --field-text, not --text. Every .promise-list on the site sits inside a
+   .field-ink panel, and in the light scheme --field IS --olive while --text is
+   ALSO --olive: the roman numerals were olive on olive, measured 1.00:1, on both
+   the front page and the fine print. Inside a field the ink is the field's. */
+.promise-list .num { font-size: var(--micro); color: var(--field-text); }
 .promise-list strong { font-size: var(--body); }
 
 /* Specimen bar (shared source controls) */

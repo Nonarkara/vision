@@ -6,120 +6,20 @@
  * the deal broke.
  *
  * Everything the machine knows about a plate is computed by the same contrast()
- * that certifies the site's own sixteen pairings, imported from one shared core.
- * That is deliberate: if the study graded plates by its own private arithmetic, it
+ * that certifies the site's own sixteen pairings, inside core/palette.js. That
+ * is deliberate: if the study graded plates by its own private arithmetic, it
  * would be able to disagree with the instrument that built it.
  *
  * Privacy, restated because it is the whole trick: an answer leaves the browser as
  * exactly two values — a plate id and one word from a fixed list of ten. The page
  * never sends anything else, and the server has nowhere to put anything else.
  */
-import { assignments, contrast, ladder } from '../core/palette.js?v=1.17.5'
+import { assignments } from '../core/palette.js?v=1.17.6'
 
 const PLATES = assignments()
 const BY_ID = new Map(PLATES.map((p) => [p.id, p]))
 const LEGAL = PLATES.filter((p) => p.legible)
 const ILLEGAL = PLATES.filter((p) => !p.legible)
-
-/**
- * SEAMS — the only colours a seam is allowed to be.
- *
- * A plate's roles are four hues at base, deep or pale. Black and white are the
- * instrument's own values and no plate can ever deal them, so a seam chosen from
- * here is guaranteed never to coincide with a band. Nothing else qualifies: put
- * olive on olive and the seam is not a seam.
- */
-export const SEAM_SET = (() => {
-  const l = ladder()
-  return [l.black.deep, l.black.base, l.black.pale, l.white.base, l.white.pale]
-})()
-
-/** Accept `#abc123` or the `rgb(r, g, b)` a computed style hands back. */
-function toHex(c) {
-  if (typeof c === 'string' && c.startsWith('#')) return c
-  const m = String(c).match(/[\d.]+/g)
-  if (!m || m.length < 3) return '#000000'
-  return '#' + m.slice(0, 3).map((v) => Math.round(+v).toString(16).padStart(2, '0')).join('')
-}
-
-/**
- * The seam that keeps a boundary visible between two colours.
- *
- * A seam only earns its place where two bands are too close to tell apart. Where
- * the ground is Naples and the ink is signal.deep the two already differ by
- * 15:1, and no seam between them is doing any work — insisting that the seam
- * clear BOTH of them is the wrong question and produces a white seam that
- * vanishes into the Naples it was meant to help.
- *
- * So the score is the better of the two ways a boundary can be seen:
- *   contrast(a, b)                  — already distinguishable, no seam needed
- *   min(contrast(s, a), contrast(s, b)) — the seam sets them apart
- *
- * `worst` is returned so a test can assert a floor rather than merely notice that
- * a colour changed. MEASURE.floor is that floor: a seam is a mark between fields,
- * so it is held to the mark floor, never to the text floor.
- */
-export const SEAM_FLOOR = 3
-
-/**
- * @param pairs  boundaries this seam must keep visible, as `[left, right]` pairs.
- *
- * Pass every boundary the seam touches and nothing else. An internal seam has
- * one pair — the two bands it sits between. The spine's edge has two, because it
- * stands between the page and the band at the top AND the page and the band at
- * the bottom. Asking one value to serve boundaries it was never told about is how
- * a seam ends up invisible on the side nobody listed.
- */
-export function seamFor(...pairs) {
-  const P = pairs.map(([a, b]) => [toHex(a), toHex(b)])
-  let best = SEAM_SET[0]
-  let bestScore = -1
-  for (const s of SEAM_SET) {
-    let score = Infinity
-    for (const [A, B] of P) {
-      const boundary = Math.max(contrast(A, B), Math.min(contrast(s, A), contrast(s, B)))
-      if (boundary < score) score = boundary
-    }
-    if (score > bestScore) { bestScore = score; best = s }
-  }
-  return { value: best, worst: bestScore }
-}
-
-/**
- * All four seams for one plate, and nothing else the caller has to remember.
- *
- * This exists as its own function for a reason found by mutation testing. When
- * paint() assembled the seams itself, a version that told the edge about only the
- * top band — dropping the bottom boundary — passed every test, because the tests
- * called seamFor() directly and never exercised the wiring. It was a real bug:
- * 18 of 48 page-and-scheme combinations dropped to 1.23:1, under the floor.
- *
- * With the boundary list fixed inside the function, dropping one is no longer a
- * change to the caller's argument list, and it fails the tests instead.
- *
- * `pageGround` matters as much as the plate: the page is Naples in light and
- * olive in dark, and the edge has to clear whichever one is actually behind it.
- */
-export function spineSeams(plate, pageGround) {
-  const g = plate.ground
-  const i = plate.reads.ink.value
-  const q = plate.reads.quiet.value
-  const s = plate.reads.signal.value
-  const page = toHex(pageGround)
-  return {
-    // Keyed by the boundary each seam serves, not by its position. A positional
-    // array made it possible to build the right seams in the wrong order and
-    // nothing noticed: the HTML fixes the bands as ground, ink, quiet, signal
-    // from top to bottom, and a swapped array would have coloured the seam
-    // between ground and ink for the pair ground and quiet.
-    'ground|ink': seamFor([g, i]).value,
-    'ink|quiet': seamFor([i, q]).value,
-    'quiet|signal': seamFor([q, s]).value,
-    // Two boundaries, both required: the spine stands between the page and the
-    // band at the top, and between the page and the band at the bottom.
-    edge: seamFor([page, g], [page, s]).value,
-  }
-}
 
 /** The arrangement the site normally wears. Everything else is a departure from it. */
 export const HOUSE = { ground: 'naples', ink: 'olive', quiet: 'gray', signal: 'signal' }
@@ -246,11 +146,6 @@ export function mount(root = document) {
     deal: root.querySelector('[data-deal]'),
     dealShared: root.querySelector('[data-deal-shared]'),
     dealIllegal: root.querySelector('[data-deal-illegal]'),
-    // The page-scale deal. One element carries the four custom properties that
-    // both the bands and the key read, so the tall stripe and the little swatches
-    // can never disagree about which hue went where.
-    head: root.querySelector('.study-chapter'),
-    stack: root.querySelector('.band-stack'),
   }
   if (!el.plate) return null
 
@@ -267,33 +162,6 @@ export function mount(root = document) {
     s.setProperty('--pi', plate.reads.ink.value)
     s.setProperty('--pq', plate.reads.quiet.value)
     s.setProperty('--ps', plate.reads.signal.value)
-
-    // The same four measured values, at page scale. Deliberately the same numbers
-    // the plate was given, read once: if these were computed separately they could
-    // disagree, and a study that disagrees with itself proves nothing.
-    if (el.head) {
-      const h = el.head.style
-      h.setProperty('--c-ground', plate.ground)
-      h.setProperty('--c-ink', plate.reads.ink.value)
-      h.setProperty('--c-quiet', plate.reads.quiet.value)
-      h.setProperty('--c-signal', plate.reads.signal.value)
-    }
-
-    // Each seam is chosen for the two colours it actually separates. Bands run
-    // top to bottom in role order, so seam 1 sits between ground and ink, 2
-    // between ink and quiet, 3 between quiet and signal; the edge sits between
-    // the spine and the page, so it has to clear the bands at both ends AND the
-    // page behind them. Repainted on every deal AND on a scheme change, because
-    // the page behind the spine is not the same colour in both schemes.
-    if (el.stack) {
-      const page = toHex(getComputedStyle(document.body).backgroundColor)
-      const seams = spineSeams(plate, page)
-      const g = el.stack.style
-      g.setProperty('--seam-1', seams['ground|ink'])
-      g.setProperty('--seam-2', seams['ink|quiet'])
-      g.setProperty('--seam-3', seams['quiet|signal'])
-      g.setProperty('--seam-edge', seams.edge)
-    }
 
     const d = describe(plate)
     el.machine.innerHTML = bi(d.machine)
@@ -446,22 +314,16 @@ export function mount(root = document) {
     } catch { /* offline: deal one locally, which is the whole point of the button */ }
   }
 
-  // The spine's edge seam is chosen against the page BENEATH it, and the page is
-  // olive in dark and Naples in light. So flipping the OS scheme mid-visit
-  // invalidates a seam that was correct a moment ago — the top band would sit on
-  // an edge now tuned for a different ground. Re-solve, don't re-deal: the
-  // visitor keeps the plate they are looking at.
-  if (globalThis.matchMedia) {
-    const scheme = globalThis.matchMedia('(prefers-color-scheme: dark)')
-    const onScheme = () => { if (current) paint(current) }
-    if (scheme.addEventListener) scheme.addEventListener('change', onScheme)
-    else if (scheme.addListener) scheme.addListener(onScheme)
-  }
+  // The scheme-change repaint went with the spine. It existed only because a seam
+  // had been solved against the page colour behind it, and the page is olive in
+  // dark and Naples in light. Nothing on this page is tuned to the scheme now —
+  // the plate's four values come from the deal, not from the theme — so a
+  // listener here would repaint identical values forever.
 
   load()
   paint(deal(LEGAL))
   followShared()
-  return { paint, load, deal, seamFor }
+  return { paint, load, deal }
 }
 
 if (typeof document !== 'undefined' && !globalThis.__pump) mount()

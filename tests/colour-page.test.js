@@ -1,7 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { gloss, describe, share, deal, HOUSE, spineSeams, SEAM_SET } from '../public/js/pages/colour.js'
-import { assignments } from '../public/js/core/palette.js'
+import { readFileSync, readdirSync } from 'node:fs'
+import { gloss, describe, share, deal, HOUSE } from '../public/js/pages/colour.js'
+import { assignments, contrast, ladder } from '../public/js/core/palette.js'
 
 const PLATES = assignments()
 const byDeal = (deal) => PLATES.find((p) => ROLES.every((r) => p.at[r] === deal[r]))
@@ -70,167 +71,170 @@ test('dealing falls back to the pool rather than returning nothing', () => {
   const one = [PLATES[0]]
   assert.ok(deal(one, PLATES[0].id))
 })
+
 // ─────────────────────────────────────────────────────────────────────────────
-// THE SPINE
+// WHAT THE PAGE DRAWS
 //
-// The audit's finding was that /colour dealt four hues onto one card and left the
-// rest of the page identical, so the colour had nowhere to go. The spine is the
-// fix: the deal at page scale, in the chapter's own column.
+// This section does not test the study — the twenty above do that, and they
+// were all here before this one. It pins the decisions that took the noise out,
+// because each is exactly the kind of change that returns later as a tidy-up.
 //
-// These tests assert the REASON the seam is computed, never the colour it
-// currently returns. Four of five first-draft mutations survived this file — the
-// floor was imported from the module under test, the candidate set was never
-// inspected, optimality was never checked, and the edge's boundary list lived in
-// a caller the tests did not exercise. Each is fixed below, and the literal
-// FLOOR is deliberately NOT imported: a test that loosens its own threshold
-// alongside the code it is testing is a test that cannot fail.
+// Two of these are negative assertions on a stylesheet, which is a strange thing
+// to write and an easy thing to mock. They are here because the failure they
+// guard against is invisible: a solid field that draws no attention to itself
+// still reads as a button-shaped object on the page, and no assertion about
+// colour, contrast or meaning would ever notice it had come back.
 
-// The instrument's own arithmetic, so these are not the code under test
-// agreeing with itself.
-const lum = (h) => {
-  const s = h.replace('#', '')
-  return [0, 2, 4].map((i) => {
-    const c = parseInt(s.slice(i, i + 2), 16) / 255
-    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
-  }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0)
-}
-const ratio = (a, b) => {
-  const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p)
-  return (x + 0.05) / (y + 0.05)
+const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), 'utf8')
+const html = read('public/colour.html')
+const css = read('public/css/pages/colour.css')
+
+/**
+ * The declaration block of one rule, by exact selector.
+ * Anchored to the start of a line so `.feel-btn` never matches `.feel-btn:hover`
+ * and `.machine-line` never matches the line it shares a selector list with.
+ */
+const ruleBody = (selector, source = css) => {
+  const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return new RegExp(`^[ \\t]*${esc}[ \\t]*\\{([^}]*)\\}`, 'm').exec(source)?.[1] ?? null
 }
 
-// A seam is a mark between fields, so it is held to the mark floor — and to it
-// literally, not to whatever the module says the floor is.
-const FLOOR = 3
+/** What a rule's `background` actually is — '' when it declares none. */
+const fill = (body) => (/(?:^|;)\s*background\s*:\s*([^;]*)/.exec(body ?? '')?.[1] ?? '').trim()
 
-// How well can a boundary be seen, given a seam drawn in `seam`?
-const visible = (a, b, seam) =>
-  Math.max(ratio(a, b), Math.min(ratio(seam, a), ratio(seam, b)))
+test('the deal is drawn once — on the plate — and nowhere else', () => {
+  // The spine repeated the plate's four colours as four bands running the height
+  // of the chapter, with a key underneath naming them. The key named two of them
+  // in the same words the plate already printed in place, twenty pixels away. It
+  // was a legend for something the page was already showing, and on a deal that
+  // put peach red on the ground it became four coloured rectangles arguing with
+  // the one that meant something.
+  for (const gone of ['band-stack', 'band-key', 'data-band', 'data-seam', 'class="bands"', 'study-chapter']) {
+    assert.ok(!html.includes(gone), `${gone} is back in the markup`)
+    assert.ok(!css.includes(gone), `${gone} is back in the stylesheet`)
+  }
+  assert.equal(html.match(/id="plate"/g).length, 1, 'there must be exactly one thing that receives the deal')
 
-// An independent copy of the search, so "did it find the best one" is checkable
-// rather than assumed. Brute force over the same five legal values.
-const CANDIDATES = ['#0a0a0a', '#101010', '#161616', '#f7f5ef', '#ffffff']
-const bestAchievable = (...pairs) =>
-  Math.max(...CANDIDATES.map((s) => Math.min(...pairs.map(([a, b]) => visible(a, b, s)))))
-
-test('every seam reaches the mark floor on every plate, in both schemes', () => {
-  for (const p of PLATES) {
-    for (const page of ['#fbe6a0', '#253122']) {
-      const s = spineSeams(p, page)
-      const v = [p.ground, p.reads.ink.value, p.reads.quiet.value, p.reads.signal.value]
-      // Each seam is checked against the boundary it is KEYED to. Checking a
-      // seam against some other pair would pass even when the wiring is wrong.
-      const keyed = [['ground|ink', v[0], v[1]], ['ink|quiet', v[1], v[2]], ['quiet|signal', v[2], v[3]]]
-      for (const [key, a, b] of keyed) {
-        assert.ok(
-          visible(a, b, s[key]) >= FLOOR,
-          `${p.id} seam ${key} on ${page} left its boundary below ${FLOOR}:1`
-        )
-      }
-      // The edge has to clear the page at BOTH ends, not just the top.
-      for (const band of [v[0], v[3]]) {
-        assert.ok(
-          visible(page, band, s.edge) >= FLOOR,
-          `${p.id} edge on ${page} fell below ${FLOOR}:1 against ${band}`
-        )
-      }
-    }
+  const js = read('public/js/pages/colour.js')
+  assert.match(js, /const s = el\.plate\.style/, 'the four dealt values no longer reach the plate')
+  for (const gone of ['--c-ground', '--c-ink', '--c-quiet', '--c-signal', '--seam-']) {
+    assert.ok(!js.includes(gone), `${gone} is back in the page script`)
   }
 })
 
-test('the seam found is the best one available, not merely a passing one', () => {
-  // Guards against scoring by average, which can satisfy the floor on one
-  // boundary while abandoning another. Optimality is the property.
-  for (const p of PLATES) {
-    for (const page of ['#fbe6a0', '#253122']) {
-      const s = spineSeams(p, page)
-      const v = [p.ground, p.reads.ink.value, p.reads.quiet.value, p.reads.signal.value]
-      const got = [
-        visible(v[0], v[1], s['ground|ink']),
-        visible(v[1], v[2], s['ink|quiet']),
-        visible(v[2], v[3], s['quiet|signal']),
-      ]
-      const want = [
-        bestAchievable([v[0], v[1]]),
-        bestAchievable([v[1], v[2]]),
-        bestAchievable([v[2], v[3]]),
-      ]
-      for (let i = 0; i < 3; i++) {
-        assert.ok(
-          Math.abs(got[i] - want[i]) < 0.01,
-          `${p.id} seam${i + 1} scored ${got[i].toFixed(2)} when ${want[i].toFixed(2)} was available`
-        )
-      }
-      const gotEdge = Math.min(visible(page, v[0], s.edge), visible(page, v[3], s.edge))
-      const wantEdge = bestAchievable([page, v[0]], [page, v[3]])
-      assert.ok(
-        Math.abs(gotEdge - wantEdge) < 0.01,
-        `${p.id} edge on ${page} scored ${gotEdge.toFixed(2)} when ${wantEdge.toFixed(2)} was available`
-      )
-    }
+test('the seam engine does not come back with it', () => {
+  // Dead code that exports itself is not neutral — it looks load-bearing, and
+  // this repo has lost parked work twice. If a band ever returns it can be
+  // rewritten; it should not find a solved problem already waiting for it.
+  for (const gone of ['SEAM_SET', 'SEAM_FLOOR', 'spineSeams', 'seamFor']) {
+    assert.ok(!js_has(gone), `${gone} is exported again with nothing to serve`)
   }
 })
+function js_has(name) {
+  return read('public/js/pages/colour.js').includes(name)
+}
 
-test('no seam colour is a colour a plate can deal', () => {
-  // Black and white are the instrument's values; a plate's roles are four hues.
-  // A seam drawn in a plate colour is a seam that can vanish — the first draft
-  // widened the candidate set to include two plate hues and nothing noticed.
-  const plateValues = new Set()
-  for (const p of PLATES) {
-    plateValues.add(p.ground)
-    for (const role of ['ink', 'quiet', 'signal']) plateValues.add(p.reads[role].value)
-  }
-  for (const s of SEAM_SET) {
-    assert.ok(!plateValues.has(s), `${s} is both a seam candidate and a plate colour`)
-  }
-})
-
-test('the near-black run a deep-tone deal produces is still three bands', () => {
-  // The case that motivated computing a seam per pair: ink signal.deep, quiet
-  // olive and signal gray.deep sit within ~1.1:1 of each other. Without seams
-  // the spine would show one dark blob where there are three roles.
-  const p = PLATES.find((x) => x.id === 'naples-signal-olive-gray')
-  assert.ok(p, 'this deal must exist')
-  const v = [p.ground, p.reads.ink.value, p.reads.quiet.value, p.reads.signal.value]
+test('the ten answers are words, and only the chosen one is a field', () => {
+  // Ten solid chips was a wall of ten identical objects, and it wrapped nine and
+  // one. The resting state is now the word alone; the fill appears when you have
+  // answered, so the page has exactly one filled object in the group and it is
+  // telling you something true.
+  const resting = ruleBody('.feel-btn')
+  assert.ok(resting, 'the chip rule is gone')
   assert.ok(
-    Math.min(ratio(v[1], v[2]), ratio(v[2], v[3])) < 1.5,
-    'the fixture no longer exercises near-identical bands'
+    ['', 'transparent'].includes(fill(resting)),
+    `an unchosen answer is a filled field again: background: ${fill(resting)}`
   )
-  const s = spineSeams(p, '#fbe6a0')
-  for (const [a, b, seam] of [[v[1], v[2], s['ink|quiet']], [v[2], v[3], s['quiet|signal']]]) {
-    assert.ok(visible(a, b, seam) >= FLOOR, `near-black boundary left at ${visible(a, b, seam).toFixed(2)}:1`)
-  }
+
+  const chosen = ruleBody('.feel-btn[aria-pressed="true"]')
+  assert.ok(chosen, 'there is no chosen state, so choosing shows nothing')
+  assert.ok(fill(chosen) && fill(chosen) !== 'transparent', 'the chosen answer is invisible against the page')
 })
 
-test('the page ground is read the way a computed style hands it back', () => {
-  // The EDGE is the only seam that depends on the page, so the edge is what this
-  // must compare. The first draft compared an internal seam, which does not
-  // depend on the page at all — and so agreed with itself no matter what toHex
-  // did. Broken toHex changes the edge on 34 of 48 plates; this is the test that
-  // notices.
-  for (const p of PLATES) {
+test('the answers stayed reachable by thumb after losing the box', () => {
+  // The box was doing one real job the padding now does invisibly: making a
+  // 44px target. Dropping the fill must not quietly drop the size, because that
+  // is the one thing a person with a thumb notices and a screenshot does not.
+  assert.match(ruleBody('.feel-btn'), /min-height:\s*var\(--target\)/, 'the answers are no longer a thumb-sized target')
+})
+
+test('the machine reads out; it does not shout', () => {
+  // It was a full-width black field, which made a machine's verdict the loudest
+  // object on a page whose one human question is the reason to be there. It was
+  // also perfectly legible and perfectly wrong, which is how it survived review.
+  const line = ruleBody('.machine-line')
+  assert.ok(line, 'the readout rule is gone')
+  assert.ok(['', 'transparent'].includes(fill(line)), `the readout is a slab again: background: ${fill(line)}`)
+  assert.match(line, /font-family:\s*var\(--mono\)/, 'the readout stopped reading as the machine')
+})
+
+test('one way to change the plate is a field; the other two are words', () => {
+  // Three solid buttons at the top of the page, equal in weight, competing with
+  // the plate they exist to change. Two of them are things you do once.
+  const btns = html.match(/<button[^>]*data-deal[^>]*>/g) ?? []
+  assert.equal(btns.length, 3, 'expected three ways to change the plate')
+  for (const b of btns) {
+    const everyday = /data-deal>/.test(b)
     assert.equal(
-      spineSeams(p, '#fbe6a0').edge,
-      spineSeams(p, 'rgb(251, 230, 160)').edge,
-      `${p.id}: the edge seam ignored how the page colour was written`
-    )
-    assert.equal(
-      spineSeams(p, '#253122').edge,
-      spineSeams(p, 'rgb(37, 49, 34)').edge,
-      `${p.id}: the edge seam ignored how the page colour was written`
+      /btn-word/.test(b),
+      !everyday,
+      everyday ? 'the everyday button lost its field' : 'a rare button is competing as a field'
     )
   }
 })
 
-test('spineSeams is a pure function of plate and page — nothing else', () => {
-  const p = PLATES[7]
-  assert.deepEqual(spineSeams(p, '#fbe6a0'), spineSeams(p, '#fbe6a0'))
-  assert.notDeepEqual(spineSeams(p, '#fbe6a0'), spineSeams(p, '#253122'))
+test('the chosen answer clears the text floor in both schemes', () => {
+  // Pressed inverts ground and text. Light: olive on Naples. Dark: Naples on
+  // olive. The same pair both ways, measured once — with the shared instrument,
+  // not with arithmetic copied out of the thing being tested.
+  const body = ruleBody('.feel-btn[aria-pressed="true"]')
+  assert.match(body, /background:\s*var\(--text\)/, 'the choice no longer inverts on the page’s own pairing')
+  assert.match(body, /color:\s*var\(--ground\)/)
+  const ratio = contrast(ladder().olive.base, ladder().naples.base)
+  assert.ok(ratio >= 4.5, `the chosen answer sits at ${ratio.toFixed(2)}:1, under the 4.5 floor`)
 })
 
-test('every deal reaches the spine with four distinct colours', () => {
-  for (const p of PLATES) {
-    const v = [p.ground, p.reads.ink.value, p.reads.quiet.value, p.reads.signal.value]
-    assert.equal(new Set(v).size, 4, `${p.id} does not deal four distinct colours to the spine`)
+// ── A TOKEN THAT LOOKS INTERCHANGEABLE AND IS NOT ───────────────────────────
+//
+// --quiet-text is declared once, as olive, and neither dark block re-declares it.
+// Every other use in the site pairs it with `background: var(--quiet)` — a grey
+// field — where olive is the right ink in both schemes. That is why it was left
+// alone: it is not broken, it is specialised.
+//
+// The two uses that put it straight on the page were broken, and both were found
+// by rendering rather than by reading. The machine's readout and the sentence
+// inviting the first answer both measured 1.00:1 in dark mode: olive on olive,
+// i.e. not on the page at all. --text follows the scheme and is the right token
+// for the page's own ink.
+//
+// This is repo-wide because the mistake is not local to one file — it is the
+// token that looks like --text and is not.
+
+test('--quiet-text is only ever used as ink on a grey field', () => {
+  const files = []
+  const walk = (dir) => {
+    for (const e of readdirSync(new URL(dir, import.meta.url), { withFileTypes: true })) {
+      if (e.isDirectory()) walk(`${dir}${e.name}/`)
+      else if (e.name.endsWith('.css')) files.push(`${dir}${e.name}`)
+    }
   }
+  walk('../public/css/')
+
+  const bad = []
+  for (const file of files) {
+    const src = readFileSync(new URL(file, import.meta.url), 'utf8')
+    // Comments carry no declarations but they do carry braces-free prose, which
+    // a selector-matching regex will happily read as the selector.
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    // Every `selector { body }`, keeping the selector so the failure can be found.
+    for (const m of src.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const [, sel, body] = m
+      if (!/color\s*:\s*var\(\s*--quiet-text\s*\)/.test(body)) continue
+      // …unless the rule puts a grey field behind it, which is the only place
+      // an olive that never changes is the correct answer.
+      if (/background(?:-color)?\s*:\s*var\(\s*--quiet\s*\)/.test(body)) continue
+      bad.push(`${file.replace('../public/css/', '')}: ${sel.trim().replace(/\s+/g, ' ').slice(0, 60)}`)
+    }
+  }
+  assert.deepEqual(bad, [], `--quiet-text is used as ink directly on the page:\n  ${bad.join('\n  ')}`)
 })

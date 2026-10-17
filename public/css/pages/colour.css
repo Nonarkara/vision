@@ -7,135 +7,20 @@
    own CSP forbids inline styles — and it means there is no rule per plate, so the
    24 deals cannot drift out of sync with each other or with the contrast code. */
 
-.deal { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--gap); }
+/* ── The three ways to change the plate ─────────────────────────────────────
+   Only the everyday one is a field. "One plate for everyone" and "show me one
+   the machine refuses" are rare enough to be words, and drawing all three as
+   solid blocks put three equal objects at the top of the page competing with
+   the plate, which is the thing they exist to change.
+
+   The pressed state keeps its field, because there it means something: this is
+   the plate the room is looking at, right now. */
+.deal { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--gap); align-items: baseline; }
 .deal .btn { min-width: 0; }
-.btn-quiet { background: var(--gray); color: var(--black); }
-.btn-quiet:hover { background: var(--gray-deep); color: var(--white); }
+.deal .btn-word { background: transparent; color: var(--text); padding: 0 4px; }
+.deal .btn-word:hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
+.deal .btn-word[aria-pressed="true"] { background: var(--signal); color: var(--black); text-decoration: none; }
 .btn[aria-pressed="true"] { background: var(--signal); color: var(--black); }
-
-/* ── The deal at page scale ───────────────────────────────────────────────
-   A plate is not a rectangle in the middle of a page. It is the page. The
-   audit's finding was that /colour dealt four new hues onto one 710px card and
-   left the rest of the screen identical on every deal, so the colour had
-   nowhere to go and nothing could be read as beautiful.
-
-   So the chapter's left column — which was a number and a title wrapped into
-   four lines beside a wide field of unused paper — becomes four bands of solid
-   colour running the full height of the study. Bauhaus placement: a hard
-   vertical division, unequal blocks, no ornament, nothing rounded.
-
-   The band proportions are the house rule made visible. The paper is most of
-   the sheet. What the machine sees is a mark on it, not a field — so it gets
-   the smallest band. Change those ratios and the argument changes with them.
-
-   No text sits on a band. A word on a dealt hue is a pairing that nothing has
-   certified, and the one thing this study must not do is invent a pairing it
-   has not measured. The key below names each band in the page's own ink. */
-/* The spine sits in the chapter's own left column. No column is added and none is
-   narrowed for it, so nothing that was readable stops being readable, and the key
-   moves under the plate where there is width for the longest label.
-
-   A three-column version was tried and rejected on a screenshot: the middle key
-   column starved the chapter body to ~225px and the plate became unreadable. A
-   full-height block of four colours also argued with the plate rather than
-   framing it. Narrow, hard-edged and flush to the margin reads as the edge of the
-   sheet, which is what it is. */
-.study-chapter {
-  grid-template-columns: clamp(44px, 5vw, 68px) minmax(0, 1fr);
-  --c-ground: var(--naples); --c-ink: var(--olive);
-  --c-quiet: var(--gray);    --c-signal: var(--signal);
-}
-/* The title spans the whole study. Squeezing it into the left column to make room
-   for the spine was the first attempt and it was wrong: the heading went from one
-   line to five while the field beside it got busier. A title earns width. */
-.study-chapter > header { grid-column: 1 / -1; }
-.bands { min-height: 380px; }
-/* Proportions follow what each role IS on a real page, which is the whole
-   argument of this room:
-     ground — most of the sheet. You read on it, so it is the largest field.
-     ink    — the words. A sentence occupies real estate; second largest.
-     quiet  — present everywhere, never read first. Middle.
-     signal — a mark ON the page, never a field. It gets the smallest band by a
-              wide margin, and that thinness is the lesson: 0.42fr against the
-              ground's 3.2fr is roughly the shape of a bar on a page.
-   The first attempt gave the ground 3.2fr and let the other three share what was
-   left, which rendered the ink a 12px sliver next to a 380px wall and inverted
-   the point. Equal bands were rejected too — four identical stripes say nothing
-   about roles at all. */
-/* A seam between bands. It has to exist at all: when a deal puts the house
-   ground back on the ground — which the default plate does — the first band is
-   the same colour as the page behind the spine, and with nothing between them
-   it simply is not there. The spine would report three bands where there are
-   four, which on a page whose whole claim is that it reports honestly is not
-   acceptable.
-
-   There is no single seam colour, and finding that out was the point of
-   measuring rather than looking. Black disappears against olive (1.36:1), white
-   disappears against Naples (1.05:1), and the page's own ink is olive, which is
-   also one of the four hues. Any fixed value is invisible on some plate.
-
-   But a seam only ever separates the two bands it sits between. So each of the
-   three seams is chosen for its own pair, and the spine's edge for the pair it
-   actually touches, from a set of values no plate can ever use — see seamFor(). */
-.band-stack {
-  display: grid;
-  /* band · seam · band · seam · band · seam · band — the 2px rows are the seams,
-     the fr rows are the roles. Both are the same argument, twice. */
-  grid-template-rows: 3.2fr 2px 1.6fr 2px 1.1fr 2px 0.5fr;
-  height: 100%;
-  min-height: 0;
-  /* The edge sits between the spine and the page, and must clear both the band
-     it touches and the page behind it — two different comparisons, which is why
-     it is chosen separately from the internal seams. */
-  padding: 2px;
-  background: var(--seam-edge, var(--black-1));
-}
-.seam { display: block; }
-.seam[data-seam="1"] { background: var(--seam-1, var(--black-1)); }
-.seam[data-seam="2"] { background: var(--seam-2, var(--black-1)); }
-.seam[data-seam="3"] { background: var(--seam-3, var(--black-1)); }
-.band { display: block; background: var(--c); }
-.band[data-band="ground"] { background: var(--c-ground); }
-.band[data-band="ink"] { background: var(--c-ink); }
-.band[data-band="quiet"] { background: var(--c-quiet); }
-.band[data-band="signal"] { background: var(--c-signal); }
-
-/* The names, in the order the spine runs: largest first. No swatches.
-
-   Swatches were tried and removed. A swatch of hue X drawn on a field of hue Y
-   is only visible when X and Y differ, and this page's own deals put every hue
-   on the ground in turn — so on six of the twenty-four plates the swatch for the
-   ink would have been olive on olive, and on the dark scheme the labels'
-   --quiet-text (olive, never re-declared for dark) sat at 1.40:1 on the olive
-   page and vanished. A key that disappears on the deals it is meant to explain
-   is worse than no key.
-
-   So the key carries only what it can always carry: the role names, in spine
-   order, in the page's own ink. The colours are the spine's job, twenty pixels
-   away and fifty times larger. The ORDER is the lesson — the paper is most of
-   the sheet and what the machine sees is a sliver on it. */
-.band-key {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
-  font-family: var(--mono); font-size: var(--micro); color: var(--text);
-}
-.band-key li { display: grid; gap: 2px; align-content: start; }
-.band-key [lang="th"] { font-family: var(--thai); }
-/* The role's share of the page, drawn to the same proportions as the spine. */
-.band-key li::before { content: ''; display: block; height: 3px; background: currentColor; }
-.band-key li[data-key="ground"]::before { height: 12px; }
-.band-key li[data-key="ink"]::before { height: 6px; }
-.band-key li[data-key="quiet"]::before { height: 4px; }
-.band-key li[data-key="signal"]::before { height: 2px; }
-
-@media (max-width: 900px) {
-  /* One column: the spine turns on its side and lies above the plate, where a
-     thumb reaches it. It keeps all four roles — it is the same deal, drawn flat. */
-  .study-chapter { grid-template-columns: 1fr; }
-  .bands { min-height: 0; }
-  .band-stack { height: 64px; grid-template-rows: none; grid-auto-flow: column; grid-auto-columns: 1fr; }
-  .band-key { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 
 .plate-frame { padding: 0; }
 
@@ -168,14 +53,26 @@
 .plate[data-illegal] { outline: 3px solid var(--signal); outline-offset: -3px; }
 
 .machine-line, .gloss-line, .illegal-warn { max-width: 68ch; }
-/* The machine's own line, in the site's readout idiom: Naples on Black is 17.45:1
-   and neither colour is re-themed, so this stays legible in both schemes. It was
-   first set in gray-deep, which is 1.1:1 on the dark ground — the same class of
-   "it renders, so it is fine" error the palette instrument exists to catch. */
+/* The machine's own line, in the site's readout idiom — and not a slab.
+   It was a full-width black field, which made the machine's verdict the loudest
+   thing on a page whose actual question is a human one. A readout is a line of
+   text: mono, tabular figures, quiet ink. It is still unmistakably the machine,
+   because of how it is set and what it says, not because of how loud it is.
+
+   The old slab was Naples on Black at 17.45:1 and legible in both schemes, so
+   nothing about it was wrong — which is exactly why it survived review. What it
+   cost was hierarchy, and that is what this fixes.
+
+   --text, NOT --quiet-text. Those look interchangeable and are not: --quiet-text
+   is declared once as olive and neither dark block re-declares it, because every
+   other use of it sits on a grey field where olive is right in both schemes. Set
+   directly on the page it is olive-on-olive after sunset — measured at 1.00:1,
+   the readout simply not being there. The page's own ink is --text, and that one
+   does follow the scheme. */
 .machine-line {
   font-family: var(--mono); font-size: var(--micro);
-  background: var(--black); color: var(--naples);
-  padding: 12px 16px; margin: 18px 0 0;
+  color: var(--text);
+  margin: 18px 0 0;
   font-variant-numeric: tabular-nums;
 }
 .machine-line [lang="th"] { font-family: var(--thai); }
@@ -191,33 +88,46 @@
 .feel { margin-top: clamp(28px, 4vw, 48px); }
 .feel h3 { margin: 0 0 12px; font-size: var(--subtitle); }
 .feel h3 [lang="th"] { font-family: var(--thai); }
-/* Ten chips, each a solid field, spaced. No box around the group and no rule
-   between them.
+/* Ten answers to one question, and they are words.
 
-   The group was first tried as one bordered field with 2px seams — a box drawn
-   to fill a slot in the layout, which is exactly the filler-component habit this
-   design does not have. Nothing about the question needed it: ten equal fields
-   with air between them already read as one question with ten answers, and a
-   frame around them only added an edge the page does not otherwise have.
+   They were ten solid grey fields. Ten filled rectangles is ten objects shouting
+   at once, and ten is exactly the number at which a row stops reading as one
+   question with ten answers and starts reading as a wall of buttons. It also
+   wrapped nine-and-one, which is the composition breaking in front of you.
 
-   Solid grey carries black at 10.16:1, a pairing the palette instrument already
-   certifies, so the chip needs no border to be legible or to look clickable. */
-.feel-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+   So the resting state is now just the word, set in the reading voice, with a
+   44px target around it that you cannot see. The padding is real and the box is
+   not: a thumb gets the size it needs and the eye gets a sentence.
+
+   Pressed is the ONE filled object on the page, and it appears only when you
+   have answered. That is where the hierarchy comes from — not from ranking the
+   feelings, which would say "calm" matters more than "anxious", but from the
+   difference between answered and not. */
+.feel-grid { display: flex; flex-wrap: wrap; gap: 0 22px; }
 .feel-btn {
-  min-width: 0; padding: 10px 16px;
-  background: var(--quiet); color: var(--black);
+  min-width: 0; min-height: var(--target);
+  padding: 0 2px;
+  background: transparent;
+  color: var(--text);
   border: 0;
+  font-family: var(--sans);
+  font-size: var(--read);
+  letter-spacing: 0;
+  transition: color 160ms var(--ease);
 }
-.feel-btn:hover { background: var(--gray-deep); color: var(--white); }
+.feel-btn:hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 5px; }
 /* Pressed inverts ground and text. Safe in BOTH schemes, and by design: the
    pairings it relies on — naples on olive, olive on naples — are the two the
    palette instrument certifies as required text. The previous white-on-text rule
    was not: in dark mode --text is naples and --white is #f7f5ef, which is
    1.14:1 — a selection that became invisible exactly where the machine's eye
    already darkens the page. */
-.feel-btn[aria-pressed="true"] { background: var(--text); color: var(--ground); }
+.feel-btn[aria-pressed="true"] {
+  background: var(--text); color: var(--ground);
+  text-decoration: none; padding: 0 10px;
+}
 /* The only outline on this page, and it is the one that has to be there: without
-   it a keyboard user cannot tell which chip they are on. */
+   it a keyboard user cannot tell which word they are on. */
 .feel-btn:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
 .feel-btn [lang="th"] { font-family: var(--thai); }
 
@@ -249,7 +159,10 @@
 .feel-bar { display: block; height: 10px; background: var(--signal); width: 2%; }
 .feel-n { font-family: var(--mono); font-size: var(--micro); font-variant-numeric: tabular-nums; text-align: right; color: var(--text); }
 
-.board-empty { color: var(--quiet-text); margin-top: var(--gap); }
+/* --text, not --quiet-text: see .machine-line above. This line is set straight on
+   the page, so it has to follow the scheme. It was olive on olive in dark mode —
+   the sentence inviting the first answer rendered at 1.00:1, i.e. not at all. */
+.board-empty { color: var(--text); margin-top: var(--gap); }
 .board-empty[hidden] { display: none; }
 .board-empty [lang="th"] { font-family: var(--thai); }
 

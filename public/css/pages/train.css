@@ -140,7 +140,10 @@ a.training-choice { text-decoration: none; }
 .video-lesson { padding:0 var(--gutter) 24px; display:grid; gap:16px; }
 .video-lesson h2 { font-size:1.15rem; margin:0; }
 .lesson-topline { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
-.lesson-topline > .micro { color:var(--olive); }
+/* --text, not a raw hue: this is set on the page, and --olive is the page's own
+   ink in light and the page's own GROUND in dark. Hardcoding it here printed this
+   line olive-on-olive after sunset — measured 1.00:1, i.e. not on the page. */
+.lesson-topline > .micro { color: var(--text); }
 .lesson-methods { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-bottom:1px solid var(--gray); }
 .lesson-methods .training-choice { position:relative; background:transparent; color:var(--black); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
 .lesson-methods .training-choice strong { font-size:1.1rem; }
