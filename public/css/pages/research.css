@@ -69,20 +69,113 @@
 .history-lab { padding: clamp(24px, 4vw, 56px) var(--gutter); display: grid; gap: 20px; scroll-margin-top: 90px; }
 .history-lab h2 { font-size: clamp(1.75rem, 3vw, 3rem); max-width: 28ch; }
 .history-lab > .prose { margin: 0; max-width: 74ch; }
-.history-choices { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2px; }
-.history-choices .btn { display: grid; grid-template-columns: 1fr; gap: 4px; align-content: start; white-space: normal; height: auto; min-height: 60px; text-align: left; justify-content: flex-start; padding: 12px; }
-.history-choices .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
-.history-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+/* The camera catalogue is the floor this page stands on, not its subject — the
+   subject is sixty years of people teaching machines to see. Six numbers in one
+   row, all display-sized, gave it no opening move: 3,425 cameras and 7 agencies
+   shouted at the same volume. So one number carries the catalogue and the other
+   five sit beside it as quiet facts.
+
+   Scoped with figures-lead because .figures is shared with /cameras, /index and
+   /reconstruct, and those pages have not been reworked. */
+.figures-lead {
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  align-items: end;
+  column-gap: clamp(28px, 5vw, 72px);
+}
+.figures-lead .is-lead { padding-left: var(--gutter); padding-right: 0; padding-bottom: clamp(20px, 2.5vw, 30px); }
+.figures-lead .is-lead .n { font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 6px; }
+.figures-lead .is-lead .micro { max-width: 18ch; }
+.figures-rest {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding-bottom: clamp(20px, 2.5vw, 30px);
+}
+.figures-lead .figures-rest .figure { padding: 0 clamp(6px, 1vw, 16px); }
+/* The five are facts, not headlines: body size, regular weight, no display face. */
+.figures-lead .figures-rest .n { font-size: var(--body); font-weight: 400; margin-bottom: 2px; }
+@media (max-width: 820px) {
+  .figures-lead { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
+  .figures-lead .is-lead { padding-bottom: 0; }
+  .figures-rest { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px clamp(6px, 3vw, 24px); }
+}
+
+/* ── The four landmarks, on a line ─────────────────────────────────────────
+   Four solid black buttons, each far bigger than the words in it, and the only
+   light object on the screen was the year you had already chosen. Four equal
+   boxes is the same failure as six equal figures.
+
+   This is the diagram the page was describing anyway, so it is drawn: four
+   marks on one rule. The marks are EVENLY spaced and that is deliberate — the
+   line is a sequence, not a scale, because 1963 to 2005 is forty-two years and
+   2016 to 2023 is seven. The sentence above already says these are landmarks
+   and not the whole history; drawing them to scale would contradict it.
+
+   The chosen year inverts. It is the only filled object in the group and it
+   appears only when you have chosen, so the eye is told where it is without
+   anything else on the page having to compete. */
+.history-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 28px 0 12px;
+}
+.axis-mark {
+  /* A 3px top edge per mark, welds into one continuous axis across the four
+     columns. A 1px rule with 3px ticks on it was tried first and the ticks
+     could not be seen at reading size — the whole thing read as a plain rule. */
+  border-top: 3px solid var(--text);
+  background: transparent;
+  border-left: 0; border-right: 0; border-bottom: 0;
+  color: var(--text);
+  cursor: pointer; text-align: left;
+  display: grid; gap: 3px; align-content: start;
+  padding: 14px clamp(10px, 1.6vw, 22px) 0 0;
+  min-height: var(--target);
+  font-family: var(--mono); font-size: var(--micro);
+}
+.axis-mark:hover { background: transparent; }
+.axis-mark .num { font-family: var(--mono); font-size: var(--body); letter-spacing: 0.03em; justify-self: start; padding: 0 4px; }
+.axis-mark[aria-pressed="true"] .num { background: var(--text); color: var(--ground); }
+.axis-mark:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.axis-mark [lang="th"] { font-family: var(--thai); line-height: 1.6; }
+
+/* On a phone the axis turns vertical: the rule becomes a left edge down the
+   column, and the four marks stack into the same timeline. */
+@media (max-width: 720px) {
+  .history-choices { grid-template-columns: minmax(0, 1fr); margin-top: 20px; }
+  .axis-mark {
+    border-top: 0; border-left: 3px solid var(--text);
+    padding: 14px 0 14px 16px; gap: 2px; align-content: center;
+  }
+}
+
+/* The figure was a half-width dark field beside an equal half of text, and it is
+   the only near-black object on a Naples page, so it out-weighed the year and
+   the heading that the section is actually about. The text gets the wider share;
+   the drawing is still the largest single thing in the column, which is right
+   for a drawing. */
+.history-panel { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: var(--gap); align-items: start; }
 .history-panel figure { margin: 0; min-width: 0; }
 .history-panel img { width: 100%; height: auto; display: block; }
 .history-panel figcaption { margin-top: 8px; }
 .history-panel h3 { font-size: clamp(1.35rem, 2vw, 2rem); margin: 8px 0 16px; }
 .history-panel p { max-width: 66ch; }
-.history-panel .controls { padding: 0; background: transparent; flex-wrap: wrap; }
+.history-panel .controls { padding: 0; background: transparent; flex-wrap: wrap; align-items: baseline; }
+/* One way into the lesson is a field; the citation is a word. Two equal blocks
+   put a DOI link at the same volume as the thing you came here to try. */
+.history-panel .controls .btn:not(.primary) { background: transparent; color: var(--text); padding: 0 4px; }
+.history-panel .controls .btn:not(.primary):hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
 .history-limit { border-left: 3px solid currentColor; padding-left: 16px; }
 .history-next { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .history-next a { min-height: 44px; display: inline-flex; align-items: center; }
-@media (max-width: 900px) { .history-panel { grid-template-columns: 1fr; } .history-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 900px) { .history-panel { grid-template-columns: 1fr; } }
+
+/* Four "choose where to start" buttons, each sized to its own words, stacked
+   into a staircase down the page-head. Two of the four are one line and one is
+   one and a half; a row of differently-sized blocks is not a row. One start
+   point is a field, the other three are words — same decision as the landmarks
+   above and the answers on /colour. */
+.page-head .cta { align-items: baseline; }
+.page-head .cta .btn:not(.primary) { background: transparent; color: var(--text); padding: 0 4px; }
+.page-head .cta .btn:not(.primary):hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
 
 .learning-kinds { padding: clamp(24px, 4vw, 56px) var(--gutter); scroll-margin-top: 90px; }
 .learning-kinds > h2 { font-size: clamp(1.75rem, 3vw, 3rem); margin-bottom: 16px; }

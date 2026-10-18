@@ -23,13 +23,24 @@
     </div>
   </section>
 
-  <section class="figures" data-aria-th="จำนวนจากรายชื่อกล้อง" data-aria-en="Figures from the camera catalogue">
-    <div class="figure"><span class="n" data-fig="total">—</span><span class="micro"><span class="th" lang="th">กล้องสาธารณะในรายชื่อ</span><span class="en" lang="en">public cameras listed</span></span></div>
-    <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">แหล่งภาพสำหรับเครื่องอ่าน</span><span class="en" lang="en">listed as pixel-readable</span></span></div>
-    <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">แหล่งวิดีโอ</span><span class="en" lang="en">video sources</span></span></div>
-    <div class="figure"><span class="n" data-fig="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">stills</span></span></div>
-    <div class="figure"><span class="n" data-fig="sources">—</span><span class="micro"><span class="th" lang="th">หน่วยงานเจ้าของกล้อง</span><span class="en" lang="en">agencies that own them</span></span></div>
-    <div class="figure"><span class="n" data-fig="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์ตอนตรวจล่าสุด</span><span class="en" lang="en">offline at last check</span></span></div>
+  <!-- Six numbers in one row, all the same size, meant nothing. 3,425 cameras and
+       7 agencies shouted at exactly the same volume, so the page had no opening
+       move at all — and the camera count is not even this page's subject, which
+       is sixty years of people teaching machines to see. The catalogue is the
+       floor it stands on. So: one number carries it, and the other five become
+       the quiet facts beside it. -->
+  <section class="figures figures-lead" data-aria-th="จำนวนจากรายชื่อกล้อง" data-aria-en="Figures from the camera catalogue">
+    <div class="figure is-lead">
+      <span class="n" data-fig="total">—</span>
+      <span class="micro"><span class="th" lang="th">กล้องสาธารณะในรายชื่อ</span><span class="en" lang="en">public cameras listed</span></span>
+    </div>
+    <div class="figures-rest">
+      <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">แหล่งภาพสำหรับเครื่องอ่าน</span><span class="en" lang="en">listed as pixel-readable</span></span></div>
+      <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">แหล่งวิดีโอ</span><span class="en" lang="en">video sources</span></span></div>
+      <div class="figure"><span class="n" data-fig="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">stills</span></span></div>
+      <div class="figure"><span class="n" data-fig="sources">—</span><span class="micro"><span class="th" lang="th">หน่วยงานเจ้าของกล้อง</span><span class="en" lang="en">agencies that own them</span></span></div>
+      <div class="figure"><span class="n" data-fig="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์ตอนตรวจล่าสุด</span><span class="en" lang="en">offline at last check</span></span></div>
+    </div>
   </section>
 
   <div class="catalogue-note"><p class="micro" data-evidence-status role="status"><span class="th" lang="th">ตัวเลขจากรายชื่อกล้องจะแสดงเมื่อโหลดสำเร็จ</span><span class="en" lang="en">Catalogue counts appear when loading succeeds.</span></p><button class="btn" type="button" data-evidence-retry hidden><span class="th" lang="th">ลองโหลดอีกครั้ง</span><span class="en" lang="en">Try loading again</span></button></div>
@@ -56,7 +67,7 @@
 </h2>
 <p class="prose"><span class="th" lang="th">กดปีเพื่อดูว่าคำถามและวิธีคิดเปลี่ยนไปอย่างไร นี่คือสี่ตัวอย่างสำคัญ ไม่ใช่ทุกก้าวของประวัติศาสตร์ วิธีเก่ากับวิธีใหม่ยังใช้ร่วมกันได้</span><span class="en" lang="en">Choose a year to see how the question and approach changed. These are four landmarks, not the whole history. Older and newer methods still work together.</span>
 </p>
-<div class="history-choices" hidden role="group" data-aria-th="เลือกตัวอย่างทางประวัติศาสตร์" data-aria-en="Choose a history example"><button class="btn" type="button" data-history-choice="shapes" aria-controls="history-shapes" aria-pressed="true"><span class="num">1963</span><span class="th" lang="th">หาขอบ แล้วประกอบเป็นรูปทรง</span><span class="en" lang="en">Find edges, build shapes</span></button><button class="btn" type="button" data-history-choice="features" aria-controls="history-features" aria-pressed="true"><span class="num">2005</span><span class="th" lang="th">วัดลักษณะ แล้วให้เครื่องตัดสิน</span><span class="en" lang="en">Measure features, then decide</span></button><button class="btn" type="button" data-history-choice="boxes" aria-controls="history-boxes" aria-pressed="true"><span class="num">2016</span><span class="th" lang="th">เรียนรู้จากภาพ แล้ววางกรอบ</span><span class="en" lang="en">Learn from pictures, draw boxes</span></button><button class="btn" type="button" data-history-choice="masks" aria-controls="history-masks" aria-pressed="true"><span class="num">2023</span><span class="th" lang="th">ชี้สิ่งที่สนใจ แล้วแยกพิกเซล</span><span class="en" lang="en">Point to an object, select its pixels</span></button>
+<div class="history-choices" hidden role="group" data-aria-th="เลือกตัวอย่างทางประวัติศาสตร์" data-aria-en="Choose a history example"><button class="axis-mark" type="button" data-history-choice="shapes" aria-controls="history-shapes" aria-pressed="true"><span class="num">1963</span><span class="th" lang="th">หาขอบ แล้วประกอบเป็นรูปทรง</span><span class="en" lang="en">Find edges, build shapes</span></button><button class="axis-mark" type="button" data-history-choice="features" aria-controls="history-features" aria-pressed="false"><span class="num">2005</span><span class="th" lang="th">วัดลักษณะ แล้วให้เครื่องตัดสิน</span><span class="en" lang="en">Measure features, then decide</span></button><button class="axis-mark" type="button" data-history-choice="boxes" aria-controls="history-boxes" aria-pressed="false"><span class="num">2016</span><span class="th" lang="th">เรียนรู้จากภาพ แล้ววางกรอบ</span><span class="en" lang="en">Learn from pictures, draw boxes</span></button><button class="axis-mark" type="button" data-history-choice="masks" aria-controls="history-masks" aria-pressed="false"><span class="num">2023</span><span class="th" lang="th">ชี้สิ่งที่สนใจ แล้วแยกพิกเซล</span><span class="en" lang="en">Point to an object, select its pixels</span></button>
 </div>
 <article class="history-panel" id="history-shapes" data-history-panel="shapes" aria-labelledby="history-shapes-title">
 <figure><img src="/img/history/shapes.svg" alt="" aria-hidden="true" width="600" height="320">

@@ -6,20 +6,20 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.17.6'
+import '../core/site.js?v=1.17.7'
 import { t, n, pct, lang, onLang, esc } from '../core/i18n.js'
-import { toast, confirmBox } from '../core/site.js?v=1.17.6'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.17.6'
-import { canUseWebcam } from '../core/source.js?v=1.17.6'
+import { toast, confirmBox } from '../core/site.js?v=1.17.7'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.17.7'
+import { canUseWebcam } from '../core/source.js?v=1.17.7'
 import { runLens, createLensState } from '../cv/lenses.js'
-import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.17.6'
+import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.17.7'
 import { knnPredict } from '../ml/learner.js'
-import * as store from '../train/store.js?v=1.17.6'
+import * as store from '../train/store.js?v=1.17.7'
 import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js'
-import { createClassList } from '../train/classes-ui.js?v=1.17.6'
+import { createClassList } from '../train/classes-ui.js?v=1.17.7'
 import { createBars } from '../train/bars.js'
 import { createTrigger } from '../gesture/fire.js'
-import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.17.6'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.17.7'
 
 const K = 5
 const LIVE_MS = 250
