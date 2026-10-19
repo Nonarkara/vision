@@ -22,8 +22,8 @@
 
 /* A research case study: diagrams remain readable as columns become rows. */
 .tagid-case h2 { font-size: clamp(2.5rem, 4vw, 4rem); }
-.tagid-case .chapter-body > p { max-width: 66ch; }
-.tagid-source { font-size: var(--micro); }
+.tagid-case .chapter-body > p { max-width: 65ch; }
+.tagid-source { display: inline-flex; align-items: center; min-height: var(--target); justify-self: start; font-size: var(--micro); }
 .tagid-pipeline, .tagid-research, .face-lineage, .tagid-watch { min-width: 0; }
 .tagid-pipeline { background: var(--black); color: var(--white); padding: 20px; }
 .tagid-pipeline > figcaption, .face-lineage > figcaption { padding: 0 0 20px; }
@@ -36,7 +36,7 @@
 .feature-sketch { width: 100%; height: 80px; display: block; margin: 12px 0; stroke: var(--naples); stroke-width: 2; fill: none; }
 .feature-sketch circle { fill: var(--naples); }
 .sketch-faint { opacity: 0.4; }
-.tagid-caption { margin: 16px 0 0; max-width: 76ch; line-height: 1.55; }
+.tagid-caption { margin: 16px 0 0; max-width: 65ch; line-height: 1.55; }
 .tagid-pipeline .tagid-caption { color: var(--gray); }
 .tagid-research-head h3, .tagid-watch h3, .tagid-reading h3 { margin: 0 0 12px; }
 .tagid-research-head .label { display: block; margin-bottom: 6px; }
@@ -44,7 +44,7 @@
 .tagid-modules details { border-bottom: 1px solid currentColor; }
 .tagid-modules summary { min-height: var(--target); padding: 12px 0; cursor: pointer; font-weight: 600; }
 .tagid-modules summary .num { margin: 0 12px; font-size: var(--micro); }
-.tagid-modules details p { margin: 0; padding: 0 16px 16px; max-width: 70ch; }
+.tagid-modules details p { margin: 0; padding: 0 16px 16px; max-width: 65ch; }
 .face-lineage ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; gap: 2px; }
 .face-lineage li { display: flex; flex-direction: column; gap: 12px; padding: 16px 12px; border-top: 3px solid var(--olive); background: var(--naples); color: var(--olive); }
 .face-lineage li strong { font-size: var(--micro); }
@@ -81,24 +81,25 @@
    Scoped with figures-lead because .figures is shared with /cameras, /index and
    /reconstruct, and those pages have not been reworked. */
 .figures-lead {
+  display: grid; padding: 0;
   grid-template-columns: minmax(0, auto) minmax(0, 1fr);
   align-items: end;
   column-gap: clamp(28px, 5vw, 72px);
 }
-.figures-lead .is-lead { padding-left: var(--gutter); padding-right: 0; padding-bottom: clamp(20px, 2.5vw, 30px); }
+.figures-lead .is-lead { max-width: none; padding-left: var(--gutter); padding-right: 0; padding-bottom: clamp(20px, 2.5vw, 30px); }
 .figures-lead .is-lead .n { font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 6px; }
 .figures-lead .is-lead .micro { max-width: 18ch; }
 .figures-rest {
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex; flex-wrap: wrap; gap: 16px 28px;
   padding-bottom: clamp(20px, 2.5vw, 30px);
 }
-.figures-lead .figures-rest .figure { padding: 0 clamp(6px, 1vw, 16px); }
+.figures-lead .figures-rest .figure { flex: 0 1 auto; padding: 0; max-width: 18ch; }
 /* The five are facts, not headlines: body size, regular weight, no display face. */
 .figures-lead .figures-rest .n { font-size: var(--body); font-weight: 400; margin-bottom: 2px; }
 @media (max-width: 820px) {
   .figures-lead { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
   .figures-lead .is-lead { padding-bottom: 0; }
-  .figures-rest { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px clamp(6px, 3vw, 24px); }
+  .figures-rest { padding-inline: var(--gutter); gap: 18px 24px; }
 }
 
 /* ── The four landmarks, on a line ─────────────────────────────────────────
@@ -160,12 +161,12 @@
 .history-panel img { width: 100%; height: auto; display: block; }
 .history-panel figcaption { margin-top: 8px; }
 .history-panel h3 { font-size: clamp(1.35rem, 2vw, 2rem); margin: 8px 0 16px; }
-.history-panel p { max-width: 66ch; }
+.history-panel p { max-width: 65ch; }
 .history-panel .controls { padding: 0; background: transparent; flex-wrap: wrap; align-items: baseline; }
 /* One way into the lesson is a field; the citation is a word. Two equal blocks
    put a DOI link at the same volume as the thing you came here to try. */
 .history-panel .controls .btn:not(.primary) { background: transparent; color: var(--text); padding: 0 4px; }
-.history-panel .controls .btn:not(.primary):hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
+.history-panel .controls .btn:not(.primary):hover { background: transparent; color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
 .history-limit { border-left: 3px solid currentColor; padding-left: 16px; }
 .history-next { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .history-next a { min-height: 44px; display: inline-flex; align-items: center; }
@@ -178,11 +179,11 @@
    above and the answers on /colour. */
 .page-head .cta { align-items: baseline; }
 .page-head .cta .btn:not(.primary) { background: transparent; color: var(--text); padding: 0 4px; }
-.page-head .cta .btn:not(.primary):hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
+.page-head .cta .btn:not(.primary):hover { background: transparent; color: var(--text); text-decoration: underline; text-underline-offset: 4px; }
 
 .learning-kinds { padding: clamp(24px, 4vw, 56px) var(--gutter); scroll-margin-top: 90px; }
 .learning-kinds > h2 { font-size: clamp(1.75rem, 3vw, 3rem); margin-bottom: 16px; }
-.learning-kinds > .prose { max-width: 80ch; }
+.learning-kinds > .prose { max-width: 65ch; }
 .learning-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0; }
 .learning-cards article { min-width: 0; border-top: 3px solid currentColor; padding-top: 16px; }
 .learning-cards h3 { font-size: clamp(1.35rem, 2vw, 1.8rem); margin: 10px 0 16px; }
@@ -208,15 +209,16 @@
 /* One question at a time; keep all three readable when scripts are unavailable. */
 .catalogue-note { padding: 12px var(--gutter); display: flex; align-items: center; flex-wrap: wrap; gap: 8px 20px; background: var(--field); color: var(--field-text); }
 .catalogue-note p { margin: 0; }
-.learning-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 20px; }
-.learning-choices .btn { white-space: normal; height: auto; justify-content: flex-start; text-align: left; gap: 12px; padding: 14px; }
+.learning-choices { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 20px; }
+.learning-choices .btn { flex: 0 1 auto; white-space: normal; height: auto; justify-content: flex-start; text-align: left; gap: 12px; padding: 14px; }
 .learning-choices .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
 .learning-cards.is-guided { grid-template-columns: 1fr; margin-top: 0; }
 .learning-cards.is-guided article { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--gap); padding-top: 24px; }
 .learning-copy, .learning-demo { min-width: 0; }
+.learning-cards p { max-width: 65ch; }
 .learning-copy > p { max-width: 54ch; }
 .learning-task { margin-top: 0; font-weight: 600; }
-.learning-demo .learning-objects { min-height: 100px; align-items: center; justify-content: space-around; }
+.learning-demo .learning-objects { width: fit-content; max-width: 100%; align-items: center; }
 .learning-demo .learning-answer { font-size: var(--body); }
 .learning-demo > a { display: inline-flex; min-height: var(--target); align-items: center; }
 .reward-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -226,6 +228,6 @@
 .reward-paths strong { font-size: var(--body); }
 .history-panel, .learning-cards article, .learning-cards h3 { scroll-margin-top: 100px; }
 @media (max-width: 900px) { .learning-cards.is-guided article { grid-template-columns: 1fr; gap: 12px; } }
-@media (max-width: 520px) { .learning-choices { grid-template-columns: 1fr; } .learning-choices .btn { padding: 10px 12px; } }
+@media (max-width: 520px) { .learning-choices .btn { padding: 10px 12px; } }
 .learning-continue { margin: 12px 0 0; }
 .learning-continue .btn { white-space: normal; text-align: left; }

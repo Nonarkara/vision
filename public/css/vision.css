@@ -344,20 +344,7 @@ em { font-style: italic; }
 }
 .more-list a { min-height: var(--target); }
 
-/* Peach Red, soft, only on a lens that reports what the machine sees.
-   The previous one keeps a fading trail. Picture and numbers stay quiet. */
-@keyframes machine-fade { from { opacity: 1; } to { opacity: 0.4; } }
-@keyframes machine-trail { from { opacity: 0.7; } to { opacity: 0; } }
-.lens-steps .btn[data-lens="edges"][aria-pressed="true"],
-.lens-steps .btn[data-lens="motion"][aria-pressed="true"],
-.lens-steps .btn[data-lens="objects"][aria-pressed="true"] {
-  box-shadow: 0 0 14px var(--signal);
-  animation: machine-fade 1.6s var(--ease) infinite alternate;
-}
-.lens-steps .btn.machine-trail {
-  box-shadow: 0 0 10px var(--signal);
-  animation: machine-trail 1.2s var(--ease) 1 forwards;
-}
+/* Lens selection stays solid: fading the whole control also fades its label. */
 .rail-tools { display: flex; align-items: stretch; flex: 0 0 auto; }
 /* The room rail is a horizontal scroller with its scrollbar hidden, so below
    the width where all ten rooms fit it looks like the list simply ends. This
@@ -425,11 +412,10 @@ em { font-style: italic; }
 .path a[data-step]:hover, .path a[data-step]:focus-visible { background: var(--naples); }
 .path a[data-step][aria-current="step"]:hover { background: var(--olive); }
 @media (max-width: 800px) {
-  .path { grid-template-columns: 1fr 1fr; }
-  .path a { padding: 12px 14px 14px; }
-  .path a:nth-child(odd) { border-inline-start: 0; }
-  .path a:nth-child(n + 3) { border-top: 1px solid var(--gray); }
-  .step-note { max-width: none; }
+  .path { display: flex; flex-wrap: wrap; }
+  .path a { flex: 0 1 auto; flex-direction: row; align-items: center; gap: 6px; min-height: var(--target); padding: 10px 12px; }
+  .path .step-name { font-size: var(--read); }
+  .path .step-note { display: none; }
 }
 
 /* ── Fields ──────────────────────────────────────────────────────────── */
@@ -475,8 +461,8 @@ em { font-style: italic; }
 .page-head .lede { margin: 0; }
 /* The terms footnote: quiet, but the links must read as links. */
 .page-head .terms { margin: 0; opacity: .85; }
-.page-head .terms a { color: var(--gray); }
-.page-head .terms a:hover, .page-head .terms a:focus-visible { color: var(--white); }
+.page-head .terms a { color: var(--text); }
+.page-head .terms a:hover, .page-head .terms a:focus-visible { color: var(--text); text-decoration-thickness: 2px; }
 @media (max-width: 900px) { .page-head { grid-template-columns: 1fr; } }
 
 .eyebrow { display: block; margin-bottom: 12px; }
@@ -518,9 +504,10 @@ em { font-style: italic; }
 }
 
 /* Numbers strip */
-.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0; }
-.figure { padding: 24px var(--gutter) 28px; }
-.figure .n { display: block; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: clamp(2rem, 3vw + 1rem, 3.5rem); font-weight: 600; line-height: 1; margin-bottom: 8px; }
+.figures { display: flex; flex-wrap: wrap; align-items: baseline; gap: 20px 32px; padding: 24px var(--gutter); }
+.figure { flex: 0 1 auto; max-width: 24ch; }
+.figure .n { display: block; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: var(--subtitle); font-weight: 600; line-height: 1; margin-bottom: 8px; }
+.figure:first-child .n { font-size: var(--title); }
 
 /* ── Instruments (live canvases + controls) ─────────────────────────── */
 
@@ -561,7 +548,6 @@ em { font-style: italic; }
 .machine-scan {
   position: fixed; z-index: 80; left: 0; right: 0; top: 0; height: 2px;
   background: var(--signal); pointer-events: none;
-  box-shadow: 0 0 12px var(--signal);
   animation: machine-scan 3.2s linear infinite;
 }
 @keyframes machine-scan { from { transform: translateY(0); } to { transform: translateY(100vh); } }
@@ -683,10 +669,10 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 
 /* Footer */
 .foot { background: var(--black); color: var(--white); padding: clamp(40px, 6vw, 80px) var(--gutter) 40px; display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); font-size: var(--micro); }
-.foot p { max-width: 70ch; }
+.foot p { max-width: 65ch; }
 .foot a { color: var(--white); }
 .foot nav { display: flex; flex-direction: column; gap: 4px; }
-.foot nav a { min-height: 32px; display: flex; align-items: center; }
+.foot nav a { min-height: var(--target); display: flex; align-items: center; }
 /* The footer shows the whole system: four hues, each on its three-step tone
    ladder. The swatches are the argument — every colour on this site is one of
    these twelve, or an instrument black/white. */
@@ -742,7 +728,7 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 70ch; }
 .cta { display: flex; flex-wrap: wrap; gap: 2px; margin-top: var(--gap); }
 .opening-stage .stage-view { flex: 1 1 auto; aspect-ratio: auto; min-height: 280px; }
 .lens-steps .btn { flex: 1 1 0; min-width: 0; padding: 0 8px; }
-.lens-steps .btn .num { opacity: 0.6; }
+.lens-steps .btn .num { opacity: 1; }
 .lens-say { color: var(--naples); font-family: var(--sans); font-size: var(--micro); line-height: 1.55; min-height: 6.5em; }
 html[data-lang="th"] .lens-say { font-family: var(--thai); }
 .specimen-line { border-top: 0; align-items: flex-end; }

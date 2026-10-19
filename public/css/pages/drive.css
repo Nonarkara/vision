@@ -128,7 +128,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
   outline: 3px solid var(--signal); outline-offset: -3px;
 }
 .captcha-ask { margin: 0; font-size: var(--body); font-weight: 600; }
-.captcha .controls { gap: 2px; }
+.captcha .controls { gap: 2px; justify-self: start; }
 .captcha .controls .btn,
 .gate-reveal .btn,
 .gate-replay .btn { min-height: 44px; }
@@ -153,7 +153,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate[data-open="true"] .gate-out,
 .gate[data-through="true"] .gate-out { display: none; }
 .captcha [data-captcha-state]:empty { display: none; }
-.gate-taught { margin: 6px 0 0; max-width: 78ch; color: var(--naples); }
+.gate-taught { margin: 6px 0 0; max-width: 65ch; color: var(--naples); }
 .gate-reveal { display: grid; gap: 12px; max-width: 62ch; }
 .gate-reveal p { margin: 0; }
 .gate[data-open="true"] {

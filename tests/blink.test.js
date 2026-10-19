@@ -347,14 +347,22 @@ test('the drill builds its six screens from photographs that sit outside its own
   await running.catch(() => {})
 })
 
-test('a full drill answers every trial — including the last — and the machine never misses', async () => {
+test('a full drill answers every trial — including the last — and the machine never misses', async (ctx) => {
   const page = storyPage()
   installGlobals(page.document)
   const { createDrill, TRIALS } = await import('../public/js/story/blink.js')
+  // Advance the flash clock with the pumped animation frames. Real 8ms sleeps
+  // can resume after a 45ms flash under load, testing host scheduling instead
+  // of whether the machine observes and records the displayed frame.
+  ctx.mock.timers.enable({ apis: ['setTimeout', 'Date'] })
+  ctx.mock.method(performance, 'now', () => Date.now())
   const drill = createDrill(page.drill, { lead: () => 0, respondMs: 20 })
 
   const running = page.startBtn.fire('click')
-  const pause = (ms) => new Promise((r) => setTimeout(r, ms))
+  const pause = async (ms) => {
+    ctx.mock.timers.tick(ms)
+    await Promise.resolve()
+  }
   let answered = 0
   for (let step = 0; step < 400 && page.againBtn.hidden; step++) {
     await pause(8)

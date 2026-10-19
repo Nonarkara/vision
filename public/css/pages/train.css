@@ -8,7 +8,7 @@
 
 /* The room: camera on the left, classes on the right */
 .room { padding: clamp(40px, 6vw, 96px) var(--gutter); }
-.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 70ch; }
+.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 65ch; }
 .room-head .prose { margin: 0; }
 .room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
 @media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
@@ -127,7 +127,7 @@ a.training-choice { text-decoration: none; }
 .room-bench .curve-view { aspect-ratio: 3 / 1; max-height: 160px; }
 .demo-test { padding: 12px 16px; }
 .demo-test .micro { margin: 0 0 8px; }
-.training-details > summary { padding: 24px var(--gutter); cursor: pointer; font-size: 1.2rem; min-height: 48px; background: var(--black-2); }
+.training-details > summary { padding: 24px var(--gutter); cursor: pointer; font-size: 1.2rem; min-height: 48px; background: var(--black-2); color: var(--white); }
 @media (max-width: 1000px) { .training-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .training-choice { padding: 12px; } .training-choice strong { font-size: 1rem; } }
 
@@ -135,28 +135,28 @@ a.training-choice { text-decoration: none; }
 
 /* One workspace: choose a method, see a frame, teach beside it. */
 .page-head { padding-top:24px; padding-bottom:20px; gap:20px; }
-.page-head h1 { font-size:clamp(2rem,3.3vw,3.6rem); max-width:18ch; }
+.page-head h1 { font-size:var(--title); max-width:18ch; }
 .page-head .lede { font-size:1rem; line-height:1.55; max-width:52ch; }
 .video-lesson { padding:0 var(--gutter) 24px; display:grid; gap:16px; }
-.video-lesson h2 { font-size:1.15rem; margin:0; }
+.video-lesson h2 { font-size:var(--body); margin:0; }
 .lesson-topline { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
 /* --text, not a raw hue: this is set on the page, and --olive is the page's own
    ink in light and the page's own GROUND in dark. Hardcoding it here printed this
    line olive-on-olive after sunset — measured 1.00:1, i.e. not on the page. */
 .lesson-topline > .micro { color: var(--text); }
-.lesson-methods { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-bottom:1px solid var(--gray); }
-.lesson-methods .training-choice { position:relative; background:transparent; color:var(--black); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
-.lesson-methods .training-choice strong { font-size:1.1rem; }
-.lesson-methods .training-choice > span:last-child { color:inherit; font-size:0.8rem; opacity:0.75; }
-.lesson-methods .training-choice[aria-pressed="true"] { border-bottom-color:var(--black); background:var(--olive); color:var(--naples); }
-.lesson-methods .training-choice:not([aria-pressed="true"]):hover { background:var(--quiet); }
+.lesson-methods { display:flex; flex-wrap:wrap; gap:4px 12px; border-bottom:1px solid var(--gray); }
+.lesson-methods .training-choice { position:relative; background:transparent; color:var(--text); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
+.lesson-methods .training-choice strong { font-size:var(--read); }
+.lesson-methods .training-choice > span:last-child { color:inherit; font-size:var(--fine);  }
+.lesson-methods .training-choice[aria-pressed="true"] { border-bottom-color:var(--text); background:var(--field); color:var(--field-text); }
+.lesson-methods .training-choice:not([aria-pressed="true"]):hover { background:var(--quiet); color:var(--quiet-text); }
 .lesson-grid { grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr); gap:24px; }
 .lesson-bench { position:sticky; top:calc(var(--rail-height) + 12px); }
 .lesson-bench .bench-view { aspect-ratio:16/9; }
 .lesson-bench .instrument-tools { position:absolute; top:0; right:0; background:transparent; z-index:2; }
 .lesson-bench .bench-caption { padding-right:170px; }
 .lesson-actions { display:grid; gap:12px; align-content:start; min-width:0; }
-.lesson-actions h3 { font-size:1.5rem; line-height:1.2; }
+.lesson-actions h3 { font-size:var(--lede); line-height:1.2; }
 .lesson-actions h3,.lesson-actions p { margin:0; }
 .lesson-actions > [data-lesson-help] { font-size:1rem; line-height:1.5; }
 .lesson-actions [data-method-panel] { display:grid; gap:12px; }
@@ -164,27 +164,27 @@ a.training-choice { text-decoration: none; }
 .lesson-actions .controls { padding:0; background:transparent; gap:8px; }
 .lesson-actions .controls .btn { flex:1; white-space:normal; padding:12px 8px; }
 .lesson-actions [data-label-frame] { display:grid; gap:4px; text-align:left; align-content:center; min-height:78px; background:var(--black); color:var(--white); border:2px solid var(--black); }
-.lesson-actions [data-label-frame] strong { font-size:1.05rem; }
-.lesson-actions [data-label-frame] small { font-size:.8rem; color:var(--naples); }
+.lesson-actions [data-label-frame] strong { font-size:var(--read); }
+.lesson-actions [data-label-frame] small { font-size:var(--fine); color:var(--naples); }
 .lesson-actions [data-label-frame]:disabled { opacity:.55; }
-.lesson-actions [data-lesson-learn] { width:100%; }
-.lesson-actions [data-lesson-reset] { justify-self:start; background:transparent; color:inherit; border:0; text-decoration:underline; font-size:.8rem; padding:0; }
-.lesson-actions [data-lesson-status] { padding:10px 12px; background:var(--quiet); color:var(--quiet-text); font-family:var(--sans); font-size:.85rem; line-height:1.4; }
+.lesson-actions [data-lesson-learn] { width:fit-content; max-width:100%; justify-self:start; }
+.lesson-actions [data-lesson-reset] { justify-self:start; background:transparent; color:inherit; border:0; text-decoration:underline; font-size:var(--fine); padding:0; }
+.lesson-actions [data-lesson-status] { padding:10px 12px; background:var(--quiet); color:var(--quiet-text); font-family:var(--sans); font-size:var(--micro); line-height:1.4; }
 .lesson-actions [data-lesson-status]:empty { display:none; }
 .lesson-labels { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding-top:8px; }
-.lesson-labels label { min-width:0; font-size:.8rem; }
+.lesson-labels label { min-width:0; font-size:var(--fine); }
 .lesson-overlay { position:absolute; left:12px; bottom:12px; background:var(--black); color:var(--naples); padding:8px 12px; max-width:calc(100% - 24px); font-weight:600; }
-.lesson-prediction { margin:0; padding:12px; font-family:var(--sans); min-height:52px; line-height:1.4; font-size:.85rem; }
-.lesson-scenes { padding:10px 12px; background:var(--black-2); color:var(--white); }
-.lesson-scenes > p { margin:0 0 6px; font-family:var(--sans); font-size:.8rem; }
+.lesson-prediction { margin:0; padding:12px; font-family:var(--sans); min-height:52px; line-height:1.4; font-size:var(--micro); }
+.lesson-scenes { align-self:flex-start; max-width:100%; padding:10px 12px; background:var(--black-2); color:var(--white); }
+.lesson-scenes > p { margin:0 0 6px; font-family:var(--sans); font-size:var(--fine); }
 .lesson-scenes .controls { padding:0; gap:4px; flex-wrap:wrap; background:transparent; }
-.lesson-scenes .btn { flex:1; white-space:normal; padding:8px; font-size:.85rem; }
+.lesson-scenes .btn { flex:0 1 auto; white-space:normal; padding:8px; font-size:var(--micro); }
 .lesson-scenes .btn[aria-pressed="true"] { background:var(--naples); color:var(--black); }
 .lesson-samples { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 .lesson-samples:empty { display:none; }
-.lesson-samples .micro { font-size:.75rem; }
-.lesson-samples .btn { min-height:44px; white-space:normal; padding:8px; font-size:.75rem; width:100%; }
-.lesson-credit { margin: 0; padding: 8px 12px 0; max-width: 70ch; }
+.lesson-samples .micro { font-size:var(--fine); }
+.lesson-samples .btn { min-height:44px; white-space:normal; padding:8px; font-size:var(--fine); width:100%; }
+.lesson-credit { margin: 0; padding: 8px 12px 0; max-width: 65ch; }
 .lesson-sample-strip { display:flex; gap:3px; padding:6px 0; }
 .lesson-sample-strip canvas { width:calc((100% - 6px)/3); height:auto; }
 .lesson-groups { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
@@ -192,35 +192,42 @@ a.training-choice { text-decoration: none; }
 .lesson-groups canvas { width:48%; height:auto; margin:2px 1%; }
 .lesson-held-frame { display:none; } /* The main video already holds this exact frame. */
 .lesson-source-picker,.lesson-notes { border-top:1px solid var(--gray); padding-top:4px; }
-.lesson-source-picker > summary,.lesson-notes > summary,.lesson-rename > summary { min-height:44px; padding:10px 0; cursor:pointer; font-size:.9rem; }
+.lesson-source-picker > summary,.lesson-notes > summary,.lesson-rename > summary { min-height:44px; padding:10px 0; cursor:pointer; font-size:var(--read); }
 .lesson-heading { display:grid; grid-template-columns:1fr 2fr; gap:20px; padding:12px 0; }
 .lesson-heading p { margin:0; }
-.lesson-notes p { max-width:90ch; font-size:.9rem; line-height:1.55; margin:10px 0; }
+.lesson-notes p { max-width:65ch; font-size:var(--read); line-height:1.55; margin:10px 0; }
 .lesson-source-picker .specimen-bar { position:static; padding:12px; }
 .advanced-training > summary { background:var(--quiet); color:var(--quiet-text); font-size:1rem; padding:16px var(--gutter); }
 .room { padding:24px var(--gutter); }
 .idea { padding:24px var(--gutter); gap:16px; }
 #teach-video { scroll-margin-top:calc(var(--rail-height) + 12px); }
-.video-lesson:is(:fullscreen,.is-expanded) { padding:16px; overflow:auto; background:var(--white); color:var(--black); }
+.video-lesson:is(:fullscreen,.is-expanded) { padding:16px; overflow:auto; background:var(--ground); color:var(--text); }
 .video-lesson:is(:fullscreen,.is-expanded) .lesson-bench { top:0; }
 @media(max-width:900px){
  .lesson-grid { grid-template-columns:1fr; gap:18px; }
  .lesson-topline > .micro { display:none; }
  .lesson-methods .training-choice { padding:10px 8px; }
  .lesson-methods .training-choice strong { font-size:1rem; }
- .lesson-methods .training-choice > span:last-child { font-size:.7rem; }
+ .lesson-methods .training-choice > span:last-child { font-size:var(--fine); }
  .lesson-heading { grid-template-columns:1fr; gap:8px; }
  .lesson-actions { gap:10px; }
- .lesson-actions h3 { font-size:1.3rem; }
+ .lesson-actions h3 { font-size:var(--lede); }
 }
 @media(max-width:900px) and (min-height:650px){
  .lesson-bench { top:var(--rail-height); z-index:4; }
  .lesson-bench .bench-caption { display:none; }
  .lesson-bench .bench-view { height:clamp(150px,24dvh,240px); aspect-ratio:auto; }
  .lesson-bench .lesson-prediction { padding:8px 12px; min-height:0; }
- .lesson-bench .lesson-scenes { padding:6px 12px; }
+ .lesson-bench .lesson-scenes { align-self:flex-start; max-width:100%; padding:6px 12px; }
  .lesson-scenes > p { display:none; }
  .lesson-scenes .btn { min-height:44px; }
  .lesson-actions :is(button,input,summary) { scroll-margin-top:calc(var(--rail-height) + 350px); }
 }
 @media(max-height:649px){ .lesson-bench { position:relative; top:auto; } }
+
+/* On phones the plain method names are enough; explanations remain in the
+   accessible button names and in the lesson immediately below. */
+@media (max-width: 520px) {
+ .lesson-methods { gap: 4px; }
+ .lesson-methods .training-choice > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
