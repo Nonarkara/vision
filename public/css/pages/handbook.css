@@ -20,7 +20,7 @@
 .handbook .doc > ul,
 .handbook .doc > ol,
 .handbook .doc > blockquote,
-.handbook .doc > details { max-width: 74ch; }
+.handbook .doc > details { max-width: 65ch; }
 
 .handbook .doc h2 {
   font-family: var(--sans);
@@ -148,3 +148,6 @@
   .handbook .doc .table { min-width: 26rem; }
   .handbook .doc-nav { justify-content: center; text-align: center; }
 }
+
+/* The resource directory is prose, including its short reading tables. */
+.handbook .doc:has(#build-with-open-tools) .table-wrap { max-width: 65ch; }

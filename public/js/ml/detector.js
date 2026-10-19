@@ -24,8 +24,12 @@ export function loadDetector() {
     const tf = await getTf()
     const model = await loadModel(URL, 'detector')
     const zero = tf.zeros([1, 300, 300, 3], 'int32')
-    const out = await model.executeAsync(zero)
-    tf.dispose([zero, out])
+    let out
+    try {
+      out = await model.executeAsync(zero)
+    } finally {
+      tf.dispose([zero, out])
+    }
     return model
   })().catch((err) => { warmed = null; throw err })
   return warmed
@@ -50,9 +54,13 @@ export async function detect(input, { minScore = 0.3, maxBoxes = 50 } = {}) {
   }
   const [scoresT, boxesT] = result[0].shape.length === 3 ? [result[0], result[1]] : [result[1], result[0]]
   const [, n, classes] = scoresT.shape
-  const scores = await scoresT.data()
-  const boxes = await boxesT.data()
-  tf.dispose(result)
+  let scores, boxes
+  try {
+    scores = await scoresT.data()
+    boxes = await boxesT.data()
+  } finally {
+    tf.dispose(result)
+  }
 
   const best = new Float32Array(n)
   const cls = new Int32Array(n)
@@ -65,11 +73,17 @@ export async function detect(input, { minScore = 0.3, maxBoxes = 50 } = {}) {
     best[i] = max
     cls[i] = arg + 1
   }
-  const boxT = tf.tensor2d(boxes, [n, 4])
-  const scoreT = tf.tensor1d(best)
-  const keepT = await tf.image.nonMaxSuppressionAsync(boxT, scoreT, maxBoxes, IOU, minScore)
-  const keep = await keepT.data()
-  tf.dispose([boxT, scoreT, keepT])
+  let boxT, scoreT, keepT, keep
+  try {
+    boxT = tf.tensor2d(boxes, [n, 4])
+    scoreT = tf.tensor1d(best)
+    keepT = await tf.image.nonMaxSuppressionAsync(boxT, scoreT, maxBoxes, IOU, minScore)
+    keep = await keepT.data()
+  } finally {
+    // A lost GPU context or rejected readback must not accumulate tensors
+    // every time the visitor retries the detector.
+    tf.dispose([boxT, scoreT, keepT])
+  }
 
   const detections = []
   for (const i of keep) {

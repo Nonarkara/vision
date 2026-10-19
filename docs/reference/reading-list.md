@@ -1,6 +1,6 @@
 # Reading list · รายการอ่านเพิ่มเติม
 
-The papers and resources behind each chapter. **Every link was checked on 5 October 2026** — arXiv identifiers against their titles, DOIs through Crossref. Where a publisher blocks automated checks, the DOI was confirmed through Crossref's metadata.
+The papers and resources behind each chapter. **Paper links below were checked on 5 October 2026** — arXiv identifiers against their titles, DOIs through Crossref. Where a publisher blocks automated checks, the DOI was confirmed through Crossref's metadata.
 
 [← Handbook](../README.md)
 
@@ -22,6 +22,75 @@ The papers and resources behind each chapter. **Every link was checked on 5 Octo
 | [Stanford CS231n](https://cs231n.github.io/) course notes | the best free introduction to CNNs for vision |
 | [TensorFlow.js](https://www.tensorflow.org/js) · [tfjs-models](https://github.com/tensorflow/tfjs-models) | the library and model zoo this site runs |
 | [MDN: Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) | why some cameras can be analysed and others cannot |
+
+## Build with open tools
+
+**Choose the job before the library.** A box says *where something might be*. A mask colours its outline. A tracker links guesses across frames. An embedding turns a picture into numbers for comparison. None of those outputs is proof that the machine understood the scene.
+
+**เริ่มจากงานที่อยากทำ:** กรอบบอกตำแหน่งที่คาดว่าเป็นวัตถุ หน้ากากระบายพื้นที่ของวัตถุ ตัวติดตามเชื่อมผลระหว่างเฟรม ส่วนเวกเตอร์ภาพใช้เปรียบเทียบความคล้าย ทั้งหมดอาจผิดได้ ไม่ใช่หลักฐานว่าเครื่องเข้าใจภาพแล้ว
+
+- **Process pixels or camera geometry:** OpenCV. [Try edges and convolution](/learn#edges).
+- **Train on named examples:** PyTorch + Torchvision. [Teach a model here](/train).
+- **Find known objects:** start with YOLO; compare Detectron2 or MMDetection. [Learn about detection](/handbook/06).
+- **Describe what to find in words:** Grounding DINO; CLIP for whole-picture comparisons. [Learn about neural networks](/handbook/05).
+- **Outline an object I point at:** Segment Anything. [See segmentation research](/research#history-lab).
+- **Follow objects through video:** ByteTrack or Norfair after a detector. [Try motion](/handbook/04).
+- **Work with satellite images:** TorchGeo, Raster Vision, eo-learn or SAMGeo. [Go to spatial tools](#spatial-and-geospatial-tools).
+
+### Pixels, training and detection
+
+- **[OpenCV](https://github.com/opencv/opencv)** — Read images and video, correct camera distortion, find edges and match features. Start here for classical vision. OpenCV.js can run selected operations in a browser, but a full build is a substantial addition; Vision's small teaching operators remain plain JavaScript.
+- **[PyTorch](https://github.com/pytorch/pytorch) + [Torchvision](https://github.com/pytorch/vision)** — Build and train neural networks; Torchvision supplies vision models, datasets and image transforms. These are Python development tools, not packages visitors need to install. Check the terms for the particular dataset and pretrained weights too.
+- **[Ultralytics YOLO](https://github.com/ultralytics/ultralytics)** — A practical workflow for detection, segmentation, pose and tracking. Useful as an offline baseline before replacing a detector. Its repository uses AGPL-3.0 and offers enterprise licensing; inspect the terms for your intended distribution and model.
+- **[Detectron2](https://github.com/facebookresearch/detectron2)** — A PyTorch framework for detection and instance segmentation: separating each object into its own region. Useful when you need custom experiments rather than a browser lesson.
+- **[MMDetection](https://github.com/open-mmlab/mmdetection)** — Compare detection architectures through configurations and a model zoo. Match its dependency versions carefully; a larger toolbox is not automatically a faster or more accurate model.
+
+**สรุป:** OpenCV เหมาะกับการประมวลผลภาพพื้นฐาน ส่วน PyTorch ใช้สร้างและฝึกโครงข่าย YOLO เป็นจุดเริ่มต้นสำหรับตรวจจับวัตถุ Detectron2 และ MMDetection เหมาะกับการทดลองที่ต้องปรับแต่งมากขึ้น เครื่องมือฝึกเหล่านี้ไม่ได้ทำงานอยู่ในหน้าเว็บนี้
+
+### Outlines, words and visual similarity
+
+- **[Segment Anything (SAM)](https://github.com/facebookresearch/segment-anything)** — Point or draw a box to propose an object's outline. Helpful for assisted labelling, but a person must check the masks. The linked repository is the original SAM, not every later model bearing its name.
+- **[Grounding DINO](https://github.com/IDEA-Research/GroundingDINO)** — Propose boxes using text such as “bus”. Open vocabulary means you can ask for new phrases; it does not guarantee recognition of a vague concept such as a dangerous or flooded road.
+- **[Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2)** — Estimate relative depth from one image: which surfaces appear nearer or farther. The default output is not a reliable distance in metres. Metric-depth variants are separate; Small weights use Apache-2.0, while Base/Large/Giant weights use CC-BY-NC-4.0 in this repository.
+- **[DINOv2](https://github.com/facebookresearch/dinov2)** — Turn images into useful visual features for similarity search, grouping and downstream tasks. A candidate for comparing embeddings offline; it is not a drop-in replacement for Vision's 1,280-number MobileNet vectors. Check the exact model's terms, as specialised weights can differ.
+- **[CLIP](https://github.com/openai/CLIP)** — Compare pictures with text descriptions. Useful for image search and choosing among written labels. A high similarity score is not a calibrated probability, a factual description or proof of a hazard.
+
+**สรุป:** SAM ช่วยวาดขอบวัตถุ Grounding DINO ใช้คำบรรยายหากรอบ Depth Anything ประเมินความใกล้ไกล ส่วน DINOv2 และ CLIP ช่วยเปรียบเทียบภาพ ผลเหล่านี้ยังต้องตรวจสอบ โดยเฉพาะระยะทางและคำที่มีความหมายกว้าง
+
+### Video, pose and tracking
+
+- **[MediaPipe](https://github.com/google-ai-edge/mediapipe)** — Hand, face and pose landmarks, with browser-capable tasks. Vision already uses its Face Landmarker in [Focus](/focus); this is an existing dependency, not a newly added capability.
+- **[MMPose](https://github.com/open-mmlab/mmpose)** — Human and animal pose models for Python experiments. Predicting joints tells you about visible geometry, not a person's intentions.
+- **[ByteTrack](https://github.com/FoundationVision/ByteTrack)** — Link detections over time, including lower-score boxes matched to existing tracks. This can reduce broken tracks during occlusion. Its temporary track IDs are not people's identities. The original ifzhang link redirects to FoundationVision.
+- **[Norfair](https://github.com/tryolabs/norfair)** — A lightweight Python tracker that accepts detections from different models. Useful for prototyping trajectories; camera movement, missed detections and crowded scenes can still break associations.
+- **[OpenFace](https://github.com/TadasBaltrusaitis/OpenFace)** — A facial-behaviour research toolkit for landmarks, head pose, gaze and facial action units. This is the Baltrušaitis toolkit, not another project with the same name. Facial movements are not reliable readings of mood or attention. Check its specific licence and model/data terms before reuse.
+
+**สรุป:** ตัวติดตามเชื่อมวัตถุข้ามเฟรม แต่หมายเลขชั่วคราวไม่ใช่การรู้ตัวบุคคล เครื่องมือใบหน้าวัดจุดและการเคลื่อนไหวที่เห็น ไม่ได้อ่านความคิด อารมณ์ หรือสมาธิได้แน่นอน
+
+### Spatial and geospatial tools
+
+- **[Raster Vision](https://github.com/azavea/raster-vision)** — Train and run models on aerial and satellite imagery, including processing large rasters in smaller pieces.
+- **[TorchGeo](https://github.com/torchgeo/torchgeo)** — Geospatial datasets, samplers, transforms and pretrained models. Useful when location, image extent and aligned inputs matter. The original microsoft link redirects to torchgeo.
+- **[eo-learn](https://github.com/sentinel-hub/eo-learn)** — Organise Earth-observation processing over time. Useful for comparing scenes; clouds, seasons and alignment can look like change without being the change you meant to measure.
+- **[SAMGeo](https://github.com/opengeos/segment-geospatial)** — Apply segmentation to geospatial images and turn results into map features. Check georeferencing and manually inspect boundaries before treating them as mapped objects.
+- **[Esri deep-learning installers](https://github.com/Esri/deep-learning-frameworks)** — Installation support for the ArcGIS ecosystem. This link is not a standalone library named “GeoAI”; it belongs in a workflow that already uses compatible ArcGIS software.
+- **[ORB-SLAM3](https://github.com/UZ-SLAMLab/ORB_SLAM3)** — Estimate a moving camera's pose and build a map from visual or visual-inertial input. A robotics/mapping tool, not a traffic detector. It needs suitable camera calibration and uses GPLv3, with separate commercial arrangements described by its authors.
+
+**สรุป:** ภาพดาวเทียมต้องจัดการพิกัด เมฆ เวลา และความตรงกันของภาพก่อนเปรียบเทียบ เครื่องมือ ArcGIS ต้องใช้กับระบบที่รองรับ ส่วน ORB-SLAM3 ใช้หาตำแหน่งกล้องที่เคลื่อนที่และสร้างแผนที่ ไม่ใช่ตรวจรถจากกล้องถนน
+
+### What belongs in Vision?
+
+**In use:** TensorFlow.js with self-hosted SSDLite/MobileNet weights, MediaPipe for face landmarks, and small JavaScript teaching algorithms. Every picture is processed on the visitor's device. Linking a repository here does not mean it runs on this site.
+
+**Improved here:** the existing detector now releases temporary memory after a failed attempt, so retrying does not keep those allocations alive.
+
+**Evaluate separately:** compare YOLO against the current detector on the same permitted clips, with precision/recall, phone latency and download size. Compare DINOv2/CLIP against MobileNet before changing the teaching representation. Add tracking only to a moving source, with explicit missed-frame and source-change behaviour. None of those replacements is deployed here.
+
+**For a separate service:** OpenCV → detector → tracker is a sensible video pipeline; PyTorch is for training, and a runtime such as ONNX Runtime can serve an exported model. Satellite workflows need the spatial tools above. These would change the classroom's deployment and privacy model, so they are architectural options, not silent additions to this page.
+
+**ใช้ในเว็บนี้จริง:** TensorFlow.js, MobileNet/SSDLite และ MediaPipe การทบทวนครั้งนี้ปรับการคืนหน่วยความจำเมื่อการตรวจจับล้มเหลว ส่วนการเปลี่ยนโมเดล เพิ่มตัวติดตาม หรือสร้างบริการประมวลผลบนเซิร์ฟเวอร์ยังเป็นทางเลือกที่ต้องวัดผลก่อน ไม่ได้ติดตั้งเพิ่มจากรายการนี้
+
+Repository links, purposes and the specific qualifications above were reviewed against the maintainers' repositories on **19 October 2026**. Code, weights and datasets can have different terms; follow the linked project's current documentation for installation and reuse.
 
 ## By chapter
 

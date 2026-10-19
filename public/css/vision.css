@@ -315,7 +315,7 @@ em { font-style: italic; }
 .rooms::-webkit-scrollbar { display: none; }
 .rooms a {
   display: flex; align-items: center; gap: 6px;
-  padding: 0 8px; min-height: 56px; white-space: nowrap;
+  padding: 0 8px; min-width: var(--target); min-height: 56px; justify-content: center; white-space: nowrap;
   font-size: var(--micro); color: var(--gray);
   transition: color 160ms var(--ease), background-color 160ms var(--ease);
 }
