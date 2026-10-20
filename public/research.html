@@ -3,70 +3,37 @@
 <head>
 <!--#head-->
 <link rel="stylesheet" href="/css/pages/research.css?v={{v}}">
+<link rel="stylesheet" href="/css/pages/research-opening.css?v={{v}}-opening">
 <title>Research · About — งานวิจัยและเรื่องของเว็บ — Vision</title>
-<meta name="description" content="The evidence this classroom runs on — thousands of Thailand's public cameras, read live — then sixty years of computer vision research: four milestones, a Thai case study, the original papers, and what machines still cannot do.">
+<meta name="description" content="Explore four visual landmarks in computer vision, try three ways machines learn, and follow the original research. Camera catalogue details are available on demand.">
 </head>
 <body>
 <!--#nav-->
 <main id="main">
 
-  <section class="page-head">
+  <header class="research-opening">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 08 · งานวิจัยและเรื่องของเว็บนี้</span><span class="en" lang="en">Room 08 · Research and about</span></span>
-      <h1><span class="th" lang="th">หกสิบปี<br>ของการสอนเครื่อง<br>ให้มองเห็น</span><span class="en" lang="en">Sixty years<br>of teaching<br>machines to see</span></h1>
+      <span class="eyebrow label"><span class="th" lang="th">ห้อง 08 · งานวิจัย</span><span class="en" lang="en">Room 08 · Research</span></span>
+      <h1><span class="th" lang="th">เครื่องเรียนรู้ที่จะมองเห็นได้อย่างไร</span><span class="en" lang="en">How computers learned to see</span></h1>
+      <p class="prose"><span class="th" lang="th">เริ่มจากภาพด้านล่าง เลือกปี แล้วดูว่าวิธีหาวัตถุเปลี่ยนจากกฎที่คนเขียนไปเป็นการเรียนรู้จากภาพอย่างไร</span><span class="en" lang="en">Start with the picture below. Choose a year to see how finding objects changed from hand-written rules to learning from pictures.</span></p>
     </div>
-    <div>
-      <p class="lede th" lang="th">จากภาพถ่ายบล็อกไม้ในปี 1963 ถึงโมเดลที่แยกวัตถุที่คุณชี้ออกจากภาพได้ นี่คืองานวิจัยที่เปลี่ยนวิธีคิด งานที่เว็บนี้ใช้อยู่จริง และคำถามที่ยังไม่มีใครตอบได้</p>
-      <p class="lede en" lang="en">From a photograph of blocks in 1963 to models that can outline an object you point at: the papers that changed the thinking, the ones this site actually runs, and the questions nobody has answered yet.</p>
-      <nav class="cta" data-aria-th="เลือกว่าจะเริ่มตรงไหน" data-aria-en="Choose where to start"><a class="btn primary" href="#history-lab"><span class="th" lang="th">เริ่มที่ภาพ: ประวัติศาสตร์ ↓</span><span class="en" lang="en">Start with pictures: the history ↓</span></a><a class="btn" href="#learning-kinds"><span class="th" lang="th">ลองเรียนรู้ 3 วิธี ↓</span><span class="en" lang="en">Try three ways to learn ↓</span></a><a class="btn" href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษาไทย ↓</span><span class="en" lang="en">A Thai case study ↓</span></a><a class="btn" href="#by-hand"><span class="th" lang="th">อ่านเส้นเวลางานวิจัย ↓</span><span class="en" lang="en">Read the research timeline ↓</span></a></nav>
-      <p class="micro"><a href="/handbook/reading#build-with-open-tools"><span class="th" lang="th">อยากลองสร้างเอง? ดูเครื่องมือและแหล่งเรียนรู้ →</span><span class="en" lang="en">Want to build your own? Explore tools &amp; resources →</span><span class="zh" lang="zh-Hans">想亲手构建？探索工具与资源 →</span></a></p>
-      <p class="micro cite-rule"><span class="th" lang="th">ทุกงานในหน้านี้มีอยู่จริง เราอ้างผู้เขียน ปี และที่ตีพิมพ์ ถ้าไม่แน่ใจในรายละเอียดใด เราตัดทิ้ง ชื่องานคงไว้เป็นภาษาอังกฤษตามต้นฉบับ</span><span class="en" lang="en">Every work on this page is real. We give authors, year and venue; where we were not sure of a detail, we left it out.</span></p>
-    </div>
-  </section>
-
-  <!-- Six numbers in one row, all the same size, meant nothing. 3,425 cameras and
-       7 agencies shouted at exactly the same volume, so the page had no opening
-       move at all — and the camera count is not even this page's subject, which
-       is sixty years of people teaching machines to see. The catalogue is the
-       floor it stands on. So: one number carries it, and the other five become
-       the quiet facts beside it. -->
-  <section class="figures figures-lead" data-aria-th="จำนวนจากรายชื่อกล้อง" data-aria-en="Figures from the camera catalogue">
-    <div class="figure is-lead">
-      <span class="n" data-fig="total">—</span>
-      <span class="micro"><span class="th" lang="th">กล้องสาธารณะในรายชื่อ</span><span class="en" lang="en">public cameras listed</span></span>
-    </div>
-    <div class="figures-rest">
-      <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">แหล่งภาพสำหรับเครื่องอ่าน</span><span class="en" lang="en">listed as pixel-readable</span></span></div>
-      <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">แหล่งวิดีโอ</span><span class="en" lang="en">video sources</span></span></div>
-      <div class="figure"><span class="n" data-fig="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">stills</span></span></div>
-      <div class="figure"><span class="n" data-fig="sources">—</span><span class="micro"><span class="th" lang="th">หน่วยงานเจ้าของกล้อง</span><span class="en" lang="en">agencies that own them</span></span></div>
-      <div class="figure"><span class="n" data-fig="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์ตอนตรวจล่าสุด</span><span class="en" lang="en">offline at last check</span></span></div>
-    </div>
-  </section>
-
-  <div class="catalogue-note"><p class="micro" data-evidence-status role="status"><span class="th" lang="th">ตัวเลขจากรายชื่อกล้องจะแสดงเมื่อโหลดสำเร็จ</span><span class="en" lang="en">Catalogue counts appear when loading succeeds.</span></p><button class="btn" type="button" data-evidence-retry hidden><span class="th" lang="th">ลองโหลดอีกครั้ง</span><span class="en" lang="en">Try loading again</span></button></div>
-
-  <section class="chapter" id="about" aria-labelledby="about-h">
-    <header>
-      <span class="chapter-no">00</span>
-      <h2 id="about-h"><span class="th" lang="th">ห้องเรียนนี้คืออะไร และยืนอยู่บนหลักฐานอะไร</span><span class="en" lang="en">What this classroom is, and what it stands on</span></h2>
-      <p class="micro"><span class="th" lang="th">ตัวเลขมาจากรายชื่อกล้อง ไม่ใช่การทดสอบภาพทุกตัว แหล่งภาพที่อยู่ในรายชื่ออาจเปิดดูไม่ได้ในขณะนั้น</span><span class="en" lang="en">These counts describe the catalogue, not a test of every stream. A listed source can still be unavailable when you open it.</span></p>
-    </header>
-    <div class="chapter-body">
-      <div class="prose">
-        <p class="th" lang="th">เว็บนี้คือห้องเรียนสาธารณะเรื่องคอมพิวเตอร์วิทัศน์ ยืนอยู่บนกล้องสาธารณะของประเทศไทยเอง: กล้องหลายพันตัวของหน่วยงานต่าง ๆ ที่เปิดให้ประชาชนดูได้ เรารวมรายชื่อจาก<a href="https://flood.nonarkara.org/">FloodDash</a> และพยายามอัปเดตทุกสิบนาที โมเดลทุกตัวรันในเบราว์เซอร์ของคุณ ไม่มีภาพถูกเก็บ และไม่มีใครถูกระบุตัว — นี่คือเส้นที่เรา<a href="/system#not-built">วาดไว้ตั้งแต่วันแรก</a> กล้องทุกตัวเป็นของหน่วยงานเจ้าของที่ติดตั้งและดูแล เราแค่ลิงก์ไปและส่งต่อบางภาพ</p>
-        <p class="en" lang="en">This site is a public classroom for computer vision, standing on Thailand's own public cameras: thousands of them, run by the agencies that installed them and opened to the public. We gather the list through <a href="https://flood.nonarkara.org/">FloodDash</a> and try to refresh it every ten minutes. Every model runs in your browser, no picture is stored, and nobody is identified — a line we <a href="/system#not-built">drew on day one</a>. Every camera belongs to the agency that installed and runs it; we only link to them and pass some frames along.</p>
-        <p class="th" lang="th">สร้างและดูแลโดย ดร.นน อัครประเสริฐกุล — <a href="/story">เรื่องเบื้องหลัง</a>ว่าทำไมมันเป็นแบบนี้ · <a href="/system">หน้าระบบ</a>ว่าอะไรรันอยู่ใต้ฝา · <a href="/cameras">หน้ากล้อง</a>ที่ทำให้ตัวเลขข้างบนมีชีวิต · และ <a href="/legal">กติกา</a>ที่เราถือ หน้าที่คุณกำลังอ่านคือหน้าวิจัยของเว็บ: เริ่มจากสี่ก้าวสำคัญของประวัติศาสตร์ แล้วไล่ต่อไปถึงงานที่เว็บนี้ใช้จริง และคำถามที่ยังไม่มีใครตอบได้</p>
-        <p class="en" lang="en">Made and run by Dr Non Arkaraprasertkul — <a href="/story">the story</a> of why it looks like this · <a href="/system">the system page</a> for what runs under the bonnet · <a href="/cameras">the cameras page</a>, where the numbers above come alive · and <a href="/legal">the rules</a> we hold. The page you are reading is the site's research-and-about room: it starts at four landmarks of the field, then walks down to the work this site actually runs and the questions nobody has answered.</p>
-      </div>
-    </div>
-  </section>
-
+    <details class="research-contents">
+      <summary><span class="th" lang="th">ในหน้านี้</span><span class="en" lang="en">On this page</span></summary>
+      <nav data-aria-th="เนื้อหาในหน้านี้" data-aria-en="On this page">
+        <a href="#history-lab"><span class="th" lang="th">ภาพสี่ช่วงสำคัญ</span><span class="en" lang="en">Four visual landmarks</span></a>
+        <a href="#learning-kinds"><span class="th" lang="th">ลองเรียนรู้สามวิธี</span><span class="en" lang="en">Try three ways to learn</span></a>
+        <a href="#nt-tag-id"><span class="th" lang="th">กรณีศึกษาไทย</span><span class="en" lang="en">A Thai case study</span></a>
+        <a href="#by-hand"><span class="th" lang="th">เส้นเวลางานวิจัยต้นฉบับ</span><span class="en" lang="en">Original research timeline</span></a>
+        <a href="/handbook/reading#build-with-open-tools"><span class="th" lang="th">เครื่องมือและแหล่งเรียนรู้</span><span class="en" lang="en">Tools and resources</span></a>
+        <a href="#about"><span class="th" lang="th">เกี่ยวกับเว็บและรายชื่อกล้อง</span><span class="en" lang="en">About this site and its cameras</span></a>
+      </nav>
+    </details>
+  </header>
 
 <section class="history-lab" id="history-lab" aria-labelledby="history-title">
-<h2 id="history-title"><span class="th" lang="th">จากเส้น สู่คำทาย: ลองเดินผ่านประวัติศาสตร์</span><span class="en" lang="en">From lines to guesses: walk through the history</span>
+<h2 id="history-title"><span class="th" lang="th">เลือกปี แล้วดูว่าวิธีคิดเปลี่ยนไปอย่างไร</span><span class="en" lang="en">Choose a year. See what changed.</span>
 </h2>
-<p class="prose"><span class="th" lang="th">กดปีเพื่อดูว่าคำถามและวิธีคิดเปลี่ยนไปอย่างไร นี่คือสี่ตัวอย่างสำคัญ ไม่ใช่ทุกก้าวของประวัติศาสตร์ วิธีเก่ากับวิธีใหม่ยังใช้ร่วมกันได้</span><span class="en" lang="en">Choose a year to see how the question and approach changed. These are four landmarks, not the whole history. Older and newer methods still work together.</span>
+<p class="prose"><span class="th" lang="th">สี่ตัวอย่างสำคัญจากกฎที่คนเขียนสู่โมเดลที่เรียนจากภาพ วิธีเก่ากับวิธีใหม่ยังใช้ร่วมกันได้</span><span class="en" lang="en">Four landmarks, from hand-written rules to models that learn from pictures. Older and newer methods still work together.</span>
 </p>
 <div class="history-choices" hidden role="group" data-aria-th="เลือกตัวอย่างทางประวัติศาสตร์" data-aria-en="Choose a history example"><button class="axis-mark" type="button" data-history-choice="shapes" aria-controls="history-shapes" aria-pressed="true"><span class="num">1963</span><span class="th" lang="th">หาขอบ แล้วประกอบเป็นรูปทรง</span><span class="en" lang="en">Find edges, build shapes</span></button><button class="axis-mark" type="button" data-history-choice="features" aria-controls="history-features" aria-pressed="false"><span class="num">2005</span><span class="th" lang="th">วัดลักษณะ แล้วให้เครื่องตัดสิน</span><span class="en" lang="en">Measure features, then decide</span></button><button class="axis-mark" type="button" data-history-choice="boxes" aria-controls="history-boxes" aria-pressed="false"><span class="num">2016</span><span class="th" lang="th">เรียนรู้จากภาพ แล้ววางกรอบ</span><span class="en" lang="en">Learn from pictures, draw boxes</span></button><button class="axis-mark" type="button" data-history-choice="masks" aria-controls="history-masks" aria-pressed="false"><span class="num">2023</span><span class="th" lang="th">ชี้สิ่งที่สนใจ แล้วแยกพิกเซล</span><span class="en" lang="en">Point to an object, select its pixels</span></button>
 </div>
@@ -541,8 +508,46 @@
     </div>
   </section>
 
+  <details class="research-about">
+    <summary><span class="th" lang="th">เกี่ยวกับเว็บนี้และรายชื่อกล้อง</span><span class="en" lang="en">About this classroom and its camera catalogue</span></summary>
+  <section class="figures catalogue-figures" data-aria-th="จำนวนจากรายชื่อกล้อง" data-aria-en="Figures from the camera catalogue">
+    <div class="figure">
+      <span class="n" data-fig="total">—</span>
+      <span class="micro"><span class="th" lang="th">กล้องสาธารณะในรายชื่อ</span><span class="en" lang="en">public cameras listed</span></span>
+    </div>
+    <div class="figures-rest">
+      <div class="figure"><span class="n" data-fig="readable">—</span><span class="micro"><span class="th" lang="th">แหล่งภาพสำหรับเครื่องอ่าน</span><span class="en" lang="en">listed as pixel-readable</span></span></div>
+      <div class="figure"><span class="n" data-fig="video">—</span><span class="micro"><span class="th" lang="th">แหล่งวิดีโอ</span><span class="en" lang="en">video sources</span></span></div>
+      <div class="figure"><span class="n" data-fig="still">—</span><span class="micro"><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">stills</span></span></div>
+      <div class="figure"><span class="n" data-fig="sources">—</span><span class="micro"><span class="th" lang="th">หน่วยงานเจ้าของกล้อง</span><span class="en" lang="en">agencies that own them</span></span></div>
+      <div class="figure"><span class="n" data-fig="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์ตอนตรวจล่าสุด</span><span class="en" lang="en">offline at last check</span></span></div>
+    </div>
+  </section>
+
+  <div class="catalogue-note"><p class="micro" data-evidence-status role="status"><span class="th" lang="th">ตัวเลขจากรายชื่อกล้องจะแสดงเมื่อโหลดสำเร็จ</span><span class="en" lang="en">Catalogue counts appear when loading succeeds.</span></p><button class="btn" type="button" data-evidence-retry hidden><span class="th" lang="th">ลองโหลดอีกครั้ง</span><span class="en" lang="en">Try loading again</span></button></div>
+
+  <section class="chapter" id="about" aria-labelledby="about-h">
+    <header>
+      <span class="chapter-no">00</span>
+      <h2 id="about-h"><span class="th" lang="th">ห้องเรียนนี้คืออะไร และยืนอยู่บนหลักฐานอะไร</span><span class="en" lang="en">What this classroom is, and what it stands on</span></h2>
+      <p class="micro"><span class="th" lang="th">ตัวเลขมาจากรายชื่อกล้อง ไม่ใช่การทดสอบภาพทุกตัว แหล่งภาพที่อยู่ในรายชื่ออาจเปิดดูไม่ได้ในขณะนั้น</span><span class="en" lang="en">These counts describe the catalogue, not a test of every stream. A listed source can still be unavailable when you open it.</span></p>
+    </header>
+    <div class="chapter-body">
+      <div class="prose">
+        <p class="th" lang="th">เว็บนี้คือห้องเรียนสาธารณะเรื่องคอมพิวเตอร์วิทัศน์ ยืนอยู่บนกล้องสาธารณะของประเทศไทยเอง: กล้องหลายพันตัวของหน่วยงานต่าง ๆ ที่เปิดให้ประชาชนดูได้ เรารวมรายชื่อจาก<a href="https://flood.nonarkara.org/">FloodDash</a> และพยายามอัปเดตทุกสิบนาที โมเดลทุกตัวรันในเบราว์เซอร์ของคุณ ไม่มีภาพถูกเก็บ และไม่มีใครถูกระบุตัว — นี่คือเส้นที่เรา<a href="/system#not-built">วาดไว้ตั้งแต่วันแรก</a> กล้องทุกตัวเป็นของหน่วยงานเจ้าของที่ติดตั้งและดูแล เราแค่ลิงก์ไปและส่งต่อบางภาพ</p>
+        <p class="en" lang="en">This site is a public classroom for computer vision, standing on Thailand's own public cameras: thousands of them, run by the agencies that installed them and opened to the public. We gather the list through <a href="https://flood.nonarkara.org/">FloodDash</a> and try to refresh it every ten minutes. Every model runs in your browser, no picture is stored, and nobody is identified — a line we <a href="/system#not-built">drew on day one</a>. Every camera belongs to the agency that installed and runs it; we only link to them and pass some frames along.</p>
+        <p class="th" lang="th">สร้างและดูแลโดย ดร.นน อัครประเสริฐกุล — <a href="/story">เรื่องเบื้องหลัง</a>ว่าทำไมมันเป็นแบบนี้ · <a href="/system">หน้าระบบ</a>ว่าอะไรรันอยู่ใต้ฝา · <a href="/cameras">หน้ากล้อง</a>ที่ทำให้ตัวเลขข้างบนมีชีวิต · และ <a href="/legal">กติกา</a>ที่เราถือ หน้าที่คุณกำลังอ่านคือหน้าวิจัยของเว็บ: เริ่มจากสี่ก้าวสำคัญของประวัติศาสตร์ แล้วไล่ต่อไปถึงงานที่เว็บนี้ใช้จริง และคำถามที่ยังไม่มีใครตอบได้</p>
+        <p class="en" lang="en">Made and run by Dr Non Arkaraprasertkul — <a href="/story">the story</a> of why it looks like this · <a href="/system">the system page</a> for what runs under the bonnet · <a href="/cameras">the cameras page</a>, where the numbers above come alive · and <a href="/legal">the rules</a> we hold. The page you are reading is the site's research-and-about room: it starts at four landmarks of the field, then walks down to the work this site actually runs and the questions nobody has answered.</p>
+      </div>
+    </div>
+  </section>
+
+
+  </details>
+
 </main>
 <!--#foot-->
 <script type="module" src="/js/pages/research.js?v={{v}}"></script>
+<script type="module" src="/js/research/section-links.js?v={{v}}"></script>
 </body>
 </html>

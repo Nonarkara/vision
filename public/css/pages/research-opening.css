@@ -1,0 +1,31 @@
+/* Research begins with a visual lesson; catalogue administration is on demand. */
+.research-opening { display: grid; grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); gap: 16px 32px; align-items: start; padding: 24px var(--gutter) 16px; }
+.research-opening h1 { font-size: var(--title); max-width: 24ch; margin: 0 0 12px; }
+.research-opening .eyebrow { margin-bottom: 8px; }
+.research-opening p { margin: 0; max-width: 58ch; font-size: var(--read); }
+.research-contents { justify-self: end; max-width: 100%; }
+.research-contents summary, .research-about > summary { cursor: pointer; min-height: var(--target); display: list-item; padding-block: 10px; font-size: var(--read); }
+.research-contents nav { display: flex; flex-direction: column; align-items: flex-start; }
+.research-contents a { display: inline-flex; align-items: center; min-height: var(--target); font-size: var(--read); }
+.history-lab { padding-top: 12px; gap: 12px; }
+.history-lab h2 { font-size: var(--subtitle); max-width: none; }
+.history-lab > .prose { font-size: var(--read); }
+.history-choices { margin-top: 4px; }
+.research-about { margin: 24px var(--gutter); border-top: 1px solid currentColor; }
+.research-about .catalogue-figures { padding: 16px 0; gap: 16px 28px; }
+.research-about .figures-rest { display: contents; }
+.research-about .figure { max-width: 20ch; }
+.research-about .figure .n { font-size: var(--body); font-weight: 600; }
+.research-about .figure .micro { font-size: var(--fine); }
+.research-about .catalogue-note { padding: 12px; }
+.research-about .chapter { padding-inline: 0; }
+/* The shared html already reserves the sticky rail with scroll-padding. */
+:is(#history-lab, #learning-kinds, #about) { scroll-margin-top: 0; }
+@media (max-width: 720px) {
+  .research-opening { grid-template-columns: 1fr; gap: 4px; padding-top: 16px; padding-bottom: 8px; }
+  .research-contents { justify-self: start; }
+  .history-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .axis-mark { flex: 0 1 auto; border: 0; border-bottom: 2px solid currentColor; padding: 4px; min-height: var(--target); }
+  .axis-mark > :not(.num) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .history-panel { gap: 12px; }
+}
