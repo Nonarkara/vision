@@ -2,10 +2,10 @@
 // its bench and its own picture source, and none of them downloads the
 // neural network until someone presses its start button.
 
-import '../core/site.js?v=1.19.5'
-import { initCount } from '../games/count.js?v=1.19.5'
-import { initPixels } from '../games/pixels.js?v=1.19.5'
-import { initFool } from '../games/fool.js?v=1.19.5'
+import '../core/site.js?v=1.20.0'
+import { initCount } from '../games/count.js?v=1.20.0'
+import { initPixels } from '../games/pixels.js?v=1.20.0'
+import { initFool } from '../games/fool.js?v=1.20.0'
 
 initCount(document.querySelector('#count'))
 initPixels(document.querySelector('#pixels'))

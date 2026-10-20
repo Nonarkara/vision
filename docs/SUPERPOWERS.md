@@ -14,6 +14,18 @@ Checked 12 October 2026, the same pass as the source list.
 
 **Strengthen evidence, time and teaching before adding more rooms or replacing every model.** This is a researched implementation plan, not a report of capabilities already shipped. Effort and acceptance criteria below are proposed, not measured results.
 
+### Approved execution: first milestone, 1.20.0
+
+The user approved this roadmap on 21 October. The first milestone adds evidence before model replacement:
+
+- **Teach:** three examples per answer, exact-picture duplicate rejection, a held new-frame test, human checking, and an explicit correction action. “Cannot tell” is excluded from the score. Changing the examples clears earlier scores. A new frame from the same camera is explicitly not evidence of transfer to another camera; near-duplicate frames can still be similar.
+- **Source clues:** locally measured darkness and low detail, shown as clues rather than diagnoses. No extra polling or camera recordings. Practice footage is correctly described as recorded public-camera frames, and an undecoded current frame cannot become an example.
+- **Repeatable evaluation:** an owned 200-frame synthetic pack with sequence-separated development/evaluation variants, normalized class/box labels and synthetic track IDs. The 100 evaluation frames share the renderer and projection with development frames; they are not a real-camera holdout. The System room runs the optional bounded check and downloads its measured report. Stop takes effect after the current load/inference job.
+
+Reproduce the manifest with `node scripts/reference-manifest.mjs`; inspect it with `npm run evaluate`. Run the check in `/system#reference-check`, download its report, then rescore with `npm run evaluate -- path/to/report.json`. The scorer checks duplicate/unknown frame IDs and computes one-to-one class/IoU matches, including false positives on control frames. Incomplete runs remain explicitly partial.
+
+The checked-in `evaluation/ssdlite-synthetic-baseline.json` is an actual desktop-browser run: 100/100 frames, **0 true positives, 35 false positives, 336 missed objects** at score 0.3 / IoU 0.5. This photo-trained detector fails on the stylized drawings; that is a domain limitation, not Thai-road accuracy. The report includes measured latency, runtime, per-frame predictions and SHA-256 model artifact identities. Physical-phone performance, real-camera labelled evaluation, tracking, hand landmarks and segmentation remain pending. This release does not claim those later capabilities.
+
 ### What the field offers, and where it fits
 
 | Direction | What a visitor should understand | Fit for Vision |

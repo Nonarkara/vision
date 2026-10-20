@@ -231,3 +231,11 @@ a.training-choice { text-decoration: none; }
  .lesson-methods { gap: 4px; }
  .lesson-methods .training-choice > span:last-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
+
+.lesson-test { display: grid; gap: 10px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--gray); }
+.lesson-test .micro { color: inherit; }
+.lesson-test [data-lesson-test] { justify-self: start; }
+.lesson-test h4 { margin: 0; font-size: var(--read); }
+
+.lesson-test-view { display: block; width: min(100%, 320px); height: auto; }
+.lesson-test-view[hidden] { display: none; }

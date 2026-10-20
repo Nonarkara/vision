@@ -56,3 +56,17 @@ test('hidden-tab time is excluded and closing removes the visibility listener', 
   assert.equal(f.source.ready, false)
   assert.equal(f.events.size, 0)
 })
+
+test('practice is ready only when the actual selected frame has decoded', t => {
+  const old = globalThis.Image, images = []
+  globalThis.Image = class { constructor() { this.complete = false; this.naturalWidth = 0; images.push(this) } }
+  t.after(() => { globalThis.Image = old })
+  const f = fixture(t)
+  assert.equal(f.source.ready, false, 'a blank placeholder must not be saved as a training example')
+  images[0].complete = true; images[0].naturalWidth = 480
+  assert.equal(f.source.ready, true)
+  f.time(600); f.draw()
+  assert.equal(f.source.ready, false, 'another decoded frame does not make the current one readable')
+  images[1].complete = true; images[1].naturalWidth = 480
+  assert.equal(f.source.ready, true)
+})

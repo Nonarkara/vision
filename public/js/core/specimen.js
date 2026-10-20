@@ -2,10 +2,11 @@
 // one source and every bench on it reads from that, so ten lenses cost one
 // stream. The bar that controls it always names the camera and its owner.
 
-import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.19.5'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.19.5'
-import { t, bi, esc, onLang } from './i18n.js?v=1.19.5'
-import { toast } from './site.js?v=1.19.5'
+import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.20.0'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.20.0'
+import { t, bi, esc, onLang } from './i18n.js?v=1.20.0'
+import { assessPixels } from '../cv/quality.js?v=1.20.0'
+import { toast } from './site.js?v=1.20.0'
 
 const STILL_REFRESH_MS = 20_000
 const LAST_CAMERA = 'vision.camera'
@@ -221,7 +222,7 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     if (!source) return { name: '', meta: '' }
     if (source.kind === 'webcam') return { name: t('กล้องของคุณ', 'Your camera'), meta: t('ภาพอยู่ในเครื่องของคุณเท่านั้น ไม่ถูกส่งไปไหน', 'The picture stays on this device; nothing is sent anywhere') }
     if (source.kind === 'photo') return { name: t('รูปของคุณ', 'Your photo'), meta: t('เปิดในเครื่องของคุณ ไม่ได้อัปโหลด', 'Opened on this device; not uploaded') }
-    if (source.kind === 'practice') return { name: t('วิดีโอฝึกที่วาดในหน้านี้', 'Drawn practice video'), meta: t('ภาพจำลอง ไม่ใช่ถนนจริง · เลือกรถแน่น ถนนโล่ง หรือสลับอัตโนมัติ', 'Simulation, not a real road · choose busy, quiet or automatic scenes') }
+    if (source.kind === 'practice') return { name: t('ภาพฝึกจากกล้องสาธารณะ', 'Public-camera practice footage', '公共摄像头练习画面'), meta: t('ภาพที่บันทึกไว้ ไม่ใช่ภาพสด · เลือกฉากรถแน่นหรือถนนโล่ง', 'Recorded frames, not live · choose busy or quiet scenes', '已录制的画面，并非直播；可选择繁忙或清静场景') }
     if (source.kind === 'localvideo') return { name: t('วิดีโอของคุณ', 'Your video'), meta: t('เปิดในเครื่อง ไม่อัปโหลด', 'Played locally; not uploaded') }
     const c = source.cam
     const kind = c.k === 'video' ? t('วิดีโอสด', 'live video') : t('ภาพนิ่ง ส่งต่อผ่านหน่วยความจำ', 'still, relayed in memory')
@@ -239,6 +240,27 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     const meta = bar.querySelector('[data-specimen-meta]')
     if (name) name.textContent = d.name
     if (meta) meta.innerHTML = esc(d.meta) + (d.link ? ` · <a href="${esc(d.link)}" target="_blank" rel="noopener">${esc(t('ดูที่เจ้าของ', 'view at owner'))} ↗</a>` : '')
+    let clue = ''
+    if (source?.ready && source.kind !== 'practice') {
+      let quality
+      try {
+        const c = document.createElement('canvas'); c.width = 80; c.height = Math.max(1, Math.round(80 * source.height / source.width))
+        const g = c.getContext('2d'); source.drawTo(g, c.width, c.height)
+        quality = assessPixels(g.getImageData(0, 0, c.width, c.height))
+      } catch { quality = { state: 'unknown' } }
+      clue = quality.state === 'dark'
+        ? t('ภาพนี้มืดมาก ลองอีกกล้องได้', 'This frame is very dark. You can try another camera.', '此帧很暗，可以试试其他摄像头。')
+        : quality.state === 'low-detail'
+          ? t('ภาพนี้มีรายละเอียดน้อย อาจเป็นฉากนิ่งหรือภาพเบลอ ไม่ได้แปลว่ากล้องเสีย', 'Little detail in this frame. It may be flat or blurred; this does not prove the camera is broken.', '此帧细节较少，可能平坦或模糊，但不能证明摄像头损坏。')
+          : quality.state === 'unknown'
+            ? t('ยังประเมินพิกเซลภาพนี้ไม่ได้', 'Cannot assess this frame’s pixels yet.', '暂时无法评估此帧像素。') : ''
+    }
+    let qualityEl = bar.querySelector('[data-specimen-quality]')
+    if (!qualityEl && clue) {
+      qualityEl = document.createElement('span'); qualityEl.className = 'micro'; qualityEl.dataset.specimenQuality = ''
+      ;(bar.querySelector('.specimen-who') ?? meta?.parentElement ?? bar).append(qualityEl)
+    }
+    if (qualityEl) { qualityEl.textContent = clue; qualityEl.hidden = !clue }
     const mine = source?.kind === 'webcam'
     bar.querySelector('[data-specimen-webcam]')?.setAttribute('aria-pressed', String(mine))
     const flip = bar.querySelector('[data-specimen-flip]')

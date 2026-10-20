@@ -1,6 +1,6 @@
 {
   "name": "vision",
-  "version": "1.19.5",
+  "version": "1.20.0",
   "private": true,
   "description": "vision.nonarkara.org — a public classroom for computer vision on Thailand's open cameras. TH/EN/ZH.",
   "type": "module",
@@ -16,6 +16,7 @@
     "build:handbook": "node scripts/build-handbook.mjs",
     "palette": "node scripts/palette-measure.mjs",
     "deploy": "node scripts/deploy-local.mjs",
+    "evaluate": "node scripts/evaluate-vision.mjs",
     "figures": "node examples/build-figures.mjs"
   },
   "license": "UNLICENSED"

@@ -3,10 +3,10 @@
 // passes over the examples as fit in a few milliseconds, then redraws the
 // curve — so "training" is something you watch happen, not a spinner.
 
-import { createLayer } from '../ml/learner.js?v=1.19.5'
-import { EMBED_SIZE } from '../ml/embedder.js?v=1.19.5'
-import { fitCanvas, clear, canvasScale, IVORY, GRAY } from '../cv/draw.js?v=1.19.5'
-import { t } from '../core/i18n.js?v=1.19.5'
+import { createLayer } from '../ml/learner.js?v=1.20.0'
+import { EMBED_SIZE } from '../ml/embedder.js?v=1.20.0'
+import { fitCanvas, clear, canvasScale, IVORY, GRAY } from '../cv/draw.js?v=1.20.0'
+import { t } from '../core/i18n.js?v=1.20.0'
 
 export const EPOCHS = 200
 const FRAME_BUDGET_MS = 10

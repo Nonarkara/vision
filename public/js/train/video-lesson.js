@@ -1,12 +1,22 @@
-import { t, onLang, count } from '../core/i18n.js?v=1.19.5'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.19.5'
-import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.19.5'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.19.5'
-import { practiceVideo } from './practice-video.js?v=1.19.5'
+import { t, onLang, count } from '../core/i18n.js?v=1.20.0'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.20.0'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.20.0'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.20.0'
+import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.20.0'
+import { practiceVideo } from './practice-video.js?v=1.20.0'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
     $ = (s) => root.querySelector(s)
+  let tests = [], testPending = null, lastTest = null
+  const sourceIds = new WeakMap()
+  let nextSourceId = 0
+  function sourceIdentity(src) {
+    const camera = src?.cam?.id ?? src?.credit?.id
+    if (camera) return { id: camera, camera: true }
+    if (!sourceIds.has(src)) sourceIds.set(src, `local-${++nextSourceId}`)
+    return { id: sourceIds.get(src), camera: false }
+  }
   let mode = 'supervised',
     labels = [],
     frames = [],
@@ -74,7 +84,7 @@ export function mountVideoLesson(specimen) {
     const counts = [0, 1].map((y) => labels.filter((s) => s.y === y).length)
     root.querySelectorAll('[data-label-frame]').forEach((b) => {
       const y = Number(b.dataset.labelFrame)
-      b.disabled = busy || counts[y] >= 30
+      b.disabled = busy || !!review || counts[y] >= 30
       const title = document.createElement('strong')
       title.textContent = names[y]
       const progress = document.createElement('small')
@@ -86,7 +96,8 @@ export function mountVideoLesson(specimen) {
       .map((name, i) => counts[i] < 3 ? `${name}: ${counts[i]} / 3 ${t("ภาพเริ่มต้น", "to get started")}` : `${name}: ${counts[i]} ${t("ภาพ · พร้อม", "examples · ready")}`)
       .join(' · ')
     paintSamples()
-    $('[data-lesson-learn]').disabled = busy || counts.some((n) => n < 3)
+    paintTest()
+    $('[data-lesson-learn]').disabled = busy || !!review || counts.some((n) => n < 3)
     $('[data-lesson-collect]').disabled = busy
     $('[data-lesson-act]').disabled = busy || !!pending
     root
@@ -151,7 +162,7 @@ export function mountVideoLesson(specimen) {
     $('[data-lesson-practice]').setAttribute('aria-pressed', String(src?.kind === 'practice'))
     root.querySelectorAll('[data-practice-scene]').forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.practiceScene === src?.sceneMode))
-      button.disabled = busy || !!pending
+      button.disabled = busy || !!pending || !!review
     })
     $('[data-lesson-source]').textContent =
       src?.kind === 'practice'
@@ -207,10 +218,11 @@ export function mountVideoLesson(specimen) {
       undo.type = 'button'
       undo.className = 'btn'
       undo.textContent = t('ลบภาพล่าสุด: ', 'Undo last: ') + names[y]
-      undo.disabled = busy
+      undo.disabled = busy || !!review
       undo.addEventListener('click', () => {
         job++
         labels.splice(labels.lastIndexOf(samples.at(-1)), 1)
+        tests = []; lastTest = null
         learned = false
         prediction = null
         status('ลบภาพล่าสุดแล้ว ตรวจตัวอย่าง แล้วกดเรียนเมื่อพร้อม', 'Last example removed. Check your examples, then Learn when ready.')
@@ -226,7 +238,13 @@ export function mountVideoLesson(specimen) {
         mode === 'supervised' ? 'เพิ่มตัวอย่างด้วยปุ่มสอน กดเรียน แล้วคำทายจะปรากฏตรงนี้' : mode === 'unsupervised' ? 'กดเก็บภาพ แล้วกลุ่มที่พบจะปรากฏตรงนี้' : 'กดลองทำ แล้วให้คะแนนการกระทำที่แสดงตรงนี้',
         mode === 'supervised' ? 'Add examples with the buttons. After Learn, its guess appears here.' : mode === 'unsupervised' ? 'Collect frames, then its group will appear here.' : 'Press Try an action, then rate the action shown here.',
       )
-    if (review && pending) {
+    if (testPending) {
+      text = names[testPending.guess]
+      explain = t('ภาพทดสอบค้างไว้ เลือกคำตอบจริง ยังไม่เพิ่มเป็นตัวอย่างสอน', 'Test frame held. Choose the true answer; this is not a training example.', '测试画面已暂停。请选择真实答案；它尚未作为训练样本。')
+    } else if (review && lastTest && mode === 'supervised') {
+      text = names[lastTest.guess]
+      explain = t('คำตอบที่คุณตรวจ: ', 'Your checked answer: ', '你核对的答案：') + (lastTest.truth === null ? t('ดูไม่ออก', 'Cannot tell', '无法判断') : names[lastTest.truth])
+    } else if (review && pending) {
       text = t(
         pending.action ? 'เงียบ' : 'แจ้งเตือน',
         pending.action ? 'Stay quiet' : 'Raise alert',
@@ -247,6 +265,7 @@ export function mountVideoLesson(specimen) {
     collecting = false
     busy = false
     pending = null
+    testPending = null
     review = null
     paint()
   }
@@ -317,7 +336,9 @@ export function mountVideoLesson(specimen) {
       isLoaded() ? 'กำลังอ่านภาพ…' : 'กำลังโหลดโมเดล 14 MB ครั้งแรก… ภาพที่เลือกถูกเก็บไว้แล้ว',
       isLoaded() ? 'Reading the frame…' : 'Loading the 14 MB model for first use… Your chosen frame is already held.',
     )
-    return { x: await embed(c), thumb: shrink(c), canvas: c }
+    const key = frameKey(c.getContext('2d').getImageData(0, 0, c.width, c.height))
+    const source = sourceIdentity(specimen.source)
+    return { x: await embed(c), thumb: shrink(c), canvas: c, key, source }
   }
   root.querySelectorAll('[data-label-frame]').forEach((b) =>
     b.addEventListener('click', async () => {
@@ -329,7 +350,12 @@ export function mountVideoLesson(specimen) {
       try {
         const sample = await read()
         if (ticket !== job) return
+        if (labels.some(s => s.key === sample.key)) {
+          status('เก็บภาพนี้แล้ว รอภาพเปลี่ยนหรือเลือกอีกฉาก', 'This picture is already saved. Wait for a new frame or choose another scene.')
+          return
+        }
         labels.push({ ...sample, y })
+        tests = []; lastTest = null
         learned = false
         prediction = null
         status(
@@ -350,12 +376,69 @@ export function mountVideoLesson(specimen) {
     }),
   )
   $('[data-lesson-learn]').addEventListener('click', () => {
+    if (busy || testPending || [0, 1].some(y => labels.filter(s => s.y === y).length < 3)) return
     learned = true
+    tests = []; lastTest = null
     lastResult = ''
     status(
       'เรียนแล้ว ดูคำตอบบนวิดีโอ ลองเฟรมใหม่ที่ไม่ได้เก็บ',
       'Learned. Watch the video answer. Test on frames you did not collect.',
     )
+    paint()
+  })
+  function paintTest() {
+    const panel = $('[data-lesson-test-panel]')
+    panel.hidden = mode !== 'supervised' || !learned
+    $('[data-lesson-test]').disabled = !learned || busy || !!testPending || tests.length >= 100
+    $('[data-test-review]').hidden = !testPending
+    const picture = $('[data-test-view]')
+    picture.hidden = !review || mode !== 'supervised'
+    if (!picture.hidden) { const g = picture.getContext('2d'); g.clearRect(0, 0, picture.width, picture.height); g.drawImage(review, 0, 0, picture.width, picture.height) }
+    $('[data-test-live]').hidden = !review || !!pending || !!testPending
+    $('[data-test-correct]').hidden = !review || !lastTest || lastTest.truth === null || !!testPending
+    for (const b of root.querySelectorAll('[data-test-label]')) b.textContent = names[Number(b.dataset.testLabel)]
+    const result = testSummary(tests)
+    $('[data-test-summary]').textContent = result.assessed
+      ? t(`ทายตรง ${result.correct}/${result.assessed} ภาพที่คุณตรวจ · ไม่แน่ใจ ${result.unsure} · เป็นผลทดสอบของโมเดลรอบนี้เท่านั้น`, `Matched ${result.correct}/${result.assessed} pictures you checked · unsure ${result.unsure} · this model revision only`, `你检查的图片中匹配 ${result.correct}/${result.assessed} 张 · 不确定 ${result.unsure} 张 · 仅适用于本轮模型`)
+      : t('ยังไม่มีภาพทดสอบที่ตรวจคำตอบ ไม่ใช่คะแนน 0%', 'No checked test pictures yet. This is not a score of 0%.', '尚无已核对的测试图，这并不表示得分为 0%。')
+  }
+  $('[data-lesson-test]').addEventListener('click', async () => {
+    if (!learned || busy || testPending) return
+    const ticket = ++job
+    busy = true; paint()
+    try {
+      const sample = await read()
+      if (ticket !== job) return
+      const eligibility = testEligibility(sample.key, labels, tests)
+      if (eligibility !== 'new') {
+        status('ภาพนี้เคยใช้แล้ว รอภาพใหม่หรือเปลี่ยนกล้อง แล้วลองอีกครั้ง', 'This picture has already been used. Wait for a new frame or change camera, then retry.')
+        return
+      }
+      const guess = classify(labels, sample.x)
+      testPending = { ...sample, guess: guess.y, truth: null }
+      review = sample.canvas
+      const sameSource = labels.some(s => s.source.id === sample.source.id)
+      status('ค้างภาพทดสอบแล้ว เลือกคำตอบจริง ภาพต่างเฟรมจากกล้องเดิมอาจคล้ายกันมาก', sameSource ? 'New frame, same training source. This does not test transfer to another camera. Choose the true answer.' : 'This picture was not saved in training. Choose the true answer. This checks this picture, not general accuracy.')
+    } catch { if (ticket === job) status('อ่านภาพทดสอบไม่ได้ ลองอีกครั้ง', 'Could not read a test frame. Try again.') }
+    finally { if (ticket === job) { busy = false; paint() } }
+  })
+  function judgeTest(truth) {
+    if (!testPending) return
+    lastTest = { ...testPending, truth }
+    tests.push({ key: lastTest.key, guess: lastTest.guess, truth })
+    testPending = null
+    status('บันทึกผลทดสอบแล้ว ยังไม่เปลี่ยนตัวอย่างสอน ถ้าต้องการสอนเพิ่ม ให้กดใช้คำตอบนี้สอน', 'Test recorded. Training examples are unchanged. Use “Teach this answer” only if you want to add it.')
+    paint()
+  }
+  root.querySelectorAll('[data-test-label]').forEach(b => b.addEventListener('click', () => judgeTest(Number(b.dataset.testLabel))))
+  $('[data-test-unsure]').addEventListener('click', () => judgeTest(null))
+  $('[data-test-live]').addEventListener('click', () => { review = null; prediction = null; lastResult = ''; paint() })
+  $('[data-test-correct]').addEventListener('click', () => {
+    if (!lastTest || lastTest.truth === null || busy) return
+    if (labels.filter(s => s.y === lastTest.truth).length >= 30) { status('กลุ่มนี้เต็มแล้ว ลบตัวอย่างก่อนเพิ่ม', 'This group is full. Remove an example before adding another.'); return }
+    labels.push({ ...lastTest, y: lastTest.truth })
+    learned = false; tests = []; lastTest = null; review = null; prediction = null
+    status('เพิ่มคำตอบนี้เป็นตัวอย่างแล้ว กดเรียนใหม่ ผลทดสอบเดิมถูกล้างเพราะโมเดลเปลี่ยน', 'Answer added as a training example. Learn again. Earlier test results were cleared because the model changes.')
     paint()
   })
   function paintGroups() {
@@ -480,6 +563,7 @@ export function mountVideoLesson(specimen) {
     cancel()
     if (mode === 'supervised') {
       labels = []
+      tests = []; lastTest = null
       learned = false
     } else if (mode === 'unsupervised') {
       frames = []

@@ -6,20 +6,20 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.19.5'
-import { t, n, pct, lang, onLang, esc } from '../core/i18n.js?v=1.19.5'
-import { toast, confirmBox } from '../core/site.js?v=1.19.5'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.19.5'
-import { canUseWebcam } from '../core/source.js?v=1.19.5'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.19.5'
-import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.19.5'
-import { knnPredict } from '../ml/learner.js?v=1.19.5'
-import * as store from '../train/store.js?v=1.19.5'
-import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.19.5'
-import { createClassList } from '../train/classes-ui.js?v=1.19.5'
-import { createBars } from '../train/bars.js?v=1.19.5'
-import { createTrigger } from '../gesture/fire.js?v=1.19.5'
-import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.19.5'
+import '../core/site.js?v=1.20.0'
+import { t, n, pct, lang, onLang, esc } from '../core/i18n.js?v=1.20.0'
+import { toast, confirmBox } from '../core/site.js?v=1.20.0'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.20.0'
+import { canUseWebcam } from '../core/source.js?v=1.20.0'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.20.0'
+import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.20.0'
+import { knnPredict } from '../ml/learner.js?v=1.20.0'
+import * as store from '../train/store.js?v=1.20.0'
+import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.20.0'
+import { createClassList } from '../train/classes-ui.js?v=1.20.0'
+import { createBars } from '../train/bars.js?v=1.20.0'
+import { createTrigger } from '../gesture/fire.js?v=1.20.0'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.20.0'
 
 const K = 5
 const LIVE_MS = 250

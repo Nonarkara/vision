@@ -315,6 +315,23 @@
     </div>
   </section>
 
+  <section class="chapter" id="reference-check" aria-labelledby="reference-title">
+    <header><h2 id="reference-title"><span class="th" lang="th">ทดสอบโมเดลด้วยภาพชุดเดิม</span><span class="en" lang="en">Check the model on a fixed reference pack</span><span class="zh" lang="zh-Hans">用固定参考集检查模型</span></h2></header>
+    <div class="chapter-body" data-reference-check>
+      <p class="prose"><span class="th" lang="th">ภาพวาด 200 ภาพ จากถนนจำลอง 12 ชุดและภาพควบคุม แยก 100 ภาพไว้ทดสอบ คนละชุดลำดับกับชุดพัฒนา แต่ใช้ภาพวาดแบบเดียวกัน ไม่ใช่การทดสอบข้ามกล้องจริง นี่เป็นการตรวจการเปลี่ยนแปลง ไม่ใช่คะแนนความแม่นยำบนถนนจริงของไทย</span><span class="en" lang="en">200 drawings from 12 synthetic road sequences and control frames, with 100 separate test frames from separate synthetic sequence variants sharing the same drawing geometry; this is not a real-camera holdout. This checks regressions; it does not measure accuracy on real Thai roads.</span><span class="zh" lang="zh-Hans">200 张绘图来自 12 段合成道路序列及控制画面，其中 100 张独立测试图来自不同的合成序列变体，绘图几何相同，并非真实跨摄像头测试。这是回归检查，不代表真实泰国道路的准确率。</span></p>
+      <details><summary><span class="th" lang="th">รันการตรวจบนอุปกรณ์นี้</span><span class="en" lang="en">Run the check on this device</span><span class="zh" lang="zh-Hans">在此设备上运行检查</span></summary>
+        <p class="prose"><span class="th" lang="th">โหลดโมเดลประมาณ 18 MB เมื่อกดเริ่ม ตรวจไม่เกิน 100 ภาพ ขอหยุดเมื่อครบสองนาทีหรือซ่อนแท็บ โดยรอขั้นโหลดหรือคำนวณปัจจุบันจบก่อน ไม่มีการเปิดกล้องหรือส่งผลกลับเซิร์ฟเวอร์ precision คือส่วนที่ทายแล้วตรง recall คือส่วนที่หาเจอจากสิ่งที่มีจริง</span><span class="en" lang="en">Start downloads about 18 MB of model weights. Checks at most 100 frames. Stop, hiding the tab, or the two-minute limit takes effect after the current model load or inference finishes. No camera opens and no results are uploaded. Precision measures how many guesses matched; recall measures how many labelled objects were found.</span><span class="zh" lang="zh-Hans">开始后下载约 18 MB 模型权重。最多检查 100 帧。点击停止、隐藏标签页或达到两分钟限额后，会等待当前模型加载或推理完成再停止。不会打开摄像头或上传结果。精确率表示预测中有多少匹配，召回率表示标注物体中有多少被找到。</span></p>
+        <div class="controls">
+          <button class="btn primary" type="button" data-reference-run><span class="th" lang="th">เริ่มตรวจ 100 ภาพ</span><span class="en" lang="en">Check 100 test frames</span><span class="zh" lang="zh-Hans">检查 100 张测试图</span></button>
+          <button class="btn" type="button" data-reference-stop disabled><span class="th" lang="th">หยุด</span><span class="en" lang="en">Stop</span><span class="zh" lang="zh-Hans">停止</span></button>
+          <button class="btn" type="button" data-reference-download disabled><span class="th" lang="th">ดาวน์โหลดรายงาน</span><span class="en" lang="en">Download report</span><span class="zh" lang="zh-Hans">下载报告</span></button>
+        </div>
+        <canvas class="reference-frame" width="320" height="180" role="img" data-aria-th="ภาพจำลองที่กำลังตรวจ" data-aria-en="Synthetic frame being checked" data-aria-zh="正在检查的合成画面" hidden></canvas>
+        <p class="prose" data-reference-output role="status" aria-live="polite"></p>
+      </details>
+    </div>
+  </section>
+
 </main>
 <!--#foot-->
 <script type="module" src="/js/pages/system.js?v={{v}}"></script>

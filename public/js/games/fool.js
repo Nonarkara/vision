@@ -3,13 +3,13 @@
 // machine cannot referee this game — it has no idea what is really in front
 // of the lens — so you do. Captures live in this tab's memory and nowhere else.
 
-import { t, bi, n, lang, onLang } from '../core/i18n.js?v=1.19.5'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.19.5'
-import { drawDetections } from '../cv/draw.js?v=1.19.5'
-import { cocoName } from '../ml/labels.js?v=1.19.5'
-import { detect } from '../ml/detector.js?v=1.19.5'
-import { toast } from '../core/site.js?v=1.19.5'
-import { readyDetector, benchSpecimen, freeze, paint, sayDetections, biClass, readBest, writeBest, FLOOR_SCORE } from './common.js?v=1.19.5'
+import { t, bi, n, lang, onLang } from '../core/i18n.js?v=1.20.0'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.20.0'
+import { drawDetections } from '../cv/draw.js?v=1.20.0'
+import { cocoName } from '../ml/labels.js?v=1.20.0'
+import { detect } from '../ml/detector.js?v=1.20.0'
+import { toast } from '../core/site.js?v=1.20.0'
+import { readyDetector, benchSpecimen, freeze, paint, sayDetections, biClass, readBest, writeBest, FLOOR_SCORE } from './common.js?v=1.20.0'
 
 const MAX_CAPTURES = 12
 const BEST_KEY = 'vision_games_fool_best_v1'

@@ -24,3 +24,6 @@ body .controls > .btn { white-space: normal; overflow-wrap: anywhere; }
 
 .table-scroll-hint { font-size: var(--micro); margin-bottom: 8px; }
 .gate-skip-note > summary { cursor: pointer; min-height: var(--target); padding-block: 10px; }
+
+.reference-frame { display: block; width: min(100%, 640px); height: auto; margin-block: 12px; }
+.reference-frame[hidden] { display: none; }
