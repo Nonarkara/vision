@@ -15,11 +15,20 @@
 .bench p.bench-caption { margin: 0; }
 .game-say { margin: 0; color: var(--naples); font-family: var(--sans); line-height: 1.55; min-height: 4.8em; }
 html[data-lang="th"] .game-say { font-family: var(--thai); }
-.game-choice .btn { flex: 1 1 0; min-width: 0; padding: 0 8px; }
-.game-go { flex: 1 1 auto; }
+/* A button is the width of its label. Two of them split a row in half and
+   read as two empty strips. The house is not uniform about this — some
+   controls rows still fill their bar — but a button stretched to five times
+   its words is not a choice anybody made. */
+.game-choice .btn { flex: 0 0 auto; min-width: 0; padding: 0 16px; }
+.game-go { flex: 0 0 auto; }
 .clock { color: var(--white); }
 
-.tally { display: grid; grid-template-columns: var(--target) minmax(0, 1fr) var(--target) auto; gap: 2px; background: var(--black); }
+/* The counter is a counter: minus, the number, plus, and the button that
+   finishes the count. It was a four-track grid whose middle track was a whole
+   column wide, so one digit sat alone in 800px of empty band. The group now
+   takes the width of its own content — and all four tracks are declared, or
+   the last button wraps into a column built for a different thing. */
+.tally { display: grid; grid-template-columns: var(--target) minmax(3ch, auto) var(--target) auto; gap: 2px; background: var(--black); width: fit-content; }
 .tally .btn { font-size: var(--body); }
 .tally-n { display: flex; align-items: center; justify-content: center; min-height: 56px; background: var(--black-1); color: var(--white); font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem); font-weight: 600; }
 

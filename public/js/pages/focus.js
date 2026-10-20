@@ -1,8 +1,8 @@
-import '../core/site.js?v=1.17.9'
+import '../core/site.js?v=1.18.0'
 import { t, bi, onLang } from '../core/i18n.js'
-import { openWebcam } from '../core/source.js?v=1.17.9'
+import { openWebcam } from '../core/source.js?v=1.18.0'
 import { faceSignals, createSession } from '../focus/session.js'
-import { drawFaceOval, outlineEdges, faceBox, mountSaw } from '../cv/feedback.js?v=1.17.9'
+import { drawFaceOval, outlineEdges, faceBox, mountSaw } from '../cv/feedback.js?v=1.18.0'
 
 const root = document.querySelector('[data-focus-room]')
 const el = (name) => root.querySelector(`[data-${name}]`)
@@ -17,6 +17,11 @@ const names = { facing: ['หันตรง', 'Facing forward'], away: ['หั
 function time(s) { return `${Math.floor(s / 60).toString().padStart(2, '0')}:${Math.floor(s % 60).toString().padStart(2, '0')}` }
 function paint() {
   const d = session.data, active = ['loading', 'calibrating', 'running'].includes(phase)
+  // The panel says what it is while the camera is off. It is hidden while real
+  // frames are on the canvas, and when the session is over and no picture is
+  // coming; the privacy line stays true the whole time.
+  const viewState = el('view-state')
+  if (viewState) viewState.hidden = phase === 'calibrating' || phase === 'running' || phase === 'finished'
   el('start').disabled = !el('consent').checked || active
   el('start').innerHTML = phase === 'paused' ? bi('เริ่มต่อ', 'Resume') : phase === 'finished' ? bi('เริ่มใหม่ (ล้างสรุป)', 'New session (clears summary)') : bi('ยินยอมและเริ่ม', 'Agree & start')
   el('pause').disabled = !active; el('stop').disabled = !(active || phase === 'paused')

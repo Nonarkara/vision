@@ -5,7 +5,7 @@
 
 /* One row per paper: the year in the margin, the work beside it. No rules, only space. */
 .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(28px, 3vw, 44px); }
-.timeline > li { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 4px 24px; margin: 0; max-width: 72ch; }
+.timeline > li { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 4px 24px; margin: 0; max-width: 62ch; }
 .timeline .year { font-size: var(--body); font-weight: 600; line-height: 1.3; }
 .timeline h3 { margin: 0 0 4px; }
 .timeline cite { font-style: normal; }
