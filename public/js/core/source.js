@@ -111,7 +111,7 @@ class FrameSource {
   }
 }
 
-async function openVideo(cam, { signal, timeout = 20_000 } = {}) {
+async function openVideo(cam, { signal, videoTimeout = 20_000 } = {}) {
   if (signal?.aborted) throw new SourceError('ยกเลิกการเปิดกล้อง', 'Camera open was cancelled')
   const video = document.createElement('video')
   video.muted = true
@@ -123,7 +123,7 @@ async function openVideo(cam, { signal, timeout = 20_000 } = {}) {
   let src = null
   const Hls = await loadHls().catch(() => null)
   const done = new Promise((resolve, reject) => {
-    const seconds = Math.max(1, Math.round(timeout / 1000))
+    const seconds = Math.max(1, Math.round(videoTimeout / 1000))
     let timer
     const finish = (err) => {
       clearTimeout(timer)
@@ -132,7 +132,7 @@ async function openVideo(cam, { signal, timeout = 20_000 } = {}) {
       else resolve()
     }
     const onAbort = () => finish(new SourceError('ยกเลิกการเปิดกล้อง', 'Camera open was cancelled'))
-    timer = setTimeout(() => finish(new SourceError(`กล้องไม่ส่งภาพภายใน ${seconds} วินาที`, `The camera sent no picture within ${seconds} seconds`)), timeout)
+    timer = setTimeout(() => finish(new SourceError(`กล้องไม่ส่งภาพภายใน ${seconds} วินาที`, `The camera sent no picture within ${seconds} seconds`)), videoTimeout)
     signal?.addEventListener('abort', onAbort, { once: true })
     video.addEventListener('loadeddata', () => finish(), { once: true })
     video.addEventListener('error', () => finish(new SourceError('เบราว์เซอร์เล่นวิดีโอนี้ไม่ได้', 'This browser could not play the stream')), { once: true })
