@@ -12,7 +12,7 @@
 // past an 8.5 m lamp post and never names it, which is the correct behaviour
 // for a detector with a closed vocabulary.
 
-import { wrap } from './track.js?v=1.19.2'
+import { wrap } from './track.js?v=1.19.5'
 
 export const FOV = (150 * Math.PI) / 180   // front + side cameras together
 export const MEMORY = 0.7                   // seconds a lost object is still believed in

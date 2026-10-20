@@ -139,13 +139,13 @@ a.training-choice { text-decoration: none; }
 .page-head .lede { font-size:1rem; line-height:1.55; max-width:52ch; }
 .video-lesson { padding:0 var(--gutter) 24px; display:grid; gap:16px; }
 .video-lesson h2 { font-size:var(--body); margin:0; }
-.lesson-topline { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.lesson-topline { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 20px; }
 /* --text, not a raw hue: this is set on the page, and --indigo is the page's own
    ink in light and the page's own GROUND in dark. Hardcoding it here printed this
    line indigo-on-indigo after sunset — measured 1.00:1, i.e. not on the page. */
 .lesson-topline > .micro { color: var(--text); }
-.lesson-methods { display:flex; flex-wrap:wrap; gap:4px 12px; border-bottom:1px solid var(--gray); }
-.lesson-methods .training-choice { position:relative; background:transparent; color:var(--text); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
+.lesson-methods { display:flex; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; gap:4px 12px; border-bottom:1px solid var(--gray); }
+.lesson-methods .training-choice { flex:none; position:relative; background:transparent; color:var(--text); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
 .lesson-methods .training-choice strong { font-size:var(--read); }
 .lesson-methods .training-choice > span:last-child { color:inherit; font-size:var(--fine);  }
 .lesson-methods .training-choice[aria-pressed="true"] { border-bottom-color:var(--text); background:var(--field); color:var(--field-text); }
@@ -174,7 +174,7 @@ a.training-choice { text-decoration: none; }
 .lesson-labels { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding-top:8px; }
 .lesson-labels label { min-width:0; font-size:var(--fine); }
 .lesson-overlay { position:absolute; left:12px; bottom:12px; background:var(--black); color:var(--ivory); padding:8px 12px; max-width:calc(100% - 24px); font-weight:600; }
-.lesson-prediction { margin:0; padding:12px; font-family:var(--sans); min-height:52px; line-height:1.4; font-size:var(--micro); }
+.lesson-prediction { color:var(--text); margin:0; padding:12px; font-family:var(--sans); min-height:52px; line-height:1.4; font-size:var(--micro); }
 .lesson-scenes { align-self:flex-start; max-width:100%; padding:10px 12px; background:var(--black-2); color:var(--white); }
 .lesson-scenes > p { margin:0 0 6px; font-family:var(--sans); font-size:var(--fine); }
 .lesson-scenes .controls { padding:0; gap:4px; flex-wrap:wrap; background:transparent; }
@@ -214,14 +214,14 @@ a.training-choice { text-decoration: none; }
  .lesson-actions h3 { font-size:var(--lede); }
 }
 @media(max-width:900px) and (min-height:650px){
- .lesson-bench { top:var(--rail-height); z-index:4; }
+ .lesson-bench { position:relative; top:auto; }
  .lesson-bench .bench-caption { display:none; }
  .lesson-bench .bench-view { height:clamp(150px,24dvh,240px); aspect-ratio:auto; }
  .lesson-bench .lesson-prediction { padding:8px 12px; min-height:0; }
  .lesson-bench .lesson-scenes { align-self:flex-start; max-width:100%; padding:6px 12px; }
  .lesson-scenes > p { display:none; }
  .lesson-scenes .btn { min-height:44px; }
- .lesson-actions :is(button,input,summary) { scroll-margin-top:calc(var(--rail-height) + 350px); }
+ .lesson-actions :is(button,input,summary) { scroll-margin-top:calc(var(--rail-height) + 16px); }
 }
 @media(max-height:649px){ .lesson-bench { position:relative; top:auto; } }
 

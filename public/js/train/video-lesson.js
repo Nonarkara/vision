@@ -1,8 +1,8 @@
-import { t, onLang, count } from '../core/i18n.js?v=1.19.2'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.19.2'
-import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.19.2'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.19.2'
-import { practiceVideo } from './practice-video.js?v=1.19.2'
+import { t, onLang, count } from '../core/i18n.js?v=1.19.5'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.19.5'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.19.5'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.19.5'
+import { practiceVideo } from './practice-video.js?v=1.19.5'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),

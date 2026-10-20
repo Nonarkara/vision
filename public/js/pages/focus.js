@@ -1,8 +1,8 @@
-import '../core/site.js?v=1.19.2'
-import { t, bi, onLang } from '../core/i18n.js?v=1.19.2'
-import { openWebcam } from '../core/source.js?v=1.19.2'
-import { faceSignals, createSession } from '../focus/session.js?v=1.19.2'
-import { drawFaceOval, outlineEdges, faceBox, mountSaw } from '../cv/feedback.js?v=1.19.2'
+import '../core/site.js?v=1.19.5'
+import { t, bi, onLang } from '../core/i18n.js?v=1.19.5'
+import { openWebcam } from '../core/source.js?v=1.19.5'
+import { faceSignals, createSession } from '../focus/session.js?v=1.19.5'
+import { drawFaceOval, outlineEdges, faceBox, mountSaw } from '../cv/feedback.js?v=1.19.5'
 
 const root = document.querySelector('[data-focus-room]')
 const el = (name) => root.querySelector(`[data-${name}]`)

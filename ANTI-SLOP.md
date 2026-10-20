@@ -58,3 +58,16 @@ It's a screen, not a judge. On our study set it caught 91% of slop with 95% prec
 These rules come from measuring the 46 citizen-built flood apps listed on FloodDash's *About → Citizen-built apps* page (flood.nonarkara.org) on 18 Oct 2026. Of those, 37 were reachable, and 31 were labelled by eye and checked with DOM and pixel metrics. People built these tools during a flood, often overnight and for free. Many of them help people, and we're grateful to every builder. The study is about visual patterns only, not about people or how useful the tools are.
 
 Apps whose maps show victims' or reporters' personal data were not pictured or quoted. The clean exceptions worth learning from are Thailand Flooder, พิกัดน้ำท่วมสมุทรปราการ (paddypure), น้ำคลอง (namkhlong), Floodboard, น้ำบนถนน บางมด (taokaetech), Floraville Flood Forecast and Meanam. They let the map win, use few boxes and one radius, keep lines short, and each has a point of view.
+
+## Spatial hallucination: geometry must explain itself
+
+Arrange space around how people read, choose and act. For each element ask: **Why is this here, why this size, and why this far from that?** “The grid put it there” is not an answer.
+
+- Keep instructions, their controls and the result they affect together. Avoid duplicated or scattered actions.
+- Use content-sized spacing; never push related content apart just to fill a viewport.
+- Put a photograph with its explanation, not beside an unrelated empty column.
+- Give the next choice clear priority. Equal cards are not a substitute for a decision.
+- Choose how navigation behaves at narrow widths; do not let it wrap accidentally.
+- Measure the scroll needed to reach a small decision. Sticky media must not cover the controls it explains.
+
+Whitespace must separate a meaningful group, support reading, or establish emphasis. If it does none of these, remove it.

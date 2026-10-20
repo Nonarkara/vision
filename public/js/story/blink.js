@@ -21,8 +21,8 @@
 //
 // No camera is opened, nothing leaves the device, and no score is stored.
 
-import { toGray, grayToRgba } from '../cv/ops.js?v=1.19.2'
-import { t, n, pct, onLang } from '../core/i18n.js?v=1.19.2'
+import { toGray, grayToRgba } from '../cv/ops.js?v=1.19.5'
+import { t, n, pct, onLang } from '../core/i18n.js?v=1.19.5'
 
 export const SCREENS = 6
 // The machine's own comparison threshold, in grey levels. It is set low on

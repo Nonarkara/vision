@@ -1,0 +1,1741 @@
+[
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 219.828125,
+      "height": 33.4375,
+      "top": 186.390625,
+      "width": 358
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 834.34375,
+      "height": 243.75,
+      "top": 590.59375,
+      "width": 390
+    },
+    "width": 390,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 333.9765625,
+      "height": 173.25,
+      "top": 160.7265625,
+      "width": 369.6640625
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 671.8125,
+      "height": 569.4140625,
+      "top": 102.3984375,
+      "width": 588.8046875
+    },
+    "width": 1024,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 423.625,
+      "height": 243.6328125,
+      "top": 179.9921875,
+      "width": 519.84375
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 693.5078125,
+      "height": 591.109375,
+      "top": 102.3984375,
+      "width": 828
+    },
+    "width": 1440,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": {
+      "bottom": 1215.375,
+      "height": 357.1875,
+      "top": 858.1875,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 269.0703125,
+      "height": 66.875,
+      "top": 202.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "wrap",
+    "preview": {
+      "bottom": 681,
+      "height": 202.5546875,
+      "top": 478.4453125,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": {
+      "bottom": 810.8046875,
+      "height": 367.9453125,
+      "top": 442.859375,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 291.171875,
+      "height": 48.359375,
+      "top": 242.8125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 182.3671875,
+      "height": 126.3671875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 816.5390625,
+      "height": 327.28125,
+      "top": 489.2578125,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": {
+      "bottom": 809.859375,
+      "height": 367.984375,
+      "top": 441.875,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 288.6875,
+      "height": 61.59375,
+      "top": 227.09375,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 164.296875,
+      "height": 108.296875,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 951.921875,
+      "height": 463.6484375,
+      "top": 488.2734375,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "before"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 194.6328125,
+      "height": 33.4375,
+      "top": 161.1953125,
+      "width": 358
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 675.5859375,
+      "height": 219.375,
+      "top": 456.2109375,
+      "width": 390
+    },
+    "width": 390,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 293.96875,
+      "height": 145.078125,
+      "top": 148.890625,
+      "width": 267.265625
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 491.1953125,
+      "height": 388.796875,
+      "top": 102.3984375,
+      "width": 691.203125
+    },
+    "width": 1024,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 245.984375,
+      "height": 123.1875,
+      "top": 122.796875,
+      "width": 375.8359375
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 649.1484375,
+      "height": 546.75,
+      "top": 102.3984375,
+      "width": 972.0078125
+    },
+    "width": 1440,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 201.9140625,
+      "height": 34.4140625,
+      "top": 167.5,
+      "width": 358
+    },
+    "intro": {
+      "bottom": 320.2890625,
+      "height": 102.375,
+      "top": 217.9140625,
+      "width": 288
+    },
+    "lang": "th",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 684.1640625,
+      "height": 219.375,
+      "top": 464.7890625,
+      "width": 390
+    },
+    "width": 390,
+    "route": "/",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 229.3046875,
+      "height": 101.75,
+      "top": 127.5546875,
+      "width": 267.265625
+    },
+    "intro": {
+      "bottom": 375.3046875,
+      "height": 126,
+      "top": 249.3046875,
+      "width": 267.265625
+    },
+    "lang": "th",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 493.296875,
+      "height": 388.796875,
+      "top": 104.5,
+      "width": 691.203125
+    },
+    "width": 1024,
+    "route": "/",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 259.359375,
+      "height": 128.859375,
+      "top": 130.5,
+      "width": 375.8359375
+    },
+    "intro": {
+      "bottom": 419.359375,
+      "height": 140,
+      "top": 279.359375,
+      "width": 360
+    },
+    "lang": "th",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 651.25,
+      "height": 546.75,
+      "top": 104.5,
+      "width": 972.0078125
+    },
+    "width": 1440,
+    "route": "/",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 262.2265625,
+      "height": 33.4375,
+      "top": 228.7890625,
+      "width": 358
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "zh",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 769.2734375,
+      "height": 219.375,
+      "top": 549.8984375,
+      "width": 390
+    },
+    "width": 390,
+    "route": "/",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 337.765625,
+      "height": 145.078125,
+      "top": 192.6875,
+      "width": 267.265625
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "zh",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 535.4921875,
+      "height": 388.796875,
+      "top": 146.6953125,
+      "width": 691.203125
+    },
+    "width": 1024,
+    "route": "/",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 289.78125,
+      "height": 123.1875,
+      "top": 166.59375,
+      "width": 375.8359375
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "zh",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 693.4453125,
+      "height": 546.75,
+      "top": 146.6953125,
+      "width": 972.0078125
+    },
+    "width": 1440,
+    "route": "/",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 1205.7734375,
+      "height": 506.7734375,
+      "top": 699,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 269.0703125,
+      "height": 66.875,
+      "top": 202.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 681,
+      "height": 202.5546875,
+      "top": 478.4453125,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 906.5234375,
+      "height": 545.03125,
+      "top": 361.4921875,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 209.8046875,
+      "height": 48.359375,
+      "top": 161.4453125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 735.171875,
+      "height": 327.28125,
+      "top": 407.890625,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 912.4609375,
+      "height": 533.8828125,
+      "top": 378.578125,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 225.390625,
+      "height": 61.59375,
+      "top": 163.796875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 888.625,
+      "height": 463.6484375,
+      "top": 424.9765625,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 1171.2734375,
+      "height": 511.28125,
+      "top": 659.9921875,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 246.9140625,
+      "height": 34.4140625,
+      "top": 212.5,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 149,
+      "height": 49,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 641.9921875,
+      "height": 202.5546875,
+      "top": 439.4375,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 940.7734375,
+      "height": 553.9140625,
+      "top": 386.859375,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 226.984375,
+      "height": 50.875,
+      "top": 176.109375,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 108.5546875,
+      "height": 52.5546875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 762.640625,
+      "height": 327.28125,
+      "top": 435.359375,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 906.9765625,
+      "height": 499.171875,
+      "top": 407.8046875,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 246.4296875,
+      "height": 64.4296875,
+      "top": 182,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 111.5,
+      "height": 55.5,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 919.953125,
+      "height": 463.6484375,
+      "top": 456.3046875,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 1276.5625,
+      "height": 506.7734375,
+      "top": 769.7890625,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 339.859375,
+      "height": 66.875,
+      "top": 272.984375,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 215.7890625,
+      "height": 48.1953125,
+      "top": 167.59375,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 751.7890625,
+      "height": 202.5546875,
+      "top": 549.234375,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 956.859375,
+      "height": 545.03125,
+      "top": 411.828125,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 260.140625,
+      "height": 48.359375,
+      "top": 211.78125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 151.3359375,
+      "height": 51.5390625,
+      "top": 99.796875,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 785.5078125,
+      "height": 327.28125,
+      "top": 458.2265625,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 965.65625,
+      "height": 533.8828125,
+      "top": 431.7734375,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 278.5859375,
+      "height": 61.59375,
+      "top": 216.9921875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 154.1953125,
+      "height": 54.3984375,
+      "top": 99.796875,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 941.8203125,
+      "height": 463.6484375,
+      "top": 478.171875,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 290.1953125,
+      "height": 88,
+      "top": 202.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/learn",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 280.4140625,
+      "height": 118.96875,
+      "top": 161.4453125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/learn",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 323.9375,
+      "height": 160.140625,
+      "top": 163.796875,
+      "width": 818.171875
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/learn",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 304.953125,
+      "height": 92.453125,
+      "top": 212.5,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 149,
+      "height": 49,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/learn",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 299.4375,
+      "height": 123.328125,
+      "top": 176.109375,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 108.5546875,
+      "height": 52.5546875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/learn",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 348.703125,
+      "height": 166.703125,
+      "top": 182,
+      "width": 818.171875
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 111.5,
+      "height": 55.5,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/learn",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 360.984375,
+      "height": 88,
+      "top": 272.984375,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 215.7890625,
+      "height": 48.1953125,
+      "top": 167.59375,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/learn",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 330.75,
+      "height": 118.96875,
+      "top": 211.78125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 151.3359375,
+      "height": 51.5390625,
+      "top": 99.796875,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/learn",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 377.1328125,
+      "height": 160.140625,
+      "top": 216.9921875,
+      "width": 818.171875
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 154.1953125,
+      "height": 54.3984375,
+      "top": 99.796875,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/learn",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 267.3359375,
+      "height": 57.140625,
+      "top": 210.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/cameras",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 259.9375,
+      "height": 82.65625,
+      "top": 177.28125,
+      "width": 369.6640625
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/cameras",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 299.4609375,
+      "height": 105.265625,
+      "top": 194.1953125,
+      "width": 519.84375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/cameras",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 285.328125,
+      "height": 64.828125,
+      "top": 220.5,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 149,
+      "height": 49,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/cameras",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 286.6953125,
+      "height": 94.75,
+      "top": 191.9453125,
+      "width": 369.6640625
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 108.5546875,
+      "height": 52.5546875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/cameras",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 332.2578125,
+      "height": 119.859375,
+      "top": 212.3984375,
+      "width": 519.84375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 111.5,
+      "height": 55.5,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/cameras",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 338.125,
+      "height": 57.140625,
+      "top": 280.984375,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 215.7890625,
+      "height": 48.1953125,
+      "top": 167.59375,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/cameras",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 310.2734375,
+      "height": 82.65625,
+      "top": 227.6171875,
+      "width": 369.6640625
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 151.3359375,
+      "height": 51.5390625,
+      "top": 99.796875,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/cameras",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 352.65625,
+      "height": 105.265625,
+      "top": 247.390625,
+      "width": 519.84375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 154.1953125,
+      "height": 54.3984375,
+      "top": 99.796875,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/cameras",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 302.5078125,
+      "height": 100.3125,
+      "top": 202.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/games",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 306.5234375,
+      "height": 145.078125,
+      "top": 161.4453125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/games",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 348.578125,
+      "height": 184.78125,
+      "top": 163.796875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/games",
+    "requestedLang": "en",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 315.7421875,
+      "height": 103.2421875,
+      "top": 212.5,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 149,
+      "height": 49,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/games",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 328.734375,
+      "height": 152.625,
+      "top": 176.109375,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 108.5546875,
+      "height": 52.5546875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/games",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 375.2890625,
+      "height": 193.2890625,
+      "top": 182,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 111.5,
+      "height": 55.5,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/games",
+    "requestedLang": "th",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 373.296875,
+      "height": 100.3125,
+      "top": 272.984375,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 215.7890625,
+      "height": 48.1953125,
+      "top": 167.59375,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 390,
+    "route": "/games",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 356.859375,
+      "height": 145.078125,
+      "top": 211.78125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 151.3359375,
+      "height": 51.5390625,
+      "top": 99.796875,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1024,
+    "route": "/games",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 401.7734375,
+      "height": 184.78125,
+      "top": 216.9921875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 154.1953125,
+      "height": 54.3984375,
+      "top": 99.796875,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": null,
+    "width": 1440,
+    "route": "/games",
+    "requestedLang": "zh",
+    "phase": "after"
+  },
+  {
+    "actions": {
+      "bottom": 1205.7734375,
+      "height": 506.7734375,
+      "top": 699,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 269.0703125,
+      "height": 66.875,
+      "top": 202.1953125,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 145,
+      "height": 45,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 681,
+      "height": 202.5546875,
+      "top": 478.4453125,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 906.5234375,
+      "height": 545.03125,
+      "top": 361.4921875,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 209.8046875,
+      "height": 48.359375,
+      "top": 161.4453125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 735.171875,
+      "height": 327.28125,
+      "top": 407.890625,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 912.4609375,
+      "height": 533.8828125,
+      "top": 378.578125,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 225.390625,
+      "height": 61.59375,
+      "top": 163.796875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "en",
+    "overflow": false,
+    "path": {
+      "bottom": 101,
+      "height": 45,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 888.625,
+      "height": 463.6484375,
+      "top": 424.9765625,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "en",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 1171.2734375,
+      "height": 511.28125,
+      "top": 659.9921875,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 246.9140625,
+      "height": 34.4140625,
+      "top": 212.5,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 149,
+      "height": 49,
+      "top": 100,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 641.9921875,
+      "height": 202.5546875,
+      "top": 439.4375,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 940.7734375,
+      "height": 553.9140625,
+      "top": 386.859375,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 226.984375,
+      "height": 50.875,
+      "top": 176.109375,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 108.5546875,
+      "height": 52.5546875,
+      "top": 56,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 762.640625,
+      "height": 327.28125,
+      "top": 435.359375,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 906.9765625,
+      "height": 499.171875,
+      "top": 407.8046875,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 246.4296875,
+      "height": 64.4296875,
+      "top": 182,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "th",
+    "overflow": false,
+    "path": {
+      "bottom": 111.5,
+      "height": 55.5,
+      "top": 56,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 919.953125,
+      "height": 463.6484375,
+      "top": 456.3046875,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "th",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 1276.5625,
+      "height": 506.7734375,
+      "top": 769.7890625,
+      "width": 358
+    },
+    "heading": {
+      "bottom": 339.859375,
+      "height": 66.875,
+      "top": 272.984375,
+      "width": 358
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 215.7890625,
+      "height": 48.1953125,
+      "top": 167.59375,
+      "width": 390
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 751.7890625,
+      "height": 202.5546875,
+      "top": 549.234375,
+      "width": 358
+    },
+    "width": 390,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 956.859375,
+      "height": 545.03125,
+      "top": 411.828125,
+      "width": 352.625
+    },
+    "heading": {
+      "bottom": 260.140625,
+      "height": 48.359375,
+      "top": 211.78125,
+      "width": 577.5234375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 151.3359375,
+      "height": 51.5390625,
+      "top": 99.796875,
+      "width": 1024
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 785.5078125,
+      "height": 327.28125,
+      "top": 458.2265625,
+      "width": 581.8359375
+    },
+    "width": 1024,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "light"
+  },
+  {
+    "actions": {
+      "bottom": 965.65625,
+      "height": 533.8828125,
+      "top": 431.7734375,
+      "width": 499.5625
+    },
+    "heading": {
+      "bottom": 278.5859375,
+      "height": 61.59375,
+      "top": 216.9921875,
+      "width": 806.3984375
+    },
+    "intro": null,
+    "lang": "zh",
+    "overflow": false,
+    "path": {
+      "bottom": 154.1953125,
+      "height": 54.3984375,
+      "top": 99.796875,
+      "width": 1440
+    },
+    "pathWrap": "nowrap",
+    "preview": {
+      "bottom": 941.8203125,
+      "height": 463.6484375,
+      "top": 478.171875,
+      "width": 824.2734375
+    },
+    "width": 1440,
+    "route": "/train",
+    "requestedLang": "zh",
+    "phase": "light"
+  },
+  {
+    "actions": null,
+    "heading": {
+      "bottom": 245.984375,
+      "height": 123.1875,
+      "top": 122.796875,
+      "width": 375.8359375
+    },
+    "intro": {
+      "bottom": 0,
+      "height": 0,
+      "top": 0,
+      "width": 0
+    },
+    "lang": "en",
+    "overflow": false,
+    "path": null,
+    "pathWrap": null,
+    "preview": {
+      "bottom": 649.1484375,
+      "height": 546.75,
+      "top": 102.3984375,
+      "width": 972.0078125
+    },
+    "width": 1440,
+    "route": "/",
+    "requestedLang": "en",
+    "phase": "light"
+  }
+]

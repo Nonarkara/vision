@@ -408,15 +408,18 @@ em { font-style: italic; }
    separate indigo from ivory, and this bar sits directly under another one. */
 
 .path {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-inline: var(--gutter);
   background: var(--quiet);
   color: var(--quiet-text);
   border-bottom: 1px solid var(--gray);
 }
 .path a {
-  display: flex; flex-direction: column; gap: 6px;
-  padding: 14px 16px 16px var(--gutter);
+  display: flex; flex: none; align-items: center; gap: 8px;
+  min-height: var(--target); padding: 8px 14px;
   text-decoration: none;
   border-inline-start: 1px solid var(--gray);
 }
@@ -424,7 +427,7 @@ em { font-style: italic; }
 .path .num { font-size: var(--fine); font-family: var(--mono); }
 .step-name { font-weight: 700; font-size: var(--body); line-height: 1.15; }
 .step-name [lang="th"] { font-family: var(--thai); }
-.step-note { font-size: var(--fine); max-width: 30ch; }
+.step-note { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 /* The step you are on. Font weight says it too, so the state survives a
    monochrome print and a screen reader that never sees the colour. */
 .path a[data-step][aria-current="step"] {
@@ -435,10 +438,10 @@ em { font-style: italic; }
 .path a[data-step]:hover, .path a[data-step]:focus-visible { background: var(--ivory); }
 .path a[data-step][aria-current="step"]:hover { background: var(--indigo); }
 @media (max-width: 800px) {
-  .path { display: flex; flex-wrap: wrap; }
+  .path { flex-wrap: nowrap; }
   .path a { flex: 0 1 auto; flex-direction: row; align-items: center; gap: 6px; min-height: var(--target); padding: 10px 12px; }
   .path .step-name { font-size: var(--read); }
-  .path .step-note { display: none; }
+
 }
 
 /* ── Fields ──────────────────────────────────────────────────────────── */
@@ -904,3 +907,18 @@ label.btn:focus-within { outline: 3px solid currentColor; outline-offset: -3px; 
 
 .instrument:is(:fullscreen, .is-expanded) .instrument-tools { position: sticky; top: 0; z-index: 2; min-height: 44px; }
 .room-grid:is(:fullscreen, .is-expanded) [data-fullscreen] { position: fixed; top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); z-index: 3; }
+
+/* Home introduces one working viewer; its copy does not stretch to its height. */
+.home-opening { min-height: 0; grid-template-columns: minmax(260px, .65fr) minmax(0, 1.35fr); align-items: start; }
+.home-opening .opening-text { justify-content: flex-start; gap: 20px; padding-block: 24px; }
+.home-opening h1 { font-size: var(--title); line-height: 1.1; }
+.home-opening .stage-view { flex: none; aspect-ratio: 16 / 9; min-height: 0; }
+.home-opening .mine-note { padding: 0 16px 12px; margin-top: 4px; max-width: 65ch; color: var(--field-text); }
+.story-teaser .page-head { grid-template-columns: minmax(240px, .8fr) minmax(0, 1.2fr); }
+.story-teaser .page-head > div:first-child { grid-column: 1 / -1; }
+.story-teaser .teaser-shot { margin: 0; max-width: none; }
+.story-teaser .teaser-shot img { max-height: 360px; object-fit: cover; }
+@media (max-width: 900px) {
+  .home-opening, .story-teaser .page-head { grid-template-columns: 1fr; }
+  .home-opening .opening-text { gap: 12px; }
+}

@@ -1,14 +1,14 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.19.2'
-import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.19.2'
-import { loadCatalog, isReadable } from '../core/catalog.js?v=1.19.2'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.19.2'
-import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.19.2'
-import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.19.2'
-import { onSpotted } from '../cv/spotted.js?v=1.19.2'
-import { cocoName } from '../ml/labels.js?v=1.19.2'
-import { detectorFailureSentence } from '../ml/failure.js?v=1.19.2'
+import '../core/site.js?v=1.19.5'
+import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.19.5'
+import { loadCatalog, isReadable } from '../core/catalog.js?v=1.19.5'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.19.5'
+import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.19.5'
+import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.19.5'
+import { onSpotted } from '../cv/spotted.js?v=1.19.5'
+import { cocoName } from '../ml/labels.js?v=1.19.5'
+import { detectorFailureSentence } from '../ml/failure.js?v=1.19.5'
 
 const canvas = document.querySelector('[data-eye]')
 const stateEl = document.querySelector('[data-eye-state]')
@@ -171,11 +171,7 @@ setInterval(() => {
   applyLens(order[(i + 1) % order.length], false)
 }, 4200)
 
-document.querySelector('[data-mine]')?.addEventListener('click', async () => {
-  stage.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' })
-  const src = await specimen.useWebcam()
-  if (src) pickLens('objects')
-})
+
 specimen.onError((text, kept) => { if (!kept) { stateEl.hidden = false; stateEl.textContent = text } })
 
 // Number keys 1–5 switch lenses, like the labels on the buttons say.

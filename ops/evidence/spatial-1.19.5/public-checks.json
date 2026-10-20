@@ -1,0 +1,104 @@
+[
+  {
+    "lang": "en",
+    "overflow": false,
+    "stamp": true,
+    "route": "/"
+  },
+  {
+    "lang": "th",
+    "overflow": false,
+    "stamp": true,
+    "route": "/"
+  },
+  {
+    "lang": "zh",
+    "overflow": false,
+    "stamp": true,
+    "route": "/"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "pathHeight": 45,
+    "stamp": true,
+    "route": "/train"
+  },
+  {
+    "lang": "th",
+    "overflow": false,
+    "pathHeight": 49,
+    "stamp": true,
+    "route": "/train"
+  },
+  {
+    "lang": "zh",
+    "overflow": false,
+    "pathHeight": 48.1953125,
+    "stamp": true,
+    "route": "/train"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "pathHeight": 45,
+    "stamp": true,
+    "route": "/learn"
+  },
+  {
+    "lang": "th",
+    "overflow": false,
+    "pathHeight": 49,
+    "stamp": true,
+    "route": "/learn"
+  },
+  {
+    "lang": "zh",
+    "overflow": false,
+    "pathHeight": 48.1953125,
+    "stamp": true,
+    "route": "/learn"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "pathHeight": 45,
+    "stamp": true,
+    "route": "/cameras"
+  },
+  {
+    "lang": "th",
+    "overflow": false,
+    "pathHeight": 49,
+    "stamp": true,
+    "route": "/cameras"
+  },
+  {
+    "lang": "zh",
+    "overflow": false,
+    "pathHeight": 48.1953125,
+    "stamp": true,
+    "route": "/cameras"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "pathHeight": 45,
+    "stamp": true,
+    "route": "/games"
+  },
+  {
+    "lang": "th",
+    "overflow": false,
+    "pathHeight": 49,
+    "stamp": true,
+    "route": "/games"
+  },
+  {
+    "lang": "zh",
+    "overflow": false,
+    "pathHeight": 48.1953125,
+    "stamp": true,
+    "route": "/games"
+  }
+]

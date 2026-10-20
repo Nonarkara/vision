@@ -6,8 +6,8 @@
 // buttons; the canvas only shows the photographs. There is also a way past the
 // whole thing, below the grid, for anyone who would rather not answer.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.19.2'
-import { features, train, pick } from '../drive/teach.js?v=1.19.2'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.19.5'
+import { features, train, pick } from '../drive/teach.js?v=1.19.5'
 
 const images = new Map()
 function photo(src) {
