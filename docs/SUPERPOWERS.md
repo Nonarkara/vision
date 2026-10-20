@@ -1,12 +1,82 @@
 # Superpowers · ความสามารถถัดไปของ Vision
 
-Ten upgrades worth making to [vision.nonarkara.org](https://vision.nonarkara.org) (1.13.3), ranked. Each one was read against a real licence, a real file size, and a room that already exists. The sources, with the star counts and the measurements, are [The ultimate sources](SOURCES.md). This page does not add a model. It says which ones deserve the next change, and which ones must stay off the public site.
+The execution strategy below was refreshed on **21 October 2026** against Vision 1.19.5 and current primary sources. It takes priority over the historical candidate ranking that follows.
+
+The original shortlist: ten upgrades worth making to [vision.nonarkara.org](https://vision.nonarkara.org) (1.13.3), ranked. Each one was read against a real licence, a real file size, and a room that already exists. The sources, with the star counts and the measurements, are [The ultimate sources](SOURCES.md). This page does not add a model. It says which ones deserve the next change, and which ones must stay off the public site.
 
 Checked 12 October 2026, the same pass as the source list.
 
 [← Handbook](README.md) · [Sources](SOURCES.md) · [Model cards](reference/models.md) · [Browser runtime](system/browser-runtime.md)
 
 ---
+
+## Execution strategy · 21 October 2026
+
+**Strengthen evidence, time and teaching before adding more rooms or replacing every model.** This is a researched implementation plan, not a report of capabilities already shipped. Effort and acceptance criteria below are proposed, not measured results.
+
+### What the field offers, and where it fits
+
+| Direction | What a visitor should understand | Fit for Vision |
+|---|---|---|
+| Detection → tracking | A box says where an object is now; a track follows it through time. | High: Cameras already has boxes and readable video. |
+| Segmentation | A box contains background; a mask marks the selected object's pixels. | High as one bounded interactive lesson. |
+| Learned representations / self-supervision | Similar pictures can be near each other before we give our own labels. | Teach already groups embeddings; explain that its current encoder was pretrained with ImageNet labels. Clustering without new labels is not the same as training the encoder without labels. |
+| Embodied / sequential learning | An action can change what happens next. | Drive is controllable; prerecorded camera footage is not. |
+| Foundation and multimodal models | One model can accept concepts or prompts and cover many tasks. | Research comparison first; device cost, model terms and grounded evaluation determine deployment. |
+| Efficient on-device inference | Model quality must survive the actual phone, browser and bandwidth budget. | Essential to every addition; preserve local processing. |
+
+### Start here: one reference pack and a repeatable baseline
+
+Create a small, versioned pack of **rights-cleared or synthetic** road frames and short sequences. An initial target of roughly 200 frames and 12 clips is a regression pack, not a representative Thai traffic benchmark. Include daylight, darkness, rain/glare, small motorcycles, crowding, obstruction, empty scenes, stale frames and broadcast/slate screens. Do not start unattended camera recording or retain visitors' imagery.
+
+Split development and evaluation by **camera and recording session**, not randomly adjacent frames. Keep an untouched evaluation partition. Record provenance and dataset/model versions with results.
+
+Measure detection precision/recall by class and size, false alerts per minute, tracking ID switches and count error, and confidence reliability where enough labels exist. Measure cold download/startup, warm median/p95 inference time, interaction stalls and memory during a bounded session on a mid-range Android, iPhone/Safari and desktop. Automated unit tests establish correctness; they do not establish visual model accuracy.
+
+**First deliverable:** a reproducible evaluation command, the reference-pack manifest and a baseline report for the current SSDLite/MobileNet implementation. Do not claim a model upgrade improves Thai CCTV until this exists. Separately watch whether first-time testers can choose a method, add an example and test a new view without coaching; collect that through invited testing rather than background analytics.
+
+### Prioritized work
+
+| Order | Change and implementation starting point | User-visible result | Acceptance criterion / dependency |
+|---|---|---|---|
+| 1 | Evaluation pack and source suitability. Extend `core/specimen.js` / `core/catalog.js` with session-local suitability checks after a source loads. | Clear states: usable picture, too dark/blurred, unchanged, or unable to assess; one action to try another source. | A readable stream is not assumed to show a useful road. Do not equate unchanged pixels with a broken camera or identify a broadcast slate from motion alone. Preserve owner cooldowns and the current source until a replacement succeeds. |
+| 2 | Make Teach's test phase explicit, using `train/video-lesson.js` and `train/video-learning.js`. | **Show examples → Learn → Try unseen pictures → Correct mistakes.** The same chosen footage remains visible across methods; a different camera/recording tests transfer. | Separate training examples from held-out evaluation. Keep “not enough evidence” available. Label the current nearest-neighbour vote as a score, not a calibrated chance of being right. Explain the frozen encoder versus the small learner. |
+| 3 | Add detection-to-track association for real video before changing the detector. Replace or clearly separate `cv/spotted.js`'s proximity counter. | Stable session-only vehicle labels, a short trail, direction and line crossings; count a crossing once instead of counting successive boxes. | Compare association with the current heuristic on fixed clips. Handle occlusion, dropped/irregular frames, source changes and low frame rates. Reset on source change; keep no persistent identity. Do not infer km/h without scene calibration or run temporal claims on isolated stills. |
+| 4 | Add MediaPipe Hand Landmarker to Gesture through a bounded worker, reusing the Focus worker pattern. | The visitor sees the hand points behind an action; compare landmark-based gestures with whole-picture classification. | Test no hand, held gesture, lighting/background changes and accidental triggers. Preserve stop/cooldown controls; no action from an unassessable frame. Self-host the runtime/model; verify the exact artifact's terms and download size. |
+| 5 | Add one interactive segmentation experiment to Learn, using MediaPipe Interactive Segmenter as the first candidate. | **Tap an object → see its outline → compare mask and box.** | Begin with an owned/cleared still, then optional personal imagery processed locally. Mask quality and phone latency pass the reference cases; never turn a mask into a flood-depth claim. Keep instructions, image and action together. |
+| 6 | Benchmark a small RT-DETR/RT-DETRv2 export beside SSDLite, rather than replacing it immediately. | An optional comparison showing misses, false positives and elapsed time on the same frame. | Independently verify code, weights and data provenance; exported graph/operator support; actual transferred bytes and peak memory. Promote only if evaluation improves the intended cases while meeting an explicitly agreed phone budget. Feature-detect and test runtime fallback; keep the current detector available. |
+| 7 | Add a small, bounded sequential-learning exercise in Drive. | Compare fixed driving rules with a learner whose braking/acceleration changes future states and rewards. | Current frame-feedback learning is a **contextual-bandit-style** lesson: it scores actions but does not make the recorded road react. Teach that distinction. Use seeded runs, a time/episode limit, cancellation, and evaluation on unseen seeds. Keep simulation-generated perception separate from real neural detections. |
+
+Orders 1–2 are prerequisites for judging progress. Tracking is the next broad visual improvement; Hand Landmarker is a smaller, contained capability upgrade. Sequential Drive learning comes after the existing simulator and the explanation have a clean comparison contract.
+
+### Architecture and release gates
+
+- Keep `detector`, `embedder`, `tracker` and lesson-specific logic separate. Introduce the smallest shared result envelope needed: frame/source token, capture/inference timestamps, normalized geometry, model/version and evidence state. Reject results from a source that has since changed.
+- Bound worker work and queues: at most one current inference job per instrument; drop obsolete frames instead of building a backlog. Record capture age separately from inference time. Pause hidden work and dispose resources on stop.
+- ONNX Runtime Web supports a wider model path, but GPU execution providers support only subsets of operators. Browser support tables and platform support evolve; feature detection alone is not proof that a particular model runs. Test the exact export on target browsers. Do not make WebGPU mandatory for the whole classroom.
+- New models load only after an intentional action, with real progress and cancellation. Keep personal images local. Do not add continuous identity recognition or infer a person's mood from appearance.
+- No new top-level room for each model. Reuse the existing lesson image and place its choices and result beside it. Preserve Thai/English/Chinese reading behaviour and honest translation fallbacks.
+- Each shipped increment needs its relevant correctness checks, model/lesson evaluation, real-device measurements, scoped responsive review and the existing `npm run check` release gate. A laboratory model comparison is not a production replacement.
+
+### Research track, not a default download
+
+DINOv3 is a current representation-learning reference, but its code and weights have their own DINOv3 License. SAM 3/3.1 demonstrates concept-prompted segmentation and tracking; the official SAM 3 implementation describes 848M parameters, CUDA prerequisites and its SAM License. Those facts justify studying them and comparing cleared examples, **not assuming either is a drop-in phone model**. Review the exact smaller/converted artifact before any experiment. Likewise, OCR and monocular depth remain useful later lessons, after the first sequence is trustworthy; predicted relative depth is not a tape measure.
+
+### Primary sources checked for this update
+
+- [MediaPipe Hand Landmarker, Web](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/web_js): synchronous inference can block the UI; Google recommends workers for camera processing.
+- [MediaPipe Interactive Segmenter, Web](https://developers.google.com/edge/mediapipe/solutions/vision/interactive_segmenter/web_js): browser-oriented interactive mask task.
+- [ByteTrack, paper](https://arxiv.org/abs/2110.06864): temporal association uses lower-score boxes to recover tracks; benchmark results do not predict our browser performance.
+- [RT-DETR, official implementation](https://github.com/lyuwenyu/RT-DETR): candidate detector family and export path, not a measured replacement here.
+- [ONNX Runtime Web](https://onnxruntime.ai/docs/tutorials/web/): execution-provider and operator constraints.
+- [On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599): raw confidence can differ from empirical correctness. Calibrating a score requires held-out evidence.
+- [DINOv3, official repository](https://github.com/facebookresearch/dinov3) and [SAM 3, official repository](https://github.com/facebookresearch/sam3): current foundation-model capabilities and model-specific terms.
+
+The agent-reach CLI and its update checker were unavailable (missing Python module); its documented Jina reader route worked for the MediaPipe source, with direct primary-source web reads used for the remaining checks. No model downloads, training jobs, camera captures or production changes were made for this research.
+
+---
+
+## Historical candidate evaluation · 12 October 2026
 
 ## How a rank was given
 
