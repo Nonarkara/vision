@@ -1,12 +1,12 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.18.0'
+import '../core/site.js?v=1.19.0'
 import { t, lang, n, count, onLang } from '../core/i18n.js'
 import { loadCatalog, isReadable } from '../core/catalog.js'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.18.0'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.19.0'
 import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js'
-import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.18.0'
-import { onSpotted } from '../cv/spotted.js?v=1.18.0'
+import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.19.0'
+import { onSpotted } from '../cv/spotted.js?v=1.19.0'
 import { cocoName } from '../ml/labels.js'
 import { detectorFailureSentence } from '../ml/failure.js'
 

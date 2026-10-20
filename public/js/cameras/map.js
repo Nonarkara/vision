@@ -6,8 +6,8 @@
 // a degree east is drawn about as long as it is on the ground. Good enough
 // for a country this size; wrong enough that nobody should measure on it.
 //
-// Colour: bright Naples squares are cameras a machine here can read; gray
-// ones it cannot. Peach Red is kept for the one camera you picked.
+// Colour: bright Ivory squares are cameras a machine here can read; gray
+// ones it cannot. Jasper Red is kept for the one camera you picked.
 
 import { fitCanvas } from '../cv/draw.js'
 
@@ -20,14 +20,14 @@ const DRAG_SLOP = 5       // CSS px of movement before a tap becomes a drag
 const LAYERS = [
   { k: 'off', size: 2, color: 'gray', alpha: 0.4, hollow: false },
   { k: 'view', size: 3.5, color: 'gray', alpha: 0.9, hollow: true },
-  { k: 'still', size: 3, color: 'naples', alpha: 0.85, hollow: false },
-  { k: 'video', size: 5.5, color: 'naples', alpha: 1, hollow: false },
+  { k: 'still', size: 3, color: 'ivory', alpha: 0.85, hollow: false },
+  { k: 'video', size: 5.5, color: 'ivory', alpha: 1, hollow: false },
 ]
 
 function tokens() {
   const css = getComputedStyle(document.documentElement)
   const v = (name, fallback) => css.getPropertyValue(name).trim() || fallback
-  return { ground: v('--black', '#101010'), faint: v('--black-3', '#303030'), naples: v('--naples', '#fbe6a0'), gray: v('--gray', '#b6bfc1'), signal: v('--signal', '#f15a30') }
+  return { ground: v('--black', '#101010'), faint: v('--black-3', '#303030'), ivory: v('--ivory', '#ebd3a2'), gray: v('--gray', '#b6bfc1'), jasper: v('--jasper', '#eb5324') }
 }
 
 function boundsOf(cams) {
@@ -100,7 +100,7 @@ export function createMap(canvas, { onPick = () => {}, onView = () => {} } = {})
 
   function drawSelected(ctx) {
     const x = sx(selected), y = sy(selected)
-    ctx.strokeStyle = ctx.fillStyle = colors.signal
+    ctx.strokeStyle = ctx.fillStyle = colors.jasper
     ctx.lineWidth = 2
     ctx.strokeRect(x - 9, y - 9, 18, 18)
     ctx.fillRect(x - 3, y - 3, 6, 6)

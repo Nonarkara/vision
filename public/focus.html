@@ -29,6 +29,7 @@
 </section>
 <section class="focus-room" data-focus-room>
 <div class="focus-grid">
+<div class="focus-col">
 <div class="bench">
 <div class="bench-caption">
 <span class="label">
@@ -43,6 +44,7 @@
 <div class="bench-state" data-view-state>
 <span class="th" lang="th">ภาพกล้องจะปรากฏที่นี่</span>
 <span class="en" lang="en">The camera picture will appear here</span>
+</div>
 </div>
 </div>
 <p class="session-state" data-status role="status">
@@ -78,6 +80,7 @@
 <option value="120">2 h</option>
 <option value="480">8 h</option>
 </select>
+<svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
 </label>
 <label class="setting">
 <span class="th" lang="th">นับการหันออกเมื่อเกิน</span>
@@ -88,6 +91,7 @@
 <option value="5">5 s</option>
 <option value="10">10 s</option>
 </select>
+<svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
 </label>
 <h2>
 <span class="th" lang="th">2 · อ่านและยินยอม</span>
@@ -98,12 +102,12 @@
 <span class="en" lang="en">Front camera only. No microphone, photos, video or identity records. Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span>
 </p>
 <label class="consent">
-<input type="checkbox" data-consent>
+<input type="checkbox" class="check" data-consent>
 <span class="th" lang="th">ฉันยินยอมให้วิเคราะห์ใบหน้าของฉันเอง และรู้ว่าหยุดได้ทุกเมื่อ</span>
 <span class="en" lang="en">I agree to analyse my own face, and know I can stop at any time.</span>
 </label>
 <label class="consent">
-<input type="checkbox" data-awake>
+<input type="checkbox" class="check" data-awake>
 <span class="th" lang="th">ขอให้หน้าจอเปิดระหว่างทดลอง (ถ้าอุปกรณ์รองรับ)</span>
 <span class="en" lang="en">Keep the screen awake during this session (if supported)</span>
 </label>
@@ -145,8 +149,8 @@
 <div class="session-timeline" data-timeline>
 </div>
 <p class="micro">
-<span class="th" lang="th">เขียวมะกอก = หันตรง · เหลือง = หันออก · เทา = ไม่เห็นใบหน้า</span>
-<span class="en" lang="en">Olive = facing forward · yellow = looking away · grey = no face seen</span>
+<span class="th" lang="th">ครามเข้ม = หันตรง · งาช้างอ่อน = หันออก · เทา = ไม่เห็นใบหน้า</span>
+<span class="en" lang="en">Indigo = facing forward · ivory = looking away · grey = no face seen</span>
 </p>
 <h3>
 <span class="th" lang="th">คุณรู้สึกอย่างไร (เลือกเอง)</span>

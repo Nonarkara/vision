@@ -5,7 +5,7 @@
 import { t, n, pct } from '../core/i18n.js'
 import * as ops from '../cv/ops.js'
 import { numbers as numbersLens } from '../cv/lenses.js'
-import { clear, containRect, fitCanvas, GRAY, NAPLES } from '../cv/draw.js'
+import { clear, containRect, fitCanvas, GRAY, IVORY } from '../cv/draw.js'
 import { runBench, blit, slider, choice, parts, writer, tag } from './bench.js'
 
 const WORK_WIDTH = 320 // analysis width: enough to see, cheap enough for twelve frames a second
@@ -119,7 +119,7 @@ function drawHistogram(canvas, hist, cut) {
   const bw = W / 256
   for (let i = 0; i < 256; i++) {
     const h = Math.min(H, (hist[i] / max) * H)
-    ctx.fillStyle = i >= cut ? NAPLES : GRAY
+    ctx.fillStyle = i >= cut ? IVORY : GRAY
     ctx.fillRect(i * bw, H - h, Math.ceil(bw), h)
   }
   const dpr = W / Math.max(1, canvas.clientWidth)

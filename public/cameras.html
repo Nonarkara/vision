@@ -11,14 +11,68 @@
 <!--#path-->
 <main id="main">
 
-  <section class="page-head" aria-labelledby="title">
-    <div>
+  <section class="opening opening-map" aria-labelledby="title">
+    <div class="opening-text">
+      <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 02 · กล้องทุกตัว</span><span class="en" lang="en">Room 02 · Every camera</span></span>
       <h1 id="title"><span class="th" lang="th">กล้อง<br>ทุกตัว</span><span class="en" lang="en">Every<br>camera</span></h1>
     </div>
-    <div>
+    </div>
+    <div class="atlas-stage">
+      <div class="bench atlas-map">
+        <div class="bench-caption">
+          <span class="label"><span class="th" lang="th">กล้องทุกตัว ตามพิกัด</span><span class="en" lang="en">Every camera, by position</span></span>
+          <span class="num" data-map-count></span>
+        </div>
+        <div class="map-view">
+          <canvas data-map role="img" aria-label="Map of camera positions across Thailand. The list beside it holds the same cameras."></canvas>
+          <div class="bench-state" data-map-state>…</div>
+        </div>
+        <div class="controls map-tools" role="group" aria-label="Map zoom">
+          <button class="btn" type="button" data-zoom-in aria-label="Zoom in">+</button>
+          <button class="btn" type="button" data-zoom-out aria-label="Zoom out">−</button>
+          <button class="btn" type="button" data-zoom-reset><span class="th" lang="th">ทั้งประเทศ</span><span class="en" lang="en">Whole country</span></button>
+          <span class="num map-zoom" data-map-zoom>×1</span>
+        </div>
+        <ul class="legend micro" aria-label="Legend">
+          <li><i class="sw sw-video" aria-hidden="true"></i><span class="th" lang="th">วิดีโอสด</span><span class="en" lang="en">Live video</span></li>
+          <li><i class="sw sw-still" aria-hidden="true"></i><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">Still</span></li>
+          <li><i class="sw sw-view" aria-hidden="true"></i><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">At source only</span></li>
+          <li><i class="sw sw-off" aria-hidden="true"></i><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">Offline</span></li>
+          <li><i class="sw sw-picked" aria-hidden="true"></i><span class="th" lang="th">กล้องที่เลือก</span><span class="en" lang="en">Your pick</span></li>
+        </ul>
+        <p class="micro map-hint"><span class="th" lang="th">แตะเพื่อเลือก · แตะสองครั้งเพื่อซูม · ลากเพื่อเลื่อนเมื่อซูมแล้ว</span><span class="en" lang="en">Tap to pick · double-tap to zoom · drag to move once zoomed</span></p>
+        <div class="readout picked" data-picked aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="opening-note">
       <p class="lede th" lang="th">กล้องสาธารณะหลายพันตัว จากเจ็ดแหล่ง บนแผนที่เดียว เลือกตัวไหนก็ได้ให้เครื่องลองมอง หรือสุ่มหลายสิบตัวแล้วนับว่าเครื่องเห็นอะไรบ้าง</p>
       <p class="lede en" lang="en">Thousands of public cameras from seven sources, on one map. Point the machine at any one, or sample a few dozen and count what it sees.</p>
+
+      <p class="prose th" lang="th">ไม่มีแผนที่ฐานเลย แต่ละจุดคือกล้องหนึ่งตัว วางตามละติจูดและลองจิจูด รูปร่างประเทศไทยปรากฏขึ้นเองเพราะกล้องอยู่ตรงนั้น จุดสีสว่างคือกล้องที่เครื่องอ่านได้ จุดสีเทาคือกล้องที่อ่านไม่ได้</p>
+      <p class="prose en" lang="en">There is no base map. Each square is one camera, placed by latitude and longitude; Thailand's shape appears because that is where the cameras are. Bright squares are cameras a machine can read, gray ones it cannot.</p>
+    </div>
+  </section>
+
+  <section class="atlas" aria-labelledby="atlas-title">
+    <div class="atlas-head">
+      <span class="chapter-no">A</span>
+      <h2 id="atlas-title"><span class="th" lang="th">แผนที่</span><span class="en" lang="en">The map</span></h2>
+    </div>
+    <div class="atlas-side" data-atlas-list>
+        <form class="filters" data-filters role="search" aria-label="Filter cameras">
+          <label><span class="label"><span class="th" lang="th">แบบ</span><span class="en" lang="en">Kind</span></span><select class="field-input" data-filter-kind></select><svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></label>
+          <label><span class="label"><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span></span><select class="field-input" data-filter-src></select><svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></label>
+          <label class="filters-q"><span class="label"><span class="th" lang="th">ค้นหาชื่อ</span><span class="en" lang="en">Search names</span></span><input class="field-input" type="search" data-filter-q autocomplete="off" spellcheck="false" placeholder="สุขุมวิท · Sukhumvit"></label>
+          <button class="btn" type="reset"><span class="th" lang="th">ล้าง</span><span class="en" lang="en">Clear</span></button>
+        </form>
+        <p class="micro list-count" data-list-count aria-live="polite"></p>
+        <ol class="cam-list" data-list></ol>
+        <div class="controls pager">
+          <button class="btn" type="button" data-page-prev>← <span class="th" lang="th">ก่อนหน้า</span><span class="en" lang="en">Previous</span></button>
+          <span class="num pager-at" data-page-at></span>
+          <button class="btn" type="button" data-page-next><span class="th" lang="th">ถัดไป</span><span class="en" lang="en">Next</span> →</button>
+        </div>
     </div>
   </section>
 
@@ -31,9 +85,10 @@
     <div class="figure"><span class="n" data-fig="off">—</span><span class="micro"><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">offline</span></span></div>
   </section>
 
+
   <section class="chapter" aria-labelledby="kinds-title">
     <header>
-      <span class="chapter-no">A</span>
+      <span class="chapter-no">B</span>
       <h2 id="kinds-title"><span class="th" lang="th">กล้องสี่แบบ</span><span class="en" lang="en">Four kinds</span></h2>
     </header>
     <div class="chapter-body">
@@ -68,58 +123,6 @@
         </table>
       </div>
       <p class="micro" data-catalog-at></p>
-    </div>
-  </section>
-
-  <section class="atlas" aria-labelledby="atlas-title">
-    <div class="atlas-head">
-      <span class="chapter-no">B</span>
-      <h2 id="atlas-title"><span class="th" lang="th">แผนที่</span><span class="en" lang="en">The map</span></h2>
-      <p class="prose th" lang="th">ไม่มีแผนที่ฐานเลย แต่ละจุดคือกล้องหนึ่งตัว วางตามละติจูดและลองจิจูด รูปร่างประเทศไทยปรากฏขึ้นเองเพราะกล้องอยู่ตรงนั้น จุดสีเหลืองสว่างคือกล้องที่เครื่องอ่านได้ จุดสีเทาคือกล้องที่อ่านไม่ได้</p>
-      <p class="prose en" lang="en">There is no base map. Each square is one camera, placed by latitude and longitude; Thailand's shape appears because that is where the cameras are. Bright squares are cameras a machine can read, gray ones it cannot.</p>
-    </div>
-    <div class="atlas-grid">
-      <div class="bench atlas-map">
-        <div class="bench-caption">
-          <span class="label"><span class="th" lang="th">กล้องทุกตัว ตามพิกัด</span><span class="en" lang="en">Every camera, by position</span></span>
-          <span class="num" data-map-count></span>
-        </div>
-        <div class="map-view">
-          <canvas data-map role="img" aria-label="Map of camera positions across Thailand. The list beside it holds the same cameras."></canvas>
-          <div class="bench-state" data-map-state>…</div>
-        </div>
-        <div class="controls map-tools" role="group" aria-label="Map zoom">
-          <button class="btn" type="button" data-zoom-in aria-label="Zoom in">+</button>
-          <button class="btn" type="button" data-zoom-out aria-label="Zoom out">−</button>
-          <button class="btn" type="button" data-zoom-reset><span class="th" lang="th">ทั้งประเทศ</span><span class="en" lang="en">Whole country</span></button>
-          <span class="num map-zoom" data-map-zoom>×1</span>
-        </div>
-        <ul class="legend micro" aria-label="Legend">
-          <li><i class="sw sw-video" aria-hidden="true"></i><span class="th" lang="th">วิดีโอสด</span><span class="en" lang="en">Live video</span></li>
-          <li><i class="sw sw-still" aria-hidden="true"></i><span class="th" lang="th">ภาพนิ่ง</span><span class="en" lang="en">Still</span></li>
-          <li><i class="sw sw-view" aria-hidden="true"></i><span class="th" lang="th">ดูที่ต้นทาง</span><span class="en" lang="en">At source only</span></li>
-          <li><i class="sw sw-off" aria-hidden="true"></i><span class="th" lang="th">ออฟไลน์</span><span class="en" lang="en">Offline</span></li>
-          <li><i class="sw sw-picked" aria-hidden="true"></i><span class="th" lang="th">กล้องที่เลือก</span><span class="en" lang="en">Your pick</span></li>
-        </ul>
-        <p class="micro map-hint"><span class="th" lang="th">แตะเพื่อเลือก · แตะสองครั้งเพื่อซูม · ลากเพื่อเลื่อนเมื่อซูมแล้ว</span><span class="en" lang="en">Tap to pick · double-tap to zoom · drag to move once zoomed</span></p>
-        <div class="readout picked" data-picked aria-live="polite"></div>
-      </div>
-
-      <div class="atlas-side" data-atlas-list>
-        <form class="filters" data-filters role="search" aria-label="Filter cameras">
-          <label><span class="label"><span class="th" lang="th">แบบ</span><span class="en" lang="en">Kind</span></span><select class="field-input" data-filter-kind></select></label>
-          <label><span class="label"><span class="th" lang="th">แหล่ง</span><span class="en" lang="en">Source</span></span><select class="field-input" data-filter-src></select></label>
-          <label class="filters-q"><span class="label"><span class="th" lang="th">ค้นหาชื่อ</span><span class="en" lang="en">Search names</span></span><input class="field-input" type="search" data-filter-q autocomplete="off" spellcheck="false" placeholder="สุขุมวิท · Sukhumvit"></label>
-          <button class="btn" type="reset"><span class="th" lang="th">ล้าง</span><span class="en" lang="en">Clear</span></button>
-        </form>
-        <p class="micro list-count" data-list-count aria-live="polite"></p>
-        <ol class="cam-list" data-list></ol>
-        <div class="controls pager">
-          <button class="btn" type="button" data-page-prev>← <span class="th" lang="th">ก่อนหน้า</span><span class="en" lang="en">Previous</span></button>
-          <span class="num pager-at" data-page-at></span>
-          <button class="btn" type="button" data-page-next><span class="th" lang="th">ถัดไป</span><span class="en" lang="en">Next</span> →</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -163,7 +166,7 @@
     <div class="chapter-body census" data-census>
       <div class="controls census-controls">
         <label class="census-n"><span class="label"><span class="th" lang="th">จำนวนกล้อง</span><span class="en" lang="en">Cameras</span></span>
-          <select class="field-input" data-census-n><option value="12">12</option><option value="24" selected>24</option><option value="48">48</option></select>
+          <select class="field-input" data-census-n><option value="12">12</option><option value="24" selected>24</option><option value="48">48</option></select><svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
         </label>
         <button class="btn primary" type="button" data-census-run><span class="th" lang="th">เริ่มนับ</span><span class="en" lang="en">Run the census</span></button>
         <button class="btn" type="button" data-census-stop disabled><span class="th" lang="th">หยุด</span><span class="en" lang="en">Stop</span></button>

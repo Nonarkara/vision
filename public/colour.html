@@ -16,7 +16,7 @@
       <h1><span class="th" lang="th">สีทำอะไร<br>กับเรา</span><span class="en" lang="en">What colour<br>does to us</span></h1>
     </div>
     <p class="lede th" lang="th">เว็บนี้มีสีสี่เฉดตลอดมา เหลืองนีเปิล มะกอกเขียว เทา และแดงพีช และแต่ละเฉดมีงานของมัน: เหลืองเป็นกระดาษ มะกอกเป็นหมึก เทาคือสิ่งที่เครื่องยังไม่มั่นใจ และแดงพีชมีไว้บอกว่า “นี่คือสิ่งที่เครื่องเห็น” ทั้งหมดนั้นเป็นการตัดสินของคน ไม่ใช่ของตัวเลข</p>
-    <p class="lede en" lang="en">This site has had four colours all along — Naples yellow, olive green, grey, and peach red — and each one has a job: the yellow is the paper, the olive is the ink, the grey is what the machine is not yet sure of, and the peach red only ever marks what the machine sees. All of that is a human decision. None of it is in the numbers.</p>
+    <p class="lede en" lang="en">This site has had four colours all along — Ivory Buff, Deep Indigo, Neutral Gray, and Jasper Red — and each one has a job: the ivory is the paper, the indigo is the ink, the grey is what the machine is not yet sure of, and the jasper red only ever marks what the machine sees. All of that is a human decision. None of it is in the numbers.</p>
   </section>
 
   <section class="chapter" id="study" aria-labelledby="study-h">
@@ -35,10 +35,10 @@
           <h3 class="plate-ink"><span class="th" lang="th">คำพูดของคน</span><span class="en" lang="en">a sentence a person wrote</span></h3>
           <p class="plate-body"><span class="th" lang="th">เครื่องนับได้ว่ามีรถอยู่ตรงนี้ แต่ไม่รู้ว่ารถคันนี้กำลังจะเลี้ยวหรือกำลังจะจอ</span><span class="en" lang="en">The machine can count that a car is here. It does not know whether that car is turning or stopping.</span></p>
           <div class="plate-signal">
-            <p><span class="th" lang="th">สิ่งที่เครื่องเห็น · ความมั่นใจ 0.41</span><span class="en" lang="en">what the machine sees · confidence 0.41</span></p>
             <span class="plate-bar" aria-hidden="true"></span>
+            <p id="plate-signal-line"></p>
           </div>
-          <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's bar a third.</span></p>
+          <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's mark a third.</span></p>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
         <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
         <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
         <label class="consent">
-          <input type="checkbox" data-consent>
+          <input type="checkbox" class="check" data-consent>
           <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
           <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
         </label>
@@ -81,7 +81,7 @@
         <p class="th" lang="th">ห้องนี้จึงเป็นการเก็บความรู้จากคนในรูปแบบที่เรียบง่ายที่สุดเท่าที่จะเป็นไปได้ ไม่มีแบบสอบถาม ไม่มีสมัครสมาชิก ไม่มีการระบุตัวตน แค่คำถามเดียวต่อหนึ่งจาน แล้วนับ</p>
         <p class="en" lang="en">So this room learns from people in the simplest way that can honestly be done: no survey, no membership, no identity. One question per plate, and a count.</p>
         <p class="th" lang="th">จานที่เครื่องปฏิเสธมีอยู่หกจานจากยี่สิบสี่จาน และทั้งหกคือจานที่มีแดงพีชเป็นพื้นหลัง ไม่มีเฉดไหนเลยที่จะได้ค่าความต่างถึง 4.5 ต่อ 1 บนพื้นนั้นได้ ไม่ว่าจะปรับโทนไปกี่ขั้น คนอ่านแดงพีชแล้วรู้สึกว่าเตือนภัยทันที ส่วนเครื่องบอกแค่ว่าอ่านไม่ออก ทั้งสองอย่างถูกทั้งคู่ และไม่มีอันไหนแก้ตัวอีกอันได้</p>
-        <p class="en" lang="en">Six of the twenty-four plates are ones the machine refuses, and all six are plates where peach red is the paper. No hue reaches 4.5 to 1 against it at any tone. A person sees peach red and feels an alarm at once. The machine says only that it cannot read it. Both are right, and neither one can correct the other.</p>
+        <p class="en" lang="en">Six of the twenty-four plates are ones the machine refuses, and all six are plates where jasper red is the paper. No hue reaches 4.5 to 1 against it at any tone. A person sees jasper red and feels an alarm at once. The machine says only that it cannot read it. Both are right, and neither one can correct the other.</p>
         <p class="th" lang="th"><a href="/system#not-built">สิ่งที่เว็บนี้ตั้งใจไม่เก็บ</a> — ไม่มีคุกกี้ ไม่มีบัญชี ไม่มีการติดตาม ไม่มีสคริปต์บุคคลที่สาม คำตอบหนึ่งคำที่คุณเลือกส่งเข้ามาที่เซิร์ฟเวอร์ของเว็บนี้เท่านั้น และเซิร์ฟเวอร์เก็บได้แค่ตัวเลขนับ ดูรายละเอียดว่าทำไมถึงเป็นไปได้ที่ <a href="/system">หน้าระบบ</a></p>
         <p class="en" lang="en"><a href="/system#not-built">What this site does not keep</a> — no cookies, no accounts, no tracking, no third-party scripts. The single word you choose goes to this site's own server and nowhere else, and the server has nowhere to put anything else. The reasoning is on the <a href="/system">system page</a>.</p>
       </div>

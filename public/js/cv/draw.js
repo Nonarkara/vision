@@ -1,13 +1,13 @@
-// Drawing what the machine sees. One rule: Peach Red marks a machine
+// Drawing what the machine sees. One rule: Jasper Red marks a machine
 // finding, and every finding carries its words and its number — colour is
 // never the only carrier.
 
 import { cocoName } from '../ml/labels.js'
 import { lang } from '../core/i18n.js'
 
-export const SIGNAL = '#f15a30'
+export const JASPER = '#eb5324'
 export const GRAY = '#b6bfc1'
-export const NAPLES = '#fbe6a0'
+export const IVORY = '#ebd3a2'
 export const BLACK = '#101010'
 
 /** Size a canvas to its CSS box × device pixel ratio; returns the context. */
@@ -51,7 +51,7 @@ export function paintImageData(ctx, img, { smooth = false } = {}) {
   return r
 }
 
-function label(ctx, text, x, y, { fill = SIGNAL, ink = BLACK } = {}) {
+function label(ctx, text, x, y, { fill = JASPER, ink = BLACK } = {}) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   const size = Math.round(12 * dpr)
   ctx.font = `600 ${size}px "IBM Plex Mono", "IBM Plex Sans Thai", monospace`
@@ -88,8 +88,8 @@ function earlier(ctx, key, boxes) {
 function glowBox(ctx, x, y, w, h, alpha, blur) {
   ctx.save()
   ctx.globalAlpha = alpha
-  ctx.strokeStyle = SIGNAL
-  ctx.shadowColor = SIGNAL
+  ctx.strokeStyle = JASPER
+  ctx.shadowColor = JASPER
   ctx.shadowBlur = blur
   ctx.strokeRect(x, y, w, h)
   ctx.restore()

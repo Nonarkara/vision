@@ -57,7 +57,7 @@ An early spark came from conversations with **Dr Supakorn Siddhichai**, who trai
 
 ## The design system
 
-One page owns it: [`public/css/vision.css`](public/css/vision.css). Colour is Sanzo Wada's Plate 303 in four hues, and **no fifth hue is admitted**. Each hue also carries a `deep` and a `pale` step built on one shared ladder — 76% hue + 24% black, 78% hue + 22% white — so a pale Olive and a pale Naples Yellow are visibly the same move rather than two accidental colours.
+One page owns it: [`public/css/vision.css`](public/css/vision.css). Colour is four hues from Sanzo Wada's archive — Ivory Buff, Deep Indigo, Neutral Gray, Jasper Red — and **no fifth hue is admitted**. Each hue also carries a `deep` and a `pale` step built on one shared ladder — 24% hue + 76% black, 22% hue + 78% white — so a pale Indigo and a pale Ivory Buff are visibly the same move rather than two accidental colours.
 
 Every pairing the CSS is allowed to set is measured, and every forbidden pairing is proved illegible rather than assumed:
 
@@ -65,9 +65,9 @@ Every pairing the CSS is allowed to set is measured, and every forbidden pairing
 npm run palette      # print the ladder and 21 measured contrast ratios
 ```
 
-The ladder buys one real freedom: base Peach Red on Naples is 2.7:1 and was always banned as text on paper, while `signal-deep` clears 13.0:1 — so emphasis set in signal on the paper ground is legal now, same hue, same job, one step down. `npm run check` fails if that ever stops being true.
+The ladder buys one real freedom: base Jasper Red on Ivory Buff is 2.48:1 and was always banned as text on paper, while `jasper-deep` clears 11.30:1 — so emphasis set in signal on the paper ground is legal now, same hue, same job, one step down. `npm run check` fails if that ever stops being true.
 
-Machine light is the other freedom, and it is still the same hue. Peach Red may glow — a soft shadow of `#f15a30`, never a fifth colour and never a gradient fill — only on what the machine sees: a detection, a motion mark, the lens that is reporting one. A trail fades by opacity. `prefers-reduced-motion` keeps the mark and drops the pulse. `npm run palette` does not gain a pairing from that glow.
+Machine light is the other freedom, and it is still the same hue. Jasper Red may glow — a soft shadow of `#eb5324`, never a fifth colour and never a gradient fill — only on what the machine sees: a detection, a motion mark, the lens that is reporting one. A trail fades by opacity. `prefers-reduced-motion` keeps the mark and drops the pulse. `npm run palette` does not gain a pairing from that glow.
 
 Type is eight steps rather than three, and the playfulness comes from mixing two voices cut from one superfamily — IBM Plex Sans and IBM Plex Sans Thai for everything a person wrote, IBM Plex Mono for every number, label and confidence the machine reported — in named pairings (`.stem`, `.measure`, `.mix`) rather than from arbitrary sizes. A proportional letter and a fixed-pitch letter are one alphabet read two ways, which is the argument of the site made in the typeface rather than in a caption under it. Because the Thai face is a member of the same family, a bilingual heading is one design instead of a condensed Latin poster stacked above a wide Thai sans.
 
@@ -225,7 +225,7 @@ Camera owners: open an issue at [github.com/Nonarkara/vision/issues](https://git
 
 ## Credits
 
-Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex Sans, IBM Plex Sans Thai and IBM Plex Mono (OFL). Simplified Chinese on the new Teach and Drive-gate lines uses a subset of WenQuanYi Micro Hei (Apache-2.0). Colour: Sanzo Wada, Plate 303, via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
+Cameras belong to the agencies that run them (GISTDA / BMA / DOH / iTIC, Nakhon Si Thammarat, Pak Kret, Rangsit, DWR, cctv.maholan.net), aggregated by FloodDash. TensorFlow.js and model weights (Apache-2.0), hls.js (Apache-2.0), IBM Plex Sans, IBM Plex Sans Thai and IBM Plex Mono (OFL). Simplified Chinese on the new Teach and Drive-gate lines uses a subset of WenQuanYi Micro Hei (Apache-2.0). Colour: four hues from Sanzo Wada's archive — Ivory Buff, Deep Indigo, Neutral Gray, Jasper Red — via [Palette](https://colors.nonarkara.org). Datasets: COCO (Lin et al., 2014), ImageNet (Deng et al., 2009). The Drive room's street, and the CAPTCHA that opens it, cite reCAPTCHA (von Ahn et al., 2008; [Google's own description](https://www.google.com/recaptcha/intro/)), Street View house-number recognition (Goodfellow et al., 2014) and the Intelligent Driver Model (Treiber, Hennecke & Helbing, 2000).
 
 © 2026 Dr Non Arkaraprasertkul. All rights reserved.
 

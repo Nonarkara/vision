@@ -116,7 +116,7 @@ export function writer(el) {
   }
 }
 
-/** A small caption on a canvas: white on black, never Peach Red — it names a view, not a finding. */
+/** A small caption on a canvas: white on black, never Jasper Red — it names a view, not a finding. */
 export function tag(ctx, text, x, y) {
   const dpr = ctx.canvas.width / Math.max(1, ctx.canvas.clientWidth)
   const size = Math.round(12 * dpr), pad = Math.round(4 * dpr)

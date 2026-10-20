@@ -1,11 +1,11 @@
 // Camera feedback: an edge outline that follows a face or a hand, a meter,
-// and one "I saw you" flash. Peach Red only. The picture is never stored.
+// and one "I saw you" flash. Jasper Red only. The picture is never stored.
 
 import { toGray, sobel } from './ops.js'
 
 export const FACE_OVAL = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109]
 
-const SIGNAL = '#f15a30'
+const JASPER = '#eb5324'
 const trails = new WeakMap()
 
 export function motionReduced() {
@@ -31,7 +31,7 @@ function scale(ctx) {
 }
 
 /**
- * Peach Red edges inside a normalised box (0–1 of `img`), drawn into `rect`
+ * Jasper Red edges inside a normalised box (0–1 of `img`), drawn into `rect`
  * (where that whole frame sits on the canvas). Returns 0–1 outline strength.
  */
 export function outlineEdges(ctx, img, box, rect) {
@@ -60,8 +60,8 @@ export function outlineEdges(ctx, img, box, rect) {
   const draw = (points, alpha, blur) => {
     ctx.save()
     ctx.globalAlpha = alpha
-    ctx.fillStyle = SIGNAL
-    ctx.shadowColor = SIGNAL
+    ctx.fillStyle = JASPER
+    ctx.shadowColor = JASPER
     ctx.shadowBlur = blur
     const s = Math.max(1.5, 1.6 * dpr)
     for (let i = 0; i < points.length; i += 2) {
@@ -90,10 +90,10 @@ export function drawFaceOval(ctx, landmarks, rect) {
     else ctx.lineTo(x, y)
   })
   ctx.closePath()
-  ctx.strokeStyle = SIGNAL
+  ctx.strokeStyle = JASPER
   ctx.lineWidth = Math.max(2, 2.5 * dpr)
   ctx.lineJoin = 'round'
-  ctx.shadowColor = SIGNAL
+  ctx.shadowColor = JASPER
   ctx.shadowBlur = motionReduced() ? 0 : 14 * dpr
   ctx.stroke()
   ctx.restore()

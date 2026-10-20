@@ -1,6 +1,6 @@
 /* /handbook — long-form reading: the handbook rendered from docs/.
- * Naples is the reading ground, olive the ink, gray the structure, and the
- * olive field carries anything the machine (or the terminal) printed.
+ * Ivory Buff is the reading ground, indigo the ink, gray the structure, and the
+ * indigo field carries anything the machine (or the terminal) printed.
  * No borders, no cards: grouping comes from fields, scale and space. */
 
 .handbook .page-head-side .lede { max-width: 46ch; }
@@ -13,14 +13,18 @@
 }
 .handbook .doc > :first-child { margin-top: 0; }
 
-/* Prose is a column; diagrams, tables and code may use the full width. */
+/* Prose is a column; diagrams, tables and code may use the full width.
+   The cap is in `em`, at the size the reader actually gets, because `ch` is
+   the advance of a zero and not of an average character: 65ch of this face is
+   88 characters, and the line was running to 84 of them. 36em is the house
+   measure in the unit the rulebook measures in. */
 .handbook .doc > h2,
 .handbook .doc > h3,
 .handbook .doc > p,
 .handbook .doc > ul,
 .handbook .doc > ol,
 .handbook .doc > blockquote,
-.handbook .doc > details { max-width: 65ch; }
+.handbook .doc > details { max-width: 36em; }
 
 .handbook .doc h2 {
   font-family: var(--sans);
@@ -40,17 +44,17 @@
 .handbook .doc ul, .handbook .doc ol { margin: 0 0 1.3em; padding-left: 1.3em; }
 .handbook .doc li { margin-bottom: 0.5em; }
 .handbook .doc ol li::marker { font-family: var(--mono); font-size: var(--micro); }
-.handbook .doc ul li::marker { color: var(--signal); font-size: 0.9em; }
+.handbook .doc ul li::marker { color: var(--text); font-size: 0.9em; }
 
 .handbook .doc blockquote {
   background: var(--black);
-  color: var(--naples);
+  color: var(--ivory);
   padding: clamp(16px, 2vw, 26px);
   margin: clamp(20px, 2.5vw, 32px) 0;
   font-size: var(--body);
 }
-.handbook .doc blockquote a { color: var(--naples); }
-.handbook .doc blockquote code { background: var(--black-2); color: var(--naples); }
+.handbook .doc blockquote a { color: var(--ivory); }
+.handbook .doc blockquote code { background: var(--black-2); color: var(--ivory); }
 
 .handbook .doc hr {
   border: 0;
@@ -66,7 +70,7 @@
 
 .handbook .doc pre.code {
   background: var(--black);
-  color: var(--naples);
+  color: var(--ivory);
   padding: clamp(14px, 1.6vw, 20px) clamp(16px, 2vw, 24px);
   margin: 20px 0;
   overflow-x: auto;
@@ -87,12 +91,16 @@
   font-size: 0.875em;
   background: color-mix(in srgb, var(--gray) 45%, transparent);
   padding: 1px 5px;
+  /* A command is one token. It used to break in the middle — "node
+     examples/02-" / "threshold.mjs" — which is not a word the reader can
+     copy, and reads as a mistake rather than as a command. */
+  white-space: nowrap;
 }
 
 .handbook .doc .table-wrap { margin: 20px 0; overflow-x: auto; }
 .handbook .doc .table { min-width: 34rem; }
 .handbook .doc .table th, .handbook .doc .table td { font-size: var(--micro); line-height: 1.45; }
-/* On the dark ground the olive header would merge with it: ink instead. */
+/* On the dark ground the indigo header would merge with it: ink instead. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .handbook .doc .table th { background: var(--black); color: var(--white); }
 }
@@ -104,18 +112,37 @@
   margin: 10px 0;
 }
 .handbook .doc details summary { cursor: pointer; font-weight: 600; min-height: 24px; }
+/* The browser's own disclosure triangle is chrome. The house draws its own:
+   a plus when the thing is closed, a dash when it is open. */
+.handbook .doc-toc > summary, .handbook .doc details > summary {
+  list-style: none;
+  -webkit-appearance: none;
+}
+.handbook .doc-toc > summary::-webkit-details-marker,
+.handbook .doc details > summary::-webkit-details-marker { display: none; }
+.handbook .doc-toc > summary::after, .handbook .doc details > summary::after {
+  content: "+"; font-family: var(--mono); color: var(--text); order: 2;
+}
+.handbook .doc-toc[open] > summary::after, .handbook .doc details[open] > summary::after { content: "–"; }
 .handbook .doc details[open] summary { margin-bottom: 10px; }
 .handbook .doc details p:last-child { margin-bottom: 0; }
 
-/* Contents, in the page head. */
+/* Contents, in the page head.
+   It used to be a full-width pale band holding a four-word label — a field
+   stretched to four times what its content needed. It is the house's own
+   disclosure now: the label in a field of its own width, and the browser's
+   default triangle replaced by the same "+" the room rail uses. */
 .handbook .doc-toc {
-  background: color-mix(in srgb, var(--gray) 40%, transparent);
-  padding: 12px 16px;
+  background: transparent;
+  padding: 0;
   margin: 18px 0 0;
   font-size: var(--micro);
   max-width: 46ch;
 }
-.handbook .doc-toc summary { cursor: pointer; font-weight: 600; min-height: 24px; }
+.handbook .doc-toc > summary {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  padding: 10px 14px; background: color-mix(in srgb, var(--gray) 40%, transparent);
+}
 .handbook .doc-toc ol {
   margin: 10px 0 0;
   padding-left: 1.5em;
@@ -146,7 +173,15 @@
 
 @media (max-width: 700px) {
   .handbook .doc .table { min-width: 26rem; }
+  /* The glossary's fourth column is a chapter number, not a definition, so it
+     fits where the three columns beside it do not. Without this the whole
+     column was scrolled out of sight with no affordance saying so. */
+  .handbook .doc .table:has(thead th:nth-child(4)) { min-width: 0; }
   .handbook .doc-nav { justify-content: center; text-align: center; }
+  /* A wide drawing scrolls inside itself rather than shrinking until its
+     labels are five pixels tall. */
+  .handbook .doc figure:has(> img[src$=".svg"]) { overflow-x: auto; scrollbar-width: thin; }
+  .handbook .doc figure img[src$=".svg"] { min-width: 620px; }
 }
 
 /* The resource directory is prose, including its short reading tables. */

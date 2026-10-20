@@ -13,9 +13,9 @@
 .timeline p:last-child { margin-bottom: 0; }
 @media (max-width: 520px) { .timeline > li { grid-template-columns: 1fr; } }
 
-/* "Used here": a quiet tag, never Peach Red — that colour is only for what the machine sees. */
+/* "Used here": a quiet tag, never Jasper Red — that colour is only for what the machine sees. */
 .used { display: inline-block; margin-left: 8px; padding: 2px 8px; background: var(--field); color: var(--field-text); white-space: nowrap; }
-.field-quiet .used { background: var(--olive); color: var(--naples); }
+.field-quiet .used { background: var(--indigo); color: var(--ivory); }
 
 .questions { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: start; }
 .questions h3 { margin-top: 0; }
@@ -33,8 +33,8 @@
 .tagid-path { background: var(--black-2); padding: 16px; min-width: 0; }
 .tagid-path strong { display: block; font-size: var(--body); line-height: 1.3; }
 .tagid-path p { margin: 8px 0 0; color: var(--gray); }
-.feature-sketch { width: 100%; height: 80px; display: block; margin: 12px 0; stroke: var(--naples); stroke-width: 2; fill: none; }
-.feature-sketch circle { fill: var(--naples); }
+.feature-sketch { width: 100%; height: 80px; display: block; margin: 12px 0; stroke: var(--ivory); stroke-width: 2; fill: none; }
+.feature-sketch circle { fill: var(--ivory); }
 .sketch-faint { opacity: 0.4; }
 .tagid-caption { margin: 16px 0 0; max-width: 65ch; line-height: 1.55; }
 .tagid-pipeline .tagid-caption { color: var(--gray); }
@@ -46,19 +46,19 @@
 .tagid-modules summary .num { margin: 0 12px; font-size: var(--micro); }
 .tagid-modules details p { margin: 0; padding: 0 16px 16px; max-width: 65ch; }
 .face-lineage ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; gap: 2px; }
-.face-lineage li { display: flex; flex-direction: column; gap: 12px; padding: 16px 12px; border-top: 3px solid var(--olive); background: var(--naples); color: var(--olive); }
+.face-lineage li { display: flex; flex-direction: column; gap: 12px; padding: 16px 12px; border-top: 3px solid var(--indigo); background: var(--ivory); color: var(--indigo); }
 .face-lineage li strong { font-size: var(--micro); }
-.face-lineage li:last-child { background: var(--olive); color: var(--naples); }
+.face-lineage li:last-child { background: var(--indigo); color: var(--ivory); }
 .tagid-videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
 .tagid-video { display: flex; flex-direction: column; gap: 8px; padding: 16px; background: var(--black); color: var(--white); text-decoration: none; }
 .tagid-video strong { font-size: var(--body); line-height: 1.3; }
-.tagid-video:hover { background: var(--olive); }
-.video-graphic { display: block; width: 100%; color: var(--naples); }
-.video-graphic svg { display: block; width: 100%; max-height: 160px; fill: var(--naples); }
+.tagid-video:hover { background: var(--indigo); }
+.video-graphic { display: block; width: 100%; color: var(--ivory); }
+.video-graphic svg { display: block; width: 100%; max-height: 160px; fill: var(--ivory); }
 .video-route { fill: none; stroke: var(--gray); stroke-width: 2; }
-.video-play { fill: var(--naples); }
+.video-play { fill: var(--ivory); }
 .video-triangle { fill: var(--black); }
-@media (max-width: 1100px) { .face-lineage ol { grid-template-columns: 1fr; } .face-lineage li { border-top: 0; border-left: 3px solid var(--olive); } }
+@media (max-width: 1100px) { .face-lineage ol { grid-template-columns: 1fr; } .face-lineage li { border-top: 0; border-left: 3px solid var(--indigo); } }
 @media (max-width: 600px) {
   .tagid-branches, .tagid-videos { grid-template-columns: 1fr; }
   .tagid-pipeline { padding: 16px; }
@@ -138,7 +138,7 @@
 .axis-mark:hover { background: transparent; }
 .axis-mark .num { font-family: var(--mono); font-size: var(--body); letter-spacing: 0.03em; justify-self: start; padding: 0 4px; }
 .axis-mark[aria-pressed="true"] .num { background: var(--text); color: var(--ground); }
-.axis-mark:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.axis-mark:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .axis-mark [lang="th"] { font-family: var(--thai); line-height: 1.6; }
 
 /* On a phone the axis turns vertical: the rule becomes a left edge down the
@@ -152,7 +152,7 @@
 }
 
 /* The figure was a half-width dark field beside an equal half of text, and it is
-   the only near-black object on a Naples page, so it out-weighed the year and
+   the only near-black object on an Ivory Buff page, so it out-weighed the year and
    the heading that the section is actually about. The text gets the wider share;
    the drawing is still the largest single thing in the column, which is right
    for a drawing. */
@@ -193,8 +193,8 @@
 .learning-objects li { display: grid; justify-items: center; gap: 8px; min-width: 56px; }
 .learning-object { display: block; width: 44px; height: 44px; }
 .learning-object.circle { clip-path: circle(50%); }
-.learning-object.red { background: var(--signal); }
-.learning-object.yellow { background: var(--naples); }
+.learning-object.red { background: var(--jasper); }
+.learning-object.yellow { background: var(--ivory); }
 .learning-answer { font-size: var(--micro); }
 .learning-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .learning-groups h4 { margin: 12px 0 0; }
@@ -202,7 +202,7 @@
 .learning-limit { border-left: 3px solid currentColor; padding-left: 12px; }
 .reward-paths { display: grid; gap: 4px; margin: 16px 0; }
 .reward-paths > div { background: var(--black); color: var(--white); padding: 12px; }
-.reward-paths strong { display: block; color: var(--naples); font-size: 1.4rem; margin-top: 6px; }
+.reward-paths strong { display: block; color: var(--ivory); font-size: 1.4rem; margin-top: 6px; }
 .learning-interaction .readout { padding: 12px 0; color: inherit; }
 @media (max-width: 1100px) { .learning-cards { grid-template-columns: 1fr; gap: 32px; } }
 
@@ -211,7 +211,7 @@
 .catalogue-note p { margin: 0; }
 .learning-choices { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 20px; }
 .learning-choices .btn { flex: 0 1 auto; white-space: normal; height: auto; justify-content: flex-start; text-align: left; gap: 12px; padding: 14px; }
-.learning-choices .btn[aria-pressed="true"] { background: var(--naples); color: var(--black); }
+.learning-choices .btn[aria-pressed="true"] { background: var(--ivory); color: var(--black); }
 .learning-cards.is-guided { grid-template-columns: 1fr; margin-top: 0; }
 .learning-cards.is-guided article { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--gap); padding-top: 24px; }
 .learning-copy, .learning-demo { min-width: 0; }
@@ -223,7 +223,7 @@
 .learning-demo > a { display: inline-flex; min-height: var(--target); align-items: center; }
 .reward-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .reward-paths > div { border: 3px solid transparent; }
-.reward-paths > div[data-chosen="true"] { border-color: var(--signal); }
+.reward-paths > div[data-chosen="true"] { border-color: var(--text); }
 .reward-marker { font-size: 2rem; display: block; }
 .reward-paths strong { font-size: var(--body); }
 .history-panel, .learning-cards article, .learning-cards h3 { scroll-margin-top: 100px; }

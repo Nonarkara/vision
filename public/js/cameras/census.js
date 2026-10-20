@@ -9,11 +9,11 @@
 
 import { t, lang, n, pct, onLang, bi } from '../core/i18n.js'
 import { camName, sourceName, pickReadable } from '../core/catalog.js'
-import { openCamera, SourceError } from '../core/source.js?v=1.18.0'
-import { sleep } from '../core/site.js?v=1.18.0'
+import { openCamera, SourceError } from '../core/source.js?v=1.19.0'
+import { sleep } from '../core/site.js?v=1.19.0'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
 import { STREET, cocoName } from '../ml/labels.js'
-import { SIGNAL, BLACK } from '../cv/draw.js'
+import { JASPER, BLACK } from '../cv/draw.js'
 
 const CONCURRENCY = 2
 const PAUSE_MS = 700
@@ -126,7 +126,7 @@ export function createCensus(root, { getPool, onStudy }) {
     ctx.fillRect(0, 0, TILE_W, TILE_H)
     const r = src.drawTo(ctx, TILE_W, TILE_H)
     if (!r) return
-    ctx.strokeStyle = SIGNAL
+    ctx.strokeStyle = JASPER
     ctx.lineWidth = 3
     for (const d of detections) ctx.strokeRect(r.x + d.x * r.w, r.y + d.y * r.h, d.w * r.w, d.h * r.h)
   }

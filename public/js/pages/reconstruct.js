@@ -6,9 +6,9 @@
 
 import { onLang } from '../core/i18n.js'
 
-const SIGNAL = '#f15a30'
+const JASPER = '#eb5324'
 const GRAY = '#b6bfc1'
-const NAPLES = '#fbe6a0'
+const IVORY = '#ebd3a2'
 const BLACK = '#101010'
 
 /** Face-mesh loops. The oval matches the focus room; the rest are the same mesh. */
@@ -298,7 +298,7 @@ export function loopEdges(loops = LOOPS) {
 const EDGES = loopEdges()
 
 async function boot() {
-  await import('../core/site.js?v=1.18.0')
+  await import('../core/site.js?v=1.19.0')
   const root = document.querySelector('[data-reconstruct]')
   if (!root) return
   const el = (name) => root.querySelector(`[data-${name}]`)
@@ -380,11 +380,11 @@ async function boot() {
     pts.sort((a, b) => b.depth - a.depth)
     for (const p of pts) {
       const s = Math.max(2, 3.2 * p.f)
-      ctx.fillStyle = p.kind === 'scalp' ? GRAY : SIGNAL
+      ctx.fillStyle = p.kind === 'scalp' ? GRAY : JASPER
       ctx.fillRect(p.x - s / 2, p.y - s / 2, s, s)
     }
     if (mesh.length) {
-      ctx.strokeStyle = NAPLES
+      ctx.strokeStyle = IVORY
       ctx.lineWidth = Math.max(1, Math.min(w, h) / 480)
       ctx.beginPath()
       for (const [a, b] of EDGES) {
@@ -434,7 +434,7 @@ async function boot() {
 
   function drawCamera(rect, landmarks) {
     if (!rect || !landmarks) return
-    camCtx.fillStyle = SIGNAL
+    camCtx.fillStyle = JASPER
     const loops = [LOOPS.oval, LOOPS.lip, LOOPS.eyeL, LOOPS.eyeR, LOOPS.browL, LOOPS.browR]
     for (const loop of loops) {
       for (const index of loop) {
@@ -455,7 +455,7 @@ async function boot() {
     const mine = ++ticket
     let opened = null
     try {
-      const { openWebcam } = await import('../core/source.js?v=1.18.0')
+      const { openWebcam } = await import('../core/source.js?v=1.19.0')
       const w = worker = new Worker('/js/focus/worker.js')
       await new Promise((resolve, reject) => {
         const watchdog = setTimeout(() => reject(new Error('timeout')), 45000)

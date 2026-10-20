@@ -1,7 +1,7 @@
 // The Teach room's default clip: real public-camera frames, not a drawing.
 // Busy and quiet are two cameras the catalogue already names. The learner
 // captures examples from whichever scene is on screen.
-import { TEACH } from '../footage/library.js?v=1.18.0'
+import { TEACH } from '../footage/library.js?v=1.19.0'
 
 const W = 640
 const H = 360
@@ -17,7 +17,7 @@ function load(urls) {
 }
 
 function paintFrame(g, img) {
-  g.fillStyle = '#253122'
+  g.fillStyle = '#051230'
   g.fillRect(0, 0, W, H)
   if (!img || !img.complete || !img.naturalWidth) return
   const s = Math.min(W / img.naturalWidth, H / img.naturalHeight)

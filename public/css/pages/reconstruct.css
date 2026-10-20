@@ -1,5 +1,5 @@
 /* /reconstruct — four steps, one reel, one on-device cloud.
-   Plate 303. Four hues. Fields, alignment and type do the grouping. */
+   Sanzo Wada's archive. Four hues. Fields, alignment and type do the grouping. */
 
 .recon-toc {
   display: flex;
@@ -25,10 +25,10 @@
 .recon .flow-fig,
 .recon .pipe-scroll { min-width: 0; }
 .recon .pipe-scroll { margin-top: 8px; max-width: 100%; }
-.recon .diagram { color: var(--olive); }
+.recon .diagram { color: var(--indigo); }
 
 .reel-block { padding: 0 var(--gutter) clamp(28px, 4vw, 48px); display: grid; gap: 18px; }
-.reel-block .figures { background: var(--olive); color: var(--naples); }
+.reel-block .figures { background: var(--indigo); color: var(--ivory); }
 .reel {
   width: min(100%, 540px);
   height: min(72vh, 640px);
@@ -39,7 +39,7 @@
 .try { padding: 0 var(--gutter) clamp(48px, 6vw, 88px); }
 .try .bench { margin-top: 8px; }
 .consent { display: flex; align-items: flex-start; gap: 12px; max-width: 62ch; }
-.consent input { flex: 0 0 auto; width: 22px; height: 22px; margin-top: 4px; accent-color: var(--olive); }
+.consent .check { margin-top: 4px; }
 
 .demo-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 2px; align-items: start; }
 .stage { position: relative; background: var(--black); }
@@ -55,9 +55,9 @@
 .cover li {
   display: flex; justify-content: space-between; align-items: center; gap: 8px;
   min-height: var(--target); margin: 0; padding: 12px 14px;
-  background: var(--quiet); color: var(--olive);
+  background: var(--quiet); color: var(--indigo);
 }
-.cover li.is-seen { background: var(--signal); color: var(--black); }
+.cover li.is-seen { background: var(--jasper); color: var(--black); }
 .cover .when-seen { display: none; }
 .cover li.is-seen .when-missing { display: none; }
 .cover li.is-seen .when-seen { display: inline; }
@@ -66,7 +66,7 @@
 
 .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
 .swatch { display: inline-block; width: 0.8em; height: 0.8em; background: var(--gray); }
-.swatch.face { background: var(--signal); }
+.swatch.face { background: var(--jasper); }
 .pose-line { color: var(--gray); }
 
 @media (max-width: 800px) {

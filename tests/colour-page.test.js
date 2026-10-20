@@ -23,10 +23,10 @@ test('every plate gets a gloss in both languages', () => {
   }
 })
 
-test('a peach-red ground is called out by name, in both languages', () => {
-  for (const p of PLATES.filter((x) => x.at.ground === 'signal')) {
-    assert.match(gloss(p).en, /Peach red is the paper/)
-    assert.match(gloss(p).th, /แดงพีชกลายเป็นพื้นกระดาษ/)
+test('a jasper-red ground is called out by name, in both languages', () => {
+  for (const p of PLATES.filter((x) => x.at.ground === 'jasper')) {
+    assert.match(gloss(p).en, /Jasper Red is the paper/)
+    assert.match(gloss(p).th, /แดงแจสเปอร์กลายเป็นพื้นกระดาษ/)
   }
 })
 
@@ -34,7 +34,7 @@ test('the gloss leads with the paper, because that is what a person feels first'
   // Where both the paper and the ink moved, the gloss must name the new paper —
   // that is the ordering decision the function encodes, and it is the whole reason
   // a background is discussed before the words sitting on it.
-  const NAME = { naples: 'Naples yellow', olive: 'olive green', gray: 'grey', signal: 'Peach red' }
+  const NAME = { ivory: 'Ivory Buff', indigo: 'Deep Indigo', gray: 'Neutral Gray', jasper: 'Jasper Red' }
   const moved = PLATES.filter((p) => p.at.ground !== HOUSE.ground && p.at.ink !== HOUSE.ink)
   assert.ok(moved.length, 'expected plates that move both the paper and the ink')
   for (const p of moved) {
@@ -107,7 +107,7 @@ test('the deal is drawn once — on the plate — and nowhere else', () => {
   // of the chapter, with a key underneath naming them. The key named two of them
   // in the same words the plate already printed in place, twenty pixels away. It
   // was a legend for something the page was already showing, and on a deal that
-  // put peach red on the ground it became four coloured rectangles arguing with
+  // put jasper red on the ground it became four coloured rectangles arguing with
   // the one that meant something.
   for (const gone of ['band-stack', 'band-key', 'data-band', 'data-seam', 'class="bands"', 'study-chapter']) {
     assert.ok(!html.includes(gone), `${gone} is back in the markup`)
@@ -184,26 +184,26 @@ test('one way to change the plate is a field; the other two are words', () => {
 })
 
 test('the chosen answer clears the text floor in both schemes', () => {
-  // Pressed inverts ground and text. Light: olive on Naples. Dark: Naples on
-  // olive. The same pair both ways, measured once — with the shared instrument,
+  // Pressed inverts ground and text. Light: indigo on ivory. Dark: ivory on
+  // indigo. The same pair both ways, measured once — with the shared instrument,
   // not with arithmetic copied out of the thing being tested.
   const body = ruleBody('.feel-btn[aria-pressed="true"]')
   assert.match(body, /background:\s*var\(--text\)/, 'the choice no longer inverts on the page’s own pairing')
   assert.match(body, /color:\s*var\(--ground\)/)
-  const ratio = contrast(ladder().olive.base, ladder().naples.base)
+  const ratio = contrast(ladder().indigo.base, ladder().ivory.base)
   assert.ok(ratio >= 4.5, `the chosen answer sits at ${ratio.toFixed(2)}:1, under the 4.5 floor`)
 })
 
 // ── A TOKEN THAT LOOKS INTERCHANGEABLE AND IS NOT ───────────────────────────
 //
-// --quiet-text is declared once, as olive, and neither dark block re-declares it.
+// --quiet-text is declared once, as indigo, and neither dark block re-declares it.
 // Every other use in the site pairs it with `background: var(--quiet)` — a grey
-// field — where olive is the right ink in both schemes. That is why it was left
+// field — where indigo is the right ink in both schemes. That is why it was left
 // alone: it is not broken, it is specialised.
 //
 // The two uses that put it straight on the page were broken, and both were found
 // by rendering rather than by reading. The machine's readout and the sentence
-// inviting the first answer both measured 1.00:1 in dark mode: olive on olive,
+// inviting the first answer both measured 1.00:1 in dark mode: indigo on indigo,
 // i.e. not on the page at all. --text follows the scheme and is the right token
 // for the page's own ink.
 //
@@ -231,7 +231,7 @@ test('--quiet-text is only ever used as ink on a grey field', () => {
       const [, sel, body] = m
       if (!/color\s*:\s*var\(\s*--quiet-text\s*\)/.test(body)) continue
       // …unless the rule puts a grey field behind it, which is the only place
-      // an olive that never changes is the correct answer.
+      // an indigo that never changes is the correct answer.
       if (/background(?:-color)?\s*:\s*var\(\s*--quiet\s*\)/.test(body)) continue
       bad.push(`${file.replace('../public/css/', '')}: ${sel.trim().replace(/\s+/g, ' ').slice(0, 60)}`)
     }

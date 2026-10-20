@@ -95,7 +95,7 @@ Note what is **absent**: no image, no face, no plate, no track id, no person att
 | Fonts (IBM Plex Sans, IBM Plex Sans Thai, IBM Plex Mono) | SIL OFL 1.1 | permitted |
 | Popular YOLO implementations (if ever adopted) | several are **AGPL-3.0** | would oblige releasing the service's source; avoid or buy a commercial licence |
 | **Public camera feeds** | owned by each agency | **the classroom's terms forbid commercial use without the owner's permission.** A commercial service needs written agreements with each camera owner, or must run only on the customer's own cameras |
-| Colour (Wada Plate 303 via Palette) | historical combination; Palette's digital conversion credited | attribution kept |
+| Colour (Wada's archive via Palette) | four credited hues; Palette's digital conversions used | attribution kept |
 
 ## 5. Compliance work a service would add
 

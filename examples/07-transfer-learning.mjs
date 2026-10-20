@@ -16,7 +16,7 @@ import { normalize, knnPredict, createLayer, pca2, leaveOneOut, dot } from '../p
 import { rule, lineChart, scatter } from './shared/ascii.mjs'
 import { writePng } from './shared/png.mjs'
 import { figDir } from './shared/out.mjs'
-import { NAPLES, SIGNAL, GRAY, OLIVE } from './shared/draw.mjs'
+import { IVORY, JASPER, GRAY, INDIGO } from './shared/draw.mjs'
 
 const D = 1280
 let s = 7
@@ -105,17 +105,17 @@ console.log(`(Overlap between "night" and the real river/road difference: ${Math
 
 // Figures: loss curve and PCA map, drawn as pixels.
 const dir = figDir()
-const canvas = (w, h) => { const d = new Uint8ClampedArray(w * h * 4); for (let p = 0; p < d.length; p += 4) d.set([...OLIVE, 255], p); return { data: d, width: w, height: h } }
+const canvas = (w, h) => { const d = new Uint8ClampedArray(w * h * 4); for (let p = 0; p < d.length; p += 4) d.set([...INDIGO, 255], p); return { data: d, width: w, height: h } }
 const dot2 = (img, x, y, c, r = 2) => { for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) { const X = Math.round(x + dx), Y = Math.round(y + dy); if (X >= 0 && Y >= 0 && X < img.width && Y < img.height) img.data.set([...c, 255], (Y * img.width + X) * 4) } }
 const loss = canvas(480, 200)
 const lmax = Math.max(...losses), lmin = Math.min(...losses)
-losses.forEach((l, i) => dot2(loss, 20 + (i / 199) * 440, 180 - ((l - lmin) / (lmax - lmin || 1)) * 160, SIGNAL, 1))
+losses.forEach((l, i) => dot2(loss, 20 + (i / 199) * 440, 180 - ((l - lmin) / (lmax - lmin || 1)) * 160, JASPER, 1))
 writePng(`${dir}/07-loss.png`, loss, 1)
 const map = canvas(480, 320)
 const xs = proj.points.map((p) => p[0]), ys = proj.points.map((p) => p[1])
 const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
-proj.points.forEach(([x, y], i) => dot2(map, 30 + ((x - x0) / (x1 - x0)) * 420, 290 - ((y - y0) / (y1 - y0)) * 260, train[i].y ? GRAY : NAPLES, 4))
+proj.points.forEach(([x, y], i) => dot2(map, 30 + ((x - x0) / (x1 - x0)) * 420, 290 - ((y - y0) / (y1 - y0)) * 260, train[i].y ? GRAY : IVORY, 4))
 const live = proj.project(probe.x)
-dot2(map, 30 + ((live[0] - x0) / (x1 - x0)) * 420, 290 - ((live[1] - y0) / (y1 - y0)) * 260, SIGNAL, 6)
+dot2(map, 30 + ((live[0] - x0) / (x1 - x0)) * 420, 290 - ((live[1] - y0) / (y1 - y0)) * 260, JASPER, 6)
 writePng(`${dir}/07-pca.png`, map, 1)
 console.log(`\nFigures written to ${dir}/07-loss.png and 07-pca.png`)

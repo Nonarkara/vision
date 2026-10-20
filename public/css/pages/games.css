@@ -9,11 +9,11 @@
 .game-score { margin: 0; padding: 10px 12px; background: var(--black); color: var(--white); font-size: var(--micro); min-height: var(--target); }
 .game-score:empty { display: none; }
 .teaches { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: var(--micro); max-width: 40ch; }
-.field-quiet .note { background: var(--naples); color: var(--olive); }
+.field-quiet .note { background: var(--ivory); color: var(--indigo); }
 
 /* Bench parts. */
 .bench p.bench-caption { margin: 0; }
-.game-say { margin: 0; color: var(--naples); font-family: var(--sans); line-height: 1.55; min-height: 4.8em; }
+.game-say { margin: 0; color: var(--ivory); font-family: var(--sans); line-height: 1.55; min-height: 4.8em; }
 html[data-lang="th"] .game-say { font-family: var(--thai); }
 /* A button is the width of its label. Two of them split a row in half and
    read as two empty strips. The house is not uniform about this — some
@@ -48,5 +48,5 @@ html[data-lang="th"] .challenge.btn { font-family: var(--thai); }
 .fool-gallery:empty { display: none; }
 .fool-gallery .tile { margin: 0; }
 .fool-gallery .tile-view canvas { object-fit: contain; }
-/* Your pick is yours, not a machine finding: it gets the room's colour, not Peach Red. */
-.pix-options .btn[aria-pressed="true"] { background: var(--naples); color: var(--olive); opacity: 1; }
+/* Your pick is yours, not a machine finding: it gets the room's colour, not Jasper Red. */
+.pix-options .btn[aria-pressed="true"] { background: var(--ivory); color: var(--indigo); opacity: 1; }

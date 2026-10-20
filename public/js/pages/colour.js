@@ -14,7 +14,7 @@
  * exactly two values — a plate id and one word from a fixed list of ten. The page
  * never sends anything else, and the server has nowhere to put anything else.
  */
-import { assignments } from '../core/palette.js?v=1.18.0'
+import { assignments } from '../core/palette.js?v=1.19.0'
 
 const PLATES = assignments()
 const BY_ID = new Map(PLATES.map((p) => [p.id, p]))
@@ -22,13 +22,13 @@ const LEGAL = PLATES.filter((p) => p.legible)
 const ILLEGAL = PLATES.filter((p) => !p.legible)
 
 /** The arrangement the site normally wears. Everything else is a departure from it. */
-export const HOUSE = { ground: 'naples', ink: 'olive', quiet: 'gray', signal: 'signal' }
+export const HOUSE = { ground: 'ivory', ink: 'indigo', quiet: 'gray', signal: 'jasper' }
 
 const HUE = {
-  naples: { th: 'เหลืองนีเปิล', en: 'Naples yellow' },
-  olive: { th: 'มะกอกเขียว', en: 'olive green' },
-  gray: { th: 'เทา', en: 'grey' },
-  signal: { th: 'แดงพีช', en: 'peach red' },
+  ivory: { th: 'งาช้างอ่อน', en: 'Ivory Buff' },
+  indigo: { th: 'ครามเข้ม', en: 'Deep Indigo' },
+  gray: { th: 'เทา', en: 'Neutral Gray' },
+  jasper: { th: 'แดงแจสเปอร์', en: 'Jasper Red' },
 }
 
 const ROLE = {
@@ -80,21 +80,24 @@ export function gloss(plate) {
   const hue = (h, l) => HUE[h][l]
 
   if (at.ground !== HOUSE.ground) {
-    return at.ground === 'signal'
+    // The one hue the machine refuses as a ground — the signal hue. It is named
+    // from HOUSE rather than written out, because a hard-coded hue name here
+    // would be a second place for the palette to go stale.
+    return at.ground === HOUSE.signal
       ? {
-        th: `แดงพีชกลายเป็นพื้นกระดาษ มันเคยมีไว้ทำหน้าที่เดียวคือบอกว่า “นี่คือสิ่งที่เครื่องเห็น” ไม่มีเฉดไหนเลยที่จะได้ 4.5:1 บนพื้นนี้ แม้จะปรับโทนไปทุกขั้น คนยังรู้สึกว่ามันเตือนภัย ส่วนกฎที่ผ่านอยู่ไม่เคยรู้ว่ามันแปลว่าอะไร`,
-        en: `Peach red is the paper. It had one job — to mark what the machine sees. No hue reaches 4.5:1 on it at any tone. A person still feels the alarm. The rule that passed never knew what the colour meant.`,
+        th: `${hue(HOUSE.signal, 'th')}กลายเป็นพื้นกระดาษ มันเคยมีไว้ทำหน้าที่เดียวคือบอกว่า “นี่คือสิ่งที่เครื่องเห็น” ไม่มีเฉดไหนเลยที่จะได้ 4.5:1 บนพื้นนี้ แม้จะปรับโทนไปทุกขั้น คนยังรู้สึกว่ามันเตือนภัย ส่วนกฎที่ผ่านอยู่ไม่เคยรู้ว่ามันแปลว่าอะไร`,
+        en: `${hue(HOUSE.signal, 'en')} is the paper. It had one job — to mark what the machine sees. No hue reaches 4.5:1 on it at any tone. A person still feels the alarm. The rule that passed never knew what the colour meant.`,
       }
       : {
-        th: `${hue(at.ground, 'th')}กลายเป็นพื้นกระดาษ เหลืองนีเปิลเคยเป็นกระดาษเสมอ นี่คือหน้าที่ของสีที่เปลี่ยนไป`,
-        en: `${hue(at.ground, 'en')} is the paper now. Naples yellow had always been the paper — this is the job that moved.`,
+        th: `${hue(at.ground, 'th')}กลายเป็นพื้นกระดาษ ${hue(HOUSE.ground, 'th')}เคยเป็นกระดาษเสมอ นี่คือหน้าที่ของสีที่เปลี่ยนไป`,
+        en: `${hue(at.ground, 'en')} is the paper now. ${hue(HOUSE.ground, 'en')} had always been the paper — this is the job that moved.`,
       }
   }
 
   if (at.signal !== HOUSE.signal) {
     return {
-      th: `${hue(at.signal, 'th')}กลายเป็นสิ่งที่เครื่องเห็น แต่แดงพีชเคยมีไว้ทำหน้าที่นี้เท่านั้น แถบสีนี้ยังถูกวางไว้ตรงที่เครื่องเห็น ทั้งที่สีไม่ได้ถูกออกแบบมาเพื่อบอกอะไรกับใคร`,
-      en: `${hue(at.signal, 'en')} is what the machine sees now. Peach red had that job alone. The bar is still where the machine's findings go — but the colour behind it was never designed to tell you anything.`,
+      th: `${hue(at.signal, 'th')}กลายเป็นสิ่งที่เครื่องเห็น แต่${hue(HOUSE.signal, 'th')}เคยมีไว้ทำหน้าที่นี้เท่านั้น แถบสีนี้ยังถูกวางไว้ตรงที่เครื่องเห็น ทั้งที่สีไม่ได้ถูกออกแบบมาเพื่อบอกอะไรกับใคร`,
+      en: `${hue(at.signal, 'en')} is what the machine sees now. ${hue(HOUSE.signal, 'en')} had that job alone. The bar is still where the machine's findings go — but the colour behind it was never designed to tell you anything.`,
     }
   }
 
@@ -134,6 +137,7 @@ export function mount(root = document) {
   const form = root.querySelector('#feel')
     const el = {
       plate: root.querySelector('#plate'),
+    signal: root.querySelector('#plate-signal-line'),
     machine: root.querySelector('#machine-line'),
     gloss: root.querySelector('#gloss-line'),
     warn: root.querySelector('#illegal-warn'),
@@ -162,6 +166,18 @@ export function mount(root = document) {
     s.setProperty('--pi', plate.reads.ink.value)
     s.setProperty('--pq', plate.reads.quiet.value)
     s.setProperty('--ps', plate.reads.signal.value)
+
+    // The machine's own number on the plate, from the same instrument that
+    // graded it: the signal colour's measured ratio against this paper. It
+    // used to be a hard-coded "confidence 0.41" that never changed on any of
+    // the twenty-four plates — a fake number under a bar that read as a meter.
+    if (el.signal) {
+      const r = plate.reads.signal.ratio.toFixed(2)
+      el.signal.innerHTML = bi({
+        th: `${ROLE.signal.th} · ${r}:1 บนกระดาษนี้`,
+        en: `${ROLE.signal.en} · ${r}:1 on this paper`,
+      })
+    }
 
     const d = describe(plate)
     el.machine.innerHTML = bi(d.machine)
@@ -315,8 +331,8 @@ export function mount(root = document) {
   }
 
   // The scheme-change repaint went with the spine. It existed only because a seam
-  // had been solved against the page colour behind it, and the page is olive in
-  // dark and Naples in light. Nothing on this page is tuned to the scheme now —
+  // had been solved against the page colour behind it, and the page is indigo in
+  // dark and Ivory Buff in light. Nothing on this page is tuned to the scheme now —
   // the plate's four values come from the deal, not from the theme — so a
   // listener here would repaint identical values forever.
 

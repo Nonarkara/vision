@@ -32,7 +32,7 @@ const changed = ops.diffMask(previousGray, currentGray, delta)  // 1 where |Δ b
 const joined  = ops.dilate(changed, width, height)              // grow each spot by one pixel
 const regions = ops.blobs(joined, width, height, minArea)       // connected regions → boxes</code></pre>
 <ol><li lang="en"><strong>Difference.</strong> For every pixel, <code>|now − before|</code>. If it is at least <code>delta</code>, mark it 1.</li><li lang="en"><strong>Dilate.</strong> Grow every marked pixel into its 3×3 neighbourhood, so a car's broken outline becomes one shape.</li><li lang="en"><strong>Connected regions.</strong> Flood-fill each group of touching marked pixels; record its bounding box and area; drop groups smaller than <code>minArea</code> (noise).</li></ol>
-<figure><img src="/img/handbook/04-motion.png" alt="Before, after, and what changed" loading="lazy"><figcaption lang="en">Left: t = 0. Middle: one second later. Right: changed pixels (Peach Red) and the regions found.</figcaption></figure>
+<figure><img src="/img/handbook/04-motion.png" alt="Before, after, and what changed" loading="lazy"><figcaption lang="en">Left: t = 0. Middle: one second later. Right: changed pixels (Jasper Red) and the regions found.</figcaption></figure>
 <p lang="en">The answer key says three vehicles moved:</p>
 <pre class="code" lang="en"><code>car        x 96 → 118
 car        x 190 → 180

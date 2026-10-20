@@ -4,9 +4,9 @@
 // detections) so a lens can be driven by any loop.
 
 import * as ops from './ops.js'
-import { paintImageData, drawDetections, drawBlobs, drawMask, clear, NAPLES } from './draw.js'
+import { paintImageData, drawDetections, drawBlobs, drawMask, clear, IVORY } from './draw.js'
 import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
-import { noteVehicles } from './spotted.js?v=1.18.0'
+import { noteVehicles } from './spotted.js?v=1.19.0'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
@@ -73,7 +73,7 @@ export function numbers(ctx, src, state, { cols = 40, values = 'luma' } = {}) {
   return { x: ox, y: oy, w: cell * img.width, h: cell * img.height, cols: img.width, rows: img.height, cell }
 }
 
-/** Edge strength as Naples-yellow light on black. */
+/** Edge strength as Ivory Buff light on black. */
 export function edges(ctx, src, state, { width = 360, gain = 1 } = {}) {
   const img = src.grab(width)
   if (!img) return null
@@ -215,4 +215,4 @@ function fitCanvasIfNeeded(canvas) {
   return { fit }
 }
 
-export { NAPLES }
+export { IVORY }

@@ -1,11 +1,11 @@
-// Drawing the track from above. Colours keep the site's rule: Peach Red is
+// Drawing the track from above. Colours keep the site's rule: Jasper Red is
 // only ever what a machine sees — the cones and the boxes. The traffic light
 // is the one exception, because a red light has to look red.
 
-import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.18.0'
-import { FOV, sightRange } from './perceive.js?v=1.18.0'
-import { VEHICLES } from './sim.js?v=1.18.0'
-import { ITEMS, STREET, offset } from './street.js?v=1.18.0'
+import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.19.0'
+import { FOV, sightRange } from './perceive.js?v=1.19.0'
+import { VEHICLES } from './sim.js?v=1.19.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.19.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -17,9 +17,9 @@ export function palette() {
     // surfaces from above: verge, footway, carriageway. Hardware, not content,
     // so they stay in the black ramp and never borrow a plate hue.
     ground: v('--black'), pave: v('--black-2'), road: v('--black-3'),
-    kerb: v('--gray'), block: v('--olive'),
+    kerb: v('--gray'), block: v('--indigo'),
     mark: v('--gray'), white: v('--white'),
-    naples: v('--naples'), gray: v('--gray'), olive: v('--olive'), signal: v('--signal'), black: v('--black'),
+    ivory: v('--ivory'), gray: v('--gray'), indigo: v('--indigo'), jasper: v('--jasper'), black: v('--black'),
   }
 }
 
@@ -56,7 +56,7 @@ export function drawTrack(ctx, k, track, c, street) {
     ctx.stroke()
   }
   if (track.layout === 'practice' || track.layout === 'city') {
-  ctx.fillStyle = c.olive
+  ctx.fillStyle = c.indigo
   ctx.beginPath()
   ctx.arc(RING.x * k, RING.y * k, (RING.r - LANE - 0.4) * k, 0, 2 * Math.PI)
   ctx.fill()
@@ -167,7 +167,7 @@ function drawFurniture(ctx, k, world, c) {
       ctx.arc(0, 0, Math.max(2, 1.6 * k), 0, 2 * Math.PI)
       ctx.fill()
     } else if (it.kind === 'bicycle' || it.kind === 'motorcycle') {
-      ctx.fillStyle = c.naples
+      ctx.fillStyle = c.ivory
       ctx.fillRect(-L / 2, -W / 2, L, W)
       ctx.fillStyle = c.black
       ctx.beginPath()
@@ -175,7 +175,7 @@ function drawFurniture(ctx, k, world, c) {
       ctx.arc(L * 0.32, 0, Math.max(1, W * 0.42), 0, 2 * Math.PI)
       ctx.fill()
     } else if (it.kind === 'stopSign') {
-      // White, not Peach Red. Red belongs to the machine: only a detection box
+      // White, not Jasper Red. Red belongs to the machine: only a detection box
       // and its confidence are ever signal-coloured, never the object itself.
       ctx.fillStyle = c.white
       ctx.beginPath()
@@ -198,7 +198,7 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
     const sel = car.id === selected
     if (!sel && !showAll) continue
     const R = car.blind ? 0 : sightRange(car, world.weather)
-    ctx.fillStyle = c.signal
+    ctx.fillStyle = c.jasper
     ctx.globalAlpha = sel ? 0.13 : 0.05
     ctx.beginPath()
     ctx.moveTo(car.x * k, car.y * k)
@@ -219,7 +219,7 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
       ctx.save()
       ctx.translate(w.x * k, w.y * k)
       ctx.rotate(h)
-      ctx.fillStyle = c.naples
+      ctx.fillStyle = c.ivory
       ctx.fillRect(-0.6 * k, -0.28 * k, 1.2 * k, 0.56 * k)
       ctx.fillRect(0.45 * k, -0.35 * k, 0.45 * k, 0.7 * k)
       ctx.restore()
@@ -236,14 +236,14 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
       // furniture has no dims of its own, so it borrows the class table's.
       const dims = o.dims ?? ITEMS[o.kind]?.dims
       const half = (dims ? Math.max(dims.L, dims.W) / 2 + 0.5 : o.kind === 'dog' ? 1.1 : 0.9) * k
-      ctx.strokeStyle = c.signal
+      ctx.strokeStyle = c.jasper
       ctx.lineWidth = car.id === selected ? 2 : 1
       ctx.strokeRect(o.x * k - half, o.y * k - half, half * 2, half * 2)
       if (car.id !== selected) continue
       const text = `${labelName(tr.label, lang)} ${Math.round(tr.conf * 100)}%`
       ctx.font = `600 ${Math.max(10, 1.9 * k)}px "IBM Plex Mono", monospace`
       const tw = ctx.measureText(text).width
-      ctx.fillStyle = c.signal
+      ctx.fillStyle = c.jasper
       ctx.fillRect(o.x * k - half, o.y * k - half - 2.4 * k, tw + 0.8 * k, 2.4 * k)
       ctx.fillStyle = c.black
       ctx.fillText(text, o.x * k - half + 0.4 * k, o.y * k - half - 0.6 * k)
@@ -252,7 +252,7 @@ export function drawWorld(ctx, k, world, c, { selected, showAll, lang }) {
 
   for (const e of world.events) {
     const age = world.t - e.t
-    ctx.strokeStyle = c.signal
+    ctx.strokeStyle = c.jasper
     ctx.lineWidth = 3
     ctx.globalAlpha = Math.max(0, 1 - age / 2.5)
     ctx.beginPath()
@@ -270,7 +270,7 @@ function drawCar(ctx, k, car, c, sel) {
   ctx.translate(car.x * k, car.y * k)
   ctx.rotate(car.h)
   const L = dims.L * k, W = dims.W * k
-  const body = car.styleName === 'careful' ? c.white : car.styleName === 'normal' ? c.gray : c.naples
+  const body = car.styleName === 'careful' ? c.white : car.styleName === 'normal' ? c.gray : c.ivory
   if (car.body === 'truck') {
     // Cargo box takes the rear 68%; the cab sits in front with a gap.
     ctx.fillStyle = c.black
@@ -299,7 +299,7 @@ function drawCar(ctx, k, car, c, sel) {
     }
   }
   if (sel || car.frozen > 0) {
-    ctx.strokeStyle = car.frozen > 0 ? c.signal : c.white
+    ctx.strokeStyle = car.frozen > 0 ? c.jasper : c.white
     ctx.lineWidth = 2
     ctx.strokeRect(-L / 2 - 3, -W / 2 - 3, L + 6, W + 6)
   }

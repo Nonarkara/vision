@@ -20,7 +20,7 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 
 /* The room: camera on the left, gestures and their actions on the right */
 .room { padding: clamp(40px, 6vw, 96px) var(--gutter); }
-.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 70ch; }
+.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 62ch; }
 .room-head .prose { margin: 0; }
 .room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
 @media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
@@ -30,12 +30,12 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 .live { display: grid; gap: 2px; padding: 0 0 2px; }
 .live-head { display: block; padding: 12px 16px 6px; color: var(--gray); }
 .live-head .micro { text-transform: none; letter-spacing: 0; }
-.live-say { color: var(--naples); }
+.live-say { color: var(--ivory); }
 .bench-note { margin: 0; padding: 4px 16px 16px; color: var(--gray); }
 
 /* Arm, then the trail of what actually happened */
 .arm-row { padding-top: 4px; }
-.log { min-height: calc(var(--target) * 2); color: var(--naples); }
+.log { min-height: calc(var(--target) * 2); color: var(--ivory); }
 
 .room-classes { display: grid; gap: 2px; min-width: 0; }
 .preset { display: grid; gap: 6px; padding: 0 0 16px; }
@@ -76,7 +76,7 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 .board { display: grid; gap: 8px; padding: 16px 12px 12px; margin-top: 2px; background: var(--quiet); color: var(--quiet-text); }
 .board-svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
 .lamp { fill: none; stroke: currentColor; stroke-width: 4; transition: fill 160ms linear; }
-.lamp.is-on { fill: var(--signal); stroke: var(--signal); }
+.lamp.is-on { fill: var(--jasper); stroke: var(--jasper); }
 .board .micro { margin: 0; }
 
 /* The honest fallback when a popup was blocked */
@@ -94,5 +94,5 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 @media (prefers-reduced-motion: reduce) { .flash { transition: none; } }
 
 /* The limits, listed like the fine print they are */
-.limits { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 2px; max-width: 74ch; }
+.limits { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 2px; max-width: 62ch; }
 .limits li { background: var(--quiet); color: var(--quiet-text); padding: 10px 14px; font-size: var(--micro); }

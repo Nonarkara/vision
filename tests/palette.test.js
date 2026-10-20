@@ -4,8 +4,8 @@ import {
   HUES, ladder, contrast, pairings, FLOOR, ROLES, assignments, toneFor, plate,
 } from '../public/js/core/palette.js'
 
-test('the four hues are the ones the site has always used', () => {
-  assert.deepEqual(Object.keys(HUES), ['naples', 'olive', 'gray', 'signal'])
+test('the four hues are the ones the site wears now', () => {
+  assert.deepEqual(Object.keys(HUES), ['ivory', 'indigo', 'gray', 'jasper'])
 })
 
 test('the tone ladder is one shared move, applied to every hue', () => {
@@ -59,15 +59,15 @@ test('legible agrees with an independent measurement of the pairings the plate p
 
 test('a mark needs the non-text floor, not the text floor', () => {
   const p = ladder()
-  const a = assignments().find((x) => x.at.ground === 'naples' && x.at.signal === 'signal')
-  assert.ok(a, 'expected a naples-ground plate with signal as the mark')
+  const a = assignments().find((x) => x.at.ground === 'ivory' && x.at.signal === 'jasper')
+  assert.ok(a, 'expected an ivory-ground plate with jasper as the mark')
   assert.equal(a.reads.signal.floor, FLOOR.mark)
   assert.notEqual(FLOOR.mark, FLOOR.text)
 })
 
-test('peach red is the one hue the machine refuses as paper', () => {
+test('jasper red is the one hue the machine refuses as paper', () => {
   const p = plate()
-  assert.deepEqual([...new Set(p.forbidden.map((a) => a.groundHue))], ['signal'])
+  assert.deepEqual([...new Set(p.forbidden.map((a) => a.groundHue))], ['jasper'])
   // and it is refused for the honest reason: nothing reaches 4.5:1 against it
   assert.ok(p.forbidden.every((a) => a.worst < FLOOR.text))
   assert.equal(p.legal.length + p.forbidden.length, 24)
@@ -75,20 +75,21 @@ test('peach red is the one hue the machine refuses as paper', () => {
 
 test('toneFor prefers the base tone and steps down only when it must', () => {
   const p = ladder()
-  assert.equal(toneFor(p, 'olive', p.naples.base, FLOOR.text).tone, 'base')
-  const stepped = toneFor(p, 'gray', p.naples.base, FLOOR.text)
+  assert.equal(toneFor(p, 'indigo', p.ivory.base, FLOOR.text).tone, 'base')
+  const stepped = toneFor(p, 'gray', p.ivory.base, FLOOR.text)
   assert.notEqual(stepped.tone, 'base')
   assert.ok(stepped.ratio >= FLOOR.text)
 })
 
 test('toneFor reports the best it managed when nothing clears', () => {
   const p = ladder()
-  // On Peach Red only olive.deep (5.85) and signal.deep (4.80) reach 4.5:1, which
-  // is why every peach-red-as-paper plate fails: three roles, two usable tones.
-  const failed = toneFor(p, 'naples', p.signal.base, FLOOR.text)
+  // On Jasper Red only indigo.base (5.10), indigo.deep (5.66) and jasper.deep
+  // (4.56) reach 4.5:1, which is why every jasper-red-as-paper plate fails:
+  // three roles, one usable hue.
+  const failed = toneFor(p, 'ivory', p.jasper.base, FLOOR.text)
   assert.equal(failed.pass, false)
   assert.ok(failed.ratio < FLOOR.text)
-  assert.equal(failed.value, p.naples.deep, 'it should still report the tone it tried last')
+  assert.equal(failed.value, p.ivory.deep, 'it should still report the tone it tried last')
   // And the ladder really is doing work here, not just failing everything.
-  assert.equal(toneFor(p, 'olive', p.signal.base, FLOOR.text).pass, true)
+  assert.equal(toneFor(p, 'indigo', p.jasper.base, FLOOR.text).pass, true)
 })

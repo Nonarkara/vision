@@ -116,7 +116,7 @@ Why does it start at **0.693**? That is −log(0.5): with random small weights t
 
 People cannot see in 1,280 dimensions. **Principal component analysis** (PCA) finds the two directions along which the examples differ most and projects onto them. `pca2()` uses the Gram-matrix trick. With N examples of D numbers — and N ≪ D, meaning far fewer examples than numbers — it works with the N×N matrix of dot products instead of the much larger D×D covariance matrix. Same leading directions, far less arithmetic.
 
-![PCA map: two clouds, and a new example (Peach Red) landing in the river cloud](img/07-pca.png)
+![PCA map: two clouds, and a new example (Jasper Red) landing in the river cloud](img/07-pca.png)
 
 Two separate clouds mean the classes look different to the network. The map is a **shadow**: two points close here can be far apart in 1,280 dimensions, and the page says so under the picture.
 

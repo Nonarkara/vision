@@ -25,7 +25,7 @@ const regions = ops.blobs(joined, width, height, minArea)       // connected reg
 
 ![Before, after, and what changed](img/04-motion.png)
 
-*Left: t = 0. Middle: one second later. Right: changed pixels (Peach Red) and the regions found.*
+*Left: t = 0. Middle: one second later. Right: changed pixels (Jasper Red) and the regions found.*
 
 The answer key says three vehicles moved:
 

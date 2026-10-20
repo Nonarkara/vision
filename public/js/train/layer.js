@@ -5,7 +5,7 @@
 
 import { createLayer } from '../ml/learner.js'
 import { EMBED_SIZE } from '../ml/embedder.js'
-import { fitCanvas, clear, canvasScale, NAPLES, GRAY } from '../cv/draw.js'
+import { fitCanvas, clear, canvasScale, IVORY, GRAY } from '../cv/draw.js'
 import { t } from '../core/i18n.js'
 
 export const EPOCHS = 200
@@ -51,7 +51,7 @@ export function trainLayer(samples, classes, { epochs = EPOCHS, onProgress } = {
 }
 
 /**
- * The curve: loss falling (Naples) and training accuracy rising (gray),
+ * The curve: loss falling (Ivory Buff) and training accuracy rising (gray),
  * each named at its end so neither depends on colour.
  */
 export function drawCurve(canvas, history, epochs = EPOCHS) {
@@ -85,7 +85,7 @@ export function drawCurve(canvas, history, epochs = EPOCHS) {
     ctx.setLineDash([])
   }
   line('acc', GRAY, [5, 4])
-  line('loss', NAPLES, [])
+  line('loss', IVORY, [])
 
   const last = history[history.length - 1]
   const tag = (text, v, colour) => {
@@ -93,7 +93,7 @@ export function drawCurve(canvas, history, epochs = EPOCHS) {
     ctx.textBaseline = 'middle'
     ctx.fillText(text, X(history.length - 1) + 6 * dpr, Y(v))
   }
-  tag(`${t('ค่าผิดพลาด', 'loss')} ${last.loss.toFixed(2)}`, last.loss, NAPLES)
+  tag(`${t('ค่าผิดพลาด', 'loss')} ${last.loss.toFixed(2)}`, last.loss, IVORY)
   tag(`${t('ถูก', 'acc')} ${Math.round(last.acc * 100)}%`, last.acc, GRAY)
 }
 

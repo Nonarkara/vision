@@ -23,7 +23,7 @@
 .drive-hero { display: grid; gap: 2px; margin-bottom: var(--gap); background: var(--black); color: var(--white); }
 .hero-bar { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 14px 6px; }
 .hero-bar .label { color: var(--gray); }
-.hero-name { margin: 0; text-align: right; font-weight: 600; color: var(--naples); }
+.hero-name { margin: 0; text-align: right; font-weight: 600; color: var(--ivory); }
 .hero-screen { display: block; width: 100%; height: clamp(220px, 34vw, 460px); background: #0b0f14; }
 .hero-controls { padding: 8px 14px; }
 .hero-controls .btn { flex: 1; white-space: nowrap; }
@@ -41,12 +41,12 @@
 .focus { display: grid; gap: 8px; padding: 16px; }
 .focus p { margin: 0; }
 .focus .label { color: var(--gray); }
-.focus-name { font-family: var(--sans); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--naples); }
+.focus-name { font-family: var(--sans); font-weight: 700; font-size: clamp(1.4rem, 1vw + 1rem, 1.9rem); line-height: 1.1; color: var(--ivory); }
 html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .focus-row { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 8px; font-size: var(--micro); min-height: 2.9em; }
 /* The unnamed row: the lesson of the room, so it reads as its own line. */
 .focus-row.unnamed { color: var(--gray); }
-.focus-row.unnamed .unnamed { color: var(--naples); }
+.focus-row.unnamed .unnamed { color: var(--ivory); }
 .focus .btn { justify-self: start; }
 
 .cards { display: grid; gap: 2px; }
@@ -57,14 +57,14 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 }
 .car-card:hover { background: var(--black-2); }
 .car-card[aria-pressed="true"] { outline: 2px solid var(--white); outline-offset: -2px; }
-.car-card.is-crashed .car-id { background: var(--signal); }
+.car-card.is-crashed .car-id { background: var(--jasper); }
 .car-id { grid-area: id; align-self: start; display: flex; align-items: center; justify-content: center; height: 2.2em; font-weight: 600; color: var(--black); }
 .car-card[data-style="careful"] .car-id { background: var(--white); }
 .car-card[data-style="normal"] .car-id { background: var(--gray); }
-.car-card[data-style="hasty"] .car-id { background: var(--naples); }
+.car-card[data-style="hasty"] .car-id { background: var(--ivory); }
 .car-name { grid-area: name; font-weight: 600; }
 .car-score { grid-area: score; color: var(--gray); }
-.car-say { grid-area: say; color: var(--naples); min-height: 2.9em; }
+.car-say { grid-area: say; color: var(--ivory); min-height: 2.9em; }
 
 .legend { margin: 8px 0 0; }
 .habits th:first-child { width: 34%; }
@@ -102,13 +102,13 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 }
 .gate-head h2 { font-size: var(--subtitle); line-height: 1.08; margin: 0; }
 .gate-head .lede { margin: 8px 0 0; max-width: 58ch; }
-.gate .stem-label { color: var(--naples); margin-bottom: 6px; }
-.captcha { display: grid; gap: 10px; align-content: start; max-width: 70ch; }
+.gate .stem-label { color: var(--ivory); margin-bottom: 6px; }
+.captcha { display: grid; gap: 10px; align-content: start; max-width: 62ch; }
 .captcha-pad { position: relative; width: min(92vw, 640px); }
 .captcha-grid {
   position: relative; z-index: 0;
   width: 100%; aspect-ratio: 16 / 10; /* the crops are wide night frames; a square cut cars off */
-  background: var(--olive); border: 0; display: block;
+  background: var(--indigo); border: 0; display: block;
   pointer-events: none;
 }
 .captcha-tiles {
@@ -125,7 +125,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); }
 .captcha-tiles .btn[aria-pressed="true"] {
   background: rgba(241, 90, 48, 0.28);
-  outline: 3px solid var(--signal); outline-offset: -3px;
+  outline: 3px solid var(--jasper); outline-offset: -3px;
 }
 .captcha-ask { margin: 0; font-size: var(--body); font-weight: 600; }
 .captcha .controls { gap: 2px; justify-self: start; }
@@ -133,7 +133,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate-reveal .btn,
 .gate-replay .btn { min-height: 44px; }
 .gate .btn { background: var(--black-2); color: var(--white); }
-.gate .btn.primary { background: var(--signal); color: var(--black); }
+.gate .btn.primary { background: var(--black); color: var(--ivory); }
 .gate .btn:hover { background: var(--black); color: var(--white); }
 .gate .captcha-tiles .btn { background: transparent; color: transparent; }
 .gate .captcha-tiles .btn:hover { background: rgba(251, 230, 160, 0.22); color: transparent; }
@@ -153,7 +153,7 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
 .gate[data-open="true"] .gate-out,
 .gate[data-through="true"] .gate-out { display: none; }
 .captcha [data-captcha-state]:empty { display: none; }
-.gate-taught { margin: 6px 0 0; max-width: 65ch; color: var(--naples); }
+.gate-taught { margin: 6px 0 0; max-width: 65ch; color: var(--ivory); }
 .gate-reveal { display: grid; gap: 12px; max-width: 62ch; }
 .gate-reveal p { margin: 0; }
 .gate[data-open="true"] {

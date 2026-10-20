@@ -46,7 +46,7 @@ if (isMain) {
   // whose hues the page had stopped using.
   const tokens = declaredTokens()
   const cssMismatch = []
-  for (const name of ['naples', 'olive', 'gray', 'signal']) {
+  for (const name of ['ivory', 'indigo', 'gray', 'jasper']) {
     if (!tokens.has(`--${name}`)) cssMismatch.push(`--${name} is on the ladder but not declared in vision.css`)
   }
 

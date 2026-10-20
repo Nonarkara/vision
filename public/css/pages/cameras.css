@@ -3,31 +3,60 @@
 
 /* Kind swatches: the same squares the map draws. Bright = a machine can read it. */
 .sw { display: inline-block; width: 10px; height: 10px; margin-right: 8px; vertical-align: 0; flex: none; }
-.sw-video { background: var(--naples); width: 12px; height: 12px; }
-.sw-still { background: var(--naples); opacity: 0.85; }
+.sw-video { background: var(--ivory); width: 12px; height: 12px; }
+.sw-still { background: var(--ivory); opacity: 0.85; }
 .sw-view { background: transparent; outline: 1px solid var(--gray); outline-offset: -1px; }
 .sw-off { background: var(--gray); opacity: 0.45; width: 7px; height: 7px; }
-.sw-picked { background: var(--signal); }
+.sw-picked { background: var(--jasper); }
 /* On paper, the bright squares need ink around them to be seen at all. */
 .kinds .sw-video, .kinds .sw-still, .cam-list .sw-video, .cam-list .sw-still { outline: 1px solid var(--text); outline-offset: 0; }
 .kinds .sw-view, .cam-list .sw-view { outline-color: var(--text); }
 .kinds .sw-off, .cam-list .sw-off { background: var(--text); }
 
-/* A. Four kinds */
+/* B. Four kinds */
 .kinds { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--gap); }
 .kinds dt { font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; }
 .kinds dd { margin: 0; font-size: var(--micro); max-width: 46ch; }
 
-/* B. The map and the list */
-.atlas { padding: clamp(48px, 7vw, 112px) 0 0; }
-.atlas-head { display: grid; gap: 12px; padding: 0 var(--gutter) var(--gap); }
-.atlas-head h2 { margin-bottom: 0.2em; }
+/* A. The map and the list */
+/* The map is the page, so it opens the page. The house's own opening split —
+   the same one the home page uses for the machine's eye — with the map in the
+   stage's place: the title and the lede on the left, the instrument on the
+   right, both above the fold. A giant heading over a map is a magazine
+   article about maps; a map beside a modest heading is a map. */
+/* The title stands at the top left, the note under it, and the map beside
+   them on a wide screen. On a phone the order is title, map, note: the map
+   reaches the first screen, which is the rule for a map product. */
+.opening-map {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-areas: "text stage" "note stage";
+}
+.opening-map .opening-text { grid-area: text; }
+.opening-map .atlas-stage { grid-area: stage; }
+.opening-map .opening-note { grid-area: note; padding: 0 var(--gutter) clamp(24px, 3vw, 40px); }
+@media (max-width: 900px) {
+  .opening-map { grid-template-columns: 1fr; grid-template-areas: "text" "stage" "note"; }
+  .opening-map .opening-note { padding-bottom: 28px; }
+}
+.opening-map .opening-text { gap: clamp(24px, 3vw, 44px); }
+.opening-map h1 { font-size: var(--title); }
+.opening-map .prose { max-width: 46ch; }
+.atlas-stage { display: flex; flex-direction: column; min-width: 0; }
+.atlas-stage .bench { flex: 1 1 auto; }
+
+/* The directory of cameras, under the map: the chapter's heading and the
+   list that names what the map shows. */
+.atlas { padding: clamp(32px, 4vw, 72px) 0 0; }
+.atlas-head {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 0 var(--gutter) 14px;
+}
 .atlas-head .chapter-no { font-family: var(--mono); font-size: var(--micro); }
-.atlas-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 0; align-items: start; }
+.atlas-head h2 { margin: 0; }
 @media (max-width: 1000px) { .atlas-grid { grid-template-columns: 1fr; } }
 
 
-.map-view { position: relative; height: min(76vh, 820px); min-height: 420px; background: var(--black); }
+.map-view { position: relative; height: min(88vh, 960px); min-height: 420px; background: var(--black); }
 .map-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: pan-y; }
 @media (max-width: 1000px) { .map-view { height: min(118vw, 720px); min-height: 380px; } }
 .map-tools { align-items: center; }
@@ -41,7 +70,7 @@
 html[data-lang="th"] .picked { font-family: var(--thai); }
 .picked .micro { color: var(--gray); }
 .picked-name { font-size: var(--body); font-weight: 600; }
-.picked-why { color: var(--naples) !important; }
+.picked-why { color: var(--ivory) !important; }
 .picked-actions { margin-top: 8px; background: transparent; }
 
 .atlas-side { min-width: 0; padding: 0 var(--gutter) var(--gap); }
@@ -52,7 +81,8 @@ html[data-lang="th"] .picked { font-family: var(--thai); }
 @media (min-width: 1300px) { .filters { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr) auto; } .filters-q { grid-column: auto; } }
 .list-count { margin: 0 0 8px; }
 
-.cam-list { list-style: none; margin: 0; padding: 0; }
+.cam-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2px; }
+@media (max-width: 900px) { .cam-list { grid-template-columns: 1fr; } }
 .cam-row {
   display: grid; grid-template-columns: minmax(0, 1fr) auto;
   gap: 4px 16px; align-items: center; padding: 10px 12px; margin: 0;
@@ -98,5 +128,4 @@ html[data-lang="th"] .picked { font-family: var(--thai); }
 .census .tile-meta { display: flex; flex-direction: column; gap: 4px; }
 .census-src { color: var(--gray); }
 .census-found { color: var(--white); }
-.census-caveat { max-width: 80ch; }
 .census-caveat p { margin: 0; }

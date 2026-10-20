@@ -64,4 +64,4 @@ Each example prints its working in the terminal (as text art, tables and charts)
 
 ---
 
-<sub>Part of vision.nonarkara.org. Diagrams use Sanzo Wada's Plate 303 as converted in [Palette](https://colors.nonarkara.org). Corrections welcome as [issues](https://github.com/Nonarkara/vision/issues).</sub>
+<sub>Part of vision.nonarkara.org. Diagrams use Sanzo Wada's archive as converted in [Palette](https://colors.nonarkara.org). Corrections welcome as [issues](https://github.com/Nonarkara/vision/issues).</sub>

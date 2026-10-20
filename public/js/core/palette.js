@@ -2,16 +2,16 @@
  * THE PALETTE — one definition, read by the gate and by the browser.
  *
  * TONE LADDER. Sanzo Wada's archive is a grid of hues by tone. The site uses four
- * hues from Plate 303 and admits no others. Each hue gets three tones built on one
- * shared ladder — the same percentages of black or white mixed into every hue — so
- * a pale Olive and a pale Naples Yellow are visibly the same *move*. That shared
- * ladder is the rule that keeps four hues from reading as eight arbitrary colours.
+ * hues and admits no others. Each hue gets three tones built on one shared ladder —
+ * the same percentages of black or white mixed into every hue — so a pale Indigo
+ * and a pale Ivory Buff are visibly the same *move*. That shared ladder is the rule
+ * that keeps four hues from reading as eight arbitrary colours.
  *
- *   deep = 76% hue + 24% black     base = the plate's own value     pale = 78% hue + 22% white
+ *   deep = 24% hue + 76% black     base = the plate's own value     pale = 22% hue + 78% white
  *
- * Machine light may glow Peach Red — the same hue, soft, only on what the machine
+ * Machine light may glow Jasper Red — the same hue, soft, only on what the machine
  * sees. That glow is not a new pairing and not a fifth hue.
- * One job per colour still holds: tone changes emphasis, never meaning. Peach Red
+ * One job per colour still holds: tone changes emphasis, never meaning. Jasper Red
  * is only ever what the machine sees, at any tone.
  *
  * This file was extracted from scripts/palette-measure.mjs, which said plainly in its
@@ -33,10 +33,10 @@ const mix = (a, b, t) => {
 }
 
 export const HUES = {
-  naples: '#fbe6a0',
-  olive: '#253122',
+  ivory: '#ebd3a2',
+  indigo: '#051230',
   gray: '#b6bfc1',
-  signal: '#f15a30',
+  jasper: '#eb5324',
 }
 
 export function ladder() {
@@ -80,43 +80,43 @@ export const FLOOR = { text: 4.5, large: 3, mark: 3 }
 
 export function pairings(p = ladder()) {
   const rows = [
-    // ── On the paper ground (Naples) ────────────────────────────────────
-    ['required', 'olive on naples', p.olive.base, p.naples.base, 'text'],
-    ['required', 'black on naples', p.black.base, p.naples.base, 'text'],
-    ['required', 'olive.deep on naples', p.olive.deep, p.naples.base, 'text'],
-    // The unlock. The old system banned signal on paper outright (2.7:1) because
-    // there was only one signal tone. signal.deep clears 13:1, so emphasis text
+    // ── On the paper ground (Ivory Buff) ─────────────────────────────────
+    ['required', 'indigo on ivory', p.indigo.base, p.ivory.base, 'text'],
+    ['required', 'black on ivory', p.black.base, p.ivory.base, 'text'],
+    ['required', 'indigo.deep on ivory', p.indigo.deep, p.ivory.base, 'text'],
+    // The unlock. The old system banned signal on paper outright (2.48:1) because
+    // there was only one signal tone. jasper.deep clears 11.30:1, so emphasis text
     // on paper is now legal — same hue, same job, one step down the ladder.
-    ['required', 'signal.deep on naples', p.signal.deep, p.naples.base, 'text'],
-    // ── On the dark grounds (Olive, Black) ───────────────────────────────
-    ['required', 'naples on olive', p.naples.base, p.olive.base, 'text'],
-    ['required', 'naples.pale on olive', p.naples.pale, p.olive.base, 'text'],
+    ['required', 'jasper.deep on ivory', p.jasper.deep, p.ivory.base, 'text'],
+    // ── On the dark grounds (Indigo, Black) ──────────────────────────────
+    ['required', 'ivory on indigo', p.ivory.base, p.indigo.base, 'text'],
+    ['required', 'ivory.pale on indigo', p.ivory.pale, p.indigo.base, 'text'],
     ['required', 'white on black', p.white.base, p.black.base, 'text'],
-    ['required', 'naples on black', p.naples.base, p.black.base, 'text'],
+    ['required', 'ivory on black', p.ivory.base, p.black.base, 'text'],
     ['required', 'gray on black', p.gray.base, p.black.base, 'text'],
     ['required', 'gray.pale on black', p.gray.pale, p.black.base, 'text'],
-    ['required', 'signal on black', p.signal.base, p.black.base, 'large'],
-    ['required', 'signal.pale on olive', p.signal.pale, p.olive.base, 'mark'],
+    ['required', 'jasper on black', p.jasper.base, p.black.base, 'large'],
+    ['required', 'jasper.pale on indigo', p.jasper.pale, p.indigo.base, 'mark'],
     // ── On the quiet field (Gray) ────────────────────────────────────────
-    ['required', 'olive on gray', p.olive.base, p.gray.base, 'text'],
+    ['required', 'indigo on gray', p.indigo.base, p.gray.base, 'text'],
     ['required', 'black on gray', p.black.base, p.gray.base, 'text'],
-    ['required', 'black on signal', p.black.base, p.signal.base, 'text'],
-    // A deeper olive ground carries Naples even harder — the way to make a
+    ['required', 'black on jasper', p.black.base, p.jasper.base, 'text'],
+    // A deeper indigo ground carries Ivory Buff even harder — the way to make a
     // section recede without introducing a hue.
-    ['required', 'naples on olive.deep', p.naples.base, p.olive.deep, 'text'],
+    ['required', 'ivory on indigo.deep', p.ivory.base, p.indigo.deep, 'text'],
 
     // ── Forbidden, and proved so ────────────────────────────────────────
-    // Black on Olive is 1.40:1. The olive field must always carry Naples.
-    ['banned', 'black on olive', p.black.base, p.olive.base, 'text'],
+    // Black on Indigo is 1.03:1. The indigo field must always carry Ivory Buff.
+    ['banned', 'black on indigo', p.black.base, p.indigo.base, 'text'],
     // Pale on pale: a pale tone is for a dark ground only.
-    ['banned', 'olive.pale on naples', p.olive.pale, p.naples.base, 'text'],
-    // Base signal is still marks-only on paper (2.7:1) — that ban survives;
-    // signal.deep is the sanctioned way to set signal as text on Naples.
-    ['banned', 'signal on naples', p.signal.base, p.naples.base, 'text'],
-    // A deep tone is for a light ground; putting one on Olive is 1.15:1.
-    ['banned', 'naples.deep on olive', p.naples.deep, p.olive.base, 'text'],
-    // White on Peach Red is 3.08:1 — large marks only, never prose.
-    ['banned', 'white on signal', p.white.base, p.signal.base, 'text'],
+    ['banned', 'indigo.pale on ivory', p.indigo.pale, p.ivory.base, 'text'],
+    // Base signal is still marks-only on paper (2.48:1) — that ban survives;
+    // jasper.deep is the sanctioned way to set signal as text on Ivory Buff.
+    ['banned', 'jasper on ivory', p.jasper.base, p.ivory.base, 'text'],
+    // A deep tone is for a light ground; putting one on Indigo is 1.47:1.
+    ['banned', 'ivory.deep on indigo', p.ivory.deep, p.indigo.base, 'text'],
+    // White on Jasper Red is 3.32:1 — large marks only, never prose.
+    ['banned', 'white on jasper', p.white.base, p.jasper.base, 'text'],
   ]
   return rows.map(([claim, name, fg, bg, kind]) => {
     const ratio = contrast(fg, bg)
@@ -128,11 +128,11 @@ export function pairings(p = ladder()) {
 // ─────────────────────────────────────────────────────────────────────────────
 // THE COLOUR STUDY
 //
-// The site has always assigned each hue a job: Naples is the paper, Olive is the
-// ink, Gray is what the machine is unsure of, Peach Red is only ever what the
+// The site has always assigned each hue a job: Ivory Buff is the paper, Indigo is
+// the ink, Gray is what the machine is unsure of, Jasper Red is only ever what the
 // machine sees. That assignment is a human decision, and it is not in the colours.
 //
-// A machine reading a plate gets numbers. #fbe6a0 and #253122 are two triples of
+// A machine reading a plate gets numbers. #ebd3a2 and #051230 are two triples of
 // bytes; contrast is a ratio computed from three luminance coefficients. Nothing in
 // that arithmetic knows that one of them was ever supposed to feel like alarm.
 //
@@ -149,10 +149,10 @@ export function pairings(p = ladder()) {
 //
 // A role may use any tone of its hue, and takes the first that clears its floor —
 // base if it can, otherwise one step down the ladder. That is the ladder doing the
-// job it was built for: "signal.deep clears 13:1, so emphasis text on paper is legal
-// — same hue, same job, one step down the ladder". Pinning every role to `base` was
-// my first cut and it wrongly threw away 20 of 24 plates, which says the floor, not
-// the study, was wrong.
+// job it was built for: "jasper.deep clears 11.30:1, so emphasis text on paper is
+// legal — same hue, same job, one step down the ladder". Pinning every role to
+// `base` was my first cut and it wrongly threw away 20 of 24 plates, which says the
+// floor, not the study, was wrong.
 export const ROLES = ['ground', 'ink', 'quiet', 'signal']
 
 /**
@@ -160,12 +160,12 @@ export const ROLES = ['ground', 'ink', 'quiet', 'signal']
  *
  * ink and quiet are text on the paper, so they carry the text floor. signal is
  * NOT: the plate draws it as a solid bar — a mark, never a field carrying words —
- * because the site's own rule is that Peach Red is only ever what the machine sees,
- * at any tone. Asking signal to carry ink was a design I tried first and it failed
- * on all 24 plates (ink-on-signal never once cleared 4.5:1, yet `legible` still
- * reported true, because the check was measuring a different pairing than the one
- * the plate paints). A mark needs 3:1, not 4.5:1 — that is WCAG's non-text rule,
- * and it is the same floor the house design uses for `signal on black`.
+ * because the site's own rule is that Jasper Red is only ever what the machine
+ * sees, at any tone. Asking signal to carry ink was a design I tried first and it
+ * failed on all 24 plates (ink-on-signal never once cleared 4.5:1, yet `legible`
+ * still reported true, because the check was measuring a different pairing than
+ * the one the plate paints). A mark needs 3:1, not 4.5:1 — that is WCAG's non-text
+ * rule, and it is the same floor the house design uses for `jasper on black`.
  */
 const PLATE_FLOOR = { ink: FLOOR.text, quiet: FLOOR.text, signal: FLOOR.mark }
 

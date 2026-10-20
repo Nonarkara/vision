@@ -7,11 +7,11 @@
 // land apart here, and the page says so under the picture.
 
 import { pca2 } from '../ml/learner.js'
-import { fitCanvas, clear, canvasScale, SIGNAL, NAPLES, GRAY, BLACK } from '../cv/draw.js'
+import { fitCanvas, clear, canvasScale, JASPER, IVORY, GRAY, BLACK } from '../cv/draw.js'
 import { t } from '../core/i18n.js'
 
 const WHITE = '#f7f5ef'
-const CLASS_INK = [NAPLES, GRAY, WHITE, NAPLES]
+const CLASS_INK = [IVORY, GRAY, WHITE, IVORY]
 
 export function createMap(canvas) {
   let set = []
@@ -80,14 +80,14 @@ export function createMap(canvas) {
     proj.points.forEach(([px, py], i) => glyph(ctx, set[i].y, sx(px), sy(py), r))
 
     if (live) {
-      ctx.strokeStyle = SIGNAL
+      ctx.strokeStyle = JASPER
       ctx.lineWidth = 3 * dpr
       ctx.beginPath()
       ctx.arc(lx, ly, r * 2.2, 0, Math.PI * 2)
       ctx.stroke()
       const text = t('ตอนนี้', 'now')
       const tw = ctx.measureText(text).width + 8 * dpr
-      ctx.fillStyle = SIGNAL
+      ctx.fillStyle = JASPER
       ctx.fillRect(lx + r * 2.6, ly - 9 * dpr, tw, 18 * dpr)
       ctx.fillStyle = BLACK
       ctx.textBaseline = 'middle'

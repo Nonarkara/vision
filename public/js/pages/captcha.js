@@ -6,8 +6,8 @@
 // buttons; the canvas only shows the photographs. There is also a way past the
 // whole thing, below the grid, for anyone who would rather not answer.
 
-import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.18.0'
-import { features, train, pick } from '../drive/teach.js?v=1.18.0'
+import { makeChallenge, retryChallenge, check, score, TARGETS, GRID, readGate, writeGate, phrase, GATE_TEXT, taughtSentence } from '../drive/captcha.js?v=1.19.0'
+import { features, train, pick } from '../drive/teach.js?v=1.19.0'
 
 const images = new Map()
 function photo(src) {
@@ -29,7 +29,7 @@ function tileRect(i, w, h) {
 }
 
 function drawTile(g, tile, x, y, w, h) {
-  g.fillStyle = '#253122'
+  g.fillStyle = '#051230'
   g.fillRect(x, y, w, h)
   const img = photo(tile.src)
   if (!img || !img.complete || !img.naturalWidth) return false
@@ -119,7 +119,7 @@ export function mountGate(root, { onEnter, lang = () => 'en', onLang, storage } 
       const button = root.querySelector(`[data-tile="${i}"]`)
       if (button) button.dataset.frame = tile.id
       if (picked.has(i)) {
-        g.strokeStyle = '#f15a30'
+        g.strokeStyle = '#eb5324'
         g.lineWidth = 4
         g.strokeRect(x + 2, y + 2, cw - 4, ch - 4)
       }

@@ -1,34 +1,53 @@
 .focus-room { padding:0 var(--gutter) 48px; }
-.focus-grid { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr); gap:var(--gap); align-items:start; }
+/* The instrument column was 60% of the width and the picture was 4:3, so the
+   black column was a third of the first screen before the camera had even been
+   asked for. It is the house's own bench ratio now, and the column is a little
+   narrower — the instrument stays the biggest thing on the page without being
+   the whole page. */
+.focus-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr); gap:var(--gap); align-items:start; }
+.focus-col { display:flex; flex-direction:column; gap:12px; min-width:0; }
 /* The camera panel is the instrument, so it carries the house `.bench-view`
    treatment and says what it is while the camera is off. A black rectangle
    with nothing in it was the largest empty region on the page. */
-.focus-view { aspect-ratio:4/3; }
+.focus-view { aspect-ratio:16 / 9; }
 /* The idle line sits at the top of the panel, where the visitor's eye already
    is, rather than in the middle of a panel that runs off the screen. */
 .focus-view .bench-state { align-items:flex-start; padding-top:22px; font-size:var(--read); }
 .focus-setup { display:grid; gap:16px; }
 .focus-setup h2 { font-size:var(--body); margin:0; }
 .focus-setup p { margin:0; }
-.setting { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.setting select { padding:10px; background:var(--white); color:var(--black); font:inherit; max-width:50%; }
+
+/* The camera's own status is a readout, not a slab: a line of words under the
+   instrument, on the page's own ground. It used to be a black field inside the
+   black panel, which is what made the whole column read as one dead block. */
+.session-state { padding:8px 0 0; margin:0; color:var(--text); font-size:var(--micro); min-height:2.6em; }
+.focus-room .controls { background:transparent; margin-top:12px; }
+
+/* A native select, restyled: a field with the house's own chevron. The browser
+   drew a 1px #767676 border and the platform chevron, and that grey is a fifth
+   grey that exists nowhere in the plate. */
+.setting { position:relative; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.setting select {
+  min-height:var(--target); max-width:50%; padding:0 34px 0 12px;
+  background:var(--field); color:var(--field-text);
+  font-family:var(--mono); font-size:var(--micro);
+  cursor:pointer;
+}
+.setting .select-mark { color:var(--field-text); right:12px; top:50%; translate:0 -50%; }
+
 .consent { display:flex; align-items:flex-start; gap:12px; }
-.consent input { flex:0 0 auto; width:22px; height:22px; margin-top:3px; accent-color:var(--olive); }
-/* The button is a grid item, and a grid item stretches. Its label is four
-   words; the button is the width of the column. */
-.focus-setup .btn { justify-self:start; }
-.session-state { padding:16px; margin:0; color:var(--naples); background:var(--black); min-height:4em; }
+.consent .check { margin-top:3px; }
 .session-results { margin-top:32px; }
 /* The four readings are a ruled strip sized to their own words, not four
    equal tracks of a grid. */
 .session-metrics { display:flex; flex-wrap:wrap; gap:2px; margin:16px 0; }
 .session-metric { flex:0 0 auto; background:var(--black); color:var(--white); padding:16px; }
-.session-metric strong { display:block; font-family:var(--mono); font-size:var(--lede); color:var(--naples); }
+.session-metric strong { display:block; font-family:var(--mono); font-size:var(--lede); color:var(--ivory); }
 .session-live { min-height:3em; margin:16px 0; }
 .session-timeline { display:flex; flex-wrap:wrap; gap:3px; max-height:160px; overflow:auto; }
 .minute { display:flex; width:28px; height:36px; background:var(--gray); }
 .minute i { display:block; height:100%; }
-.minute .facing { background:var(--olive); }.minute .away { background:var(--naples); }.minute .absent { background:var(--gray); }
+.minute .facing { background:var(--indigo); }.minute .away { background:var(--ivory); }.minute .absent { background:var(--gray); }
 @media(max-width:1000px) { .focus-grid { grid-template-columns:1fr; } }
 
 .focus-room:is(:fullscreen,.is-expanded) { padding:16px; background:var(--white); color:var(--black); }

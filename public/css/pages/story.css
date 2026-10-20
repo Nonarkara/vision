@@ -1,36 +1,46 @@
 /* /story — the one page allowed to be loud. Same plate, same rules
    (no radius, no shadow, no gradient), turned up: full-bleed photographs,
-   oversized type, CCTV furniture. Peach Red still marks only machine
+   oversized type, CCTV furniture. Jasper Red still marks only machine
    findings, the recording light, and the call to action. */
 
 /* ── Hero: a control room, recording ─────────────────────────────── */
 .hero {
   position: relative; display: flex; flex-direction: column; justify-content: flex-end;
   min-height: calc(100svh - var(--rail-height)); overflow: hidden;
-  background: var(--black); color: var(--naples);
+  background: var(--black); color: var(--ivory);
   /* The REC chip is taken out of flow. This padding is its row, so the
      eyebrow and the headline start underneath it instead of through it. */
   padding-top: 52px;
   container-type: inline-size;
 }
 .hero-shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 22%; }
-.hero-veil { position: absolute; inset: 0; background: rgba(16, 16, 16, 0.58); }
+/* The veil is the type's ground, so it has to be measured like one. At 58%
+   the brightest patch of the photograph still came through at rgb(107,107,107),
+   and Ivory Buff on that was 3.65:1 — under the 3:1 large-text floor in places,
+   and the new paper is darker than the old one was. The veil is deeper and the
+   type is White, which clears 6.13:1 against the worst patch of the picture.
+   The photograph is the loud thing on this page; the words on it still have to
+   be readable. */
+.hero-veil { position: absolute; inset: 0; background: rgba(16, 16, 16, 0.64); }
 .hero-text { position: relative; z-index: 1; padding: 12px var(--gutter) clamp(56px, 8vw, 120px); max-width: 1400px; }
-.hero h1 { font-size: clamp(2rem, 10vw, 9.5rem); line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; overflow-wrap: normal; word-break: normal; hyphens: manual; }
+.hero h1 { font-size: clamp(2rem, 10vw, 9.5rem); line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; overflow-wrap: normal; word-break: normal; hyphens: manual; color: var(--white); }
 .hero h1 [lang="th"] { text-transform: none; font-size: 0.62em; line-height: 1.08; letter-spacing: 0; }
-.hero h1 em { font-style: normal; color: var(--black); background: var(--naples); padding: 0 0.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+/* The reversed word was Ivory Buff on a photograph already full of Ivory Buff
+   type, so it read as a hole punched in the line rather than as emphasis. It
+   is the house's own inversion now — ink on paper — which reads as a mark. */
+.hero h1 em { font-style: normal; color: var(--ivory); background: var(--black); padding: 0 0.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 @container (min-width: 1px) {
   .hero h1 { font-size: clamp(2rem, 10.5cqi, 9.5rem); }
 }
-.hero-lede { font-size: clamp(1.25rem, 1.2vw + 0.9rem, 2rem); font-weight: 600; max-width: 30ch; margin: 28px 0 0; }
-.hero-cap { position: absolute; right: var(--gutter); bottom: 16px; margin: 0; color: var(--gray); text-align: right; max-width: 60ch; }
+.hero-lede { font-size: clamp(1.25rem, 1.2vw + 0.9rem, 2rem); font-weight: 600; max-width: 30ch; margin: 28px 0 0; color: var(--white); }
+.hero-cap { position: absolute; right: var(--gutter); bottom: 16px; margin: 0; color: var(--ivory); text-align: right; max-width: 60ch; }
 .rec {
   position: absolute; z-index: 2; top: 12px; left: var(--gutter);
   max-width: calc(100% - 2 * var(--gutter));
   font-family: var(--mono); font-size: var(--micro); letter-spacing: 0.1em; color: var(--white);
   background: var(--black); padding: 6px 10px;
 }
-.rec-dot { color: var(--signal); animation: blink 1.2s steps(2, start) infinite; }
+.rec-dot { color: var(--jasper); animation: blink 1.2s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
 @media (max-width: 600px) {
   .hero { padding-top: 48px; }
@@ -45,15 +55,15 @@
 .story .prose .big { font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem); font-weight: 600; line-height: 1.4; }
 .story .prose .big[lang="th"] { line-height: 1.65; }
 .story .prose strong { background: var(--text); color: var(--ground); padding: 0 0.2em; font-weight: 600; }
-.field-quiet .prose strong { background: var(--olive); color: var(--naples); }
+.field-quiet .prose strong { background: var(--indigo); color: var(--ivory); }
 
 /* ── Exhibits: six rooms, labelled like feeds ────────────────────── */
 .exhibits { padding: clamp(48px, 7vw, 112px) var(--gutter); }
 .exhibits-head { display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); gap: var(--gap); align-items: end; margin-bottom: var(--gap); }
-.exhibits-head h2 { color: var(--naples); }
+.exhibits-head h2 { color: var(--ivory); }
 .exhibits-head p { max-width: 42ch; }
 .exhibits-head .controls { background: transparent; margin-top: 8px; }
-.exhibits-head .readout { padding: 12px 0 0; color: var(--naples); }
+.exhibits-head .readout { padding: 12px 0 0; color: var(--ivory); }
 @media (max-width: 900px) { .exhibits-head { grid-template-columns: 1fr; } }
 
 /* Masonry by columns: every photo keeps its own shape, so machine boxes line up. */
@@ -64,23 +74,23 @@
 .shot-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .shot-tag { position: absolute; top: 0; left: 0; padding: 4px 8px; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; background: var(--black); color: var(--white); }
 .shot figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 10px 12px 14px; color: var(--gray); }
-.shot-count { color: var(--signal); }
+.shot-count { color: var(--jasper); }
 
 /* ── The question, as loud as the page gets ─────────────────────── */
-.question { background: var(--naples); color: var(--black); padding: clamp(64px, 10vw, 160px) var(--gutter); }
+.question { background: var(--ivory); color: var(--black); padding: clamp(64px, 10vw, 160px) var(--gutter); }
 .question p {
   margin: 0; font-family: var(--sans); font-weight: 700; text-transform: uppercase;
   font-size: clamp(2.75rem, 8.5vw, 9rem); line-height: 0.9; letter-spacing: -0.03em;
 }
 .question p[lang="th"] { font-family: var(--thai); text-transform: none; letter-spacing: 0; line-height: 1.2; font-size: clamp(2.25rem, 6vw, 6.5rem); }
-.question em { font-style: normal; background: var(--black); color: var(--naples); padding: 0 0.1em; }
+.question em { font-style: normal; background: var(--black); color: var(--ivory); padding: 0 0.1em; }
 
 /* ── The live wall ──────────────────────────────────────────────── */
 .wall { grid-template-columns: repeat(3, minmax(0, 1fr)); min-height: 120px; }
 @media (max-width: 760px) { .wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .wall-tile .tile-meta { min-height: 0; }
 .wall-controls { background: transparent; margin-bottom: 2px; }
-.wall-note { color: var(--gray); max-width: 70ch; margin: 0; }
+.wall-note { color: var(--gray); max-width: 62ch; margin: 0; }
 #try .readout { padding-left: 0; }
 
 /* ── Makers ─────────────────────────────────────────────────────── */
@@ -94,15 +104,15 @@
 .portrait { width: 120px; height: 120px; object-fit: cover; filter: grayscale(1) contrast(1.1); }
 @media (max-width: 480px) { .creator { grid-template-columns: 1fr; } }
 /* On-screen display: where and when the photo was taken, from its own metadata. */
-.shot-osd { position: absolute; right: 0; bottom: 0; padding: 4px 8px; font-size: 0.75rem; letter-spacing: 0.04em; background: var(--black); color: var(--naples); }
+.shot-osd { position: absolute; right: 0; bottom: 0; padding: 4px 8px; font-size: 0.75rem; letter-spacing: 0.04em; background: var(--black); color: var(--ivory); }
 
 /* ── The blink drill: now it is your turn ───────────────────────────── */
 .drill { border-top: 1px solid var(--rule); margin-top: clamp(32px, 4vw, 56px); padding-top: clamp(24px, 3vw, 40px); }
-.drill-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 68ch; }
+.drill-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 62ch; }
 .drill-head h3 { font-family: var(--sans); font-size: clamp(2rem, 3vw + 0.75rem, 4rem); line-height: 1; margin: 0; }
 .drill-head h3 [lang="th"] { font-family: var(--thai); font-size: 0.8em; line-height: 1.25; }
 .drill-head p { margin: 0; }
-.drill-fair { border-left: 3px solid var(--signal); padding-left: 12px; }
+.drill-fair { border-left: 3px solid var(--jasper); padding-left: 12px; }
 .drill-controls { background: transparent; margin-bottom: 2px; }
 
 .drill-wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
@@ -118,15 +128,15 @@
 }
 .drill-tile.is-open { cursor: pointer; }
 .drill-tile:not(.is-open) { cursor: default; }
-/* Peach Red still means one thing only: the machine found something. */
-.drill-tile.is-machine { outline: 3px solid var(--signal); outline-offset: -3px; }
-.drill-tile.is-machine .drill-num { background: var(--signal); color: var(--black); }
+/* Jasper Red still means one thing only: the machine found something. */
+.drill-tile.is-machine { outline: 3px solid var(--jasper); outline-offset: -3px; }
+.drill-tile.is-machine .drill-num { background: var(--jasper); color: var(--black); }
 /* Which screen actually flashed. This rule did not exist: the class was set on
    every reveal and nothing ever drew it, so the one on-wall statement of the
    truth was invisible and only the log table carried it. */
-.drill-tile.is-truth { outline: 3px solid var(--signal); outline-offset: -3px; }
-.drill-tile.is-yours .drill-num { background: var(--naples); color: var(--black); }
-.drill-tile:focus-visible { outline: 3px solid var(--naples); outline-offset: 2px; }
+.drill-tile.is-truth { outline: 3px solid var(--jasper); outline-offset: -3px; }
+.drill-tile.is-yours .drill-num { background: var(--ivory); color: var(--black); }
+.drill-tile:focus-visible { outline: 3px solid var(--ivory); outline-offset: 2px; }
 
 .drill-say { white-space: pre-line; color: var(--text); }
 .drill-log { width: 100%; border-collapse: collapse; margin-top: var(--gap); font-size: var(--micro); }
@@ -134,8 +144,8 @@
 .drill-log th, .drill-log td { padding: 6px 10px; text-align: start; border-bottom: 1px solid var(--rule); }
 .drill-log th { font-weight: 600; color: var(--text); white-space: nowrap; }
 .drill-log td { font-family: var(--mono); color: var(--gray); }
-.drill-log td.ok { color: var(--naples); }
-.drill-log td.miss { color: var(--signal); }
+.drill-log td.ok { color: var(--ivory); }
+.drill-log td.miss { color: var(--jasper); }
 @media (max-width: 560px) {
   .drill-log thead { display: none; }
   .drill-log tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
