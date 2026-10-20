@@ -1,9 +1,11 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
+import http from 'node:http'
 import os from 'node:os'
 import path from 'node:path'
 import { createColourStore, validateAnswer, readBody, FEELINGS } from '../server/colour.js'
+import { handler } from '../server/index.js'
 import { assignments } from '../public/js/core/palette.js'
 
 const tmp = (name) => path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'colour-')), name)
@@ -109,6 +111,33 @@ test('the shared plate can be rolled, and a legible one is the default', () => {
   assert.ok(s.legal.has(first.id))
   const any = s.dealShared(true)
   assert.ok(s.plates.some((p) => p.id === any.id))
+})
+
+test('the plate the server rolls is one the machine can read', async () => {
+  // The page says the six plates the machine refuses are reachable only behind
+  // an explicit button — never as a surprise. But the shared roll landed on a
+  // visitor's screen on arrival, and it was rolling from all twenty-four, so
+  // one visit in four put an unreadable plate in front of someone who never
+  // asked for one. This rolls it eighteen times, which is under the write
+  // limiter's burst and still enough to fail almost every time if the pool is
+  // wrong.
+  const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'colour-route-')), 'colour.json')
+  const before = fs.existsSync(file) ? fs.readFileSync(file) : null
+  const server = http.createServer(handler)
+  await new Promise((r) => server.listen(0, '127.0.0.1', r))
+  try {
+    const base = `http://127.0.0.1:${server.address().port}`
+    for (let i = 0; i < 18; i++) {
+      const res = await fetch(base + '/api/colour/share', { method: 'POST' })
+      assert.equal(res.status, 200)
+      const data = await res.json()
+      assert.ok(data.shared?.id, 'the server rolled no plate at all')
+      assert.ok(LEGAL.includes(data.shared.id), `the server dealt ${data.shared.id}, which the machine cannot read`)
+    }
+  } finally {
+    server.close()
+    if (before) fs.writeFileSync(file, before)
+  }
 })
 
 test('every feeling has Thai and English, and no two share an id', () => {

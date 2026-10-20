@@ -172,7 +172,10 @@ const ROUTES = {
     if (!writeLimiter.take(clientIp(req))) {
       return json(req, res, 429, { error: 'enough for now' }, { 'Retry-After': '30' })
     }
-    json(req, res, 200, { ok: true, shared: colour.dealShared(true) })
+    // Only a legible plate is dealt here. The page says the six the machine
+    // refuses are reachable only behind an explicit button — so the roll that
+    // lands on a visitor's screen must not be one of them.
+    json(req, res, 200, { ok: true, shared: colour.dealShared() })
   },
 
   'GET /api/health': (req, res) => {

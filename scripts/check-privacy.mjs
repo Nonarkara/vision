@@ -21,6 +21,9 @@
 //   node scripts/check-privacy.mjs
 
 import http from 'node:http'
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { handler } from '../server/index.js'
 import { PAGES } from '../server/http.js'
 
@@ -68,7 +71,35 @@ if (!legal.includes('No analytics, no advertising, no third-party tracking scrip
   fail('/legal.html', 'the no-tracking promise has been edited or removed — if that is deliberate, say so here')
 }
 
-// 4. Report the known residual honestly rather than pretending it is not there.
+// 4. The storage claim must be complete. /legal names, in public, every key the
+//    site keeps in the visitor's browser. A key that exists in the code but is
+//    missing from that sentence is a promise the page does not keep — and this
+//    page is the one a PDPA question would be answered from.
+const keys = new Set()
+const walk = (dir) => {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name)
+    if (entry.isDirectory()) walk(path)
+    else if (entry.name.endsWith('.js')) {
+      const src = readFileSync(path, 'utf8')
+      // A key, not a hostname: 'vision_lang_v1' and 'vision.camera' are keys,
+      // 'vision.nonarkara.org' is the site's own name in a media-session title.
+      for (const m of src.matchAll(/['"](vision(?:_[a-z0-9_]+|\.[a-z0-9_]+))['"]/g)) keys.add(m[1])
+    }
+  }
+}
+walk(fileURLToPath(new URL('../public/js/', import.meta.url)))
+for (const key of [...keys].sort()) {
+  if (!legal.includes(key)) fail('/legal.html', `stores "${key}" in the visitor's browser but does not name it`)
+}
+// The page also says how many there are. That number has to be the number the
+// code keeps, or the sentence is true about the wrong set.
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']
+const word = WORDS[keys.size]
+if (!word) fail('/legal.html', `${keys.size} storage keys — the storage sentence cannot name them all yet`)
+else if (!legal.includes(`keeps ${word} things`)) fail('/legal.html', `does not say it keeps ${word} things (the code keeps ${keys.size})`)
+
+// 5. Report the known residual honestly rather than pretending it is not there.
 const beacon = /static\.cloudflareinsights\.com/
 const injected = (await (await fetch(base + '/index.html')).text()).match(beacon)
 console.log('privacy:')
@@ -81,6 +112,7 @@ if (problems.length) {
 } else {
   console.log(`  script-src closed on ${sample.length} pages — no third-party code can run`)
   console.log(`  origin serves no third-party script`)
+  console.log(`  ${keys.size} browser-storage key(s) all named on /legal`)
 }
 if (injected) console.log('  ! a Cloudflare beacon is present in this response — investigate')
 else console.log('  origin response carries no Cloudflare beacon (any tag seen in a browser is added at the edge)')
