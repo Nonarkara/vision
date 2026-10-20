@@ -280,7 +280,7 @@ function renderMarkdown(md, ctx) {
         const id = isGlossary ? ` id="${slug(r[0])}"` : ''
         return `<tr${id}>${r.map((c) => `<td${langAttr(c)}>${inline(c, ctx)}</td>`).join('')}</tr>`
       }).join('')
-      out.push(`<div class="table-wrap"><table class="table"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`)
+      out.push(`<p class="table-scroll-hint"><span class="th" lang="th">ตารางกว้างกว่าจอ? เลื่อนตารางไปด้านข้างเพื่อดูทุกคอลัมน์</span><span class="en" lang="en">Table wider than your screen? Scroll it sideways to see every column.</span><span class="zh" lang="zh-Hans">表格比屏幕宽？左右滑动可查看所有列。</span></p><div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table" data-aria-th="ตารางเลื่อนด้านข้างได้" data-aria-en="Scrollable table" data-aria-zh="可左右滑动的表格"><table class="table"><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`)
       continue
     }
 
@@ -356,8 +356,8 @@ function meta(md) {
 const chrome = {
   eyebrowTh: 'คู่มือ · อ่านเองทีละบท',
   eyebrowEn: 'Handbook · read it on your own',
-  ledeTh: 'อ่านเองได้ทีละบท ทุกบทมาพร้อมแบบฝึกหัดให้ลองทำเองและคำถามท้ายบท เมื่ออยากรู้ให้ลึกกว่านี้ กลับไปที่ห้องเรียนบนเว็บเพื่อทดลองของจริง',
-  ledeEn: 'Read a chapter at a time. Each comes with an exercise you can try on your own and questions to check yourself. When you want to go deeper, go back to the room on this site and run it for real.',
+  ledeTh: 'อ่านคำอธิบาย แล้วลองทำแบบฝึกหัดของบทนี้',
+  ledeEn: 'Read the explanation, then try the chapter’s exercise.',
   tocTh: 'ในหน้านี้',
   tocEn: 'On this page',
   indexTh: 'หน้าคู่มือ',
@@ -396,6 +396,23 @@ function tocBlock(toc) {
   return `<details class="doc-toc"><summary><span class="th" lang="th">${chrome.tocTh}</span><span class="en" lang="en">${chrome.tocEn}</span></summary><ol>${items}</ol></details>`
 }
 
+const chineseTitles = {
+  '/handbook': '计算机视觉手册', '/handbook/01': '图像由数字组成',
+  '/handbook/02': '光线、色彩与阈值', '/handbook/03': '卷积与边缘',
+  '/handbook/04': '运动', '/handbook/05': '神经网络', '/handbook/06': '目标检测',
+  '/handbook/07': '教机器学习', '/handbook/08': '局限与伦理',
+  '/handbook/glossary': '术语表', '/handbook/reading': '延伸阅读',
+  '/handbook/actions': '浏览器能做什么',
+}
+function heading(spec, title) {
+  const parts = title.split(' · ')
+  const prefix = spec.chapter ? parts.shift() + ' · ' : ''
+  const english = prefix + parts[0]
+  const thai = prefix + parts.slice(1).join(' · ')
+  const chinese = prefix + chineseTitles[spec.route]
+  return `<span class="th" lang="th">${esc(thai)}</span><span class="en" lang="en">${esc(english)}</span><span class="zh" lang="zh-Hans">${esc(chinese)}</span>`
+}
+
 function pageHtml(spec, body, { title, desc }, toc) {
   return `<!doctype html>
 <html lang="th" data-lang="th">
@@ -410,12 +427,12 @@ function pageHtml(spec, body, { title, desc }, toc) {
 <main id="main">
   <header class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">${chrome.eyebrowTh}</span><span class="en" lang="en">${chrome.eyebrowEn}</span></span>
-      <h1>${esc(title)}</h1>
+      <span class="eyebrow label"><span class="th" lang="th">${chrome.eyebrowTh}</span><span class="en" lang="en">${chrome.eyebrowEn}</span><span class="zh" lang="zh-Hans">手册 · 逐章阅读</span></span>
+      <h1>${heading(spec, title)}</h1>
     </div>
     <div class="page-head-side">
       <p class="lede th" lang="th">${chrome.ledeTh}</p>
-      <p class="lede en" lang="en">${chrome.ledeEn}</p>
+      <p class="lede en" lang="en">${chrome.ledeEn}</p><p class="lede zh" lang="zh-Hans">阅读解释，再试试本章练习。</p>
       ${tocBlock(toc)}
     </div>
   </header>

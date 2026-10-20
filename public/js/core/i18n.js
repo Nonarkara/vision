@@ -61,8 +61,10 @@ export function noteMissingTranslation(root = document.body) {
   const existing = root.querySelector('.lang-note')
   if (existing) existing.remove()
   if (lang() !== 'zh') return
-  const th = root.querySelectorAll('[lang="th"]').length
-  const zh = root.querySelectorAll('[lang|="zh"]').length
+  // Translated navigation is not evidence that the handbook article is translated.
+  const content = root.querySelector('main .doc') ?? root
+  const th = content.querySelectorAll('[lang="th"]').length
+  const zh = content.querySelectorAll('[lang|="zh"]').length
   if (th > 0 && zh >= th / 2) return
   const note = document.createElement('p')
   note.className = 'lang-note'

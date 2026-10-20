@@ -3,8 +3,8 @@
 // "record" button, the live preview and a country-wide judge run never fight
 // over the graphics card — and nothing loads until the first look is asked for.
 
-import { look } from '../ml/embedder.js'
-import { normalize } from '../ml/learner.js'
+import { look } from '../ml/embedder.js?v=1.19.2'
+import { normalize } from '../ml/learner.js?v=1.19.2'
 
 export const EMBED_WIDTH = 224
 

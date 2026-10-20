@@ -1,8 +1,8 @@
 // The live figures: how many cameras of each kind, and whose they are. Read
 // from the same catalogue the map draws, so the numbers and the dots agree.
 
-import { t, esc, n, onLang } from '../core/i18n.js'
-import { SOURCES, isReadable } from '../core/catalog.js'
+import { t, esc, n, onLang } from '../core/i18n.js?v=1.19.2'
+import { SOURCES, isReadable } from '../core/catalog.js?v=1.19.2'
 
 const KIND_KEYS = ['video', 'still', 'view', 'off']
 

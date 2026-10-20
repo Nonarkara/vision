@@ -1,0 +1,26 @@
+/* Shared reading roles. Task titles introduce the work instead of filling it. */
+body main .page-head { align-items: start; gap: 16px 24px; padding-top: 24px; padding-bottom: 20px; }
+body main .page-head h1 { font-size: var(--title); line-height: 1.1; max-width: 24ch; }
+body main .page-head .lede { font-size: var(--read); line-height: 1.6; max-width: 36em; }
+body main .page-head .eyebrow { margin-bottom: 8px; }
+/* Chinese body leading is comfortable at 1.7; a heading needs a different role. */
+:is(h1, h2, h3, h4) [lang|="zh"], :is(h1, h2, h3, h4)[lang|="zh"] { line-height: 1.2; }
+body.handbook main .page-head h1 { font-size: var(--title); }
+body.handbook .doc :not(pre) > code { white-space: normal; overflow-wrap: anywhere; }
+body.handbook .doc :is(figure, .table-wrap, pre) { min-width: 0; max-width: 100%; }
+body.handbook .doc details > summary { min-height: var(--target); }
+/* Keep touch targets, but let translated labels wrap instead of clipping. */
+body .controls > .btn { white-space: normal; overflow-wrap: anywhere; }
+.page-explanation { margin: 20px var(--gutter); border-top: 1px solid currentColor; }
+.page-explanation > summary { cursor: pointer; min-height: var(--target); padding-block: 10px; font-size: var(--read); }
+.page-explanation .start-block { padding-inline: 0; }
+@media (max-width: 900px) {
+  body main .page-head { gap: 12px; }
+  body .opening:not(.opening-map) .opening-text { padding-top: 24px; padding-bottom: 24px; gap: 16px; }
+  body .opening:not(.opening-map) h1 { font-size: var(--title); line-height: 1.1; }
+  body .opening:not(.opening-map) .lede { font-size: var(--read); line-height: 1.6; }
+  body .opening:not(.opening-map) .cta { margin-top: 16px; }
+}
+
+.table-scroll-hint { font-size: var(--micro); margin-bottom: 8px; }
+.gate-skip-note > summary { cursor: pointer; min-height: var(--target); padding-block: 10px; }

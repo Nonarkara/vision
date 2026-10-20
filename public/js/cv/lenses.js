@@ -3,31 +3,36 @@
 // paints one view. State persists between calls (previous frame, last
 // detections) so a lens can be driven by any loop.
 
-import * as ops from './ops.js'
-import { paintImageData, drawDetections, drawBlobs, drawMask, clear, IVORY } from './draw.js'
-import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js'
-import { noteVehicles } from './spotted.js?v=1.19.0'
+import * as ops from './ops.js?v=1.19.2'
+import { paintImageData, drawDetections, drawBlobs, drawMask, clear, IVORY } from './draw.js?v=1.19.2'
+import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.19.2'
+import { noteVehicles } from './spotted.js?v=1.19.2'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
 export const LENS_TEXT = {
   picture: {
+    zh: ['图像', '这是摄像头传来的画面。人看到的是道路；对计算机来说，它还没有含义。'],
     th: ['ภาพ', 'นี่คือสิ่งที่กล้องส่งมา สำหรับเรา มันคือถนน สำหรับคอมพิวเตอร์ ยังไม่มีความหมายอะไรเลย'],
     en: ['Picture', 'This is what the camera sends. To you it is a road. To the computer it does not mean anything yet.'],
   },
   numbers: {
+    zh: ['数字', '图像是一格格的小方块。每格有一个亮度值，从 0（黑）到 255（白）。计算机先得到这些数字。'],
     th: ['ตัวเลข', 'ภาพคือตารางช่องสี่เหลี่ยมเล็ก ๆ แต่ละช่องคือตัวเลขความสว่าง 0 (ดำ) ถึง 255 (ขาว) คอมพิวเตอร์เห็นแค่นี้'],
     en: ['Numbers', 'A picture is a grid of tiny squares. Each holds a brightness number from 0 (black) to 255 (white). This is all the computer gets.'],
   },
   edges: {
+    zh: ['边缘', '相邻数字差别大的地方可能是边缘。边缘是形状的第一条线索。'],
     th: ['ขอบ', 'ตรงไหนที่ตัวเลขข้างกันต่างกันมาก ตรงนั้นคือขอบ ขอบคือร่องรอยแรกของรูปร่าง'],
     en: ['Edges', 'Where neighbouring numbers differ a lot, there is an edge. Edges are the first trace of shape.'],
   },
   motion: {
+    zh: ['运动', '用这一帧减去上一帧。数字发生变化的方块可能有东西在动。橙色标出机器注意到的变化。'],
     th: ['การเคลื่อนไหว', 'เอาภาพนี้ลบกับภาพก่อนหน้า ช่องที่ตัวเลขเปลี่ยนคือสิ่งที่ขยับ สีส้มคือสิ่งที่เครื่องสังเกตเห็น'],
     en: ['Motion', 'Subtract the previous frame from this one. Squares whose numbers changed are things that moved. Orange marks what the machine noticed.'],
   },
   objects: {
+    zh: ['物体', '用大量图片训练过的神经网络猜测物体在哪里，并给出置信度。这仍然可能猜错。'],
     th: ['สิ่งของ', 'โครงข่ายประสาทเทียมที่ฝึกจากภาพนับแสนภาพ เดาว่ามีอะไรอยู่ตรงไหน พร้อมบอกว่ามั่นใจกี่เปอร์เซ็นต์'],
     en: ['Objects', 'A neural network trained on hundreds of thousands of photos guesses what is where — and says how sure it is.'],
   },

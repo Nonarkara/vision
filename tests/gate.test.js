@@ -186,7 +186,7 @@ test('the way out is offered in all three languages, and says it is not a lock',
     const block = html.slice(i, i + 400)
     assert.ok(block.includes(`lang="${lang}"`), `the skip button has no ${lang} label`)
   }
-  const note = html.slice(html.indexOf('gate-skip-note'), html.indexOf('gate-skip-note') + 900)
+  const note = html.match(/<p[^>]*id="gate-skip-note"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? ''
   assert.match(note, /not a lock/, 'the page does not say plainly that this is not a lock')
   // It writes one flag to sessionStorage when you get through, so "it stores
   // nothing" was false. The claim now names the one thing that is kept.

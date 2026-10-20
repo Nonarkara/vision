@@ -6,9 +6,9 @@
 // It is a shadow of the real thing. Two points close in 1,280 dimensions can
 // land apart here, and the page says so under the picture.
 
-import { pca2 } from '../ml/learner.js'
-import { fitCanvas, clear, canvasScale, JASPER, IVORY, GRAY, BLACK } from '../cv/draw.js'
-import { t } from '../core/i18n.js'
+import { pca2 } from '../ml/learner.js?v=1.19.2'
+import { fitCanvas, clear, canvasScale, JASPER, IVORY, GRAY, BLACK } from '../cv/draw.js?v=1.19.2'
+import { t } from '../core/i18n.js?v=1.19.2'
 
 const WHITE = '#f7f5ef'
 const CLASS_INK = [IVORY, GRAY, WHITE, IVORY]
