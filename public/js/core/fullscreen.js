@@ -1,6 +1,6 @@
 // One enlarged instrument, with its controls intact. Native fullscreen when
 // available; an accessible viewport mode on phones that do not offer it.
-import { t, bi, onLang } from './i18n.js?v=1.20.0'
+import { t, bi, onLang } from './i18n.js?v=1.20.1'
 
 export function initFullscreen() {
   let active = null

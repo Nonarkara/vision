@@ -2,9 +2,9 @@
 // themselves as a strip of tiny pictures. Click a picture to throw it away —
 // a bad example teaches as surely as a good one.
 
-import { t, bi, esc, n, lang, onLang } from '../core/i18n.js?v=1.20.0'
-import * as store from './store.js?v=1.20.0'
-import { isBusy } from './eye.js?v=1.20.0'
+import { t, bi, esc, n, lang, onLang } from '../core/i18n.js?v=1.20.1'
+import * as store from './store.js?v=1.20.1'
+import { isBusy } from './eye.js?v=1.20.1'
 
 const HOLD_MS = 250
 

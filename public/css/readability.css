@@ -27,3 +27,21 @@ body .controls > .btn { white-space: normal; overflow-wrap: anywhere; }
 
 .reference-frame { display: block; width: min(100%, 640px); height: auto; margin-block: 12px; }
 .reference-frame[hidden] { display: none; }
+
+/* Home promises: headings introduce a thought; paragraphs stay together.
+   One compact reading beat within a thought, two between thoughts. */
+body .promises .page-head { padding-bottom: 16px; }
+body .promises .page-head h2 { font-size: var(--subtitle); line-height: 1.15; max-width: 28ch; }
+body .promise-reading { display: grid; grid-template-columns: 1fr; gap: 2em; padding-bottom: 2em; font-size: var(--read); }
+body .promise-reading > li { display: grid; grid-template-columns: minmax(12em, 1fr) minmax(0, 2fr); column-gap: 2em; row-gap: .5em; max-width: 68em; }
+body .promise-reading h3 { margin: 0; font-size: var(--body); line-height: 1.25; max-width: 22ch; }
+body .promise-reading p { margin: 0; max-width: 60ch; line-height: 1.4; }
+body .promise-reading :is(h3, p) > [lang] { line-height: inherit; }
+body .promise-reading p + p { margin-top: .8em; }
+body .promise-reading p strong { font-size: inherit; }
+html[data-lang="th"] body .promise-reading p,
+html[data-lang="zh"] body .promise-reading p { line-height: 1.5; }
+@media (max-width: 700px) {
+  body .promise-reading > li { grid-template-columns: 1fr; }
+  body .promise-reading h3 { max-width: none; }
+}

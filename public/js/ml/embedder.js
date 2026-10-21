@@ -12,7 +12,7 @@
 // Weights: TensorFlow.js model zoo (Apache-2.0), self-hosted under /models.
 // Input in [0, 1], 224×224 — as in @tensorflow-models/mobilenet 2.1.1.
 
-import { loadModel, getTf } from './tf.js?v=1.20.0'
+import { loadModel, getTf } from './tf.js?v=1.20.1'
 
 const URL = '/models/mobilenet_v2_1.0_224/model.json'
 const EMBED_NODE = 'module_apply_default/MobilenetV2/Logits/AvgPool'

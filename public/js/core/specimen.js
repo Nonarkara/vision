@@ -2,11 +2,11 @@
 // one source and every bench on it reads from that, so ten lenses cost one
 // stream. The bar that controls it always names the camera and its owner.
 
-import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.20.0'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.20.0'
-import { t, bi, esc, onLang } from './i18n.js?v=1.20.0'
-import { assessPixels } from '../cv/quality.js?v=1.20.0'
-import { toast } from './site.js?v=1.20.0'
+import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.20.1'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.20.1'
+import { t, bi, esc, onLang } from './i18n.js?v=1.20.1'
+import { assessPixels } from '../cv/quality.js?v=1.20.1'
+import { toast } from './site.js?v=1.20.1'
 
 const STILL_REFRESH_MS = 20_000
 const LAST_CAMERA = 'vision.camera'
