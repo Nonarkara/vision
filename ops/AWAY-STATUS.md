@@ -713,3 +713,17 @@ The screenshot showed three isolated roman numerals, detached titles, long undif
 Measured on the live site after publication: Home at 390, 1024 and 1440 in Thai, English and Chinese — nine combinations, no document overflow, no console errors, every page serving the 1.20.1 stamp. The linter still calls Home a REVIEW at five heuristic points, and that is recorded rather than hidden: the lens tabs are classified as stretched number tiles, and the long-line, type-chaos and default-font flags are pre-existing. The promise groups themselves are content-sized, carry no numbers or cards, and cap prose at 60ch. That is the whole of Home's finding — this entry does not claim the page clears every heuristic.
 
 Gate on the release tree: 326/326 tests, plus site references and JS/model shards, fonts, handbook, module URL consistency, privacy, docs and palette. Published 1.20.1; public health confirmed healthy. Evidence in `ops/evidence/promises-1.20.1/`.
+
+### A button that keeps its own width · 1.20.2 · 2026-10-21
+
+The 1.20.1 release had shipped, and the release log had not said so: `ops/AWAY-STATUS.md` stopped at 1.18.0 while five releases went out, and the 1.19.0 plate record points at that file for the findings of the independent review. The log now carries 1.19.0, 1.19.2, 1.19.5, 1.20.0 and 1.20.1, and `AGENTS.md` states the procedure that keeps it current.
+
+Those entries were written from the release trees rather than from memory, and two numbers were wrong until they were measured. 1.19.0 shipped **313** tests, not 311, and 95 local references, not 93. The number the rulebook cares about most — the map's share of the first screen — was measured with the same linter on a 1.19.0 worktree: **40% of the first desktop screen and 52% of the first phone screen** on `/cameras`, where 1.18.0 had none.
+
+The release itself is one CSS line. The `/focus` setup column is a grid, and a lone button in a grid column stretches to the column by default: the recalibrate button was **540px** wide to hold **112px** of words, which is a field with a label in it rather than a button. It now keeps its own width — 112px at both 1440 and 390, measured on the live page after publication.
+
+The linter was run over the whole site for the first time in one sweep: all **27 live routes** at 1440 and 390. **68 points, 0 SLOP routes**; the house's threshold is 6. Home is a REVIEW at 5, `/drive` and `/gesture` at 4, `/handbook`, `/research`, `/system` and `/train` at 3, and every other route 2 or below.
+
+Its ten stretch-to-fill hits were read one by one rather than taken at face value, because the instrument flags and a person judges. Nine of them are the house's own idiom — a row of controls sharing the width of its row: the five lens tabs on Home, the two setup buttons in the gesture room, the control rows on `/everyday` and `/train`, the tile actions, and the confirm dialog's pair. The linter's rule fires on every one of those by construction, since it cannot tell a control row from a control that was stretched. The tenth was a lone button in a grid column, and that is the one this release fixes.
+
+Gate on the release tree: 326/326 tests, plus fonts, the generated handbook, 27 pages / 97 local references, 88 modules / 70 imports with no URL forks, privacy, docs and the palette certificate. Published 1.20.2; public health confirms `ok:true`/`version:1.20.2` with a fresh catalogue of 3,432 cameras, the page serves the new `?v=1.20.2` stamp, and the focus room opens at 1440 and 390 with no console error and no horizontal overflow.
