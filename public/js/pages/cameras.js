@@ -53,7 +53,7 @@ function renderPicked() {
   const owner = typeof c.w === 'string' && /^https?:\/\//i.test(c.w)
     ? `<a class="btn" href="${esc(c.w)}" target="_blank" rel="noopener noreferrer">${esc(t('ดูที่เจ้าของ', 'View at owner'))} ↗</a>`
     : ''
-  const studyBtn = isReadable(c) ? `<button class="btn primary" type="button" data-picked-study>${esc(t('ศึกษากล้องนี้', 'Study this'))}</button>` : ''
+  const studyBtn = isReadable(c) ? `<button class="btn primary" type="button" data-picked-study>${esc(t('ให้เครื่องมอง', 'Point the machine'))}</button>` : ''
   const why = isReadable(c) ? '' : `<span class="micro picked-why">${esc(t('เครื่องอ่านพิกเซลของกล้องนี้ไม่ได้จากที่นี่ ดูได้ที่เว็บของเจ้าของเท่านั้น', 'No machine here can read this camera\'s pixels; it can only be watched at its owner\'s site.'))}</span>`
   pickedEl.innerHTML = `
     <strong class="picked-name">${esc(camName(c))}</strong>

@@ -4,8 +4,17 @@
 
 /* Rules, score and lesson sit in the chapter's narrow left column, so the title steps down a size. */
 .chapter > header h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); overflow-wrap: normal; }
-.game-rules { margin: 0; padding-left: 1.2em; font-size: var(--micro); max-width: 40ch; }
-.game-rules li { margin-bottom: 0.5em; }
+/* The picker: the entry point this page was missing. A control row, so the
+   buttons sit at their own width on one black strip — three equal columns
+   would stretch a two-word name across half the screen. */
+/* Each choice is its own field. The plate used to run the full width of the
+   page with nothing in it past the last button, and on a phone it left an
+   orphan band under the wrapped row. */
+.game-picker { padding: 0; gap: 8px; background: transparent; }
+.game-picker .btn { background: var(--black-2); color: var(--white); font-family: var(--sans); font-size: var(--read); }
+.game-picker .btn .game-picker-n { font-family: var(--mono); font-size: var(--micro); }
+.game-picker .btn[aria-pressed="true"] { background: var(--ivory); color: var(--black); }
+.game-picker .btn:hover { background: var(--gray); color: var(--black); }
 .game-score { margin: 0; padding: 10px 12px; background: var(--black); color: var(--white); font-size: var(--micro); min-height: var(--target); }
 .game-score:empty { display: none; }
 .teaches { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: var(--micro); max-width: 40ch; }

@@ -40,7 +40,7 @@ const viewState = $('[data-view-state]')
 const statusEl = $('[data-status]')
 
 runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), { fps: 15, state: createLensState(), onFrame: () => { viewState.hidden = true } })
-specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = '' })
+specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = ''; paintManual() })
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
 viewState.textContent = t('เลือกวิดีโอหรือกล้องในบทเรียนด้านบน', 'Choose a video or camera in the lesson above')
 
@@ -360,19 +360,20 @@ function refreshStats() {
   statsTimer = setTimeout(() => { paintLoo(); map.rebuild(set) }, STATS_DEBOUNCE_MS)
 }
 
-// ── The four-step checklist ─────────────────────────────────────────────
+// ── The manual: four steps that tick themselves off ─────────────────────────────────────────────
 
-const howtoEl = $('[data-howto]')
-const HOWTO = {
+const manualEl = $('[data-manual]')
+const STEPS = {
+  camera: () => !!specimen.source,
   examples: () => store.allFilled(),
   guess: () => !!lastLive,
   train: () => !!trained,
   judge: () => judged,
 }
-function paintHowto() {
-  if (!howtoEl) return
-  for (const li of howtoEl.querySelectorAll('[data-step]')) {
-    if (HOWTO[li.dataset.step]?.()) li.setAttribute('data-done', '')
+function paintManual() {
+  if (!manualEl) return
+  for (const li of manualEl.querySelectorAll('[data-step]')) {
+    if (STEPS[li.dataset.step]?.()) li.setAttribute('data-done', '')
     else li.removeAttribute('data-done')
   }
 }
@@ -397,7 +398,7 @@ store.onChange((kind) => {
   }
   paintTrainState()
   paintLive()
-  paintHowto()
+  paintManual()
   paintChallenge()
   refreshStats()
 })
@@ -425,7 +426,7 @@ trainBtn.addEventListener('click', async () => {
   $('.training-curve').open = false
   lastLiveKey = ''
   paintTrainState()
-  paintHowto()
+  paintManual()
   paintChallenge()
   toast(t(`พร้อมแล้ว! ลองภาพใหม่แล้วดูคำตอบด้านล่าง`, `Ready! Try a new picture and watch the answer below.`))
 })
@@ -467,13 +468,13 @@ async function liveTick() {
         const lay = trained?.classes === classes ? trained.layer.predict(x) : null
         lastLive = { knn: k?.probs ?? null, lay }
         paintLive()
-        paintHowto()
+        paintManual()
         map.setLive(x, k?.neighbours ?? [])
       }
     } else if (!canGuess() && lastLive) {
       lastLive = null
       paintLive()
-      paintHowto()
+      paintManual()
       map.setLive(null)
     }
   } catch { /* a dropped frame is not worth a message */ }
@@ -557,7 +558,7 @@ createJudge(
   judgeModels,
   (results, models) => {
     judged = true
-    paintHowto()
+    paintManual()
     const same = models.length > 1
       ? results.filter((r) => r.top === r.probs[1].indexOf(Math.max(...r.probs[1]))).length
       : null
@@ -594,7 +595,7 @@ $('[data-import]').addEventListener('change', async (e) => {
     trained = { layer: got.layer, classes: got.names.length, stamp: samplesStamp, examples: got.examples ?? 0, epochs: got.epochs ?? 0, imported: true }
     trainNote = () => t('ใช้ชั้นจากไฟล์อยู่ ฝึกใหม่เมื่อไรก็จะแทนที่', 'Using the layer from your file; training again replaces it.')
     paintTrainState()
-    paintHowto()
+    paintManual()
     lastLiveKey = ''
     keepSay.textContent = t('เปิดไฟล์แล้ว ทุกอย่างอยู่ในแท็บนี้', 'Opened — it stays in this tab.')
   } catch (err) {
@@ -627,7 +628,7 @@ window.addEventListener('resize', () => {
 renderPresets()
 store.applyPreset(preset)
 paintModel()
-paintHowto()
+paintManual()
 paintChallenge()
 liveTick()
 

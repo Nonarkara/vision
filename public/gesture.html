@@ -29,11 +29,40 @@
       <span class="chapter-no">01</span>
       <h2 id="room-title"><span class="th" lang="th">สอนท่าของคุณ</span><span class="en" lang="en">Teach it your gestures</span></h2>
       <p class="prose"><span class="th" lang="th">เก็บตัวอย่างกลุ่มละ 3 ภาพขึ้นไป ใช้มุมและแสงที่ต่างกัน ตั้งท่าให้ “เปิดใช้การกระทำ” แล้วทำท่าค้างไว้สักครู่ — เมื่อคะแนนมั่นคง มันจะลงมือทำสิ่งที่คุณเลือก</span><span class="en" lang="en">Add at least 3 examples per group, varying angle and light. Press “Arm the actions”, then hold a gesture a moment — when the score settles, it does what you picked.</span></p>
-      <ol class="howto" data-howto data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
-        <li data-step="examples"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">กด “ใช้กล้องของฉัน” แล้วทำแต่ละท่า กด “เพิ่มตัวอย่าง” ของท่านั้น 5–10 ครั้ง</span><span class="en" lang="en">Press “Use my camera”, then for each pose press its “Add example” 5–10 times</span></li>
-        <li data-step="arm"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">กด “เปิดใช้การกระทำ” — นี่คือคลิกที่เบราว์เซอร์เรียกร้อง</span><span class="en" lang="en">Press “Arm the actions” — the click the browser insists on</span></li>
-        <li data-step="fire"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ทำท่าค้าง แล้วดูล็อกด้านล่างว่ามันทำอะไร</span><span class="en" lang="en">Hold a gesture and read the log below for what it did</span></li>
-        <li data-step="again"><span class="howto-tick" aria-hidden="true"></span><span class="th" lang="th">ลองท่าที่สอง ดูว่ามันแยกสองท่าได้จริง</span><span class="en" lang="en">Try a second gesture — see whether it tells them apart</span></li>
+      <ol class="manual" data-manual data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
+        <li data-step="camera">
+          <span class="manual-n" aria-hidden="true">1</span>
+          <span class="manual-body">
+            <span class="th" lang="th">เปิดภาพก่อน — กด <code class="part">ใช้กล้องของฉัน</code></span><span class="en" lang="en">Open a picture first — press <code class="part">Use my camera</code></span>
+            <span class="manual-warn th" lang="th">เบราว์เซอร์จะถาม กดอนุญาต</span><span class="manual-warn en" lang="en">The browser will ask — allow it</span>
+          </span>
+        </li>
+        <li data-step="examples">
+          <span class="manual-n" aria-hidden="true">2</span>
+          <span class="manual-body">
+            <span class="th" lang="th">กด <code class="part">+ เพิ่มตัวอย่าง</code> ของท่านั้น 5–10 ครั้ง</span><span class="en" lang="en">Press <code class="part">+ Add example</code> on that pose 5–10 times</span>
+            <span class="manual-warn th" lang="th">ให้แต่ละท่าต่างมุมและต่างแสงกัน</span><span class="manual-warn en" lang="en">Vary the angle and the light</span>
+          </span>
+        </li>
+        <li data-step="arm">
+          <span class="manual-n" aria-hidden="true">3</span>
+          <span class="manual-body">
+            <span class="th" lang="th">กด <code class="part">เปิดใช้การกระทำ</code> — นี่คือคลิกที่เบราว์เซอร์เรียกร้อง</span><span class="en" lang="en">Press <code class="part">Arm the actions</code> — the click the browser insists on</span>
+          </span>
+        </li>
+        <li data-step="fire">
+          <span class="manual-n" aria-hidden="true">4</span>
+          <span class="manual-body">
+            <span class="th" lang="th">ทำท่าค้าง แล้วอ่าน <code class="part">บันทึก</code> ด้านล่างว่ามันทำอะไร</span><span class="en" lang="en">Hold a pose, then read the <code class="part">Log</code> below for what it did</span>
+            <span class="manual-warn th" lang="th">ทายผิดก็ทำผิด — เล่นเสร็จกด <code class="part">พักไว้ก่อน</code></span><span class="manual-warn en" lang="en">A wrong guess runs the wrong thing — press <code class="part">Rest them</code> when you stop</span>
+          </span>
+        </li>
+        <li data-step="again">
+          <span class="manual-n" aria-hidden="true">5</span>
+          <span class="manual-body">
+            <span class="th" lang="th">ลองท่าที่สอง แล้วดูว่ามันแยกสองท่าได้จริงไหม</span><span class="en" lang="en">Try a second pose — see whether it really tells them apart</span>
+          </span>
+        </li>
       </ol>
     </header>
 
@@ -62,7 +91,7 @@
           <button class="btn" type="button" data-disarm>■ <span class="th" lang="th">พักไว้ก่อน</span><span class="en" lang="en">Rest them</span></button>
         </div>
         <p class="readout" data-arm-say aria-live="polite"></p>
-        <p class="readout log" data-log aria-live="polite"></p>
+        <span class="label live-head"><span class="th" lang="th">บันทึก</span><span class="en" lang="en">Log</span></span><p class="readout log" data-log aria-live="polite"></p>
         <p class="micro bench-note"><span class="th" lang="th">การกระทำเกิดขึ้นเมื่อท่าถูกต้องเท่านั้น ถ้าทายผิด มันจะลงมือผิดเรื่อง — กด “พักไว้ก่อน” เสมอเมื่อเล่นเสร็จ</span><span class="en" lang="en">Actions run on a correct guess. A wrong guess runs the wrong thing — always press “Rest them” when you stop playing.</span></p>
       </div>
 

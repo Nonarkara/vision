@@ -722,6 +722,72 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 62ch; }
 .steps li:last-child { background: var(--jasper); color: var(--black); }
 @media (max-width: 700px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* ── The manual ─────────────────────────────────────────────────────────
+   An IKEA instruction sheet, as a house component. One step. One action.
+   The control it names set in the face that control itself wears, so the
+   word on the page and the word on the button are the same word. A warning
+   sits under the step it belongs to, never in a note somewhere else.
+
+   The instruction is the house's voice — the reading face. The number, the
+   named part and the confirmation are the machine's — mono. That is the
+   site's own argument about who is speaking, applied to a sheet of
+   instructions: a person is told what to do, and the machine is the one
+   that says whether it worked.
+
+   When a step is confirmed the marker fills with the signal. Jasper means
+   "what the machine sees", and a step the machine has confirmed is the one
+   thing in this room it does report — so the accent is spent there and
+   nowhere else. */
+.manual {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 2px;
+  /* The measure is the house's prose measure. `ch` resolves against the
+     element's own size, so the size is set here: inherited at 22px, 62ch
+     would have been 845px and every step would have stretched past its own
+     text. The instruction is prose, so it gets the prose width. */
+  max-width: 62ch; font-size: var(--read);
+}
+.manual li {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px; align-items: start;
+  padding: 11px 16px 11px 11px;
+  background: var(--field); color: var(--field-text);
+}
+.manual-n {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  background: var(--black-3); color: var(--white);
+  font-family: var(--mono); font-size: var(--micro); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.manual-body { font-size: var(--read); line-height: 1.45; min-width: 0; }
+.manual-body > span { display: block; }
+/* The name of a part or a control, in the face it wears on the page. The size
+   is inherited, not scaled: a scaled chip creates a font size that exists
+   nowhere else on the page, and a page with nine sizes has no type scale. */
+.manual .part {
+  font-family: var(--mono); letter-spacing: 0.02em;
+  background: var(--white); color: var(--black);
+  padding: 1px 6px; overflow-wrap: break-word;
+}
+.manual .part [lang="th"], .manual .part[lang="th"] { font-family: var(--thai); letter-spacing: 0; }
+/* A warning belongs to the step under it. */
+.manual-warn {
+  display: block; margin-top: 5px;
+  font-family: var(--mono); font-size: var(--fine); color: var(--gray);
+}
+/* Confirmed. The machine saw it. */
+.manual li[data-done] .manual-n { background: var(--jasper); color: var(--black); font-size: 0; }
+.manual li[data-done] .manual-n::after {
+  content: ""; display: block; width: 5px; height: 10px;
+  border: solid var(--black); border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -2px);
+}
+/* On an instrument the row is one step lighter than the ground it stands on,
+   the same move the house makes for a button inside a bench. */
+.bench .manual li, .field-ink .manual li, .field-black .manual li { background: var(--black-2); color: var(--white); }
+.bench .manual .part, .field-ink .manual .part, .field-black .manual .part { background: var(--white); color: var(--black); }
+.bench .manual-warn, .field-ink .manual-warn, .field-black .manual-warn { color: var(--gray); }
+
 /* Notices */
 .note { padding: 16px 20px; background: var(--quiet); color: var(--quiet-text); font-size: var(--read); max-width: 62ch; }
 .note strong { font-weight: 600; }

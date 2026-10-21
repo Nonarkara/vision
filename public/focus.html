@@ -51,26 +51,38 @@
 <span class="th" lang="th">กล้องปิด · ยังไม่เริ่ม</span>
 <span class="en" lang="en">Camera off · Not started</span>
 </p>
-<div class="controls">
-<button type="button" class="btn primary" data-start disabled>
-<span class="th" lang="th">ยินยอมและเริ่ม</span>
-<span class="en" lang="en">Agree &amp; start</span>
-</button>
-<button type="button" class="btn" data-pause disabled>
-<span class="th" lang="th">พักและปิดกล้อง</span>
-<span class="en" lang="en">Pause &amp; camera off</span>
-</button>
-<button type="button" class="btn" data-stop disabled>
-<span class="th" lang="th">จบและดูสรุป</span>
-<span class="en" lang="en">Finish &amp; review</span>
-</button>
-</div>
 </div>
 <div class="focus-setup">
-<h2>
-<span class="th" lang="th">1 · เลือกช่วงเวลา</span>
-<span class="en" lang="en">1 · Choose a session</span>
-</h2>
+<ol class="manual" data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
+  <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body">
+    <span class="th" lang="th">เลือกช่วงเวลา — ตั้ง <code class="part">หยุดอัตโนมัติหลัง</code> และ <code class="part">นับการหันออกเมื่อเกิน</code></span>
+    <span class="en" lang="en">Choose a session — set <code class="part">Stop automatically after</code> and <code class="part">Count a look-away after</code></span>
+  </span></li>
+  <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body">
+    <span class="th" lang="th">อ่านแล้วยินยอม — ติ๊ก <code class="part">ฉันยินยอมให้วิเคราะห์ใบหน้าของฉันเอง</code></span>
+    <span class="en" lang="en">Read and agree — tick <code class="part">I agree to analyse my own face</code></span>
+    <span class="manual-warn th" lang="th">ใช้กล้องหน้า ไม่ใช้ไมโครโฟน ไม่บันทึกภาพ วิดีโอ หรือชื่อบุคคล</span>
+    <span class="manual-warn en" lang="en">Front camera only. No microphone, photos, video or identity records</span>
+  </span></li>
+  <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body">
+    <span class="th" lang="th">กด <code class="part">ยินยอมและเริ่ม</code></span>
+    <span class="en" lang="en">Press <code class="part">Agree &amp; start</code></span>
+    <span class="manual-warn th" lang="th">เปิดแท็บนี้ไว้ด้านหน้า — การซ่อนแท็บจะพักและปิดกล้อง</span>
+    <span class="manual-warn en" lang="en">Keep this tab visible — hiding it pauses the session and turns the camera off</span>
+  </span></li>
+  <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body">
+    <span class="th" lang="th">ตั้งท่าปกติ — มองหน้าจอตามปกติประมาณ 5 วินาที</span>
+    <span class="en" lang="en">Set your usual position — look at the screen normally for about five seconds</span>
+    <span class="manual-warn th" lang="th">ถ้าขยับที่นั่ง ให้กด <code class="part">ตั้งท่าปกติใหม่</code></span>
+    <span class="manual-warn en" lang="en">If you move your seat, press <code class="part">Recalibrate</code></span>
+  </span></li>
+  <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body">
+    <span class="th" lang="th">ให้คะแนนความรู้สึก แล้วกด <code class="part">จบและดูสรุป</code></span>
+    <span class="en" lang="en">Rate how you feel, then press <code class="part">Finish &amp; review</code></span>
+    <span class="manual-warn th" lang="th">กล้องไม่รู้ว่าคุณรู้สึกอย่างไร คุณบอกเอง และคำตอบนั้นไม่เปลี่ยนตัวเลขที่วัด</span>
+    <span class="manual-warn en" lang="en">The camera cannot know your mood. You tell it yourself, and those notes do not change the measurements</span>
+  </span></li>
+</ol>
 <label class="setting">
 <span class="th" lang="th">หยุดอัตโนมัติหลัง</span>
 <span class="en" lang="en">Stop automatically after</span>
@@ -93,14 +105,24 @@
 </select>
 <svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
 </label>
-<h2>
-<span class="th" lang="th">2 · อ่านและยินยอม</span>
-<span class="en" lang="en">2 · Read &amp; agree</span>
-</h2>
-<p>
-<span class="th" lang="th">ใช้กล้องหน้า ไม่ใช้ไมโครโฟน ไม่บันทึกภาพ วิดีโอ หรือชื่อบุคคล ประมวลผลในแท็บนี้เท่านั้น สรุปเก็บในหน่วยความจำจนปิดหน้า คุณเลือกดาวน์โหลดได้</span>
-<span class="en" lang="en">Front camera only. No microphone, photos, video or identity records. Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span>
+<p class="micro">
+<span class="th" lang="th">ประมวลผลในแท็บนี้เท่านั้น สรุปเก็บในหน่วยความจำจนปิดหน้า คุณเลือกดาวน์โหลดได้</span>
+<span class="en" lang="en">Analysis stays in this tab. The summary stays in memory until you close the page; you may choose to download it.</span>
 </p>
+<div class="controls">
+<button type="button" class="btn primary" data-start disabled>
+<span class="th" lang="th">ยินยอมและเริ่ม</span>
+<span class="en" lang="en">Agree &amp; start</span>
+</button>
+<button type="button" class="btn" data-pause disabled>
+<span class="th" lang="th">พักและปิดกล้อง</span>
+<span class="en" lang="en">Pause &amp; camera off</span>
+</button>
+<button type="button" class="btn" data-stop disabled>
+<span class="th" lang="th">จบและดูสรุป</span>
+<span class="en" lang="en">Finish &amp; review</span>
+</button>
+</div>
 <label class="consent">
 <input type="checkbox" class="check" data-consent>
 <span class="th" lang="th">ฉันยินยอมให้วิเคราะห์ใบหน้าของฉันเอง และรู้ว่าหยุดได้ทุกเมื่อ</span>
@@ -115,13 +137,9 @@
 <span class="th" lang="th">เปิดแท็บนี้ไว้ด้านหน้า เมื่อซ่อนแท็บจะพักและปิดกล้อง คุณต้องกดเริ่มต่อเอง เวลาที่เลือกนับช่วงพักด้วย อุปกรณ์ที่หลับหรือช้าจะมีช่วงที่ไม่ได้วัด ไม่มีการนับช่วงเหล่านั้นว่าเสียสมาธิ</span>
 <span class="en" lang="en">Keep this tab visible. Hiding it pauses the session and turns the camera off; resume yourself when ready. The time limit includes pauses. Device sleep and slow processing leave unmeasured gaps. Those gaps are never counted as distraction.</span>
 </p>
-<h2>
-<span class="th" lang="th">3 · ตั้งท่าปกติ</span>
-<span class="en" lang="en">3 · Set your usual position</span>
-</h2>
-<p>
-<span class="th" lang="th">หลังเริ่ม มองหน้าจอตามปกติประมาณ 5 วินาที มีใบหน้าเดียวและแสงสว่างเพียงพอ จากนั้นทดลองหันหน้าออกแล้วกลับมา ถ้าขยับที่นั่งให้ตั้งค่าใหม่</span>
-<span class="en" lang="en">After starting, look at the screen normally for about five seconds. Use good light and keep just one face in view. Then try turning away and coming back. Recalibrate if you move your seat.</span>
+<p class="micro">
+<span class="th" lang="th">มีใบหน้าเดียวและแสงสว่างเพียงพอ จากนั้นทดลองหันหน้าออกแล้วกลับมา</span>
+<span class="en" lang="en">Keep just one face in view and use good light. Then try turning away and coming back.</span>
 </p>
 <button type="button" class="btn" data-calibrate disabled>
 <span class="th" lang="th">ตั้งท่าปกติใหม่</span>

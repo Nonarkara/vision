@@ -125,7 +125,10 @@
 </h3>
 <p><span class="th" lang="th">เหมือนฝึกจากบัตรคำที่มีเฉลย เราให้ภาพพร้อมชื่อ เช่น “วงกลม” หรือ “สี่เหลี่ยม” เครื่องใช้ตัวอย่างเพื่อเรียนรู้การทายชื่อของภาพใหม่</span><span class="en" lang="en">Like practising with flashcards that have answers. We give each picture a label, such as “circle” or “square”. The machine uses these examples to learn how to label a new picture.</span>
 </p></div><div class="learning-demo">
-<p class="learning-task"><span class="th" lang="th">ลองทำ: เปิดเฉลย แล้วสังเกตว่าวงกลมต่างสีก็ยังมีชื่อเดียวกัน</span><span class="en" lang="en">Try it: show the answers. Notice that circles of different colours still share one label.</span></p>
+<ol class="manual" data-aria-th="วิธีลองเรียนรู้แบบมีคำตอบ" data-aria-en="How to try supervised learning">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เปิดเฉลยบนบัตร</code></span><span class="en" lang="en">Press <code class="part">Show the answers on the cards</code></span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">สังเกตว่าวงกลมต่างสีก็ยังมีชื่อเดียวกัน</span><span class="en" lang="en">Notice that circles of different colours still share one label</span><span class="manual-warn th" lang="th">เครื่องเรียนจากชื่อที่เราให้ ไม่ใช่จากความหมายของภาพ</span><span class="manual-warn en" lang="en">It learns from the labels we give, not from what a picture means</span></span></li>
+      </ol>
 <ul class="learning-objects">
 <li data-shape="circle" data-colour="red"><span class="learning-object circle red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีส้ม</span><span class="en" lang="en">Orange circle</span></span><span class="learning-answer" hidden><span class="th" lang="th">วงกลม</span><span class="en" lang="en">Circle</span></span>
 </li>
@@ -147,7 +150,11 @@
 </h3>
 <p><span class="th" lang="th">เราให้ข้อมูลโดยไม่บอกชื่อที่ถูกต้อง เครื่องมองหาความคล้ายกัน เช่น จัดภาพเป็นกลุ่ม สีหรือรูปร่างอาจทำให้ได้กลุ่มคนละแบบ กลุ่มเหล่านี้ไม่ได้มีชื่อว่า “แมว” หรือ “สุนัข” ขึ้นมาเอง</span><span class="en" lang="en">We give data without the correct labels. The machine looks for patterns, such as groups of similar pictures. Colour and shape can produce different groups. These groups do not automatically name themselves “cat” or “dog”.</span>
 </p></div><div class="learning-demo">
-<p class="learning-task"><span class="th" lang="th">ลองทำ: จัดตามรูปร่าง แล้วเปลี่ยนเป็นสี ภาพเดิมย้ายกลุ่มอย่างไร?</span><span class="en" lang="en">Try it: group by shape, then by colour. Which pictures move to a different group?</span></p>
+<ol class="manual" data-aria-th="วิธีลองเรียนรู้แบบไม่มีเฉลย" data-aria-en="How to try unsupervised learning">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">กลุ่มตามรูปร่าง</code></span><span class="en" lang="en">Press <code class="part">Group by shape</code></span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">กลุ่มตามสี</code> แล้วดูว่าภาพเดิมย้ายกลุ่มไหม</span><span class="en" lang="en">Press <code class="part">Group by colour</code> and see which pictures move</span><span class="manual-warn th" lang="th">กลุ่มที่ได้ไม่ได้ตั้งชื่อว่าแมวหรือสุนัข</span><span class="manual-warn en" lang="en">The groups it finds are not named “cat” or “dog”</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ไม่จัดกลุ่ม</code> เพื่อดูภาพดิบ</span><span class="en" lang="en">Press <code class="part">Show ungrouped</code> to see the raw pictures</span></span></li>
+      </ol>
 <div data-grouped-objects>
 <ul class="learning-objects">
 <li data-shape="circle" data-colour="red"><span class="learning-object circle red" aria-hidden="true"></span><span class="vh"><span class="th" lang="th">วงกลมสีส้ม</span><span class="en" lang="en">Orange circle</span></span>
@@ -174,7 +181,11 @@
 </h3>
 <p><span class="th" lang="th">เหมือนหุ่นยนต์ลองเลือกทาง มันทำบางอย่าง รับคะแนน แล้วปรับว่าครั้งต่อไปควรเลือกอะไร เป้าหมายคือได้คะแนนรวมดีขึ้น ไม่ใช่รับเฉลยให้ทุกการกระทำ</span><span class="en" lang="en">Like a robot trying a route. It takes an action, gets a reward, then adjusts what to choose next. Its goal is to earn better rewards, rather than receive the correct answer for every action.</span>
 </p></div><div class="learning-demo">
-<p class="learning-task"><span class="th" lang="th">ลองทำ: กดให้หุ่นยนต์เลือก 3 ครั้ง สองครั้งแรกมันสำรวจ ครั้งที่สามเลือกจากคะแนนที่จำไว้</span><span class="en" lang="en">Try it: let the robot choose three times. First it explores both paths; then it uses the rewards it remembers.</span></p>
+<ol class="manual" data-aria-th="วิธีลองเรียนรู้แบบให้รางวัล" data-aria-en="How to try reinforcement learning">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ให้หุ่นยนต์เลือก</code> สามครั้ง</span><span class="en" lang="en">Press <code class="part">Let the robot choose</code> three times</span><span class="manual-warn th" lang="th">สองครั้งแรกมันสำรวจ ครั้งที่สามเลือกจากคะแนนที่จำไว้</span><span class="manual-warn en" lang="en">The first two explore; the third uses the rewards it remembers</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">ดูว่าทางไหนได้คะแนนดีกว่า</span><span class="en" lang="en">See which path paid better</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มใหม่</code> เพื่อลองอีกครั้ง</span><span class="en" lang="en">Press <code class="part">Reset</code> to try again</span></span></li>
+      </ol>
 <div class="reward-paths">
 <div data-reward-path="0"><span class="reward-marker" aria-hidden="true">←</span> <span class="th" lang="th">ทางซ้าย</span><span class="en" lang="en">Left path</span><strong data-reward-result="0"><span class="th" lang="th">ยังไม่เคยลอง</span><span class="en" lang="en">Not tried yet</span></strong>
 </div>

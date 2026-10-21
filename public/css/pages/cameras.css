@@ -102,6 +102,9 @@ html[data-lang="th"] .picked { font-family: var(--thai); }
 .cam-kind .sw { align-self: center; }
 .cam-actions { display: flex; gap: 2px; flex-wrap: wrap; justify-content: flex-end; }
 .cam-actions .btn { padding: 0 12px; }
+/* Where the camera really lives — part of what this camera is, not a step. */
+.cam-owner { color: inherit; text-decoration-thickness: 1px; }
+.cam-owner:hover { text-decoration-thickness: 2px; }
 @media (max-width: 700px) {
   .cam-row { grid-template-columns: minmax(0, 1fr); }
   .cam-actions { justify-content: flex-start; }

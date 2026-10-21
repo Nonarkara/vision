@@ -133,8 +133,13 @@
       <p class="th" lang="th">กล้องที่คุณเลือกมาอยู่ตรงนี้ ผ่านเลนส์ห้าแบบเดียวกับหน้าแรก หรือจะใช้กล้องของคุณเอง หรือรูปของคุณก็ได้</p>
       <p class="en" lang="en">The camera you pick lands here, through the same five lenses as the home page. Or use your own camera, or a photo of yours.</p>
       <p class="micro"><span class="th" lang="th">ภาพจากกล้องและรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera and your photos are processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+      
     </header>
-    <div class="chapter-body cam-bench-wrap" data-bench>
+    <div class="chapter-body cam-bench-wrap" data-bench><ol class="manual" data-aria-th="วิธีให้เครื่องมอง" data-aria-en="How to point the machine">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">เลือกกล้อง — แตะจุดบนแผนที่ หรือกดชื่อกล้องในรายชื่อ</span><span class="en" lang="en">Pick a camera — tap a square on the map, or press a name in the list</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ให้เครื่องมอง</code> แล้วกล้องจะเปิดที่นี่</span><span class="en" lang="en">Press <code class="part">Point the machine</code> and the camera opens here</span><span class="manual-warn th" lang="th">กล้องเป็นของผู้อื่น บางตัวก็ไม่ตอบ — ลองกล้องอื่น</span><span class="manual-warn en" lang="en">These cameras belong to other people and some do not answer — try another</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">เปลี่ยนเลนส์ — กด <code class="part">1 ภาพ</code> <code class="part">2 ตัวเลข</code> <code class="part">3 ขอบ</code> <code class="part">4 ขยับ</code> หรือ <code class="part">5 สิ่งของ</code></span><span class="en" lang="en">Change the lens — press <code class="part">1 Picture</code> <code class="part">2 Numbers</code> <code class="part">3 Edges</code> <code class="part">4 Motion</code> or <code class="part">5 Objects</code></span></span></li>
+      </ol>
       <div data-specimen-slot></div>
       <div class="bench">
         <div class="bench-caption">
@@ -162,8 +167,13 @@
       <h2 id="census-title"><span class="th" lang="th">สำมะโน</span><span class="en" lang="en">A census</span></h2>
       <p class="th" lang="th">สุ่มกล้องภาพนิ่งที่เครื่องอ่านได้ ขอภาพจากแต่ละตัวหนึ่งภาพ ให้โครงข่ายประสาทเทียมหาคน รถ และเรือ แล้วรวมยอด กล้องที่สุ่มมาจากตัวกรองบนแผนที่ อยากนับเฉพาะนครศรีธรรมราชก็เลือกแหล่งนั้นก่อน</p>
       <p class="en" lang="en">Sample readable still cameras, ask each for one frame, let the neural network look for people, vehicles and boats, and add it up. The sample is drawn from the map's filters — choose a source first to count only that city.</p>
+      
     </header>
-    <div class="chapter-body census" data-census>
+    <div class="chapter-body census" data-census><ol class="manual" data-aria-th="วิธีสำมะโน" data-aria-en="How to run the census">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">ตั้งตัวกรองด้านบน — เลือกแหล่งกับจำนวนกล้อง</span><span class="en" lang="en">Set the filters above — choose the source and the number of cameras</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มนับ</code></span><span class="en" lang="en">Press <code class="part">Run the census</code></span><span class="manual-warn th" lang="th">ครั้งแรกต้องโหลดโครงข่ายประสาทเทียมราว 18 MB</span><span class="manual-warn en" lang="en">The first run downloads the neural network, about 18 MB</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">อ่านแถบยอดรวม แล้วดูภาพที่นับได้ด้านล่าง</span><span class="en" lang="en">Read the total bars, then the counted frames below</span><span class="manual-warn th" lang="th">นี่คือตัวอย่าง ไม่ใช่การนับประเทศไทย — “ไม่เห็น” ไม่ได้แปลว่า “ไม่มี”</span><span class="manual-warn en" lang="en">This is a sample, not a count of Thailand — “not detected” does not mean “not there”</span></span></li>
+      </ol>
       <div class="controls census-controls">
         <label class="census-n"><span class="label"><span class="th" lang="th">จำนวนกล้อง</span><span class="en" lang="en">Cameras</span></span>
           <select class="field-input" data-census-n><option value="12">12</option><option value="24" selected>24</option><option value="48">48</option></select><svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>

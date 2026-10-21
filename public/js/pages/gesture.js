@@ -55,7 +55,7 @@ runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), {
     handSaw.update(found.score, 'edges')
   },
 })
-specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = '' })
+specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = ''; paintManual() })
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
 // Gestures are made by you, so your camera comes first. A road camera loads
 // only on a device that has no camera to offer.
@@ -206,7 +206,7 @@ armBtn.addEventListener('click', async () => {
   lastArm = res
   armSay.textContent = `${res.ok ? '✓' : '!'} ${t(res.th, res.en)}`
   paintArm()
-  paintHowto()
+  paintManual()
   toast(t('เปิดใช้การกระทำแล้ว — ทำท่าได้เลย', 'Actions armed — make a gesture'))
 })
 
@@ -215,7 +215,7 @@ $('[data-disarm]').addEventListener('click', () => {
   actions.disarm()
   armSay.textContent = t('✓ พักการกระทำไว้แล้ว — ท่าของคุณจะไม่ทำอะไรตอนนี้', '✓ Actions are resting — a gesture will do nothing now')
   paintArm()
-  paintHowto()
+  paintManual()
 })
 
 function paintArm() {
@@ -280,7 +280,7 @@ async function fireGesture({ index }) {
   })
   fired++
   firedIdx.add(index)
-  paintHowto()
+  paintManual()
 }
 
 async function liveTick() {
@@ -299,32 +299,33 @@ async function liveTick() {
         paintLiveSay(list, probs)
         const shot = trigger.tick(probs, performance.now(), { enabled: armed && !capturing })
         if (shot) await fireGesture(shot)
-        paintHowto()
+        paintManual()
       }
     } else if (!canGuess() && lastLive) {
       lastLive = null
       bars.setProbs(null)
       paintLiveSay(store.getClasses(), null)
-      paintHowto()
+      paintManual()
     }
   } catch { /* a dropped frame is not worth a message */ }
   setTimeout(liveTick, LIVE_MS)
 }
 
-// ── The four-step checklist ─────────────────────────────────────────────
+// ── The manual: five steps that tick themselves off ─────────────────────────────────────────────
 
-const howtoEl = $('[data-howto]')
-const HOWTO = {
+const manualEl = $('[data-manual]')
+const STEPS = {
+  camera: () => !!specimen.source,
   examples: () => canGuess(),
   arm: () => armed,
   fire: () => fired >= 1,
   again: () => firedIdx.size >= 2,
 }
 
-function paintHowto() {
-  if (!howtoEl) return
-  for (const li of howtoEl.querySelectorAll('[data-step]')) {
-    if (HOWTO[li.dataset.step]?.()) li.setAttribute('data-done', '')
+function paintManual() {
+  if (!manualEl) return
+  for (const li of manualEl.querySelectorAll('[data-step]')) {
+    if (STEPS[li.dataset.step]?.()) li.setAttribute('data-done', '')
     else li.removeAttribute('data-done')
   }
 }
@@ -340,14 +341,14 @@ function repaintAll() {
 
 store.onChange((kind) => {
   lastLiveKey = ''
-  if (kind === 'samples') { paintHowto(); return }
+  if (kind === 'samples') { paintManual(); return }
   if (kind === 'structure') {
     lastLive = null
     bars.setProbs(null)
     trigger = createTrigger()
   }
   repaintAll()
-  paintHowto()
+  paintManual()
 })
 
 onLang(() => {
@@ -365,6 +366,6 @@ renderPresets()
 store.applyPreset(preset)
 repaintAll()
 paintModel()
-paintHowto()
+paintManual()
 paintLog()
 liveTick()

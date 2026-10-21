@@ -12,19 +12,22 @@ const isWebLink = (u) => typeof u === 'string' && /^https?:\/\//i.test(u)
 function rowHtml(c, i, pickedCam) {
   const k = safeKind(c.k)
   const study = isReadable(c)
-    ? `<button class="btn" type="button" data-study="${i}">${esc(t('ศึกษากล้องนี้', 'Study this'))}</button>`
+    ? `<button class="btn" type="button" data-study="${i}">${esc(t('ให้เครื่องมอง', 'Point the machine'))}</button>`
     : ''
+  // The owner's page is not a step in this room's flow — it is where the
+  // camera actually lives. It belongs in the line that says what this camera
+  // is, not in the row's column of actions, which holds one action.
   const owner = isWebLink(c.w)
-    ? `<a class="btn" href="${esc(c.w)}" target="_blank" rel="noopener noreferrer">${esc(t('ดูที่เจ้าของ', 'View at owner'))} ↗</a>`
+    ? `<a class="cam-owner" href="${esc(c.w)}" target="_blank" rel="noopener noreferrer">${esc(t('ดูที่เจ้าของ', 'at owner'))} ↗</a>`
     : ''
   const loc = c.loc && c.loc !== c.th ? `<span class="micro cam-loc">${esc(c.loc)}</span>` : ''
   return `<li class="cam-row${c === pickedCam ? ' is-picked' : ''}">
     <div class="cam-name">
       <button class="cam-pick" type="button" data-pick="${i}" aria-label="${esc(t('แสดงบนแผนที่', 'Show on map'))}: ${esc(camName(c))}">${esc(camName(c))}</button>
       ${loc}
-      <span class="micro cam-kind"><i class="sw sw-${k}" aria-hidden="true"></i>${esc(kindName(k))} · ${esc(sourceName(c.src))}</span>
+      <span class="micro cam-kind"><i class="sw sw-${k}" aria-hidden="true"></i>${esc(kindName(k))} · ${esc(sourceName(c.src))}${owner ? ` · ${owner}` : ''}</span>
     </div>
-    <span class="cam-actions">${study}${owner}</span>
+    <span class="cam-actions">${study}</span>
   </li>`
 }
 
