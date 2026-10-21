@@ -16,6 +16,10 @@
 .focus-setup { display:grid; gap:16px; }
 .focus-setup h2 { font-size:var(--body); margin:0; }
 .focus-setup p { margin:0; }
+/* A button in a grid column keeps its own width. Stretched to the column it
+   stops being a button and becomes a panel — and a disabled one reads as an
+   empty field with a word in it. */
+.focus-setup .btn { justify-self:start; }
 
 /* The camera's own status is a readout, not a slab: a line of words under the
    instrument, on the page's own ground. It used to be a black field inside the
