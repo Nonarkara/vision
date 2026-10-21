@@ -1,8 +1,25 @@
 # AGENTS.md
 
 > **Read [ANTI-SLOP.md](ANTI-SLOP.md) before any design or frontend work.** These are Dr Non's hard rules against AI design slop: empty space is a decision, subtract before you add, and the map comes first. Check pages with `slop-lint` (tools/slop-lint.mjs in Nonarkara/palette).
+>
+> **Read [MSH.md](MSH.md) before any design or frontend work.** Spatial hallucination (SH) is the root cause: an interface that invents a reason for things to occupy space instead of arranging them around how people read, choose and act. It is not cosmetic polish and it is not slop — a system can work and still be **bad design** because its geometry makes a small task expensive. The giant top bar, the stretched row, the equal cards that make a page monotonous, and the long scroll that follows are all the same failure. **When you find SH, massacre.**
 
 This file is the entry point for AI agents (Grok Bot, Claude, Cursor, ChatGPT, Copilot) working in this repo. Read the README for what the project is. Follow ANTI-SLOP.md for every screen.
+
+## MSH — spatial hallucination is the root cause
+
+`ANTI-SLOP.md` lists thirteen hard limits. They are the **symptoms**. SH is the **disease**: one element expands without a task reason, its row or header grows to accommodate it, useful content falls below the first screen, related things lose their shared context, and the user scrolls to reconstruct a picture the layout should have given them. A page can pass all thirteen limits and still be spatially hallucinated, and it can fail one limit and be fine everywhere else.
+
+The law is in [MSH.md](MSH.md) and it is not optional:
+
+1. **The test, for every region:** *Why is this here? Why this size? Why this far from that?* "The grid put it there", "the container had room" and "it looks balanced" are failed answers.
+2. **Fix the first unnecessary expansion.** Do not decorate its consequences, and do not solve SH by adding another spacer, panel, badge or row of identical cards.
+3. **Compose the first screen before extending the page.** 390 × 844, 1024, and 1440 × 900. If the task can fit one screen, make it fit; if the content earns the scroll, organise that scroll around meaning.
+4. **Relationships determine distance.** Related controls stay together, labels stay with their values, explanations stay with the decision they support. Less space within a group than between groups.
+5. **Chrome earns its pixels.** Headers, nav, toolbars and sticky bands fit their useful contents. Do not stack identity, title, status and controls into separate bands when they are one coherent group. Measure the combined footprint, gaps and sticky offsets included.
+6. **Evidence before a pass.** Real screenshots at 390, 1024 and 1440; chrome cost, task visibility, geometry failures, hierarchy and preservation recorded per viewport. Source scans and green builds cannot prove a visual pass. If rendering was unavailable, report **unverified**.
+
+The completion report for visual work states: **Found** (element, viewport, task cost) · **Changed** (the invented spatial demand removed) · **Verified** (screenshots, measured before/after, exercised interactions, independent review) · **Remaining** (unresolved SH or unverified states — never claim a clean pass while any remain).
 
 ## Shipping a release
 

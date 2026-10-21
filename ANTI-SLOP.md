@@ -8,6 +8,8 @@ AI slop comes from not deciding what the space is for. It goes wrong in one of t
 
 The clean apps in our study differ from the slop ones mainly by **what they leave out**. Before you add a box, shadow, corner radius, badge or emoji, remove one.
 
+**The limits below are symptoms. The root cause is spatial hallucination — see [MSH.md](MSH.md) and the "Spatial hallucination" section at the end of this file.** An interface that invents a reason for things to occupy space fails this way whether or not it breaks a numbered limit: the stretched row, the inflated top bar, the equal cards that flatten the hierarchy, and the scroll that follows are one failure wearing four costumes. When you find SH, massacre.
+
 ## Hard limits per screen
 
 The measured examples come from the study below. "Slop" means the median slop or mixed app, and "clean" means the median clean app.
@@ -61,6 +63,8 @@ Apps whose maps show victims' or reporters' personal data were not pictured or q
 
 ## Spatial hallucination: geometry must explain itself
 
+> **MSH — Massacre Spatial Hallucination.** The full law, with the repair procedure and the evidence required before a pass, is in **[MSH.md](MSH.md)**. Read it before designing, building or reviewing any interface. **When you find SH, massacre.**
+
 Arrange space around how people read, choose and act. For each element ask: **Why is this here, why this size, and why this far from that?** “The grid put it there” is not an answer.
 
 - Keep instructions, their controls and the result they affect together. Avoid duplicated or scattered actions.
@@ -71,3 +75,5 @@ Arrange space around how people read, choose and act. For each element ask: **Wh
 - Measure the scroll needed to reach a small decision. Sticky media must not cover the controls it explains.
 
 Whitespace must separate a meaningful group, support reading, or establish emphasis. If it does none of these, remove it.
+
+The failure spreads: an element expands without a task reason → its row, header or panel grows → useful content falls below the first screen → related information and actions lose their shared context → the reader scrolls to reconstruct a picture the layout should have given them → repeated equal-sized blocks flatten the hierarchy and make the journey monotonous. **Fix the first unnecessary expansion. Do not decorate the consequences.** A working system can still be bad design when its geometry makes a small task expensive.
