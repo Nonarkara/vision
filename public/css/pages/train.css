@@ -230,3 +230,20 @@ a.training-choice { text-decoration: none; }
    sentence, not a banner: uncapped it ran 152 monospace characters across the
    page — the longest line on the site. */
 .training-note { max-width: 58ch; }
+
+/* One picture, three answers: the same frame asked of all three learners.
+   The room used to teach each method alone, so the difference between them
+   was left for the reader to work out. Here they answer side by side. */
+.three-ways { display:grid; gap:12px; padding:24px 0 0; }
+.three-ways-lede { margin:0; font-size:var(--read); line-height:1.5; }
+.three-ways-body { display:grid; grid-template-columns:minmax(0,240px) minmax(0,1fr); gap:12px; align-items:start; }
+.three-ways-stage { display:grid; gap:10px; justify-items:start; align-content:start; }
+.three-ways-stage canvas { width:100%; height:auto; background:var(--field); }
+.three-ways-cards { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
+.three-way { display:grid; gap:8px; align-content:start; padding:14px; background:var(--field); color:var(--field-text); }
+.three-way h3 { margin:0; font-size:var(--read); line-height:1.2; }
+.three-way-eyebrow { margin:0; color:var(--gray); }
+.three-way-answer { margin:0; justify-self:start; display:inline-block; max-width:100%; padding:5px 10px; background:var(--white); color:var(--black); font-family:var(--mono); font-size:var(--micro); overflow-wrap:anywhere; }
+.three-way-need { margin:0; color:var(--gray); line-height:1.45; }
+@media (max-width:1100px) { .three-ways-body { grid-template-columns:1fr; } .three-ways-stage { grid-template-columns:auto minmax(0,1fr); align-items:center; } }
+@media (max-width:760px) { .three-ways-cards { grid-template-columns:1fr; } }

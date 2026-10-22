@@ -34,7 +34,11 @@ export function mountVideoLesson(specimen) {
     rounds = 0,
     stopped = false,
     timer = null,
-    statusText = null
+    statusText = null,
+    // The one frame all three learners were asked about, and its own ticket:
+    // asking must never cancel a lesson that is already running.
+    lastAsk = null,
+    askJob = 0
   const names = [t('ถนนรถแน่น', 'Busy road'), t('ถนนโล่ง', 'Quiet road')],
     named = [false, false]
   root.querySelectorAll('[data-lesson-name]').forEach((el, i) => {
@@ -96,9 +100,11 @@ export function mountVideoLesson(specimen) {
       .map((name, i) => counts[i] < 3 ? `${name}: ${counts[i]} / 3 ${t("ภาพเริ่มต้น", "to get started")}` : `${name}: ${counts[i]} ${t("ภาพ · พร้อม", "examples · ready")}`)
       .join(' · ')
     paintSamples()
+    paintThreeWays()
     paintTest()
     $('[data-lesson-learn]').disabled = busy || !!review || counts.some((n) => n < 3)
     $('[data-lesson-collect]').disabled = busy
+    $('[data-three-ask]').disabled = busy
     $('[data-lesson-act]').disabled = busy || !!pending
     root
       .querySelectorAll('[data-reward]')
@@ -441,6 +447,128 @@ export function mountVideoLesson(specimen) {
     status('เพิ่มคำตอบนี้เป็นตัวอย่างแล้ว กดเรียนใหม่ ผลทดสอบเดิมถูกล้างเพราะโมเดลเปลี่ยน', 'Answer added as a training example. Learn again. Earlier test results were cleared because the model changes.')
     paint()
   })
+  /**
+   * One picture, three answers.
+   *
+   * The room used to teach each method on its own, so the difference between
+   * them was left for the reader to work out. Here the same frame goes to all
+   * three learners at once: the supervised one answers in a word you named,
+   * the unsupervised one in a group name it chose, and the reinforcement one
+   * with an action rather than a label at all.
+   */
+  function threeWayState() {
+    const sup = lastAsk ? classify(labels, lastAsk.x) : null
+    const uns = lastAsk && groups ? groupOf(groups.centres, lastAsk.x) : null
+    const rl = lastAsk ? policy(feedback, lastAsk.x, rounds) : null
+    return {
+      supervised: sup
+        ? {
+            answer: names[sup.y],
+            need: t(
+              'ตอบด้วยคำที่คุณตั้ง — คำนี้เป็นของคุณ',
+              'Answers in your word — that word is yours',
+            ),
+          }
+        : learned
+          ? {
+              answer: t('พร้อมแล้ว', 'Ready'),
+              need: t(
+                'ตอบด้วยคำที่คุณตั้ง — กดถามทั้งสามเพื่อดูคำตอบ',
+                'Answers in your word — press Ask all three to see it',
+              ),
+            }
+          : {
+              answer: t('ยังไม่รู้', 'Does not know yet'),
+              need: t(
+                'ตอบด้วยคำที่คุณตั้ง — ต้องการอย่างน้อย 3 ภาพต่อกลุ่มแล้วกดเรียน',
+                'Answers in your word — needs 3 pictures in each group, then Learn',
+              ),
+            },
+      unsupervised:
+        uns !== null
+          ? {
+              answer: t(`กลุ่ม ${uns + 1}`, `Group ${uns + 1}`),
+              need: t(
+                'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — คุณเป็นคนตั้งว่ากลุ่มนี้คืออะไร',
+                'Answers in a group name it chose — you decide what the group means',
+              ),
+            }
+          : groups
+            ? {
+                answer: t('พร้อมแล้ว', 'Ready'),
+                need: t(
+                  'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — กดถามทั้งสามเพื่อดูว่าภาพนี้ไปอยู่กลุ่มไหน',
+                  'Answers in a group name it chose — press Ask all three to see which group this picture lands in',
+                ),
+              }
+            : {
+                answer: t('ยังไม่รู้', 'Does not know yet'),
+                need: t(
+                  'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — ต้องเก็บภาพ 24 ภาพก่อน',
+                  'Answers in a group name it chose — needs 24 frames first',
+                ),
+              },
+      reinforcement: rl
+        ? {
+            answer: rl.action ? t('เงียบ', 'Stay quiet') : t('แจ้งเตือน', 'Raise alert'),
+            need: rl.exploring
+              ? t(
+                  'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — กำลังลองอยู่ เพราะยังไม่มีคะแนน',
+                  'Answers with an action, not a label — still exploring, it has no scores yet',
+                )
+              : t(
+                  'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — ใช้คะแนนที่ผ่านมา',
+                  'Answers with an action, not a label — using the rewards it collected',
+                ),
+          }
+        : {
+            answer: t('พร้อมเลย', 'Ready right away'),
+            need: t(
+              'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — มันต้องเลือกทันที แม้ยังไม่ได้เรียนอะไรเลย',
+              'Answers with an action, not a label — it must pick straight away, with nothing learned',
+            ),
+          },
+    }
+  }
+
+  function paintThreeWays() {
+    const state = threeWayState()
+    root.querySelectorAll('.three-way').forEach((card) => {
+      const row = state[card.dataset.way]
+      if (!row) return
+      const answer = card.querySelector('[data-way-answer]')
+      const need = card.querySelector('[data-way-need]')
+      if (answer.textContent !== row.answer) answer.textContent = row.answer
+      if (need.textContent !== row.need) need.textContent = row.need
+    })
+  }
+
+  $('[data-three-ask]').addEventListener('click', async () => {
+    if (busy) return
+    const ticket = ++askJob
+    busy = true
+    paint()
+    try {
+      const sample = await read()
+      if (ticket !== askJob) return
+      lastAsk = sample
+      const view = $('[data-three-view]')
+      view.hidden = false
+      view.getContext('2d').drawImage(sample.thumb, 0, 0, view.width, view.height)
+      status(
+        'ถามทั้งสามแล้ว — ดูว่าคำตอบต่างกันยังไง',
+        'Asked all three. Watch how the answers differ.',
+      )
+    } catch {
+      status('อ่านภาพไม่สำเร็จ ลองอีกครั้ง', 'Could not read the frame. Try again.')
+    } finally {
+      if (ticket === askJob) {
+        busy = false
+        paint()
+      }
+    }
+  })
+
   function paintGroups() {
     const el = $('[data-lesson-groups]')
     el.replaceChildren()
