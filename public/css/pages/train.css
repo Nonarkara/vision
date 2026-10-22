@@ -245,5 +245,5 @@ a.training-choice { text-decoration: none; }
 .three-way-eyebrow { margin:0; color:var(--gray); }
 .three-way-answer { margin:0; justify-self:start; display:inline-block; max-width:100%; padding:5px 10px; background:var(--white); color:var(--black); font-family:var(--mono); font-size:var(--micro); overflow-wrap:anywhere; }
 .three-way-need { margin:0; color:var(--gray); line-height:1.45; }
-@media (max-width:1100px) { .three-ways-body { grid-template-columns:1fr; } .three-ways-stage { grid-template-columns:auto minmax(0,1fr); align-items:center; } }
+@media (max-width:1100px) { .three-ways-body { grid-template-columns:1fr; } .three-ways-stage { grid-template-columns:auto minmax(0,1fr); align-items:start; } }
 @media (max-width:760px) { .three-ways-cards { grid-template-columns:1fr; } }

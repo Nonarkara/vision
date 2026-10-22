@@ -85,6 +85,27 @@ test('the reinforcement learner answers even with nothing learned', () => {
   assert.ok(js.includes("answer: t('พร้อมเลย', 'Ready right away')"), 'the reinforcement learner must be ready before it has learned anything')
 })
 
+test('the supervised card cannot answer before the learner has been taught', () => {
+  // classify() answers from a single example. The room's own rule is three
+  // pictures in each group and then Learn, and adding an example clears what
+  // it had learned. A card that answered from one example would contradict
+  // the lesson sitting right above it.
+  assert.match(
+    js,
+    /const sup = lastAsk && learned \? classify\(labels, lastAsk\.x\) : null/,
+    'the supervised answer must wait until the reader has taught it',
+  )
+})
+
+test('the button does not move out from under the pointer when the picture appears', () => {
+  const stage = html.match(/<div class="three-ways-stage">([\s\S]*?)<\/div>/)
+  assert.ok(stage, 'the stage must exist')
+  assert.ok(
+    stage[1].indexOf('data-three-ask') < stage[1].indexOf('data-three-view'),
+    'the button must come before the picture: if the picture appears above it, the button slides away under the pointer',
+  )
+})
+
 test('the comparison is the room\'s own styling, not a new language', () => {
   assert.ok(css.includes('.three-way {'), 'the cards must be styled')
   assert.ok(css.includes('.three-way-answer {'), 'the answer must be styled')

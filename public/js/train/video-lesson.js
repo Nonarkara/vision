@@ -457,7 +457,11 @@ export function mountVideoLesson(specimen) {
    * with an action rather than a label at all.
    */
   function threeWayState() {
-    const sup = lastAsk ? classify(labels, lastAsk.x) : null
+    // The supervised learner only knows what you have actually taught it:
+    // the room's own rule is three pictures in each group and then Learn, and
+    // adding an example clears what it had learned. Answering from one example
+    // would contradict the lesson sitting right above this card.
+    const sup = lastAsk && learned ? classify(labels, lastAsk.x) : null
     const uns = lastAsk && groups ? groupOf(groups.centres, lastAsk.x) : null
     const rl = lastAsk ? policy(feedback, lastAsk.x, rounds) : null
     return {
@@ -465,8 +469,8 @@ export function mountVideoLesson(specimen) {
         ? {
             answer: names[sup.y],
             need: t(
-              'ตอบด้วยคำที่คุณตั้ง — คำนี้เป็นของคุณ',
-              'Answers in your word — that word is yours',
+              'ตอบด้วยคำที่คุณตั้ง — คำนี้เป็นของคุณ แต่ยังทำผิดได้',
+              'Answers in your word — that word is yours, but it can still be wrong',
             ),
           }
         : learned
