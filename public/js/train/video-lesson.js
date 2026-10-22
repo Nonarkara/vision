@@ -1,7 +1,8 @@
 import { t, onLang, count } from '../core/i18n.js?v=1.20.1'
 import { runLens, createLensState } from '../cv/lenses.js?v=1.20.1'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.20.1'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.20.1'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.22.0'
+import { threeWayState } from './three-ways.js?v=1.22.0'
 import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.20.1'
 import { practiceVideo } from './practice-video.js?v=1.20.1'
 
@@ -455,88 +456,21 @@ export function mountVideoLesson(specimen) {
    * three learners at once: the supervised one answers in a word you named,
    * the unsupervised one in a group name it chose, and the reinforcement one
    * with an action rather than a label at all.
+   *
+   * The words themselves live in `three-ways.js`, which holds no DOM — that is
+   * what lets the comparison be checked without a browser.
    */
-  function threeWayState() {
-    // The supervised learner only knows what you have actually taught it:
-    // the room's own rule is three pictures in each group and then Learn, and
-    // adding an example clears what it had learned. Answering from one example
-    // would contradict the lesson sitting right above this card.
-    const sup = lastAsk && learned ? classify(labels, lastAsk.x) : null
-    const uns = lastAsk && groups ? groupOf(groups.centres, lastAsk.x) : null
-    const rl = lastAsk ? policy(feedback, lastAsk.x, rounds) : null
-    return {
-      supervised: sup
-        ? {
-            answer: names[sup.y],
-            need: t(
-              'ตอบด้วยคำที่คุณตั้ง — คำนี้เป็นของคุณ แต่ยังทำผิดได้',
-              'Answers in your word — that word is yours, but it can still be wrong',
-            ),
-          }
-        : learned
-          ? {
-              answer: t('พร้อมแล้ว', 'Ready'),
-              need: t(
-                'ตอบด้วยคำที่คุณตั้ง — กดถามทั้งสามเพื่อดูคำตอบ',
-                'Answers in your word — press Ask all three to see it',
-              ),
-            }
-          : {
-              answer: t('ยังไม่รู้', 'Does not know yet'),
-              need: t(
-                'ตอบด้วยคำที่คุณตั้ง — ต้องการอย่างน้อย 3 ภาพต่อกลุ่มแล้วกดเรียน',
-                'Answers in your word — needs 3 pictures in each group, then Learn',
-              ),
-            },
-      unsupervised:
-        uns !== null
-          ? {
-              answer: t(`กลุ่ม ${uns + 1}`, `Group ${uns + 1}`),
-              need: t(
-                'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — คุณเป็นคนตั้งว่ากลุ่มนี้คืออะไร',
-                'Answers in a group name it chose — you decide what the group means',
-              ),
-            }
-          : groups
-            ? {
-                answer: t('พร้อมแล้ว', 'Ready'),
-                need: t(
-                  'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — กดถามทั้งสามเพื่อดูว่าภาพนี้ไปอยู่กลุ่มไหน',
-                  'Answers in a group name it chose — press Ask all three to see which group this picture lands in',
-                ),
-              }
-            : {
-                answer: t('ยังไม่รู้', 'Does not know yet'),
-                need: t(
-                  'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — ต้องเก็บภาพ 24 ภาพก่อน',
-                  'Answers in a group name it chose — needs 24 frames first',
-                ),
-              },
-      reinforcement: rl
-        ? {
-            answer: rl.action ? t('เงียบ', 'Stay quiet') : t('แจ้งเตือน', 'Raise alert'),
-            need: rl.exploring
-              ? t(
-                  'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — กำลังลองอยู่ เพราะยังไม่มีคะแนน',
-                  'Answers with an action, not a label — still exploring, it has no scores yet',
-                )
-              : t(
-                  'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — ใช้คะแนนที่ผ่านมา',
-                  'Answers with an action, not a label — using the rewards it collected',
-                ),
-          }
-        : {
-            answer: t('พร้อมเลย', 'Ready right away'),
-            need: t(
-              'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — มันต้องเลือกทันที แม้ยังไม่ได้เรียนอะไรเลย',
-              'Answers with an action, not a label — it must pick straight away, with nothing learned',
-            ),
-          },
-    }
-  }
-
   function paintThreeWays() {
-    const state = threeWayState()
+    const state = threeWayState({
+      labels,
+      learned,
+      groups,
+      feedback,
+      rounds,
+      ask: lastAsk,
+      names,
+      t,
+    })
     root.querySelectorAll('.three-way').forEach((card) => {
       const row = state[card.dataset.way]
       if (!row) return
@@ -558,7 +492,9 @@ export function mountVideoLesson(specimen) {
       lastAsk = sample
       const view = $('[data-three-view]')
       view.hidden = false
-      view.getContext('2d').drawImage(sample.thumb, 0, 0, view.width, view.height)
+      // The full frame, not the 96px strip thumbnail: the picture in the card
+      // has to be the picture the machine saw, not a blurred copy of it.
+      view.getContext('2d').drawImage(sample.canvas, 0, 0, view.width, view.height)
       status(
         'ถามทั้งสามแล้ว — ดูว่าคำตอบต่างกันยังไง',
         'Asked all three. Watch how the answers differ.',

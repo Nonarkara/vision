@@ -130,6 +130,12 @@ a.training-choice { text-decoration: none; }
    ink in light and the page's own GROUND in dark. Hardcoding it here printed this
    line indigo-on-indigo after sunset — measured 1.00:1, i.e. not on the page. */
 .lesson-topline > .micro { color: var(--text); }
+/* The three method buttons promise what each one answers with. The payoff is
+   a screen further down, so the topline carries the way to it. The Thai face
+   gives this line a 22px box against the heading's 20px, so on a phone the
+   topline is 3px taller in Thai and 2px in English, and the bench moves down
+   by the same. At 1440 the link shares the line and nothing moves at all. */
+.lesson-topline > .lesson-jump { color: var(--text); font-size: var(--fine); }
 .lesson-methods { display:flex; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; gap:4px 12px; border-bottom:1px solid var(--gray); }
 .lesson-methods .training-choice { flex:none; position:relative; background:transparent; color:var(--text); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
 .lesson-methods .training-choice strong { font-size:var(--read); }
@@ -234,16 +240,24 @@ a.training-choice { text-decoration: none; }
 /* One picture, three answers: the same frame asked of all three learners.
    The room used to teach each method alone, so the difference between them
    was left for the reader to work out. Here they answer side by side. */
-.three-ways { display:grid; gap:12px; padding:24px 0 0; }
+.three-ways { display:grid; gap:12px; padding:24px 0 0; scroll-margin-top:calc(var(--rail-height) + 12px); }
 .three-ways-lede { margin:0; font-size:var(--read); line-height:1.5; }
-.three-ways-body { display:grid; grid-template-columns:minmax(0,240px) minmax(0,1fr); gap:12px; align-items:start; }
+.three-ways-body { display:grid; grid-template-columns:minmax(0,224px) minmax(0,1fr); gap:12px; align-items:start; }
 .three-ways-stage { display:grid; gap:10px; justify-items:start; align-content:start; }
-.three-ways-stage canvas { width:100%; height:auto; background:var(--field); }
+/* The picture is 224 x 126 by construction, and it is never scaled up. The
+   old width:100% rule gave it 851 px of box at 1024 — a stretch of 3.8x, and
+   it pushed the three cards half a screen down. A stretched thumbnail is not
+   the frame the machine saw. */
+.three-ways-stage canvas { width:224px; max-width:100%; height:auto; background:var(--field); }
 .three-ways-cards { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; }
 .three-way { display:grid; gap:8px; align-content:start; padding:14px; background:var(--field); color:var(--field-text); }
 .three-way h3 { margin:0; font-size:var(--read); line-height:1.2; }
 .three-way-eyebrow { margin:0; color:var(--gray); }
 .three-way-answer { margin:0; justify-self:start; display:inline-block; max-width:100%; padding:5px 10px; background:var(--white); color:var(--black); font-family:var(--mono); font-size:var(--micro); overflow-wrap:anywhere; }
 .three-way-need { margin:0; color:var(--gray); line-height:1.45; }
-@media (max-width:1100px) { .three-ways-body { grid-template-columns:1fr; } .three-ways-stage { grid-template-columns:auto minmax(0,1fr); align-items:start; } }
+/* At 1024 the three cards side by side are 233px each, which is the narrowest
+   a comparison can be and still read. Below that they would be narrower still,
+   so the body becomes one column, the stage is a strip of its own, and the
+   picture never widens past its own 224px. */
+@media (max-width:1023px) { .three-ways-body { grid-template-columns:1fr; } }
 @media (max-width:760px) { .three-ways-cards { grid-template-columns:1fr; } }

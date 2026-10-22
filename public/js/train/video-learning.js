@@ -57,15 +57,20 @@ export function policy(feedback, x, round = 0) {
     n[s.action] += weight
   }
   for (let a = 0; a < 2; a++) if (n[a]) q[a] /= n[a]
-  const exploring = !n[0] || !n[1] || round % 5 === 4
-  const action = !n[0]
+  // Which of the two actions has a score near this frame. The room's card has
+  // to tell three things apart: nothing has ever been rated, one action has
+  // never been rated, and both have been rated but it still explores now and
+  // then. "Exploring" alone cannot tell those apart.
+  const scored = [n[0] > 0, n[1] > 0]
+  const exploring = !scored[0] || !scored[1] || round % 5 === 4
+  const action = !scored[0]
     ? 0
-    : !n[1]
+    : !scored[1]
       ? 1
       : exploring
         ? round % 2
         : q[1] > q[0]
           ? 1
           : 0
-  return { action, q, exploring }
+  return { action, q, exploring, scored }
 }

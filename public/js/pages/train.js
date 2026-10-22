@@ -6,7 +6,7 @@
 // Everything — examples, weights, predictions — lives in this tab's memory.
 
 import '../core/site.js?v=1.20.1'
-import { mountVideoLesson } from '../train/video-lesson.js?v=1.20.1'
+import { mountVideoLesson } from '../train/video-lesson.js?v=1.22.0'
 import { t, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.20.1'
 import { toast, confirmBox } from '../core/site.js?v=1.20.1'
 import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.20.1'
