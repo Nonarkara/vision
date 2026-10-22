@@ -25,21 +25,24 @@ Two house rules did the measuring:
   | Room | 1.20.2 | 1.21.0 | Page height |
   |---|---|---|---|
   | /games | 52 | **35** | 5494 → **2441 px** |
-  | /research | 60 | 59 | 15089 → 15166 |
-  | /cameras | 194 | 194 | — |
+  | /research | 59 | 59 | 15089 → 15166 |
+  | /cameras | 194 | 194 | 7585 → 8040 |
   | /gesture | 46 | 46 | 3583 → 3723 |
   | /everyday | 50 | 50 | 10523 |
-  | /learn | 97 | 97 | 11352 |
+  | /learn | 98 | 98 | 11424 |
   | /handbook | 58 | 58 | 4270 |
   | /reconstruct | 38 | 38 | 6675 |
   | /drive | 35 | 35 | 4436 |
   | /focus | 35 | 35 | 2882 → 3029 |
-  | /colour | 24 | 24 | 2462 → 3220 |
+  | /colour | 24 | 24 | 2490 → 3220 |
   | /story | 24 | 24 | 6542 |
-  | /system | 34 | 34 | 9181 → 9500 |
+  | /system | 34 | 34 | 9500 |
   | /train | 72 | 72 | 1595 → 1827 |
+  | / | 51 | 51 | 4559 |
 
   **Only /games got smaller.** The other rooms got a manual, and a manual is text: the control counts did not move and the pages got taller. That is the honest result, and it is not the result the first draft of this record claimed.
+
+  **The whole table was re-measured on both trees before publishing, and four of the first draft's numbers did not survive it** — /research's 1.20.2 count was 59 and not 60, /learn's was 98 and not 97 at both ends, /system's 1.20.2 height was 9500 and not 9181, and /colour's was 2490 and not 2462. All four were figures carried over from an earlier release rather than measured on the tree, which is exactly how a log starts lying.
 - **The spatial measurement** (MSH): chrome cost above `<main>`, page-head height, the Y of the room's first control, the width and line count of every instruction block, and horizontal overflow — at 390, 1024 and 1440.
 
 > **Corrections to the first draft of this record.** An independent review measured the tree after it was written and found five of its claims did not hold. They are corrected here rather than quietly dropped: the manual's width was reported as 845 px and is **595 px**; the "305 × 338, five lines per step" figure describes an *intermediate build of this release*, not 1.20.2; the control count of 191 for /cameras was not a count of anything reproducible — the figure is **194 visible**, and it did not fall; "/home's head draws the five steps as a diagram whose numbers are the lens buttons" is **wrong** — the figure in that head is the handbook path, labelled "Chapter 01, Chapter 02, Chapters 04–05, Chapter 06, Chapter 07", and the head's own `<h1>` is "How a computer sees"; and "below the fold on a tablet" was **false** — the focus button sat at y=709 in a 768 px viewport, on screen with 59 px to spare.
