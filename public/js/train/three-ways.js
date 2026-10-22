@@ -13,6 +13,18 @@
 import { classify, groupOf, policy } from './video-learning.js?v=1.22.0'
 
 /**
+ * The name of the two actions, in one place.
+ *
+ * The card and the room's own panel are the same learner shown twice, so they
+ * must not each carry their own copy of this mapping. A card that says "Stay
+ * quiet" while the panel directly above it says "Raise alert" would be two
+ * different machines, and nothing else in the room would notice.
+ */
+export function actionLabel(action, t) {
+  return action ? t('เงียบ', 'Stay quiet') : t('แจ้งเตือน', 'Raise alert')
+}
+
+/**
  * What each of the three cards should say.
  *
  * @param {object} s
@@ -109,9 +121,7 @@ export function threeWayState({
             },
     reinforcement: rl
       ? {
-          answer: rl.action
-            ? t('เงียบ', 'Stay quiet')
-            : t('แจ้งเตือน', 'Raise alert'),
+          answer: actionLabel(rl.action, t),
           need: reinforcementNeed(feedback, rl, t),
         }
       : {
@@ -133,6 +143,11 @@ export function threeWayState({
  * card was claiming it had none. And "using the rewards it collected" was
  * true only once BOTH actions have been rated — until then the policy has to
  * try the action nobody has told it about.
+ *
+ * The second state says "near this picture" on purpose. `scored` is computed
+ * over the twelve nearest rewards to the frame that was asked, so with more
+ * than twelve rewards in the room an action the reader HAS rated can still
+ * have no score near this frame. The card says what is true where it stands.
  */
 function reinforcementNeed(feedback, rl, t) {
   if (!feedback.length)
@@ -142,8 +157,8 @@ function reinforcementNeed(feedback, rl, t) {
     )
   if (!rl.scored[0] || !rl.scored[1])
     return t(
-      'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — กำลังลองการกระทำที่ยังไม่มีคะแนน',
-      'Answers with an action, not a label — trying the action that has no score yet',
+      'ตอบด้วยการกระทำ ไม่ใช่คำตอบ — กำลังลองการกระทำที่ยังไม่มีคะแนนใกล้ภาพนี้',
+      'Answers with an action, not a label — trying the action it has no score for near this picture',
     )
   if (rl.exploring)
     return t(

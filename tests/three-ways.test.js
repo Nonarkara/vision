@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { threeWayState } from '../public/js/train/three-ways.js'
+import { threeWayState, actionLabel } from '../public/js/train/three-ways.js'
 
 // The room taught supervised, unsupervised and reinforcement one after another,
 // and never showed them side by side. A reader could follow any one of them
@@ -82,7 +82,7 @@ test('the room asks all three learners the same picture', () => {
 test('the room wires the comparison through the module the tests can read', () => {
   // The words must live where they can be checked. If they drift back into
   // the page script, these pins stop being behavioural.
-  assert.match(js, /import \{ threeWayState \} from '\.\/three-ways\.js\?v=/, 'the page must import the comparison')
+  assert.match(js, /import \{[^}]*threeWayState[^}]*\} from '\.\/three-ways\.js\?v=/, 'the page must import the comparison')
   assert.match(js, /threeWayState\(\{\s*labels,\s*learned,\s*groups,\s*feedback,\s*rounds,\s*ask: lastAsk,\s*names,\s*t,/, 'and pass the room its own state')
   assert.doesNotMatch(js, /function threeWayState\(\)/, 'the comparison must not be written twice')
 })
@@ -169,7 +169,7 @@ test('the reinforcement card tells the truth about the scores it has', () => {
   assert.match(none.reinforcement.need, /no scores yet/, 'with nothing rated it has no scores')
   const one = state({ feedback: [{ x: [10, 10], action: 1, reward: 1 }], rounds: 1 })
   assert.doesNotMatch(one.reinforcement.need, /no scores yet/, 'one rating is a score')
-  assert.match(one.reinforcement.need, /trying the action that has no score yet/, 'and it must try the action nobody rated')
+  assert.match(one.reinforcement.need, /trying the action it has no score for near this picture/, 'and it must try the action nobody rated')
   const both = state()
   assert.match(both.reinforcement.need, /using the rewards it collected/, 'both rated, it uses them')
   const exploring = state({ rounds: 4 })
@@ -179,10 +179,66 @@ test('the reinforcement card tells the truth about the scores it has', () => {
 test('the button does not move out from under the pointer when the picture appears', () => {
   const stage = html.match(/<div class="three-ways-stage">([\s\S]*?)<\/div>/)
   assert.ok(stage, 'the stage must exist')
+  // The picture must never appear ABOVE the button: if it does, the picture
+  // is what slides the button out from under the pointer.
+  //
+  // The button does still move when the ask reports back — 56px at 1440 —
+  // because the room's status line grows by one line, which is the same
+  // shift every lesson action causes and has nothing to do with the picture.
+  // This pin guards the picture's place, and only the picture's place.
   assert.ok(
     stage[1].indexOf('data-three-ask') < stage[1].indexOf('data-three-view'),
     'the button must come before the picture: if the picture appears above it, the button slides away under the pointer',
   )
+})
+
+test('the two actions have one name, not a copy in each place', () => {
+  // The card and the room's own panel are the same learner shown twice. If
+  // each carries its own mapping they can drift, and the reader is left
+  // looking at two different machines.
+  assert.equal(actionLabel(1, en), 'Stay quiet')
+  assert.equal(actionLabel(0, en), 'Raise alert')
+  assert.equal(actionLabel(1, (th) => th), 'เงียบ')
+  assert.equal(actionLabel(0, (th) => th), 'แจ้งเตือน')
+  assert.equal(
+    [...js.matchAll(/'เงียบ'|'แจ้งเตือน'/g)].length,
+    0,
+    'the lesson panel must not spell the action names out again',
+  )
+  assert.equal(
+    [...ways.matchAll(/'เงียบ'/g)].length,
+    1,
+    'the action names live in one place',
+  )
+})
+
+test('every sentence the cards can say exists in Thai as well as English', () => {
+  // The room is Thai-first: the house runs its linter in Thai, and four of
+  // these sentences are the only copy of a state the reader will ever see.
+  // A Thai string that is empty, truncated, or left in English must not
+  // ship green.
+  const seen = []
+  const record = (th, e) => {
+    seen.push([th, e])
+    return e
+  }
+  const walk = (over) => state({ ...over, t: record })
+  // every state the room can reach
+  walk({ labels: [], learned: false, groups: null, feedback: [], rounds: 0, ask: null })
+  walk({ labels: [], learned: false, groups: null, feedback: [], rounds: 0 })
+  walk({ labels: [{ x: [0, 0], y: 0 }], learned: false, groups: null, feedback: [], rounds: 0 })
+  walk({ labels: [], learned: false, groups: null, feedback: [{ x: [10, 10], action: 1, reward: 1 }], rounds: 1 })
+  walk({ labels: [], learned: true, groups: null, feedback: [], rounds: 0, ask: null })
+  walk({ labels: [], learned: true, groups: null, feedback: [], rounds: 0 })
+  walk({ labels: [], learned: false, feedback: [], rounds: 0, ask: null })
+  walk({ labels: [], learned: false, feedback: [], rounds: 0 })
+  walk({ rounds: 4 })
+  walk({})
+  assert.ok(new Set(seen.map(([, e]) => e)).size >= 16, 'the walk must reach every sentence')
+  for (const [th, e] of seen) {
+    assert.ok(th.length > 0, `the Thai of "${e}" is empty`)
+    assert.notEqual(th, e, `"${e}" reads the same in Thai and English`)
+  }
 })
 
 test('the picture is never scaled up', () => {

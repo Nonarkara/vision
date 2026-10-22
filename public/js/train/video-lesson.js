@@ -2,7 +2,7 @@ import { t, onLang, count } from '../core/i18n.js?v=1.20.1'
 import { runLens, createLensState } from '../cv/lenses.js?v=1.20.1'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.20.1'
 import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.22.0'
-import { threeWayState } from './three-ways.js?v=1.22.0'
+import { threeWayState, actionLabel } from './three-ways.js?v=1.22.0'
 import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.20.1'
 import { practiceVideo } from './practice-video.js?v=1.20.1'
 
@@ -188,8 +188,8 @@ export function mountVideoLesson(specimen) {
     )
     $('[data-lesson-action]').textContent = pending
       ? t(
-          `ภาพค้างเพื่อให้คะแนน: ${pending.action ? 'เงียบ' : 'แจ้งเตือน'} · ${pending.exploring ? 'กำลังลอง' : 'ใช้รางวัลที่ผ่านมา'}`,
-          `Frame held for feedback: ${pending.action ? 'Stay quiet' : 'Raise alert'} · ${pending.exploring ? 'exploring' : 'using earlier rewards'}`,
+          `ภาพค้างเพื่อให้คะแนน: ${actionLabel(pending.action, t)} · ${pending.exploring ? 'กำลังลอง' : 'ใช้รางวัลที่ผ่านมา'}`,
+          `Frame held for feedback: ${actionLabel(pending.action, t)} · ${pending.exploring ? 'exploring' : 'using earlier rewards'}`,
         )
       : t(
           'กดลองเลือกการกระทำ แล้วให้คะแนนภาพนั้น',
@@ -252,10 +252,7 @@ export function mountVideoLesson(specimen) {
       text = names[lastTest.guess]
       explain = t('คำตอบที่คุณตรวจ: ', 'Your checked answer: ', '你核对的答案：') + (lastTest.truth === null ? t('ดูไม่ออก', 'Cannot tell', '无法判断') : names[lastTest.truth])
     } else if (review && pending) {
-      text = t(
-        pending.action ? 'เงียบ' : 'แจ้งเตือน',
-        pending.action ? 'Stay quiet' : 'Raise alert',
-      )
+      text = actionLabel(pending.action, t)
       explain = t(
         'ภาพนี้ค้างไว้เพื่อให้คะแนนการกระทำ ไม่ใช่ผลตรวจนับรถ',
         'This frame is held so you can rate its action. This is not a vehicle count.',
@@ -693,10 +690,7 @@ export function mountVideoLesson(specimen) {
               )
             } else {
               const result = policy(feedback, x, rounds)
-              text = t(
-                result.action ? 'เงียบ' : 'แจ้งเตือน',
-                result.action ? 'Stay quiet' : 'Raise alert',
-              )
+              text = actionLabel(result.action, t)
               explain = t(
                 'ข้อเสนอจากรางวัลที่ผ่านมา กดลองเพื่อให้คะแนนอีกครั้ง',
                 'Suggested from earlier rewards. Press Try an action to rate another choice.',
