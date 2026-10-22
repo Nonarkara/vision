@@ -61,6 +61,20 @@ function restorePrevious() {
 }
 
 const hadPrevious = backupPrevious()
+
+// A module that changed must be fetched under a new URL. The edge rewrites
+// the server's `no-cache` to a four-hour max-age, so a browser that already
+// has the old response treats it as fresh; the ?v= stamp on the import is the
+// only thing that stops a stale copy. HTML references do not need this — they
+// carry {{v}}, rendered per request — but a module imported by another module
+// has to have its stamp moved by hand, and that is exactly what gets
+// forgotten. Checked here so a release that forgets it fails closed instead
+// of shipping a four-hour-old module.
+if (hadPrevious) {
+  const stampCheck = path.join(root, 'scripts', 'check-module-stamps.mjs')
+  execFileSync('node', [stampCheck, path.join(previous, 'public')], { cwd: root, stdio: 'inherit' })
+}
+
 fs.mkdirSync(path.join(runtime, 'logs'), { recursive: true })
 for (const dir of shipped) {
   const src = path.join(root, dir)

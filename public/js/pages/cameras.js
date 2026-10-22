@@ -14,7 +14,7 @@ import { wantsWebcam } from '../core/specimen.js?v=1.20.1'
 import { paintFigures } from '../cameras/figures.js?v=1.20.1'
 import { createFilters, matches, kindName, safeKind } from '../cameras/filters.js?v=1.20.1'
 import { createMap } from '../cameras/map.js?v=1.20.1'
-import { createList } from '../cameras/list.js?v=1.20.1'
+import { createList } from '../cameras/list.js?v=1.21.0'
 import { createBench } from '../cameras/bench.js?v=1.20.1'
 import { createCensus } from '../cameras/census.js?v=1.20.1'
 
