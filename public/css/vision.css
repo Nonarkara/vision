@@ -468,8 +468,13 @@ em { font-style: italic; }
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   min-height: calc(100svh - var(--rail-height));
 }
+/* The text column is as tall as the map beside it, because the opening fills
+   the screen. `space-between` used to spend that height on a gap: the title
+   sat at the top, its own explanation at the bottom, and 262px of ivory
+   separated two sentences that belong together. The explanation now sits
+   under the title, and the space the map needs is the map's. */
 .opening-text {
-  display: flex; flex-direction: column; justify-content: space-between; gap: var(--gap);
+  display: flex; flex-direction: column; justify-content: flex-start; gap: var(--gap);
   padding: clamp(28px, 3.5vw, 56px) var(--gutter);
 }
 .opening-text .lede { margin: 0; }
@@ -741,11 +746,13 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 62ch; }
 .manual {
   list-style: none; margin: 0; padding: 0;
   display: grid; gap: 2px;
-  /* The measure is the house's prose measure. `ch` resolves against the
-     element's own size, so the size is set here: inherited at 22px, 62ch
-     would have been 845px and every step would have stretched past its own
-     text. The instruction is prose, so it gets the prose width. */
-  max-width: 62ch; font-size: var(--read);
+  /* The measure is the house's prose measure, and the plate is as wide as
+     its own widest step. `ch` resolves against the element's own size, so
+     the size is set here: inherited at 22px, 62ch would have been 845px.
+     The instruction is prose, so it gets the prose width — but a plate
+     wider than its longest step is a card with an empty right-hand side,
+     so the content decides the width and the measure only caps it. */
+  width: fit-content; max-width: 62ch; font-size: var(--read);
 }
 .manual li {
   display: grid; grid-template-columns: 28px minmax(0, 1fr);
@@ -761,14 +768,19 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 62ch; }
 }
 .manual-body { font-size: var(--read); line-height: 1.45; min-width: 0; }
 .manual-body > span { display: block; }
-/* The name of a part or a control, in the face it wears on the page. The size
-   is inherited, not scaled: a scaled chip creates a font size that exists
-   nowhere else on the page, and a page with nine sizes has no type scale. */
+/* The name of a part or a control, in the face it wears on the page. It is
+   one box: a chip that breaks at a space becomes two boxes, and a reader
+   holding two boxes labelled "Count" and "vehicles" is holding neither of
+   the controls. So the chip never breaks inside; when it does not fit the
+   line, it drops to its own line instead. Its size is the house's small
+   mono, so even a long name still fits a phone. */
 .manual .part {
-  font-family: var(--mono); letter-spacing: 0.02em;
+  display: inline-block; white-space: nowrap;
+  font-family: var(--mono); font-size: var(--micro); letter-spacing: 0.02em;
   background: var(--white); color: var(--black);
-  padding: 1px 6px; overflow-wrap: break-word;
+  padding: 1px 6px;
 }
+.manual-warn .part { font-size: inherit; }
 .manual .part [lang="th"], .manual .part[lang="th"] { font-family: var(--thai); letter-spacing: 0; }
 /* A warning belongs to the step under it. */
 .manual-warn {
@@ -776,9 +788,12 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 62ch; }
   font-family: var(--mono); font-size: var(--fine); color: var(--gray);
 }
 /* Confirmed. The machine saw it. */
-.manual li[data-done] .manual-n { background: var(--jasper); color: var(--black); font-size: 0; }
+/* The number steps aside for the tick. Hiding it with `font-size: 0` put a
+   zero into the page's inventory of type sizes, and a page with a zero in
+   it has no scale; visibility does the same work and leaves the size alone. */
+.manual li[data-done] .manual-n { background: var(--jasper); color: var(--black); visibility: hidden; }
 .manual li[data-done] .manual-n::after {
-  content: ""; display: block; width: 5px; height: 10px;
+  content: ""; display: block; width: 5px; height: 10px; visibility: visible;
   border: solid var(--black); border-width: 0 2px 2px 0;
   transform: rotate(45deg) translate(-1px, -2px);
 }

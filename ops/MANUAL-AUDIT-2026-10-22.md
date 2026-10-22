@@ -20,22 +20,43 @@ Five questions, asked of every room:
 
 Two house rules did the measuring:
 
-- **The control count per room**, read off the live pages on the **1.20.2 tree** (TH), before any of this release's changes: Home 40 · Cameras **191** · Colour 24 · Drive 35 · Everyday 48 · Focus 35 · Games 46 · Gesture 44 · Learn 96 · Reconstruct 38 · Research 59 · Story 24 · System 34 · Train 66.
+- **The control count per room.** A count is not a number until you say which elements you count, so: *every interactive element in the document — `button`, `a[href]`, `input`, `select`, `textarea`, `[role="button"]`, `label.btn` — that is visible at 1440 px in Thai, with the catalogue loaded.* Measured on the 1.20.2 tree and again on this one:
+
+  | Room | 1.20.2 | 1.21.0 | Page height |
+  |---|---|---|---|
+  | /games | 52 | **35** | 5494 → **2441 px** |
+  | /research | 60 | 59 | 15089 → 15166 |
+  | /cameras | 194 | 194 | — |
+  | /gesture | 46 | 46 | 3583 → 3723 |
+  | /everyday | 50 | 50 | 10523 |
+  | /learn | 97 | 97 | 11352 |
+  | /handbook | 58 | 58 | 4270 |
+  | /reconstruct | 38 | 38 | 6675 |
+  | /drive | 35 | 35 | 4436 |
+  | /focus | 35 | 35 | 2882 → 3029 |
+  | /colour | 24 | 24 | 2462 → 3220 |
+  | /story | 24 | 24 | 6542 |
+  | /system | 34 | 34 | 9181 → 9500 |
+  | /train | 72 | 72 | 1595 → 1827 |
+
+  **Only /games got smaller.** The other rooms got a manual, and a manual is text: the control counts did not move and the pages got taller. That is the honest result, and it is not the result the first draft of this record claimed.
 - **The spatial measurement** (MSH): chrome cost above `<main>`, page-head height, the Y of the room's first control, the width and line count of every instruction block, and horizontal overflow — at 390, 1024 and 1440.
+
+> **Corrections to the first draft of this record.** An independent review measured the tree after it was written and found five of its claims did not hold. They are corrected here rather than quietly dropped: the manual's width was reported as 845 px and is **595 px**; the "305 × 338, five lines per step" figure describes an *intermediate build of this release*, not 1.20.2; the control count of 191 for /cameras was not a count of anything reproducible — the figure is **194 visible**, and it did not fall; "/home's head draws the five steps as a diagram whose numbers are the lens buttons" is **wrong** — the figure in that head is the handbook path, labelled "Chapter 01, Chapter 02, Chapters 04–05, Chapter 06, Chapter 07", and the head's own `<h1>` is "How a computer sees"; and "below the fold on a tablet" was **false** — the focus button sat at y=709 in a 768 px viewport, on screen with 59 px to spare.
 
 ## The verdicts
 
 | Room | Verdict | What the test found |
 |---|---|---|
 | **/learn** | ✔ drawable | 8 chapters, each a complete unit of work. Already a manual. |
-| **/home** | ✔ drawable | *Corrected.* The head draws "How a computer sees, in five steps" as a diagram whose stage numbers are the lens buttons 1–5. The five lenses are not five browsable views — they are five stages of one pipeline. Nothing to add. |
+| **/home** | ✔ drawable | *Corrected twice.* The first draft said the head draws "How a computer sees, in five steps" as a diagram whose stage numbers are the lens buttons 1–5. It does not: that figure is the **handbook path**, labelled "Chapter 01, Chapter 02, Chapters 04–05, Chapter 06, Chapter 07", and it is not in the head. The head's `<h1>` is "How a computer sees". /home passes for a different reason: its lede states the sequence in words — light, then numbers, then edges, then motion, then a guess — and the lens buttons are numbered 1–5 to match. The five lenses are five stages of one pipeline, so the room has one goal and no steps to draw. A manual here would be a list of the stages, which the buttons already are. |
 | **/everyday** | ✔ drawable | 9 self-contained examples. Each is its own manual. |
 | **/story** | ✔ drawable | 4 drills, one act each. |
 | **/system** | ✔ drawable | A model card and one optional check. |
 | **/drive** | ✔ nearly | The gate is already three numbered tiles. |
-| **/gesture** | ✔ nearly | Four steps existed — but step 1 held two actions, and the per-pose dropdowns were never mentioned. |
+| **/gesture** | ✔ nearly | Four steps existed — but step 1 held two actions, and the two dropdowns that make the room work (the pose set and what each pose *does*) were never mentioned. |
 | **/train** | ✘ **failing** | Three paradigms each with its own sub-flow, plus gesture teaching, plus games, plus a drawing activity, plus a 24-camera judge. Six flows in one room. |
-| **/cameras** | ✘ **failing** | 191 controls. Three unranked goals. Three controls on every one of 24+ rows. |
+| **/cameras** | ✘ **failing** | 194 visible controls. Three unranked goals. Every row carried three clickable things. |
 | **/games** | ✘ **failing** | Two games plus six challenge cards — three goals, and no way to tell which one the room is asking for. |
 | **/focus** | ~ nearly | Five setup decisions, and the mood rating was an unexplained second goal. |
 | **/colour** | ~ nearly | The rating step's purpose was never stated. |
@@ -43,20 +64,22 @@ Two house rules did the measuring:
 
 ## The three failing rooms were changed, not annotated
 
-### /train — six flows became one
+### /train — the gesture room left the chooser
 
 The chooser asked "What would you like to teach?" and offered four activities **and** the gesture room as a fifth, numbered `05 →`. The gesture room is a different room with its own four-step manual and its own instrument; sitting in the chooser made it look like a fifth way to run *this* flow.
 
-- The gesture room left the chooser and became a quiet line under it — still one click away, no longer pretending to be an activity.
+- The gesture room left the chooser and became a line under it — still one click away, no longer pretending to be an activity. *(First attempt failed the spatial test: the line was left inside a five-column grid and landed in the fifth cell as a tile-shaped hole, 268 × 165 px of a paragraph dressed as a choice. It now sits below the grid, and the grid is four columns wide because there are four choices.)*
 - A line now says the truth about what is left: all four activities run the same steps.
 - The lesson's three methods each got a manual of their own, because supervised, unsupervised and reinforcement really are three different procedures and a reader must be told which one they are in.
 - The room's four-step `.howto` became a five-step manual, and the optional fourth step ("if you want to try more") was replaced by the check that actually matters: try it on another road camera.
 
-### /cameras — one action per row
+**What did not get simpler.** The room still has two choosers — "How will you teach it?" above the bench and "What would you like to teach?" inside a collapsed disclosure — and the second is not really a second flow, because the first is the visible one. The visible control count did not move (72 before, 72 after) and the page grew from 1595 to 1827 px, because a manual is text. The gesture room's removal from the chooser is a real simplification; the rest of this room is documentation.
 
-- The row had three controls: the name (show on map), **Study this**, and **View at owner ↗**. The owner link is not a step in this room's flow — it is where the camera actually lives, so it moved into the line that says what the camera is. **The row's action column now holds one action.**
+### /cameras — one action per row, and a manual where the button is
+
+- The row had three clickable things: the name (show on map), **Study this**, and **View at owner ↗**. The owner link is not a step in this room's flow — it is where the camera actually lives — so it moved into the line that says what the camera is. **The row's action column now holds one action.** The clickable count did not fall: the owner link is still a link, it is simply metadata now. 194 visible controls before, 194 after.
 - **Study this** became **Point the machine** — the same words as the chapter's title, so the manual and the button say one thing.
-- Chapter C got a manual: pick → point → change the lens, with the lens buttons named exactly as they are labelled (`1 Picture` … `5 Objects`).
+- **The manual moved.** It was in chapter C, and it told the reader to press `Point the machine` — a button that lives in the list, 2415 px above, in a different chapter. A manual that names a control the reader cannot see is the release's own rule broken. The room's manual now sits in the atlas, above the list that carries the button, and it has two steps: pick a camera, press `Point the machine`. Chapter C got its own two-step manual for the bench's own controls: choose a picture, change the lens.
 - Chapter D, the census, got its own manual — so the third goal is no longer unranked, it is a named instrument with a stated procedure, and it carries the warnings that belong with it (18 MB on first run; "not detected" is not "not there").
 
 ### /games — one game at a time
@@ -79,9 +102,11 @@ The manual is now `.manual` in `public/css/vision.css`, loaded by every page:
 - an optional warning line, under the step it belongs to;
 - the house's live tick, kept: a step the machine has confirmed fills its marker with Jasper. Jasper means "what the machine sees", and a step the machine has confirmed is the one thing in these rooms it does report.
 
+**The plate is as wide as its own longest step, and the prose measure only caps it.** A fixed 62ch field is a card whose rows all span 595px whether the step wants 209px of Thai or 470px — the house's own rule 9, worn by the release's own component. So the content decides the width: /colour 372 px, /research 379 px, /train 470 px, /gesture 489 px, /focus 498 px, /games 556 px, and on a phone the full column. The rows stay equal width inside that plate, so the numbers still line up down the side.
+
 The manual speaks **Thai and English** — the house's two complete languages. Chinese falls back to the English span, and the page's existing Chinese notice discloses the gap.
 
-`tests/manual.test.js` pins it: the component lives in the house stylesheet and no page may re-declare it (that is how the gesture room lost its manual); every step has exactly one number and one body; the numbers run 1, 2, 3; no manual exceeds five steps; both languages are present; a named part is named the same number of times in both; the live `data-step` keys are exactly the keys the page scripts watch; and every named part names something that is really on the page.
+`tests/manual.test.js` pins it: the component lives in the house stylesheet and no page may re-declare it (that is how the gesture room lost its manual); every step has exactly one number and one body; the numbers run 1, 2, 3; no manual exceeds five steps; both languages are present; a named part is named the same number of times in both; the live `data-step` keys are exactly the keys the page scripts watch; every named part names something that is really on the page; the plate is content-sized and no step row sets its own width; and the manual adds no font size of its own. Each of those pins was checked by injecting the bug it claims to catch and watching it fail.
 
 ## The part that is easiest to fake: naming a part
 
@@ -92,34 +117,69 @@ Two chips failed, and both were real:
 - **The lesson's buttons are relabelled at runtime.** The markup says `Add frame to group 1`; the lesson replaces the button's contents with the group name and the count, so the button actually reads **`Busy road + Add example · 0 / 3 to start`**. The manual named a label that is gone by the time anyone sees it. The chips now name the action the button really offers — `+ เพิ่มภาพ` / `+ Add example` — and the group by the name it carries: **ถนนรถแน่น** / **Busy road**, **ถนนโล่ง** / **Quiet road**.
 - **The gesture room's log had no name on the page.** The manual said read the `log`, and the page had an empty black field with nothing written on it. The log now carries the house's own readout label — `บันทึก` / **Log** — so the part the instruction names is a part the reader can see.
 
+A third chip failed later, and it was the sharpest one in the release: the /cameras manual named `Point the machine`, and that button lives in the atlas list, **2415 px above the manual in a different chapter**. The string was on the page, so every string-based check passed — but the reader was told to press a button that was not on screen. The fix was to move the manual, not to reword it.
+
 After the fixes, every named part in every manual, in both languages, names something that appears on its page. The check is also in the test suite.
+
+**How far is the control from the step that names it?** Measured on the phone, for every chip in every manual, against the nearest visible control carrying the same words: /cameras `Point the machine` 507 px, /focus `Agree & start` 567 px and `Recalibrate` 866 px, /games `Count vehicles` 689 px and `+` 1629 px, /gesture `Arm the actions` 1021 px. Every one resolves **on its own page**; none crosses a section boundary. That boundary is the release's rule — a manual may name a control further down its own room, because that is what a printed instruction sheet does, but it may not name one in a different chapter.
 
 ## The four partial failures, fixed
 
-- **/focus** — the setup column became a five-step manual, and the three numbered headings went with it (the manual carries the numbering). The mood rating is now a step whose purpose is stated: the camera cannot know your mood, you tell it yourself, and those notes do not change the measurements. **The session buttons moved out of the instrument column into the column that names them** — "Agree & start" was 800 px away at the bottom of a 530 px black panel, below the fold on a tablet.
+- **/focus** — the setup column became a five-step manual, and the three numbered headings went with it (the manual carries the numbering). The mood rating is now a step whose purpose is stated: the camera cannot know your mood, you tell it yourself, and those notes do not change the measurements. **The session buttons moved out of the instrument column into the column that names them** — "Agree & start" sat at x=46, under a 530 px black panel, and is now at x=854 beside the step that names it: **808 px closer to the instruction that tells the reader to press it.** (The first draft of this record also claimed the button was "below the fold on a tablet". It was not: at 1024 × 768 it sat at y=709, on screen with 59 px to spare. The distance was the real problem.)
 - **/colour** — the rating step now says what it is for: your word exists to be compared with other people's, it is not a score for you.
 - **/research** — the three methods each got a manual: show the answers; group by shape then by colour; let the robot choose three times.
 - **/home** — nothing to add. Recorded above.
 
 ## Spatial hallucination, measured
 
-MSH is now wired into `AGENTS.md` and `ANTI-SLOP.md`, with the full law in `MSH.md`. Applying it to this release's own work found four things:
+MSH is now wired into `AGENTS.md` and `ANTI-SLOP.md`, with the full law in `MSH.md`. Applying it to this release's own work found seven things:
 
 | Found | Measure | Changed |
 |---|---|---|
-| **The manuals were in the narrow column.** The chapter grid is `0.6fr | 2fr`; a manual dropped into the chapter header landed in the 305 px column at 1440 and the 217 px column at 1024. | 305 × 338, 5 lines per step | The manuals moved into the chapter body — the wide column. Now 845 × 172, 2 lines per step. |
-| **A named part forced the page wider than the screen.** `white-space: nowrap` on the chip; "Add this answer to the shared result" pushed /colour to a 418 px scroll width at 390. | scrollWidth 418 > 390 | The chip wraps instead. Overflow 0. |
-| **The game picker ran past its content.** The plate was a full-width black band; at 1440 it ran 940 px past the last button, and on a phone the wrapped row left an orphan band under it. | 940 px of empty plate | Each choice is now its own field. |
-| **The session buttons were scattered from the steps that name them.** | 800 px, below the fold at 1024 | Moved into the setup column, under the consent they depend on. |
-| **The instruction sheet was wider than its own text.** `max-width: 64ch` resolved against an inherited 22 px, so the plate was 845 px holding a 350 px line. | 845 px, 2.4× its content | The measure is set at the reading size: 62ch → 595 px, the house's prose measure. |
-| **The named part created two font sizes that existed nowhere else.** A scaled chip is 15.2 px in the body and 11.9 px inside a warning. | /gesture 7 → 9 sizes, /focus 8 → 9 | The chip inherits its context instead of scaling. The manual now adds **no** size to any page. |
+| **The manuals were in the narrow column.** The chapter grid is `0.6fr` / `2fr`; a manual dropped into the chapter header landed in the 305 px column at 1440 and the 217 px column at 1024. | 305 × 505, 5 lines per step | The manuals moved into the chapter body — the wide column. /gesture now measures 489 × 343, 2 lines per step. |
+| **A named part forced the page wider than the screen.** `white-space: nowrap` on the chip; "Add this answer to the shared result" pushed /colour to a 418 px scroll width at 390. | scrollWidth 418 > 390 | The chip never breaks *inside*. When it does not fit the line it drops to its own line instead. Overflow 0 at every width. |
+| **The game picker ran past its content.** The plate was a full-width black band; at 1440 it ran 940 px past the last button, and on a phone the wrapped row left an orphan band under it. | 940 px of empty plate | The picker is an instrument strip: it hugs its choices, sits on the page gutter, and scrolls inside itself. |
+| **The session buttons were scattered from the steps that name them.** | 808 px, measured: x=46 → x=854 | Moved into the setup column, under the consent they depend on. |
+| **The instruction sheet was wider than its own text.** `max-width: 64ch` resolved against an inherited 22 px, so the plate was 845 px holding a 350 px line. | 845 px, 2.4× its content | The measure is set at the reading size, and then the content decides the width: 62ch is the cap, not the width. /colour's plate is 372 px. |
+| **The named part created two font sizes that existed nowhere else.** A scaled chip is 15.2 px in the body and 11.9 px inside a warning. | /gesture 7 → 9 sizes, /focus 8 → 9 | The chip wears the house's small mono instead of scaling. Measured across all fifteen rooms: the size sets are **identical** to 1.20.2, and /focus loses one. |
+| **Every step row was a stretched band.** The plate was a fixed 62ch field, so a row held its text and nothing else — step 4 of /colour is 209 px of Thai in a 595 px field. | 595 px row, 209 px of text | The plate is as wide as its own longest step and the measure only caps it. /colour 372 px, /research 379 px, /train 470 px, /gesture 489 px, /focus 498 px, /games 556 px. |
 
-Two systemic findings are **measured and recorded, not fixed here**, because a change to the composition of all 27 pages is its own release with its own baseline and its own review:
+Three systemic findings are **measured and recorded, not fixed here**, because a change to the composition of all 27 pages is its own release with its own baseline and its own review:
 
-- **The page head is a stretched row.** `.page-head` is `1.618fr | 1fr` with the standfirst pushed to the far right. At 1440 the title's text ends at x=355 and the standfirst begins at x=890 — **535 px of nothing between the title and the sentence that explains it.** On a 390 × 844 phone the head is 335–395 px, up to 47 % of the screen before the page's work begins.
+- **The page head is a stretched row.** `.page-head` is `1.618fr` / `1fr` with the standfirst pushed to the far right. At 1440 the title's text ends at x=355 and the standfirst begins at x=890 — **535 px of nothing between the title and the sentence that explains it.** On a 390 × 844 phone the head is 335–395 px, up to 47 % of the screen before the page's work begins.
 - **The nav is two stacked bands** on /cameras, /games, /learn and /train: the main nav and the path bar, 101 px at 1440 and 145 px at 390. Two bands where one coherent group would do.
+- **The chapter track is wider than the card in it.** The manual's plate is now as wide as its own longest step — 372 px on /colour, 429 px on /cameras — and the chapter body around it is 1017 px. The card no longer stretches, and the track beside it still does. Same class as the two above: a change to the chapter grid is its own release.
 
-Both are the next release's work, with the numbers above as the baseline.
+All three are the next release's work, with the numbers above as the baseline.
+
+## The independent review
+
+The house rule is that a designer does not review their own work. A separate agent read `MSH.md`, `ANTI-SLOP.md` and this record, read the 28 screenshots, and drove the live tree at 1.21.0 against the 1.20.2 baseline at 390, 1024 and 1440 with the catalogue loaded. It returned **PARTIAL**: /focus, /colour and /research passed; /gesture, /train, /cameras and /games needed work. Its findings are the ones that mattered — **nine of them, and all nine are fixed here.**
+
+**Found** — the reviewer's list, with the task cost it measured:
+
+| Found | Where | Task cost |
+|---|---|---|
+| The "quiet line" under the teaching chooser was the fifth cell of a still-five-column grid — a 268 × 165 px tile-shaped hole | /train, every width | The reader saw a fifth *choice* that was a sentence |
+| The title and the sentence that explains it were separated by 262 px of ivory | /cameras | The room's first sentence sat a third of a screen below its title |
+| The selected game was ivory on ivory — byte-identical to the page ground | /games | The picker could not say which game was on screen |
+| The picker ran out of the page gutter | /games, 390 | A black field touched the edge of the screen |
+| The manual named `Point the machine`, a button **2415 px above it in another chapter** | /cameras | The reader was told to press a button that was not on screen |
+| The named part broke into two boxes at every width — "4 Motion" became a chip `4` and a chip `Motion` | all seven | The release's central promise is that the chip carries the control's exact words |
+| The line the release added was 152 characters of monospace | /train | A new rule-2 breach, 1.44× the line the release removed |
+| The two dropdowns that make the gesture room work were never named | /gesture | A reader following the five steps literally never learns a pose must be picked |
+| The finished manual was itself a stretch-to-fill example | /colour, /train | The release's own component broke the house's own rule 9 |
+
+**Changed** — the grid is four columns and the line is a line again; the title and its explanation sit together; the selected game is Jasper on black; the picker sits on the gutter and scrolls inside itself; the manual moved to the atlas and chapter C got its own bench manual; the chip is one indivisible box that drops to its own line rather than breaking; the long line is capped at 58ch; step 1 of the gesture manual now names the actions list; and the plate is as wide as its own longest step.
+
+**Verified** — 27 routes × 390 / 1024 / 1440 = 81 combinations: status 200, no horizontal overflow, no console error, `?v=1.21.0` on every asset. The linter sits at its 1.20.2 baseline on all seven manual rooms. The font-size inventory is identical to 1.20.2 on all fifteen rooms, and /focus loses one. Eleven tests pin the component, and each pin was checked by **injecting the bug it claims to catch** and watching it fail.
+
+**Remaining** — honest, and none of it is hidden:
+
+- **A named control is still a scroll away.** Measured on the phone: /cameras `Point the machine` 507 px, /focus `Recalibrate` 866 px, /gesture `Arm the actions` 1021 px, /games `+` 1629 px. Every one of them resolves **on its own page** and none crosses a section boundary — that was the release's rule, and it holds. The distance itself is the next release's work.
+- **The chapter track is 1017 px around a card that is 372 px.** The card no longer stretches; the track beside it still does. Same class as the page head and the nav.
+- **The pin "a named part names something on the page" is a substring test** over the markup and the scripts, not a check against a rendered control — so it cannot catch a chip that names a control in another section. The /cameras chip was fixed by moving the manual, not by making the test clever. The test is still worth widening.
+- **Full-resolution IOC originals remain in the public history.** Carried since 1.18.0; removing them needs a destructive `git filter-repo` rewrite, which is the author's call.
 
 ## What the instrument says
 
@@ -127,9 +187,22 @@ The linter was run over all 27 routes twice — once against the 1.20.2 tree in 
 
 **68 points before, 68 points after, Δ0, and no route changed verdict.** The house's threshold is 6 and there are no SLOP routes in either. Adding seven manuals and simplifying three rooms cost the site **no** linter points at all, and that is the number worth stating: the instruction sheets did not become slop.
 
-The two regressions the first pass did introduce were found by comparing against the baseline rather than by reading a score, and both are fixed:
+Room by room, on the seven rooms that carry a manual:
 
-- the instruction sheet measured at 845 px for a 350 px line (the `ch` unit resolving against an inherited 22 px), and
-- the named part creating a 15.2 px and an 11.9 px size that existed nowhere else, pushing /gesture and /focus over the nine-size threshold.
+| Room | 1.20.2 | 1.21.0 | Changed |
+|---|---|---|---|
+| /colour | OK 2 | OK 2 | — |
+| /focus | OK 2 | OK 2 | — |
+| /games | OK 2 | OK 2 | — |
+| /cameras | REVIEW 4 | REVIEW 4 | — |
+| /research | REVIEW 3 | REVIEW 3 | — |
+| /train | REVIEW 3 | REVIEW 3 | — |
+| /gesture | REVIEW 4 | REVIEW 4 | one fewer stretch example: the "■ พักไว้ก่อน" button de-stretched from 341 px to its content width |
 
-Both are in the table above. The second is the kind of thing a linter's "type-chaos" flag says almost nothing about, and a baseline measurement says exactly what it is.
+The three regressions the first pass did introduce were found by comparing against the baseline rather than by reading a score, and all three are fixed:
+
+- the instruction sheet measured at 845 px for a 350 px line (the `ch` unit resolving against an inherited 22 px),
+- the named part creating a 15.2 px and an 11.9 px size that existed nowhere else, pushing /gesture and /focus over the nine-size threshold, and
+- the finished plate itself becoming a stretch-to-fill example: /colour and /train were picking up the house's own rule 9 from the manual's own step rows, because a fixed 62ch field holds a short step in a wide band.
+
+The third is the one worth remembering. The fix for "the sheet was wider than its text" — 845 px → 595 px — did not remove the stretch, it only made it less visible: the chip got smaller, so the row's content got narrower, so the gap between them got wider. **A linter's "type-chaos" flag says almost nothing about this; a baseline measurement says exactly what it is.**

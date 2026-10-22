@@ -1,3 +1,5 @@
+SH is like bureaucracy - good one works like bento box design: neat, full of variety of nutrients, easy to transport, effective, economically resource-oriented. So, bureaucracy, if done well, can be a really good thing. That said, bureaucrats act like they know things: they do, but they know things through other people, usually those before them. Passiong through generation, rules get bended over time, and bit by bit bureaucracy becomes hallucinated: "we need this department." "we need this meeting." "we need new working groups." "we need new committees" - each makes things bloated, kicked out of MoMA rules, and eventually become fully hallucinated. For someone who have been in bureaucracy for years and have seen good designs globally, I can spot bad design right away by just looking at how frequent unintentional design, of which SH is one of the biggest dude in town, right away. SH design is like a bad bureaucracy: disorganized, bloated, unbalanced, hard to read, longer than it should be, ugly.
+
 # MSH — Massacre Spatial Hallucination
 
 > **When you find SH, massacre.**

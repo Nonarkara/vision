@@ -112,6 +112,31 @@ test('a named part names something that is really on the page', () => {
   }
 })
 
+test('the manual plate is as wide as its own longest step, and no wider', () => {
+  // The plate used to be a fixed 62ch field, so every step row spanned 595px
+  // whether its text wanted 209px or 470px. That is the house's own
+  // stretch-to-fill rule: a step is a short thing in a wide band. The
+  // content decides the width now and the prose measure only caps it.
+  const plate = css.match(/\.manual\s*\{([\s\S]*?)\}/)
+  assert.ok(plate, 'vision.css must carry the manual component')
+  assert.ok(/width:\s*fit-content/.test(plate[1]), 'the manual plate must be as wide as its content')
+  assert.ok(/max-width:\s*62ch/.test(plate[1]), 'the manual plate must stay inside the house prose measure')
+  const step = css.match(/\.manual li\s*\{([\s\S]*?)\}/)
+  assert.ok(step, 'vision.css must carry the manual step')
+  assert.ok(!/width\s*:/.test(step[1]), 'a step row must not set its own width — a row that fills the plate is the stretch')
+})
+
+test('the manual adds no font size of its own', () => {
+  // A scaled chip made a 15.2px size in the body and an 11.9px size inside a
+  // warning — two sizes that existed nowhere else on the page, which pushed
+  // /gesture and /focus over the house's nine-size limit. The chip wears a
+  // house size instead.
+  const part = css.match(/\.manual \.part\s*\{([\s\S]*?)\}/)
+  assert.ok(part, 'vision.css must carry the named part')
+  assert.ok(/font-size:\s*var\(--/.test(part[1]), 'the named part must wear a house size, not a size of its own')
+  assert.ok(!/font-size:\s*0/.test(css.match(/\.manual li\[data-done\] \.manual-n\s*\{([\s\S]*?)\}/)?.[1] || ''), 'a zero font-size is not a way to hide a number')
+})
+
 test('the rooms that failed the manual test were simplified, not documented around', () => {
   // /train: the gesture room is a different room, so it is no longer offered as
   // a fifth thing to teach in the same chooser.

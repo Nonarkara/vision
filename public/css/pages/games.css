@@ -7,13 +7,25 @@
 /* The picker: the entry point this page was missing. A control row, so the
    buttons sit at their own width on one black strip — three equal columns
    would stretch a two-word name across half the screen. */
-/* Each choice is its own field. The plate used to run the full width of the
-   page with nothing in it past the last button, and on a phone it left an
-   orphan band under the wrapped row. */
-.game-picker { padding: 0; gap: 8px; background: transparent; }
-.game-picker .btn { background: var(--black-2); color: var(--white); font-family: var(--sans); font-size: var(--read); }
+/* The picker is an instrument strip: it says which mode the machine is in.
+   It hugs its choices instead of running the full width of the page with
+   nothing in it past the last one, it sits on the page's own gutter, and
+   when the three do not fit they scroll inside the strip rather than
+   wrapping into an orphan band. */
+.game-picker {
+  display: flex; flex-wrap: nowrap; gap: 2px;
+  width: fit-content; max-width: calc(100% - var(--gutter) * 2);
+  margin: 0 var(--gutter); overflow-x: auto;
+  background: var(--black);
+}
+.game-picker .btn {
+  flex: 0 0 auto; background: var(--black-2); color: var(--white);
+  font-family: var(--sans); font-size: var(--read);
+}
 .game-picker .btn .game-picker-n { font-family: var(--mono); font-size: var(--micro); }
-.game-picker .btn[aria-pressed="true"] { background: var(--ivory); color: var(--black); }
+/* On an instrument the accent stays, because here "on" really does mean
+   "this is the mode the machine is in". */
+.game-picker .btn[aria-pressed="true"] { background: var(--jasper); color: var(--black); }
 .game-picker .btn:hover { background: var(--gray); color: var(--black); }
 .game-score { margin: 0; padding: 10px 12px; background: var(--black); color: var(--white); font-size: var(--micro); min-height: var(--target); }
 .game-score:empty { display: none; }

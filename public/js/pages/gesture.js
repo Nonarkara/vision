@@ -315,7 +315,6 @@ async function liveTick() {
 
 const manualEl = $('[data-manual]')
 const STEPS = {
-  camera: () => !!specimen.source,
   examples: () => canGuess(),
   arm: () => armed,
   fire: () => fired >= 1,
