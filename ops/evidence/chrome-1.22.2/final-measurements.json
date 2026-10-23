@@ -1,0 +1,326 @@
+[
+ {
+  "lang": "th",
+  "w": 390,
+  "h": 844,
+  "flat": 0.07,
+  "rail": 44,
+  "action": 660.7,
+  "scene": 586.7,
+  "video": 274.2,
+  "head": {
+   "x": 0,
+   "w": 390,
+   "right": 390,
+   "bottom": 166
+  },
+  "h1": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 86
+  },
+  "lede": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 150
+  },
+  "gap": -358,
+  "deadRight": 16,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 390,
+  "title": "สอนให้เห็นความต่าง",
+  "errors": []
+ },
+ {
+  "lang": "th",
+  "w": 1024,
+  "h": 900,
+  "flat": 0.397,
+  "rail": 44,
+  "action": 499.9,
+  "scene": 396,
+  "video": 295.3,
+  "head": {
+   "x": 0,
+   "w": 1024,
+   "right": 1024,
+   "bottom": 132
+  },
+  "h1": {
+   "x": 33,
+   "w": 210,
+   "right": 243,
+   "bottom": 95
+  },
+  "lede": {
+   "x": 267,
+   "w": 576,
+   "right": 843,
+   "bottom": 116
+  },
+  "gap": 24,
+  "deadRight": 181,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1024,
+  "title": "สอนให้เห็นความต่าง",
+  "errors": []
+ },
+ {
+  "lang": "th",
+  "w": 1440,
+  "h": 900,
+  "flat": 0.383,
+  "rail": 44,
+  "action": 455,
+  "scene": 351.2,
+  "video": 274.4,
+  "head": {
+   "x": 0,
+   "w": 1440,
+   "right": 1440,
+   "bottom": 132
+  },
+  "h1": {
+   "x": 46,
+   "w": 236,
+   "right": 282,
+   "bottom": 99
+  },
+  "lede": {
+   "x": 306,
+   "w": 576,
+   "right": 882,
+   "bottom": 116
+  },
+  "gap": 24,
+  "deadRight": 558,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1440,
+  "title": "สอนให้เห็นความต่าง",
+  "errors": []
+ },
+ {
+  "lang": "en",
+  "w": 390,
+  "h": 844,
+  "flat": 0.058,
+  "rail": 44,
+  "action": 670.7,
+  "scene": 596.7,
+  "video": 284.1,
+  "head": {
+   "x": 0,
+   "w": 390,
+   "right": 390,
+   "bottom": 182
+  },
+  "h1": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 86
+  },
+  "lede": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 166
+  },
+  "gap": -358,
+  "deadRight": 16,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 390,
+  "title": "Teach it to see the difference",
+  "errors": []
+ },
+ {
+  "lang": "en",
+  "w": 1024,
+  "h": 900,
+  "flat": 0.395,
+  "rail": 44,
+  "action": 476.4,
+  "scene": 376.9,
+  "video": 276.2,
+  "head": {
+   "x": 0,
+   "w": 1024,
+   "right": 1024,
+   "bottom": 124
+  },
+  "h1": {
+   "x": 33,
+   "w": 391,
+   "right": 423,
+   "bottom": 93
+  },
+  "lede": {
+   "x": 447,
+   "w": 544,
+   "right": 991,
+   "bottom": 108
+  },
+  "gap": 24,
+  "deadRight": 33,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1024,
+  "title": "Teach it to see the difference",
+  "errors": []
+ },
+ {
+  "lang": "en",
+  "w": 1440,
+  "h": 900,
+  "flat": 0.351,
+  "rail": 44,
+  "action": 458.5,
+  "scene": 359,
+  "video": 258.2,
+  "head": {
+   "x": 0,
+   "w": 1440,
+   "right": 1440,
+   "bottom": 124
+  },
+  "h1": {
+   "x": 46,
+   "w": 440,
+   "right": 486,
+   "bottom": 97
+  },
+  "lede": {
+   "x": 510,
+   "w": 576,
+   "right": 1086,
+   "bottom": 108
+  },
+  "gap": 24,
+  "deadRight": 354,
+  "note": null,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1440,
+  "title": "Teach it to see the difference",
+  "errors": []
+ },
+ {
+  "lang": "zh",
+  "w": 390,
+  "h": 844,
+  "flat": 0.07,
+  "rail": 44,
+  "action": 739.3,
+  "scene": 665.3,
+  "video": 352.7,
+  "head": {
+   "x": 0,
+   "w": 390,
+   "right": 390,
+   "bottom": 249
+  },
+  "h1": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 153
+  },
+  "lede": {
+   "x": 16,
+   "w": 358,
+   "right": 374,
+   "bottom": 233
+  },
+  "gap": -358,
+  "deadRight": 16,
+  "note": 68,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 390,
+  "title": "Teach it to see the difference",
+  "errors": []
+ },
+ {
+  "lang": "zh",
+  "w": 1024,
+  "h": 900,
+  "flat": 0.345,
+  "rail": 44,
+  "action": 520.6,
+  "scene": 421.1,
+  "video": 320.4,
+  "head": {
+   "x": 0,
+   "w": 1024,
+   "right": 1024,
+   "bottom": 168
+  },
+  "h1": {
+   "x": 33,
+   "w": 391,
+   "right": 423,
+   "bottom": 137
+  },
+  "lede": {
+   "x": 447,
+   "w": 480,
+   "right": 927,
+   "bottom": 152
+  },
+  "gap": 24,
+  "deadRight": 97,
+  "note": 44,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1024,
+  "title": "Teach it to see the difference",
+  "errors": []
+ },
+ {
+  "lang": "zh",
+  "w": 1440,
+  "h": 900,
+  "flat": 0.322,
+  "rail": 44,
+  "action": 502.7,
+  "scene": 403.2,
+  "video": 302.4,
+  "head": {
+   "x": 0,
+   "w": 1440,
+   "right": 1440,
+   "bottom": 168
+  },
+  "h1": {
+   "x": 46,
+   "w": 440,
+   "right": 486,
+   "bottom": 141
+  },
+  "lede": {
+   "x": 510,
+   "w": 480,
+   "right": 990,
+   "bottom": 152
+  },
+  "gap": 24,
+  "deadRight": 450,
+  "note": 44,
+  "methodOverflow": false,
+  "overflow": false,
+  "scrollW": 1440,
+  "title": "Teach it to see the difference",
+  "errors": []
+ }
+]

@@ -267,7 +267,14 @@ a.training-choice { text-decoration: none; }
 .three-ways-stage [data-three-status] { margin: 0; padding: 0; min-height: 0; color: var(--text); font-size: var(--micro); line-height: 1.4; max-width: 32ch; }
 .three-ways-stage [data-three-status]:empty { display: none; }
 
-/* Keep the title with the sentence that explains the task, not across a void. */
-body main .page-head { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 16px; }
+/* Keep the title with the sentence that explains the task, not across a void.
+   The title's column is sized to the title, so the two sit side by side with a
+   24px gap and the band is one row instead of two. The paper to the right of
+   the standfirst is the ragged end of a 60ch line — 308px in English, 404px in
+   Chinese, 512px in Thai, where the title is half as wide — not a third of the
+   band left empty on purpose. The phone stacks them: two columns do not fit
+   in 390px. */
+body main .page-head { grid-template-columns: auto minmax(0, 1fr); gap: 8px 24px; align-items: start; padding-block: 16px; }
 body main .page-head h1 { font-size: var(--subtitle); max-width: none; }
 body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width: 60ch; }
+@media (max-width: 900px) { body main .page-head { grid-template-columns: minmax(0, 1fr); } }
