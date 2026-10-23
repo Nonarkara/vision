@@ -10,7 +10,7 @@
 import { t, esc, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.20.1'
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.20.1'
 import { openCamera } from '../core/source.js?v=1.20.1'
-import { sleep } from '../core/site.js?v=1.20.1'
+import { sleep } from '../core/site.js?v=1.22.1'
 import { snapshot, shrink, embed } from './eye.js?v=1.20.1'
 import { GLYPHS, nameOf } from './store.js?v=1.20.1'
 

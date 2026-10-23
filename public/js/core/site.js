@@ -8,6 +8,30 @@ for (const btn of document.querySelectorAll('[data-lang-toggle]')) {
   btn.addEventListener('click', () => setLang(nextLang(lang())))
 }
 
+// Room navigation is a disclosure on small screens, not a permanent second bar.
+const roomToggle = document.querySelector('.room-toggle')
+const roomNavigation = document.querySelector('.room-navigation')
+if (roomToggle && roomNavigation) {
+  const closeRooms = () => {
+    roomToggle.setAttribute('aria-expanded', 'false')
+    roomNavigation.dataset.open = 'false'
+    roomNavigation.querySelectorAll('details[open]').forEach(el => { el.open = false })
+  }
+  roomNavigation.dataset.collapsible = 'true'
+  roomToggle.addEventListener('click', () => {
+    const open = roomToggle.getAttribute('aria-expanded') !== 'true'
+    roomToggle.setAttribute('aria-expanded', String(open))
+    roomNavigation.dataset.open = String(open)
+  })
+  document.addEventListener('click', e => { if (!roomNavigation.contains(e.target)) closeRooms() })
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return
+    const more = roomNavigation.querySelector('details[open]')
+    if (more) { more.open = false; more.querySelector('summary').focus(); e.preventDefault() }
+    else if (roomToggle.getAttribute('aria-expanded') === 'true') { closeRooms(); roomToggle.focus(); e.preventDefault() }
+  })
+}
+
 // Accessible names are read aloud, not shown, so they need both languages too.
 // Any element carrying data-aria-th / data-aria-en gets its aria-label painted
 // now and repainted on every switch — a screen-reader user switching to Thai

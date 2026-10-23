@@ -6,8 +6,8 @@
 import { t, bi, n, count, onLang } from '../core/i18n.js?v=1.20.1'
 import { STREET } from '../ml/labels.js?v=1.20.1'
 import { drawDetections } from '../cv/draw.js?v=1.20.1'
-import { startSpecimen } from '../core/specimen.js?v=1.20.1'
-import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js?v=1.20.1'
+import { startSpecimen } from '../core/specimen.js?v=1.22.1'
+import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js?v=1.22.1'
 
 const ROUNDS = 5
 const COUNT_MS = 15_000

@@ -6,7 +6,7 @@ import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } f
 import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.20.1'
 import { t, bi, esc, onLang } from './i18n.js?v=1.20.1'
 import { assessPixels } from '../cv/quality.js?v=1.20.1'
-import { toast } from './site.js?v=1.20.1'
+import { toast } from './site.js?v=1.22.1'
 
 const STILL_REFRESH_MS = 20_000
 const LAST_CAMERA = 'vision.camera'

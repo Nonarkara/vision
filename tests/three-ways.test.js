@@ -176,16 +176,14 @@ test('the reinforcement card tells the truth about the scores it has', () => {
   assert.match(exploring.reinforcement.need, /still tries the other action now and then/, 'and it still explores now and then')
 })
 
-test('the button does not move out from under the pointer when the picture appears', () => {
+test('the comparison puts its ask control before the optional picture', () => {
   const stage = html.match(/<div class="three-ways-stage">([\s\S]*?)<\/div>/)
   assert.ok(stage, 'the stage must exist')
   // The picture must never appear ABOVE the button: if it does, the picture
   // is what slides the button out from under the pointer.
   //
-  // The button does still move when the ask reports back — 56px at 1440 —
-  // because the room's status line grows by one line, which is the same
-  // shift every lesson action causes and has nothing to do with the picture.
-  // This pin guards the picture's place, and only the picture's place.
+  // This is a markup ordering check, not a layout measurement. The browser
+  // evidence in the release record measures the separate status-line change.
   assert.ok(
     stage[1].indexOf('data-three-ask') < stage[1].indexOf('data-three-view'),
     'the button must come before the picture: if the picture appears above it, the button slides away under the pointer',

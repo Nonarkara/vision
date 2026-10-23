@@ -11,9 +11,9 @@ import { cocoName } from '../ml/labels.js?v=1.20.1'
 import { detect } from '../ml/detector.js?v=1.20.1'
 import { pixelate } from '../cv/ops.js?v=1.20.1'
 import { drawDetections } from '../cv/draw.js?v=1.20.1'
-import { startSpecimen } from '../core/specimen.js?v=1.20.1'
-import { sleep } from '../core/site.js?v=1.20.1'
-import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, biClass, shuffle, FLOOR_SCORE } from './common.js?v=1.20.1'
+import { startSpecimen } from '../core/specimen.js?v=1.22.1'
+import { sleep } from '../core/site.js?v=1.22.1'
+import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, biClass, shuffle, FLOOR_SCORE } from './common.js?v=1.22.1'
 
 const ROUNDS = 5
 const BLOCKS = [64, 40, 24, 14, 8, 4, 1] // pixels per block on a 640-wide frame; 1 is the sharp picture

@@ -3,10 +3,10 @@
 // run on whatever the visitor holds up to their own camera. No model, no
 // download: just ops.otsu, ops.threshold and ops.blobs, small enough to read.
 
-import '../core/site.js?v=1.20.1'
-import { whenVisible } from '../core/site.js?v=1.20.1'
+import '../core/site.js?v=1.22.1'
+import { whenVisible } from '../core/site.js?v=1.22.1'
 import { t, n, onLang } from '../core/i18n.js?v=1.20.1'
-import { createSpecimen, startSpecimen, specimenBarHtml, wantsWebcam } from '../core/specimen.js?v=1.20.1'
+import { createSpecimen, startSpecimen, specimenBarHtml, wantsWebcam } from '../core/specimen.js?v=1.22.1'
 import * as ops from '../cv/ops.js?v=1.20.1'
 import { fitCanvas, paintImageData, drawBlobs, clear } from '../cv/draw.js?v=1.20.1'
 

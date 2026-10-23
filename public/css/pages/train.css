@@ -136,7 +136,7 @@ a.training-choice { text-decoration: none; }
    topline is 3px taller in Thai and 2px in English, and the bench moves down
    by the same. At 1440 the link shares the line and nothing moves at all. */
 .lesson-topline > .lesson-jump { color: var(--text); font-size: var(--fine); }
-.lesson-methods { display:flex; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:thin; gap:4px 12px; border-bottom:1px solid var(--gray); }
+.lesson-methods { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px 12px; border-bottom:1px solid var(--gray); }
 .lesson-methods .training-choice { flex:none; position:relative; background:transparent; color:var(--text); border:0; border-bottom:4px solid transparent; padding:12px 16px; gap:3px; }
 .lesson-methods .training-choice strong { font-size:var(--read); }
 .lesson-methods .training-choice > span:last-child { color:inherit; font-size:var(--fine);  }
@@ -261,3 +261,14 @@ a.training-choice { text-decoration: none; }
    picture never widens past its own 224px. */
 @media (max-width:1023px) { .three-ways-body { grid-template-columns:1fr; } }
 @media (max-width:760px) { .three-ways-cards { grid-template-columns:1fr; } }
+
+/* Instructions stay available without displacing the first teaching action. */
+.lesson-steps > summary { cursor: pointer; font-size: var(--read); padding-block: 8px; min-height: var(--target); }
+.lesson-steps .manual { margin-block: 8px; }
+.three-ways-stage [data-three-status] { margin: 0; padding: 0; min-height: 0; color: var(--text); font-size: var(--micro); line-height: 1.4; max-width: 32ch; }
+.three-ways-stage [data-three-status]:empty { display: none; }
+
+/* Keep the title with the sentence that explains the task, not across a void. */
+body main .page-head { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 16px; }
+body main .page-head h1 { font-size: var(--subtitle); max-width: none; }
+body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width: 60ch; }

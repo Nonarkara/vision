@@ -1,5 +1,5 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.20.1'
+import '../core/site.js?v=1.22.1'
 import { evidence, loadCatalog } from '../core/catalog.js?v=1.20.1'
 
 // Share the catalogue loader: language changes also reuse an in-flight request.

@@ -8,8 +8,8 @@ import { runLens, createLensState } from '../cv/lenses.js?v=1.20.1'
 import { drawDetections } from '../cv/draw.js?v=1.20.1'
 import { cocoName } from '../ml/labels.js?v=1.20.1'
 import { detect } from '../ml/detector.js?v=1.20.1'
-import { toast } from '../core/site.js?v=1.20.1'
-import { readyDetector, benchSpecimen, freeze, paint, sayDetections, biClass, readBest, writeBest, FLOOR_SCORE } from './common.js?v=1.20.1'
+import { toast } from '../core/site.js?v=1.22.1'
+import { readyDetector, benchSpecimen, freeze, paint, sayDetections, biClass, readBest, writeBest, FLOOR_SCORE } from './common.js?v=1.22.1'
 
 const MAX_CAPTURES = 12
 const BEST_KEY = 'vision_games_fool_best_v1'

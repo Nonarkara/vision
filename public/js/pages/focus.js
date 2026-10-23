@@ -1,4 +1,4 @@
-import '../core/site.js?v=1.20.1'
+import '../core/site.js?v=1.22.1'
 import { t, bi, onLang } from '../core/i18n.js?v=1.20.1'
 import { openWebcam } from '../core/source.js?v=1.20.1'
 import { faceSignals, createSession } from '../focus/session.js?v=1.20.1'

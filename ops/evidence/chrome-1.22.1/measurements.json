@@ -1,0 +1,73 @@
+{
+  "before": [
+    {
+      "action": 1233.015625,
+      "ask": 1701.390625,
+      "h": 844,
+      "lang": "en",
+      "overflow": false,
+      "path": 45,
+      "rail": 100,
+      "video": 481.4453125,
+      "w": 390
+    },
+    {
+      "action": 927.671875,
+      "ask": 1380.140625,
+      "h": 900,
+      "lang": "en",
+      "overflow": false,
+      "path": 45,
+      "rail": 56,
+      "video": 408.796875,
+      "w": 1024
+    },
+    {
+      "action": 898.40625,
+      "ask": 1341.1875,
+      "h": 900,
+      "lang": "en",
+      "overflow": false,
+      "path": 45,
+      "rail": 56,
+      "video": 425.8828125,
+      "w": 1440
+    }
+  ],
+  "after": [
+    {
+      "action": 674.0703125,
+      "ask": 1198.4453125,
+      "h": 844,
+      "lang": "en",
+      "overflow": false,
+      "rail": 44,
+      "video": 285.1171875,
+      "w": 390
+    },
+    {
+      "action": 500.4765625,
+      "ask": 1008.9453125,
+      "h": 900,
+      "lang": "en",
+      "overflow": false,
+      "rail": 44,
+      "video": 344.21875,
+      "w": 1024
+    },
+    {
+      "action": 506.1875,
+      "ask": 1004.96875,
+      "h": 900,
+      "lang": "en",
+      "overflow": false,
+      "rail": 44,
+      "video": 349.890625,
+      "w": 1440
+    }
+  ],
+  "statusJump": {
+    "before": 56,
+    "after": 0
+  }
+}

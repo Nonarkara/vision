@@ -6,9 +6,9 @@
 import { fitCanvas, containRect, clear, drawLabel, GRAY, BLACK } from '../cv/draw.js?v=1.20.1'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.20.1'
 import { cocoName } from '../ml/labels.js?v=1.20.1'
-import { createSpecimen } from '../core/specimen.js?v=1.20.1'
+import { createSpecimen } from '../core/specimen.js?v=1.22.1'
 import { t, bi, lang, onLang } from '../core/i18n.js?v=1.20.1'
-import { sleep } from '../core/site.js?v=1.20.1'
+import { sleep } from '../core/site.js?v=1.22.1'
 
 // Low enough that "almost" boxes exist to be shown; every game filters upward.
 export const FLOOR_SCORE = 0.15

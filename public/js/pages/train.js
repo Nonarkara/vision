@@ -5,11 +5,11 @@
 //
 // Everything — examples, weights, predictions — lives in this tab's memory.
 
-import '../core/site.js?v=1.20.1'
-import { mountVideoLesson } from '../train/video-lesson.js?v=1.22.0'
+import '../core/site.js?v=1.22.1'
+import { mountVideoLesson } from '../train/video-lesson.js?v=1.22.1'
 import { t, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.20.1'
-import { toast, confirmBox } from '../core/site.js?v=1.20.1'
-import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.20.1'
+import { toast, confirmBox } from '../core/site.js?v=1.22.1'
+import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.22.1'
 import { canUseWebcam } from '../core/source.js?v=1.20.1'
 import { runLens, createLensState } from '../cv/lenses.js?v=1.20.1'
 import { knnPredict, leaveOneOutAsync } from '../ml/learner.js?v=1.20.1'
@@ -19,7 +19,7 @@ import { createClassList } from '../train/classes-ui.js?v=1.20.1'
 import { createBars } from '../train/bars.js?v=1.20.1'
 import { trainLayer, drawCurve, EPOCHS, layerFile, download, parseLayerFile, fileReason } from '../train/layer.js?v=1.20.1'
 import { createMap } from '../train/map.js?v=1.20.1'
-import { createJudge } from '../train/judge.js?v=1.20.1'
+import { createJudge } from '../train/judge.js?v=1.22.1'
 import { demoFrames, roadScene } from '../train/demo.js?v=1.20.1'
 
 const K = 5

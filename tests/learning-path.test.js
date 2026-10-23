@@ -102,3 +102,19 @@ test('a room with no Chinese keeps its English rather than going blank', () => {
   const css = read('public/css/vision.css')
   assert.match(css, /html\[data-lang="zh"\] \.en:has\(\+ \.zh\)/)
 })
+test('the four-step path lives inside room navigation, without a second page band', () => {
+  for (const [route, page] of [['/learn', 'learn'], ['/cameras', 'cameras'], ['/train', 'train'], ['/games', 'games']]) {
+    const html = assemble(page, route)
+    const end = html.indexOf('</header>')
+    const header = html.slice(0, end)
+    assert.match(header, /class="path"/, `${route}: the path must stay reachable in navigation`)
+    assert.doesNotMatch(html.slice(end), /class="path"/, `${route}: no duplicate path band`)
+    assert.equal((header.match(/data-step="/g) ?? []).length, 4)
+    assert.match(header, /aria-controls="rooms-nav"/)
+  }
+})
+
+test('off-path rooms do not inherit a path or leave an unresolved nav slot', () => {
+  const html = assemble('colour', '/colour')
+  assert.doesNotMatch(html, /class="path"|class="path-title"|<!--#learningpath-->/)
+})

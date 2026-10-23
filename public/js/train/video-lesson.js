@@ -36,6 +36,7 @@ export function mountVideoLesson(specimen) {
     stopped = false,
     timer = null,
     statusText = null,
+    comparisonText = null,
     // The one frame all three learners were asked about, and its own ticket:
     // asking must never cancel a lesson that is already running.
     lastAsk = null,
@@ -53,6 +54,10 @@ export function mountVideoLesson(specimen) {
   function status(th, en) {
     statusText = [th, en]
     $('[data-lesson-status]').textContent = t(th, en)
+  }
+  function comparisonStatus(th, en) {
+    comparisonText = [th, en]
+    $('[data-three-status]').textContent = t(th, en)
   }
   const reviewingSource = {
     ready: true,
@@ -333,10 +338,10 @@ export function mountVideoLesson(specimen) {
       )
     }
   })
-  async function read() {
+  async function read(report = status) {
     const c = snapshot(specimen.source)
     if (!c) throw Error('No frame')
-    status(
+    report(
       isLoaded() ? 'กำลังอ่านภาพ…' : 'กำลังโหลดโมเดล 14 MB ครั้งแรก… ภาพที่เลือกถูกเก็บไว้แล้ว',
       isLoaded() ? 'Reading the frame…' : 'Loading the 14 MB model for first use… Your chosen frame is already held.',
     )
@@ -484,7 +489,7 @@ export function mountVideoLesson(specimen) {
     busy = true
     paint()
     try {
-      const sample = await read()
+      const sample = await read(comparisonStatus)
       if (ticket !== askJob) return
       lastAsk = sample
       const view = $('[data-three-view]')
@@ -492,12 +497,12 @@ export function mountVideoLesson(specimen) {
       // The full frame, not the 96px strip thumbnail: the picture in the card
       // has to be the picture the machine saw, not a blurred copy of it.
       view.getContext('2d').drawImage(sample.canvas, 0, 0, view.width, view.height)
-      status(
+      comparisonStatus(
         'ถามทั้งสามแล้ว — ดูว่าคำตอบต่างกันยังไง',
         'Asked all three. Watch how the answers differ.',
       )
     } catch {
-      status('อ่านภาพไม่สำเร็จ ลองอีกครั้ง', 'Could not read the frame. Try again.')
+      if (ticket === askJob) comparisonStatus('อ่านภาพไม่สำเร็จ ลองอีกครั้ง', 'Could not read the frame. Try again.')
     } finally {
       if (ticket === askJob) {
         busy = false
@@ -708,6 +713,7 @@ export function mountVideoLesson(specimen) {
   }
   onLang(() => {
     if (statusText) status(...statusText)
+    if (comparisonText) comparisonStatus(...comparisonText)
     for (let i = 0; i < 2; i++)
       if (!named[i]) {
         names[i] = i ? t('ถนนโล่ง', 'Quiet road') : t('ถนนรถแน่น', 'Busy road')

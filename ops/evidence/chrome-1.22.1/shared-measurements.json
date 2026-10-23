@@ -1,0 +1,107 @@
+[
+  {
+    "route": "/",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 390
+  },
+  {
+    "route": "/cameras",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 390
+  },
+  {
+    "route": "/games",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 390
+  },
+  {
+    "route": "/learn",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 390
+  },
+  {
+    "route": "/research",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 390
+  },
+  {
+    "route": "/",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1024
+  },
+  {
+    "route": "/cameras",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1024
+  },
+  {
+    "route": "/games",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1024
+  },
+  {
+    "route": "/learn",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1024
+  },
+  {
+    "route": "/research",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1024
+  },
+  {
+    "route": "/",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1440
+  },
+  {
+    "route": "/cameras",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1440
+  },
+  {
+    "route": "/games",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1440
+  },
+  {
+    "route": "/learn",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1440
+  },
+  {
+    "route": "/research",
+    "current": 1,
+    "overflow": false,
+    "rail": 44,
+    "w": 1440
+  }
+]

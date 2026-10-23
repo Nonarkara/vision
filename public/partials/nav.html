@@ -4,7 +4,9 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#051230"/><path d="M5 12V5h7M20 5h7v7M27 20v7h-7M12 27H5v-7" fill="none" stroke="#eb5324" stroke-width="3"/><rect x="13" y="13" width="6" height="6" fill="#ebd3a2"/></svg>
     <span>VISION</span>
   </a>
-  <nav class="rooms" data-aria-th="ห้องเรียนทั้งหมด" data-aria-en="Rooms">
+  <div class="room-navigation">
+    <button class="room-toggle" type="button" aria-expanded="false" aria-controls="rooms-nav"><span class="th" lang="th">ห้องเรียน</span><span class="en" lang="en">Rooms</span><span class="zh" lang="zh-Hans">课堂</span></button>
+  <nav id="rooms-nav" class="rooms" data-aria-th="ห้องเรียนทั้งหมด" data-aria-en="Rooms">
     <a href="/cameras" data-page="cameras"><span class="th" lang="th">ดู</span><span class="en" lang="en">See</span></a>
     <a href="/games" data-page="games"><span class="th" lang="th">เล่น</span><span class="en" lang="en">Play</span></a>
     <a href="/train" data-page="train"><span class="th" lang="th">สอน</span><span class="en" lang="en">Teach</span></a>
@@ -13,6 +15,7 @@
     <details class="more-room">
       <summary><span class="th" lang="th">อื่น ๆ</span><span class="en" lang="en">More</span></summary>
       <div class="more-list">
+        <!--#learningpath-->
         <a href="/gesture" data-page="gesture"><span class="th" lang="th">สั่งด้วยท่า</span><span class="en" lang="en">Gestures</span></a>
         <a href="/focus" data-page="focus"><span class="th" lang="th">ใบหน้าและสมาธิ</span><span class="en" lang="en">Face &amp; focus</span></a>
         <a href="/reconstruct" data-page="reconstruct"><span class="th" lang="th">สร้างสามมิติ</span><span class="en" lang="en">Reconstruct</span></a>
@@ -26,6 +29,7 @@
       </div>
     </details>
   </nav>
+  </div>
   <div class="rail-tools">
     <button class="lang-toggle" type="button" data-lang-toggle data-aria-th="ภาษา: ไทย อังกฤษ จีน" data-aria-en="Language: Thai, English, Chinese" data-aria-zh="语言：泰语、英语、简体中文">
       <span class="th" lang="th"><b>ไทย</b> <span aria-hidden="true">/</span> EN <span aria-hidden="true">/</span> 中文</span>

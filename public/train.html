@@ -13,7 +13,6 @@
 
   <section class="page-head" aria-labelledby="title">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 03 · ฝึกเอง</span><span class="en" lang="en">Room 03 · Train it yourself</span></span>
       <h1 id="title"><span class="th" lang="th">สอนให้เห็นความต่าง</span><span class="en" lang="en">Teach it to see the difference</span></h1>
     </div>
     <div>
@@ -32,13 +31,14 @@
 <h3 data-lesson-step></h3><p data-lesson-help></p>
 <div class="lesson-scenes" data-practice-controls hidden><p class="micro"><span class="th" lang="th">เปลี่ยนสิ่งที่อยู่ในวิดีโอ</span><span class="en" lang="en">Change what is in the video</span></p><div class="controls" role="group" data-aria-th="ฉากในวิดีโอฝึก" data-aria-en="Practice video scene" data-aria-zh="练习视频场景"><button class="btn" type="button" data-practice-scene="busy" aria-pressed="false"><span class="th" lang="th">รถแน่น</span><span class="en" lang="en">Busy</span></button><button class="btn" type="button" data-practice-scene="quiet" aria-pressed="false"><span class="th" lang="th">ถนนโล่ง</span><span class="en" lang="en">Quiet</span></button><button class="btn" type="button" data-practice-scene="auto" aria-pressed="false"><span class="th" lang="th">สลับอัตโนมัติ</span><span class="en" lang="en">Auto</span></button></div></div>
 <div data-method-panel="supervised">
-<ol class="manual" data-aria-th="วิธีสอนแบบบอกคำตอบ" data-aria-en="How to teach by giving answers">
+
+<div class="controls"><button class="btn primary" type="button" data-label-frame="0"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 1</span><span class="en" lang="en">Add frame to group 1</span></button><button class="btn primary" type="button" data-label-frame="1"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 2</span><span class="en" lang="en">Add frame to group 2</span></button></div>
+<details class="lesson-steps"><summary><span class="th" lang="th">ดูขั้นตอนทีละข้อ</span><span class="en" lang="en">Step-by-step instructions</span></summary><ol class="manual" data-aria-th="วิธีสอนแบบบอกคำตอบ" data-aria-en="How to teach by giving answers">
   <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">+ เพิ่มภาพ</code> ที่กลุ่ม <strong>ถนนรถแน่น</strong> ตอนที่ฉากรถแน่นอยู่บนจอ</span><span class="en" lang="en">Press <code class="part">+ Add example</code> on the <strong>Busy road</strong> group while the busy scene is on screen</span></span></li>
   <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">+ เพิ่มภาพ</code> ที่กลุ่ม <strong>ถนนโล่ง</strong> ตอนที่ฉากถนนโล่งอยู่บนจอ</span><span class="en" lang="en">Press <code class="part">+ Add example</code> on the <strong>Quiet road</strong> group while the quiet scene is on screen</span></span></li>
   <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เรียนจากคำตอบของฉัน</code></span><span class="en" lang="en">Press <code class="part">Learn from my answers</code></span></span></li>
   <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ค้างภาพใหม่แล้วให้ทาย</code> แล้วดูว่ามันเดาถูกไหม</span><span class="en" lang="en">Press <code class="part">Hold a new frame &amp; guess</code> and see whether it is right</span><span class="manual-warn th" lang="th">ภาพใหม่จากกล้องเดิมไม่ใช่หลักฐานว่าใช้กับกล้องอื่นได้</span><span class="manual-warn en" lang="en">A new frame from the same camera does not prove it works on another camera</span></span></li>
-</ol>
-<div class="controls"><button class="btn primary" type="button" data-label-frame="0"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 1</span><span class="en" lang="en">Add frame to group 1</span></button><button class="btn primary" type="button" data-label-frame="1"><span class="th" lang="th">เพิ่มภาพให้กลุ่ม 2</span><span class="en" lang="en">Add frame to group 2</span></button></div>
+</ol></details>
 <p data-lesson-counts class="vh"></p><button class="btn primary" type="button" data-lesson-learn><span class="th" lang="th">เรียนจากคำตอบของฉัน</span><span class="en" lang="en">Learn from my answers</span></button><div class="lesson-test" data-lesson-test-panel>
 <h4><span class="th" lang="th">ลองภาพที่ยังไม่ได้สอน</span><span class="en" lang="en">Try a picture you did not teach</span><span class="zh" lang="zh-Hans">试试尚未教过的图片</span></h4>
 <p class="micro"><span class="th" lang="th">หลังเรียนแล้ว รอเฟรมใหม่หรือเปลี่ยนกล้อง เครื่องจะทายก่อนคุณบอกคำตอบ ภาพจากกล้องเดิมไม่ใช่หลักฐานว่าใช้ได้กับกล้องอื่น</span><span class="en" lang="en">After Learn, wait for a new frame or change camera. It guesses before you give the answer. A new frame from the same camera does not prove it works on another camera.</span><span class="zh" lang="zh-Hans">学习后等待新画面或更换摄像头。模型先预测，你再核对。同一摄像头的新画面不能证明模型适用于其他摄像头。</span></p>
@@ -49,15 +49,15 @@
 <div class="controls"><button class="btn" type="button" data-test-live hidden><span class="th" lang="th">เล่นวิดีโอต่อ</span><span class="en" lang="en">Continue video</span><span class="zh" lang="zh-Hans">继续视频</span></button><button class="btn" type="button" data-test-correct hidden><span class="th" lang="th">ใช้คำตอบนี้สอน</span><span class="en" lang="en">Teach this answer</span><span class="zh" lang="zh-Hans">用此答案训练</span></button></div>
 </div><div class="lesson-samples" data-lesson-samples></div><details class="lesson-rename"><summary><span class="th" lang="th">เปลี่ยนชื่อคำตอบ</span><span class="en" lang="en">Use your own names</span></summary><div class="lesson-labels"><label><span class="th" lang="th">ชื่อกลุ่มแรก</span><span class="en" lang="en">First group name</span><input class="field-input" data-lesson-name="0" maxlength="40" value="Busy road"></label><label><span class="th" lang="th">ชื่อกลุ่มที่สอง</span><span class="en" lang="en">Second group name</span><input class="field-input" data-lesson-name="1" maxlength="40" value="Quiet road"></label></div></details>
 </div>
-<div data-method-panel="unsupervised" hidden><p><span class="th" lang="th">เก็บ 24 ภาพในประมาณ 24 วินาที แล้วจัดกลุ่มจากความคล้ายของภาพ คุณไม่ได้บอกชื่อหรือคำตอบ</span><span class="en" lang="en">Collect 24 frames over about 24 seconds, then group them by visual similarity. You supply no names or answers.</span></p><ol class="manual" data-aria-th="วิธีสอนแบบหาความคล้าย" data-aria-en="How to teach by finding patterns">
+<div data-method-panel="unsupervised" hidden><p><span class="th" lang="th">เก็บ 24 ภาพในประมาณ 24 วินาที แล้วจัดกลุ่มจากความคล้ายของภาพ คุณไม่ได้บอกชื่อหรือคำตอบ</span><span class="en" lang="en">Collect 24 frames over about 24 seconds, then group them by visual similarity. You supply no names or answers.</span></p><details class="lesson-steps"><summary><span class="th" lang="th">ดูขั้นตอนทีละข้อ</span><span class="en" lang="en">Step-by-step instructions</span></summary><ol class="manual" data-aria-th="วิธีสอนแบบหาความคล้าย" data-aria-en="How to teach by finding patterns">
   <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เก็บภาพแล้วหาสองกลุ่ม</code> แล้วรอราว 24 วินาที</span><span class="en" lang="en">Press <code class="part">Collect frames &amp; find two groups</code>, then wait about 24 seconds</span></span></li>
   <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">ดูสองกลุ่มที่มันหาเจอเอง</span><span class="en" lang="en">Read the two groups it found by itself</span><span class="manual-warn th" lang="th">มันแบ่งกลุ่มจากความคล้ายของภาพ ไม่ใช่จากคำตอบของคุณ</span><span class="manual-warn en" lang="en">It splits by visual similarity, not by your answers</span></span></li>
-</ol><button class="btn primary" type="button" data-lesson-collect><span class="th" lang="th">เก็บภาพแล้วหาสองกลุ่ม</span><span class="en" lang="en">Collect frames &amp; find two groups</span></button><div class="lesson-groups" data-lesson-groups></div></div>
-<div data-method-panel="reinforcement" hidden><p><span class="th" lang="th">ตั้งเป้าหมาย: แจ้งเตือนเมื่อถนนรถแน่น กดให้เครื่องเลือกการกระทำ ภาพนั้นจะค้างไว้ให้คุณให้คะแนน จากนั้นลองเฟรมใหม่</span><span class="en" lang="en">Goal: raise an alert when traffic looks busy. Ask it to choose an action. That frame stays on screen while you give feedback. Then try a new frame.</span></p><ol class="manual" data-aria-th="วิธีสอนแบบให้รางวัล" data-aria-en="How to teach by giving rewards">
+</ol></details><button class="btn primary" type="button" data-lesson-collect><span class="th" lang="th">เก็บภาพแล้วหาสองกลุ่ม</span><span class="en" lang="en">Collect frames &amp; find two groups</span></button><div class="lesson-groups" data-lesson-groups></div></div>
+<div data-method-panel="reinforcement" hidden><p><span class="th" lang="th">ตั้งเป้าหมาย: แจ้งเตือนเมื่อถนนรถแน่น กดให้เครื่องเลือกการกระทำ ภาพนั้นจะค้างไว้ให้คุณให้คะแนน จากนั้นลองเฟรมใหม่</span><span class="en" lang="en">Goal: raise an alert when traffic looks busy. Ask it to choose an action. That frame stays on screen while you give feedback. Then try a new frame.</span></p><details class="lesson-steps"><summary><span class="th" lang="th">ดูขั้นตอนทีละข้อ</span><span class="en" lang="en">Step-by-step instructions</span></summary><ol class="manual" data-aria-th="วิธีสอนแบบให้รางวัล" data-aria-en="How to teach by giving rewards">
   <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ลองเลือกการกระทำ</code> แล้วดูว่าเครื่องเลือกอะไร</span><span class="en" lang="en">Press <code class="part">Try an action</code> and watch what it chooses</span></span></li>
   <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">✓ เหมาะสม · +1</code> หรือ <code class="part">× ไม่เหมาะ · −1</code></span><span class="en" lang="en">Press <code class="part">✓ Good choice · +1</code> or <code class="part">× Wrong choice · −1</code></span></span></li>
   <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ลองเลือกการกระทำ</code> อีกครั้งบนภาพใหม่</span><span class="en" lang="en">Press <code class="part">Try an action</code> again on a new frame</span></span></li>
-</ol><button class="btn primary" type="button" data-lesson-act><span class="th" lang="th">ลองเลือกการกระทำ</span><span class="en" lang="en">Try an action</span></button><canvas class="lesson-held-frame" data-lesson-held width="224" height="126" hidden role="img" data-aria-th="ภาพที่ค้างไว้เพื่อให้คะแนนการกระทำ" data-aria-en="Held frame for rating this action"></canvas><p data-lesson-action></p><div class="controls"><button class="btn" type="button" data-reward="1" disabled><span class="th" lang="th">✓ เหมาะสม · +1</span><span class="en" lang="en">✓ Good choice · +1</span></button><button class="btn" type="button" data-reward="-1" disabled><span class="th" lang="th">× ไม่เหมาะ · −1</span><span class="en" lang="en">× Wrong choice · −1</span></button></div><p class="micro" data-lesson-rewards></p></div>
+</ol></details><button class="btn primary" type="button" data-lesson-act><span class="th" lang="th">ลองเลือกการกระทำ</span><span class="en" lang="en">Try an action</span></button><canvas class="lesson-held-frame" data-lesson-held width="224" height="126" hidden role="img" data-aria-th="ภาพที่ค้างไว้เพื่อให้คะแนนการกระทำ" data-aria-en="Held frame for rating this action"></canvas><p data-lesson-action></p><div class="controls"><button class="btn" type="button" data-reward="1" disabled><span class="th" lang="th">✓ เหมาะสม · +1</span><span class="en" lang="en">✓ Good choice · +1</span></button><button class="btn" type="button" data-reward="-1" disabled><span class="th" lang="th">× ไม่เหมาะ · −1</span><span class="en" lang="en">× Wrong choice · −1</span></button></div><p class="micro" data-lesson-rewards></p></div>
 <p class="readout lesson-prediction" data-lesson-explain></p>
 <p class="readout" data-lesson-status role="status"></p>
 <button class="btn" type="button" data-lesson-reset><span class="th" lang="th">ล้างบทเรียนนี้แล้วเริ่มใหม่</span><span class="en" lang="en">Clear this lesson &amp; start again</span></button>
@@ -69,6 +69,7 @@
 <div class="three-ways-body">
 <div class="three-ways-stage">
 <button class="btn primary" type="button" data-three-ask><span class="th" lang="th">ถามทั้งสาม</span><span class="en" lang="en">Ask all three</span></button>
+<p class="readout" data-three-status role="status"></p>
 <canvas data-three-view width="224" height="126" role="img" data-aria-th="ภาพที่ถามทั้งสาม" data-aria-en="The picture asked to all three" hidden></canvas>
 </div>
 <div class="three-ways-cards" aria-live="polite">
@@ -162,7 +163,7 @@
       <span class="chapter-no">01</span>
       <h2 id="room-title"><span class="th" lang="th">ให้มันดูตัวอย่าง</span><span class="en" lang="en">Show it examples</span></h2>
       <p class="prose"><span class="th" lang="th">ให้เครื่องดูภาพของแต่ละกลุ่ม กด “เพิ่มตัวอย่าง” ตอนที่เห็นสิ่งนั้น ลองเก็บกลุ่มละ 10 ภาพจากหลายมุม แล้วกด “ฝึกแล้วลองทาย”</span><span class="en" lang="en">Show it each group. Press “Add example” when that thing is in the picture. Aim for 10 pictures per group from different angles. Then press “Train and try it”.</span></p>
-      <ol class="manual" data-manual data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
+      <details class="lesson-steps"><summary><span class="th" lang="th">ดูขั้นตอนทีละข้อ</span><span class="en" lang="en">Step-by-step instructions</span></summary><ol class="manual" data-manual data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
         <li data-step="camera">
           <span class="manual-n" aria-hidden="true">1</span>
           <span class="manual-body">
@@ -196,7 +197,7 @@
             <span class="manual-warn th" lang="th">ภาพจากกล้องเดิมไม่ใช่หลักฐานว่าใช้กับกล้องอื่นได้</span><span class="manual-warn en" lang="en">A new frame from the same camera does not prove it works on another camera</span>
           </span>
         </li>
-      </ol>
+      </ol></details>
     </header>
 
     <div class="room-grid">

@@ -10,7 +10,7 @@
 import { t, lang, n, pct, onLang, bi } from '../core/i18n.js?v=1.20.1'
 import { camName, sourceName, pickReadable } from '../core/catalog.js?v=1.20.1'
 import { openCamera, SourceError } from '../core/source.js?v=1.20.1'
-import { sleep } from '../core/site.js?v=1.20.1'
+import { sleep } from '../core/site.js?v=1.22.1'
 import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.20.1'
 import { STREET, cocoName } from '../ml/labels.js?v=1.20.1'
 import { JASPER, BLACK } from '../cv/draw.js?v=1.20.1'

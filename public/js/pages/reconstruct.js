@@ -298,7 +298,7 @@ export function loopEdges(loops = LOOPS) {
 const EDGES = loopEdges()
 
 async function boot() {
-  await import('../core/site.js?v=1.20.1')
+  await import('../core/site.js?v=1.22.1')
   const root = document.querySelector('[data-reconstruct]')
   if (!root) return
   const el = (name) => root.querySelector(`[data-${name}]`)

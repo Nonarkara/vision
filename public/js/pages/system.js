@@ -2,7 +2,7 @@
 // about itself right now. Everything from the network goes in by textContent:
 // source labels come from upstream and are not ours to trust.
 
-import '../core/site.js?v=1.20.1'
+import '../core/site.js?v=1.22.1'
 import { t, n, lang, onLang } from '../core/i18n.js?v=1.20.1'
 import { loadCatalog, SOURCES } from '../core/catalog.js?v=1.20.1'
 

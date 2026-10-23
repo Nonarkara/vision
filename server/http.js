@@ -123,7 +123,9 @@ const PATH_STEP = { '/learn': 'begin', '/cameras': 'look', '/train': 'teach', '/
 
 /** Assemble a page: partials in, current page and path step marked, version stamped. */
 export function assemblePage(html, { partials, page, version, route }) {
-  let out = html.replace(/<!--#(\w+)-->/g, (m, name) => partials[name] ?? m)
+  const hasPath = html.includes('<!--#path-->')
+  const nav = (partials.nav ?? '').replace('<!--#learningpath-->', hasPath ? partials.path ?? '' : '')
+  let out = html.replace('<!--#path-->', '').replace(/<!--#(\w+)-->/g, (m, name) => name === 'nav' ? nav : partials[name] ?? m)
   out = out.replace(`data-page="${page}"`, `data-page="${page}" aria-current="page"`)
   // `data-step` values are words, never page names, so this can only ever
   // touch the learning-path rail and not some other element's attribute.

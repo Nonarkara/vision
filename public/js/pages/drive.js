@@ -2,7 +2,7 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.20.1'
+import '../core/site.js?v=1.22.1'
 import { lang, count, onLang } from '../core/i18n.js?v=1.20.1'
 import { mountGate } from './captcha.js?v=1.20.1'
 import { readGate, writeGate } from '../drive/captcha.js?v=1.20.1'
