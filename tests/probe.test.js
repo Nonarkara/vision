@@ -23,13 +23,14 @@ test('the first camera is probed three at a time, and a slow one is aborted', as
   assert.equal(PROBE_PARALLEL, 3)
   let inflight = 0
   let max = 0
+  let ranOut = 0 // cameras left to finish on their own timer instead of being aborted
   const cams = [{ id: 'slow' }, { id: 'fast' }, { id: 'other' }]
-  const t0 = Date.now()
   const hit = await probeCameras(cams, (cam, signal) => new Promise((resolve, reject) => {
     inflight++
     max = Math.max(max, inflight)
     const timer = setTimeout(() => {
       inflight--
+      ranOut++
       resolve({ id: cam.id, close() {} })
     }, cam.id === 'fast' ? 40 : 500)
     signal.addEventListener('abort', () => {
@@ -42,5 +43,9 @@ test('the first camera is probed three at a time, and a slow one is aborted', as
   }))
   assert.equal(hit.cam.id, 'fast')
   assert.ok(max >= 2, 'the batch was in flight together')
-  assert.ok(Date.now() - t0 < 300, 'the slow cameras did not run out their timer')
+  // The slow cameras were aborted, not left to run out their own timer. This
+  // is what a 300ms wall-clock bound was trying to say, and it failed under
+  // load: the clock moved, not the behaviour. Only the camera that won may
+  // have run its timer out.
+  assert.equal(ranOut, 1, 'only the camera that won may run its timer out')
 })
