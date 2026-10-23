@@ -1,0 +1,32 @@
+[
+  {
+    "action": 671.671875,
+    "h": 844,
+    "lang": "en",
+    "overflow": false,
+    "rail": 44,
+    "scene": 194.6640625,
+    "video": 285.1171875,
+    "w": 390
+  },
+  {
+    "action": 518.078125,
+    "h": 900,
+    "lang": "en",
+    "overflow": false,
+    "rail": 44,
+    "scene": 194.6640625,
+    "video": 364.21875,
+    "w": 1024
+  },
+  {
+    "action": 503.7890625,
+    "h": 900,
+    "lang": "en",
+    "overflow": false,
+    "rail": 44,
+    "scene": 194.6640625,
+    "video": 349.890625,
+    "w": 1440
+  }
+]
