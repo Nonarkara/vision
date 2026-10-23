@@ -21,6 +21,17 @@ The law is in [MSH.md](MSH.md) and it is not optional:
 
 The completion report for visual work states: **Found** (element, viewport, task cost) · **Changed** (the invented spatial demand removed) · **Verified** (screenshots, measured before/after, exercised interactions, independent review) · **Remaining** (unresolved SH or unverified states — never claim a clean pass while any remain).
 
+## Reading the linter's hits
+
+`slop-lint` scores heuristics, not the house. Four hits fire here for reasons that have nothing to do with the design, and one of them fires on nine of the fifteen rooms. Read a hit against this baseline, not by its name:
+
+- **`default-font`** — the linter's banned list contains `ibm plex sans thai`, the house's own approved Thai face. It always fires.
+- **`emoji-icons`** — the house's `↗` and `▶` marks are Unicode Extended_Pictographic and the linter has no functional-symbol exclusion.
+- **`type-chaos`** — the Thai face is set at 0.82em of its Latin counterpart, so a bilingual page computes more sizes than the eight-step scale.
+- **`void`** — the rule measures the largest connected flat region, which on this site is the paper ground that wraps a room's floating cards. Measured on one tree: /everyday 0.737, /colour 0.712, /reconstruct 0.565, /games 0.551, /gesture 0.522, /research 0.530, /system 0.530, /handbook 0.510, /drive 0.416, /train 0.383.
+
+The number is not the finding. Locate the region and look at it before calling it dead space: a hit on the paper ground is the house's ground, and a hit on the head of a page is a void a person can see.
+
 ## Shipping a release
 
 1. `npm run check` must be green before anything is published: fonts, the generated handbook, the test suite, site references, module URL consistency, privacy, docs and the palette certificate.
