@@ -2,6 +2,7 @@
 // Busy and quiet are two cameras the catalogue already names. The learner
 // captures examples from whichever scene is on screen.
 import { TEACH } from '../footage/library.js?v=1.20.1'
+import { HUES } from '../core/palette.js?v=1.23.0'
 
 const W = 640
 const H = 360
@@ -17,7 +18,10 @@ function load(urls) {
 }
 
 function paintFrame(g, img) {
-  g.fillStyle = '#051230'
+  // The frame around the picture is the quiet hue, read from the palette the
+  // gate certifies — not a second hex here. It was indigo, which is the ink
+  // colour one step away from the panel's black: the two read as one.
+  g.fillStyle = HUES.gray
   g.fillRect(0, 0, W, H)
   if (!img || !img.complete || !img.naturalWidth) return
   const s = Math.min(W / img.naturalWidth, H / img.naturalHeight)

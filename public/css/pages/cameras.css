@@ -58,6 +58,10 @@
 
 .map-view { position: relative; height: min(88vh, 960px); min-height: 420px; background: var(--black); }
 .map-view canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: pan-y; }
+/* The map's own ground is the hardware's black, not the view's quiet field, so
+   the state over it keeps the light ink on black and no field of its own — a
+   grey panel over the map would be the map's own chrome covering the map. */
+.map-view .bench-state { background: transparent; color: var(--gray); }
 @media (max-width: 1000px) { .map-view { height: min(118vw, 720px); min-height: 380px; } }
 .map-tools { align-items: center; }
 .map-tools .btn { font-size: var(--body); }

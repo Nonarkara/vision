@@ -32,6 +32,36 @@ The completion report for visual work states: **Found** (element, viewport, task
 
 The number is not the finding. Locate the region and look at it before calling it dead space: a hit on the paper ground is the house's ground, and a hit on the head of a page is a void a person can see.
 
+## The colour law — three hues on a screen
+
+The site has four hues and admits no others. Each has exactly one job, and the job is written down with the colours themselves in `public/js/core/palette.js`:
+
+| hue | job | where it belongs |
+|---|---|---|
+| **ivory** `#ebd3a2` | the paper | the ground a room sits on, and the type on a dark ground |
+| **indigo** `#051230` | the words | the ink a person wrote, and the dark ground its type stands on |
+| **gray** `#b6bfc1` | the quiet | the parts nobody is meant to read first — an instrument's frame, a step number, a specimen's mount |
+| **jasper** `#eb5324` | the signal | what the machine sees, and only that |
+
+**Every room's first screen carries at least three of the four, each at a size a reader can see — `SCREEN_FLOOR`, half a per cent of the screen — and each doing its own job.** A screen carrying two reads as two colours however well it is laid out. That is what "dull" means here: not beige, not empty, but the same two colours twice. Measured before 1.23.0, gray and jasper were under half a per cent of a first screen on most rooms, and the instrument's frame was black — 1.03:1 from the indigo, the same colour twice.
+
+**A photograph's colours are the world's, not the house's.** On a room that leads with a photograph, the house is measured on what it *paints*: an opaque surface by its own pixels, and a scrim over a photograph by its declared colour and its own area. The story's veil was the hardware's black, which is not one of the four hues and credits nothing; it is the site's ink now, and the loudest page reads as the house's own paper on the house's own ground.
+
+The census is a browser instrument, so it lives with the other browser instruments and is run by hand before a release, the way `slop-lint` is:
+
+```sh
+cd ../_shared/vision-tools && BASE=http://127.0.0.1:8431 node hue-share.mjs
+```
+
+It prints, per room and per width, which hues are carried and how much of the screen each one takes. **The repository holds the declarations themselves**: `tests/colour-law.test.js` pins them, and every pin there was proved by injection — the declaration was changed, the pin failed, the declaration was put back.
+
+When a room fails:
+
+- **It carries two hues** — find the quiet surface it is missing. The quiet hue belongs on the instrument's picture frame, on the machine's state and counters, on step numbers, on a specimen's mount. Never a hairline, never a 12px muted label, and never a full-width bar — a quiet field on a row that spans the screen is a stretched bar, and the linter says so.
+- **A hue is there but has no job** — that is worse than a missing hue. Gray that decorates has stopped being the quiet.
+- **The signal hue is missing** — it is not owed on every screen. It belongs where the machine has answered: the recording light, the mark on a detected object, the step the machine confirmed. A room where the machine has not spoken yet does not owe a signal.
+- **A pairing is new** — certify it. `scripts/palette-measure.mjs --check` is the gate, and a pairing the site really paints but the certificate does not know is a pairing nobody has measured.
+
 ## Shipping a release
 
 1. `npm run check` must be green before anything is published: fonts, the generated handbook, the test suite, site references, module URL consistency, privacy, docs and the palette certificate.

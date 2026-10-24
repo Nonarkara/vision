@@ -15,14 +15,42 @@
 
    The pressed state keeps its field, because there it means something: this is
    the plate the room is looking at, right now. */
-.deal { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--gap); align-items: baseline; }
+.deal { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
 .deal .btn { min-width: 0; }
 .deal .btn-word { background: transparent; color: var(--text); padding: 0 4px; }
 .deal .btn-word:hover { background: transparent; color: var(--black); text-decoration: underline; text-underline-offset: 4px; }
 .deal .btn-word[aria-pressed="true"] { background: var(--black); color: var(--ivory); text-decoration: none; }
 .btn[aria-pressed="true"] { background: var(--jasper); color: var(--black); }
 
-.plate-frame { padding: 0; }
+/* ── The study's own body ───────────────────────────────────────────────
+   The manual used to sit OUTSIDE this body, as a third child of .chapter.
+   The chapter grid has two columns, so the manual took the wide one and the
+   body — the buttons, the plate, the machine's reading, the words — was
+   pushed down into the narrow header column, 305px wide. The plate's own
+   sentence came out eight characters to a line, and the room's subject was a
+   sliver in the corner of a mostly empty screen.
+
+   Every other room puts its manual inside the body, and so does this one now.
+   The body is two columns: the instruction and its controls on the left, the
+   plate and the machine's reading of it on the right, and the human's answer
+   across the foot. */
+.chapter-body.study {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+}
+.study-instructions { display: grid; gap: var(--gap); align-content: start; }
+.study-plate { display: grid; gap: var(--gap); align-content: start; }
+@media (max-width: 1100px) {
+  .chapter-body.study { grid-template-columns: 1fr; }
+}
+
+/* The mount. The plate's own ground is dealt at runtime, so it can land on
+   the page's ivory and vanish into it. The mount is the instrument's frame —
+   the same quiet field the bench view carries on the teaching pages — so the
+   plate is always a specimen on a surface rather than a shape on paper. */
+.plate-frame { background: var(--quiet); padding: clamp(18px, 2vw, 30px); }
+.study-plate { display: grid; gap: var(--gap); align-content: start; }
+
 
 .plate {
   --pg: var(--ivory); --pi: var(--indigo); --pq: var(--gray); --ps: var(--jasper);
@@ -90,7 +118,7 @@
 .illegal-warn[hidden] { display: none; }
 .illegal-warn [lang="th"] { font-family: var(--thai); line-height: 1.7; }
 
-.feel { margin-top: clamp(28px, 4vw, 48px); }
+.feel { margin-top: 0; }
 .feel h3 { margin: 0 0 12px; font-size: var(--subtitle); }
 .feel h3 [lang="th"] { font-family: var(--thai); }
 /* Ten answers to one question, and they are words.

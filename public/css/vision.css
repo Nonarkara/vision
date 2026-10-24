@@ -543,13 +543,22 @@ em { font-style: italic; }
 .index li { margin: 0; }
 .index a {
   display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, 1.2fr);
-  gap: 16px 24px; align-items: baseline;
+  gap: 16px 24px; align-items: stretch;
   padding: 20px var(--gutter);
   text-decoration: none;
   transition: background-color 160ms var(--ease), color 160ms var(--ease);
 }
 .index a:hover, .index a:focus-visible { background: var(--field); color: var(--field-text); outline-offset: -3px; }
-.index .num { font-size: var(--micro); }
+/* The chapter number is the quietest thing in the row — a number nobody reads
+   first — so it is a quiet field and not loose ink. The column it stands in
+   runs the height of the row, so a reading room's index carries the quiet hue
+   as a real surface instead of a hairline. */
+.index .num {
+  font-size: var(--micro); align-self: stretch;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--quiet); color: var(--quiet-text);
+  padding: 4px 10px;
+}
 .index .title { font-family: var(--sans); font-weight: 700; font-size: clamp(1.5rem, 2.2vw + 0.6rem, 2.5rem); line-height: 1; }
 .index .title [lang="th"], .index .title[lang="th"] { font-family: var(--thai); font-size: 0.85em; line-height: 1.25; }
 .index .desc { max-width: 46ch; }
@@ -566,16 +575,41 @@ em { font-style: italic; }
 
 /* ── Instruments (live canvases + controls) ─────────────────────────── */
 
+/* The quiet hue is the parts nobody is meant to read first, and an
+   instrument's frame and label row are exactly that. They carried black — the
+   hardware, not a plate colour — so every room with an instrument read as two
+   colours: paper and ink. The frame is the quiet hue now, and the picture
+   inside it is the only strong thing on the screen. */
 .bench { background: var(--black); color: var(--white); display: flex; flex-direction: column; min-width: 0; }
-.bench-view { position: relative; background: var(--black); aspect-ratio: 16 / 9; overflow: hidden; }
+.bench-view { position: relative; background: var(--quiet); aspect-ratio: 16 / 9; overflow: hidden; }
 .bench-view canvas, .bench-view video, .bench-view img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .bench-view video.feed, .bench-view img.feed { visibility: hidden; }
+/* The state message: the instrument saying it has nothing yet. It stands on the
+   view's quiet field, so it is the quiet field with the ink that goes on it —
+   the same pairing the caption row uses, in the same rule, because that is
+   what --quiet-text is for. It was grey ink, which is the quiet hue itself:
+   legible on the black frame the view used to be, and 1.6:1 on the grey it
+   became. */
 .bench-state {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  padding: 24px; text-align: center; font-family: var(--mono); font-size: var(--micro); color: var(--gray);
+  padding: 24px; text-align: center; font-family: var(--mono); font-size: var(--micro);
+  color: var(--quiet-text);
+  background: var(--quiet);
 }
 .bench-state[hidden] { display: none; }
-.bench-caption { padding: 12px 16px; font-size: var(--micro); color: var(--gray); min-height: var(--target); display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; justify-content: space-between; }
+/* The label row. It is the instrument's own housing: the state at one end,
+   the counters at the other, on the hardware's black.
+
+   The quiet hue goes on the ITEMS, not on the row. It was tried on the row
+   and it was wrong twice over: the row's links and the owner's name are white
+   on black and would have been 1.7:1 on a grey field, and a full-width grey
+   bar holding one short label is a stretched bar — the linter's
+   stretch-to-fill caught it on /games. The state and the counters are exactly
+   what the house calls quiet (what the machine is not yet sure of), and a chip
+   is the house's existing way to wear it: the path steps in the More menu do
+   the same. */
+.bench-caption { padding: 12px 16px; font-size: var(--micro); color: var(--gray); min-height: var(--target); display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.bench-caption > .label, .bench-caption > .num { background: var(--quiet); color: var(--quiet-text); padding: 4px 8px; }
 .spotted { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: baseline; color: var(--white); }
 .spotted .micro { color: var(--gray); }
 
@@ -780,13 +814,18 @@ figcaption { font-size: var(--read); padding-top: 12px; max-width: 62ch; }
 }
 .manual li {
   display: grid; grid-template-columns: 28px minmax(0, 1fr);
-  gap: 12px; align-items: start;
+  gap: 12px; align-items: stretch;
   padding: 11px 16px 11px 11px;
   background: var(--field); color: var(--field-text);
 }
+/* The step marker is the quietest thing in the row: a number nobody reads
+   first. It carried the hardware's black; it carries the quiet hue now, and
+   the column it stands in runs the height of the step, so the list reads as a
+   rail of quiet blocks against the ink. A step the machine has confirmed
+   still answers in the signal hue. */
 .manual-n {
-  width: 28px; height: 28px; display: grid; place-items: center;
-  background: var(--black-3); color: var(--white);
+  width: 28px; align-self: stretch; display: grid; place-items: center;
+  background: var(--quiet); color: var(--quiet-text);
   font-family: var(--mono); font-size: var(--micro); font-weight: 600;
   font-variant-numeric: tabular-nums;
 }

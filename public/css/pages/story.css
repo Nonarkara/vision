@@ -17,30 +17,48 @@
 /* The veil is the type's ground, so it has to be measured like one. At 58%
    the brightest patch of the photograph still came through at rgb(107,107,107),
    and Ivory Buff on that was 3.65:1 — under the 3:1 large-text floor in places,
-   and the new paper is darker than the old one was. The veil is deeper and the
-   type is White, which clears 6.13:1 against the worst patch of the picture.
-   The photograph is the loud thing on this page; the words on it still have to
-   be readable. */
-.hero-veil { position: absolute; inset: 0; background: rgba(16, 16, 16, 0.64); }
+   and the new paper is darker than the old one was.
+
+   The veil was black, which is the hardware's colour and 1.03:1 from the
+   site's ink — the same colour twice, and not a hue the house owns. It is the
+   house's INK now, at 70%: the type's ground is the house's own dark ground,
+   and the photograph is still the loud thing behind it.
+
+   Measured over the crop the hero actually shows, at 1440 and at 390, and in
+   each box the type really occupies, the brightest patch of the picture reads
+   at rgb(80,89,110) under this veil. Ivory Buff on that is 4.79:1 — over the
+   4.5:1 the eyebrow and the caption need as small text, and far over the 3:1
+   the headline and the lede need as large text. White on the same patch is
+   6.42:1, which is the number the 1.21.0 record kept, so the veil did not
+   cost the page a single point of contrast. */
+.hero-veil { position: absolute; inset: 0; background: rgba(5, 18, 48, 0.70); }
 .hero-text { position: relative; z-index: 1; padding: 12px var(--gutter) clamp(56px, 8vw, 120px); max-width: 1400px; }
-.hero h1 { font-size: clamp(2rem, 10vw, 9.5rem); line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; overflow-wrap: normal; word-break: normal; hyphens: manual; color: var(--white); }
+.hero h1 { font-size: clamp(2rem, 10vw, 9.5rem); line-height: 0.92; letter-spacing: -0.035em; text-transform: uppercase; overflow-wrap: normal; word-break: normal; hyphens: manual; color: var(--ivory); }
 .hero h1 [lang="th"] { text-transform: none; font-size: 0.62em; line-height: 1.08; letter-spacing: 0; }
-/* The reversed word was Ivory Buff on a photograph already full of Ivory Buff
-   type, so it read as a hole punched in the line rather than as emphasis. It
-   is the house's own inversion now — ink on paper — which reads as a mark. */
+/* The reversed word. It was Ivory Buff type on a photograph already full of
+   Ivory Buff type, so it read as a hole punched in the line rather than as
+   emphasis. It is the house's inversion now — paper on the ink — knocked out
+   of the line in a block of the hardware's black, which is what makes the
+   word read as a mark and not as a gap. */
 .hero h1 em { font-style: normal; color: var(--ivory); background: var(--black); padding: 0 0.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 @container (min-width: 1px) {
   .hero h1 { font-size: clamp(2rem, 10.5cqi, 9.5rem); }
 }
-.hero-lede { font-size: clamp(1.25rem, 1.2vw + 0.9rem, 2rem); font-weight: 600; max-width: 30ch; margin: 28px 0 0; color: var(--white); }
+.hero-lede { font-size: clamp(1.25rem, 1.2vw + 0.9rem, 2rem); font-weight: 600; max-width: 30ch; margin: 28px 0 0; color: var(--ivory); }
 .hero-cap { position: absolute; right: var(--gutter); bottom: 16px; margin: 0; color: var(--ivory); text-align: right; max-width: 60ch; }
+/* The recording chip. It was a black field with a Jasper Red dot — a light
+   small enough to miss, on the page whose whole argument is that nobody was
+   watching. REC is the machine saying it IS watching, which is the signal
+   hue's only job on this site, so the chip is the signal hue now, at a size a
+   reader can see, with the words in the certified black-on-Jasper pairing
+   (5.25:1). The dot stays a light, and it still blinks. */
 .rec {
   position: absolute; z-index: 2; top: 12px; left: var(--gutter);
   max-width: calc(100% - 2 * var(--gutter));
-  font-family: var(--mono); font-size: var(--micro); letter-spacing: 0.1em; color: var(--white);
-  background: var(--black); padding: 6px 10px;
+  font-family: var(--mono); font-size: var(--micro); letter-spacing: 0.1em; color: var(--black);
+  background: var(--jasper); padding: 6px 10px;
 }
-.rec-dot { color: var(--jasper); animation: blink 1.2s steps(2, start) infinite; }
+.rec-dot { color: var(--black); animation: blink 1.2s steps(2, start) infinite; }
 @keyframes blink { to { visibility: hidden; } }
 @media (max-width: 600px) {
   .hero { padding-top: 48px; }

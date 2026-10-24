@@ -19,6 +19,53 @@
  * The ladder now lives with the site it describes, so the instrument that certifies a
  * pairing and the page that paints it cannot drift apart. The colour study on /colour
  * imports the same numbers and is therefore graded by the same rules that built it.
+ *
+ * ONE JOB PER HUE — AND THREE HUES ON A SCREEN.
+ *
+ * A screen that carries two of these reads as two colours however well it is laid
+ * out, and the two the site never really used were gray and jasper: measured over
+ * fifteen rooms, they were under half a percent of a first screen, and the
+ * instrument's frame was black, which is 1.03:1 from indigo — the same colour
+ * twice. So the rule is:
+ *
+ *   Every room's first screen carries at least three of the four hues, each at a
+ *   size a reader can see, and each doing its own job:
+ *     ivory  — the paper the room sits on
+ *     indigo — the words a person wrote
+ *     gray   — the quiet: the parts nobody is meant to read first
+ *     jasper — the signal: what the machine sees, and only that
+ *
+ * "A size a reader can see" is a number and not a taste: SCREEN_FLOOR, half a
+ * per cent of the first screen. At 1440×900 that is a 76×76 block; at 390×844,
+ * a 41×40 one. The house's own hairlines measure 0.01%–0.15% of a screen, so
+ * the floor stands an order of magnitude above a rule and far below a surface:
+ * it is the size of a chip you can see without looking for it, and nothing
+ * smaller. It is exported so there is one number and not two.
+ *
+ * The quiet hue is where the machine has not answered yet — an instrument's
+ * frame, a label nobody reads first. The signal hue is where it has. A fifth
+ * hue, or a hue without its job, is not a version of this. The hues stay the
+ * same four and the ladder stays the same ladder; what changes is how much of
+ * each one a screen is allowed to be.
+ *
+ * THE PHOTOGRAPH CLAUSE. A photograph's colours are the world's, not the
+ * house's. On a room that leads with a photograph — the story — the pixels are
+ * a control room, and a census of them measures the photographer, not the
+ * design. So the house is measured on what it PAINTS: an opaque surface by its
+ * own pixels, and a scrim over a photograph by its DECLARED colour and its own
+ * area. The story's veil was the hardware's black, which is not one of the four
+ * hues and credits nothing; it is the site's ink now, at 70%, and the loudest
+ * page reads as the house's own paper on the house's own ground. A scrim
+ * credits only the pixels under it that no house tone already claimed — the
+ * photograph coming through — so the house's own type standing on the scrim
+ * keeps its own hue and nothing is counted twice.
+ *
+ * MEASURED BY the colour census, one room at a time, at 1440×900 and 390×844,
+ * in Thai. It is a browser instrument, so it lives with the other browser
+ * instruments and is run by hand before a release, the way the linter is. What
+ * the repository holds is the stylesheet's own declarations — the pins are in
+ * tests/colour-law.test.js, and each one was proved by changing the
+ * stylesheet and watching the pin fail.
  */
 
 const hex = (h) => {
@@ -38,6 +85,34 @@ export const HUES = {
   gray: '#b6bfc1',
   jasper: '#eb5324',
 }
+
+/**
+ * The floor of the "three hues on a screen" law: the least of a hue a first
+ * screen may carry and still be carrying it. Half a per cent of the screen —
+ * a 76×76 block at 1440×900, a 41×40 one at 390×844. The house's own
+ * hairlines measure 0.01%–0.15%, so this is a chip you can see, not a rule
+ * you can guess at.
+ *
+ * It lives here, with the hues it measures, so the census that reads it and
+ * the stylesheet that obeys it cannot drift apart.
+ */
+export const SCREEN_FLOOR = 0.5
+
+/**
+ * The story hero's veil — the ground the page's biggest type stands on.
+ *
+ * The veil is the site's ink at 70% over a photograph, so the ground the type
+ * actually reads against is neither the ink nor the picture: it is the two
+ * blended, and the blend changes with every patch of the picture. The worst
+ * one is rgb(80,89,110) — measured over the crop the hero really shows, at
+ * 1440 and at 390, with the browser instruments.
+ *
+ * That number is a fact about THIS photograph, so it goes stale if the
+ * photograph changes. Re-derive it with the veil measurement and change it
+ * here together with the veil — the pin in tests/colour-law.test.js holds the
+ * two together, and the certificate below refuses the page if they drift.
+ */
+export const VEIL = { css: 'rgba(5, 18, 48, 0.70)', worst: '#50596e' }
 
 export function ladder() {
   const out = {}
@@ -97,6 +172,13 @@ export function pairings(p = ladder()) {
     ['required', 'gray.pale on black', p.gray.pale, p.black.base, 'text'],
     ['required', 'jasper on black', p.jasper.base, p.black.base, 'large'],
     ['required', 'jasper.pale on indigo', p.jasper.pale, p.indigo.base, 'mark'],
+    // ── On the story hero's veil (Indigo over a photograph) ──────────────
+    // The loudest page's type stands on a blend, not on a ladder tone, so the
+    // pairing the site really paints is certified against the worst patch of
+    // the picture underneath. Ivory Buff on that is 4.80:1 — over the 4.5:1
+    // the eyebrow and the caption need as small text, and far over the 3:1
+    // the headline and the lede need as large text.
+    ['required', 'ivory on the story veil', p.ivory.base, VEIL.worst, 'text'],
     // ── On the quiet field (Gray) ────────────────────────────────────────
     ['required', 'indigo on gray', p.indigo.base, p.gray.base, 'text'],
     ['required', 'black on gray', p.black.base, p.gray.base, 'text'],

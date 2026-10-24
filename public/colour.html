@@ -21,48 +21,51 @@
 
   <section class="chapter" id="study" aria-labelledby="study-h">
     <header><span class="chapter-no">01</span><h2 id="study-h"><span class="th" lang="th">สับสีใหม่แล้วดูว่ารู้สึกอย่างไร</span><span class="en" lang="en">Deal the colours again, then notice</span></h2></header>
-      <ol class="manual" data-aria-th="วิธีใช้การทดลองสี" data-aria-en="How to use the colour study">
-        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">ดูจานที่สับไว้ — แถบล่างสุดคือสิ่งที่เครื่องเห็น</span><span class="en" lang="en">Look at the plate you were dealt — the bottom bar is what the machine sees</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กดคำที่ใกล้กับความรู้สึกของคุณมากที่สุด</span><span class="en" lang="en">Press the word closest to how the plate feels</span><span class="manual-warn th" lang="th">คำตอบนี้มีไว้เทียบกับคำของคนอื่น — ไม่ใช่คะแนนของคุณ</span><span class="manual-warn en" lang="en">Your word exists to be compared with other people's — it is not a score for you</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">ติ๊ก <code class="part">ส่งคำตอบนี้</code> ถ้าคุณยินยอม</span><span class="en" lang="en">Tick <code class="part">Add this answer</code> if you agree</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">อ่านว่าคนอื่นตอบอะไร</span><span class="en" lang="en">Read what other people said</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">↻ สับอีกจาน</code> เพื่อลองจานใหม่</span><span class="en" lang="en">Press <code class="part">↻ Deal another</code> for a fresh plate</span></span></li>
-      </ol>
-    <div class="chapter-body">
-
-      <div class="deal">
-        <button class="btn" type="button" data-deal><span class="th" lang="th">↻ สับอีกจาน</span><span class="en" lang="en">↻ Deal another</span></button>
-        <button class="btn btn-word" type="button" data-deal-shared aria-pressed="false"><span class="th" lang="th">จานเดียวสำหรับทุกคน</span><span class="en" lang="en">One plate for everyone</span></button>
-        <button class="btn btn-word" type="button" data-deal-illegal><span class="th" lang="th">ขอจานที่เครื่องอ่านไม่ออก</span><span class="en" lang="en">Show me one the machine refuses</span></button>
-      </div>
-
-      <div class="plate-frame">
-        <div class="plate" id="plate" role="img" aria-labelledby="plate-desc">
-          <p class="plate-quiet"><span class="th" lang="th">ส่วนที่ไม่ได้อ่านก่อน</span><span class="en" lang="en">the part nobody reads first</span></p>
-          <h3 class="plate-ink"><span class="th" lang="th">คำพูดของคน</span><span class="en" lang="en">a sentence a person wrote</span></h3>
-          <p class="plate-body"><span class="th" lang="th">เครื่องนับได้ว่ามีรถอยู่ตรงนี้ แต่ไม่รู้ว่ารถคันนี้กำลังจะเลี้ยวหรือกำลังจะจอ</span><span class="en" lang="en">The machine can count that a car is here. It does not know whether that car is turning or stopping.</span></p>
-          <div class="plate-signal">
-            <span class="plate-bar" aria-hidden="true"></span>
-            <p id="plate-signal-line"></p>
-          </div>
-          <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's mark a third.</span></p>
+    <div class="chapter-body study">
+      <div class="study-instructions">
+        <ol class="manual" data-aria-th="วิธีใช้การทดลองสี" data-aria-en="How to use the colour study">
+          <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">ดูจานที่สับไว้ — แถบล่างสุดคือสิ่งที่เครื่องเห็น</span><span class="en" lang="en">Look at the plate you were dealt — the bottom bar is what the machine sees</span></span></li>
+          <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กดคำที่ใกล้กับความรู้สึกของคุณมากที่สุด</span><span class="en" lang="en">Press the word closest to how the plate feels</span><span class="manual-warn th" lang="th">คำตอบนี้มีไว้เทียบกับคำของคนอื่น — ไม่ใช่คะแนนของคุณ</span><span class="manual-warn en" lang="en">Your word exists to be compared with other people's — it is not a score for you</span></span></li>
+          <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">ติ๊ก <code class="part">ส่งคำตอบนี้</code> ถ้าคุณยินยอม</span><span class="en" lang="en">Tick <code class="part">Add this answer</code> if you agree</span></span></li>
+          <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">อ่านว่าคนอื่นตอบอะไร</span><span class="en" lang="en">Read what other people said</span></span></li>
+          <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">↻ สับอีกจาน</code> เพื่อลองจานใหม่</span><span class="en" lang="en">Press <code class="part">↻ Deal another</code> for a fresh plate</span></span></li>
+        </ol>
+        <div class="deal">
+          <button class="btn" type="button" data-deal><span class="th" lang="th">↻ สับอีกจาน</span><span class="en" lang="en">↻ Deal another</span></button>
+          <button class="btn btn-word" type="button" data-deal-shared aria-pressed="false"><span class="th" lang="th">จานเดียวสำหรับทุกคน</span><span class="en" lang="en">One plate for everyone</span></button>
+          <button class="btn btn-word" type="button" data-deal-illegal><span class="th" lang="th">ขอจานที่เครื่องอ่านไม่ออก</span><span class="en" lang="en">Show me one the machine refuses</span></button>
         </div>
+
+        <form class="feel" id="feel" aria-labelledby="feel-h">
+          <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
+          <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
+          <label class="consent">
+            <input type="checkbox" class="check" data-consent>
+            <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
+            <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
+          </label>
+          <p class="feel-status" id="feel-status" role="status"></p>
+        </form>
       </div>
 
-      <p class="machine-line" id="machine-line" role="status"></p>
-      <p class="gloss-line" id="gloss-line"></p>
-      <p class="illegal-warn" id="illegal-warn" hidden></p>
+      <div class="study-plate">
+        <div class="plate-frame">
+          <div class="plate" id="plate" role="img" aria-labelledby="plate-desc">
+            <p class="plate-quiet"><span class="th" lang="th">ส่วนที่ไม่ได้อ่านก่อน</span><span class="en" lang="en">the part nobody reads first</span></p>
+            <h3 class="plate-ink"><span class="th" lang="th">คำพูดของคน</span><span class="en" lang="en">a sentence a person wrote</span></h3>
+            <p class="plate-body"><span class="th" lang="th">เครื่องนับได้ว่ามีรถอยู่ตรงนี้ แต่ไม่รู้ว่ารถคันนี้กำลังจะเลี้ยวหรือกำลังจะจอ</span><span class="en" lang="en">The machine can count that a car is here. It does not know whether that car is turning or stopping.</span></p>
+            <div class="plate-signal">
+              <span class="plate-bar" aria-hidden="true"></span>
+              <p id="plate-signal-line"></p>
+            </div>
+            <p id="plate-desc" class="vh"><span class="th" lang="th">จานสีที่สับแล้ว พื้นหลังเป็นสีหนึ่ง ตัวอักษรเป็นอีกสีหนึ่ง และแถบที่เครื่องเห็นเป็นอีกสีหนึ่ง</span><span class="en" lang="en">A dealt colour plate: the background is one colour, the words another, and the machine's mark a third.</span></p>
+          </div>
+        </div>
 
-      <form class="feel" id="feel" aria-labelledby="feel-h">
-        <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
-        <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
-        <label class="consent">
-          <input type="checkbox" class="check" data-consent>
-          <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
-          <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
-        </label>
-        <p class="feel-status" id="feel-status" role="status"></p>
-      </form>
+        <p class="machine-line" id="machine-line" role="status"></p>
+        <p class="gloss-line" id="gloss-line"></p>
+        <p class="illegal-warn" id="illegal-warn" hidden></p>
+      </div>
 
     </div>
   </section>

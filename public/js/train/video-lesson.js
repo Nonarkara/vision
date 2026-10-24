@@ -4,7 +4,7 @@ import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.20.1'
 import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.22.0'
 import { threeWayState, actionLabel } from './three-ways.js?v=1.22.0'
 import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.20.1'
-import { practiceVideo } from './practice-video.js?v=1.20.1'
+import { practiceVideo } from './practice-video.js?v=1.23.0'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
