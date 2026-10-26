@@ -150,3 +150,5 @@ html[data-lang="th"] .picked { font-family: var(--thai); }
 }
 
 @media (max-width: 900px) { .opening-map .map-view { height: min(108vw, 500px); min-height: 340px; } }
+/* Map navigation is quiet instrument chrome; its buttons form one readable group. */
+.map-tools .btn { background: var(--quiet); color: var(--quiet-text); }
