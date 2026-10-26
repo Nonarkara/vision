@@ -1,0 +1,182 @@
+Full-room observation on release tree; camera navigation changed afterwards. Replace camera rows with the final focused measurement appended below.
+
+/             desktop  carried 4 [ivory indigo gray jasper]  ivory 32.64%  indigo 1.23%  gray 41.39%  jasper 0.65%  black 22.41%  photo 0%  other 1.56%
+/             phone    carried 4 [ivory indigo gray jasper]  ivory 33.06%  indigo 1.41%  gray 27.58%  jasper 1%  black 32.72%  photo 0%  other 3.78%
+/cameras      desktop  carried 2 [ivory indigo]  ivory 22.6%  indigo 0.54%  gray 0.45%  jasper 0.02%  black 75.25%  photo 0%  other 1.09%
+/cameras      phone    carried 3 [ivory indigo gray]  ivory 14%  indigo 0.52%  gray 1.7%  jasper 0.05%  black 82.07%  photo 0%  other 1.43%
+/colour       desktop  carried 3 [ivory indigo gray]  ivory 85.63%  indigo 1.61%  gray 5.21%  jasper 0.03%  black 4.86%  photo 0%  other 2.61%
+/colour       phone    carried 3 [ivory indigo gray]  ivory 81.56%  indigo 1.36%  gray 7.56%  jasper 0.12%  black 4.55%  photo 0%  other 4.66%
+/drive        desktop  carried 3 [ivory indigo gray]  ivory 24.91%  indigo 52.67%  gray 7.72%  jasper 0.01%  black 8.75%  photo 0%  other 5.83%
+/drive        phone    carried 3 [ivory indigo gray]  ivory 28.12%  indigo 42.88%  gray 2.67%  jasper 0.02%  black 15.32%  photo 0%  other 10.76%
+/everyday     desktop  carried 3 [ivory indigo gray]  ivory 88.55%  indigo 2.71%  gray 1.96%  jasper 0.01%  black 4.45%  photo 0%  other 2.28%
+/everyday     phone    carried 3 [ivory indigo gray]  ivory 85.66%  indigo 2.88%  gray 1.92%  jasper 0.02%  black 4.55%  photo 0%  other 4.78%
+/focus        desktop  carried 3 [ivory indigo gray]  ivory 45.18%  indigo 12.89%  gray 28.36%  jasper 0.01%  black 10.47%  photo 0%  other 2.01%
+/focus        phone    carried 3 [ivory indigo gray]  ivory 35.43%  indigo 18.91%  gray 24.95%  jasper 0.02%  black 13.78%  photo 0%  other 3.84%
+/games        desktop  carried 3 [ivory indigo gray]  ivory 49.66%  indigo 0.57%  gray 31.15%  jasper 0.34%  black 17.38%  photo 0%  other 0.81%
+/games        phone    carried 4 [ivory indigo gray jasper]  ivory 51%  indigo 1.14%  gray 17.39%  jasper 1.32%  black 25.95%  photo 0%  other 2.84%
+/gesture      desktop  carried 3 [ivory indigo gray]  ivory 50.67%  indigo 6.93%  gray 16.37%  jasper 0.01%  black 19.49%  photo 0%  other 1.36%
+/gesture      phone    carried 3 [ivory indigo gray]  ivory 49.46%  indigo 1.64%  gray 17.95%  jasper 0.02%  black 27.16%  photo 0%  other 3.48%
+/handbook     desktop  carried 4 [ivory indigo gray jasper]  ivory 70.86%  indigo 9.89%  gray 2.72%  jasper 2.64%  black 6.82%  photo 0%  other 4.61%
+/handbook     phone    carried 3 [ivory indigo gray]  ivory 66.93%  indigo 8.76%  gray 2.4%  jasper 0.09%  black 4.55%  photo 0%  other 15.25%
+/learn        desktop  carried 3 [ivory indigo gray]  ivory 48.43%  indigo 2.56%  gray 4.52%  jasper 0.01%  black 28.37%  photo 0%  other 15.61%
+/learn        phone    carried 3 [ivory indigo gray]  ivory 52.52%  indigo 3.54%  gray 4.17%  jasper 0.02%  black 28.44%  photo 0%  other 10.85%
+/reconstruct  desktop  carried 4 [ivory indigo gray jasper]  ivory 80.04%  indigo 2.24%  gray 7.3%  jasper 2.41%  black 4.49%  photo 0%  other 3.48%
+/reconstruct  phone    carried 4 [ivory indigo gray jasper]  ivory 62.83%  indigo 2.36%  gray 20.01%  jasper 4.22%  black 4.65%  photo 0%  other 5.74%
+/research     desktop  carried 3 [ivory indigo gray]  ivory 77.63%  indigo 13.62%  gray 1.11%  jasper 0.01%  black 4.93%  photo 0%  other 2.67%
+/research     phone    carried 3 [ivory indigo gray]  ivory 68.26%  indigo 20.68%  gray 1.79%  jasper 0.02%  black 4.55%  photo 0%  other 4.52%
+/story        desktop  carried 3 [ivory indigo jasper]  ivory 3.37%  indigo 90.1%  gray 0.11%  jasper 0.63%  black 5.68%  photo 89%  other 0.08%  scrim: div.hero-veil
+/story        phone    carried 3 [ivory indigo jasper]  ivory 1.78%  indigo 90.33%  gray 0.1%  jasper 2.47%  black 4.94%  photo 87.94%  other 0.2%  scrim: div.hero-veil
+/system       desktop  carried 4 [ivory indigo gray jasper]  ivory 79.14%  indigo 2.02%  gray 3.17%  jasper 2.98%  black 9.19%  photo 0%  other 3.47%
+/system       phone    carried 4 [ivory indigo gray jasper]  ivory 63.14%  indigo 1.44%  gray 7.65%  jasper 7.25%  black 16.11%  photo 0%  other 4.22%
+/train        desktop  carried 3 [ivory indigo gray]  ivory 53.58%  indigo 3.89%  gray 10.9%  jasper 0.01%  black 14.21%  photo 0%  other 17.15%
+/train        phone    carried 3 [ivory indigo gray]  ivory 52.54%  indigo 4.97%  gray 6.94%  jasper 0.02%  black 20.67%  photo 0%  other 14.48%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/  (carries 4: ivory+indigo+gray+jasper)
+     821778px  rgb(16, 16, 16)        972x801 @y44  div.opening-stage.bench
+     671906px  rgb(16, 16, 16)        972x44 @y647  div.controls.lens-steps
+     629137px  rgb(182, 191, 193)     972x547 @y101  div.bench-view.stage-view
+     629137px  rgb(182, 191, 193)     972x547 @y101  div.bench-state
+     133282px  rgb(31, 31, 31)        193x44 @y647  button.btn
+     133282px  rgb(31, 31, 31)        193x44 @y647  button.btn
+
+/cameras  (carries 2: ivory+indigo)
+     972000px  rgb(16, 16, 16)        1080x975 @y44  div.bench.atlas-map
+     912060px  rgb(16, 16, 16)        1080x44 @y801  div.controls.map-tools
+     864540px  rgb(16, 16, 16)        1080x656 @y145  div.map-view
+      95040px  rgb(16, 16, 16)        1080x44 @y44  div.instrument-tools
+      77720px  rgb(31, 31, 31)        92x44 @y801  button.btn
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+
+/colour  (carries 3: ivory+indigo+gray)
+     418722px  rgb(182, 191, 193)     760x369 @y181  div.plate-frame
+     366765px  rgb(235, 211, 162)     703x312 @y210  div.plate
+     189715px  rgb(5, 18, 48)         372x50 @y460  li
+     170382px  rgb(5, 18, 48)         372x50 @y408  li
+     151048px  rgb(5, 18, 48)         372x50 @y356  li
+     131715px  rgb(5, 18, 48)         372x77 @y277  li
+
+/drive  (carries 3: ivory+indigo+gray)
+    1296000px  rgb(182, 191, 193)     1440x997 @y845  section.chapter.gate-note
+    1216868px  rgb(5, 18, 48)         1440x582 @y263  section.gate
+     344983px  rgb(5, 18, 48)         521x326 @y337  canvas.captcha-grid
+     132691px  rgb(16, 16, 16)        185x46 @y672  div.controls.pad
+      96253px  rgb(31, 31, 31)        199x44 @y440  button.btn
+      66054px  rgb(31, 31, 31)        92x44 @y672  button.btn
+
+/everyday  (carries 3: ivory+indigo+gray)
+      64800px  rgb(182, 191, 193)     72x47 @y882  span.num
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      60649px  rgb(182, 191, 193)     72x47 @y796  span.num
+      54421px  rgb(182, 191, 193)     72x47 @y709  span.num
+      48193px  rgb(182, 191, 193)     72x47 @y623  span.num
+      41965px  rgb(182, 191, 193)     72x47 @y536  span.num
+
+/focus  (carries 3: ivory+indigo+gray)
+     628944px  rgb(16, 16, 16)        782x541 @y263  div.bench
+     628944px  rgb(182, 191, 193)     782x440 @y364  div.bench-view.focus-view
+     628944px  rgb(182, 191, 193)     782x440 @y364  div.bench-state
+     314111px  rgb(5, 18, 48)         498x77 @y554  li
+     274837px  rgb(5, 18, 48)         498x79 @y473  li
+     240453px  rgb(16, 16, 16)        782x44 @y263  div.instrument-tools
+
+/games  (carries 3: ivory+indigo+gray)
+     915188px  rgb(16, 16, 16)        1017x960 @y363  div.bench.instrument
+     915188px  rgb(182, 191, 193)     1017x572 @y508  div.bench-view
+     915188px  rgb(182, 191, 193)     1017x572 @y508  div.bench-state
+     516287px  rgb(16, 16, 16)        1017x44 @y464  div.controls
+     414091px  rgb(16, 16, 16)        1017x44 @y363  div.instrument-tools
+     391228px  rgb(5, 18, 48)         556x77 @y627  li
+
+/gesture  (carries 3: ivory+indigo+gray)
+     636370px  rgb(16, 16, 16)        707x1216 @y513  div.bench.room-bench
+     636370px  rgb(182, 191, 193)     707x398 @y614  div.bench-view
+     636370px  rgb(182, 191, 193)     707x398 @y614  div.bench-state
+     553359px  rgb(5, 18, 48)         615x158 @y780  li.klass.field-ink
+     478127px  rgb(5, 18, 48)         615x158 @y620  li.klass.field-ink
+     405762px  rgb(5, 18, 48)         489x50 @y780  li
+
+/handbook  (carries 4: ivory+indigo+gray+jasper)
+    1213059px  color(srgb 0.713726 0.74902 0.756863 / 0.35) 1348x40 @y884  tr
+     941879px  rgb(16, 16, 16)        1348x351 @y348  img
+     534642px  rgb(5, 18, 48)         605x40 @y844  th
+     414681px  rgb(5, 18, 48)         469x40 @y844  th
+     242297px  rgb(5, 18, 48)         274x40 @y844  th
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+
+/learn  (carries 3: ivory+indigo+gray)
+     812320px  rgb(16, 16, 16)        903x713 @y474  div.bench.instrument
+     812320px  rgb(182, 191, 193)     903x508 @y518  div.bench-view
+     479925px  rgb(16, 16, 16)        1440x108 @y226  div.specimen-bar.field-black
+     467691px  rgb(16, 16, 16)        903x44 @y474  div.instrument-tools
+     101925px  rgb(16, 16, 16)        313x44 @y281  div.controls
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+
+/reconstruct  (carries 4: ivory+indigo+gray+jasper)
+     125380px  rgb(182, 191, 193)     253x130 @y366  li
+     125380px  rgb(182, 191, 193)     253x130 @y366  li
+     125380px  rgb(182, 191, 193)     253x130 @y366  li
+     125380px  rgb(235, 83, 36)       253x130 @y366  li
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+/research  (carries 3: ivory+indigo+gray)
+     120573px  rgb(16, 16, 16)        153x44 @y743  a.btn.primary
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      26481px  rgb(5, 18, 48)         63x35 @y382  span.num
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+/story  (carries 3: ivory+indigo+jasper)
+    1296000px  rgb(16, 16, 16)        1440x856 @y44  section.hero
+    1296000px  rgba(5, 18, 48, 0.7)   1440x856 @y44  div.hero-veil
+      75550px  rgb(16, 16, 16)        122x155 @y462  em
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      23958px  rgb(235, 83, 36)       265x34 @y56  div.rec
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+/system  (carries 4: ivory+indigo+gray+jasper)
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+/train  (carries 3: ivory+indigo+gray)
+     648298px  rgb(16, 16, 16)        824x512 @y274  div.bench.lesson-bench
+     648298px  rgb(182, 191, 193)     824x464 @y323  div.bench-view
+     386509px  rgb(5, 18, 48)         470x77 @y745  li
+     349418px  rgb(5, 18, 48)         470x50 @y693  li
+     324965px  rgb(5, 18, 48)         470x50 @y641  li
+     300512px  rgb(5, 18, 48)         470x50 @y589  li
+
+ROOM SUMMARY (desktop)
+  /             4 hues  ivory+indigo+gray+jasper
+  /cameras      2 hues  ivory+indigo
+  /colour       3 hues  ivory+indigo+gray
+  /drive        3 hues  ivory+indigo+gray
+  /everyday     3 hues  ivory+indigo+gray
+  /focus        3 hues  ivory+indigo+gray
+  /games        3 hues  ivory+indigo+gray
+  /gesture      3 hues  ivory+indigo+gray
+  /handbook     4 hues  ivory+indigo+gray+jasper
+  /learn        3 hues  ivory+indigo+gray
+  /reconstruct  4 hues  ivory+indigo+gray+jasper
+  /research     3 hues  ivory+indigo+gray
+  /story        3 hues  ivory+indigo+jasper
+  /system       4 hues  ivory+indigo+gray+jasper
+  /train        3 hues  ivory+indigo+gray
+
+FINAL CAMERA MEASUREMENT (2b97a39)
+/cameras      desktop  carried 3 [ivory indigo gray]  ivory 22.74%  indigo 0.56%  gray 1.5%  jasper 0.02%  black 73.53%  photo 0%  other 1.61%
+/cameras      phone    carried 3 [ivory indigo gray]  ivory 14.41%  indigo 0.57%  gray 5.6%  jasper 0.05%  black 76.31%  photo 0%  other 2.85%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/cameras  (carries 3: ivory+indigo+gray)
+     972000px  rgb(16, 16, 16)        1080x975 @y44  div.bench.atlas-map
+     912060px  rgb(16, 16, 16)        1080x44 @y801  div.controls.map-tools
+     864540px  rgb(16, 16, 16)        1080x656 @y145  div.map-view
+      95040px  rgb(16, 16, 16)        1080x44 @y44  div.instrument-tools
+      77720px  rgb(182, 191, 193)     92x44 @y801  button.btn
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+
+ROOM SUMMARY (desktop)
+  /cameras      3 hues  ivory+indigo+gray

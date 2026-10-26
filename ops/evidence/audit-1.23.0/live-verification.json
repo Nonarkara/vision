@@ -1,0 +1,134 @@
+[
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/cameras.js?v=1.23.0"
+    ],
+    "width": 390,
+    "route": "/cameras"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/colour.js?v=1.23.0"
+    ],
+    "width": 390,
+    "route": "/colour"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/train.js?v=1.23.0"
+    ],
+    "width": 390,
+    "route": "/train"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/system.js?v=1.23.0"
+    ],
+    "width": 390,
+    "route": "/system"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/cameras.js?v=1.23.0"
+    ],
+    "width": 1024,
+    "route": "/cameras"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/colour.js?v=1.23.0"
+    ],
+    "width": 1024,
+    "route": "/colour"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/train.js?v=1.23.0"
+    ],
+    "width": 1024,
+    "route": "/train"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/system.js?v=1.23.0"
+    ],
+    "width": 1024,
+    "route": "/system"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/cameras.js?v=1.23.0"
+    ],
+    "width": 1440,
+    "route": "/cameras"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/colour.js?v=1.23.0"
+    ],
+    "width": 1440,
+    "route": "/colour"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/train.js?v=1.23.0"
+    ],
+    "width": 1440,
+    "route": "/train"
+  },
+  {
+    "lang": "en",
+    "overflow": false,
+    "scripts": [
+      "https://vision.nonarkara.org/js/lang.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/core/site.js?v=1.23.0",
+      "https://vision.nonarkara.org/js/pages/system.js?v=1.23.0"
+    ],
+    "width": 1440,
+    "route": "/system"
+  }
+]
