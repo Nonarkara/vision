@@ -14,12 +14,12 @@
   <header class="page-head">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 06 · เกม</span><span class="en" lang="en">Room 06 · Games</span></span>
-      <h1><span class="th" lang="th">นับให้เก่งกว่า<br>ทายให้ไวกว่า<br>หลอกให้ได้</span><span class="en" lang="en">Out-count it.<br>Out-guess it.<br>Fool it.</span></h1>
+      <h1><span class="th" lang="th">เล่นกับเครื่อง</span><span class="en" lang="en">Play against the machine</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">สามเกมกับเครื่องตรวจจับวัตถุตัวจริง ตัวเดียวกับที่ใช้ทั้งเว็บนี้ ไม่มีฝ่ายไหนเป็นเฉลย คุณจะเห็นว่าเครื่องเก่งตรงไหน พลาดตรงไหน และพลาดเพราะอะไร</p>
-      <p class="lede en" lang="en">Three games against a real object detector — the same one used across this site. Neither side is the answer key. You will see where the machine is good, where it slips, and why.</p>
-      <p class="micro games-privacy"><span class="th" lang="th">ทุกอย่างคำนวณในเบราว์เซอร์นี้ ภาพจากกล้องหรือรูปของคุณไม่ถูกส่งหรือบันทึกไว้ที่ไหน คะแนนสูงสุดเก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span><span class="en" lang="en">Everything computes in this browser. Your camera and photos are never sent or saved anywhere. Best scores stay in this browser only.</span></p>
+      <p class="lede th" lang="th">ลองนับวัตถุ ลดพิกเซล หรือหลอกตาเครื่อง แล้วเทียบคำตอบของคุณกับเครื่อง ทั้งสองฝ่ายอาจผิดได้</p>
+      <p class="lede en" lang="en">Count objects, use fewer pixels, or fool the detector. Compare your answer with the machine — either of you can be wrong.</p>
+      <p class="micro games-privacy"><span class="th" lang="th">ภาพของคุณและคะแนนสูงสุดอยู่ในเบราว์เซอร์นี้เท่านั้น</span><span class="en" lang="en">Your pictures and best scores stay in this browser.</span></p>
     </div>
   </header>
 
@@ -49,19 +49,21 @@
       <h2 id="count-title"><span class="th" lang="th">แข่งนับ</span><span class="en" lang="en">Count race</span></h2>
       
       <p class="game-score num" data-count-score aria-live="polite"></p>
-      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ตัวเลขของเครื่องขึ้นกับเกณฑ์ความมั่นใจที่เราเลือก และเครื่องก็ไม่ใช่เฉลย</span><span class="en" lang="en">A machine's count depends on the confidence threshold we choose — and the machine is not the answer key either.</span></p>
     </header>
-    <div class="chapter-body"><ol class="manual" data-aria-th="วิธีเล่นแข่งนับ" data-aria-en="How to play the count race">
+    <div class="chapter-body"><details class="game-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ตัวเลขของเครื่องขึ้นกับเกณฑ์ความมั่นใจที่เราเลือก และเครื่องก็ไม่ใช่เฉลย</span><span class="en" lang="en">A machine's count depends on the confidence threshold we choose — and the machine is not the answer key either.</span></p><ol class="manual" data-aria-th="วิธีเล่นแข่งนับ" data-aria-en="How to play the count race">
         <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">เลือกว่าจะนับอะไร — กด <code class="part">นับยานพาหนะ</code> หรือ <code class="part">นับคน</code></span><span class="en" lang="en">Choose what to count — press <code class="part">Count vehicles</code> or <code class="part">Count people</code></span></span></li>
         <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มเกม</code> — ภาพหนึ่งภาพจะหยุดนิ่ง</span><span class="en" lang="en">Press <code class="part">Start</code> — one frame freezes</span><span class="manual-warn th" lang="th">มีเวลา 15 วินาที</span><span class="manual-warn en" lang="en">You have 15 seconds</span></span></li>
         <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">+</code> หรือ <code class="part">−</code> จนได้จำนวนที่คิดว่าถูก</span><span class="en" lang="en">Press <code class="part">+</code> or <code class="part">−</code> until the number you believe is right</span></span></li>
         <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">นับเสร็จ</code> — กรอบของเครื่องจะปรากฏ พร้อมความมั่นใจของแต่ละกรอบ</span><span class="en" lang="en">Press <code class="part">Done</code> — the machine's boxes appear, each with its confidence</span></span></li>
         <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">ตัดสินว่าใครใกล้ความจริงกว่า — กด <code class="part">ฉันใกล้กว่า</code> หรือ <code class="part">เครื่องใกล้กว่า</code></span><span class="en" lang="en">Decide who was closer — press <code class="part">I was closer</code> or <code class="part">The machine was closer</code></span><span class="manual-warn th" lang="th">ดูอีกครั้งให้ดีก่อนตัดสิน — ห้ารอบต่อหนึ่งเกม</span><span class="manual-warn en" lang="en">Look again carefully before you decide — five rounds a match</span></span></li>
-      </ol>
+      </ol></details>
       <div class="bench" data-count>
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">คุณ ปะทะ เครื่อง</span><span class="en" lang="en">You vs the machine</span></span>
           <span class="num clock" data-count-clock>15.0 s</span>
+        </div>
+        <div class="controls">
+          <button class="btn primary game-go" type="button" data-count-go><span class="th" lang="th">เริ่มเกม</span><span class="en" lang="en">Start</span></button>
         </div>
         <div class="bench-view">
           <canvas data-count-canvas role="img" aria-label="A frozen camera frame for counting"></canvas>
@@ -88,9 +90,6 @@
           <button class="btn" type="button" data-judge="machine"><span class="th" lang="th">เครื่องใกล้กว่า</span><span class="en" lang="en">The machine was closer</span></button>
           <button class="btn" type="button" data-judge="draw"><span class="th" lang="th">เสมอ / บอกไม่ได้</span><span class="en" lang="en">Tie / can't tell</span></button>
         </div>
-        <div class="controls">
-          <button class="btn primary game-go" type="button" data-count-go><span class="th" lang="th">เริ่มเกม</span><span class="en" lang="en">Start</span></button>
-        </div>
         <div class="bench-caption specimen-line" data-specimen>
           <span><span class="who" data-specimen-name><span class="th" lang="th">ยังไม่ได้เปิดกล้อง</span><span class="en" lang="en">No camera open yet</span></span><br><span data-specimen-meta></span></span>
           <span class="controls">
@@ -112,14 +111,13 @@
       <h2 id="pixels-title"><span class="th" lang="th">พิกเซลน้อยที่สุด</span><span class="en" lang="en">Fewest pixels</span></h2>
       
       <p class="game-score num" data-pix-score aria-live="polite"></p>
-      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ความละเอียดคือข้อมูล คนใช้บริบทเดาจากภาพหยาบได้ ส่วนเครื่องถูกฝึกจากภาพที่ชัด และพลาดง่ายเมื่อภาพไม่เหมือนที่เคยเห็น</span><span class="en" lang="en">Resolution is information. People use context to guess from a coarse picture; the machine was trained on sharp photos and slips when a picture looks unlike what it has seen.</span></p>
     </header>
-    <div class="chapter-body"><ol class="manual" data-aria-th="วิธีเล่นพิกเซลน้อยที่สุด" data-aria-en="How to play fewest pixels">
+    <div class="chapter-body"><details class="game-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ความละเอียดคือข้อมูล คนใช้บริบทเดาจากภาพหยาบได้ ส่วนเครื่องถูกฝึกจากภาพที่ชัด และพลาดง่ายเมื่อภาพไม่เหมือนที่เคยเห็น</span><span class="en" lang="en">Resolution is information. People use context to guess from a coarse picture; the machine was trained on sharp photos and slips when a picture looks unlike what it has seen.</span></p><ol class="manual" data-aria-th="วิธีเล่นพิกเซลน้อยที่สุด" data-aria-en="How to play fewest pixels">
         <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มเกม</code> — ภาพเริ่มจากบล็อกใหญ่มาก</span><span class="en" lang="en">Press <code class="part">Start</code> — the picture starts as huge blocks</span></span></li>
         <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">เลือกคำตอบของคุณ — กดปุ่มที่ตรงกับสิ่งที่คุณเห็น</span><span class="en" lang="en">Make your guess — press the button that matches what you see</span><span class="manual-warn th" lang="th">ทายได้ครั้งเดียวต่อรอบ</span><span class="manual-warn en" lang="en">One guess per round</span></span></li>
         <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">ขอดูชัดขึ้น →</code> แล้วเครื่องจะทายครั้งเดียวเหมือนกัน</span><span class="en" lang="en">Press <code class="part">Sharper →</code> and the machine takes its one guess too</span><span class="manual-warn th" lang="th">เครื่องทายเมื่อมั่นใจถึง 50%</span><span class="manual-warn en" lang="en">The machine commits when it is 50% sure</span></span></li>
         <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">ดูว่าใครทายถูกตอนภาพยังหยาบ — คนนั้นชนะรอบ</span><span class="en" lang="en">Whoever is right at the coarser picture wins the round</span><span class="manual-warn th" lang="th">ห้ารอบต่อหนึ่งเกม</span><span class="manual-warn en" lang="en">Five rounds a match</span></span></li>
-      </ol>
+      </ol></details>
       <div class="bench" data-pix>
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">ภาพหยาบ</span><span class="en" lang="en">Coarse picture</span></span>
@@ -158,15 +156,14 @@
       <h2 id="fool-title"><span class="th" lang="th">หลอกตาเครื่อง</span><span class="en" lang="en">Fool the machine</span></h2>
       
       <p class="game-score num" data-fool-score aria-live="polite"></p>
-      <p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">เครื่องจับรูปแบบของพิกเซล ไม่ได้เข้าใจสิ่งของ “ไม่เห็น” จึงไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">The machine matches patterns of pixels; it does not understand things. So “not detected” never means “not there”.</span></p>
     </header>
-    <div class="chapter-body"><ol class="manual" data-aria-th="วิธีเล่นหลอกตาเครื่อง" data-aria-en="How to play fool the machine">
+    <div class="chapter-body"><details class="game-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">เครื่องจับรูปแบบของพิกเซล ไม่ได้เข้าใจสิ่งของ “ไม่เห็น” จึงไม่เคยแปลว่า “ไม่มี”</span><span class="en" lang="en">The machine matches patterns of pixels; it does not understand things. So “not detected” never means “not there”.</span></p><ol class="manual" data-aria-th="วิธีเล่นหลอกตาเครื่อง" data-aria-en="How to play fool the machine">
         <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เปิดกล้องของฉันแล้วเริ่ม</code> — หรือเลือกรูปของคุณ</span><span class="en" lang="en">Press <code class="part">Open my camera and start</code> — or choose a photo of yours</span></span></li>
         <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">เลือกโจทย์หนึ่งข้อ — กดการ์ดโจทย์</span><span class="en" lang="en">Pick one challenge — press a challenge card</span></span></li>
         <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">ทำให้เครื่องเห็นสิ่งที่ไม่มี หรือมองไม่เห็นสิ่งที่มี</span><span class="en" lang="en">Make it see what is not there, or miss what is</span></span></li>
         <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เก็บภาพ</code></span><span class="en" lang="en">Press <code class="part">Capture</code></span></span></li>
         <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">คุณเป็นคนตัดสินว่าหลอกสำเร็จหรือไม่</span><span class="en" lang="en">You are the one who decides whether it was fooled</span><span class="manual-warn th" lang="th">มีแต่คุณที่รู้ว่าอะไรอยู่หน้ากล้องจริง ๆ</span><span class="manual-warn en" lang="en">Only you know what is really in front of the camera</span></span></li>
-      </ol>
+      </ol></details>
       <div class="bench" data-fool>
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">ตาของเครื่อง · สด</span><span class="en" lang="en">The machine's eye · live</span></span>

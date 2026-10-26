@@ -71,3 +71,5 @@ html[data-lang="th"] .challenge.btn { font-family: var(--thai); }
 .fool-gallery .tile-view canvas { object-fit: contain; }
 /* Your pick is yours, not a machine finding: it gets the room's colour, not Jasper Red. */
 .pix-options .btn[aria-pressed="true"] { background: var(--ivory); color: var(--indigo); opacity: 1; }
+
+.game-guide > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }

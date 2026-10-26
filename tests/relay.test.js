@@ -222,3 +222,42 @@ test('a host that really is broken still opens the breaker', async () => {
   const last = await relay.frame('x', url).then(() => 'served', (e) => e.status)
   assert.equal(last, 503, 'repeated host-level failures must still rest the host')
 })
+
+
+test('one queue budget covers all hosts, with accurate waiting stats', async () => {
+  let release
+  const gate = new Promise(r => { release = r })
+  const f = fakeFetch(async () => { await gate; return ok() })
+  const relay = createRelay({ fetchImpl: f, maxQueue: 3 })
+  const results = []
+  try {
+    for (let i = 0; i < 4; i++) results.push(relay.frame(`active${i}`, () => `https://${i < 2 ? 'one' : 'two'}.test/${i}`).catch(e => e))
+    // Two different host queues must not each receive three waiting slots.
+    for (let i = 0; i < 6; i++) results.push(relay.frame(`queued${i}`, () => `https://${i % 2 ? 'one' : 'two'}.test/q${i}`).catch(e => e))
+    await new Promise(r => setImmediate(r))
+    assert.equal(f.calls.length, 4)
+    assert.equal(relay.stats().waiting, 3)
+  } finally { release() }
+  const settled = await Promise.all(results)
+  assert.equal(settled.filter(r => r instanceof RelayError && r.status === 503).length, 3)
+  assert.equal(f.calls.length, 7)
+  assert.equal(relay.stats().waiting, 0)
+  assert.equal(relay.stats().inflight, 0)
+})
+
+test('synchronous multi-host arrivals cannot overbook the pending budget', async () => {
+  let release
+  const gate = new Promise(r => { release = r })
+  const f = fakeFetch(async () => { await gate; return ok() })
+  const relay = createRelay({ fetchImpl: f, maxQueue: 1 })
+  const work = Array.from({ length: 12 }, (_, i) => relay.frame(String(i), () => `https://host${i}.test/x`).catch(e => e))
+  try {
+    await new Promise(r => setImmediate(r))
+    assert.equal(f.calls.length, 4)
+    assert.equal(relay.stats().waiting, 1)
+  } finally { release() }
+  const settled = await Promise.all(work)
+  assert.equal(settled.filter(r => r instanceof RelayError && r.status === 503).length, 7)
+  assert.equal(f.calls.length, 5)
+  assert.equal(relay.stats().waiting, 0)
+})

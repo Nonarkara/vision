@@ -2,8 +2,8 @@
 // One state, one match function, so the map, the list and the census always
 // agree about which cameras are "the ones you are looking at".
 
-import { t, onLang } from '../core/i18n.js?v=1.20.1'
-import { SOURCES, isReadable } from '../core/catalog.js?v=1.20.1'
+import { t, onLang } from '../core/i18n.js?v=1.23.0'
+import { SOURCES, isReadable } from '../core/catalog.js?v=1.23.0'
 
 /** Short kind names for legends, rows and selects. The long ones live in catalog.js. */
 export const KIND_SHORT = {

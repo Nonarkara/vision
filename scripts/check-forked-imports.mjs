@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const JS = path.join(ROOT, 'public', 'js')
 
+const VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8')).version
 const seen = new Map() // resolved path -> Set of '?v=1.2.3' or 'unstamped'
 const files = []
 
@@ -40,7 +41,8 @@ const IMPORT = /(?:^|[\s;])(?:import|export)\s+(?:[^'"]*?\sfrom\s+)?['"]([^'"]+)
 
 for (const file of files) {
   const src = fs.readFileSync(file, 'utf8')
-  for (const m of src.matchAll(IMPORT)) {
+  const dynamic = /import\s*\(\s*['"]([^'"]+)['"]/g
+  for (const m of [...src.matchAll(IMPORT), ...src.matchAll(dynamic)]) {
     const spec = m[1]
     if (!spec.startsWith('.')) continue // bare/absolute specifier, not ours to resolve
     const stamp = /[?&]v=[0-9.]+/.exec(spec)?.[0] ?? 'unstamped'
@@ -53,6 +55,28 @@ for (const file of files) {
     seen.get(resolved).add(stamp)
   }
 }
+
+// HTML entry points and shared partials participate in the same module graph.
+// {{v}} is rendered as the package version, not as an arbitrary placeholder.
+function htmlEntries(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const file = path.join(dir, entry.name)
+    if (entry.isDirectory()) htmlEntries(file)
+    else if (entry.name.endsWith('.html')) {
+      const html = fs.readFileSync(file, 'utf8').replaceAll('{{v}}', VERSION)
+      for (const script of html.matchAll(/<script\b[^>]*>/g)) {
+        if (!/type=["']module["']/.test(script[0])) continue
+        const spec = /src=["']([^"']+)["']/.exec(script[0])?.[1]
+        if (!spec?.startsWith('/js/')) continue
+        const resolved = path.join(ROOT, 'public', spec.split('?')[0])
+        const stamp = /[?&]v=[0-9.]+/.exec(spec)?.[0] ?? 'unstamped'
+        if (!seen.has(resolved)) seen.set(resolved, new Set())
+        seen.get(resolved).add(stamp)
+      }
+    }
+  }
+}
+htmlEntries(path.join(ROOT, 'public'))
 
 const forked = [...seen.entries()].filter(([, stamps]) => stamps.size > 1)
 

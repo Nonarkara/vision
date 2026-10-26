@@ -122,3 +122,10 @@
   .learn-toc { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
   .learn-toc a { flex: 0 0 auto; }
 }
+
+.learn-overview { margin-inline: var(--gutter); }
+.learn-overview > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }
+.learn-overview .learn-map { margin-inline: 0; }
+
+
+@media (min-width: 1101px) { .learn .chapter:has(.chapter-body.split) { grid-template-rows: min-content 1fr; } }

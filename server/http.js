@@ -296,9 +296,9 @@ export function json(req, res, status, data, extra = {}, encoded = null) {
   // Vary always: a cache must not hand a gzipped copy to a client that never asked for one.
   const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Vary: 'Accept-Encoding', ...securityHeaders(), ...extra }
   let out = body
-  if ((encoded?.gz ?? (body.length > 1024 ? zlib.gzipSync(body) : null)) && wantsGzip(req)) {
-    out = encoded ? encoded.gz : zlib.gzipSync(body)
-    headers['Content-Encoding'] = 'gzip'
+  if (wantsGzip(req)) {
+    const gz = encoded ? encoded.gz : body.length > 1024 ? zlib.gzipSync(body) : null
+    if (gz) { out = gz; headers['Content-Encoding'] = 'gzip' }
   }
   headers['Content-Length'] = out.length
   res.writeHead(status, headers)

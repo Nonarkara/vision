@@ -96,3 +96,7 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 /* The limits, listed like the fine print they are */
 .limits { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 2px; max-width: 62ch; }
 .limits li { background: var(--quiet); color: var(--quiet-text); padding: 10px 14px; font-size: var(--micro); }
+
+/* Put the working camera/classes before the optional extended guide. */
+.room { padding-block: 24px; }
+.gesture-guide > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }

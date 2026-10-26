@@ -37,10 +37,12 @@
 .chapter-body.study {
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   align-items: start;
+  grid-template-areas: "instructions plate" "answer plate" "options reading";
+  row-gap: 20px;
 }
-.study-instructions { display: grid; gap: var(--gap); align-content: start; }
-.study-plate { display: grid; gap: var(--gap); align-content: start; }
-@media (max-width: 1100px) {
+.study-instructions { display: grid; grid-area: instructions; gap: 12px; align-content: start; }
+.study-plate { display: grid; grid-area: plate; gap: 12px; align-content: start; }
+@media (max-width: 900px) {
   .chapter-body.study { grid-template-columns: 1fr; }
 }
 
@@ -49,7 +51,7 @@
    the same quiet field the bench view carries on the teaching pages — so the
    plate is always a specimen on a surface rather than a shape on paper. */
 .plate-frame { background: var(--quiet); padding: clamp(18px, 2vw, 30px); }
-.study-plate { display: grid; gap: var(--gap); align-content: start; }
+
 
 
 .plate {
@@ -119,7 +121,7 @@
 .illegal-warn [lang="th"] { font-family: var(--thai); line-height: 1.7; }
 
 .feel { margin-top: 0; }
-.feel h3 { margin: 0 0 12px; font-size: var(--subtitle); }
+.feel h3 { margin: 0 0 12px; font-size: var(--body); }
 .feel h3 [lang="th"] { font-family: var(--thai); }
 /* Ten answers to one question, and they are words.
 
@@ -202,3 +204,19 @@
 @media (max-width: 620px) {
   .feel-bars li { grid-template-columns: 7em 1fr 2.6em; }
 }
+/* Read in task order: guide, look at the plate, then choose a response. */
+body main .page-head { grid-template-columns: auto minmax(0, 1fr); gap: 12px 24px; padding-block: 16px; align-items: start; }
+body main .page-head h1 { font-size: var(--subtitle); line-height: 1.15; max-width: 20ch; }
+body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width: 60ch; }
+#study { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 16px; }
+#study > header { flex-direction: row; align-items: baseline; gap: 12px; }
+#study > header h2 { font-size: var(--body); margin: 0; }
+.study > .feel { grid-area: answer; }
+.study-guide > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }
+@media (max-width: 900px) {
+  body main .page-head { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .chapter-body.study { grid-template-areas: "instructions" "plate" "answer" "options" "reading"; }
+}
+
+.study > .deal { grid-area: options; }
+.study-reading { grid-area: reading; }

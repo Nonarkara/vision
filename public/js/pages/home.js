@@ -1,14 +1,14 @@
 // Home: one live camera, five lenses. The page's argument in one instrument.
 
-import '../core/site.js?v=1.22.1'
-import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.20.1'
-import { loadCatalog, isReadable } from '../core/catalog.js?v=1.20.1'
-import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.22.1'
-import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.20.1'
-import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.20.1'
-import { onSpotted } from '../cv/spotted.js?v=1.20.1'
-import { cocoName } from '../ml/labels.js?v=1.20.1'
-import { detectorFailureSentence } from '../ml/failure.js?v=1.20.1'
+import '../core/site.js?v=1.23.0'
+import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.23.0'
+import { loadCatalog, isReadable } from '../core/catalog.js?v=1.23.0'
+import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.23.0'
+import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.23.0'
+import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.23.0'
+import { onSpotted } from '../cv/spotted.js?v=1.23.0'
+import { cocoName } from '../ml/labels.js?v=1.23.0'
+import { detectorFailureSentence } from '../ml/failure.js?v=1.23.0'
 
 const canvas = document.querySelector('[data-eye]')
 const stateEl = document.querySelector('[data-eye-state]')

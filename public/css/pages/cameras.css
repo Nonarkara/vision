@@ -28,8 +28,9 @@
    them on a wide screen. On a phone the order is title, map, note: the map
    reaches the first screen, which is the rule for a map product. */
 .opening-map {
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
   grid-template-areas: "text stage" "note stage";
+  grid-template-rows: min-content 1fr;
 }
 .opening-map .opening-text { grid-area: text; }
 .opening-map .atlas-stage { grid-area: stage; }
@@ -136,3 +137,16 @@ html[data-lang="th"] .picked { font-family: var(--thai); }
 .census-src { color: var(--gray); }
 .census-found { color: var(--white); }
 .census-caveat p { margin: 0; }
+
+/* The map gets the working area; its introduction stays in one compact group. */
+.opening-map .opening-text { align-self: start; gap: 16px; padding-block: 24px; }
+.opening-map .opening-note { padding: 0 var(--gutter) 24px; }
+.opening-map .opening-note .lede { font-size: var(--read); line-height: 1.5; }
+.opening-map .opening-note .prose { font-size: var(--read); line-height: 1.5; margin-top: 16px; }
+.opening-map .map-view { height: clamp(380px, calc(100svh - var(--rail-height) - 200px), 760px); min-height: 380px; }
+@media (max-width: 900px) {
+  .opening-map { grid-template-columns: minmax(0,1fr); grid-template-areas: "text" "stage" "note"; grid-template-rows: auto; }
+  .opening-map .opening-note .prose { margin-bottom: 0; }
+}
+
+@media (max-width: 900px) { .opening-map .map-view { height: min(108vw, 500px); min-height: 340px; } }

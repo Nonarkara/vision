@@ -12,40 +12,26 @@
 
   <section class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้องสี · การทดลอง</span><span class="en" lang="en">Colour room · a study</span></span>
-      <h1><span class="th" lang="th">สีทำอะไร<br>กับเรา</span><span class="en" lang="en">What colour<br>does to us</span></h1>
+      <h1><span class="th" lang="th">สีทำอะไรกับเรา</span><span class="en" lang="en">What colour does to us</span></h1>
     </div>
-    <p class="lede th" lang="th">เว็บนี้มีสีสี่เฉดตลอดมา เหลืองนีเปิล มะกอกเขียว เทา และแดงพีช และแต่ละเฉดมีงานของมัน: เหลืองเป็นกระดาษ มะกอกเป็นหมึก เทาคือสิ่งที่เครื่องยังไม่มั่นใจ และแดงพีชมีไว้บอกว่า “นี่คือสิ่งที่เครื่องเห็น” ทั้งหมดนั้นเป็นการตัดสินของคน ไม่ใช่ของตัวเลข</p>
-    <p class="lede en" lang="en">This site has had four colours all along — Ivory Buff, Deep Indigo, Neutral Gray, and Jasper Red — and each one has a job: the ivory is the paper, the indigo is the ink, the grey is what the machine is not yet sure of, and the jasper red only ever marks what the machine sees. All of that is a human decision. None of it is in the numbers.</p>
+    <p class="lede th" lang="th">เปลี่ยนหน้าที่ของสีทั้งสี่ แล้วดูว่าหน้าจอทำให้คุณรู้สึกอย่างไร ไม่มีคำตอบที่ถูกหรือผิด</p>
+    <p class="lede en" lang="en">Give the same four colours different jobs. Look at the screen, then choose how it feels. There is no right answer.</p>
   </section>
 
   <section class="chapter" id="study" aria-labelledby="study-h">
     <header><span class="chapter-no">01</span><h2 id="study-h"><span class="th" lang="th">สับสีใหม่แล้วดูว่ารู้สึกอย่างไร</span><span class="en" lang="en">Deal the colours again, then notice</span></h2></header>
     <div class="chapter-body study">
       <div class="study-instructions">
-        <ol class="manual" data-aria-th="วิธีใช้การทดลองสี" data-aria-en="How to use the colour study">
+        <details class="study-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><ol class="manual" data-aria-th="วิธีใช้การทดลองสี" data-aria-en="How to use the colour study">
           <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">ดูจานที่สับไว้ — แถบล่างสุดคือสิ่งที่เครื่องเห็น</span><span class="en" lang="en">Look at the plate you were dealt — the bottom bar is what the machine sees</span></span></li>
           <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กดคำที่ใกล้กับความรู้สึกของคุณมากที่สุด</span><span class="en" lang="en">Press the word closest to how the plate feels</span><span class="manual-warn th" lang="th">คำตอบนี้มีไว้เทียบกับคำของคนอื่น — ไม่ใช่คะแนนของคุณ</span><span class="manual-warn en" lang="en">Your word exists to be compared with other people's — it is not a score for you</span></span></li>
           <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">ติ๊ก <code class="part">ส่งคำตอบนี้</code> ถ้าคุณยินยอม</span><span class="en" lang="en">Tick <code class="part">Add this answer</code> if you agree</span></span></li>
           <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">อ่านว่าคนอื่นตอบอะไร</span><span class="en" lang="en">Read what other people said</span></span></li>
           <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">↻ สับอีกจาน</code> เพื่อลองจานใหม่</span><span class="en" lang="en">Press <code class="part">↻ Deal another</code> for a fresh plate</span></span></li>
-        </ol>
-        <div class="deal">
-          <button class="btn" type="button" data-deal><span class="th" lang="th">↻ สับอีกจาน</span><span class="en" lang="en">↻ Deal another</span></button>
-          <button class="btn btn-word" type="button" data-deal-shared aria-pressed="false"><span class="th" lang="th">จานเดียวสำหรับทุกคน</span><span class="en" lang="en">One plate for everyone</span></button>
-          <button class="btn btn-word" type="button" data-deal-illegal><span class="th" lang="th">ขอจานที่เครื่องอ่านไม่ออก</span><span class="en" lang="en">Show me one the machine refuses</span></button>
-        </div>
+        </ol></details>
 
-        <form class="feel" id="feel" aria-labelledby="feel-h">
-          <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
-          <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
-          <label class="consent">
-            <input type="checkbox" class="check" data-consent>
-            <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
-            <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
-          </label>
-          <p class="feel-status" id="feel-status" role="status"></p>
-        </form>
+
+
       </div>
 
       <div class="study-plate">
@@ -62,10 +48,29 @@
           </div>
         </div>
 
+      </div>
+
+        <form class="feel" id="feel" aria-labelledby="feel-h">
+          <h3 id="feel-h"><span class="th" lang="th">จานนี้ทำให้คุณรู้สึกอย่างไร</span><span class="en" lang="en">How does this plate feel</span></h3>
+          <div class="feel-grid" role="group" aria-labelledby="feel-h" data-feelings></div>
+          <label class="consent">
+            <input type="checkbox" class="check" data-consent>
+            <span class="th" lang="th">ส่งคำตอบนี้เข้าไปรวมกับของคนอื่น — เก็บแค่คำเดียวกับจานที่เห็น ไม่มีชื่อ ไม่มีคุกกี้ ไม่มีที่อยู่ ไม่มีบัญชี</span>
+            <span class="en" lang="en">Add this answer to the shared result — one word and the plate you saw. No name, no cookie, no address, no account.</span>
+          </label>
+          <p class="feel-status" id="feel-status" role="status"></p>
+        </form>
+        <div class="deal">
+          <button class="btn" type="button" data-deal><span class="th" lang="th">↻ สับอีกจาน</span><span class="en" lang="en">↻ Deal another</span></button>
+          <button class="btn btn-word" type="button" data-deal-shared aria-pressed="false"><span class="th" lang="th">จานเดียวสำหรับทุกคน</span><span class="en" lang="en">One plate for everyone</span></button>
+          <button class="btn btn-word" type="button" data-deal-illegal><span class="th" lang="th">ขอจานที่เครื่องอ่านไม่ออก</span><span class="en" lang="en">Show me one the machine refuses</span></button>
+        </div>
+      <div class="study-reading">
         <p class="machine-line" id="machine-line" role="status"></p>
         <p class="gloss-line" id="gloss-line"></p>
         <p class="illegal-warn" id="illegal-warn" hidden></p>
       </div>
+
 
     </div>
   </section>
@@ -86,12 +91,12 @@
       <div class="prose">
         <p class="th" lang="th">เครื่องคำนวณความต่างของความสว่างได้อย่างเดียว มันแปลงสีเป็นค่าความสว่างเชิงสัมพัทธ์ แล้วหารสองค่าเข้าด้วยกัน ได้อัตราส่วนอย่าง 10.98 ต่อ 1 นั่นคือทั้งหมดที่มันรู้เกี่ยวกับจานสีนี้ มันไม่รู้ว่าสีหนึ่งคือ “อันตราย” สีหนึ่งคือ “กระดาษ” หรือสีไหนทำให้เราไว้ใจ</p>
         <p class="en" lang="en">A machine can compute one thing here: relative luminance, divided. Two numbers, one ratio, something like 10.98 to 1. That is the whole of what it knows about this plate. It does not know that one of these colours is supposed to mean danger, that another is supposed to be paper, or which one makes you trust it.</p>
-        <p class="th" lang="th">แต่เราอ่านสีไม่ใช่แบบนั้น เราอ่านความหมายก่อนอ่านความต่าง แดงคืออันตราย ฟ้าคือความสงบ เหลืองคือกระดาษ ไม่ใช่เพราะเราเรียนรู้มา แต่เพราะร่างกายเราทำงานแบบนั้นตั้งแต่ก่อนมีภาษา ความหมายของสีจึงไม่ได้อยู่ในตัวเลข แต่อยู่ในคน</p>
-        <p class="en" lang="en">We do not read colour that way. We read meaning before we read difference. Red is danger. Blue is calm. Yellow is paper — not because anyone decided it, but because our bodies have worked that way since before language. So the meaning of a colour is not in the numbers. It is in the people looking.</p>
+        <p class="th" lang="th">คนอาจรู้สึกกับสีเดียวกันไม่เหมือนกัน ประสบการณ์และบริบทมีผลกับความหมายที่เราอ่านจากสี ห้องนี้ถามว่าคุณรู้สึกอย่างไร ไม่ได้ตัดสินว่าสีหนึ่งต้องมีความหมายเดียวสำหรับทุกคน</p>
+        <p class="en" lang="en">People can read the same colour differently. Experience and context shape what it means to us. This room asks for your reaction; it does not assume one colour has the same meaning for everyone.</p>
         <p class="th" lang="th">ห้องนี้จึงเป็นการเก็บความรู้จากคนในรูปแบบที่เรียบง่ายที่สุดเท่าที่จะเป็นไปได้ ไม่มีแบบสอบถาม ไม่มีสมัครสมาชิก ไม่มีการระบุตัวตน แค่คำถามเดียวต่อหนึ่งจาน แล้วนับ</p>
         <p class="en" lang="en">So this room learns from people in the simplest way that can honestly be done: no survey, no membership, no identity. One question per plate, and a count.</p>
-        <p class="th" lang="th">จานที่เครื่องปฏิเสธมีอยู่หกจานจากยี่สิบสี่จาน และทั้งหกคือจานที่มีแดงพีชเป็นพื้นหลัง ไม่มีเฉดไหนเลยที่จะได้ค่าความต่างถึง 4.5 ต่อ 1 บนพื้นนั้นได้ ไม่ว่าจะปรับโทนไปกี่ขั้น คนอ่านแดงพีชแล้วรู้สึกว่าเตือนภัยทันที ส่วนเครื่องบอกแค่ว่าอ่านไม่ออก ทั้งสองอย่างถูกทั้งคู่ และไม่มีอันไหนแก้ตัวอีกอันได้</p>
-        <p class="en" lang="en">Six of the twenty-four plates are ones the machine refuses, and all six are plates where jasper red is the paper. No hue reaches 4.5 to 1 against it at any tone. A person sees jasper red and feels an alarm at once. The machine says only that it cannot read it. Both are right, and neither one can correct the other.</p>
+        <p class="th" lang="th">จานที่เครื่องปฏิเสธมีอยู่หกจานจากยี่สิบสี่จาน และทั้งหกคือจานที่มีแดงพีชเป็นพื้นหลัง ไม่มีเฉดไหนเลยที่จะได้ค่าความต่างถึง 4.5 ต่อ 1 บนพื้นนั้นได้ ไม่ว่าจะปรับโทนไปกี่ขั้น คนอาจรู้สึกว่าจานนี้สะดุดตา แต่เครื่องยังอาจปฏิเสธความต่างของตัวอักษร ความรู้สึกกับการตรวจความอ่านง่ายตอบคนละคำถาม และไม่ได้หักล้างกัน</p>
+        <p class="en" lang="en">Six of the twenty-four plates are ones the machine refuses, and all six are plates where jasper red is the paper. No hue reaches 4.5 to 1 against it at any tone. A person may find that plate striking. The contrast check may still reject its text. A feeling and a readability check answer different questions; one does not cancel the other.</p>
         <p class="th" lang="th"><a href="/system#not-built">สิ่งที่เว็บนี้ตั้งใจไม่เก็บ</a> — ไม่มีคุกกี้ ไม่มีบัญชี ไม่มีการติดตาม ไม่มีสคริปต์บุคคลที่สาม คำตอบหนึ่งคำที่คุณเลือกส่งเข้ามาที่เซิร์ฟเวอร์ของเว็บนี้เท่านั้น และเซิร์ฟเวอร์เก็บได้แค่ตัวเลขนับ ดูรายละเอียดว่าทำไมถึงเป็นไปได้ที่ <a href="/system">หน้าระบบ</a></p>
         <p class="en" lang="en"><a href="/system#not-built">What this site does not keep</a> — no cookies, no accounts, no tracking, no third-party scripts. The single word you choose goes to this site's own server and nowhere else, and the server has nowhere to put anything else. The reasoning is on the <a href="/system">system page</a>.</p>
       </div>

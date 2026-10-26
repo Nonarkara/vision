@@ -14,14 +14,11 @@
   <header class="page-head">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span></span>
-      <h1><span class="th" lang="th">เครื่องมองอย่างไร<br>ทีละขั้น</span><span class="en" lang="en">How it looks,<br>step by step</span></h1>
+      <h1><span class="th" lang="th">เครื่องมองเห็นอย่างไร</span><span class="en" lang="en">How a computer sees</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">ทุกบทศึกษาภาพเดียวกัน เลือกได้จากแถบสีดำด้านล่าง จะเป็นกล้องสาธารณะ กล้องของคุณเอง หรือรูปของคุณก็ได้ เปลี่ยนเมื่อไรก็ได้ เครื่องมือทุกบทจะเปลี่ยนตาม</p>
-      <p class="lede en" lang="en">Every chapter studies the same picture, chosen in the black bar below: a public camera, your own camera, or a photo of yours. Change it any time and every instrument follows.</p>
-      <div class="cta">
-        <button class="btn primary" type="button" data-learn-mine><span class="th" lang="th">ใช้กล้องของฉันทั้งหน้า</span><span class="en" lang="en">Use my camera for the whole page</span></button>
-      </div>
+      <p class="lede th" lang="th">เลือกภาพด้านล่าง แล้วดูว่าพิกเซลกลายเป็นตัวเลข ขอบ การเคลื่อนไหว และคำเดาได้อย่างไร ทั้งแปดบทใช้ภาพที่คุณเลือก</p>
+      <p class="lede en" lang="en">Choose a picture below. Explore how its pixels become numbers, edges, motion, and a guess. All eight chapters use your chosen picture.</p>
       <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
     </div>
   </header>
@@ -40,6 +37,36 @@
   </nav>
   <p class="learn-progress" data-progress role="status"></p>
 
+
+
+  <!-- 01 -->
+  <section class="chapter" id="numbers" data-chapter="numbers" aria-labelledby="numbers-title">
+    <header>
+      <span class="chapter-no">01 / 08</span>
+      <h2 id="numbers-title"><span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></h2>
+    </header>
+    <div class="chapter-body split">
+
+      <div class="bench">
+        <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
+        <div class="slider">
+          <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
+          <output for="cols" data-cols-out></output>
+          <input id="cols" type="range" min="6" max="96" step="1" value="16" data-cols>
+        </div>
+        <p class="readout" data-readout></p>
+      </div>
+      <div class="prose">
+        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่า<a href="/handbook/glossary#pixel">พิกเซล</a> คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
+        <p class="en" lang="en">A picture on a screen is made of tiny squares called <a href="/handbook/glossary#pixel">pixels</a>. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
+        <p class="th" lang="th">เลื่อนแถบให้เหลือช่องน้อยลง แล้วตัวเลขจะปรากฏในช่อง ภาพจากกล้องจริงหนึ่งภาพมีตัวเลขแบบนี้หลายล้านตัว ทุกอย่างที่เหลือในหน้านี้คือการคิดเลขกับตารางนี้</p>
+        <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p>
+        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
+      </div>
+    </div>
+  </section>
+
+  <details class="learn-overview"><summary><span class="th" lang="th">แผนภาพเชื่อมโยงทั้งแปดบท</span><span class="en" lang="en">How the eight chapters connect</span></summary>
   <figure class="flow-fig learn-map pipe-scroll">
     <svg class="diagram flow" viewBox="0 0 1000 130">
       <path class="stroke" d="M20 60 H980"/>
@@ -102,32 +129,7 @@
     </svg>
     <figcaption><span class="th" lang="th">แปดบทของการมองเห็น ตั้งแต่แสงจนถึงขีดจำกัด กดหมายเลขเพื่อไปที่บทนั้น</span><span class="en" lang="en">Eight chapters of seeing, from light to the limits. Tap a number to jump there.</span></figcaption>
   </figure>
-
-  <!-- 01 -->
-  <section class="chapter" id="numbers" data-chapter="numbers" aria-labelledby="numbers-title">
-    <header>
-      <span class="chapter-no">01 / 08</span>
-      <h2 id="numbers-title"><span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></h2>
-    </header>
-    <div class="chapter-body split">
-      <div class="prose">
-        <p class="th" lang="th">ภาพบนจอประกอบด้วยช่องสี่เหลี่ยมเล็ก ๆ เรียกว่า<a href="/handbook/glossary#pixel">พิกเซล</a> คอมพิวเตอร์ไม่ได้เห็นถนนหรือรถ มันได้รับแค่ตัวเลขบอกความสว่างของแต่ละช่อง ตั้งแต่ 0 (ดำสนิท) ถึง 255 (ขาวที่สุด)</p>
-        <p class="en" lang="en">A picture on a screen is made of tiny squares called <a href="/handbook/glossary#pixel">pixels</a>. The computer does not see a road or a car. It receives one number for how bright each square is, from 0 (black) to 255 (white).</p>
-        <p class="th" lang="th">เลื่อนแถบให้เหลือช่องน้อยลง แล้วตัวเลขจะปรากฏในช่อง ภาพจากกล้องจริงหนึ่งภาพมีตัวเลขแบบนี้หลายล้านตัว ทุกอย่างที่เหลือในหน้านี้คือการคิดเลขกับตารางนี้</p>
-        <p class="en" lang="en">Slide to fewer squares and the numbers appear inside them. One real camera picture holds millions of these. Everything else on this page is arithmetic on this grid.</p>
-        <p class="try"><span class="label"><span class="th" lang="th">ลองดู</span><span class="en" lang="en">Try</span></span> <span class="th" lang="th">หาจุดที่สว่างที่สุดในภาพ ตัวเลขของมันใกล้ 255 ไหม</span><span class="en" lang="en">Find the brightest spot. Is its number close to 255?</span></p>
-      </div>
-      <div class="bench">
-        <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
-        <div class="slider">
-          <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
-          <output for="cols" data-cols-out></output>
-          <input id="cols" type="range" min="6" max="96" step="1" value="16" data-cols>
-        </div>
-        <p class="readout" data-readout></p>
-      </div>
-    </div>
-  </section>
+  </details>
 
   <!-- 02 -->
   <section class="chapter field-quiet" id="colour" data-chapter="colour" aria-labelledby="colour-title">

@@ -2,9 +2,9 @@
 // about itself right now. Everything from the network goes in by textContent:
 // source labels come from upstream and are not ours to trust.
 
-import '../core/site.js?v=1.22.1'
-import { t, n, lang, onLang } from '../core/i18n.js?v=1.20.1'
-import { loadCatalog, SOURCES } from '../core/catalog.js?v=1.20.1'
+import '../core/site.js?v=1.23.0'
+import { t, n, lang, onLang } from '../core/i18n.js?v=1.23.0'
+import { loadCatalog, SOURCES } from '../core/catalog.js?v=1.23.0'
 
 const KINDS = ['video', 'still', 'view', 'off']
 const healthBody = document.querySelector('[data-health]')
@@ -34,7 +34,7 @@ function duration(seconds) {
 }
 
 function origin(o) {
-  if (o === 'flooddash') return t('FloodDash (สด)', 'FloodDash (live)')
+  if (o === 'flooddash') return t('ดึงครั้งล่าสุดจาก FloodDash', 'last fetched from FloodDash')
   if (o === 'disk') return t('สำเนาล่าสุดบนดิสก์ (FloodDash ไม่ตอบ)', 'last saved copy on disk (FloodDash not answering)')
   return t('ยังไม่มี', 'nothing yet')
 }
@@ -56,16 +56,20 @@ function paintHealth() {
   if (!health) return
   const c = health.catalogue ?? {}
   const r = health.relay ?? {}
+  const upstreamMs = Date.parse(c.upstreamAt)
+  const age = Number.isFinite(upstreamMs) ? Math.max(0, (Number(checkedAt) - upstreamMs) / 1000) : null
+  const ageText = age === null ? t('ไม่ทราบ', 'unknown') : `${duration(age)}${age > 1800 ? t(' · เก่ากว่า 30 นาที', ' · older than 30 minutes') : ''}`
   const resting = Array.isArray(r.resting_hosts) && r.resting_hosts.length ? r.resting_hosts.join(', ') : t('ไม่มี', 'none')
   const rows = [
-    [t('สถานะ', 'Status'), health.ok ? t('ทำงาน', 'working') : t('ยังไม่มีรายชื่อกล้อง', 'no camera list yet')],
+    [t('สถานะ', 'Status'), health.ok ? t('เว็บไซต์ตอบสนอง', 'site responding') : t('ยังไม่มีรายชื่อกล้อง', 'no camera list yet')],
     [t('รุ่น', 'Version'), health.version ?? '—'],
     [t('ทำงานต่อเนื่องมาแล้ว', 'Up for'), duration(health.uptime_s)],
     [t('รายชื่อกล้องมาจาก', 'Camera list from'), origin(c.origin)],
     [t('โหลดรายชื่อเมื่อ', 'List loaded'), when(c.loadedAt)],
     [t('FloodDash รวบรวมเมื่อ', 'FloodDash gathered it'), when(c.upstreamAt)],
+    [t('อายุรายชื่อ ณ เวลาที่อ่าน', 'Catalogue age when checked'), ageText],
     [t('ภาพในหน่วยความจำรีเลย์ตอนนี้', 'Frames in relay memory now'), n(r.cached_frames ?? 0)],
-    [t('กำลังดึง · รอคิว', 'Fetching · waiting'), `${n(r.inflight ?? 0)} · ${n(r.waiting ?? 0)}`],
+    [t('กำลังดึง · รอคิว', 'Fetching · waiting'), `${n(Math.max(0, (r.inflight ?? 0) - (r.waiting ?? 0)))} · ${n(r.waiting ?? 0)}`],
     [t('กล้องที่รีเลย์ลองแล้ว (ล่าสุดสำเร็จ / ล้มเหลว)', 'Cameras the relay has tried (last ok / failed)'), `${n(r.checked_cameras ?? 0)} (${n(r.last_ok ?? 0)} / ${n(r.last_failed ?? 0)})`],
     [t('โฮสต์ที่กำลังพัก', 'Hosts resting'), resting],
     [t('หน่วยความจำเซิร์ฟเวอร์', 'Server memory'), `${n(health.memory_mb ?? 0)} MB`],
@@ -131,5 +135,5 @@ readHealth()
 refreshBtn.addEventListener('click', readHealth)
 onLang(() => { paintHealth(); paintSources(); paintAt() })
 
-import { mountReferenceCheck } from '../evaluation/bench.js?v=1.20.1'
+import { mountReferenceCheck } from '../evaluation/bench.js?v=1.23.0'
 mountReferenceCheck()

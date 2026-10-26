@@ -72,9 +72,16 @@ export function semaphore(limit) {
     const next = queue.shift()
     if (next) { active++; next() }
   }
+  const tryAcquire = () => {
+    if (active >= limit) return null
+    active++
+    return release
+  }
   return {
+    tryAcquire,
     async acquire() {
-      if (active < limit) { active++; return release }
+      const slot = tryAcquire()
+      if (slot) return slot
       await new Promise((resolve) => queue.push(resolve))
       return release
     },
@@ -90,6 +97,7 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
   const hosts = new Map()        // host -> { sem, fails, openUntil }
   const health = new Map()       // id -> { ok, at, ms }
   let revision = 0
+  let waiting = 0
 
   function hostState(host) {
     let h = hosts.get(host)
@@ -107,17 +115,20 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     const host = hostOf(url)
     const hs = hostState(host)
     if (hs.openUntil > now()) throw new RelayError(503, `upstream ${host} is resting after repeated failures`)
-    // Rule 5: the wait queue is bounded. A slow upstream plus a fast client
-    // must not turn this process into a socket warehouse.
-    //
-    // Both queues count. A request parked on the per-host semaphore has not yet
-    // reached the global one, and per-host concurrency (2) is smaller than the
-    // global limit (4) — so a flood of ids on a SINGLE allow-listed host used to
-    // park without limit while global.waiting stayed pinned at zero, which is the
-    // one shape the guard existed to refuse.
-    if (global.waiting + hs.sem.waiting >= maxQueue) throw new RelayError(503, 'relay is busy — too many frames already queued, try again shortly')
-    const releaseHost = await hs.sem.acquire()
-    const releaseGlobal = await global.acquire()
+    // Reserve immediately available slots synchronously. Otherwise every host
+    // shares ONE pending budget, including callers between semaphore awaits.
+    // Counting only this host's queue let several hosts each spend the limit.
+    let releaseHost = hs.sem.tryAcquire()
+    let releaseGlobal = releaseHost ? global.tryAcquire() : null
+    if (releaseHost && !releaseGlobal) { releaseHost(); releaseHost = null }
+    if (!releaseGlobal) {
+      if (waiting >= maxQueue) throw new RelayError(503, 'relay is busy — too many frames already queued, try again shortly')
+      waiting++
+      try {
+        releaseHost = await hs.sem.acquire()
+        releaseGlobal = await global.acquire()
+      } finally { waiting-- }
+    }
     const t0 = now()
     try {
       // Queued requests must respect a breaker opened while they waited.
@@ -215,7 +226,7 @@ export function createRelay({ fetchImpl = fetch, now = () => Date.now(), log = (
     return {
       cached_frames: cache.size,
       inflight: inflight.size,
-      waiting: global.waiting,
+      waiting,
       checked_cameras: health.size,
       last_ok: ok,
       last_failed: failed,

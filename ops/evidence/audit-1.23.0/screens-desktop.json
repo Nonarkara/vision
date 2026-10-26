@@ -1,0 +1,137 @@
+[
+  {
+    "route": "/",
+    "canvas": 1,
+    "head": 146.4296875,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/cameras",
+    "canvas": 1,
+    "head": 0,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/colour",
+    "canvas": 0,
+    "head": 80,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/drive",
+    "canvas": 1,
+    "head": 154.9296875,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/everyday",
+    "canvas": 0,
+    "head": 219.359375,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/focus",
+    "canvas": 1,
+    "head": 154.9296875,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/games",
+    "canvas": 1,
+    "head": 283.7890625,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/gesture",
+    "canvas": 0,
+    "head": 154.9296875,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/handbook",
+    "canvas": 0,
+    "head": 154.9296875,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/learn",
+    "canvas": 1,
+    "head": 271.375,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/reconstruct",
+    "canvas": 0,
+    "head": 219.359375,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/research",
+    "canvas": 0,
+    "head": 0,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/story",
+    "canvas": 0,
+    "head": 0,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/system",
+    "canvas": 0,
+    "head": 219.359375,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  },
+  {
+    "route": "/train",
+    "canvas": 1,
+    "head": 88,
+    "height": 900,
+    "overflow": false,
+    "rail": 44,
+    "width": 1440
+  }
+]

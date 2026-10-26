@@ -4,7 +4,7 @@
 // The landmark worker is the focus room's worker. WASM compilation stays on
 // that one URL. Nothing in this file uploads, writes storage, or keeps a picture.
 
-import { onLang } from '../core/i18n.js?v=1.20.1'
+import { onLang } from '../core/i18n.js?v=1.23.0'
 
 const JASPER = '#eb5324'
 const GRAY = '#b6bfc1'
@@ -298,7 +298,7 @@ export function loopEdges(loops = LOOPS) {
 const EDGES = loopEdges()
 
 async function boot() {
-  await import('../core/site.js?v=1.22.1')
+  await import('../core/site.js?v=1.23.0')
   const root = document.querySelector('[data-reconstruct]')
   if (!root) return
   const el = (name) => root.querySelector(`[data-${name}]`)
@@ -455,7 +455,7 @@ async function boot() {
     const mine = ++ticket
     let opened = null
     try {
-      const { openWebcam } = await import('../core/source.js?v=1.20.1')
+      const { openWebcam } = await import('../core/source.js?v=1.23.0')
       const w = worker = new Worker('/js/focus/worker.js')
       await new Promise((resolve, reject) => {
         const watchdog = setTimeout(() => reject(new Error('timeout')), 45000)

@@ -212,7 +212,7 @@ test('the colour study keeps its manual inside the body it belongs to', () => {
   assert.ok(closeOf(colourHtml, instructions) > manual, 'the manual must close inside the instruction column, not after it')
 })
 
-test('the study body is two columns, and the human answer sits with the instruction', () => {
+test('the study body separates the plate from its controls', () => {
   const body = lastRule('.chapter-body.study', colourCss)
   assert.match(body, /grid-template-columns:\s*minmax\(0,\s*0\.85fr\)\s+minmax\(0,\s*1\.15fr\)/,
     'the body must split the plate away from the instruction')
@@ -230,4 +230,13 @@ test('the law is written where the palette lives, with the photograph clause in 
   const palette = readFileSync(new URL('../public/js/core/palette.js', import.meta.url), 'utf8')
   assert.match(palette, /THREE HUES ON A SCREEN/, 'the law must be stated with the colours it measures')
   assert.match(palette, /PHOTOGRAPH CLAUSE/, 'a photograph\'s colours are the world\'s, and the rule must say so')
+})
+
+
+test('the colour plate precedes the answer form in reading and keyboard order', () => {
+  const plate = colourHtml.indexOf('id="plate"')
+  const answer = colourHtml.indexOf('id="feel"')
+  assert.ok(plate > 0 && answer > plate, 'look at the plate before answering')
+  const instructions = colourHtml.indexOf('<div class="study-instructions">')
+  assert.ok(answer > closeOf(colourHtml, instructions), 'answers must not be hidden ahead of the plate in the instruction wrapper')
 })

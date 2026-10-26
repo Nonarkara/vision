@@ -45,3 +45,7 @@ html[data-lang="zh"] body .promise-reading p { line-height: 1.5; }
   body .promise-reading > li { grid-template-columns: 1fr; }
   body .promise-reading h3 { max-width: none; }
 }
+
+/* A title and its explanation are one reading group, not distant grid ends. */
+.page-head:has(h1) { grid-template-columns: fit-content(42%) minmax(0, 1fr); column-gap: 24px; }
+@media (max-width: 900px) { .page-head:has(h1) { grid-template-columns: minmax(0, 1fr); } }

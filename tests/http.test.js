@@ -1,4 +1,5 @@
 import { test } from 'node:test'
+import zlib from 'node:zlib'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -180,4 +181,25 @@ test('a forwarded client address must look like an address before it becomes a k
   // A non-loopback peer may not set it at all.
   const remote = { socket: { remoteAddress: '198.51.100.7' }, headers: { 'cf-connecting-ip': '203.0.113.9' } }
   assert.equal(clientIp(remote), '198.51.100.7')
+})
+
+
+test('JSON avoids compression for identity clients and compresses once for gzip', async (t) => {
+  const { json } = await import('../server/http.js')
+  const realGzip = zlib.gzipSync
+  const compress = t.mock.method(zlib, 'gzipSync', (...args) => realGzip(...args))
+  const data = { message: 'x'.repeat(2048) }
+  const response = () => ({ writeHead(status, headers) { this.headers = headers }, end(body) { this.body = body } })
+  const plain = response()
+  json({ method: 'GET', headers: { 'accept-encoding': 'identity' } }, plain, 200, data)
+  assert.equal(compress.mock.callCount(), 0)
+  assert.deepEqual(JSON.parse(plain.body), data)
+  const gzip = response()
+  json({ method: 'GET', headers: { 'accept-encoding': 'gzip' } }, gzip, 200, data)
+  assert.equal(compress.mock.callCount(), 1)
+  assert.equal(gzip.headers['Content-Encoding'], 'gzip')
+  assert.deepEqual(JSON.parse(zlib.gunzipSync(gzip.body)), data)
+  const encoded = { body: Buffer.from(JSON.stringify(data)), gz: gzip.body }
+  json({ method: 'GET', headers: { 'accept-encoding': 'gzip' } }, response(), 200, null, {}, encoded)
+  assert.equal(compress.mock.callCount(), 1, 'memoised responses must not compress again')
 })
