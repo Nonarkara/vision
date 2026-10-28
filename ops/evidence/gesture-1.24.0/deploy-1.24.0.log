@@ -1,0 +1,2523 @@
+
+> vision@1.24.0 deploy
+> node scripts/deploy-local.mjs
+
+
+> vision@1.24.0 check
+> node scripts/check-fonts.mjs && node scripts/build-handbook.mjs --check && node --test tests/*.test.js && node scripts/check-site.mjs && node scripts/check-forked-imports.mjs && node scripts/check-privacy.mjs && node scripts/check-docs.mjs && node scripts/palette-measure.mjs --check
+
+✓ 4 families, 10 fonts, no unresolvable name and no orphaned file
+✓ handbook pages match docs/
+TAP version 13
+# Subtest: changedShare counts exactly what diffMask marks
+ok 1 - changedShare counts exactly what diffMask marks
+  ---
+  duration_ms: 1.002
+  type: 'test'
+  ...
+# Subtest: changedShare is zero on an unchanged frame, and on nothing at all
+ok 2 - changedShare is zero on an unchanged frame, and on nothing at all
+  ---
+  duration_ms: 0.068041
+  type: 'test'
+  ...
+# Subtest: shade moves the rectangle and nothing outside it
+ok 3 - shade moves the rectangle and nothing outside it
+  ---
+  duration_ms: 0.393209
+  type: 'test'
+  ...
+# Subtest: shade clamps at white and at black instead of wrapping
+ok 4 - shade clamps at white and at black instead of wrapping
+  ---
+  duration_ms: 0.062708
+  type: 'test'
+  ...
+# Subtest: shade clips a patch that hangs off the edge instead of throwing
+ok 5 - shade clips a patch that hangs off the edge instead of throwing
+  ---
+  duration_ms: 0.048625
+  type: 'test'
+  ...
+# Subtest: patchRect stays inside the frame and follows the given rand
+ok 6 - patchRect stays inside the frame and follows the given rand
+  ---
+  duration_ms: 0.747834
+  type: 'test'
+  ...
+# Subtest: the patch covers the share of the screen the page promises
+ok 7 - the patch covers the share of the screen the page promises
+  ---
+  duration_ms: 0.046792
+  type: 'test'
+  ...
+# Subtest: the machine cannot miss a trial: every delta clears its own threshold
+ok 8 - the machine cannot miss a trial: every delta clears its own threshold
+  ---
+  duration_ms: 0.044458
+  type: 'test'
+  ...
+# Subtest: the machine cannot be outvoted: the flashed screen is always the loudest
+ok 9 - the machine cannot be outvoted: the flashed screen is always the loudest
+  ---
+  duration_ms: 9.461833
+  type: 'test'
+  ...
+# Subtest: the ladder gets harder, and never easier by accident
+ok 10 - the ladder gets harder, and never easier by accident
+  ---
+  duration_ms: 0.692833
+  type: 'test'
+  ...
+# Subtest: scoreDrill keeps practice out of the tally
+ok 11 - scoreDrill keeps practice out of the tally
+  ---
+  duration_ms: 0.904917
+  type: 'test'
+  ...
+# Subtest: scoreDrill on an empty drill is zero, not NaN
+ok 12 - scoreDrill on an empty drill is zero, not NaN
+  ---
+  duration_ms: 0.100375
+  type: 'test'
+  ...
+# Subtest: a trial records what the machine actually caught, not the right answer
+ok 13 - a trial records what the machine actually caught, not the right answer
+  ---
+  duration_ms: 0.109167
+  type: 'test'
+  ...
+# Subtest: a trial the machine missed stays a miss — it is never backfilled with truth
+ok 14 - a trial the machine missed stays a miss — it is never backfilled with truth
+  ---
+  duration_ms: 0.280709
+  type: 'test'
+  ...
+# Subtest: a machine catch that disagrees with the truth scores as a miss
+ok 15 - a machine catch that disagrees with the truth scores as a miss
+  ---
+  duration_ms: 0.105583
+  type: 'test'
+  ...
+# Subtest: the recorded share is the one the machine measured, to full precision
+ok 16 - the recorded share is the one the machine measured, to full precision
+  ---
+  duration_ms: 0.138208
+  type: 'test'
+  ...
+# (node:98452) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: the drill builds its six screens from photographs that sit outside its own section
+ok 17 - the drill builds its six screens from photographs that sit outside its own section
+  ---
+  duration_ms: 589.604417
+  type: 'test'
+  ...
+# Subtest: a full drill answers every trial — including the last — and the machine never misses
+ok 18 - a full drill answers every trial — including the last — and the machine never misses
+  ---
+  duration_ms: 291.887208
+  type: 'test'
+  ...
+# Subtest: rebuilding the wall does not duplicate the screens
+ok 19 - rebuilding the wall does not duplicate the screens
+  ---
+  duration_ms: 609.561292
+  type: 'test'
+  ...
+# Subtest: a camera that sends no picture gives up when the caller says so, not at the default
+ok 20 - a camera that sends no picture gives up when the caller says so, not at the default
+  ---
+  duration_ms: 403.585334
+  type: 'test'
+  ...
+# Subtest: the message tells the visitor how long it waited
+ok 21 - the message tells the visitor how long it waited
+  ---
+  duration_ms: 1503.656542
+  type: 'test'
+  ...
+# Subtest: catalogue consumers share pending work and reuse the resolved answer
+ok 22 - catalogue consumers share pending work and reuse the resolved answer
+  ---
+  duration_ms: 21.604
+  type: 'test'
+  ...
+# Subtest: a failed catalogue response can be retried without accepting an error as data
+ok 23 - a failed catalogue response can be retried without accepting an error as data
+  ---
+  duration_ms: 2.279042
+  type: 'test'
+  ...
+# Subtest: a cold start with FloodDash down reads the catalogue saved on disk
+ok 24 - a cold start with FloodDash down reads the catalogue saved on disk
+  ---
+  duration_ms: 3.798333
+  type: 'test'
+  ...
+# Subtest: a cold start with no usable file on disk stays empty rather than crashing
+ok 25 - a cold start with no usable file on disk stays empty rather than crashing
+  ---
+  duration_ms: 2.097917
+  type: 'test'
+  ...
+# Subtest: a successful refresh adopts the payload and writes the cache file
+ok 26 - a successful refresh adopts the payload and writes the cache file
+  ---
+  duration_ms: 23.019458
+  type: 'test'
+  ...
+# Subtest: a failing refresh keeps the last good copy instead of emptying the catalogue
+ok 27 - a failing refresh keeps the last good copy instead of emptying the catalogue
+  ---
+  duration_ms: 13.196833
+  type: 'test'
+  ...
+# Subtest: the published catalogue never contains a relay URL
+ok 28 - the published catalogue never contains a relay URL
+  ---
+  duration_ms: 34.355875
+  type: 'test'
+  ...
+# Subtest: live HLS from an allow-listed CORS host is video
+ok 29 - live HLS from an allow-listed CORS host is video
+  ---
+  duration_ms: 2.512083
+  type: 'test'
+  ...
+# Subtest: HLS from an unknown host is not treated as readable video
+ok 30 - HLS from an unknown host is not treated as readable video
+  ---
+  duration_ms: 0.237708
+  type: 'test'
+  ...
+# Subtest: plain-http HLS is never video
+ok 31 - plain-http HLS is never video
+  ---
+  duration_ms: 0.055958
+  type: 'test'
+  ...
+# Subtest: relaySource refuses hosts off the allow-list and non-https
+ok 32 - relaySource refuses hosts off the allow-list and non-https
+  ---
+  duration_ms: 0.413666
+  type: 'test'
+  ...
+# Subtest: relaySource rewrites DWR stills to the local FloodDash
+ok 33 - relaySource rewrites DWR stills to the local FloodDash
+  ---
+  duration_ms: 0.464958
+  type: 'test'
+  ...
+# Subtest: down camera with no viewer is off
+ok 34 - down camera with no viewer is off
+  ---
+  duration_ms: 0.097875
+  type: 'test'
+  ...
+# Subtest: buildCatalog drops out-of-Thailand and duplicate cameras, keeps relay URLs server-side
+ok 35 - buildCatalog drops out-of-Thailand and duplicate cameras, keeps relay URLs server-side
+  ---
+  duration_ms: 0.254625
+  type: 'test'
+  ...
+# Subtest: buildCatalog sorts video before still before view before off
+ok 36 - buildCatalog sorts video before still before view before off
+  ---
+  duration_ms: 0.14525
+  type: 'test'
+  ...
+# Subtest: buildCatalog tolerates garbage payloads
+ok 37 - buildCatalog tolerates garbage payloads
+  ---
+  duration_ms: 0.364458
+  type: 'test'
+  ...
+# Subtest: readCapped refuses a catalogue body past the cap instead of buffering it
+ok 38 - readCapped refuses a catalogue body past the cap instead of buffering it
+  ---
+  duration_ms: 33.398209
+  type: 'test'
+  ...
+# Subtest: two catalogue refreshes cannot interleave on one temp file
+ok 39 - two catalogue refreshes cannot interleave on one temp file
+  ---
+  duration_ms: 46.111584
+  type: 'test'
+  ...
+# Subtest: a catalogue that collapses implausibly is refused, keeping the last good copy
+ok 40 - a catalogue that collapses implausibly is refused, keeping the last good copy
+  ---
+  duration_ms: 55.768542
+  type: 'test'
+  ...
+# Subtest: the floor of the law is one number, and it is half a per cent
+ok 41 - the floor of the law is one number, and it is half a per cent
+  ---
+  duration_ms: 0.721917
+  type: 'test'
+  ...
+# Subtest: the instrument's frame is the quiet hue, not the hardware's black
+ok 42 - the instrument's frame is the quiet hue, not the hardware's black
+  ---
+  duration_ms: 26.683958
+  type: 'test'
+  ...
+# Subtest: the instrument's state and counters are quiet chips, and the row stays the housing
+ok 43 - the instrument's state and counters are quiet chips, and the row stays the housing
+  ---
+  duration_ms: 30.199458
+  type: 'test'
+  ...
+# Subtest: a step marker is the quiet hue, and a step the machine confirmed still answers in the signal
+ok 44 - a step marker is the quiet hue, and a step the machine confirmed still answers in the signal
+  ---
+  duration_ms: 35.988125
+  type: 'test'
+  ...
+# Subtest: the chapter number in an index is the quiet hue
+ok 45 - the chapter number in an index is the quiet hue
+  ---
+  duration_ms: 17.398291
+  type: 'test'
+  ...
+# Subtest: the colour study plate sits on the quiet mount, so a dealt ground can never vanish into the page
+ok 46 - the colour study plate sits on the quiet mount, so a dealt ground can never vanish into the page
+  ---
+  duration_ms: 0.402667
+  type: 'test'
+  ...
+# Subtest: the practice clip's letterbox is the quiet hue, read from the palette
+ok 47 - the practice clip's letterbox is the quiet hue, read from the palette
+  ---
+  duration_ms: 0.086084
+  type: 'test'
+  ...
+# Subtest: the instrument's state message stands on the quiet field, in the ink that goes on it
+ok 48 - the instrument's state message stands on the quiet field, in the ink that goes on it
+  ---
+  duration_ms: 11.266208
+  type: 'test'
+  ...
+# Subtest: the map keeps its own ground, and the state over it keeps the light ink
+ok 49 - the map keeps its own ground, and the state over it keeps the light ink
+  ---
+  duration_ms: 0.844084
+  type: 'test'
+  ...
+# Subtest: the recording chip is the signal hue, with the words in the certified pairing
+ok 50 - the recording chip is the signal hue, with the words in the certified pairing
+  ---
+  duration_ms: 1.1075
+  type: 'test'
+  ...
+# Subtest: the story veil is the house ink, and it is the veil the certificate measured
+ok 51 - the story veil is the house ink, and it is the veil the certificate measured
+  ---
+  duration_ms: 0.916875
+  type: 'test'
+  ...
+# Subtest: the story headline is the house paper, not the hardware white
+ok 52 - the story headline is the house paper, not the hardware white
+  ---
+  duration_ms: 2.64225
+  type: 'test'
+  ...
+# Subtest: the colour study keeps its manual inside the body it belongs to
+ok 53 - the colour study keeps its manual inside the body it belongs to
+  ---
+  duration_ms: 0.393416
+  type: 'test'
+  ...
+# Subtest: the study body separates the plate from its controls
+ok 54 - the study body separates the plate from its controls
+  ---
+  duration_ms: 1.673708
+  type: 'test'
+  ...
+# Subtest: the law is written where the palette lives, with the photograph clause in it
+ok 55 - the law is written where the palette lives, with the photograph clause in it
+  ---
+  duration_ms: 0.16225
+  type: 'test'
+  ...
+# Subtest: the colour plate precedes the answer form in reading and keyboard order
+ok 56 - the colour plate precedes the answer form in reading and keyboard order
+  ---
+  duration_ms: 0.051458
+  type: 'test'
+  ...
+# Subtest: the house arrangement is recognised and says nothing was swapped
+ok 57 - the house arrangement is recognised and says nothing was swapped
+  ---
+  duration_ms: 0.826792
+  type: 'test'
+  ...
+# Subtest: every plate gets a gloss in both languages
+ok 58 - every plate gets a gloss in both languages
+  ---
+  duration_ms: 0.174292
+  type: 'test'
+  ...
+# Subtest: a jasper-red ground is called out by name, in both languages
+ok 59 - a jasper-red ground is called out by name, in both languages
+  ---
+  duration_ms: 0.103
+  type: 'test'
+  ...
+# Subtest: the gloss leads with the paper, because that is what a person feels first
+ok 60 - the gloss leads with the paper, because that is what a person feels first
+  ---
+  duration_ms: 0.303375
+  type: 'test'
+  ...
+# Subtest: the machine line reports the measured worst reading and the verdict
+ok 61 - the machine line reports the measured worst reading and the verdict
+  ---
+  duration_ms: 0.404125
+  type: 'test'
+  ...
+# Subtest: share is a percentage of the honest denominator, and survives a zero
+ok 62 - share is a percentage of the honest denominator, and survives a zero
+  ---
+  duration_ms: 1.293625
+  type: 'test'
+  ...
+# Subtest: dealing always moves, and never leaves the pool
+ok 63 - dealing always moves, and never leaves the pool
+  ---
+  duration_ms: 0.298541
+  type: 'test'
+  ...
+# Subtest: dealing falls back to the pool rather than returning nothing
+ok 64 - dealing falls back to the pool rather than returning nothing
+  ---
+  duration_ms: 0.09225
+  type: 'test'
+  ...
+# Subtest: the deal is drawn once — on the plate — and nowhere else
+ok 65 - the deal is drawn once — on the plate — and nowhere else
+  ---
+  duration_ms: 0.929459
+  type: 'test'
+  ...
+# Subtest: the seam engine does not come back with it
+ok 66 - the seam engine does not come back with it
+  ---
+  duration_ms: 1.184792
+  type: 'test'
+  ...
+# Subtest: the ten answers are words, and only the chosen one is a field
+ok 67 - the ten answers are words, and only the chosen one is a field
+  ---
+  duration_ms: 0.535042
+  type: 'test'
+  ...
+# Subtest: the answers stayed reachable by thumb after losing the box
+ok 68 - the answers stayed reachable by thumb after losing the box
+  ---
+  duration_ms: 0.141583
+  type: 'test'
+  ...
+# Subtest: the machine reads out; it does not shout
+ok 69 - the machine reads out; it does not shout
+  ---
+  duration_ms: 0.164625
+  type: 'test'
+  ...
+# Subtest: one way to change the plate is a field; the other two are words
+ok 70 - one way to change the plate is a field; the other two are words
+  ---
+  duration_ms: 0.134375
+  type: 'test'
+  ...
+# Subtest: the chosen answer clears the text floor in both schemes
+ok 71 - the chosen answer clears the text floor in both schemes
+  ---
+  duration_ms: 0.339417
+  type: 'test'
+  ...
+# Subtest: --quiet-text is only ever used as ink on a grey field
+ok 72 - --quiet-text is only ever used as ink on a grey field
+  ---
+  duration_ms: 5.220333
+  type: 'test'
+  ...
+# {"t":"2026-10-28T19:27:08.799Z","level":"warn","msg":"colour study starts empty","error":"ENOENT: no such file or directory, open '/Volumes/Data/agent-scratch/vision-fingers/release/data/colour.json'"}
+# Subtest: a fresh store is empty, not broken
+ok 73 - a fresh store is empty, not broken
+  ---
+  duration_ms: 3.689292
+  type: 'test'
+  ...
+# Subtest: an answer is refused unless both values are on the list
+ok 74 - an answer is refused unless both values are on the list
+  ---
+  duration_ms: 0.10025
+  type: 'test'
+  ...
+# Subtest: extra fields are ignored, not stored — there is nowhere to put them
+ok 75 - extra fields are ignored, not stored — there is nowhere to put them
+  ---
+  duration_ms: 1.630541
+  type: 'test'
+  ...
+# Subtest: an unknown value cannot create a new cell
+ok 76 - an unknown value cannot create a new cell
+  ---
+  duration_ms: 0.381583
+  type: 'test'
+  ...
+# Subtest: an illegible plate is still counted — refusing would lose the lesson
+ok 77 - an illegible plate is still counted — refusing would lose the lesson
+  ---
+  duration_ms: 0.73625
+  type: 'test'
+  ...
+# Subtest: the summary counts up and sorts by count, ties in the fixed order
+ok 78 - the summary counts up and sorts by count, ties in the fixed order
+  ---
+  duration_ms: 7.869375
+  type: 'test'
+  ...
+# Subtest: counts survive a restart
+ok 79 - counts survive a restart
+  ---
+  duration_ms: 1.056
+  type: 'test'
+  ...
+# Subtest: a hand-edited file cannot inject a key a request could not
+ok 80 - a hand-edited file cannot inject a key a request could not
+  ---
+  duration_ms: 2.401083
+  type: 'test'
+  ...
+# Subtest: the board is sorted by how many answers, and only answered plates appear
+ok 81 - the board is sorted by how many answers, and only answered plates appear
+  ---
+  duration_ms: 1.557167
+  type: 'test'
+  ...
+# Subtest: the shared plate can be rolled, and a legible one is the default
+ok 82 - the shared plate can be rolled, and a legible one is the default
+  ---
+  duration_ms: 1.349708
+  type: 'test'
+  ...
+# Subtest: the plate the server rolls is one the machine can read
+ok 83 - the plate the server rolls is one the machine can read
+  ---
+  duration_ms: 94.932917
+  type: 'test'
+  ...
+# Subtest: every feeling has Thai and English, and no two share an id
+ok 84 - every feeling has Thai and English, and no two share an id
+  ---
+  duration_ms: 0.089042
+  type: 'test'
+  ...
+# Subtest: the English column is Latin and the Thai column is Thai
+ok 85 - the English column is Latin and the Thai column is Thai
+  ---
+  duration_ms: 0.132667
+  type: 'test'
+  ...
+# Subtest: an over-large body is refused rather than buffered
+ok 86 - an over-large body is refused rather than buffered
+  ---
+  duration_ms: 0.336375
+  type: 'test'
+  ...
+# Subtest: malformed JSON is a 400, not a crash
+ok 87 - malformed JSON is a 400, not a crash
+  ---
+  duration_ms: 0.106083
+  type: 'test'
+  ...
+# Subtest: detector releases every temporary tensor on failure and can retry
+ok 88 - detector releases every temporary tensor on failure and can retry
+  ---
+  duration_ms: 4.379042
+  type: 'test'
+  ...
+# Subtest: a blocked model library is named as a script or network problem
+ok 89 - a blocked model library is named as a script or network problem
+  ---
+  duration_ms: 0.838333
+  type: 'test'
+  ...
+# Subtest: dropped weights are named as a download problem
+ok 90 - dropped weights are named as a download problem
+  ---
+  duration_ms: 0.204167
+  type: 'test'
+  ...
+# Subtest: a dead graphics engine is named as such
+ok 91 - a dead graphics engine is named as such
+  ---
+  duration_ms: 0.129667
+  type: 'test'
+  ...
+# Subtest: out of memory is named as such
+ok 92 - out of memory is named as such
+  ---
+  duration_ms: 0.167083
+  type: 'test'
+  ...
+# Subtest: an unknown failure still explains and still offers a way forward
+ok 93 - an unknown failure still explains and still offers a way forward
+  ---
+  duration_ms: 0.4105
+  type: 'test'
+  ...
+# Subtest: every message points at the lenses that still work, in both languages
+ok 94 - every message points at the lenses that still work, in both languages
+  ---
+  duration_ms: 0.126417
+  type: 'test'
+  ...
+# Subtest: the Thai message is Thai when the page is Thai
+ok 95 - the Thai message is Thai when the page is Thai
+  ---
+  duration_ms: 0.115917
+  type: 'test'
+  ...
+# Subtest: the sentence wrapper capitalises the clause so it reads as a sentence
+ok 96 - the sentence wrapper capitalises the clause so it reads as a sentence
+  ---
+  duration_ms: 0.065875
+  type: 'test'
+  ...
+# Subtest: both loops close, and each finds its stop line, its zebras and the roundabout
+ok 97 - both loops close, and each finds its stop line, its zebras and the roundabout
+  ---
+  duration_ms: 4.731
+  type: 'test'
+  ...
+# Subtest: a point on my road ahead is "in my lane"; one beside the road is not
+ok 98 - a point on my road ahead is "in my lane"; one beside the road is not
+  ---
+  duration_ms: 2.808083
+  type: 'test'
+  ...
+# Subtest: the camera misses more when things are far, small or in the dark — and sees nothing when covered
+ok 99 - the camera misses more when things are far, small or in the dark — and sees nothing when covered
+  ---
+  duration_ms: 0.153125
+  type: 'test'
+  ...
+# Subtest: the driver model accelerates on an empty road and brakes hard for something stopped close ahead
+ok 100 - the driver model accelerates on an empty road and brakes hard for something stopped close ahead
+  ---
+  duration_ms: 0.073166
+  type: 'test'
+  ...
+# Subtest: the same seed gives the same race
+ok 101 - the same seed gives the same race
+  ---
+  duration_ms: 2062.294625
+  type: 'test'
+  ...
+# Subtest: in daylight nobody is hit, every car keeps lapping, and careful drivers cause no crash
+ok 102 - in daylight nobody is hit, every car keeps lapping, and careful drivers cause no crash
+  ---
+  duration_ms: 17686.486667
+  type: 'test'
+  ...
+# Subtest: at night the hasty cars do more harm than the careful ones — the lesson the page teaches
+ok 103 - at night the hasty cars do more harm than the careful ones — the lesson the page teaches
+  ---
+  duration_ms: 5792.168042
+  type: 'test'
+  ...
+# Subtest: a car with its camera covered runs red lights — and the others still have to dodge it
+ok 104 - a car with its camera covered runs red lights — and the others still have to dodge it
+  ---
+  duration_ms: 2098.546792
+  type: 'test'
+  ...
+# Subtest: road choices have actual distinct lanes, opposing directions and bounded traffic
+ok 105 - road choices have actual distinct lanes, opposing directions and bounded traffic
+  ---
+  duration_ms: 2439.109875
+  type: 'test'
+  ...
+# Subtest: vehicles have their real Thai sizes — the sizes every view shares
+ok 106 - vehicles have their real Thai sizes — the sizes every view shares
+  ---
+  duration_ms: 0.388542
+  type: 'test'
+  ...
+# Subtest: traffic mixes sedans, pickups, lorries and buses — and lorries drive like lorries
+ok 107 - traffic mixes sedans, pickups, lorries and buses — and lorries drive like lorries
+  ---
+  duration_ms: 16.834
+  type: 'test'
+  ...
+# Subtest: collision footprints follow real lengths: a lorry outweighs two sedans of road
+ok 108 - collision footprints follow real lengths: a lorry outweighs two sedans of road
+  ---
+  duration_ms: 0.135209
+  type: 'test'
+  ...
+# Subtest: a lorry fills more of the frame — and the detector calls it a lorry
+ok 109 - a lorry fills more of the frame — and the detector calls it a lorry
+  ---
+  duration_ms: 4.573083
+  type: 'test'
+  ...
+# Subtest: cars sharing city roads never spawn inside each other
+ok 110 - cars sharing city roads never spawn inside each other
+  ---
+  duration_ms: 36.176
+  type: 'test'
+  ...
+# Subtest: reference split is reproducible and separates complete view groups
+ok 111 - reference split is reproducible and separates complete view groups
+  ---
+  duration_ms: 4.033458
+  type: 'test'
+  ...
+# Subtest: one ground truth cannot match duplicate predictions; empty-frame errors count
+ok 112 - one ground truth cannot match duplicate predictions; empty-frame errors count
+  ---
+  duration_ms: 0.531042
+  type: 'test'
+  ...
+# Subtest: wrong classes miss the target and partial or empty runs never imply success
+ok 113 - wrong classes miss the target and partial or empty runs never imply success
+  ---
+  duration_ms: 0.321041
+  type: 'test'
+  ...
+# Subtest: invalid, unknown and duplicate predictions are rejected
+ok 114 - invalid, unknown and duplicate predictions are rejected
+  ---
+  duration_ms: 0.315333
+  type: 'test'
+  ...
+# Subtest: quality clues distinguish darkness and little detail without claiming safety
+ok 115 - quality clues distinguish darkness and little detail without claiming safety
+  ---
+  duration_ms: 0.381084
+  type: 'test'
+  ...
+# Subtest: saved manifest and actual model baseline remain reproducible
+ok 116 - saved manifest and actual model baseline remain reproducible
+  ---
+  duration_ms: 14.42275
+  type: 'test'
+  ...
+# {"t":"2026-10-28T19:27:08.922Z","level":"info","msg":"colour study loaded","total":0}
+# Subtest: evidence refuses a payload with no camera list rather than inventing figures
+ok 117 - evidence refuses a payload with no camera list rather than inventing figures
+  ---
+  duration_ms: 3.3615
+  type: 'test'
+  ...
+# Subtest: a catalogue that has not loaded yet prints dashes, never zeros
+ok 118 - a catalogue that has not loaded yet prints dashes, never zeros
+  ---
+  duration_ms: 0.071042
+  type: 'test'
+  ...
+# Subtest: every figure is a real count or null — never a defaulted zero
+ok 119 - every figure is a real count or null — never a defaulted zero
+  ---
+  duration_ms: 0.089959
+  type: 'test'
+  ...
+# Subtest: readable is counted with the same isReadable every other page uses
+ok 120 - readable is counted with the same isReadable every other page uses
+  ---
+  duration_ms: 0.110042
+  type: 'test'
+  ...
+# Subtest: a real zero is still printed as a zero once the catalogue has loaded
+ok 121 - a real zero is still printed as a zero once the catalogue has loaded
+  ---
+  duration_ms: 0.057625
+  type: 'test'
+  ...
+# Subtest: sources prefers the server list and falls back to distinct owners
+ok 122 - sources prefers the server list and falls back to distinct owners
+  ---
+  duration_ms: 0.094542
+  type: 'test'
+  ...
+# Subtest: what the strip prints for the catalogue this server is actually serving
+ok 123 - what the strip prints for the catalogue this server is actually serving
+  ---
+  duration_ms: 13.706084
+  type: 'test'
+  ...
+# Subtest: 01-pixels still prints what docs/01 quotes
+ok 124 - 01-pixels still prints what docs/01 quotes
+  ---
+  duration_ms: 628.472708
+  type: 'test'
+  ...
+# Subtest: 02-threshold still prints what docs/02 quotes
+ok 125 - 02-threshold still prints what docs/02 quotes
+  ---
+  duration_ms: 213.06175
+  type: 'test'
+  ...
+# Subtest: 03-convolution still prints what docs/03 and img/convolution.svg quotes
+ok 126 - 03-convolution still prints what docs/03 and img/convolution.svg quotes
+  ---
+  duration_ms: 994.28925
+  type: 'test'
+  ...
+# Subtest: 04-motion still prints what docs/04 quotes
+ok 127 - 04-motion still prints what docs/04 quotes
+  ---
+  duration_ms: 299.985333
+  type: 'test'
+  ...
+# Subtest: 05-detection-nms still prints what docs/06 quotes
+ok 128 - 05-detection-nms still prints what docs/06 quotes
+  ---
+  duration_ms: 226.75475
+  type: 'test'
+  ...
+# Subtest: 06-precision-recall still prints what docs/06 quotes
+ok 129 - 06-precision-recall still prints what docs/06 quotes
+  ---
+  duration_ms: 101.6235
+  type: 'test'
+  ...
+# Subtest: 07-transfer-learning still prints what docs/07 quotes
+ok 130 - 07-transfer-learning still prints what docs/07 quotes
+  ---
+  duration_ms: 525.657208
+  type: 'test'
+  ...
+# Subtest: lessons write their figures
+ok 131 - lessons write their figures
+  ---
+  duration_ms: 0.222625
+  type: 'test'
+  ...
+# Subtest: a number choice cancels an unresolved camera permission and closes a late grant
+ok 132 - a number choice cancels an unresolved camera permission and closes a late grant
+  ---
+  duration_ms: 2.827416
+  type: 'test'
+  ...
+# Subtest: Stop cancels a note awaiting audio activation
+ok 133 - Stop cancels a note awaiting audio activation
+  ---
+  duration_ms: 0.706667
+  type: 'test'
+  ...
+# Subtest: muted number choices never enable sound themselves
+ok 134 - muted number choices never enable sound themselves
+  ---
+  duration_ms: 0.471708
+  type: 'test'
+  ...
+# Subtest: count all zero to five extensions, independent of rotation and handedness
+ok 135 - count all zero to five extensions, independent of rotation and handedness
+  ---
+  duration_ms: 3.004292
+  type: 'test'
+  ...
+# Subtest: invalid/absent landmarks never manufacture a finger
+ok 136 - invalid/absent landmarks never manufacture a finger
+  ---
+  duration_ms: 0.079417
+  type: 'test'
+  ...
+# Subtest: two open palms support ten fingers and seven uses both hands
+ok 137 - two open palms support ten fingers and seven uses both hands
+  ---
+  duration_ms: 0.078
+  type: 'test'
+  ...
+# Subtest: color endpoints and all ten intermediate steps are linear
+ok 138 - color endpoints and all ten intermediate steps are linear
+  ---
+  duration_ms: 0.091417
+  type: 'test'
+  ...
+# Subtest: music spans one diatonic octave in eight ascending notes
+ok 139 - music spans one diatonic octave in eight ascending notes
+  ---
+  duration_ms: 0.055917
+  type: 'test'
+  ...
+# Subtest: a held count fires once; a brief dropout cannot retrigger it
+ok 140 - a held count fires once; a brief dropout cannot retrigger it
+  ---
+  duration_ms: 0.071125
+  type: 'test'
+  ...
+# Subtest: release then repeat supports quick rhythmic notes without a long cooldown
+ok 141 - release then repeat supports quick rhythmic notes without a long cooldown
+  ---
+  duration_ms: 0.051917
+  type: 'test'
+  ...
+# Subtest: real MediaPipe landmarks from public pointing and victory examples count one and two
+ok 142 - real MediaPipe landmarks from public pointing and victory examples count one and two
+  ---
+  duration_ms: 5.632875
+  type: 'test'
+  ...
+# Subtest: counts sustained look-away episodes once, and distinguishes missing faces
+ok 143 - counts sustained look-away episodes once, and distinguishes missing faces
+  ---
+  duration_ms: 0.735792
+  type: 'test'
+  ...
+# Subtest: brief blinks do not become long closures and paused or suspended time is excluded
+ok 144 - brief blinks do not become long closures and paused or suspended time is excluded
+  ---
+  duration_ms: 0.124792
+  type: 'test'
+  ...
+# Subtest: personal calibration changes look-away threshold; multiple faces yield no individual signal
+ok 145 - personal calibration changes look-away threshold; multiple faces yield no individual signal
+  ---
+  duration_ms: 0.0885
+  type: 'test'
+  ...
+# Subtest: summaries stay bounded over an eight-hour session and mood is self-reported
+ok 146 - summaries stay bounded over an eight-hour session and mood is self-reported
+  ---
+  duration_ms: 6.323167
+  type: 'test'
+  ...
+# Subtest: a Cloudflare 504 page is named as the tunnel, not the neural network
+ok 147 - a Cloudflare 504 page is named as the tunnel, not the neural network
+  ---
+  duration_ms: 23.430625
+  type: 'test'
+  ...
+# Subtest: a relay 424 keeps the owner's reason
+ok 148 - a relay 424 keeps the owner's reason
+  ---
+  duration_ms: 0.206334
+  type: 'test'
+  ...
+# Subtest: an aborted open does not look like a dead camera
+ok 149 - an aborted open does not look like a dead camera
+  ---
+  duration_ms: 0.093333
+  type: 'test'
+  ...
+# Subtest: the traffic-light canvas is not the click target
+ok 150 - the traffic-light canvas is not the click target
+  ---
+  duration_ms: 0.56325
+  type: 'test'
+  ...
+# Subtest: phone viewport mode keeps bench controls, isolates the page, and restores it on Escape
+ok 151 - phone viewport mode keeps bench controls, isolates the page, and restores it on Escape
+  ---
+  duration_ms: 0.973792
+  type: 'test'
+  ...
+# Subtest: phone viewport mode keeps session consent and summary, isolates the page, and restores it on Escape
+ok 152 - phone viewport mode keeps session consent and summary, isolates the page, and restores it on Escape
+  ---
+  duration_ms: 0.17675
+  type: 'test'
+  ...
+# Subtest: phone viewport mode keeps session consent and summary, isolates the page, and restores it on Escape
+ok 153 - phone viewport mode keeps session consent and summary, isolates the page, and restores it on Escape
+  ---
+  duration_ms: 0.113833
+  type: 'test'
+  ...
+# Subtest: desktop Escape asks the browser to leave fullscreen and does not swallow the key
+ok 154 - desktop Escape asks the browser to leave fullscreen and does not swallow the key
+  ---
+  duration_ms: 0.123125
+  type: 'test'
+  ...
+# Subtest: a browser that resolves fullscreen without entering still gets viewport mode
+ok 155 - a browser that resolves fullscreen without entering still gets viewport mode
+  ---
+  duration_ms: 0.1325
+  type: 'test'
+  ...
+# Subtest: teach scenes are real, distinct public-camera sequences
+ok 156 - teach scenes are real, distinct public-camera sequences
+  ---
+  duration_ms: 1.213125
+  type: 'test'
+  ...
+# Subtest: every gate tile is a real crop with a known label
+ok 157 - every gate tile is a real crop with a known label
+  ---
+  duration_ms: 0.875875
+  type: 'test'
+  ...
+# Subtest: the gate only asks for what a person can see in a night crop
+ok 158 - the gate only asks for what a person can see in a night crop
+  ---
+  duration_ms: 1.315917
+  type: 'test'
+  ...
+# Subtest: the hand-picked grouping and the labels agree
+ok 159 - the hand-picked grouping and the labels agree
+  ---
+  duration_ms: 0.2665
+  type: 'test'
+  ...
+# Subtest: one slip passes, two do not, and a blank or random guess does not
+ok 160 - one slip passes, two do not, and a blank or random guess does not
+  ---
+  duration_ms: 9.01225
+  type: 'test'
+  ...
+# Subtest: new Teach, Drive-gate, reveal and credit lines are Thai, English and Simplified Chinese
+ok 161 - new Teach, Drive-gate, reveal and credit lines are Thai, English and Simplified Chinese
+  ---
+  duration_ms: 1.356375
+  type: 'test'
+  ...
+# Subtest: passing is remembered in the session store and is not remembered before that
+ok 162 - passing is remembered in the session store and is not remembered before that
+  ---
+  duration_ms: 0.1565
+  type: 'test'
+  ...
+# Subtest: the gate offers a way past it, and the way out is reachable while shut
+ok 163 - the gate offers a way past it, and the way out is reachable while shut
+  ---
+  duration_ms: 0.345459
+  type: 'test'
+  ...
+# Subtest: the way out is offered in all three languages, and says it is not a lock
+ok 164 - the way out is offered in all three languages, and says it is not a lock
+  ---
+  duration_ms: 0.46325
+  type: 'test'
+  ...
+# Subtest: the way out stays gone once you are through, even after asking for another challenge
+ok 165 - the way out stays gone once you are through, even after asking for another challenge
+  ---
+  duration_ms: 0.475625
+  type: 'test'
+  ...
+# Subtest: the skip button names the note that explains it
+ok 166 - the skip button names the note that explains it
+  ---
+  duration_ms: 0.237459
+  type: 'test'
+  ...
+# Subtest: turning on ordinary actions does not open an unexplained blank window
+ok 167 - turning on ordinary actions does not open an unexplained blank window
+  ---
+  duration_ms: 1.062708
+  type: 'test'
+  ...
+# Subtest: a chosen handbook action can prepare one window from the user click
+ok 168 - a chosen handbook action can prepare one window from the user click
+  ---
+  duration_ms: 0.176833
+  type: 'test'
+  ...
+# Subtest: turning off while audio permission is pending cannot re-enable actions or open a window
+ok 169 - turning off while audio permission is pending cannot re-enable actions or open a window
+  ---
+  duration_ms: 0.2825
+  type: 'test'
+  ...
+# Subtest: an action cannot change the pretend lamp while actions are off
+ok 170 - an action cannot change the pretend lamp while actions are off
+  ---
+  duration_ms: 0.054208
+  type: 'test'
+  ...
+# Subtest: teaching waits for a picture, even when every pose has examples
+ok 171 - teaching waits for a picture, even when every pose has examples
+  ---
+  duration_ms: 1.176083
+  type: 'test'
+  ...
+# Subtest: a well-taught pose cannot hide another pose that still needs pictures
+ok 172 - a well-taught pose cannot hide another pose that still needs pictures
+  ---
+  duration_ms: 0.06075
+  type: 'test'
+  ...
+# Subtest: three examples for each of at least two poses makes the room ready
+ok 173 - three examples for each of at least two poses makes the room ready
+  ---
+  duration_ms: 0.063416
+  type: 'test'
+  ...
+# Subtest: clearing examples returns a ready room to teaching
+ok 174 - clearing examples returns a ready room to teaching
+  ---
+  duration_ms: 0.050542
+  type: 'test'
+  ...
+# Subtest: a gesture fires only after it holds the lead for two looks
+ok 175 - a gesture fires only after it holds the lead for two looks
+  ---
+  duration_ms: 1.308834
+  type: 'test'
+  ...
+# Subtest: a leader below the confidence line never fires
+ok 176 - a leader below the confidence line never fires
+  ---
+  duration_ms: 0.111667
+  type: 'test'
+  ...
+# Subtest: a flickering leader never fires
+ok 177 - a flickering leader never fires
+  ---
+  duration_ms: 0.051959
+  type: 'test'
+  ...
+# Subtest: one global cooldown spaces consecutive fires
+ok 178 - one global cooldown spaces consecutive fires
+  ---
+  duration_ms: 0.063
+  type: 'test'
+  ...
+# Subtest: disarmed ticks never fire and forget a half-built lead
+ok 179 - disarmed ticks never fire and forget a half-built lead
+  ---
+  duration_ms: 0.054583
+  type: 'test'
+  ...
+# Subtest: every action has both languages, and defaults are real actions
+ok 180 - every action has both languages, and defaults are real actions
+  ---
+  duration_ms: 0.136792
+  type: 'test'
+  ...
+# Subtest: the tone the page builds is a valid mono 16-bit WAV of the right size
+ok 181 - the tone the page builds is a valid mono 16-bit WAV of the right size
+  ---
+  duration_ms: 3.180042
+  type: 'test'
+  ...
+# Subtest: the gesture room starts with one finger, a palm and a resting pose, each bound to a real action
+ok 182 - the gesture room starts with one finger, a palm and a resting pose, each bound to a real action
+  ---
+  duration_ms: 0.7145
+  type: 'test'
+  ...
+# Subtest: the glossary gives every term an addressable id
+ok 183 - the glossary gives every term an addressable id
+  ---
+  duration_ms: 0.648291
+  type: 'test'
+  ...
+# Subtest: every glossary fragment link on the site lands on a real term
+ok 184 - every glossary fragment link on the site lands on a real term
+  ---
+  duration_ms: 3.618125
+  type: 'test'
+  ...
+# Subtest: pixel identity survives a new image object and changes when its pixels change
+ok 185 - pixel identity survives a new image object and changes when its pixels change
+  ---
+  duration_ms: 0.766834
+  type: 'test'
+  ...
+# Subtest: training and previously tested pictures cannot masquerade as fresh tests
+ok 186 - training and previously tested pictures cannot masquerade as fresh tests
+  ---
+  duration_ms: 0.144625
+  type: 'test'
+  ...
+# Subtest: unsure judgments do not become wrong answers or artificial accuracy
+ok 187 - unsure judgments do not become wrong answers or artificial accuracy
+  ---
+  duration_ms: 0.693167
+  type: 'test'
+  ...
+# Subtest: safeResolve serves real files and refuses traversal, dotfiles, NUL and directories
+ok 188 - safeResolve serves real files and refuses traversal, dotfiles, NUL and directories
+  ---
+  duration_ms: 0.891833
+  type: 'test'
+  ...
+# Subtest: every page in the router exists on disk
+ok 189 - every page in the router exists on disk
+  ---
+  duration_ms: 0.532083
+  type: 'test'
+  ...
+# Subtest: assemblePage fills partials, marks the current page and stamps the version
+ok 190 - assemblePage fills partials, marks the current page and stamps the version
+  ---
+  duration_ms: 0.156666
+  type: 'test'
+  ...
+# Subtest: limiter allows a burst then refills at the stated rate
+ok 191 - limiter allows a burst then refills at the stated rate
+  ---
+  duration_ms: 0.662083
+  type: 'test'
+  ...
+# Subtest: clientIp trusts cf-connecting-ip only from loopback
+ok 192 - clientIp trusts cf-connecting-ip only from loopback
+  ---
+  duration_ms: 0.08825
+  type: 'test'
+  ...
+# Subtest: CSP forbids inline script, eval and framing
+ok 193 - CSP forbids inline script, eval and framing
+  ---
+  duration_ms: 0.10325
+  type: 'test'
+  ...
+# Subtest: static memo is keyed by file, so slash variants do not grow memory, and raw templates are never served
+ok 194 - static memo is keyed by file, so slash variants do not grow memory, and raw templates are never served
+  ---
+  duration_ms: 18.529375
+  type: 'test'
+  ...
+# Subtest: full-size original photos are not served; resized copies are
+ok 195 - full-size original photos are not served; resized copies are
+  ---
+  duration_ms: 0.791708
+  type: 'test'
+  ...
+# Subtest: a page is compressed only for a client that said it can read gzip
+ok 196 - a page is compressed only for a client that said it can read gzip
+  ---
+  duration_ms: 4.877125
+  type: 'test'
+  ...
+# Subtest: share tags come from the page title, and a 404 stays out of the index
+ok 197 - share tags come from the page title, and a 404 stays out of the index
+  ---
+  duration_ms: 0.693334
+  type: 'test'
+  ...
+# Subtest: robots points at the sitemap, and the sitemap names exactly the routed pages
+ok 198 - robots points at the sitemap, and the sitemap names exactly the routed pages
+  ---
+  duration_ms: 0.64575
+  type: 'test'
+  ...
+# Subtest: only designated vision workers may compile WASM; documents keep strict script policy
+ok 199 - only designated vision workers may compile WASM; documents keep strict script policy
+  ---
+  duration_ms: 5.9975
+  type: 'test'
+  ...
+# Subtest: a client that refuses gzip with q=0 is not served a gzipped body
+ok 200 - a client that refuses gzip with q=0 is not served a gzipped body
+  ---
+  duration_ms: 0.178416
+  type: 'test'
+  ...
+# Subtest: the private photo directory cannot be reached by respelling its case
+ok 201 - the private photo directory cannot be reached by respelling its case
+  ---
+  duration_ms: 0.17325
+  type: 'test'
+  ...
+# Subtest: the limiter evicts the least recently used bucket, not the oldest inserted
+ok 202 - the limiter evicts the least recently used bucket, not the oldest inserted
+  ---
+  duration_ms: 0.078333
+  type: 'test'
+  ...
+# Subtest: an evicted bucket starts full again — and that is now a known property
+ok 203 - an evicted bucket starts full again — and that is now a known property
+  ---
+  duration_ms: 0.035292
+  type: 'test'
+  ...
+# Subtest: a forwarded client address must look like an address before it becomes a key
+ok 204 - a forwarded client address must look like an address before it becomes a key
+  ---
+  duration_ms: 0.121125
+  type: 'test'
+  ...
+# Subtest: JSON avoids compression for identity clients and compresses once for gzip
+ok 205 - JSON avoids compression for identity clients and compresses once for gzip
+  ---
+  duration_ms: 1.54825
+  type: 'test'
+  ...
+# {"t":"2026-10-28T19:27:09.460Z","level":"info","msg":"colour study loaded","total":0}
+# Subtest: parseTarget accepts paths and refuses authority-shaped targets without throwing
+ok 206 - parseTarget accepts paths and refuses authority-shaped targets without throwing
+  ---
+  duration_ms: 0.635459
+  type: 'test'
+  ...
+# Subtest: hostile request targets get an answer, not a crash
+ok 207 - hostile request targets get an answer, not a crash
+  ---
+  duration_ms: 20.423958
+  type: 'test'
+  ...
+# Subtest: keep-alive stays shorter than the headers deadline
+ok 208 - keep-alive stays shorter than the headers deadline
+  ---
+  duration_ms: 0.183667
+  type: 'test'
+  ...
+# Subtest: the course is eight chapters, and the page says so in the same order
+ok 209 - the course is eight chapters, and the page says so in the same order
+  ---
+  duration_ms: 0.681958
+  type: 'test'
+  ...
+# Subtest: above the first chapter, the first chapter is what you are reading
+ok 210 - above the first chapter, the first chapter is what you are reading
+  ---
+  duration_ms: 0.112583
+  type: 'test'
+  ...
+# Subtest: a chapter becomes current when its top passes the reading line
+ok 211 - a chapter becomes current when its top passes the reading line
+  ---
+  duration_ms: 0.046959
+  type: 'test'
+  ...
+# Subtest: the last chapter stays current all the way to the foot of the page
+ok 212 - the last chapter stays current all the way to the foot of the page
+  ---
+  duration_ms: 0.04275
+  type: 'test'
+  ...
+# Subtest: a chapter that starts below the reading line does not steal the marker
+ok 213 - a chapter that starts below the reading line does not steal the marker
+  ---
+  duration_ms: 0.092584
+  type: 'test'
+  ...
+# Subtest: a first-time visitor is told where to start, not congratulated on zero
+ok 214 - a first-time visitor is told where to start, not congratulated on zero
+  ---
+  duration_ms: 0.097792
+  type: 'test'
+  ...
+# Subtest: progress is counted in chapters read, out of the chapters there are
+ok 215 - progress is counted in chapters read, out of the chapters there are
+  ---
+  duration_ms: 0.044292
+  type: 'test'
+  ...
+# Subtest: a finished course points at the next room instead of the eighth chapter again
+ok 216 - a finished course points at the next room instead of the eighth chapter again
+  ---
+  duration_ms: 0.063209
+  type: 'test'
+  ...
+# Subtest: returning is offered the chapter that was left, not the first one
+ok 217 - returning is offered the chapter that was left, not the first one
+  ---
+  duration_ms: 0.221625
+  type: 'test'
+  ...
+# Subtest: progress survives a reload
+ok 218 - progress survives a reload
+  ---
+  duration_ms: 0.85425
+  type: 'test'
+  ...
+# Subtest: the same chapter is never counted twice
+ok 219 - the same chapter is never counted twice
+  ---
+  duration_ms: 0.108625
+  type: 'test'
+  ...
+# Subtest: a chapter this page does not have cannot be counted as read
+ok 220 - a chapter this page does not have cannot be counted as read
+  ---
+  duration_ms: 0.038333
+  type: 'test'
+  ...
+# Subtest: a broken or hostile stored value is ignored rather than trusted
+ok 221 - a broken or hostile stored value is ignored rather than trusted
+  ---
+  duration_ms: 0.044917
+  type: 'test'
+  ...
+# Subtest: normalize gives unit length and survives zero vectors
+ok 222 - normalize gives unit length and survives zero vectors
+  ---
+  duration_ms: 1.734542
+  type: 'test'
+  ...
+# Subtest: kNN labels a new point by its neighbours, with probabilities summing to 1
+ok 223 - kNN labels a new point by its neighbours, with probabilities summing to 1
+  ---
+  duration_ms: 0.297583
+  type: 'test'
+  ...
+# Subtest: the trained layer lowers its loss and separates the clusters
+ok 224 - the trained layer lowers its loss and separates the clusters
+  ---
+  duration_ms: 5.669958
+  type: 'test'
+  ...
+# Subtest: leave-one-out is perfect on separable data; pca2 needs three points
+ok 225 - leave-one-out is perfect on separable data; pca2 needs three points
+  ---
+  duration_ms: 1.057083
+  type: 'test'
+  ...
+# Subtest: the path is four steps, in order, each naming where it goes
+ok 226 - the path is four steps, in order, each naming where it goes
+  ---
+  duration_ms: 1.350542
+  type: 'test'
+  ...
+# Subtest: each step says what it is, in Thai, English and Chinese
+ok 227 - each step says what it is, in Thai, English and Chinese
+  ---
+  duration_ms: 0.180334
+  type: 'test'
+  ...
+# Subtest: every room of the path shows the rail
+ok 228 - every room of the path shows the rail
+  ---
+  duration_ms: 0.617458
+  type: 'test'
+  ...
+# Subtest: a room marks its own step, so "where am I" is answered by the markup
+ok 229 - a room marks its own step, so "where am I" is answered by the markup
+  ---
+  duration_ms: 2.872875
+  type: 'test'
+  ...
+# Subtest: a room off the path marks no step at all
+ok 230 - a room off the path marks no step at all
+  ---
+  duration_ms: 0.351917
+  type: 'test'
+  ...
+# Subtest: the rail marks a step, and the page itself is still marked once
+ok 231 - the rail marks a step, and the page itself is still marked once
+  ---
+  duration_ms: 0.551125
+  type: 'test'
+  ...
+# Subtest: every room that carries the rail is a real, reachable page
+ok 232 - every room that carries the rail is a real, reachable page
+  ---
+  duration_ms: 0.342375
+  type: 'test'
+  ...
+# Subtest: only one room is finished in Chinese, and the rest are honest about it
+ok 233 - only one room is finished in Chinese, and the rest are honest about it
+  ---
+  duration_ms: 2.306958
+  type: 'test'
+  ...
+# Subtest: the Chinese line the note shows is about the page, not about the site
+ok 234 - the Chinese line the note shows is about the page, not about the site
+  ---
+  duration_ms: 0.353167
+  type: 'test'
+  ...
+# Subtest: a room with no Chinese keeps its English rather than going blank
+ok 235 - a room with no Chinese keeps its English rather than going blank
+  ---
+  duration_ms: 0.403208
+  type: 'test'
+  ...
+# Subtest: the four-step path lives inside room navigation, without a second page band
+ok 236 - the four-step path lives inside room navigation, without a second page band
+  ---
+  duration_ms: 0.912
+  type: 'test'
+  ...
+# Subtest: off-path rooms do not inherit a path or leave an unresolved nav slot
+ok 237 - off-path rooms do not inherit a path or leave an unresolved nav slot
+  ---
+  duration_ms: 0.174334
+  type: 'test'
+  ...
+# Subtest: the network is asked below every line the two confidence sliders can reach
+ok 238 - the network is asked below every line the two confidence sliders can reach
+  ---
+  duration_ms: 0.603708
+  type: 'test'
+  ...
+# Subtest: the line opens where the page always said it did
+ok 239 - the line opens where the page always said it did
+  ---
+  duration_ms: 0.073083
+  type: 'test'
+  ...
+# Subtest: a line at 90% still leaves candidates to argue about
+ok 240 - a line at 90% still leaves candidates to argue about
+  ---
+  duration_ms: 0.059375
+  type: 'test'
+  ...
+# Subtest: count reads as English, not as a template
+ok 241 - count reads as English, not as a template
+  ---
+  duration_ms: 0.269708
+  type: 'test'
+  ...
+# Subtest: count needs no plural form in Thai, and never prints one
+ok 242 - count needs no plural form in Thai, and never prints one
+  ---
+  duration_ms: 0.493
+  type: 'test'
+  ...
+# Subtest: the manual is a house component, so it lives in the house stylesheet
+ok 243 - the manual is a house component, so it lives in the house stylesheet
+  ---
+  duration_ms: 3.127708
+  type: 'test'
+  ...
+# Subtest: every room that carries a manual has one
+ok 244 - every room that carries a manual has one
+  ---
+  duration_ms: 1.404458
+  type: 'test'
+  ...
+# Subtest: a manual step is one number and one body
+ok 245 - a manual step is one number and one body
+  ---
+  duration_ms: 0.781042
+  type: 'test'
+  ...
+# Subtest: a manual is five steps at most
+ok 246 - a manual is five steps at most
+  ---
+  duration_ms: 0.255333
+  type: 'test'
+  ...
+# Subtest: a manual speaks in both house languages
+ok 247 - a manual speaks in both house languages
+  ---
+  duration_ms: 0.719375
+  type: 'test'
+  ...
+# Subtest: a named part is named the same number of times in both languages
+ok 248 - a named part is named the same number of times in both languages
+  ---
+  duration_ms: 0.50325
+  type: 'test'
+  ...
+# Subtest: the live steps tick the same keys the page scripts watch
+ok 249 - the live steps tick the same keys the page scripts watch
+  ---
+  duration_ms: 0.630417
+  type: 'test'
+  ...
+# Subtest: a named part names something that is really on the page
+ok 250 - a named part names something that is really on the page
+  ---
+  duration_ms: 55.352625
+  type: 'test'
+  ...
+# Subtest: the manual plate is as wide as its own longest step, and no wider
+ok 251 - the manual plate is as wide as its own longest step, and no wider
+  ---
+  duration_ms: 0.491042
+  type: 'test'
+  ...
+# Subtest: the manual adds no font size of its own
+ok 252 - the manual adds no font size of its own
+  ---
+  duration_ms: 0.398
+  type: 'test'
+  ...
+# Subtest: the rooms that failed the manual test were simplified, not documented around
+ok 253 - the rooms that failed the manual test were simplified, not documented around
+  ---
+  duration_ms: 0.413958
+  type: 'test'
+  ...
+# Subtest: no line on this site is wider than the house measure of 65ch
+ok 254 - no line on this site is wider than the house measure of 65ch
+  ---
+  duration_ms: 2.492208
+  type: 'test'
+  ...
+# Subtest: the prose itself is capped at 62ch, which is the house number
+ok 255 - the prose itself is capped at 62ch, which is the house number
+  ---
+  duration_ms: 0.346166
+  type: 'test'
+  ...
+# Subtest: the measure is applied to the text, not only to a container around it
+ok 256 - the measure is applied to the text, not only to a container around it
+  ---
+  duration_ms: 0.784083
+  type: 'test'
+  ...
+# Subtest: HTML module stamp and static imports must refer to one module identity
+ok 257 - HTML module stamp and static imports must refer to one module identity
+  ---
+  duration_ms: 207.64625
+  type: 'test'
+  ...
+# Subtest: dynamic imports also participate in the HTML module graph
+ok 258 - dynamic imports also participate in the HTML module graph
+  ---
+  duration_ms: 189.027
+  type: 'test'
+  ...
+# Subtest: every lens can describe itself in all three supported languages
+ok 259 - every lens can describe itself in all three supported languages
+  ---
+  duration_ms: 0.736
+  type: 'test'
+  ...
+# Subtest: every routed page boots the shared language and navigation controls
+ok 260 - every routed page boots the shared language and navigation controls
+  ---
+  duration_ms: 8.865667
+  type: 'test'
+  ...
+# Subtest: Chinese handbook chrome cannot hide an untranslated-article notice
+ok 261 - Chinese handbook chrome cannot hide an untranslated-article notice
+  ---
+  duration_ms: 0.4135
+  type: 'test'
+  ...
+# Subtest: untranslated footer cannot mark a translated activity as untranslated
+ok 262 - untranslated footer cannot mark a translated activity as untranslated
+  ---
+  duration_ms: 0.150334
+  type: 'test'
+  ...
+# Subtest: luma weights sum to 1 so white stays 255
+ok 263 - luma weights sum to 1 so white stays 255
+  ---
+  duration_ms: 0.810542
+  type: 'test'
+  ...
+# Subtest: otsu splits a two-tone picture between the tones
+ok 264 - otsu splits a two-tone picture between the tones
+  ---
+  duration_ms: 0.789917
+  type: 'test'
+  ...
+# Subtest: identity kernel leaves the picture unchanged; sobel finds a vertical edge
+ok 265 - identity kernel leaves the picture unchanged; sobel finds a vertical edge
+  ---
+  duration_ms: 0.225125
+  type: 'test'
+  ...
+# Subtest: pixelate averages blocks
+ok 266 - pixelate averages blocks
+  ---
+  duration_ms: 0.129084
+  type: 'test'
+  ...
+# Subtest: diffMask + dilate + blobs find one moving square
+ok 267 - diffMask + dilate + blobs find one moving square
+  ---
+  duration_ms: 0.377834
+  type: 'test'
+  ...
+# Subtest: readFrame calls a black frame dark and flat
+ok 268 - readFrame calls a black frame dark and flat
+  ---
+  duration_ms: 0.152084
+  type: 'test'
+  ...
+# Subtest: the four hues are the ones the site wears now
+ok 269 - the four hues are the ones the site wears now
+  ---
+  duration_ms: 1.271875
+  type: 'test'
+  ...
+# Subtest: the tone ladder is one shared move, applied to every hue
+ok 270 - the tone ladder is one shared move, applied to every hue
+  ---
+  duration_ms: 0.305
+  type: 'test'
+  ...
+# Subtest: every required pairing clears its floor and every banned one stays under
+ok 271 - every required pairing clears its floor and every banned one stays under
+  ---
+  duration_ms: 0.336459
+  type: 'test'
+  ...
+# Subtest: there are exactly 24 deals of four hues to four roles, each used once
+ok 272 - there are exactly 24 deals of four hues to four roles, each used once
+  ---
+  duration_ms: 0.717917
+  type: 'test'
+  ...
+# Subtest: every plate id is unique
+ok 273 - every plate id is unique
+  ---
+  duration_ms: 1.586584
+  type: 'test'
+  ...
+# Subtest: legible agrees with an independent measurement of the pairings the plate paints
+ok 274 - legible agrees with an independent measurement of the pairings the plate paints
+  ---
+  duration_ms: 1.566958
+  type: 'test'
+  ...
+# Subtest: a mark needs the non-text floor, not the text floor
+ok 275 - a mark needs the non-text floor, not the text floor
+  ---
+  duration_ms: 0.895583
+  type: 'test'
+  ...
+# Subtest: jasper red is the one hue the machine refuses as paper
+ok 276 - jasper red is the one hue the machine refuses as paper
+  ---
+  duration_ms: 0.635917
+  type: 'test'
+  ...
+# Subtest: toneFor prefers the base tone and steps down only when it must
+ok 277 - toneFor prefers the base tone and steps down only when it must
+  ---
+  duration_ms: 0.453166
+  type: 'test'
+  ...
+# Subtest: toneFor reports the best it managed when nothing clears
+ok 278 - toneFor reports the best it managed when nothing clears
+  ---
+  duration_ms: 0.338375
+  type: 'test'
+  ...
+# Subtest: a still the relay already marked dead is not offered again
+ok 279 - a still the relay already marked dead is not offered again
+  ---
+  duration_ms: 0.89325
+  type: 'test'
+  ...
+# Subtest: a census retry skips cameras that just failed when others remain
+ok 280 - a census retry skips cameras that just failed when others remain
+  ---
+  duration_ms: 0.768708
+  type: 'test'
+  ...
+# Subtest: when every readable camera just failed, the retry still has something to ask
+ok 281 - when every readable camera just failed, the retry still has something to ask
+  ---
+  duration_ms: 0.08725
+  type: 'test'
+  ...
+# Subtest: cameras that answered, and h:1, sort ahead of the untested ones
+ok 282 - cameras that answered, and h:1, sort ahead of the untested ones
+  ---
+  duration_ms: 0.076584
+  type: 'test'
+  ...
+# Subtest: a preferred video is kept when only one video slot is open
+ok 283 - a preferred video is kept when only one video slot is open
+  ---
+  duration_ms: 0.063667
+  type: 'test'
+  ...
+# Subtest: practice traffic advances through visible time even when no preview was drawn
+ok 284 - practice traffic advances through visible time even when no preview was drawn
+  ---
+  duration_ms: 1.90425
+  type: 'test'
+  ...
+# Subtest: practice scene controls hold the traffic type while frames keep moving
+ok 285 - practice scene controls hold the traffic type while frames keep moving
+  ---
+  duration_ms: 0.207459
+  type: 'test'
+  ...
+# Subtest: hidden-tab time is excluded and closing removes the visibility listener
+ok 286 - hidden-tab time is excluded and closing removes the visibility listener
+  ---
+  duration_ms: 0.219583
+  type: 'test'
+  ...
+# Subtest: practice is ready only when the actual selected frame has decoded
+ok 287 - practice is ready only when the actual selected frame has decoded
+  ---
+  duration_ms: 0.550459
+  type: 'test'
+  ...
+# Subtest: the first camera is probed three at a time, and a slow one is aborted
+ok 288 - the first camera is probed three at a time, and a slow one is aborted
+  ---
+  duration_ms: 43.149542
+  type: 'test'
+  ...
+# Subtest: a specimen with no source asks for a picture instead of pretending to study
+ok 289 - a specimen with no source asks for a picture instead of pretending to study
+  ---
+  duration_ms: 1.457791
+  type: 'test'
+  ...
+# Subtest: a stopped picture notifies learners instead of only changing the bar
+ok 290 - a stopped picture notifies learners instead of only changing the bar
+  ---
+  duration_ms: 1.828459
+  type: 'test'
+  ...
+# Subtest: a room that straddles the chevron is not shown as a half glyph
+ok 291 - a room that straddles the chevron is not shown as a half glyph
+  ---
+  duration_ms: 0.430333
+  type: 'test'
+  ...
+# Subtest: a room wholly inside the rail is left where it is
+ok 292 - a room wholly inside the rail is left where it is
+  ---
+  duration_ms: 0.05175
+  type: 'test'
+  ...
+# Subtest: the last rooms stay visible once the rail is scrolled to the end
+ok 293 - the last rooms stay visible once the rail is scrolled to the end
+  ---
+  duration_ms: 0.043958
+  type: 'test'
+  ...
+# Subtest: a few pixels of padding past the chevron is not a cut word
+ok 294 - a few pixels of padding past the chevron is not a cut word
+  ---
+  duration_ms: 0.039166
+  type: 'test'
+  ...
+# Subtest: a room cut off the left edge is hidden as well
+ok 295 - a room cut off the left edge is hidden as well
+  ---
+  duration_ms: 0.042416
+  type: 'test'
+  ...
+# Subtest: pose readings match pure yaw, pitch and roll
+ok 296 - pose readings match pure yaw, pitch and roll
+  ---
+  duration_ms: 1.310125
+  type: 'test'
+  ...
+# Subtest: canonical landmarks undo the camera rotation
+ok 297 - canonical landmarks undo the camera rotation
+  ---
+  duration_ms: 0.756541
+  type: 'test'
+  ...
+# Subtest: coverage records an angle without forgetting the others, and does not mutate
+ok 298 - coverage records an angle without forgetting the others, and does not mutate
+  ---
+  duration_ms: 0.110041
+  type: 'test'
+  ...
+# Subtest: the scalp cap is geometry past the forehead, and only the crown pose asks for it
+ok 299 - the scalp cap is geometry past the forehead, and only the crown pose asks for it
+  ---
+  duration_ms: 0.241583
+  type: 'test'
+  ...
+# Subtest: a turned head accumulates face points, and the scalp waits for the crown
+ok 300 - a turned head accumulates face points, and the scalp waits for the crown
+  ---
+  duration_ms: 2.5455
+  type: 'test'
+  ...
+# Subtest: the cloud dedupes, separates kinds, and stops at its cap
+ok 301 - the cloud dedupes, separates kinds, and stops at its cap
+  ---
+  duration_ms: 0.200792
+  type: 'test'
+  ...
+# Subtest: a nearer point projects larger than a farther one
+ok 302 - a nearer point projects larger than a farther one
+  ---
+  duration_ms: 0.286292
+  type: 'test'
+  ...
+# Subtest: every dynamic phrase exists in Thai, English and Chinese
+ok 303 - every dynamic phrase exists in Thai, English and Chinese
+  ---
+  duration_ms: 0.315958
+  type: 'test'
+  ...
+# Subtest: the room page carries Thai, English and Chinese, and only the official reel embed
+ok 304 - the room page carries Thai, English and Chinese, and only the official reel embed
+  ---
+  duration_ms: 1.485958
+  type: 'test'
+  ...
+# Subtest: the demo script does not store or upload, and stays inside the plate
+ok 305 - the demo script does not store or upload, and stays inside the plate
+  ---
+  duration_ms: 0.834417
+  type: 'test'
+  ...
+# Subtest: the route exists and the frame policy is only the Instagram reel
+ok 306 - the route exists and the frame policy is only the Instagram reel
+  ---
+  duration_ms: 0.491
+  type: 'test'
+  ...
+# Subtest: serves a frame and caches it for the TTL
+ok 307 - serves a frame and caches it for the TTL
+  ---
+  duration_ms: 26.21775
+  type: 'test'
+  ...
+# Subtest: never follows redirects and refuses unknown ids
+ok 308 - never follows redirects and refuses unknown ids
+  ---
+  duration_ms: 0.42
+  type: 'test'
+  ...
+# Subtest: rejects non-images, tiny and oversized bodies as 424, never 502 or 504
+ok 309 - rejects non-images, tiny and oversized bodies as 424, never 502 or 504
+  ---
+  duration_ms: 6.527958
+  type: 'test'
+  ...
+# Subtest: coalesces concurrent requests for one camera into one upstream fetch
+ok 310 - coalesces concurrent requests for one camera into one upstream fetch
+  ---
+  duration_ms: 0.931875
+  type: 'test'
+  ...
+# Subtest: opens the circuit breaker after repeated failures on a host
+ok 311 - opens the circuit breaker after repeated failures on a host
+  ---
+  duration_ms: 1.192125
+  type: 'test'
+  ...
+# Subtest: sweep empties expired frames so idle memory returns to zero
+ok 312 - sweep empties expired frames so idle memory returns to zero
+  ---
+  duration_ms: 0.519334
+  type: 'test'
+  ...
+# Subtest: refuses new frames once the wait queue is full — the relay is not a socket warehouse
+ok 313 - refuses new frames once the wait queue is full — the relay is not a socket warehouse
+  ---
+  duration_ms: 3.545708
+  type: 'test'
+  ...
+# Subtest: semaphore limits concurrency and serves waiters in order
+ok 314 - semaphore limits concurrency and serves waiters in order
+  ---
+  duration_ms: 0.105167
+  type: 'test'
+  ...
+# Subtest: stops reading an oversized chunked response and cancels upstream
+ok 315 - stops reading an oversized chunked response and cancels upstream
+  ---
+  duration_ms: 2.269416
+  type: 'test'
+  ...
+# Subtest: queued requests respect a breaker opened while waiting
+ok 316 - queued requests respect a breaker opened while waiting
+  ---
+  duration_ms: 1.260833
+  type: 'test'
+  ...
+# Subtest: the wait queue is bounded per host, not only in the global queue
+ok 317 - the wait queue is bounded per host, not only in the global queue
+  ---
+  duration_ms: 4.195709
+  type: 'test'
+  ...
+# Subtest: the breaker counts one host, not one port
+ok 318 - the breaker counts one host, not one port
+  ---
+  duration_ms: 0.621334
+  type: 'test'
+  ...
+# Subtest: dead cameras cannot be used to rest a whole host
+ok 319 - dead cameras cannot be used to rest a whole host
+  ---
+  duration_ms: 1.126541
+  type: 'test'
+  ...
+# Subtest: a host that really is broken still opens the breaker
+ok 320 - a host that really is broken still opens the breaker
+  ---
+  duration_ms: 1.101042
+  type: 'test'
+  ...
+# Subtest: one queue budget covers all hosts, with accurate waiting stats
+ok 321 - one queue budget covers all hosts, with accurate waiting stats
+  ---
+  duration_ms: 3.548625
+  type: 'test'
+  ...
+# Subtest: synchronous multi-host arrivals cannot overbook the pending budget
+ok 322 - synchronous multi-host arrivals cannot overbook the pending budget
+  ---
+  duration_ms: 1.008584
+  type: 'test'
+  ...
+# Subtest: the visual lesson precedes the optional catalogue and about section
+ok 323 - the visual lesson precedes the optional catalogue and about section
+  ---
+  duration_ms: 1.1895
+  type: 'test'
+  ...
+# Subtest: the opening has a single heading and optional readable contents
+ok 324 - the opening has a single heading and optional readable contents
+  ---
+  duration_ms: 0.17375
+  type: 'test'
+  ...
+# Subtest: the four landmarks are marks on one axis, not four boxes
+ok 325 - the four landmarks are marks on one axis, not four boxes
+  ---
+  duration_ms: 0.328459
+  type: 'test'
+  ...
+# Subtest: each year keeps its descriptive name for assistive technology
+ok 326 - each year keeps its descriptive name for assistive technology
+  ---
+  duration_ms: 0.157459
+  type: 'test'
+  ...
+# Subtest: one way in is a field and the rest are words, in both places that offer a way in
+ok 327 - one way in is a field and the rest are words, in both places that offer a way in
+  ---
+  duration_ms: 0.374041
+  type: 'test'
+  ...
+# Subtest: the landmark chooser still degrades to four readable panels without JavaScript
+ok 328 - the landmark chooser still degrades to four readable panels without JavaScript
+  ---
+  duration_ms: 0.201125
+  type: 'test'
+  ...
+# Subtest: deep links reveal the optional catalogue before aligning its target
+ok 329 - deep links reveal the optional catalogue before aligning its target
+  ---
+  duration_ms: 1.272459
+  type: 'test'
+  ...
+# Subtest: section links realign even when the target is not a history or learning panel
+ok 330 - section links realign even when the target is not a history or learning panel
+  ---
+  duration_ms: 0.142417
+  type: 'test'
+  ...
+# Subtest: tries both unknown actions before using observed rewards
+ok 331 - tries both unknown actions before using observed rewards
+  ---
+  duration_ms: 0.652125
+  type: 'test'
+  ...
+# Subtest: values are averages of feedback, and change when rewards change
+ok 332 - values are averages of feedback, and change when rewards change
+  ---
+  duration_ms: 0.1365
+  type: 'test'
+  ...
+# Subtest: one try on a path reads "1 time", never "1 times"
+ok 333 - one try on a path reads "1 time", never "1 times"
+  ---
+  duration_ms: 0.747833
+  type: 'test'
+  ...
+# Subtest: the thai readout never pluralises, and unknown paths say so
+ok 334 - the thai readout never pluralises, and unknown paths say so
+  ---
+  duration_ms: 0.15225
+  type: 'test'
+  ...
+# Subtest: before anything is tried, the readout invites both paths
+ok 335 - before anything is tried, the readout invites both paths
+  ---
+  duration_ms: 0.119709
+  type: 'test'
+  ...
+# Subtest: the next-choice explanation distinguishes exploration, learned preference and ties
+ok 336 - the next-choice explanation distinguishes exploration, learned preference and ties
+  ---
+  duration_ms: 0.163708
+  type: 'test'
+  ...
+# (node:98505) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: a late camera cannot replace a newer local photo
+ok 337 - a late camera cannot replace a newer local photo
+  ---
+  duration_ms: 29.655667
+  type: 'test'
+  ...
+# Subtest: closing a specimen releases a source that finishes opening later
+ok 338 - closing a specimen releases a source that finishes opening later
+  ---
+  duration_ms: 0.259791
+  type: 'test'
+  ...
+# Subtest: a late still refresh closes its bitmap after the source is closed
+ok 339 - a late still refresh closes its bitmap after the source is closed
+  ---
+  duration_ms: 0.525792
+  type: 'test'
+  ...
+# Subtest: overlapping webcam requests release the late stream and keep the newer camera
+ok 340 - overlapping webcam requests release the late stream and keep the newer camera
+  ---
+  duration_ms: 0.73875
+  type: 'test'
+  ...
+# Subtest: an unanswered camera request times out and releases a late permission grant
+ok 341 - an unanswered camera request times out and releases a late permission grant
+  ---
+  duration_ms: 0.7115
+  type: 'test'
+  ...
+# Subtest: pending video playback times out and releases the camera
+ok 342 - pending video playback times out and releases the camera
+  ---
+  duration_ms: 1.436875
+  type: 'test'
+  ...
+# Subtest: a working webcam is installed even when device enumeration never answers
+ok 343 - a working webcam is installed even when device enumeration never answers
+  ---
+  duration_ms: 0.936
+  type: 'test'
+  ...
+# Subtest: a late local clip is discarded after a newer source choice and releases its URL
+ok 344 - a late local clip is discarded after a newer source choice and releases its URL
+  ---
+  duration_ms: 0.676875
+  type: 'test'
+  ...
+# Subtest: the actual webcam stop branch publishes readiness loss to its learners
+ok 345 - the actual webcam stop branch publishes readiness loss to its learners
+  ---
+  duration_ms: 1.2915
+  type: 'test'
+  ...
+# Subtest: reopening a webcam publishes its release before waiting for permission
+ok 346 - reopening a webcam publishes its release before waiting for permission
+  ---
+  duration_ms: 0.97175
+  type: 'test'
+  ...
+# Subtest: every class the street can be named by is a real COCO class the site model knows
+ok 347 - every class the street can be named by is a real COCO class the site model knows
+  ---
+  duration_ms: 0.868792
+  type: 'test'
+  ...
+# Subtest: the things a detector cannot name are named here as unnameable, not quietly given a class
+ok 348 - the things a detector cannot name are named here as unnameable, not quietly given a class
+  ---
+  duration_ms: 0.117041
+  type: 'test'
+  ...
+# Subtest: a world contains a street, and every piece of it has its own identity
+ok 349 - a world contains a street, and every piece of it has its own identity
+  ---
+  duration_ms: 76.965
+  type: 'test'
+  ...
+# Subtest: the camera can only ever believe in one object at a time per id — so the tracker must key uniquely
+ok 350 - the camera can only ever believe in one object at a time per id — so the tracker must key uniquely
+  ---
+  duration_ms: 304.525708
+  type: 'test'
+  ...
+# Subtest: nothing stands in another road's carriageway — a junction is kept clear
+ok 351 - nothing stands in another road's carriageway — a junction is kept clear
+  ---
+  duration_ms: 128.801875
+  type: 'test'
+  ...
+# Subtest: parked bicycles and motorbikes wait at the kerb, not in the running lane
+ok 352 - parked bicycles and motorbikes wait at the kerb, not in the running lane
+  ---
+  duration_ms: 47.490875
+  type: 'test'
+  ...
+# Subtest: the footway is outside the kerb, and the kerb is at the real 3.2 m
+ok 353 - the footway is outside the kerb, and the kerb is at the real 3.2 m
+  ---
+  duration_ms: 31.090041
+  type: 'test'
+  ...
+# Subtest: a car on the road comes to believe in real street classes, and in the right words
+ok 354 - a car on the road comes to believe in real street classes, and in the right words
+  ---
+  duration_ms: 482.959958
+  type: 'test'
+  ...
+# Subtest: a street object with no COCO class is never given a detection box
+ok 355 - a street object with no COCO class is never given a detection box
+  ---
+  duration_ms: 3.3665
+  type: 'test'
+  ...
+# Subtest: a challenge is fair: between two and six of the nine squares hold the target
+ok 356 - a challenge is fair: between two and six of the nine squares hold the target
+  ---
+  duration_ms: 1.633291
+  type: 'test'
+  ...
+# Subtest: the same seed always produces the same challenge — reloading is not a new question
+ok 357 - the same seed always produces the same challenge — reloading is not a new question
+  ---
+  duration_ms: 0.2175
+  type: 'test'
+  ...
+# Subtest: you pass with the right squares or one slip, not two
+ok 358 - you pass with the right squares or one slip, not two
+  ---
+  duration_ms: 0.113792
+  type: 'test'
+  ...
+# Subtest: a wrong answer explains itself without scolding anyone
+ok 359 - a wrong answer explains itself without scolding anyone
+  ---
+  duration_ms: 0.051666
+  type: 'test'
+  ...
+# Subtest: Drive cards, totals and focus speak Simplified Chinese, not Thai, when lang is zh
+ok 360 - Drive cards, totals and focus speak Simplified Chinese, not Thai, when lang is zh
+  ---
+  duration_ms: 0.719209
+  type: 'test'
+  ...
+# Subtest: every challenge asks about a class COCO really has
+ok 361 - every challenge asks about a class COCO really has
+  ---
+  duration_ms: 0.041458
+  type: 'test'
+  ...
+# Subtest: a tile becomes 64 brightness cells centred on mid-grey, plus 3 colour readings
+ok 362 - a tile becomes 64 brightness cells centred on mid-grey, plus 3 colour readings
+  ---
+  duration_ms: 0.903333
+  type: 'test'
+  ...
+# Subtest: brightness cells run from −0.5 (black) to +0.5 (white), mapped by position
+ok 363 - brightness cells run from −0.5 (black) to +0.5 (white), mapped by position
+  ---
+  duration_ms: 0.174583
+  type: 'test'
+  ...
+# Subtest: a lamp-coloured reading is scaled to the same order as the brightness cells
+ok 364 - a lamp-coloured reading is scaled to the same order as the brightness cells
+  ---
+  duration_ms: 0.137041
+  type: 'test'
+  ...
+# Subtest: training lifts the weight of the feature that separates the labels
+ok 365 - training lifts the weight of the feature that separates the labels
+  ---
+  duration_ms: 4.363292
+  type: 'test'
+  ...
+# Subtest: the same labels always teach the same machine
+ok 366 - the same labels always teach the same machine
+  ---
+  duration_ms: 3.843833
+  type: 'test'
+  ...
+# Subtest: predict never overflows, whichever side of the wall it is on
+ok 367 - predict never overflows, whichever side of the wall it is on
+  ---
+  duration_ms: 0.079208
+  type: 'test'
+  ...
+# Subtest: pick answers only with tiles at or above half, and says how sure it is
+ok 368 - pick answers only with tiles at or above half, and says how sure it is
+  ---
+  duration_ms: 0.246208
+  type: 'test'
+  ...
+# Subtest: an empty lesson teaches nothing, and says so at half
+ok 369 - an empty lesson teaches nothing, and says so at half
+  ---
+  duration_ms: 0.051542
+  type: 'test'
+  ...
+# Subtest: the room asks all three learners the same picture
+ok 370 - the room asks all three learners the same picture
+  ---
+  duration_ms: 1.480584
+  type: 'test'
+  ...
+# Subtest: the room wires the comparison through the module the tests can read
+ok 371 - the room wires the comparison through the module the tests can read
+  ---
+  duration_ms: 0.274917
+  type: 'test'
+  ...
+# Subtest: there is one card per learning method, and they are the room's three
+ok 372 - there is one card per learning method, and they are the room's three
+  ---
+  duration_ms: 0.928417
+  type: 'test'
+  ...
+# Subtest: each card says what you give it and what it answers, in both languages
+ok 373 - each card says what you give it and what it answers, in both languages
+  ---
+  duration_ms: 0.273209
+  type: 'test'
+  ...
+# Subtest: the three cards ask three different things of you
+ok 374 - the three cards ask three different things of you
+  ---
+  duration_ms: 0.150084
+  type: 'test'
+  ...
+# Subtest: the reinforcement learner answers with an action, not a label
+ok 375 - the reinforcement learner answers with an action, not a label
+  ---
+  duration_ms: 0.28575
+  type: 'test'
+  ...
+# Subtest: the reinforcement learner answers even with nothing learned
+ok 376 - the reinforcement learner answers even with nothing learned
+  ---
+  duration_ms: 0.121
+  type: 'test'
+  ...
+# Subtest: the supervised card cannot answer before the learner has been taught
+ok 377 - the supervised card cannot answer before the learner has been taught
+  ---
+  duration_ms: 0.077458
+  type: 'test'
+  ...
+# Subtest: the supervised card stops asking for pictures the reader already gave
+ok 378 - the supervised card stops asking for pictures the reader already gave
+  ---
+  duration_ms: 0.29475
+  type: 'test'
+  ...
+# Subtest: the reinforcement card tells the truth about the scores it has
+ok 379 - the reinforcement card tells the truth about the scores it has
+  ---
+  duration_ms: 0.450625
+  type: 'test'
+  ...
+# Subtest: the comparison puts its ask control before the optional picture
+ok 380 - the comparison puts its ask control before the optional picture
+  ---
+  duration_ms: 0.126292
+  type: 'test'
+  ...
+# Subtest: the two actions have one name, not a copy in each place
+ok 381 - the two actions have one name, not a copy in each place
+  ---
+  duration_ms: 0.225667
+  type: 'test'
+  ...
+# Subtest: every sentence the cards can say exists in Thai as well as English
+ok 382 - every sentence the cards can say exists in Thai as well as English
+  ---
+  duration_ms: 0.774125
+  type: 'test'
+  ...
+# Subtest: the picture is never scaled up
+ok 383 - the picture is never scaled up
+  ---
+  duration_ms: 0.290167
+  type: 'test'
+  ...
+# Subtest: the payoff is reachable from the lesson that promises it
+ok 384 - the payoff is reachable from the lesson that promises it
+  ---
+  duration_ms: 0.105667
+  type: 'test'
+  ...
+# Subtest: the comparison is the room's own styling, not a new language
+ok 385 - the comparison is the room's own styling, not a new language
+  ---
+  duration_ms: 0.162292
+  type: 'test'
+  ...
+# Subtest: the demo set is 16 frames: busy then empty, alternating
+ok 386 - the demo set is 16 frames: busy then empty, alternating
+  ---
+  duration_ms: 136.958625
+  type: 'test'
+  ...
+# Subtest: the same seed draws the same frame, so the demo is reproducible
+ok 387 - the same seed draws the same frame, so the demo is reproducible
+  ---
+  duration_ms: 35.118041
+  type: 'test'
+  ...
+# Subtest: busy frames carry more vehicles than empty ones
+ok 388 - busy frames carry more vehicles than empty ones
+  ---
+  duration_ms: 102.419625
+  type: 'test'
+  ...
+# Subtest: the two classes do not draw the same picture for one seed
+ok 389 - the two classes do not draw the same picture for one seed
+  ---
+  duration_ms: 13.526167
+  type: 'test'
+  ...
+# Subtest: every coordinate the projection emits is a finite number
+ok 390 - every coordinate the projection emits is a finite number
+  ---
+  duration_ms: 41.555792
+  type: 'test'
+  ...
+# Subtest: the title sits beside the sentence that explains the task
+ok 391 - the title sits beside the sentence that explains the task
+  ---
+  duration_ms: 0.903792
+  type: 'test'
+  ...
+# Subtest: the title and the sentence stand on the same line
+ok 392 - the title and the sentence stand on the same line
+  ---
+  duration_ms: 0.193375
+  type: 'test'
+  ...
+# Subtest: the title is not capped, so its column can hug it
+ok 393 - the title is not capped, so its column can hug it
+  ---
+  duration_ms: 0.128625
+  type: 'test'
+  ...
+# Subtest: the sentence that explains the task stays inside a readable line
+ok 394 - the sentence that explains the task stays inside a readable line
+  ---
+  duration_ms: 0.116125
+  type: 'test'
+  ...
+# Subtest: the head stacks on a phone, because two columns do not fit in 390px
+ok 395 - the head stacks on a phone, because two columns do not fit in 390px
+  ---
+  duration_ms: 0.31275
+  type: 'test'
+  ...
+# Subtest: stopping training settles its completion and cancels scheduled work
+ok 396 - stopping training settles its completion and cancels scheduled work
+  ---
+  duration_ms: 3.07075
+  type: 'test'
+  ...
+# Subtest: training completes at the requested epoch and reports progress
+ok 397 - training completes at the requested epoch and reports progress
+  ---
+  duration_ms: 8.160542
+  type: 'test'
+  ...
+# Subtest: stopping from a progress callback does not schedule another frame
+ok 398 - stopping from a progress callback does not schedule another frame
+  ---
+  duration_ms: 0.574125
+  type: 'test'
+  ...
+# Subtest: labelled frames decide unseen frames, while clustering uses no labels
+ok 399 - labelled frames decide unseen frames, while clustering uses no labels
+  ---
+  duration_ms: 0.935541
+  type: 'test'
+  ...
+# Subtest: rewarded policy changes by context, explores and responds to correction
+ok 400 - rewarded policy changes by context, explores and responds to correction
+  ---
+  duration_ms: 0.240541
+  type: 'test'
+  ...
+# Subtest: windshield projects the actual heading; boxes cannot appear behind the car
+ok 401 - windshield projects the actual heading; boxes cannot appear behind the car
+  ---
+  duration_ms: 0.418292
+  type: 'test'
+  ...
+# Subtest: sun glare reduces sight; decisions expose the actual limiting tracked object
+ok 402 - sun glare reduces sight; decisions expose the actual limiting tracked object
+  ---
+  duration_ms: 535.793125
+  type: 'test'
+  ...
+# Subtest: a car counts once while it stays put, and again after it leaves
+ok 403 - a car counts once while it stays put, and again after it leaves
+  ---
+  duration_ms: 1.536792
+  type: 'test'
+  ...
+# Subtest: the stored record is a date and a count, and a new day starts again
+ok 404 - the stored record is a date and a count, and a new day starts again
+  ---
+  duration_ms: 0.783458
+  type: 'test'
+  ...
+# Subtest: the Konami code fires only on the full sequence
+ok 405 - the Konami code fires only on the full sequence
+  ---
+  duration_ms: 0.097666
+  type: 'test'
+  ...
+# Subtest: I saw you flashes once per appearance
+ok 406 - I saw you flashes once per appearance
+  ---
+  duration_ms: 0.085959
+  type: 'test'
+  ...
+1..406
+# tests 406
+# suites 0
+# pass 406
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 30496.041292
+{"t":"2026-10-28T19:27:39.469Z","level":"info","msg":"colour study loaded","total":0}
+  ! /api/health reports ok:false (0 cameras, origin empty) — the server is up but has no catalogue
+✓ 27 pages, 97 local references, all JS parses, all model shards present
+✓ 92 modules, 86 resolved imports, no module loaded under two URLs
+{"t":"2026-10-28T19:27:53.677Z","level":"info","msg":"colour study loaded","total":0}
+privacy:
+  script-src closed on 5 pages — no third-party code can run
+  origin serves no third-party script
+  9 browser-storage key(s) all named on /legal
+  origin response carries no Cloudflare beacon (any tag seen in a browser is added at the edge)
+✓ the no-analytics promise is enforced by the CSP, not just asserted
+✓ documentation links and anchors resolve; mermaid sequence diagrams are free of ';'; every handbook element names the language it is written in
+
+  TONE LADDER — every hue on one shared ladder
+
+  hue      deep      base      pale
+  ivory     #383327   #ebd3a2   #fbf5eb
+  indigo    #01040c   #051230   #c8cbd1
+  gray      #2c2e2e   #b6bfc1   #eff1f1
+  jasper    #381409   #eb5324   #fbd9cf
+  black     #0a0a0a   #101010   #161616
+  white     #f7f5ef   #f7f5ef   #ffffff
+
+  PAIRINGS — measured, not asserted
+
+  ✓  12.66:1  (needs 4.5          )  indigo on ivory          #051230 on #ebd3a2
+  ✓  13.02:1  (needs 4.5          )  black on ivory           #101010 on #ebd3a2
+  ✓  14.04:1  (needs 4.5          )  indigo.deep on ivory     #01040c on #ebd3a2
+  ✓  11.30:1  (needs 4.5          )  jasper.deep on ivory     #381409 on #ebd3a2
+  ✓  12.66:1  (needs 4.5          )  ivory on indigo          #ebd3a2 on #051230
+  ✓  17.05:1  (needs 4.5          )  ivory.pale on indigo     #fbf5eb on #051230
+  ✓  17.45:1  (needs 4.5          )  white on black           #f7f5ef on #101010
+  ✓  13.02:1  (needs 4.5          )  ivory on black           #ebd3a2 on #101010
+  ✓  10.16:1  (needs 4.5          )  gray on black            #b6bfc1 on #101010
+  ✓  16.78:1  (needs 4.5          )  gray.pale on black       #eff1f1 on #101010
+  ✓   5.25:1  (needs 3            )  jasper on black          #eb5324 on #101010
+  ✓  14.03:1  (needs 3            )  jasper.pale on indigo    #fbd9cf on #051230
+  ✓   4.80:1  (needs 4.5          )  ivory on the story veil  #ebd3a2 on #50596e
+  ✓   9.87:1  (needs 4.5          )  indigo on gray           #051230 on #b6bfc1
+  ✓  10.16:1  (needs 4.5          )  black on gray            #101010 on #b6bfc1
+  ✓   5.25:1  (needs 4.5          )  black on jasper          #101010 on #eb5324
+  ✓  14.04:1  (needs 4.5          )  ivory on indigo.deep     #ebd3a2 on #01040c
+  ⊘   1.03:1  (stays under 4.5    )  black on indigo          #101010 on #051230
+  ⊘   1.11:1  (stays under 4.5    )  indigo.pale on ivory     #c8cbd1 on #ebd3a2
+  ⊘   2.48:1  (stays under 4.5    )  jasper on ivory          #eb5324 on #ebd3a2
+  ⊘   1.47:1  (stays under 4.5    )  ivory.deep on indigo     #383327 on #051230
+  ⊘   3.32:1  (stays under 4.5    )  white on jasper          #f7f5ef on #eb5324
+
+  COLOUR STUDY — 24 deals of 4 hues to 4 roles
+
+  18 legible · 6 behind the explicit toggle
+
+  No hue clears 4.5:1 on jasper at any tone —
+  so the machine refuses it as a ground, while a person still reads it.
+
+
+  17 required pairings clear their floor · 5 forbidden pairings stay illegible · every ladder hue is still in the CSS.
+
+✓ every changed module is fetched under a new URL
+Published 1.24.0: https://vision.nonarkara.org
