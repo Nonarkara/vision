@@ -19,11 +19,18 @@
 html[data-lang="th"] .gstep { font-family: var(--thai); }
 
 /* The room: camera on the left, gestures and their actions on the right */
-.room { padding: clamp(40px, 6vw, 96px) var(--gutter); }
-.room-head { display: grid; gap: 12px; margin-bottom: var(--gap); max-width: 62ch; }
+.room { padding: 20px var(--gutter); }
+.room-head { display: grid; grid-template-columns: minmax(0, 65ch) auto; gap: 8px 12px; margin-bottom: 16px; align-items: baseline; }
+.room-head h2 { font-size: var(--body); margin: 0; }
+.room-head .setup-next { grid-column: 1; grid-row: 1; font-size: var(--read); max-width: 65ch; }
 .room-head .prose { margin: 0; }
-.room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
-@media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; } }
+.room-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-areas: "picture classes" "results classes"; grid-template-rows: min-content 1fr; gap: 16px var(--gap); align-items: start; }
+.room-bench { grid-area: picture; }
+.room-classes { grid-area: classes; }
+.room-results { grid-area: results; }
+@media (max-width: 1000px) { .room-grid { grid-template-columns: 1fr; grid-template-areas: "picture" "classes" "results"; grid-template-rows: auto; }
+.room-head { grid-template-columns: 1fr; }
+.gesture-guide { grid-column: 1 / -1; } }
 
 .room-bench { scroll-margin-top: 90px; }
 .room-bench .controls .btn { flex: 1 1 auto; }
@@ -98,5 +105,33 @@ html[data-lang="th"] .gstep { font-family: var(--thai); }
 .limits li { background: var(--quiet); color: var(--quiet-text); padding: 10px 14px; font-size: var(--micro); }
 
 /* Put the working camera/classes before the optional extended guide. */
-.room { padding-block: 24px; }
+
 .gesture-guide > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }
+
+/* Empty example strips say what is missing; they do not reserve a future gallery. */
+.shots:has(.shots-empty) { min-height: 0; padding-block: 4px 8px; }
+.room-bench [data-status] { font-size: var(--micro); min-height: 0; }
+.room-results .live-key { margin: 0; padding: 12px 16px 0; }
+.room-results [data-arm-say]:empty, .room-results .log:empty { display: none; }
+
+.room-head .gesture-guide { justify-self: start; }
+.room-bench > .bench-caption { align-items: center; }
+.room-bench [data-model-state] { font-size: var(--fine); }
+
+.room-bench .model-state { margin: 0; padding: 0 16px 12px; color: var(--gray); }
+@media (max-width: 600px) {
+  /* Three source choices share one touch row, rather than making a second band. */
+  .specimen-bar .controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; }
+  .specimen-bar .controls > .btn { min-width: 0; padding-inline: 8px; }
+  .room-bench > .bench-caption { padding-block: 4px; }
+}
+
+.preset > summary { min-height: var(--target); cursor: pointer; padding-block: 8px; font-size: var(--read); }
+.preset { padding-bottom: 8px; }
+.room-bench [data-status]:empty { display: none; }
+.room-bench [data-model-state][hidden] { display: none; }
+
+@media (max-width: 820px) {
+  /* The persistent fullscreen exit has its own space beside the caption. */
+  .room-grid:is(:fullscreen, .is-expanded) .bench-caption > .label { max-width: calc(100% - 190px); }
+}

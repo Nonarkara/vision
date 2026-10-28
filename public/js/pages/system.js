@@ -2,9 +2,9 @@
 // about itself right now. Everything from the network goes in by textContent:
 // source labels come from upstream and are not ours to trust.
 
-import '../core/site.js?v=1.23.0'
-import { t, n, lang, onLang } from '../core/i18n.js?v=1.23.0'
-import { loadCatalog, SOURCES } from '../core/catalog.js?v=1.23.0'
+import '../core/site.js?v=1.23.1'
+import { t, n, lang, onLang } from '../core/i18n.js?v=1.23.1'
+import { loadCatalog, SOURCES } from '../core/catalog.js?v=1.23.1'
 
 const KINDS = ['video', 'still', 'view', 'off']
 const healthBody = document.querySelector('[data-health]')
@@ -135,5 +135,5 @@ readHealth()
 refreshBtn.addEventListener('click', readHealth)
 onLang(() => { paintHealth(); paintSources(); paintAt() })
 
-import { mountReferenceCheck } from '../evaluation/bench.js?v=1.23.0'
+import { mountReferenceCheck } from '../evaluation/bench.js?v=1.23.1'
 mountReferenceCheck()

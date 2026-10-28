@@ -176,3 +176,34 @@ test('a late local clip is discarded after a newer source choice and releases it
   specimen.close()
   assert.equal(newer.closed,true)
 })
+
+test('the actual webcam stop branch publishes readiness loss to its learners', async () => {
+  const stream = mockWebcam(() => Promise.resolve(stream))
+  let ended
+  stream.track.addEventListener = (type, fn) => { if (type === 'ended') ended = fn }
+  const specimen = createSpecimen({ refreshStills: false })
+  const ready = []
+  specimen.on(src => ready.push(!!src?.ready))
+  await specimen.useWebcam()
+  ended()
+  assert.deepEqual(ready, [true, false])
+  assert.equal(specimen.source.ready, false)
+  specimen.close()
+})
+
+test('reopening a webcam publishes its release before waiting for permission', async () => {
+  let calls = 0
+  let refuse
+  const permission = new Promise((resolve, reject) => { refuse = reject })
+  const stream = mockWebcam(() => ++calls === 1 ? Promise.resolve(stream) : permission)
+  const specimen = createSpecimen({ refreshStills: false })
+  const ready = []
+  specimen.on(src => ready.push(!!src?.ready))
+  await specimen.useWebcam()
+  const reopening = specimen.useWebcam()
+  assert.deepEqual(ready, [true, false])
+  assert.equal(specimen.source, null)
+  refuse(new Error('camera refused'))
+  assert.equal(await reopening, null)
+  specimen.close()
+})

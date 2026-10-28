@@ -2,11 +2,11 @@
 // one source and every bench on it reads from that, so ten lenses cost one
 // stream. The bar that controls it always names the camera and its owner.
 
-import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.23.0'
-import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.23.0'
-import { t, bi, esc, onLang } from './i18n.js?v=1.23.0'
-import { assessPixels } from '../cv/quality.js?v=1.23.0'
-import { toast } from './site.js?v=1.23.0'
+import { loadCatalog, pickReadable, camName, sourceName, shuffle, isReadable } from './catalog.js?v=1.23.1'
+import { openCamera, openWebcam, openPhoto, openLocalVideo, SourceError, canUseWebcam, countWebcams } from './source.js?v=1.23.1'
+import { t, bi, esc, onLang } from './i18n.js?v=1.23.1'
+import { assessPixels } from '../cv/quality.js?v=1.23.1'
+import { toast } from './site.js?v=1.23.1'
 
 const STILL_REFRESH_MS = 20_000
 const LAST_CAMERA = 'vision.camera'
@@ -65,7 +65,11 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     source = next
     if (next?.cam) remember(next.cam)
     if (next && !next.onended) {
-      next.onended = () => { if (source === next) status(t('สตรีมนี้ขาดไป กด ↻ เพื่อดูกล้องอื่น', 'This stream dropped — press ↻ for another camera')) }
+      next.onended = () => {
+        if (source !== next) return
+        status(t('สตรีมนี้ขาดไป กด ↻ เพื่อดูกล้องอื่น', 'This stream dropped — press ↻ for another camera'))
+        emit()
+      }
     }
     clearInterval(refreshTimer)
     if (source?.kind === 'still' && refreshStills) {
@@ -172,12 +176,16 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     const ticket = ++request
     status(t('กำลังขออนุญาตใช้กล้องของคุณ…', 'Asking for your camera…'))
     // Release the current camera first: phones refuse a second open of the same sensor.
-    if (source?.kind === 'webcam') { source.close(); source = null }
+    if (source?.kind === 'webcam') { source.close(); source = null; emit() }
     try {
       const src = await openWebcam({ facing: nextFacing })
       if (ticket !== request) { src.close(); return null }
       facing = nextFacing
-      src.onended = () => { if (source === src) status(t('กล้องของคุณหยุดส่งภาพ หรือถูกใช้ที่เครื่องมืออื่นบนหน้านี้ กด “กล้องของฉัน” เพื่อใช้ที่นี่', 'Your camera stopped, or another instrument on this page is using it — press “My camera” to use it here')) }
+      src.onended = () => {
+        if (source !== src) return
+        status(t('กล้องของคุณหยุดส่งภาพ หรือถูกใช้ที่เครื่องมืออื่นบนหน้านี้ กด “กล้องของฉัน” เพื่อใช้ที่นี่', 'Your camera stopped, or another instrument on this page is using it — press “My camera” to use it here'))
+        emit()
+      }
       if (!setSource(src, ticket)) return null
       // Device enumeration is optional; a pending browser response must not
       // hold a working camera behind the startup message.
@@ -219,7 +227,7 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
   }
 
   function describe() {
-    if (!source) return { name: '', meta: '' }
+    if (!source) return { name: t('เลือกภาพ', 'Choose a picture', '选择画面'), meta: '' }
     if (source.kind === 'webcam') return { name: t('กล้องของคุณ', 'Your camera'), meta: t('ภาพอยู่ในเครื่องของคุณเท่านั้น ไม่ถูกส่งไปไหน', 'The picture stays on this device; nothing is sent anywhere') }
     if (source.kind === 'photo') return { name: t('รูปของคุณ', 'Your photo'), meta: t('เปิดในเครื่องของคุณ ไม่ได้อัปโหลด', 'Opened on this device; not uploaded') }
     if (source.kind === 'practice') return { name: t('ภาพฝึกจากกล้องสาธารณะ', 'Public-camera practice footage', '公共摄像头练习画面'), meta: t('ภาพที่บันทึกไว้ ไม่ใช่ภาพสด · เลือกฉากรถแน่นหรือถนนโล่ง', 'Recorded frames, not live · choose busy or quiet scenes', '已录制的画面，并非直播；可选择繁忙或清静场景') }
@@ -236,6 +244,8 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
   function render() {
     if (!bar) return
     const d = describe()
+    const label = bar.querySelector('[data-specimen-label]')
+    if (label) label.textContent = source ? t('กำลังศึกษา', 'Studying', '正在观察') : t('ภาพ', 'Picture', '画面')
     const name = bar.querySelector('[data-specimen-name]')
     const meta = bar.querySelector('[data-specimen-meta]')
     if (name) name.textContent = d.name
@@ -276,6 +286,7 @@ export function createSpecimen({ bar = null, prefer = 'video', refreshStills = t
     const file = bar.querySelector('[data-specimen-photo]')
     file?.addEventListener('change', () => { if (file.files?.[0]) usePhoto(file.files[0]); file.value = '' })
     onLang(render)
+    render()
   }
 
   return {
@@ -315,8 +326,8 @@ export function specimenBarHtml() {
   return `
   <div class="specimen-bar field-black" data-specimen>
     <div class="specimen-who">
-      <span class="label">${bi('กำลังศึกษา', 'Studying')}</span>
-      <strong data-specimen-name>…</strong>
+      <span class="label" data-specimen-label>${bi('ภาพ', 'Picture')}</span>
+      <strong data-specimen-name>${bi('เลือกภาพ', 'Choose a picture')}</strong>
       <span class="micro" data-specimen-meta></span>
     </div>
     <div class="controls">

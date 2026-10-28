@@ -4,7 +4,7 @@
 // settings that have not changed, is not painted again. Eight benches on one
 // page then cost roughly what the one you are looking at costs.
 
-import { fitCanvas } from '../cv/draw.js?v=1.23.0'
+import { fitCanvas } from '../cv/draw.js?v=1.23.1'
 
 /**
  * Drive `paint(ctx, src)` on `canvas`. Returns { invalidate } — call it when a

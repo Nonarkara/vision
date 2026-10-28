@@ -6,24 +6,24 @@
 //
 // Everything — examples, bindings, the log — lives in this tab's memory.
 
-import '../core/site.js?v=1.23.0'
-import { t, n, pct, lang, onLang, esc } from '../core/i18n.js?v=1.23.0'
-import { toast, confirmBox } from '../core/site.js?v=1.23.0'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.23.0'
-import { canUseWebcam } from '../core/source.js?v=1.23.0'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.23.0'
-import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.23.0'
-import { knnPredict } from '../ml/learner.js?v=1.23.0'
-import * as store from '../train/store.js?v=1.23.0'
-import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.23.0'
-import { createClassList } from '../train/classes-ui.js?v=1.23.0'
-import { createBars } from '../train/bars.js?v=1.23.0'
-import { createTrigger } from '../gesture/fire.js?v=1.23.0'
-import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.23.0'
+import '../core/site.js?v=1.23.1'
+import { t, n, pct, lang, onLang, esc } from '../core/i18n.js?v=1.23.1'
+import { toast, confirmBox } from '../core/site.js?v=1.23.1'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.23.1'
+import { canUseWebcam } from '../core/source.js?v=1.23.1'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.23.1'
+import { outlineEdges, handRegion, mountSaw } from '../cv/feedback.js?v=1.23.1'
+import { knnPredict } from '../ml/learner.js?v=1.23.1'
+import * as store from '../train/store.js?v=1.23.1'
+import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.23.1'
+import { createClassList } from '../train/classes-ui.js?v=1.23.1'
+import { createBars } from '../train/bars.js?v=1.23.1'
+import { setupState, MIN_EXAMPLES } from '../gesture/setup.js?v=1.23.1'
+import { createTrigger } from '../gesture/fire.js?v=1.23.1'
+import { ACTIONS, DEFAULT_ACTIONS, PRESET_ACTIONS, createActions } from '../gesture/actions.js?v=1.23.1'
 
 const K = 5
 const LIVE_MS = 250
-const MIN_EXAMPLES = 3
 const DEMO_MB = '14 MB'
 
 const $ = (sel) => document.querySelector(sel)
@@ -55,12 +55,20 @@ runLens($('[data-view]'), () => specimen.source, () => ({ name: 'picture' }), {
     handSaw.update(found.score, 'edges')
   },
 })
-specimen.on((src) => { viewState.hidden = !!src; lastLiveKey = ''; paintManual() })
+let lastSource = null
+specimen.on((src) => {
+  if (src !== lastSource || !src?.ready) cancelArm()
+  lastSource = src
+  viewState.hidden = !!src?.ready
+  if (!src?.ready) paintIdlePicture()
+  lastLiveKey = ''
+  paintManual()
+})
 specimen.onError((text, kept) => { if (!kept) { viewState.hidden = false; viewState.textContent = text } })
 // Gestures are made by you, so your camera comes first. A road camera loads
 // only on a device that has no camera to offer.
 if (canUseWebcam()) {
-  viewState.textContent = t('กด “ใช้กล้องของฉัน” เพื่อเริ่ม — ภาพไม่ออกจากเครื่องนี้', 'Press “Use my camera” to begin — the picture never leaves this device')
+  paintIdlePicture()
 } else {
   viewState.textContent = t('กำลังหากล้องที่ตอบ…', 'Finding a camera that answers…')
   startSpecimen(specimen).then((src) => {
@@ -68,9 +76,16 @@ if (canUseWebcam()) {
   })
 }
 
-const mineBtn = $('[data-mine]')
-if (!canUseWebcam()) mineBtn.hidden = true
-mineBtn.addEventListener('click', () => specimen.useWebcam())
+function paintIdlePicture() {
+  if (specimen.source?.ready) return
+  if ($('[data-fullscreen]')?.getAttribute('aria-pressed') === 'true') {
+    viewState.textContent = t('ภาพหยุดแล้ว ออกจากเต็มจอเพื่อเลือกกล้องหรือรูปใหม่', 'The picture stopped. Exit full screen to choose another camera or photo.')
+    return
+  }
+  viewState.textContent = specimen.source
+    ? t('ภาพหยุดแล้ว เลือกกล้องหรือรูปจากแถบด้านบนอีกครั้ง', 'The picture stopped. Choose a camera or photo above again.')
+    : t('เลือก “กล้องของฉัน” หรือ “รูปของฉัน” ด้านบน เพื่อเริ่มสอน', 'Choose “My camera” or “My photo” above to start teaching')
+}
 
 // ── The network: loads on the first example, says how far along it is ───
 
@@ -79,6 +94,7 @@ let modelP = -1
 let statusFn = () => ''
 function say(fn) { statusFn = fn; statusEl.textContent = fn() }
 function paintModel() {
+  modelState.hidden = modelP < 0 && !isLoaded()
   modelState.textContent = isLoaded() || modelP >= 1 ? `MobileNetV2 · ${t('พร้อม', 'ready')}`
     : modelP < 0 ? `MobileNetV2 · ${t('ยังไม่โหลด', 'not loaded')}`
       : `MobileNetV2 · ${Math.round(modelP * 100)}%`
@@ -90,7 +106,7 @@ document.addEventListener('modelprogress', (e) => {
   if (e.detail.done) say(() => t('โครงข่ายพร้อมแล้ว ครั้งแรกอาจช้าสักครู่ระหว่างที่การ์ดจอเตรียมตัว', 'The network is ready. The very first look can take a moment while the graphics card warms up.'))
   else say(() => `${t(`กำลังโหลดโครงข่าย (${DEMO_MB} ครั้งแรกเท่านั้น)`, `Loading the network (${DEMO_MB}, first time only)`)} ${Math.round(modelP * 100)}%`)
 })
-say(() => t(`กด “เพิ่มตัวอย่าง” ครั้งแรก แล้วโครงข่ายจะโหลด (${DEMO_MB} ครั้งเดียว)`, `The network loads (${DEMO_MB}, once) when you add your first example.`))
+say(() => '')
 
 // ── Examples ────────────────────────────────────────────────────────────
 
@@ -98,7 +114,7 @@ let capturing = 0
 
 async function capture(key, { quiet }) {
   const src = specimen.source
-  if (!src?.ready) { if (!quiet) toast(t('ยังไม่มีภาพ รอกล้องสักครู่', 'No picture yet — wait for the camera')); return }
+  if (!src?.ready) { if (!quiet) toast(t('เลือกกล้องหรือรูปจากแถบด้านบนก่อน', 'Choose a camera or photo above first')); return }
   if (store.isFull(key)) { if (!quiet) toast(t(`กลุ่มนี้เต็มแล้ว (${store.MAX_PER_CLASS} ภาพ)`, `This class is full (${store.MAX_PER_CLASS} examples)`)); return }
   if (capturing) { if (!quiet) toast(t('กำลังประมวลผลภาพก่อนหน้า รอสักครู่', 'Still working on the last picture — one moment')); return }
   const snap = snapshot(src)
@@ -196,30 +212,54 @@ const actions = createActions({
 // ── Arm / rest: the click the browser insists on before anything runs ───
 
 let armed = false
+let arming = false
+let armTicket = 0
 let lastArm = null
 const armBtn = $('[data-arm]')
 const armSay = $('[data-arm-say]')
 
+function cancelArm() {
+  armTicket++
+  arming = false
+  armed = false
+  actions.disarm()
+  lastArm = null
+  armSay.textContent = ''
+}
+
 armBtn.addEventListener('click', async () => {
-  const res = await actions.arm()
+  if (arming || setupState(store.getClasses(), specimen.source?.ready).stage !== 'ready') return
+  const ticket = ++armTicket
+  arming = true
+  paintManual()
+  const openWindow = store.getClasses().some((c, i) => actionFor(c, i) === 'link')
+  const res = await actions.arm({ openWindow })
+  if (ticket !== armTicket) return
+  arming = false
+  if (setupState(store.getClasses(), specimen.source?.ready).stage !== 'ready') {
+    cancelArm()
+    paintManual()
+    return
+  }
   armed = true
   lastArm = res
   armSay.textContent = `${res.ok ? '✓' : '!'} ${t(res.th, res.en)}`
-  paintArm()
   paintManual()
-  toast(t('เปิดใช้การกระทำแล้ว — ทำท่าได้เลย', 'Actions armed — make a gesture'))
+  toast(t('เปิดใช้การกระทำแล้ว — ทำท่าได้เลย', 'Actions are on — make a gesture'))
 })
 
 $('[data-disarm]').addEventListener('click', () => {
-  armed = false
-  actions.disarm()
-  armSay.textContent = t('✓ พักการกระทำไว้แล้ว — ท่าของคุณจะไม่ทำอะไรตอนนี้', '✓ Actions are resting — a gesture will do nothing now')
+  cancelArm()
+  lastArm = { ok: true, th: 'ปิดการกระทำแล้ว — ท่าของคุณจะไม่ทำอะไรตอนนี้', en: 'Actions are off — a gesture will do nothing now' }
+  armSay.textContent = `✓ ${t(lastArm.th, lastArm.en)}`
   paintArm()
   paintManual()
 })
 
 function paintArm() {
   armBtn.setAttribute('aria-pressed', String(armed))
+  armBtn.disabled = arming || armed || setupState(store.getClasses(), specimen.source?.ready).stage !== 'ready'
+  $('[data-disarm]').disabled = !armed && !arming
 }
 
 // ── The log: what actually happened, both languages kept ────────────────
@@ -249,8 +289,7 @@ const barLabels = () => store.getClasses().map((c, i) => `${store.GLYPHS[i]} ${s
 const paintLabels = () => bars.setLabels(barLabels())
 
 function canGuess() {
-  const list = store.getClasses()
-  return list.length >= 2 && list.every((c) => c.samples.length >= MIN_EXAMPLES)
+  return setupState(store.getClasses(), true).taught
 }
 
 function paintLiveSay(list, probs) {
@@ -322,6 +361,19 @@ const STEPS = {
 }
 
 function paintManual() {
+  const state = setupState(store.getClasses(), specimen.source?.ready)
+  $('[data-setup]').textContent = arming
+    ? t('กำลังเปิดใช้การกระทำ… กดปิดได้ทุกเมื่อ', 'Turning on actions… You can turn them off at any time.')
+    : armed
+    ? t('เปิดใช้แล้ว ลองทำท่า หรือกด “ปิดการกระทำ” เพื่อหยุด', 'Actions are on. Try a pose, or press “Turn off actions” to stop.')
+    : state.stage === 'picture'
+      ? t('เลือกกล้องหรือรูปจากแถบด้านบนก่อน ภาพของคุณไม่ออกจากเครื่อง', 'Choose a camera or photo above first. Your pictures stay on your device.')
+      : state.stage === 'examples'
+        ? t(`ยังต้องการอีก ${n(state.missing)} ภาพ เพิ่มตัวอย่างให้ครบทุกท่า ลองเปลี่ยนมุมและแสงด้วย`, `Pictures still needed: ${n(state.missing)}. Add examples to every pose; vary the angle and light.`)
+        : t('พร้อมแล้ว เลือกการกระทำของแต่ละท่า แล้วกด “เปิดใช้การกระทำ”', 'Ready. Choose what each pose does, then press “Turn on actions”.')
+  paintArm()
+  const full = $('[data-fullscreen]')
+  full.disabled = !specimen.source?.ready && full.getAttribute('aria-pressed') !== 'true'
   if (!manualEl) return
   for (const li of manualEl.querySelectorAll('[data-step]')) {
     if (STEPS[li.dataset.step]?.()) li.setAttribute('data-done', '')
@@ -340,8 +392,13 @@ function repaintAll() {
 
 store.onChange((kind) => {
   lastLiveKey = ''
-  if (kind === 'samples') { paintManual(); return }
+  if (kind === 'samples') {
+    if (!canGuess()) cancelArm()
+    paintManual()
+    return
+  }
   if (kind === 'structure') {
+    cancelArm()
     lastLive = null
     bars.setProbs(null)
     trigger = createTrigger()
@@ -356,7 +413,14 @@ onLang(() => {
   paintModel()
   paintLog()
   statusEl.textContent = statusFn()
+  paintManual()
+  if (!specimen.source?.ready) paintIdlePicture()
   if (lastArm) armSay.textContent = `${lastArm.ok ? '✓' : '!'} ${t(lastArm.th, lastArm.en)}`
+})
+
+window.addEventListener('resize', () => {
+  paintManual()
+  if (!specimen.source?.ready) paintIdlePicture()
 })
 
 // ── Start ───────────────────────────────────────────────────────────────

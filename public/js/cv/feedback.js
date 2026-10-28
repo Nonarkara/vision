@@ -1,7 +1,7 @@
 // Camera feedback: an edge outline that follows a face or a hand, a meter,
 // and one "I saw you" flash. Jasper Red only. The picture is never stored.
 
-import { toGray, sobel } from './ops.js?v=1.23.0'
+import { toGray, sobel } from './ops.js?v=1.23.1'
 
 export const FACE_OVAL = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109]
 

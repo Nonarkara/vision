@@ -49,3 +49,31 @@ test('the first camera is probed three at a time, and a slow one is aborted', as
   // have run its timer out.
   assert.equal(ranOut, 1, 'only the camera that won may run its timer out')
 })
+
+test('a specimen with no source asks for a picture instead of pretending to study', async () => {
+  const { createSpecimen } = await import('../public/js/core/specimen.js')
+  const nodes = {
+    '[data-specimen-label]': {}, '[data-specimen-name]': {},
+    '[data-specimen-meta]': {}, '[data-specimen-quality]': {},
+  }
+  const specimen = createSpecimen({ bar: {
+    classList: { contains: () => false },
+    querySelector: selector => nodes[selector] ?? null,
+  } })
+  assert.equal(nodes['[data-specimen-label]'].textContent, 'Picture')
+  assert.equal(nodes['[data-specimen-name]'].textContent, 'Choose a picture')
+  specimen.close()
+})
+
+test('a stopped picture notifies learners instead of only changing the bar', async () => {
+  const { createSpecimen } = await import('../public/js/core/specimen.js')
+  const specimen = createSpecimen()
+  const seen = []
+  const source = { closed: false, get ready() { return !this.closed }, close() { this.closed = true } }
+  specimen.on(src => seen.push(src?.ready ?? false))
+  specimen.useLocal(source)
+  source.close()
+  source.onended()
+  assert.deepEqual(seen, [true, false])
+  specimen.close()
+})

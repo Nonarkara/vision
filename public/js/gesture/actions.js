@@ -3,7 +3,7 @@
 // missing, asleep, or refuses, fire() returns an honest sentence instead of
 // pretending something happened.
 
-import { t } from '../core/i18n.js?v=1.23.0'
+import { t } from '../core/i18n.js?v=1.23.1'
 
 export const ACTIONS = [
   { id: 'beep', th: 'เสียงสั้น', en: 'A short beep' },
@@ -72,31 +72,35 @@ export function createActions({ room = null, flash = null, lamps = [], spot = nu
   let held = null
   let tone = null
   let armed = false
+  let armRequest = 0
   const lampOn = lamps.map(() => false)
   let reduced = false
   try { reduced = matchMedia('(prefers-reduced-motion: reduce)').matches } catch { /* no media queries, no flash */ }
 
   /** Called from the Arm button's click — the one gesture the browser insists on. */
-  async function arm() {
+  async function arm({ openWindow = false } = {}) {
+    const ticket = ++armRequest
     try {
       ctx = ctx ?? new AudioContext()
       if (ctx.state !== 'running') await ctx.resume()
     } catch { ctx = null }
+    if (ticket !== armRequest) return refuse('ยังปิดการกระทำอยู่ เพราะการตั้งค่าเปลี่ยนไป', 'Actions stayed off because setup changed')
     try {
-      if (!held || held.closed) held = window.open('about:blank')
+      if (openWindow && (!held || held.closed)) held = window.open('about:blank')
     } catch { held = null }
     armed = true
     if (spot) spot.hidden = true
     const sound = ctx?.state === 'running'
-    const win = !!held && !held.closed
+    const win = openWindow && !!held && !held.closed
     return {
       ok: sound,
-      th: `เปิดใช้แล้ว — เสียง: ${sound ? 'พร้อม' : 'ไม่พร้อม'} · หน้าต่าง: ${win ? 'เปิดรอไว้' : 'ถูกบล็อก จะใช้ปุ่มลิงก์แทน'}`,
-      en: `Armed — sound: ${sound ? 'ready' : 'unavailable'} · window: ${win ? 'held open' : 'blocked, the link button will be used'}`,
+      th: `เปิดใช้แล้ว — เสียง: ${sound ? 'พร้อม' : 'ไม่พร้อม'} · หน้าต่าง: ${!openWindow ? 'ยังไม่จำเป็น' : win ? 'เปิดรอไว้' : 'ถูกบล็อก จะใช้ปุ่มลิงก์แทน'}`,
+      en: `Actions on — sound: ${sound ? 'ready' : 'unavailable'} · window: ${!openWindow ? 'not needed' : win ? 'held open' : 'blocked, the link button will be used'}`,
     }
   }
 
   function disarm() {
+    armRequest++
     armed = false
     return ok('พักการกระทำไว้ก่อน', 'Actions are resting')
   }
@@ -115,8 +119,9 @@ export function createActions({ room = null, flash = null, lamps = [], spot = nu
 
   /** id → { ok, th, en }: what actually happened, honestly. */
   async function fire(id) {
+    if (!armed) return refuse('ปิดการกระทำอยู่ — กด “เปิดใช้การกระทำ” ก่อน', 'Actions are off — press “Turn on actions” first')
     if (id === 'beep') {
-      if (!ctx || ctx.state !== 'running') return refuse('ยังไม่ได้เปิดใช้ —กด “เปิดใช้การกระทำ” ก่อน', 'Not armed yet — press “Arm the actions” first')
+      if (!ctx || ctx.state !== 'running') return refuse('ยังไม่ได้เปิดใช้ —กด “เปิดใช้การกระทำ” ก่อน', 'Turn on actions first')
       beep()
       return ok('ดังปี๊ป', 'Beeped')
     }

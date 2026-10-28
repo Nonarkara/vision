@@ -13,10 +13,10 @@
   <section class="page-head" aria-labelledby="title">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">ห้อง 04 · สั่งด้วยท่า</span><span class="en" lang="en">Room 04 · Gestures</span></span>
-      <h1 id="title"><span class="th" lang="th">สั่งด้วยท่ามือ</span><span class="en" lang="en">Control it with a gesture</span></h1>
+      <h1 id="title"><span class="th" lang="th">สอนท่าทาง</span><span class="en" lang="en">Teach a gesture</span></h1>
     </div>
     <div>
-      <p class="lede"><span class="th" lang="th">สอนเครื่องสามท่า แล้วเลือกให้แต่ละท่าทำอะไร: ส่งเสียง บันทึกภาพ หรือไม่ทำอะไร ทุกอย่างทำงานในแท็บนี้</span><span class="en" lang="en">Teach three poses, then choose what each one does: beep, save a picture, or do nothing. Everything runs in this tab.</span></p>
+      <p class="lede"><span class="th" lang="th">สอนเครื่องให้จำท่า แล้วให้แต่ละท่าส่งเสียงหรือทำสิ่งง่าย ๆ ในแท็บนี้</span><span class="en" lang="en">Teach a few poses to make a sound or run a simple action in this tab.</span></p>
     </div>
   </section>
 
@@ -24,37 +24,36 @@
 
   <div data-specimen-slot></div>
 
-  <section id="gesture-room" class="room" aria-labelledby="room-title">
+  <section id="gesture-room" class="room" aria-labelledby="title">
     <header class="room-head">
-      <span class="chapter-no">01</span>
-      <h2 id="room-title"><span class="th" lang="th">สอนท่าของคุณ</span><span class="en" lang="en">Teach it your gestures</span></h2>
-      <p class="prose"><span class="th" lang="th">เพิ่มภาพตัวอย่างอย่างน้อยท่าละ 3 ภาพ แล้วกด “เปิดใช้การกระทำ” และลองทำท่านั้น</span><span class="en" lang="en">Add 3 or more pictures per pose. Then press “Arm the actions” and try a pose.</span></p>
+      <p class="prose setup-next" data-setup aria-live="polite"></p>
       <details class="gesture-guide"><summary><span class="th" lang="th">วิธีสอนทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><ol class="manual" data-manual data-aria-th="วิธีใช้ห้องนี้" data-aria-en="How to use this room">
         <li>
           <span class="manual-n" aria-hidden="true">1</span>
           <span class="manual-body">
             <span class="th" lang="th">บอกก่อนว่าแต่ละท่าจะทำอะไร — เลือกทีละข้อในรายการการกระทำ</span><span class="en" lang="en">Say what each pose should do — pick one per pose in the actions list</span>
-            <span class="manual-warn th" lang="th">เปิดภาพก่อน — กด <code class="part">ใช้กล้องของฉัน</code> แล้วเบราว์เซอร์จะถาม กดอนุญาต</span><span class="manual-warn en" lang="en">Open a picture first — press <code class="part">Use my camera</code>; the browser will ask, so allow it</span>
+            <span class="manual-warn th" lang="th">เปิดภาพก่อน — กด <code class="part">กล้องของฉัน</code> แล้วเบราว์เซอร์จะถาม กดอนุญาต</span><span class="manual-warn en" lang="en">Open a picture first — press <code class="part">My camera</code>; the browser will ask, so allow it</span>
           </span>
         </li>
         <li data-step="examples">
           <span class="manual-n" aria-hidden="true">2</span>
           <span class="manual-body">
             <span class="th" lang="th">กด <code class="part">+ เพิ่มตัวอย่าง</code> ของท่านั้น 5–10 ครั้ง</span><span class="en" lang="en">Press <code class="part">+ Add example</code> on that pose 5–10 times</span>
+          <span class="manual-warn"><span class="th" lang="th">ตัวอย่างแรกจะโหลดโครงข่าย 14 MB ครั้งเดียว</span><span class="en" lang="en">The first example downloads the network: 14 MB, once.</span></span>
             <span class="manual-warn th" lang="th">ให้แต่ละท่าต่างมุมและต่างแสงกัน</span><span class="manual-warn en" lang="en">Vary the angle and the light</span>
           </span>
         </li>
         <li data-step="arm">
           <span class="manual-n" aria-hidden="true">3</span>
           <span class="manual-body">
-            <span class="th" lang="th">กด <code class="part">เปิดใช้การกระทำ</code> — นี่คือคลิกที่เบราว์เซอร์เรียกร้อง</span><span class="en" lang="en">Press <code class="part">Arm the actions</code> — the click the browser insists on</span>
+            <span class="th" lang="th">กด <code class="part">เปิดใช้การกระทำ</code> — นี่คือคลิกที่เบราว์เซอร์เรียกร้อง</span><span class="en" lang="en">Press <code class="part">Turn on actions</code> — the click the browser insists on</span>
           </span>
         </li>
         <li data-step="fire">
           <span class="manual-n" aria-hidden="true">4</span>
           <span class="manual-body">
             <span class="th" lang="th">ทำท่าค้าง แล้วอ่าน <code class="part">บันทึก</code> ด้านล่างว่ามันทำอะไร</span><span class="en" lang="en">Hold a pose, then read the <code class="part">Log</code> below for what it did</span>
-            <span class="manual-warn th" lang="th">ทายผิดก็ทำผิด — เล่นเสร็จกด <code class="part">พักไว้ก่อน</code></span><span class="manual-warn en" lang="en">A wrong guess runs the wrong thing — press <code class="part">Rest them</code> when you stop</span>
+            <span class="manual-warn th" lang="th">ทายผิดก็ทำผิด — เล่นเสร็จกด <code class="part">ปิดการกระทำ</code></span><span class="manual-warn en" lang="en">A wrong guess runs the wrong thing — press <code class="part">Turn off actions</code> when you stop</span>
           </span>
         </li>
         <li data-step="again">
@@ -70,36 +69,22 @@
       <div class="bench room-bench" data-aria-th="สิ่งที่เครื่องเห็นตอนนี้" data-aria-en="What the machine sees now">
         <div class="bench-caption">
           <span class="label"><span class="th" lang="th">ภาพที่เครื่องเห็นตอนนี้</span><span class="en" lang="en">What it sees now</span></span>
-          <span class="num" data-model-state></span>
+          <button class="btn" type="button" data-fullscreen aria-pressed="false"><span class="th" lang="th">เต็มจอ</span><span class="en" lang="en">Full screen</span></button>
         </div>
         <div class="bench-view">
           <canvas data-view role="img" data-aria-th="ภาพปัจจุบันจากกล้องของคุณ กล้องสาธารณะ หรือรูปถ่าย" data-aria-en="The current picture from your camera, a public camera, or a photo"></canvas>
           <div class="bench-state" data-view-state>…</div>
         </div>
-        <div class="controls">
-          <button class="btn primary" type="button" data-mine><span class="th" lang="th">ใช้กล้องของฉัน</span><span class="en" lang="en">Use my camera</span></button>
-        </div>
         <p class="readout" data-status aria-live="polite"></p>
-        <div class="live">
-          <p class="micro live-key"><span class="th" lang="th">แถบนี้คือคะแนนของท่าที่ใกล้ที่สุดตอนนี้ ไม่ใช่การยืนยันว่าถูก — ที่ถูกต้องคือเมื่อคะแนนมั่นคงพอที่จะลงมือ</span><span class="en" lang="en">This bar shows how close the nearest gesture looks right now — not a verdict. It counts only when the score is steady enough to act on.</span></p>
-          <span class="label live-head"><span class="th" lang="th">คะแนนท่าจากภาพสด</span><span class="en" lang="en">Gesture score from the live picture</span></span>
-          <div class="bars" data-bars></div>
-        </div>
-        <p class="readout live-say" data-live-say aria-live="polite"></p>
-        <div class="controls arm-row">
-          <button class="btn primary" type="button" data-arm aria-pressed="false"><span class="th" lang="th">เปิดใช้การกระทำ</span><span class="en" lang="en">Arm the actions</span></button>
-          <button class="btn" type="button" data-disarm>■ <span class="th" lang="th">พักไว้ก่อน</span><span class="en" lang="en">Rest them</span></button>
-        </div>
-        <p class="readout" data-arm-say aria-live="polite"></p>
-        <span class="label live-head"><span class="th" lang="th">บันทึก</span><span class="en" lang="en">Log</span></span><p class="readout log" data-log aria-live="polite"></p>
-        <p class="micro bench-note"><span class="th" lang="th">การกระทำเกิดขึ้นเมื่อท่าถูกต้องเท่านั้น ถ้าทายผิด มันจะลงมือผิดเรื่อง — กด “พักไว้ก่อน” เสมอเมื่อเล่นเสร็จ</span><span class="en" lang="en">Actions run on a correct guess. A wrong guess runs the wrong thing — always press “Rest them” when you stop playing.</span></p>
+        <p class="micro model-state" data-model-state hidden></p>
+
       </div>
 
       <div class="room-classes">
-        <div class="preset">
+        <details class="preset"><summary><span class="th" lang="th">เปลี่ยนชุดท่า</span><span class="en" lang="en">Change the poses</span></summary>
           <label class="label" for="preset"><span class="th" lang="th">หรือเลือกชุดท่าอื่น</span><span class="en" lang="en">Or pick another set</span></label>
           <select id="preset" class="field-input" data-preset></select><svg class="select-mark" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        </div>
+        </details>
         <ol class="klasses" data-classes data-aria-th="กลุ่มท่าทั้งหมด" data-aria-en="All gesture groups"></ol>
         <div class="controls room-more">
           <button class="btn" type="button" data-add-class>+ <span class="th" lang="th">เพิ่มกลุ่ม</span><span class="en" lang="en">Add a group</span></button>
@@ -131,6 +116,21 @@
         <p class="note"><strong><span class="th" lang="th">อยู่ในแท็บนี้เท่านั้น</span><span class="en" lang="en">This tab only.</span></strong> <span class="th" lang="th">ตัวอย่างทั้งหมดอยู่ในหน่วยความจำของแท็บนี้ ไม่ได้บันทึกและไม่ได้ส่งไปไหน ภาพจากกล้องของคุณประมวลผลในเครื่องนี้เท่านั้น</span><span class="en" lang="en">Your examples live in this tab's memory — not saved, not sent anywhere. Your camera's picture is processed on this device only.</span></p>
         <p class="micro tips"><strong><span class="th" lang="th">ทำไมต้องมีกลุ่ม “ไม่ทำท่า”?</span><span class="en" lang="en">Why a “Nothing” group?</span></strong> <span class="th" lang="th">ถ้าไม่มี เครื่องต้องเลือกท่าใดท่าหนึ่งเสมอ แค่ใบหน้าคุณเฉย ๆ ก็จะสั่งการได้ กลุ่มนี้ให้มันมีทางตอบว่า “ไม่มีท่า”</span><span class="en" lang="en">Without it, the machine must always pick a gesture — your face alone would set one off. This group gives it a way to answer “no gesture”.</span></p>
         <p class="micro tips"><span class="th" lang="th">ให้ตัวอย่างหลากหลาย ทั้งมุม ระยะ และแสง ถ้าทุกภาพของท่าแรกคุณอยู่หน้ากำแพงสีเดิม เครื่องอาจเรียนรู้กำแพงแทนท่าของคุณ</span><span class="en" lang="en">Vary angle, distance and light. If every first-gesture example has the same wall behind it, the machine may learn the wall instead of your gesture.</span></p>
+      </div>
+      <div class="room-results field-black">
+        <div class="live">
+          <p class="micro live-key"><span class="th" lang="th">แถบนี้คือคะแนนของท่าที่ใกล้ที่สุดตอนนี้ ไม่ใช่การยืนยันว่าถูก — ที่ถูกต้องคือเมื่อคะแนนมั่นคงพอที่จะลงมือ</span><span class="en" lang="en">This bar shows how close the nearest gesture looks right now — not a verdict. It counts only when the score is steady enough to act on.</span></p>
+          <span class="label live-head"><span class="th" lang="th">คะแนนท่าจากภาพสด</span><span class="en" lang="en">Gesture score from the live picture</span></span>
+          <div class="bars" data-bars></div>
+        </div>
+        <p class="readout live-say" data-live-say aria-live="polite"></p>
+        <div class="controls arm-row">
+          <button class="btn primary" type="button" data-arm aria-pressed="false"><span class="th" lang="th">เปิดใช้การกระทำ</span><span class="en" lang="en">Turn on actions</span></button>
+          <button class="btn" type="button" data-disarm>■ <span class="th" lang="th">ปิดการกระทำ</span><span class="en" lang="en">Turn off actions</span></button>
+        </div>
+        <p class="readout" data-arm-say aria-live="polite"></p>
+        <span class="label live-head"><span class="th" lang="th">บันทึก</span><span class="en" lang="en">Log</span></span><p class="readout log" data-log aria-live="polite"></p>
+        <p class="micro bench-note"><span class="th" lang="th">เครื่องจะลงมือเมื่อมั่นใจ แต่ถ้าทายผิด มันจะลงมือผิดเรื่อง — กด “ปิดการกระทำ” เสมอเมื่อเล่นเสร็จ</span><span class="en" lang="en">An action runs when the machine is confident. A wrong guess runs the wrong thing — always press “Turn off actions” when you stop playing.</span></p>
       </div>
     </div>
     <div class="flash" data-flash aria-hidden="true"></div>

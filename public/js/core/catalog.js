@@ -1,6 +1,6 @@
 // The camera catalogue, as the browser sees it. One fetch per page.
 
-import { t } from './i18n.js?v=1.23.0'
+import { t } from './i18n.js?v=1.23.1'
 
 let pending = null
 
