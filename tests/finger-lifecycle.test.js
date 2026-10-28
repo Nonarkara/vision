@@ -46,13 +46,13 @@ test('returning from browser back-cache restarts drawing and leaves a fresh audi
  const tail=page.slice(page.indexOf('const observer ='))
  vm.runInContext(`let visible=true,inputTicket=0,animation=0;const $=()=>({});
  const trigger={reset(){}};const silence=()=>{};const clearEffect=()=>{};
- const stop=()=>calls.push('stop');const frame=()=>{};const onLang=()=>{};const paint=()=>{};const drawExample=()=>{};
+ const message=()=>calls.push('camera off');const stop=()=>calls.push('stop');const frame=()=>{};const onLang=()=>{};const paint=()=>{};const drawExample=()=>{};
  let audio={close:()=>{calls.push('close audio');return Promise.resolve()}};
  ${tail}
  globalThis.audioNow=()=>audio;`,context)
  calls.length=0;events.pagehide()
  assert.deepEqual(calls,['stop','cancel','disconnect','close audio'])
  assert.equal(context.audioNow(),null)
- calls.length=0;events.pageshow({persisted:true});assert.deepEqual(calls,['observe','animate'])
+ calls.length=0;events.pageshow({persisted:true});assert.deepEqual(calls,['camera off','observe','animate'])
  calls.length=0;events.pageshow({persisted:false});assert.deepEqual(calls,[])
 })

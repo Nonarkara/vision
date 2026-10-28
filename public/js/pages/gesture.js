@@ -241,6 +241,6 @@ document.addEventListener('visibilitychange', () => { trigger.reset(); if (docum
 const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (!visible) { trigger.reset(); silence(); clearEffect() } })
 observer.observe($('[data-stage]'))
 window.addEventListener('pagehide', () => { stop(false); cancelAnimationFrame(animation); observer.disconnect(); audio?.close().catch(() => {}); audio = null })
-window.addEventListener('pageshow', event => { if (event.persisted) { observer.observe($('[data-stage]')); animation = requestAnimationFrame(frame) } })
+window.addEventListener('pageshow', event => { if (event.persisted) { message('กล้องปิดแล้ว เปิดกล้องเพื่อเล่นต่อ', 'Camera is off. Start it again to keep playing.', '摄像头已关闭，请重新开启后继续。'); observer.observe($('[data-stage]')); animation = requestAnimationFrame(frame) } })
 onLang(() => { paint(); if (statusMessage) message(...statusMessage); if (!source) drawExample() })
 paint(); drawExample(); animation = requestAnimationFrame(frame)
