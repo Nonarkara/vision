@@ -276,7 +276,7 @@ export function createStatic({ root, version, log = () => {} }) {
     // Page templates are only ever served assembled, under their clean URL.
     if (found.full.endsWith('.html')) return false
     // Memo by the resolved file, not the request path: `/a//b` and `/a/b` are one file, one entry.
-    send(req, res, load(found.full, found.full, found.st), cacheControl('/' + path.relative(root, found.full).split(path.sep).join('/')), 200, path.relative(root, found.full) === 'js/focus/worker.js')
+    send(req, res, load(found.full, found.full, found.st), cacheControl('/' + path.relative(root, found.full).split(path.sep).join('/')), 200, ['js/focus/worker.js', 'js/gesture/worker.js'].includes(path.relative(root, found.full)))
     return true
   }
 

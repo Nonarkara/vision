@@ -1,11 +1,11 @@
 // The story: control-room photographs the machine can count, a live wall it
 // can watch, and the people who made this.
 
-import '../core/site.js?v=1.23.1'
-import { lang } from '../core/i18n.js?v=1.23.1'
-import { createWall } from '../story/wall.js?v=1.23.1'
-import { createExhibits } from '../story/exhibits.js?v=1.23.1'
-import { createDrill } from '../story/blink.js?v=1.23.1'
+import '../core/site.js?v=1.24.0'
+import { lang } from '../core/i18n.js?v=1.24.0'
+import { createWall } from '../story/wall.js?v=1.24.0'
+import { createExhibits } from '../story/exhibits.js?v=1.24.0'
+import { createDrill } from '../story/blink.js?v=1.24.0'
 
 createExhibits(document.querySelector('.exhibits'))
 createWall(document.getElementById('try'))

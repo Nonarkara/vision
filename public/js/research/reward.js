@@ -1,5 +1,5 @@
 // A one-step reward learner (a two-armed bandit), not a navigation model.
-import { t, count } from '../core/i18n.js?v=1.23.1'
+import { t, count } from '../core/i18n.js?v=1.24.0'
 
 export function createRewardLearner() {
   const actions = [{ count: 0, value: 0 }, { count: 0, value: 0 }]

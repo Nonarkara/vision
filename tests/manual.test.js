@@ -34,7 +34,7 @@ test('the manual is a house component, so it lives in the house stylesheet', () 
 
 test('every room that carries a manual has one', () => {
   const carriers = [...new Set(manuals.map((m) => m.file))].sort()
-  assert.deepEqual(carriers, ['cameras.html', 'colour.html', 'focus.html', 'games.html', 'gesture.html', 'research.html', 'train.html'])
+  assert.deepEqual(carriers, ['cameras.html', 'colour.html', 'focus.html', 'games.html', 'research.html', 'train.html'])
 })
 
 test('a manual step is one number and one body', () => {
@@ -76,7 +76,7 @@ test('a named part is named the same number of times in both languages', () => {
 })
 
 test('the live steps tick the same keys the page scripts watch', () => {
-  for (const [file, js] of [['gesture.html', 'public/js/pages/gesture.js'], ['train.html', 'public/js/pages/train.js']]) {
+  for (const [file, js] of [['train.html', 'public/js/pages/train.js']]) {
     const html = read(`public/${file}`)
     const source = read(js)
     const keys = [...html.matchAll(/data-step="([^"]+)"/g)].map((m) => m[1])

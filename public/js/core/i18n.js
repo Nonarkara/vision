@@ -62,7 +62,7 @@ export function noteMissingTranslation(root = document.body) {
   if (existing) existing.remove()
   if (lang() !== 'zh') return
   // Translated navigation is not evidence that the handbook article is translated.
-  const content = root.querySelector('main .doc') ?? root
+  const content = root.querySelector('main .doc') ?? root.querySelector('main') ?? root
   const th = content.querySelectorAll('[lang="th"]').length
   const zh = content.querySelectorAll('[lang|="zh"]').length
   if (th > 0 && zh >= th / 2) return

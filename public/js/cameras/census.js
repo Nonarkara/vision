@@ -7,13 +7,13 @@
 // a pause after each, a hard cap on how many, and a stop button that works.
 // The cameras belong to road agencies and city halls, not to us.
 
-import { t, lang, n, pct, onLang, bi } from '../core/i18n.js?v=1.23.1'
-import { camName, sourceName, pickReadable } from '../core/catalog.js?v=1.23.1'
-import { openCamera, SourceError } from '../core/source.js?v=1.23.1'
-import { sleep } from '../core/site.js?v=1.23.1'
-import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.23.1'
-import { STREET, cocoName } from '../ml/labels.js?v=1.23.1'
-import { JASPER, BLACK } from '../cv/draw.js?v=1.23.1'
+import { t, lang, n, pct, onLang, bi } from '../core/i18n.js?v=1.24.0'
+import { camName, sourceName, pickReadable } from '../core/catalog.js?v=1.24.0'
+import { openCamera, SourceError } from '../core/source.js?v=1.24.0'
+import { sleep } from '../core/site.js?v=1.24.0'
+import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.0'
+import { STREET, cocoName } from '../ml/labels.js?v=1.24.0'
+import { JASPER, BLACK } from '../cv/draw.js?v=1.24.0'
 
 const CONCURRENCY = 2
 const PAUSE_MS = 700

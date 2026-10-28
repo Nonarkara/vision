@@ -88,3 +88,16 @@ test('desktop Escape asks the browser to leave fullscreen and does not swallow t
   assert.equal(prevented, false)
   assert.equal(exited, true)
 })
+
+test('a browser that resolves fullscreen without entering still gets viewport mode', async () => {
+  const root=element(),body=element(),main=element(),header=element(),panel=element(['finger-room']),button=element()
+  children(root,body);children(body,header,main);children(main,panel)
+  panel.querySelector=s=>s==='canvas'?{}:s==='[data-fullscreen]'?button:null
+  panel.requestFullscreen=async()=>{}
+  globalThis.document={body,documentElement:{dataset:{lang:'en'}},fullscreenEnabled:true,fullscreenElement:null,querySelectorAll:()=>[panel],addEventListener(){}}
+  globalThis.window={matchMedia:()=>({matches:true}),dispatchEvent(){}}
+  initFullscreen();await button.events.click()
+  assert.equal(panel.classList.contains('is-expanded'),true)
+  assert.equal(header.inert,true)
+  assert.equal(button.attrs['aria-pressed'],'true')
+})

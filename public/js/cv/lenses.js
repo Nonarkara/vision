@@ -3,10 +3,10 @@
 // paints one view. State persists between calls (previous frame, last
 // detections) so a lens can be driven by any loop.
 
-import * as ops from './ops.js?v=1.23.1'
-import { paintImageData, drawDetections, drawBlobs, drawMask, clear, IVORY } from './draw.js?v=1.23.1'
-import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.23.1'
-import { noteVehicles } from './spotted.js?v=1.23.1'
+import * as ops from './ops.js?v=1.24.0'
+import { paintImageData, drawDetections, drawBlobs, drawMask, clear, IVORY } from './draw.js?v=1.24.0'
+import { detect, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.0'
+import { noteVehicles } from './spotted.js?v=1.24.0'
 
 export const LENS_ORDER = ['picture', 'numbers', 'edges', 'motion', 'objects']
 
