@@ -240,6 +240,7 @@ document.addEventListener('keydown', event => {
 document.addEventListener('visibilitychange', () => { trigger.reset(); if (document.hidden) { inputTicket++ }; if (document.hidden) { silence(); clearEffect(); ink.clearRect(0,0,800,450) } })
 const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; if (!visible) { trigger.reset(); silence(); clearEffect() } })
 observer.observe($('[data-stage]'))
-window.addEventListener('pagehide', () => { stop(false); cancelAnimationFrame(animation); observer.disconnect(); audio?.close().catch(() => {}) })
+window.addEventListener('pagehide', () => { stop(false); cancelAnimationFrame(animation); observer.disconnect(); audio?.close().catch(() => {}); audio = null })
+window.addEventListener('pageshow', event => { if (event.persisted) { observer.observe($('[data-stage]')); animation = requestAnimationFrame(frame) } })
 onLang(() => { paint(); if (statusMessage) message(...statusMessage); if (!source) drawExample() })
 paint(); drawExample(); animation = requestAnimationFrame(frame)
