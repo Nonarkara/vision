@@ -10,7 +10,7 @@
 // is what the room is for, so it has to be checkable without a browser. The
 // translator is passed in because the house's own reaches for the document,
 // and node has none.
-import { classify, groupOf, policy } from './video-learning.js?v=1.24.0'
+import { classify, groupOf, policy } from './video-learning.js?v=1.24.1'
 
 /**
  * The name of the two actions, in one place.

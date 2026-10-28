@@ -1,6 +1,6 @@
 {
   "name": "vision",
-  "version": "1.24.0",
+  "version": "1.24.1",
   "private": true,
   "description": "vision.nonarkara.org \u2014 a public classroom for computer vision on Thailand's open cameras. TH/EN/ZH.",
   "type": "module",

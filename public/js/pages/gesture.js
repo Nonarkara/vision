@@ -1,7 +1,7 @@
-import '../core/site.js?v=1.24.0'
-import { t, onLang } from '../core/i18n.js?v=1.24.0'
-import { openWebcam } from '../core/source.js?v=1.24.0'
-import { countHand, createCountTrigger, NOTES, SOLFEGE, saturation } from '../gesture/fingers.js?v=1.24.0'
+import '../core/site.js?v=1.24.1'
+import { t, onLang } from '../core/i18n.js?v=1.24.1'
+import { openWebcam } from '../core/source.js?v=1.24.1'
+import { countHand, createCountTrigger, NOTES, SOLFEGE, saturation } from '../gesture/fingers.js?v=1.24.1'
 
 const $ = s => document.querySelector(s)
 const picture = $('[data-picture]'), ctx = picture.getContext('2d')
@@ -149,7 +149,7 @@ async function start() {
     source = next; opening = false
     source.onended = () => fail('กล้องหยุดแล้ว เปิดอีกครั้งได้', 'The camera stopped. You can start it again.', '摄像头已停止，可以重新开启。')
     $('[data-idle]').hidden = true
-    worker = new Worker('/js/gesture/worker.js?v=1.24.0')
+    worker = new Worker('/js/gesture/worker.js?v=1.24.1')
     loadTimer = setTimeout(() => fail('โหลดตัวอ่านมือไม่สำเร็จ ลองอีกครั้งหรือใช้ปุ่มตัวเลข', 'Hand reader took too long to load. Retry or use the number buttons.', '手部模型加载超时，请重试或使用数字按钮。'), 45000)
     worker.onerror = () => { if (id === ticket) fail('ตัวอ่านมือเปิดไม่ได้ ลองอีกครั้งหรือใช้ปุ่มตัวเลข', 'The hand reader could not start. Retry or use the number buttons.', '手部模型无法启动，请重试或使用数字按钮。') }
     worker.onmessage = ({ data }) => {

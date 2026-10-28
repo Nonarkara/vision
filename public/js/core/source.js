@@ -8,7 +8,7 @@
 // owner (or our memory-only relay) and stays in this tab. A webcam frame or a
 // chosen photo never leaves the device at all: nothing here uploads anything.
 
-import { t } from './i18n.js?v=1.24.0'
+import { t } from './i18n.js?v=1.24.1'
 
 let hlsLoading = null
 function loadHls() {

@@ -37,3 +37,22 @@ test('muted number choices never enable sound themselves',async()=>{
  const r=room();r.api.example(3);assert.equal(r.api.state().sound,false)
  r.resume();await Promise.resolve();await Promise.resolve();assert.deepEqual(r.calls,[3])
 })
+
+test('returning from browser back-cache restarts drawing and leaves a fresh audio context available',()=>{
+ const events={}, calls=[]
+ const context=vm.createContext({events,calls,window:{addEventListener:(name,fn)=>{events[name]=fn}},
+   IntersectionObserver:class {observe(){calls.push('observe')}disconnect(){calls.push('disconnect')}},
+   requestAnimationFrame:()=>{calls.push('animate');return 1},cancelAnimationFrame:()=>calls.push('cancel')})
+ const tail=page.slice(page.indexOf('const observer ='))
+ vm.runInContext(`let visible=true,inputTicket=0,animation=0;const $=()=>({});
+ const trigger={reset(){}};const silence=()=>{};const clearEffect=()=>{};
+ const stop=()=>calls.push('stop');const frame=()=>{};const onLang=()=>{};const paint=()=>{};const drawExample=()=>{};
+ let audio={close:()=>{calls.push('close audio');return Promise.resolve()}};
+ ${tail}
+ globalThis.audioNow=()=>audio;`,context)
+ calls.length=0;events.pagehide()
+ assert.deepEqual(calls,['stop','cancel','disconnect','close audio'])
+ assert.equal(context.audioNow(),null)
+ calls.length=0;events.pageshow({persisted:true});assert.deepEqual(calls,['observe','animate'])
+ calls.length=0;events.pageshow({persisted:false});assert.deepEqual(calls,[])
+})

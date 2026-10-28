@@ -10,8 +10,8 @@
 // Post-processing follows @tensorflow-models/coco-ssd 2.2.3 (Apache-2.0),
 // rewritten here so NMS stays on the GPU backend instead of switching to CPU.
 
-import { loadModel, getTf } from './tf.js?v=1.24.0'
-import { COCO } from './labels.js?v=1.24.0'
+import { loadModel, getTf } from './tf.js?v=1.24.1'
+import { COCO } from './labels.js?v=1.24.1'
 
 const URL = '/models/ssdlite_mobilenet_v2/model.json'
 export const DETECTOR_INPUT_WIDTH = 640

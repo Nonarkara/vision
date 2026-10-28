@@ -3,11 +3,11 @@
 // scores. Neither side is the answer key: you referee each round after a
 // second, slower look — which is, not by accident, how training labels get made.
 
-import { t, bi, n, count, onLang } from '../core/i18n.js?v=1.24.0'
-import { STREET } from '../ml/labels.js?v=1.24.0'
-import { drawDetections } from '../cv/draw.js?v=1.24.0'
-import { startSpecimen } from '../core/specimen.js?v=1.24.0'
-import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js?v=1.24.0'
+import { t, bi, n, count, onLang } from '../core/i18n.js?v=1.24.1'
+import { STREET } from '../ml/labels.js?v=1.24.1'
+import { drawDetections } from '../cv/draw.js?v=1.24.1'
+import { startSpecimen } from '../core/specimen.js?v=1.24.1'
+import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, sayDetections } from './common.js?v=1.24.1'
 
 const ROUNDS = 5
 const COUNT_MS = 15_000

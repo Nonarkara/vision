@@ -6,10 +6,10 @@
 // That is the point of the story: the first useful thing a machine does in an
 // operations centre is not to understand, but to not blink.
 
-import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.24.0'
-import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.24.0'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.24.0'
-import { t, esc, pct, onLang } from '../core/i18n.js?v=1.24.0'
+import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.24.1'
+import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.24.1'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.24.1'
+import { t, esc, pct, onLang } from '../core/i18n.js?v=1.24.1'
 
 const SCREENS = 6
 const STILL_REFRESH_MS = 20_000
