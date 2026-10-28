@@ -1,0 +1,15 @@
+/gesture      desktop  carried 3 [ivory indigo gray]  ivory 38.2%  indigo 9.52%  gray 22.13%  jasper 0.01%  black 24.09%  photo 0%  other 1.24%
+/gesture      phone    carried 3 [ivory indigo gray]  ivory 48.13%  indigo 3.96%  gray 22.96%  jasper 0.02%  black 19.48%  photo 0%  other 2.85%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/gesture  (carries 3: ivory+indigo+gray)
+     636370px  rgb(16, 16, 16)        707x446 @y821  div.room-results.field-black
+     568944px  rgb(16, 16, 16)        707x466 @y339  div.bench.room-bench
+     568944px  rgb(182, 191, 193)     707x398 @y407  div.bench-view
+     568944px  rgb(182, 191, 193)     707x398 @y407  div.bench-state
+     501530px  rgb(5, 18, 48)         615x138 @y678  li.klass.field-ink
+     415702px  rgb(5, 18, 48)         615x138 @y539  li.klass.field-ink
+
+ROOM SUMMARY (desktop)
+  /gesture      3 hues  ivory+indigo+gray

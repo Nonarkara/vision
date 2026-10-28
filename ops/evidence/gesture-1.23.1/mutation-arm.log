@@ -1,0 +1,50 @@
+TAP version 13
+# Subtest: turning on ordinary actions does not open an unexplained blank window
+ok 1 - turning on ordinary actions does not open an unexplained blank window
+  ---
+  duration_ms: 0.82375
+  type: 'test'
+  ...
+# Subtest: a chosen handbook action can prepare one window from the user click
+ok 2 - a chosen handbook action can prepare one window from the user click
+  ---
+  duration_ms: 0.1635
+  type: 'test'
+  ...
+# Subtest: turning off while audio permission is pending cannot re-enable actions or open a window
+not ok 3 - turning off while audio permission is pending cannot re-enable actions or open a window
+  ---
+  duration_ms: 0.623625
+  type: 'test'
+  location: '/Volumes/Data/agent-scratch/vision-audit-2026-10-29/mutation/tests/gesture-arming.test.js:35:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Volumes/Data/agent-scratch/vision-audit-2026-10-29/mutation/tests/gesture-arming.test.js:41:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: an action cannot change the pretend lamp while actions are off
+ok 4 - an action cannot change the pretend lamp while actions are off
+  ---
+  duration_ms: 0.149166
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 3
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 92.580084
