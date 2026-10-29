@@ -2,13 +2,13 @@
 // both benches and loads only when someone presses the button — 18 MB is a
 // real cost on a phone, and nobody should pay it just for scrolling past.
 
-import { t, lang, onLang, count } from '../core/i18n.js?v=1.24.3'
-import * as ops from '../cv/ops.js?v=1.24.3'
-import { clear, containRect, drawDetections } from '../cv/draw.js?v=1.24.3'
-import { detect, loadDetector, tally, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.3'
-import { backend } from '../ml/tf.js?v=1.24.3'
-import { cocoName } from '../ml/labels.js?v=1.24.3'
-import { runBench, blit, slider, parts, writer } from './bench.js?v=1.24.3'
+import { t, lang, onLang, count } from '../core/i18n.js?v=1.24.4'
+import * as ops from '../cv/ops.js?v=1.24.4'
+import { clear, containRect, drawDetections } from '../cv/draw.js?v=1.24.4'
+import { detect, loadDetector, tally, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.4'
+import { backend } from '../ml/tf.js?v=1.24.4'
+import { cocoName } from '../ml/labels.js?v=1.24.4'
+import { runBench, blit, slider, parts, writer } from './bench.js?v=1.24.4'
 
 // ── The page's one network ──────────────────────────────────────────────
 

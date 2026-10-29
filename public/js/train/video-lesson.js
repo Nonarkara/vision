@@ -1,10 +1,10 @@
-import { t, onLang, count } from '../core/i18n.js?v=1.24.3'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.24.3'
-import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.24.3'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.24.3'
-import { threeWayState, actionLabel } from './three-ways.js?v=1.24.3'
-import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.24.3'
-import { practiceVideo } from './practice-video.js?v=1.24.3'
+import { t, onLang, count } from '../core/i18n.js?v=1.24.4'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.24.4'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.24.4'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.24.4'
+import { threeWayState, actionLabel } from './three-ways.js?v=1.24.4'
+import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.24.4'
+import { practiceVideo } from './practice-video.js?v=1.24.4'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),

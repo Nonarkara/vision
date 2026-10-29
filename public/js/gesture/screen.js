@@ -4,7 +4,7 @@
 // curve instead of the pixels: the fade, the brush, the rhythm of the notes,
 // the fall of a sheet of paper. The page draws what these say.
 
-import { saturation } from './fingers.js?v=1.24.3'
+import { saturation } from './fingers.js?v=1.24.4'
 
 /**
  * The picture's colour at a given count.

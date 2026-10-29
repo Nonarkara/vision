@@ -2,13 +2,13 @@
 // what every bench studies — a public camera, the visitor's own camera, or a
 // photo — so switching to your own face re-teaches the whole page at once.
 
-import '../core/site.js?v=1.24.3'
-import { t, bi, esc, onLang } from '../core/i18n.js?v=1.24.3'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.3'
-import { numbersChapter, colourChapter, thresholdChapter } from '../learn/pixels.js?v=1.24.3'
-import { convolutionChapter, edgesChapter, motionChapter } from '../learn/filters.js?v=1.24.3'
-import { detectorChapter, limitsChapter } from '../learn/neural.js?v=1.24.3'
-import { ORDER, currentIndex, readSeen, rememberSeen, progressText, resumeAt } from '../learn/course.js?v=1.24.3'
+import '../core/site.js?v=1.24.4'
+import { t, bi, esc, onLang } from '../core/i18n.js?v=1.24.4'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.4'
+import { numbersChapter, colourChapter, thresholdChapter } from '../learn/pixels.js?v=1.24.4'
+import { convolutionChapter, edgesChapter, motionChapter } from '../learn/filters.js?v=1.24.4'
+import { detectorChapter, limitsChapter } from '../learn/neural.js?v=1.24.4'
+import { ORDER, currentIndex, readSeen, rememberSeen, progressText, resumeAt } from '../learn/course.js?v=1.24.4'
 
 const CHAPTERS = {
   numbers: numbersChapter,

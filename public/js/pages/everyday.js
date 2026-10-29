@@ -3,12 +3,12 @@
 // run on whatever the visitor holds up to their own camera. No model, no
 // download: just ops.otsu, ops.threshold and ops.blobs, small enough to read.
 
-import '../core/site.js?v=1.24.3'
-import { whenVisible } from '../core/site.js?v=1.24.3'
-import { t, n, onLang } from '../core/i18n.js?v=1.24.3'
-import { createSpecimen, startSpecimen, specimenBarHtml, wantsWebcam } from '../core/specimen.js?v=1.24.3'
-import * as ops from '../cv/ops.js?v=1.24.3'
-import { fitCanvas, paintImageData, drawBlobs, clear } from '../cv/draw.js?v=1.24.3'
+import '../core/site.js?v=1.24.4'
+import { whenVisible } from '../core/site.js?v=1.24.4'
+import { t, n, onLang } from '../core/i18n.js?v=1.24.4'
+import { createSpecimen, startSpecimen, specimenBarHtml, wantsWebcam } from '../core/specimen.js?v=1.24.4'
+import * as ops from '../cv/ops.js?v=1.24.4'
+import { fitCanvas, paintImageData, drawBlobs, clear } from '../cv/draw.js?v=1.24.4'
 
 const WIDTH = 320          // analysis width: a QR finder square survives, a phone keeps up
 const FPS = 12

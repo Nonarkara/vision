@@ -1085,3 +1085,7 @@ label.btn:focus-within { outline: 3px solid currentColor; outline-offset: -3px; 
   .home-opening .opening-stage { grid-column: 2; grid-row: 1 / span 2; }
   .home-opening .home-next { align-self: start; }
 }
+
+/* Source-quality warnings stay visible; only the ownership detail is optional. */
+.home-opening .home-source-info { display: block; }
+.home-opening .home-source-info .micro { display: block; overflow: visible; -webkit-line-clamp: unset; }

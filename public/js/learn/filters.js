@@ -2,11 +2,11 @@
 // window can find, and what changes between one moment and the next. Still
 // no learning anywhere — every number here was chosen by a person.
 
-import { t, pct } from '../core/i18n.js?v=1.24.3'
-import * as ops from '../cv/ops.js?v=1.24.3'
-import { edges as edgesLens, motion as motionLens, createLensState } from '../cv/lenses.js?v=1.24.3'
-import { clear, containRect } from '../cv/draw.js?v=1.24.3'
-import { runBench, blit, slider, choice, parts, writer, pointIn } from './bench.js?v=1.24.3'
+import { t, pct } from '../core/i18n.js?v=1.24.4'
+import * as ops from '../cv/ops.js?v=1.24.4'
+import { edges as edgesLens, motion as motionLens, createLensState } from '../cv/lenses.js?v=1.24.4'
+import { clear, containRect } from '../cv/draw.js?v=1.24.4'
+import { runBench, blit, slider, choice, parts, writer, pointIn } from './bench.js?v=1.24.4'
 
 const WORK_WIDTH = 320
 

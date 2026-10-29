@@ -7,12 +7,12 @@
 // nearest neighbours over the same 24 cameras is how you find out whether
 // training actually bought you anything.
 
-import { t, esc, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.24.3'
-import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.24.3'
-import { openCamera } from '../core/source.js?v=1.24.3'
-import { sleep } from '../core/site.js?v=1.24.3'
-import { snapshot, shrink, embed } from './eye.js?v=1.24.3'
-import { GLYPHS, nameOf } from './store.js?v=1.24.3'
+import { t, esc, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.24.4'
+import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.24.4'
+import { openCamera } from '../core/source.js?v=1.24.4'
+import { sleep } from '../core/site.js?v=1.24.4'
+import { snapshot, shrink, embed } from './eye.js?v=1.24.4'
+import { GLYPHS, nameOf } from './store.js?v=1.24.4'
 
 export const JUDGE_COUNT = 24
 const PAUSE_MS = 700

@@ -8,10 +8,10 @@
 // A game is wired the first time it is chosen, so the detector is not loaded
 // for a game nobody plays.
 
-import '../core/site.js?v=1.24.3'
-import { initCount } from '../games/count.js?v=1.24.3'
-import { initPixels } from '../games/pixels.js?v=1.24.3'
-import { initFool } from '../games/fool.js?v=1.24.3'
+import '../core/site.js?v=1.24.4'
+import { initCount } from '../games/count.js?v=1.24.4'
+import { initPixels } from '../games/pixels.js?v=1.24.4'
+import { initFool } from '../games/fool.js?v=1.24.4'
 
 const GAMES = ['count', 'pixels', 'fool']
 const picker = document.querySelector('[data-game-picker]')

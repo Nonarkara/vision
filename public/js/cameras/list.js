@@ -2,9 +2,9 @@
 // also the map's keyboard and screen-reader alternative — every square on the
 // map is a row here, and "Show on map" does what a tap on the map does.
 
-import { t, esc, n, onLang } from '../core/i18n.js?v=1.24.3'
-import { camName, sourceName, isReadable } from '../core/catalog.js?v=1.24.3'
-import { kindName, safeKind } from './filters.js?v=1.24.3'
+import { t, esc, n, onLang } from '../core/i18n.js?v=1.24.4'
+import { camName, sourceName, isReadable } from '../core/catalog.js?v=1.24.4'
+import { kindName, safeKind } from './filters.js?v=1.24.4'
 
 const PAGE_SIZE = 50
 const isWebLink = (u) => typeof u === 'string' && /^https?:\/\//i.test(u)

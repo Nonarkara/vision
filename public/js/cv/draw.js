@@ -2,8 +2,8 @@
 // finding, and every finding carries its words and its number — colour is
 // never the only carrier.
 
-import { cocoName } from '../ml/labels.js?v=1.24.3'
-import { lang } from '../core/i18n.js?v=1.24.3'
+import { cocoName } from '../ml/labels.js?v=1.24.4'
+import { lang } from '../core/i18n.js?v=1.24.4'
 
 export const JASPER = '#eb5324'
 export const GRAY = '#b6bfc1'

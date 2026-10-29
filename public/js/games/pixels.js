@@ -6,14 +6,14 @@
 // The detector really does look at the blocky picture: ops.pixelate makes
 // it, and that canvas is what goes into the network at every step.
 
-import { t, bi, esc, n, lang, onLang } from '../core/i18n.js?v=1.24.3'
-import { cocoName } from '../ml/labels.js?v=1.24.3'
-import { detect } from '../ml/detector.js?v=1.24.3'
-import { pixelate } from '../cv/ops.js?v=1.24.3'
-import { drawDetections } from '../cv/draw.js?v=1.24.3'
-import { startSpecimen } from '../core/specimen.js?v=1.24.3'
-import { sleep } from '../core/site.js?v=1.24.3'
-import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, biClass, shuffle, FLOOR_SCORE } from './common.js?v=1.24.3'
+import { t, bi, esc, n, lang, onLang } from '../core/i18n.js?v=1.24.4'
+import { cocoName } from '../ml/labels.js?v=1.24.4'
+import { detect } from '../ml/detector.js?v=1.24.4'
+import { pixelate } from '../cv/ops.js?v=1.24.4'
+import { drawDetections } from '../cv/draw.js?v=1.24.4'
+import { startSpecimen } from '../core/specimen.js?v=1.24.4'
+import { sleep } from '../core/site.js?v=1.24.4'
+import { paint, drawUnsure, huntFrame, readyDetector, benchSpecimen, readBest, writeBest, biClass, shuffle, FLOOR_SCORE } from './common.js?v=1.24.4'
 
 const ROUNDS = 5
 const BLOCKS = [64, 40, 24, 14, 8, 4, 1] // pixels per block on a 640-wide frame; 1 is the sharp picture

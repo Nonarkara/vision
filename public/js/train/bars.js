@@ -2,7 +2,7 @@
 // Built with DOM calls, not markup strings, because class names are typed by
 // the visitor and widths are set from script (the CSP forbids style="").
 
-import { pct } from '../core/i18n.js?v=1.24.3'
+import { pct } from '../core/i18n.js?v=1.24.4'
 
 /** container: an element with class "bars". */
 export function createBars(container) {

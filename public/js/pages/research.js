@@ -1,6 +1,6 @@
 // All illustrations and explanations remain readable without JavaScript.
-import '../core/site.js?v=1.24.3'
-import { evidence, loadCatalog } from '../core/catalog.js?v=1.24.3'
+import '../core/site.js?v=1.24.4'
+import { evidence, loadCatalog } from '../core/catalog.js?v=1.24.4'
 
 // Share the catalogue loader: language changes also reuse an in-flight request.
 let latestCameras = null
@@ -92,8 +92,8 @@ window.addEventListener('hashchange', followSectionLink)
 followSectionLink()
 
 // Three teaching illustrations; only the one-step reward example learns values.
-import { bi, n, onLang, t, lang } from '../core/i18n.js?v=1.24.3'
-import { createRewardLearner, describeReward } from '../research/reward.js?v=1.24.3'
+import { bi, n, onLang, t, lang } from '../core/i18n.js?v=1.24.4'
+import { createRewardLearner, describeReward } from '../research/reward.js?v=1.24.4'
 for (const interaction of document.querySelectorAll('.learning-interaction')) interaction.hidden = false
 const labelButton = document.querySelector('[data-reveal-labels]')
 labelButton.addEventListener('click', () => {
