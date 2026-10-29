@@ -36,9 +36,16 @@ const fail = (where, what) => problems.push(`${where}: ${what}`)
 
 // 1. script-src must stay closed. A third-party host here means code from
 //    somewhere else can run on a page, which is the thing /legal denies.
+// Keep the index response for the final report. A filesystem walk can block
+// longer than the local server's idle keep-alive; fetching again afterwards
+// raced that closed socket under load. Consume each sampled body as well.
+let injected = null
+const beacon = /static\.cloudflareinsights\.com/
 const sample = ['/index.html', '/drive.html', '/research.html', '/everyday.html', '/legal.html']
 for (const page of sample) {
   const res = await fetch(base + page)
+  const html = await res.text()
+  if (page === '/index.html') injected = html.match(beacon)
   const csp = res.headers.get('content-security-policy') ?? ''
   if (!csp) { fail(page, 'no CSP header — nothing is enforcing the no-tracking promise'); continue }
 
@@ -100,8 +107,6 @@ if (!word) fail('/legal.html', `${keys.size} storage keys — the storage senten
 else if (!legal.includes(`keeps ${word} things`)) fail('/legal.html', `does not say it keeps ${word} things (the code keeps ${keys.size})`)
 
 // 5. Report the known residual honestly rather than pretending it is not there.
-const beacon = /static\.cloudflareinsights\.com/
-const injected = (await (await fetch(base + '/index.html')).text()).match(beacon)
 console.log('privacy:')
 // These two lines used to print unconditionally. A page with no CSP, a wildcard
 // or unsafe-inline was recorded by fail() and the script STILL said "no
