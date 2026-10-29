@@ -1,0 +1,15 @@
+/gesture      desktop  carried 4 [ivory indigo gray jasper]  ivory 58.04%  indigo 22.13%  gray 10.04%  jasper 3.32%  black 4.8%  photo 0%  other 1.63%
+/gesture      phone    carried 4 [ivory indigo gray jasper]  ivory 58.56%  indigo 20.28%  gray 9.96%  jasper 1.16%  black 5.83%  photo 0%  other 4.01%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/gesture  (carries 4: ivory+indigo+gray+jasper)
+    1119574px  rgb(235, 211, 162)     1348x668 @y163  section.finger-room.instrument
+     703760px  rgb(182, 191, 193)     864x577 @y237  div.finger-instrument
+     656387px  rgb(5, 18, 48)         848x477 @y297  div.finger-stage
+     656387px  rgb(235, 211, 162)     848x53 @y721  div.finger-idle
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      53144px  rgb(5, 18, 48)         83x44 @y600  button.btn
+
+ROOM SUMMARY (desktop)
+  /gesture      4 hues  ivory+indigo+gray+jasper
