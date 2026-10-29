@@ -1,0 +1,59 @@
+/             desktop  carried 4 [ivory indigo gray jasper]  ivory 34.89%  indigo 1.36%  gray 5.24%  jasper 0.65%  black 36.34%  photo 0%  other 21.35%
+/             phone    carried 4 [ivory indigo gray jasper]  ivory 27.22%  indigo 1.37%  gray 3.07%  jasper 1%  black 40.49%  photo 0%  other 26.3%
+/games        desktop  carried 4 [ivory indigo gray jasper]  ivory 48.75%  indigo 0.72%  gray 32.55%  jasper 0.69%  black 15.89%  photo 0%  other 1.27%
+/games        phone    carried 4 [ivory indigo gray jasper]  ivory 40.72%  indigo 1.01%  gray 22.56%  jasper 2.72%  black 29.52%  photo 0%  other 3.02%
+/learn        desktop  carried 3 [ivory indigo gray]  ivory 49.98%  indigo 1.66%  gray 3.23%  jasper 0.06%  black 23.55%  photo 0%  other 20.94%
+/learn        phone    carried 3 [ivory indigo gray]  ivory 38.3%  indigo 1.52%  gray 3.19%  jasper 0.21%  black 38%  photo 0%  other 18.13%
+/train        desktop  carried 3 [ivory indigo gray]  ivory 53.58%  indigo 3.89%  gray 10.9%  jasper 0.01%  black 14.21%  photo 0%  other 17.15%
+/train        phone    carried 3 [ivory indigo gray]  ivory 52.54%  indigo 4.97%  gray 6.94%  jasper 0.02%  black 20.67%  photo 0%  other 14.48%
+/drive        desktop  carried 3 [ivory indigo gray]  ivory 24.29%  indigo 52.15%  gray 7.2%  jasper 0.01%  black 12.37%  photo 0%  other 3.86%
+/drive        phone    carried 3 [ivory indigo gray]  ivory 28.47%  indigo 42.8%  gray 2.34%  jasper 0.02%  black 15.96%  photo 0%  other 10.08%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/  (carries 4: ivory+indigo+gray+jasper)
+     848995px  rgb(16, 16, 16)        972x829 @y44  div.opening-stage.bench
+     671906px  rgb(16, 16, 16)        972x44 @y647  div.controls.lens-steps
+     629137px  rgb(182, 191, 193)     972x547 @y101  div.bench-view.stage-view
+     133282px  rgb(235, 83, 36)       193x44 @y647  button.btn
+     133282px  rgb(31, 31, 31)        193x44 @y647  button.btn
+     133271px  rgb(31, 31, 31)        193x44 @y647  button.btn.machine-trail
+
+/games  (carries 4: ivory+indigo+gray+jasper)
+     728775px  rgb(16, 16, 16)        810x787 @y267  div.bench.instrument
+     656226px  rgb(16, 16, 16)        810x44 @y766  div.controls.game-choice
+     620597px  rgb(182, 191, 193)     810x455 @y311  div.bench-view
+     620597px  rgb(182, 191, 193)     810x455 @y311  div.bench-state
+     468717px  rgb(16, 16, 16)        521x44 @y874  p.game-score.num
+     432663px  rgb(5, 18, 48)         506x105 @y750  li
+
+/learn  (carries 3: ivory+indigo+gray)
+     718594px  rgb(16, 16, 16)        798x622 @y327  div.bench.instrument
+     703012px  rgb(16, 16, 16)        798x104 @y776  div.slider.numbers-controls
+     619974px  rgb(182, 191, 193)     798x449 @y327  div.bench-view
+     385020px  rgb(16, 16, 16)        1440x67 @y200  div.specimen-bar.field-black
+      80147px  rgb(16, 16, 16)        313x44 @y212  div.controls
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+
+/train  (carries 3: ivory+indigo+gray)
+     648298px  rgb(16, 16, 16)        824x512 @y274  div.bench.lesson-bench
+     648298px  rgb(182, 191, 193)     824x464 @y323  div.bench-view
+     386509px  rgb(5, 18, 48)         470x77 @y745  li
+     349418px  rgb(5, 18, 48)         470x50 @y693  li
+     324965px  rgb(5, 18, 48)         470x50 @y641  li
+     300512px  rgb(5, 18, 48)         470x50 @y589  li
+
+/drive  (carries 3: ivory+indigo+gray)
+    1296000px  rgb(182, 191, 193)     1440x997 @y845  section.chapter.gate-note
+    1216868px  rgb(5, 18, 48)         1440x582 @y263  section.gate
+     344983px  rgb(5, 18, 48)         521x326 @y337  canvas.captcha-grid
+     132691px  rgb(16, 16, 16)        185x46 @y672  div.controls.pad
+      96253px  rgb(31, 31, 31)        199x44 @y440  button.btn
+      66054px  rgb(31, 31, 31)        92x44 @y672  button.btn
+
+ROOM SUMMARY (desktop)
+  /             4 hues  ivory+indigo+gray+jasper
+  /games        4 hues  ivory+indigo+gray+jasper
+  /learn        3 hues  ivory+indigo+gray
+  /train        3 hues  ivory+indigo+gray
+  /drive        3 hues  ivory+indigo+gray
