@@ -1,0 +1,7 @@
+{"t":"2026-10-29T20:03:11.025Z","level":"info","msg":"colour study loaded","total":0}
+privacy:
+  script-src closed on 5 pages — no third-party code can run
+  origin serves no third-party script
+  9 browser-storage key(s) all named on /legal
+  origin response carries no Cloudflare beacon (any tag seen in a browser is added at the edge)
+✓ the no-analytics promise is enforced by the CSP, not just asserted

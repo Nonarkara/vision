@@ -1,0 +1,12 @@
+{
+  "creditOpen": false,
+  "style": [
+    "/css/vision.css?v=1.24.4",
+    "/css/readability.css?v=1.24.4"
+  ],
+  "sw": 390,
+  "version": "1.24.4",
+  "w": 390,
+  "warning": "Little detail in this frame. It may be flat or blurred; this does not prove the camera is broken.",
+  "warningInCredit": false
+}
