@@ -1,0 +1,56 @@
+TAP version 13
+# Subtest: struck note includes bounded attack/decay and three harmonic partials
+ok 1 - struck note includes bounded attack/decay and three harmonic partials
+  ---
+  duration_ms: 2.822584
+  type: 'test'
+  ...
+# Subtest: rapid notes stay bounded and Stop disconnects every oscillator and gain
+ok 2 - rapid notes stay bounded and Stop disconnects every oscillator and gain
+  ---
+  duration_ms: 6.62575
+  type: 'test'
+  ...
+# Subtest: natural note completion disconnects all voice nodes
+ok 3 - natural note completion disconnects all voice nodes
+  ---
+  duration_ms: 0.992
+  type: 'test'
+  ...
+# Subtest: late rejection from a closed context cannot discard a newer working context
+not ok 4 - late rejection from a closed context cannot discard a newer working context
+  ---
+  duration_ms: 2.424958
+  type: 'test'
+  location: '/Volumes/Data/agent-scratch/vision-minimax-2026-10-30/mutation/tests/finger-sound.test.js:32:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Volumes/Data/agent-scratch/vision-minimax-2026-10-30/mutation/tests/finger-sound.test.js:38:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: invalid notes do not allocate nodes or play while audio is closed
+ok 5 - invalid notes do not allocate nodes or play while audio is closed
+  ---
+  duration_ms: 0.960208
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 257.027458

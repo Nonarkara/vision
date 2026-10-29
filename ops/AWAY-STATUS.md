@@ -916,3 +916,37 @@ Shipped code5cbacf7 from detached release worktree. /gesture now needs no teachi
 ### 1.24.1 — 2026-10-29 · Finger playground return-state recovery
 
 Shipped98d2e24 from a clean detached release tree. Returning through browser Back now restarts the renderer/visibility observer, creates fresh audio on the next user action and says camera is off; camera is not reopened automatically. Actual lifecycle routines are regression-tested. npm run deploy green:407/407 tests,27pages/97local refs,92modules/86resolved imports,17 required palette pairings, fresh module URLs. Local/public ok:true/version1.24.1; catalogue loaded19:31:35Z/upstream19:26:37Z. Live390/1024/1440 no horizontal overflow or observed console errors; musical repetition/mute/keyboard and color endpoints verified. Three hues carried; release-tree slop-lint OK,1point/score4 (long-lines/house Thai face), independently reviewed. Source and scoped visual review closed; physical webcam/two-hand diversity and speakers remain unverified. Full evidence and limitations in ops/FINGER-PLAYGROUND-2026-10-29.md; ops/evidence/gesture-1.24.0 also includes the1.24.1 health, gate and live capture.
+
+### Monitoring — 2026-10-29 02:36 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,421 catalogue entries; loaded02:31:35/upstream02:26:37 Bangkok (about5/10 minutes old), within refresh tolerance. App PID1528 running/last exit0 after the recorded release; tunnel PID935 remains running and has never exited. Memory16–17MB; relay idle, one last-successful check, no resting hosts. Recent app log confirms healthy1.24.1 startup/catalogue load; app error log unchanged since28October10:40 and tunnel log unchanged since01:19, with older client-cancelled requests rather than a current outage. No service recovery, UI/code changes, camera access or machine-wide monitoring. Working tree was clean before this monitoring entry. Nothing actionable to notify.
+
+### Monitoring — 2026-10-29 03:33 Bangkok (no deployment)
+
+Local/public health agree1.24.1/ok:true,3,421 entries; loaded03:31:35/upstream03:26:41 Bangkok (about2/7 minutes old). All recent ten-minute catalogue refreshes succeeded. App PID1528 and tunnel PID935 remain running with exit0; memory18–20MB, relay idle, one successful checked camera and no resting hosts. Error logs have no new entries since the previously recorded isolated fetch/client-cancelled requests. Preserved the prior uncommitted monitoring note. No recovery, deployment, UI/code change, camera access or machine-wide monitoring; no actionable change to notify.
+
+### Monitoring — 2026-10-29 04:31 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,420 entries; loaded/upstream04:21:38 Bangkok (about10 minutes old, at the next scheduled refresh boundary and below the30-minute investigation threshold). Recent ten-minute refreshes succeeded; no new app/tunnel error entries. App PID1528 and tunnel PID935 remain running/exit0; memory20–22MB, relay idle, one successful checked camera and no resting hosts. Preserved existing monitoring edits. No recovery, deployment, UI/code changes, private camera access or machine-wide jobs; no actionable change to notify.
+
+### Monitoring — 2026-10-29 05:38 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,419 catalogue entries; loaded05:31:35/upstream05:28:23 Bangkok (about7/10 minutes old). Recent ten-minute refreshes all succeeded; app error log unchanged. App PID1528 and tunnel PID935 remain running/exit0; tunnel connections re-registered at04:43 Bangkok and public health is accessible, with no sustained failure requiring recovery. Memory20–22MB, relay idle, one successful checked camera and no resting hosts. Preserved prior monitoring edits. No deployment, restart, UI/code changes, camera access or machine-wide jobs; no actionable change to notify.
+
+Tunnel detail: logs show transient QUIC inactivity/timeouts and a local DNS error around04:40 Bangkok; one edge connection recovered at04:40:53 and the other three at04:43:17 without intervention. This is recovered evidence, not a current outage or a reason to restart healthy services.
+
+### Monitoring — 2026-10-29 06:38 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,421 entries; loaded06:31:35/upstream06:28:19 Bangkok (about7/10 minutes old). Recent ten-minute refreshes succeeded; app/tunnel logs contain no new failures since the previously recorded automatic tunnel recovery. App PID1528 and tunnel PID935 remain running/exit0; memory20–22MB, relay idle, one successful checked camera and no resting hosts. Preserved prior monitoring edits. No recovery, deployment, UI/code changes, camera access or machine-wide jobs; no actionable change to notify.
+
+### Monitoring — 2026-10-29 07:42 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,420 entries; loaded07:41:35/upstream07:40:24 Bangkok (about1/3 minutes old). Recent ten-minute refreshes succeeded and error/tunnel logs show no new failures. App PID1528 and tunnel PID935 remain running/exit0; memory21–22MB, relay idle, one successful checked camera and no resting hosts. Preserved prior monitoring edits. No recovery, deployment, UI/code changes, camera access or machine-wide jobs; no actionable change to notify.
+
+### Monitoring — 2026-10-29 08:42 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true,3,421 entries; loaded/upstream08:41:39 Bangkok (about1 minute old). Recent ten-minute refreshes succeeded; no new app/tunnel failures. App PID1528 and tunnel PID935 remain running/exit0; memory20–22MB, relay idle, one successful checked camera and no resting hosts. Preserved prior monitoring edits. No recovery, deployment, UI/code changes, camera access or machine-wide jobs; no actionable change to notify.
+
+### Monitoring — 2026-10-30 00:36 Bangkok (no deployment)
+
+Local/public agree1.24.1/ok:true;3,254 catalogue entries, loaded00:34:02/upstream00:33:32 Bangkok, fresh within minutes. The lower count matches FloodDash /api/cctv/all exactly (total/raw cameras3,254, degraded:false), so it is an upstream listing change rather than evidence of local ingestion loss. Recent ten-minute refreshes succeeded; isolated23:44 fetch failure recovered on later cycles. App PID948 and tunnel PID941 run with never-exited state for their current jobs; tunnel connections registered23:44. Memory26–27MB, relay idle, no checked cameras or resting hosts. Preserved existing monitoring notes and other agent's uncommitted1.24.2 Gesture/font/module/evidence changes; did not deploy them. No recovery, UI/code changes, camera capture or machine-wide jobs; no actionable failure to notify.

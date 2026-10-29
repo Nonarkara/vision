@@ -1,0 +1,73 @@
+TAP version 13
+# Subtest: a number choice cancels an unresolved camera permission and closes a late grant
+ok 1 - a number choice cancels an unresolved camera permission and closes a late grant
+  ---
+  duration_ms: 4.199875
+  type: 'test'
+  ...
+# Subtest: Stop cancels a note awaiting audio activation
+ok 2 - Stop cancels a note awaiting audio activation
+  ---
+  duration_ms: 2.36775
+  type: 'test'
+  ...
+# Subtest: muted number choices never enable sound themselves
+ok 3 - muted number choices never enable sound themselves
+  ---
+  duration_ms: 1.313834
+  type: 'test'
+  ...
+# Subtest: returning from browser back-cache restarts drawing and leaves a fresh audio context available
+ok 4 - returning from browser back-cache restarts drawing and leaves a fresh audio context available
+  ---
+  duration_ms: 1.441958
+  type: 'test'
+  ...
+# Subtest: mute suppresses the actual music action after audio has already started
+not ok 5 - mute suppresses the actual music action after audio has already started
+  ---
+  duration_ms: 4.619334
+  type: 'test'
+  location: '/Volumes/Data/agent-scratch/vision-minimax-2026-10-30/mutation/tests/finger-lifecycle.test.js:59:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        261.6,
+    +   293.7
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 261.6
+  actual:
+    0: 261.6
+    1: 293.7
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Volumes/Data/agent-scratch/vision-minimax-2026-10-30/mutation/tests/finger-lifecycle.test.js:68:9)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: late failed audio setup cannot mute a newer successful setup
+ok 6 - late failed audio setup cannot mute a newer successful setup
+  ---
+  duration_ms: 1.362833
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 5
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 348.123583

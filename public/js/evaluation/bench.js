@@ -1,6 +1,6 @@
-import { t, onLang } from '../core/i18n.js?v=1.24.1'
-import { PACK, referenceFrames, drawReference } from './reference.js?v=1.24.1'
-import { evaluate } from './metrics.js?v=1.24.1'
+import { t, onLang } from '../core/i18n.js?v=1.24.2'
+import { PACK, referenceFrames, drawReference } from './reference.js?v=1.24.2'
+import { evaluate } from './metrics.js?v=1.24.2'
 export function mountReferenceCheck() {
   const root = document.querySelector('[data-reference-check]')
   if (!root) return
@@ -24,7 +24,7 @@ export function mountReferenceCheck() {
     canvas.hidden = false; paint()
     const started = performance.now()
     try {
-      const { loadDetector, detect } = await import('../ml/detector.js?v=1.24.1')
+      const { loadDetector, detect } = await import('../ml/detector.js?v=1.24.2')
       const cold = performance.now(); await loadDetector(); report.loadAndWarmupMs = performance.now() - cold
       report.runtime.backend = window.tf?.getBackend?.() ?? 'unknown'
       for (const frame of frames) {

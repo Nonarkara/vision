@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: a missing hand lifts the pen; a fist clears only when a hand exists
+ok 1 - a missing hand lifts the pen; a fist clears only when a hand exists
+  ---
+  duration_ms: 2.242042
+  type: 'test'
+  ...
+# Subtest: drawing connects nearby fingertip positions and avoids cross-hand jumps
+ok 2 - drawing connects nearby fingertip positions and avoids cross-hand jumps
+  ---
+  duration_ms: 0.445708
+  type: 'test'
+  ...
+# Subtest: camera-free brush choices produce a real sample stroke at all ten widths
+ok 3 - camera-free brush choices produce a real sample stroke at all ten widths
+  ---
+  duration_ms: 3.226584
+  type: 'test'
+  ...
+# Subtest: a number choice cancels an unresolved camera permission and closes a late grant
+ok 4 - a number choice cancels an unresolved camera permission and closes a late grant
+  ---
+  duration_ms: 2.508708
+  type: 'test'
+  ...
+# Subtest: Stop cancels a note awaiting audio activation
+ok 5 - Stop cancels a note awaiting audio activation
+  ---
+  duration_ms: 0.511708
+  type: 'test'
+  ...
+# Subtest: muted number choices never enable sound themselves
+ok 6 - muted number choices never enable sound themselves
+  ---
+  duration_ms: 0.558791
+  type: 'test'
+  ...
+# Subtest: returning from browser back-cache restarts drawing and leaves a fresh audio context available
+ok 7 - returning from browser back-cache restarts drawing and leaves a fresh audio context available
+  ---
+  duration_ms: 0.532084
+  type: 'test'
+  ...
+# Subtest: mute suppresses the actual music action after audio has already started
+ok 8 - mute suppresses the actual music action after audio has already started
+  ---
+  duration_ms: 0.737333
+  type: 'test'
+  ...
+# Subtest: late failed audio setup cannot mute a newer successful setup
+ok 9 - late failed audio setup cannot mute a newer successful setup
+  ---
+  duration_ms: 0.492292
+  type: 'test'
+  ...
+# Subtest: color and brush mappings have real endpoints and progress monotonically
+ok 10 - color and brush mappings have real endpoints and progress monotonically
+  ---
+  duration_ms: 1.066666
+  type: 'test'
+  ...
+# Subtest: rhythm strip retains only recent notes and bounds long and negative time gaps
+ok 11 - rhythm strip retains only recent notes and bounds long and negative time gaps
+  ---
+  duration_ms: 0.25375
+  type: 'test'
+  ...
+# Subtest: paper falls, and a note pulse expires without growing forever
+ok 12 - paper falls, and a note pulse expires without growing forever
+  ---
+  duration_ms: 0.13425
+  type: 'test'
+  ...
+# Subtest: struck note includes bounded attack/decay and three harmonic partials
+ok 13 - struck note includes bounded attack/decay and three harmonic partials
+  ---
+  duration_ms: 2.057084
+  type: 'test'
+  ...
+# Subtest: rapid notes stay bounded and Stop disconnects every oscillator and gain
+ok 14 - rapid notes stay bounded and Stop disconnects every oscillator and gain
+  ---
+  duration_ms: 1.174292
+  type: 'test'
+  ...
+# Subtest: natural note completion disconnects all voice nodes
+ok 15 - natural note completion disconnects all voice nodes
+  ---
+  duration_ms: 0.255916
+  type: 'test'
+  ...
+# Subtest: late rejection from a closed context cannot discard a newer working context
+ok 16 - late rejection from a closed context cannot discard a newer working context
+  ---
+  duration_ms: 0.466125
+  type: 'test'
+  ...
+# Subtest: invalid notes do not allocate nodes or play while audio is closed
+ok 17 - invalid notes do not allocate nodes or play while audio is closed
+  ---
+  duration_ms: 0.633583
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 547.803875

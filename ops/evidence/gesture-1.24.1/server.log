@@ -1,0 +1,8 @@
+{"t":"2026-10-29T17:27:37.166Z","level":"info","msg":"colour study loaded","total":0}
+{"t":"2026-10-29T17:27:37.234Z","level":"info","msg":"catalogue loaded from disk","cameras":3254}
+{"t":"2026-10-29T17:27:37.241Z","level":"info","msg":"vision listening","host":"127.0.0.1","port":8431,"version":"1.24.2"}
+{"t":"2026-10-29T17:27:39.360Z","level":"info","msg":"catalogue refreshed","cameras":3254,"video":1,"still":2681,"view":324,"off":248,"total":3254}
+{"t":"2026-10-29T17:37:37.807Z","level":"info","msg":"catalogue refreshed","cameras":3254,"video":1,"still":2681,"view":324,"off":248,"total":3254}
+{"t":"2026-10-29T17:47:42.242Z","level":"info","msg":"catalogue refreshed","cameras":3254,"video":1,"still":2681,"view":324,"off":248,"total":3254}
+{"t":"2026-10-29T17:57:38.627Z","level":"info","msg":"catalogue refreshed","cameras":3254,"video":1,"still":2681,"view":324,"off":248,"total":3254}
+{"t":"2026-10-29T18:07:37.658Z","level":"info","msg":"catalogue refreshed","cameras":3252,"video":1,"still":2679,"view":324,"off":248,"total":3252}

@@ -101,3 +101,16 @@ test('a browser that resolves fullscreen without entering still gets viewport mo
   assert.equal(header.inert,true)
   assert.equal(button.attrs['aria-pressed'],'true')
 })
+
+test('an instrument can choose viewport fullscreen when the in-app browser stalls native requests', async () => {
+  const root=element(),body=element(),main=element(),header=element(),panel=element(['finger-room']),button=element()
+  children(root,body);children(body,header,main);children(main,panel)
+  panel.querySelector=s=>s==='canvas'?{}:s==='[data-fullscreen]'?button:null
+  panel.getAttribute=k=>k==='data-fullscreen-mode'?'viewport':null
+  let requested=false
+  panel.requestFullscreen=async()=>{requested=true;await new Promise(()=>{})}
+  globalThis.document={body,documentElement:{dataset:{lang:'en'}},fullscreenEnabled:true,querySelectorAll:()=>[panel],addEventListener(){}}
+  globalThis.window={matchMedia:()=>({matches:true}),dispatchEvent(){}}
+  initFullscreen();await button.events.click()
+  assert.equal(requested,false);assert.equal(panel.classList.contains('is-expanded'),true);assert.equal(header.inert,true)
+})

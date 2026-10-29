@@ -1,6 +1,6 @@
 // One enlarged instrument, with its controls intact. Native fullscreen when
 // available; an accessible viewport mode on phones that do not offer it.
-import { t, bi, onLang } from './i18n.js?v=1.24.1'
+import { t, bi, onLang } from './i18n.js?v=1.24.2'
 
 export function initFullscreen() {
   let active = null
@@ -76,7 +76,7 @@ export function initFullscreen() {
     }
     // On narrow screens keep the browser's navigation available; the panel
     // still fills the viewport, with touch controls and an explicit exit.
-    if (document.fullscreenEnabled && panel.requestFullscreen && window.matchMedia('(min-width: 821px)').matches) {
+    if (panel.getAttribute?.('data-fullscreen-mode') !== 'viewport' && document.fullscreenEnabled && panel.requestFullscreen && window.matchMedia('(min-width: 821px)').matches) {
       try { await panel.requestFullscreen(); if (document.fullscreenElement === panel) return } catch { /* viewport mode still works */ }
     }
     enterViewport(panel, button)
