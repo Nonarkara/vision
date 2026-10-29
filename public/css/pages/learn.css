@@ -161,3 +161,8 @@ body main.learn .page-head { gap: 8px 24px; }
   .learn .numbers-controls [data-fullscreen] { grid-column: 3; grid-row: 1 / span 2; }
   .learn .numbers-controls [data-fullscreen] [lang] { display: none; }
 }
+/* A phone fullscreen removes surrounding chrome; it does not invent extra
+   picture height or detach the number grid from its slider. */
+@media (max-width: 760px) {
+  .learn #numbers .bench:is(:fullscreen, .is-expanded) > .bench-view { flex: none; height: auto; min-height: 0; aspect-ratio: 16 / 9; }
+}
