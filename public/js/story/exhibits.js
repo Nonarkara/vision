@@ -3,9 +3,9 @@
 // who is looking at what — and says so. Same model, same honesty as every
 // other room: every box carries its class and its score.
 
-import { detect, loadDetector } from '../ml/detector.js?v=1.24.2'
-import { drawDetections } from '../cv/draw.js?v=1.24.2'
-import { t, n } from '../core/i18n.js?v=1.24.2'
+import { detect, loadDetector } from '../ml/detector.js?v=1.24.3'
+import { drawDetections } from '../cv/draw.js?v=1.24.3'
+import { t, n } from '../core/i18n.js?v=1.24.3'
 
 const PERSON = 1
 const CHAIR = 62

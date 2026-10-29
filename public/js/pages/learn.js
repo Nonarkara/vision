@@ -2,13 +2,13 @@
 // what every bench studies — a public camera, the visitor's own camera, or a
 // photo — so switching to your own face re-teaches the whole page at once.
 
-import '../core/site.js?v=1.24.2'
-import { t, bi, esc, onLang } from '../core/i18n.js?v=1.24.2'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.2'
-import { numbersChapter, colourChapter, thresholdChapter } from '../learn/pixels.js?v=1.24.2'
-import { convolutionChapter, edgesChapter, motionChapter } from '../learn/filters.js?v=1.24.2'
-import { detectorChapter, limitsChapter } from '../learn/neural.js?v=1.24.2'
-import { ORDER, currentIndex, readSeen, rememberSeen, progressText, resumeAt } from '../learn/course.js?v=1.24.2'
+import '../core/site.js?v=1.24.3'
+import { t, bi, esc, onLang } from '../core/i18n.js?v=1.24.3'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.3'
+import { numbersChapter, colourChapter, thresholdChapter } from '../learn/pixels.js?v=1.24.3'
+import { convolutionChapter, edgesChapter, motionChapter } from '../learn/filters.js?v=1.24.3'
+import { detectorChapter, limitsChapter } from '../learn/neural.js?v=1.24.3'
+import { ORDER, currentIndex, readSeen, rememberSeen, progressText, resumeAt } from '../learn/course.js?v=1.24.3'
 
 const CHAPTERS = {
   numbers: numbersChapter,
@@ -24,6 +24,15 @@ const CHAPTERS = {
 const slot = document.querySelector('[data-specimen-slot]')
 slot.insertAdjacentHTML('afterend', specimenBarHtml())
 slot.remove()
+// Keep the source name at the picture choice. Its full ownership/relay credit
+// opens in place instead of being permanently clamped to two phone lines.
+const sourceBar = document.querySelector('[data-specimen]')
+const sourceCredit = document.createElement('details')
+sourceCredit.className = 'specimen-credit'
+const sourceSummary = document.createElement('summary')
+sourceSummary.append(sourceBar.querySelector('[data-specimen-name]'))
+sourceCredit.append(sourceSummary, sourceBar.querySelector('[data-specimen-meta]'))
+sourceBar.querySelector('.specimen-who').append(sourceCredit)
 const specimen = createSpecimen({ bar: document.querySelector('[data-specimen]'), prefer: 'video' })
 const getSource = () => specimen.source
 
@@ -96,6 +105,9 @@ for (const [index, chapter] of chapters.entries()) {
 let seen = readSeen()
 const progressEl = document.querySelector('[data-progress]')
 function paintProgress() {
+  // The first chapter already says where a new reader starts. Save this band
+  // for real progress and a returning reader’s resume link.
+  progressEl.hidden = seen.length === 0
   const [th, en, zh] = progressText(seen, chapters.length)
   progressEl.innerHTML = bi(th, en, zh)
   const next = resumeAt(seen)
@@ -103,7 +115,8 @@ function paintProgress() {
     const link = document.createElement('a')
     link.className = 'learn-resume'
     link.href = `#${next}`
-    link.innerHTML = bi(`คุณอ่านมาถึงบทที่ ${seen.length + 1} · กลับไปต่อที่นี่ →`, `You stopped at chapter ${seen.length + 1} · go back there →`, `你读到第 ${seen.length + 1} 章 · 从那里继续 →`)
+    link.innerHTML = bi('อ่านต่อ →', 'Continue →', '继续 →')
+    link.setAttribute('aria-label', t(`อ่านต่อที่บท ${seen.length + 1}`, `Continue at chapter ${seen.length + 1}`, `从第 ${seen.length + 1} 章继续`))
     progressEl.append(' ', link)
   }
 }

@@ -11,8 +11,8 @@
 // job in front of people so the clicks could train vision models. The
 // reveal on the page says so. The labels stay in this tab.
 
-import { rng } from './rand.js?v=1.24.2'
-import { GATE_TILES } from '../footage/library.js?v=1.24.2'
+import { rng } from './rand.js?v=1.24.3'
+import { GATE_TILES } from '../footage/library.js?v=1.24.3'
 
 export const GRID = 3
 export const TILES = GRID * GRID

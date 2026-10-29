@@ -1066,3 +1066,22 @@ label.btn:focus-within { outline: 3px solid currentColor; outline-offset: -3px; 
   .home-opening, .story-teaser .page-head { grid-template-columns: 1fr; }
   .home-opening .opening-text { gap: 12px; }
 }
+
+/* Home: changing the picture belongs beside the picture, before the commentary. */
+@media (max-width: 900px) {
+.home-opening .bench-caption:first-child { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding-block: 8px; }
+.home-opening .bench-caption:first-child .label { justify-self: start; }
+.home-opening .bench-caption:first-child [data-clock] { grid-column: 2; grid-row: 1; }
+.home-opening .spotted { grid-column: 1 / -1; }
+}
+.home-opening .specimen-line { display: block; padding: 8px 12px 0; }
+.home-opening .specimen-line .controls { background: transparent; }
+.home-source-credit { margin: 0 4px; font-size: var(--micro); }
+.home-source-credit > summary { cursor: pointer; min-height: var(--target); padding-block: 10px; }
+.home-source-credit > div { padding-bottom: 8px; }
+.home-opening .home-next { margin: 0; padding: 0 var(--gutter) 20px; grid-column: 1; }
+@media (min-width: 901px) {
+  .home-opening { grid-template-rows: min-content 1fr; }
+  .home-opening .opening-stage { grid-column: 2; grid-row: 1 / span 2; }
+  .home-opening .home-next { align-self: start; }
+}

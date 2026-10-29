@@ -5,22 +5,22 @@
 //
 // Everything — examples, weights, predictions — lives in this tab's memory.
 
-import '../core/site.js?v=1.24.2'
-import { mountVideoLesson } from '../train/video-lesson.js?v=1.24.2'
-import { t, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.24.2'
-import { toast, confirmBox } from '../core/site.js?v=1.24.2'
-import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.2'
-import { canUseWebcam } from '../core/source.js?v=1.24.2'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.24.2'
-import { knnPredict, leaveOneOutAsync } from '../ml/learner.js?v=1.24.2'
-import * as store from '../train/store.js?v=1.24.2'
-import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.24.2'
-import { createClassList } from '../train/classes-ui.js?v=1.24.2'
-import { createBars } from '../train/bars.js?v=1.24.2'
-import { trainLayer, drawCurve, EPOCHS, layerFile, download, parseLayerFile, fileReason } from '../train/layer.js?v=1.24.2'
-import { createMap } from '../train/map.js?v=1.24.2'
-import { createJudge } from '../train/judge.js?v=1.24.2'
-import { demoFrames, roadScene } from '../train/demo.js?v=1.24.2'
+import '../core/site.js?v=1.24.3'
+import { mountVideoLesson } from '../train/video-lesson.js?v=1.24.3'
+import { t, n, count, pct, lang, onLang } from '../core/i18n.js?v=1.24.3'
+import { toast, confirmBox } from '../core/site.js?v=1.24.3'
+import { createSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.3'
+import { canUseWebcam } from '../core/source.js?v=1.24.3'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.24.3'
+import { knnPredict, leaveOneOutAsync } from '../ml/learner.js?v=1.24.3'
+import * as store from '../train/store.js?v=1.24.3'
+import { snapshot, shrink, embed, isBusy, isLoaded } from '../train/eye.js?v=1.24.3'
+import { createClassList } from '../train/classes-ui.js?v=1.24.3'
+import { createBars } from '../train/bars.js?v=1.24.3'
+import { trainLayer, drawCurve, EPOCHS, layerFile, download, parseLayerFile, fileReason } from '../train/layer.js?v=1.24.3'
+import { createMap } from '../train/map.js?v=1.24.3'
+import { createJudge } from '../train/judge.js?v=1.24.3'
+import { demoFrames, roadScene } from '../train/demo.js?v=1.24.3'
 
 const K = 5
 const LIVE_MS = 250

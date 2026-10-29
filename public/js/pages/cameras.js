@@ -6,17 +6,17 @@
 // filters decide which cameras are "in view", and the map, the list and the
 // census all read that same set.
 
-import '../core/site.js?v=1.24.2'
-import { t, esc, n, onLang } from '../core/i18n.js?v=1.24.2'
-import { whenVisible } from '../core/site.js?v=1.24.2'
-import { loadCatalog, camName, sourceName, isReadable, byId } from '../core/catalog.js?v=1.24.2'
-import { wantsWebcam } from '../core/specimen.js?v=1.24.2'
-import { paintFigures } from '../cameras/figures.js?v=1.24.2'
-import { createFilters, matches, kindName, safeKind } from '../cameras/filters.js?v=1.24.2'
-import { createMap } from '../cameras/map.js?v=1.24.2'
-import { createList } from '../cameras/list.js?v=1.24.2'
-import { createBench } from '../cameras/bench.js?v=1.24.2'
-import { createCensus } from '../cameras/census.js?v=1.24.2'
+import '../core/site.js?v=1.24.3'
+import { t, esc, n, onLang } from '../core/i18n.js?v=1.24.3'
+import { whenVisible } from '../core/site.js?v=1.24.3'
+import { loadCatalog, camName, sourceName, isReadable, byId } from '../core/catalog.js?v=1.24.3'
+import { wantsWebcam } from '../core/specimen.js?v=1.24.3'
+import { paintFigures } from '../cameras/figures.js?v=1.24.3'
+import { createFilters, matches, kindName, safeKind } from '../cameras/filters.js?v=1.24.3'
+import { createMap } from '../cameras/map.js?v=1.24.3'
+import { createList } from '../cameras/list.js?v=1.24.3'
+import { createBench } from '../cameras/bench.js?v=1.24.3'
+import { createCensus } from '../cameras/census.js?v=1.24.3'
 
 const benchRoot = document.querySelector('[data-bench]')
 const bench = createBench(benchRoot)

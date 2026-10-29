@@ -2,11 +2,11 @@
 // A grid of numbers, three numbers per square for colour, and the first
 // decision a machine can make about a pixel — light or dark.
 
-import { t, n, pct } from '../core/i18n.js?v=1.24.2'
-import * as ops from '../cv/ops.js?v=1.24.2'
-import { numbers as numbersLens } from '../cv/lenses.js?v=1.24.2'
-import { clear, containRect, fitCanvas, GRAY, IVORY } from '../cv/draw.js?v=1.24.2'
-import { runBench, blit, slider, choice, parts, writer, tag } from './bench.js?v=1.24.2'
+import { t, n, pct } from '../core/i18n.js?v=1.24.3'
+import * as ops from '../cv/ops.js?v=1.24.3'
+import { numbers as numbersLens } from '../cv/lenses.js?v=1.24.3'
+import { clear, containRect, fitCanvas, GRAY, IVORY } from '../cv/draw.js?v=1.24.3'
+import { runBench, blit, slider, choice, parts, writer, tag } from './bench.js?v=1.24.3'
 
 const WORK_WIDTH = 320 // analysis width: enough to see, cheap enough for twelve frames a second
 

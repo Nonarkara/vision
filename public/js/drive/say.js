@@ -1,9 +1,9 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange, FOV } from './perceive.js?v=1.24.2'
-import { ITEMS } from './street.js?v=1.24.2'
-import { wrap } from './track.js?v=1.24.2'
+import { sightRange, FOV } from './perceive.js?v=1.24.3'
+import { ITEMS } from './street.js?v=1.24.3'
+import { wrap } from './track.js?v=1.24.3'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful', '谨慎'],

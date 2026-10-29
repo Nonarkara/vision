@@ -7,7 +7,6 @@
   #decide-figure { overflow-x: hidden; }
   #decide-figure svg { display: none; }
   #decide-figure .drive-stack { display: grid; grid-template-columns: 1fr; margin: 0; }
-  .drive, .gate, .chapter { overflow-x: clip; max-width: 100%; }
   .habits { table-layout: fixed; }
   .habits th, .habits td { overflow-wrap: anywhere; }
 }

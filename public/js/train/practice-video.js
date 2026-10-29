@@ -1,8 +1,8 @@
 // The Teach room's default clip: real public-camera frames, not a drawing.
 // Busy and quiet are two cameras the catalogue already names. The learner
 // captures examples from whichever scene is on screen.
-import { TEACH } from '../footage/library.js?v=1.24.2'
-import { HUES } from '../core/palette.js?v=1.24.2'
+import { TEACH } from '../footage/library.js?v=1.24.3'
+import { HUES } from '../core/palette.js?v=1.24.3'
 
 const W = 640
 const H = 360

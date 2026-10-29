@@ -13,18 +13,19 @@
 
   <header class="page-head">
     <div>
-      <span class="eyebrow label"><span class="th" lang="th">ห้อง 01 · แปดบท</span><span class="en" lang="en">Room 01 · eight chapters</span></span>
       <h1><span class="th" lang="th">เครื่องมองเห็นอย่างไร</span><span class="en" lang="en">How a computer sees</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">เลือกภาพด้านล่าง แล้วดูว่าพิกเซลกลายเป็นตัวเลข ขอบ การเคลื่อนไหว และคำเดาได้อย่างไร ทั้งแปดบทใช้ภาพที่คุณเลือก</p>
-      <p class="lede en" lang="en">Choose a picture below. Explore how its pixels become numbers, edges, motion, and a guess. All eight chapters use your chosen picture.</p>
+      <p class="lede th" lang="th">เลือกภาพหนึ่งภาพ แล้วตามภาพนั้นไปทั้งแปดขั้น จากพิกเซลจนถึงคำเดาของเครื่อง</p>
+      <p class="lede en" lang="en">Choose a picture. Follow it through eight steps, from pixels to guesses.</p>
       <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องหรือรูปของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera or photo is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
     </div>
   </header>
 
   <div data-specimen-slot></div>
 
+  <div class="learn-navigation">
+  <details class="learn-contents"><summary><span class="th" lang="th">8 บท</span><span class="en" lang="en">8 chapters</span><span class="zh" lang="zh">8 章</span></summary>
   <nav class="learn-toc" aria-label="Chapters">
     <a href="#numbers"><span class="num">01</span> <span class="th" lang="th">ภาพคือตัวเลข</span><span class="en" lang="en">A picture is numbers</span></a>
     <a href="#colour"><span class="num">02</span> <span class="th" lang="th">สีคือตัวเลขสามตัว</span><span class="en" lang="en">Colour is three numbers</span></a>
@@ -35,7 +36,9 @@
     <a href="#detector"><span class="num">07</span> <span class="th" lang="th">โครงข่ายที่ฝึกแล้ว</span><span class="en" lang="en">A trained network</span></a>
     <a href="#limits"><span class="num">08</span> <span class="th" lang="th">สิ่งที่มันทำไม่ได้</span><span class="en" lang="en">What it cannot do</span></a>
   </nav>
-  <p class="learn-progress" data-progress role="status"></p>
+  </details>
+  <p class="learn-progress" data-progress role="status" hidden></p>
+  </div>
 
 
 
@@ -49,9 +52,10 @@
 
       <div class="bench">
         <div class="bench-view"><canvas data-view role="img" aria-label="ตารางตัวเลขความสว่าง · A grid of brightness numbers"></canvas><div class="bench-state" data-state>…</div></div>
-        <div class="slider">
+        <div class="slider numbers-controls">
           <label for="cols"><span class="th" lang="th">จำนวนช่องตามแนวนอน</span><span class="en" lang="en">Squares across</span></label>
           <output for="cols" data-cols-out></output>
+          <button class="btn" type="button" data-fullscreen aria-label="Full screen">⛶</button>
           <input id="cols" type="range" min="6" max="96" step="1" value="16" data-cols>
         </div>
         <p class="readout" data-readout></p>

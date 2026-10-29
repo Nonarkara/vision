@@ -3,12 +3,12 @@
 // model-loading progress, and a best score that survives a reload when the
 // browser allows it (and quietly doesn't when it won't).
 
-import { fitCanvas, containRect, clear, drawLabel, GRAY, BLACK } from '../cv/draw.js?v=1.24.2'
-import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.2'
-import { cocoName } from '../ml/labels.js?v=1.24.2'
-import { createSpecimen } from '../core/specimen.js?v=1.24.2'
-import { t, bi, lang, onLang } from '../core/i18n.js?v=1.24.2'
-import { sleep } from '../core/site.js?v=1.24.2'
+import { fitCanvas, containRect, clear, drawLabel, GRAY, BLACK } from '../cv/draw.js?v=1.24.3'
+import { detect, loadDetector, DETECTOR_INPUT_WIDTH } from '../ml/detector.js?v=1.24.3'
+import { cocoName } from '../ml/labels.js?v=1.24.3'
+import { createSpecimen } from '../core/specimen.js?v=1.24.3'
+import { t, bi, lang, onLang } from '../core/i18n.js?v=1.24.3'
+import { sleep } from '../core/site.js?v=1.24.3'
 
 // Low enough that "almost" boxes exist to be shown; every game filters upward.
 export const FLOOR_SCORE = 0.15
@@ -124,4 +124,4 @@ export function writeBest(key, value) {
   try { localStorage.setItem(key, String(value)) } catch { /* private mode: the best lasts this visit */ }
 }
 
-export { shuffle } from '../core/catalog.js?v=1.24.2'
+export { shuffle } from '../core/catalog.js?v=1.24.3'

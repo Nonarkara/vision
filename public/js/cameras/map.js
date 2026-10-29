@@ -9,7 +9,7 @@
 // Colour: bright Ivory squares are cameras a machine here can read; gray
 // ones it cannot. Jasper Red is kept for the one camera you picked.
 
-import { fitCanvas } from '../cv/draw.js?v=1.24.2'
+import { fitCanvas } from '../cv/draw.js?v=1.24.3'
 
 const PAD = 16            // CSS px around the country
 const PICK_RADIUS = 22    // CSS px — a fingertip, not a mouse pointer

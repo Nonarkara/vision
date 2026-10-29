@@ -48,22 +48,15 @@
       <span class="chapter-no">01</span>
       <h2 id="count-title"><span class="th" lang="th">แข่งนับ</span><span class="en" lang="en">Count race</span></h2>
       
-      <p class="game-score num" data-count-score aria-live="polite"></p>
+
     </header>
-    <div class="chapter-body"><details class="game-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ตัวเลขของเครื่องขึ้นกับเกณฑ์ความมั่นใจที่เราเลือก และเครื่องก็ไม่ใช่เฉลย</span><span class="en" lang="en">A machine's count depends on the confidence threshold we choose — and the machine is not the answer key either.</span></p><ol class="manual" data-aria-th="วิธีเล่นแข่งนับ" data-aria-en="How to play the count race">
-        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">เลือกว่าจะนับอะไร — กด <code class="part">นับยานพาหนะ</code> หรือ <code class="part">นับคน</code></span><span class="en" lang="en">Choose what to count — press <code class="part">Count vehicles</code> or <code class="part">Count people</code></span></span></li>
-        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มเกม</code> — ภาพหนึ่งภาพจะหยุดนิ่ง</span><span class="en" lang="en">Press <code class="part">Start</code> — one frame freezes</span><span class="manual-warn th" lang="th">มีเวลา 15 วินาที</span><span class="manual-warn en" lang="en">You have 15 seconds</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">+</code> หรือ <code class="part">−</code> จนได้จำนวนที่คิดว่าถูก</span><span class="en" lang="en">Press <code class="part">+</code> or <code class="part">−</code> until the number you believe is right</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">นับเสร็จ</code> — กรอบของเครื่องจะปรากฏ พร้อมความมั่นใจของแต่ละกรอบ</span><span class="en" lang="en">Press <code class="part">Done</code> — the machine's boxes appear, each with its confidence</span></span></li>
-        <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">ตัดสินว่าใครใกล้ความจริงกว่า — กด <code class="part">ฉันใกล้กว่า</code> หรือ <code class="part">เครื่องใกล้กว่า</code></span><span class="en" lang="en">Decide who was closer — press <code class="part">I was closer</code> or <code class="part">The machine was closer</code></span><span class="manual-warn th" lang="th">ดูอีกครั้งให้ดีก่อนตัดสิน — ห้ารอบต่อหนึ่งเกม</span><span class="manual-warn en" lang="en">Look again carefully before you decide — five rounds a match</span></span></li>
-      </ol></details>
+    <div class="chapter-body">
       <div class="bench" data-count>
+
         <div class="bench-caption">
-          <span class="label"><span class="th" lang="th">คุณ ปะทะ เครื่อง</span><span class="en" lang="en">You vs the machine</span></span>
-          <span class="num clock" data-count-clock>15.0 s</span>
-        </div>
-        <div class="controls">
           <button class="btn primary game-go" type="button" data-count-go><span class="th" lang="th">เริ่มเกม</span><span class="en" lang="en">Start</span></button>
+          <span class="num clock" data-count-clock>15.0 s</span>
+          <button class="btn" type="button" data-fullscreen aria-label="Full screen">⛶</button>
         </div>
         <div class="bench-view">
           <canvas data-count-canvas role="img" aria-label="A frozen camera frame for counting"></canvas>
@@ -84,6 +77,7 @@
           <output class="num" for="count-thr" data-count-thr-out>40%</output>
           <input id="count-thr" type="range" min="10" max="90" step="5" value="40" data-count-thr>
         </div>
+      <p class="game-score num" data-count-score aria-live="polite"></p>
         <p class="readout game-say" data-count-say aria-live="polite"></p>
         <div class="controls game-choice" data-count-judge role="group" aria-label="Who was closer" hidden>
           <button class="btn" type="button" data-judge="you"><span class="th" lang="th">ฉันใกล้กว่า</span><span class="en" lang="en">I was closer</span></button>
@@ -100,6 +94,13 @@
           </span>
         </div>
       </div>
+<details class="game-guide"><summary><span class="th" lang="th">วิธีเล่นทีละขั้น</span><span class="en" lang="en">Step-by-step guide</span></summary><p class="teaches"><span class="label"><span class="th" lang="th">เกมนี้สอนว่า</span><span class="en" lang="en">What this teaches</span></span><span class="th" lang="th">ตัวเลขของเครื่องขึ้นกับเกณฑ์ความมั่นใจที่เราเลือก และเครื่องก็ไม่ใช่เฉลย</span><span class="en" lang="en">A machine's count depends on the confidence threshold we choose — and the machine is not the answer key either.</span></p><ol class="manual" data-aria-th="วิธีเล่นแข่งนับ" data-aria-en="How to play the count race">
+        <li><span class="manual-n" aria-hidden="true">1</span><span class="manual-body"><span class="th" lang="th">เลือกว่าจะนับอะไร — กด <code class="part">นับยานพาหนะ</code> หรือ <code class="part">นับคน</code></span><span class="en" lang="en">Choose what to count — press <code class="part">Count vehicles</code> or <code class="part">Count people</code></span></span></li>
+        <li><span class="manual-n" aria-hidden="true">2</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">เริ่มเกม</code> — ภาพหนึ่งภาพจะหยุดนิ่ง</span><span class="en" lang="en">Press <code class="part">Start</code> — one frame freezes</span><span class="manual-warn th" lang="th">มีเวลา 15 วินาที</span><span class="manual-warn en" lang="en">You have 15 seconds</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">3</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">+</code> หรือ <code class="part">−</code> จนได้จำนวนที่คิดว่าถูก</span><span class="en" lang="en">Press <code class="part">+</code> or <code class="part">−</code> until the number you believe is right</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">4</span><span class="manual-body"><span class="th" lang="th">กด <code class="part">นับเสร็จ</code> — กรอบของเครื่องจะปรากฏ พร้อมความมั่นใจของแต่ละกรอบ</span><span class="en" lang="en">Press <code class="part">Done</code> — the machine's boxes appear, each with its confidence</span></span></li>
+        <li><span class="manual-n" aria-hidden="true">5</span><span class="manual-body"><span class="th" lang="th">ตัดสินว่าใครใกล้ความจริงกว่า — กด <code class="part">ฉันใกล้กว่า</code> หรือ <code class="part">เครื่องใกล้กว่า</code></span><span class="en" lang="en">Decide who was closer — press <code class="part">I was closer</code> or <code class="part">The machine was closer</code></span><span class="manual-warn th" lang="th">ดูอีกครั้งให้ดีก่อนตัดสิน — ห้ารอบต่อหนึ่งเกม</span><span class="manual-warn en" lang="en">Look again carefully before you decide — five rounds a match</span></span></li>
+      </ol></details>
       <p class="note"><span class="th" lang="th">กล้องสาธารณะ: เราข้ามภาพที่เครื่องไม่เห็นอะไรเลย เพื่อให้ทุกรอบมีของให้นับ นั่นแปลว่าคุณจะไม่ได้เห็นภาพที่เครื่องพลาดหมดทุกคัน ซึ่งก็มีอยู่จริง กล้องของคุณและรูปของคุณใช้ภาพที่หยุดไว้ตรง ๆ ไม่ข้าม</span><span class="en" lang="en">Public cameras: we skip frames where the machine sees nothing at all, so every round has something to count. That means you never see the frames where it missed every single vehicle — and those exist. Your camera and photos use the frozen frame as it is, no skipping.</span></p>
     </div>
   </section>

@@ -2,15 +2,15 @@
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.24.2'
-import { lang, count, onLang } from '../core/i18n.js?v=1.24.2'
-import { mountGate } from './captcha.js?v=1.24.2'
-import { readGate, writeGate } from '../drive/captcha.js?v=1.24.2'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.24.2'
-import { drawWindshield } from '../drive/perspective.js?v=1.24.2'
-import { sightRange } from '../drive/perceive.js?v=1.24.2'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.24.2'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.24.2'
+import '../core/site.js?v=1.24.3'
+import { lang, count, onLang } from '../core/i18n.js?v=1.24.3'
+import { mountGate } from './captcha.js?v=1.24.3'
+import { readGate, writeGate } from '../drive/captcha.js?v=1.24.3'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.24.3'
+import { drawWindshield } from '../drive/perspective.js?v=1.24.3'
+import { sightRange } from '../drive/perceive.js?v=1.24.3'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.24.3'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.24.3'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')

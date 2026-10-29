@@ -3,7 +3,7 @@
 // missing, asleep, or refuses, fire() returns an honest sentence instead of
 // pretending something happened.
 
-import { t } from '../core/i18n.js?v=1.24.2'
+import { t } from '../core/i18n.js?v=1.24.3'
 
 export const ACTIONS = [
   { id: 'beep', th: 'เสียงสั้น', en: 'A short beep' },

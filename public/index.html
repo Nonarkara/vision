@@ -18,10 +18,7 @@
       <div>
         <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
         <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
-        <div class="cta">
-          <a class="btn primary big" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
 
-        </div>
 
       </div>
     </div>
@@ -52,9 +49,7 @@
         <output for="lens-min" data-lens-min-out>30%</output>
         <input id="lens-min" type="range" min="5" max="90" step="5" value="30" data-lens-min>
       </div>
-      <p class="readout lens-say" data-lens-say aria-live="polite"></p>
       <div class="bench-caption specimen-line" data-specimen>
-        <span><span class="who" data-specimen-name>…</span><br><span data-specimen-meta></span></span>
         <span class="controls">
           <button class="btn" type="button" data-specimen-next>↻ <span class="th" lang="th">กล้องสาธารณะ</span><span class="en" lang="en">Public camera</span></button>
           <button class="btn" type="button" data-specimen-webcam aria-pressed="false"><span class="th" lang="th">กล้องของฉัน</span><span class="en" lang="en">My camera</span></button>
@@ -62,8 +57,16 @@
           <label class="btn"><span class="th" lang="th">รูปของฉัน</span><span class="en" lang="en">My photo</span><input type="file" accept="image/*" class="vh" data-specimen-photo></label>
           <button class="btn" type="button" data-fullscreen aria-label="Full screen" title="Full screen">⛶</button>
         </span>
+        <details class="home-source-credit">
+          <summary class="who" data-specimen-name>…</summary>
+          <div data-specimen-meta></div>
+        </details>
       </div>
+      <p class="readout lens-say" data-lens-say aria-live="polite"></p>
       <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
+    </div>
+    <div class="cta home-next">
+      <a class="btn primary" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
     </div>
   </section>
 

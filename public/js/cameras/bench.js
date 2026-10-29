@@ -3,11 +3,11 @@
 // and offers the visitor's own camera and photos as equals — this room is
 // about every camera, and yours is one of them.
 
-import { t, lang, onLang } from '../core/i18n.js?v=1.24.2'
-import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.2'
-import { SourceError } from '../core/source.js?v=1.24.2'
-import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js?v=1.24.2'
-import { cocoName } from '../ml/labels.js?v=1.24.2'
+import { t, lang, onLang } from '../core/i18n.js?v=1.24.3'
+import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.24.3'
+import { SourceError } from '../core/source.js?v=1.24.3'
+import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js?v=1.24.3'
+import { cocoName } from '../ml/labels.js?v=1.24.3'
 
 const MIN_SCORE = 0.3
 

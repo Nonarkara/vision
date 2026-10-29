@@ -4,19 +4,11 @@
 
 /* Rules, score and lesson sit in the chapter's narrow left column, so the title steps down a size. */
 .chapter > header h2 { font-size: clamp(2rem, 2.2vw + 1rem, 3.25rem); overflow-wrap: normal; }
-/* The picker: the entry point this page was missing. A control row, so the
-   buttons sit at their own width on one black strip — three equal columns
-   would stretch a two-word name across half the screen. */
-/* The picker is an instrument strip: it says which mode the machine is in.
-   It hugs its choices instead of running the full width of the page with
-   nothing in it past the last one, it sits on the page's own gutter, and
-   when the three do not fit they scroll inside the strip rather than
-   wrapping into an orphan band. */
+/* Three visible choices, wrapping as a group rather than hiding the last game. */
 .game-picker {
-  display: flex; flex-wrap: nowrap; gap: 2px;
+  display: flex; flex-wrap: wrap; gap: 2px;
   width: fit-content; max-width: calc(100% - var(--gutter) * 2);
-  margin: 0 var(--gutter); overflow-x: auto;
-  background: var(--black);
+  margin: 0 var(--gutter); background: transparent;
 }
 .game-picker .btn {
   flex: 0 0 auto; background: var(--black-2); color: var(--white);
@@ -73,3 +65,25 @@ html[data-lang="th"] .challenge.btn { font-family: var(--thai); }
 .pix-options .btn[aria-pressed="true"] { background: var(--ivory); color: var(--indigo); opacity: 1; }
 
 .game-guide > summary { cursor: pointer; min-height: var(--target); padding-block: 8px; font-size: var(--read); }
+
+/* On phones, the game name introduces the picture without a second title band. */
+@media (max-width: 760px) {
+  .chapter { padding-block: 20px; gap: 16px; }
+  .chapter > header { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+  .chapter > header h2 { font-size: var(--subtitle); margin: 0; }
+  .game-score { width: fit-content; }
+  .chapter-body { gap: 12px; }
+}
+
+[data-count] > .bench-caption:first-child { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 8px; padding: 0; }
+[data-count] > .bench-caption:first-child [data-fullscreen] { margin-inline-start: auto; }
+
+/* The count's instructions accompany its picture on wide screens. */
+@media (min-width: 1101px) {
+  #count { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); grid-template-rows: min-content min-content 1fr; gap: 16px 32px; padding-top: 24px; }
+  #count > header { grid-column: 1; grid-row: 1; }
+  #count > .chapter-body { display: contents; }
+  #count .bench { grid-column: 2; grid-row: 1 / span 3; }
+  #count .game-guide { grid-column: 1; grid-row: 2; }
+  #count .chapter-body > .note { grid-column: 1; grid-row: 3; align-self: start; margin: 0; }
+}
