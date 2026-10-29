@@ -311,6 +311,7 @@ $('[data-clear]').addEventListener('click', () => { pencil.clearRect(0, 0, 800, 
 drawn.addEventListener('pointerdown', event => {
   if (mode !== 'draw') return
   if (opening || source || worker) stop(false)
+  message('กล้องปิด · วาดด้วยเมาส์หรือสัมผัสจอ', 'Camera off · drawing with mouse or touch.', '摄像头已关闭 · 使用鼠标或触屏作画。')
   manual = true; $('[data-idle]').hidden = true; count ||= 1; paint()
   const r = drawn.getBoundingClientRect()
   pointer = { x: (event.clientX-r.left)/r.width*800, y: (event.clientY-r.top)/r.height*450 }

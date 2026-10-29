@@ -77,3 +77,15 @@ test('late failed audio setup cannot mute a newer successful setup',async()=>{
  globalThis.waiting=enableSound();inputTicket++;globalThis.isSound=()=>sound;`,context)
  finish(false);await context.waiting;assert.equal(context.isSound(),true)
 })
+
+test('switching a live camera to pointer drawing states that the camera is off',()=>{
+ const events={},messages=[],context=vm.createContext({events,messages})
+ const input=page.slice(page.indexOf('// Pointer input'),page.indexOf("$('[data-camera]').addEventListener"))
+ vm.runInContext(`let mode='draw',opening=false,source={},worker=null,manual=false,count=1,tip=null,pointer=null;
+ const pencil={clearRect(){}};const $=()=>({hidden:false,addEventListener(){}});
+ const drawn={addEventListener:(name,fn)=>events[name]=fn,getBoundingClientRect:()=>({left:0,top:0,width:100,height:100}),setPointerCapture(){}};
+ const paint=()=>{};const stop=()=>{source=null};const message=(th,en)=>messages.push(en);
+ ${input}
+ events.pointerdown({clientX:10,clientY:20,pointerId:1});globalThis.cameraNow=source;`,context)
+ assert.equal(context.cameraNow,null);assert.match(messages[0],/Camera off/)
+})
