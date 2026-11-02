@@ -266,3 +266,10 @@ body main#main .page-head h1 { font-size:clamp(1.65rem,2.4vw,2.2rem); line-heigh
 .drive-tuning .btn:disabled { background:var(--black-2); color:var(--gray); }
 
 .drive [data-focus-does] { font-weight:600; }
+
+/* Related experiments sit one control-width apart, not at opposite page edges. */
+.drive-tuning { grid-template-columns:max-content minmax(0,65ch); gap:24px; justify-content:start; }
+.drive-label-lesson:not([open]) > .gate { display:none; }
+@media(max-width:900px) { .drive-tuning { grid-template-columns:minmax(0,1fr); gap:12px; } }
+.drive { padding-bottom:16px; }
+.drive-tuning .traffic-control { width:fit-content; max-width:65ch; font-size:var(--read); }
