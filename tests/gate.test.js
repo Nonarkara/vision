@@ -106,7 +106,7 @@ test('new Teach, Drive-gate, reveal and credit lines are Thai, English and Simpl
   const train = fs.readFileSync(path.join(root, 'public/train.html'), 'utf8')
   const system = fs.readFileSync(path.join(root, 'public/system.html'), 'utf8')
   const lesson = fs.readFileSync(path.join(root, 'public/js/train/video-lesson.js'), 'utf8')
-  const gate = drive.slice(drive.indexOf('<section class="gate"'), drive.indexOf('<section class="drive"'))
+  const gate = drive.slice(drive.indexOf('<section class="gate"'), drive.indexOf('</section>', drive.indexOf('<section class="gate"')))
   assert.ok(classes(gate, 'th') > 0)
   assert.equal(classes(gate, 'th'), classes(gate, 'en'))
   assert.equal(classes(gate, 'en'), classes(gate, 'zh'))

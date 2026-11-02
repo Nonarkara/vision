@@ -10,8 +10,8 @@
 // straight line, cars along their loop) and checked against my lane — the
 // predict-then-check idea behind sampling planners such as TUM's Frenetix.
 
-import { at, alongMyLane, LANE } from './track.js?v=1.25.0'
-import { sightRange } from './perceive.js?v=1.25.0'
+import { at, alongMyLane, LANE } from './track.js?v=1.26.0'
+import { sightRange } from './perceive.js?v=1.26.0'
 
 export const CAR_LEN = 4.6
 export const MAX_BRAKE = 9            // m/s², an emergency stop on dry tarmac
@@ -78,6 +78,15 @@ function constraints(car, world) {
   if (route.stopS != null && !car.blind) {
     const d = ahead(car.s, route.stopS, route.len) - Math.max(CAR_LEN / 2, len(car) / 2)
     const state = world.light[route.lightGroup ?? route.id]
+    if (world.keepClear && d > 0 && d < R) {
+      const blocked = [...car.tracks.values()].some(({obj}) => {
+        if (obj.kind !== 'car' || obj.v > 1) return false
+        const exit = alongMyLane(route, route.exitS ?? route.stopS + 10, 25, obj.x, obj.y, 0.5)
+        return exit && exit.along < len(car) + len(obj)/2 + car.style.s0
+      })
+      if (blocked) out.push({gap:d, dv:v, reason:'blocked_exit'})
+    }
+
     if (d > -1 && d < R) {
       if (state === 'red') out.push({ gap: d, dv: v, reason: 'light_red' })
       else if (state === 'amber' && d > v * v / (2 * 4)) out.push({ gap: d, dv: v, reason: 'light_amber' })

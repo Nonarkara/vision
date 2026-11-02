@@ -259,3 +259,7 @@
   .sticker-lesson { grid-template-columns: 1fr; }
   .sticker-guide dd { max-width: 65ch; }
 }
+
+/* The qualification belongs to the comparison, rather than extending only the film column. */
+.sticker-guide .sticker-context { margin: 16px 0 0; }
+.learning-copy .learning-limit { margin-top: 16px; }

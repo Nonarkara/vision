@@ -185,3 +185,84 @@ html[data-lang="th"] .focus-name { font-family: var(--thai); }
   .gate:not([data-open="true"]) .captcha-pad { width: 100%; }
   .gate:not([data-open="true"]) .gate-reveal { grid-column: 1; grid-row: 3; }
 }
+
+/* A task workspace, not a parade of full-width instruments. */
+.drive-label-lesson { margin: 0 var(--gutter) 8px; }
+.drive-label-lesson > summary, .fleet-details > summary, .traffic-control summary { cursor:pointer; min-height:var(--target); padding-block:10px; }
+.drive-label-lesson .gate { padding:16px; }
+.drive .scenario-picks { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+.drive .scenario-picks .btn { min-height:44px; flex:0 1 auto; padding:8px 12px; }
+.layout-hint, .asok-credit { margin:8px 0 12px; max-width:65ch; }
+.drive-workspace { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:start; gap:16px; }
+.drive-hero { min-width:0; margin:0; }
+.drive-map { min-width:0; }
+.hero-bar { flex-wrap:wrap; align-items:center; gap:6px 12px; padding:8px 12px; }
+.hero-bar > .label { display:none; }
+.hero-name { text-align:left; font-size:var(--read); flex:1 1 20ch; }
+.car-picker { font-size:var(--read); display:flex; gap:8px; align-items:center; }
+.car-picker select { font:inherit; color:var(--indigo); background:var(--gray); min-height:44px; max-width:100%; }
+.hero-screen { height:auto; aspect-ratio:16/10; }
+.hero-controls { display:flex; flex-wrap:wrap; gap:4px; padding:8px 12px; }
+.hero-controls .btn { flex:0 1 auto; min-width:44px; }
+.hero-controls .btn:last-child { grid-column:auto; }
+.hero-note { padding:0 12px; }
+.hero-note summary { cursor:pointer; min-height:44px; padding-block:10px; }
+.hero-note p { max-width:65ch; }
+.drive .focus { padding:8px 12px 12px; }
+.drive .focus-row { min-height:0; grid-template-columns:5em minmax(0,1fr); line-height:1.4; }
+.drive .knob { display:flex; flex-wrap:wrap; align-items:center; gap:2px; }
+.drive .knob .label { width:5em; }
+.drive .knob .btn { min-width:44px; padding-inline:12px; }
+.traffic-control { padding:12px; background:var(--gray); color:var(--indigo); }
+.traffic-control h3 { margin:0 0 8px; font-size:var(--body); }
+.traffic-control .controls { padding:0; background:transparent; gap:4px; }
+.keep-clear { display:flex; align-items:center; gap:8px; font-size:var(--read); min-height:44px; max-width:60ch; }
+.keep-clear input { width:20px; height:20px; flex:none; }
+.traffic-readout { margin:8px 0; max-width:65ch; }
+.traffic-control p { max-width:65ch; }
+.fleet-details { margin-top:12px; }
+.drive .cards { max-height:none; overflow:visible; grid-template-columns:repeat(3,minmax(0,1fr)); }
+.drive .car-say { min-height:0; }
+.drive-view-picks { display:none; }
+@media(max-width:900px) {
+ .drive-workspace { grid-template-columns:1fr; }
+ .drive-view-picks { display:flex; padding:0; margin-bottom:8px; gap:4px; background:transparent; }
+ .drive-workspace[data-mobile-view="driver"] .drive-map { display:none; }
+ .drive-workspace[data-mobile-view="map"] .drive-hero { display:none; }
+ .drive .cards { grid-template-columns:1fr; }
+}
+
+/* Orientation is a compact sentence; the moving instrument earns the area. */
+body main#main .page-head { padding-block:16px 12px; align-items:center; gap:12px 24px; }
+body main#main .page-head h1 { font-size:clamp(1.65rem,2.4vw,2.2rem); line-height:1.12; max-width:24ch; }
+.page-head .eyebrow { margin-bottom:4px; font-size:var(--fine); }
+.page-head .lede { font-size:var(--read); max-width:65ch; }
+.drive .layout-hint { margin-block:4px 8px; max-width:65ch; }
+.drive-map .bench { position:relative; }
+.drive-map .instrument-tools { position:absolute; right:0; top:0; z-index:1; }
+.drive-map .bench-caption { justify-content:flex-start; gap:4px; padding:8px 130px 8px 12px; min-height:60px; }
+.drive-map .bench-caption .num { background:transparent; padding:0; }
+.hero-screen { aspect-ratio:16/9; }
+@media(max-width:900px) {
+ .page-head { gap:8px; }
+ body main#main .page-head h1 { max-width:30ch; }
+ .drive-map .bench-caption { padding-right:110px; }
+}
+
+.road-picker { display:none; }
+@media(max-width:900px) {
+ .drive .scenario-picks { display:none; }
+ .road-picker { display:flex; gap:8px; align-items:center; font-size:var(--read); margin-bottom:8px; }
+ .road-picker select { font:inherit; min-height:44px; min-width:0; max-width:100%; background:var(--gray); color:var(--indigo); }
+ .hero-name { flex-basis:16ch; }
+}
+
+.scenario-picks .btn[aria-pressed="true"], .drive-view-picks .btn[aria-pressed="true"] { background:var(--ivory); color:var(--indigo); }
+.drive-tuning { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:16px; align-items:start; margin-top:12px; }
+.drive-tuning .knobs { background:var(--black); padding:8px 12px; }
+@media(max-width:900px) { .drive-tuning { grid-template-columns:1fr; } }
+.drive-tuning .btn { background:var(--black-2); color:var(--ivory); }
+.drive-tuning .btn[aria-pressed="true"] { background:var(--ivory); color:var(--indigo); }
+.drive-tuning .btn:disabled { background:var(--black-2); color:var(--gray); }
+
+.drive [data-focus-does] { font-weight:600; }

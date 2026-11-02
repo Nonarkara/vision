@@ -1,9 +1,9 @@
 // What each car tells you, in both languages: what it is doing, why, and
 // what it can see. Pure strings — the page decides where they go.
 
-import { sightRange, FOV } from './perceive.js?v=1.25.0'
-import { ITEMS } from './street.js?v=1.25.0'
-import { wrap } from './track.js?v=1.25.0'
+import { sightRange, FOV } from './perceive.js?v=1.26.0'
+import { ITEMS } from './street.js?v=1.26.0'
+import { wrap } from './track.js?v=1.26.0'
 
 export const STYLE_NAME = {
   careful: ['ระวัง', 'Careful', '谨慎'],
@@ -28,6 +28,7 @@ const REASON = {
   clear: ['ทางโล่ง', 'the road is clear', '道路畅通'],
   curve: ['มีทางโค้งข้างหน้า', 'a bend is coming', '前方有弯道'],
   short_sight: ['มองเห็นได้แค่ {R} ม. จึงขับช้าพอจะหยุดทันในระยะนั้น', 'it can only see {R} m, so it keeps to a speed it can stop within', '只能看见 {R} 米，所以把速度保持在这个距离内能够停下'],
+  blocked_exit: ['ทางออกแยกยังมีรถค้าง รอก่อนเข้าแยก', 'the exit is blocked — wait before entering the junction', '出口拥堵——在路口前等待'],
   light_red: ['ไฟแดงข้างหน้า', 'red light ahead', '前方红灯'],
   light_amber: ['ไฟเหลือง และยังหยุดทัน', 'amber light, and it can still stop in time', '黄灯，而且还能及时停下'],
   person_waiting: ['มีคนรอข้ามทางม้าลาย ให้คนไปก่อน', 'someone is waiting at the zebra — people go first', '有人在斑马线旁等待，行人优先'],

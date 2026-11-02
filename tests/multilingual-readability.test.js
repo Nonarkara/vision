@@ -39,7 +39,7 @@ test('Chinese handbook chrome cannot hide an untranslated-article notice', ctx =
   ctx.after(() => { globalThis.document = previous })
   globalThis.document = { documentElement: { dataset: { lang: 'zh' } }, createElement: () => ({ setAttribute() {} }) }
   noteMissingTranslation(root)
-  assert.match(notice?.innerHTML ?? '', /下面是英文内容/)
+  assert.match(notice?.innerHTML ?? '', /未译部分显示英文/)
 })
 
 test('untranslated footer cannot mark a translated activity as untranslated', ctx => {

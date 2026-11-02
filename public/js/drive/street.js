@@ -21,8 +21,8 @@
 // kerb is always 3.2 m from the middle of the road and a sedan really is 4.4 m
 // long beside it.
 
-import { LANE, STEP, at } from './track.js?v=1.25.0'
-import { rng } from './rand.js?v=1.25.0'
+import { LANE, STEP, at } from './track.js?v=1.26.0'
+import { rng } from './rand.js?v=1.26.0'
 
 /** Everything a Thai urban street puts next to the carriageway, in metres. */
 export const STREET = {
@@ -132,15 +132,17 @@ export function buildStreet(track, { seed = 1, layout = 'practice' } = {}) {
     // top view can fill between them and the windshield can draw a raised kerb.
     {
       const side = outer
-      const kerb = []
-      const back = []
+      let kerb = [], back = [], startS = 0
+      const finish=()=>{if(kerb.length>2)footways.push({id,side,kerb,back,startS});kerb=[];back=[]}
       for (let s = 0; s < route.len; s += STEP) {
         const p = at(route, s)
         if (p.ring) continue
+        if (p.junction) { finish(); continue }
+        if(!kerb.length)startS=s
         kerb.push(offset(p, AT.kerb * side))
         back.push(offset(p, (AT.kerb + STREET.pavement) * side))
       }
-      if (kerb.length > 2) footways.push({ id, side, kerb, back })
+      finish()
     }
 
     // Street furniture at fixed spacing, alternating sides. Never on the ring:
@@ -265,7 +267,13 @@ export function buildStreet(track, { seed = 1, layout = 'practice' } = {}) {
   })
 
   const kept = items.filter((it) => {
-    if (it.kind === 'building') return true
+    if (it.kind === 'building') {
+      const c=Math.cos(it.h),s=Math.sin(it.h)
+      return Object.values(track).every(r=>r.pts.every(p=>{
+        const dx=p.x-it.x,dy=p.y-it.y
+        return Math.abs(dx*c+dy*s)>it.depth/2+LANE || Math.abs(-dx*s+dy*c)>it.width/2+LANE
+      }))
+    }
     return nearestRoad(track, it.x, it.y, it.route) > CROSSING_CLEAR
   })
 
@@ -291,12 +299,13 @@ const LIGHT_STATES = ['red', 'amber', 'green']
 export function stepStreet(street, world) {
   for (const it of street.items) {
     if (!it.walker) continue
-    it.phase += world.t * it.speed * 2
-    const s = it.s + Math.sin(world.t * 0.12 * it.speed + it.phase) * 2.5 * it.dir
+    // Oscillate at a bounded walking speed; never integrate absolute time.
+    const travel = world.t * it.speed / 2.5
+    const s = it.s + (Math.sin(travel + it.phase) - Math.sin(it.phase)) * 2.5 * it.dir
     const route = world.track[it.route]
     if (!route) continue
     const p = at(route, s)
-    const lat = (AT.standing + Math.sin(world.t * 0.4 + it.phase) * 0.35) * it.side
+    const lat = (AT.standing + (Math.sin(travel + it.phase) - Math.sin(it.phase)) * 0.15) * it.side
     it.x = p.x - Math.sin(p.h) * lat
     it.y = p.y + Math.cos(p.h) * lat
     it.h = p.h + (it.side > 0 ? 0 : Math.PI)

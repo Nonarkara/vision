@@ -1,16 +1,17 @@
+import { queues } from '../drive/control.js?v=1.26.0'
 // Drive: six cars on a test track, each telling you what it sees and why it
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.25.0'
-import { lang, count, onLang } from '../core/i18n.js?v=1.25.0'
-import { mountGate } from './captcha.js?v=1.25.0'
-import { readGate, writeGate } from '../drive/captcha.js?v=1.25.0'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.25.0'
-import { drawWindshield } from '../drive/perspective.js?v=1.25.0'
-import { sightRange } from '../drive/perceive.js?v=1.25.0'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.25.0'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.25.0'
+import '../core/site.js?v=1.26.0'
+import { lang, count, onLang } from '../core/i18n.js?v=1.26.0'
+import { mountGate } from './captcha.js?v=1.26.0'
+import { writeGate } from '../drive/captcha.js?v=1.26.0'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.26.0'
+import { drawWindshield } from '../drive/perspective.js?v=1.26.0'
+import { sightRange } from '../drive/perceive.js?v=1.26.0'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.26.0'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.26.0'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
@@ -20,8 +21,7 @@ const hg = hero.getContext('2d')
 const heroName = root.querySelector('[data-hero-name]')
 
 // ── The gate ──────────────────────────────────────────────────────────
-// Drive stays hidden until this tab has passed the frame check. Passing is
-// remembered for the session, after the reveal.
+// The road opens immediately. Image labelling remains an optional exercise.
 const gateEl = document.querySelector('[data-gate]')
 const replay = gateEl?.querySelector('[data-gate-replay]')
 let through = false
@@ -41,30 +41,45 @@ function openRoom() {
   gateEl?.setAttribute('data-through', 'true')
   replay?.setAttribute('aria-expanded', 'false')
 }
-if (readGate(sessionStorage) === 'entered') openRoom()
+// The road opens immediately; image labelling remains an optional lesson.
+openRoom()
 let gate = null
 try {
   gate = mountGate(gateEl, {
-    onEnter: () => { writeGate(sessionStorage, 'entered'); openRoom() },
+    onEnter: () => { writeGate(sessionStorage, 'entered'); openRoom(); document.querySelector('[data-label-lesson]').open = false; document.querySelector('[data-label-lesson] summary').focus() },
     lang,
     onLang,
     storage: sessionStorage,
   })
 } catch {
-  /* a broken gate stays shut; it does not wave the visitor through */
+  /* The optional exercise can fail without blocking the road. */
 }
 replay?.addEventListener('click', () => {
   gateEl.removeAttribute('data-open')
   replay.setAttribute('aria-expanded', 'true')
   gate?.replay()
 })
+document.querySelector('[data-label-lesson]').addEventListener('toggle', e => {
+  if (e.target.open) { gateEl.removeAttribute('data-open'); replay.setAttribute('aria-expanded','true'); gate?.replay() }
+})
+const workspace = root.querySelector('.drive-workspace')
+root.querySelectorAll('button[data-mobile-view]').forEach(b=>b.addEventListener('click',()=>{
+  workspace.dataset.mobileView=b.dataset.mobileView
+  root.querySelectorAll('button[data-mobile-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))
+}))
+const roadPicker=root.querySelector('[data-road-picker]')
+roadPicker.addEventListener('change',()=>root.querySelector(`[data-set="layout"][data-value="${roadPicker.value}"]`).click())
+const picker = root.querySelector('[data-car-picker]')
+picker.addEventListener('change',()=>{selected=Number(picker.value);syncFocus();syncHeroName()})
+root.querySelector('[data-keep-clear]').addEventListener('change',e=>{settings.keepClear=e.target.checked;resetWorld()})
 const cardsEl = root.querySelector('[data-cards]')
 const totalsEl = root.querySelector('[data-totals]')
 const focusEl = root.querySelector('[data-focus]')
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
 
-const settings = { weather: 'day', people: 'few', dogs: 'few', speed: 1, layout: 'two', traffic: 6 }
-let world = createWorld({ seed: Date.now() % 100000, ...settings })
+const settings = { weather: 'day', people: 'few', dogs: 'few', speed: 1, layout: 'two', traffic: 6, control: 'fixed', keepClear: true }
+const scenarioSeed = Date.now() % 100000
+let world = createWorld({ seed: scenarioSeed, ...settings })
 let selected = 1
 let showAll = false
 let playing = !reduced
@@ -84,8 +99,8 @@ root.addEventListener('click', (e) => {
   if (b.dataset.set) {
     const { set, value } = b.dataset
     settings[set] = ['speed', 'traffic'].includes(set) ? Number(value) : value
-    if (set === 'layout' || set === 'traffic') {
-      if (set === 'layout' && value === 'city') { settings.traffic = 24; settings.people = 'many'; settings.dogs = 'many'; press('traffic', 24); press('people', 'many'); press('dogs', 'many') }
+    if (set === 'layout' || set === 'traffic' || set === 'control') {
+      if (set === 'layout' && ['city','asok'].includes(value)) { settings.traffic = value === 'asok' ? 32 : 24; settings.people = 'many'; settings.dogs = 'many'; press('traffic', settings.traffic); press('people', 'many'); press('dogs', 'many') }
       resetWorld()
     } else if (set !== 'speed') world[set] = value
     press(set, value)
@@ -97,11 +112,6 @@ root.addEventListener('click', (e) => {
   } else if (b.hasAttribute('data-all')) {
     showAll = !showAll
     b.setAttribute('aria-pressed', String(showAll))
-  } else if (b.hasAttribute('data-blind')) {
-    const car = world.cars[selected - 1]
-    car.blind = !car.blind
-    car.tracks.clear()
-    syncFocus()
   } else if (b.dataset.car) {
     selected = Number(b.dataset.car)
     syncFocus(); syncHeroName()
@@ -139,18 +149,19 @@ canvas.addEventListener('click', (e) => {
 })
 
 function syncPlay() {
-  const b = root.querySelector('[data-play]')
+  for (const b of root.querySelectorAll('[data-play]')) {
   b.setAttribute('aria-pressed', String(playing))
   b.querySelector('[data-play-label]').innerHTML = playing
-    ? '<span class="th" lang="th">❚❚ หยุดชั่วคราว</span><span class="en" lang="en">❚❚ Pause</span>'
-    : '<span class="th" lang="th">▶ เริ่ม</span><span class="en" lang="en">▶ Play</span>'
+    ? '<span class="th" lang="th">❚❚ หยุดชั่วคราว</span><span class="en" lang="en">❚❚ Pause</span><span class="zh" lang="zh-Hans">❚❚ 暂停</span>'
+    : '<span class="th" lang="th">▶ เริ่ม</span><span class="en" lang="en">▶ Play</span><span class="zh" lang="zh-Hans">▶ 播放</span>'
+  }
 }
 
 function resetWorld() {
-  world = createWorld({ seed: Date.now() % 100000, ...settings })
+  world = createWorld({ seed: scenarioSeed, ...settings })
   selected = Math.min(selected, world.cars.length); bg = null; acc = 0
   root.querySelectorAll('[data-set="people"]').forEach((b) => { b.disabled = !world.zebras.length })
-  buildCards(); syncCards(); syncFocus(); render()
+  buildCards(); syncCards(); syncFocus(); syncHeroName(); render()
 }
 
 // ── Cards: one per car, the text twin of the picture ─────────────────
@@ -161,6 +172,17 @@ function L(th, en, zh) {
 }
 
 function buildCards() {
+  roadPicker.innerHTML=Array.from(root.querySelectorAll('[data-set="layout"]')).map(b=>`<option value="${b.dataset.value}">${(b.querySelector('.'+lang())??b.querySelector('.en')).textContent.trim()}</option>`).join('')
+  roadPicker.value=settings.layout
+  picker.innerHTML = world.cars.map(c=>`<option value="${c.id}">${c.id} · ${STYLE_NAME[c.styleName][lang()==='th'?0:lang()==='zh'?2:1]}</option>`).join('')
+  root.querySelector('[data-asok-credit]').hidden = settings.layout !== 'asok'
+  root.querySelector('[data-layout-hint]').hidden = settings.layout !== 'asok'
+  root.querySelector('[data-layout-hint]').textContent = settings.layout === 'asok'
+    ? L('อโศก–สุขุมวิท: แนวถนนจากแผนที่จริง เลน จุดข้าม ทางวนกลับ และไฟเป็นข้อสมมติในการสอน', 'Asok–Sukhumvit: mapped road alignment; lanes, crossings, return loops and signals are teaching assumptions.', '阿索克–素坤逸：道路走向来自地图；车道、过街点、回程环路和信号均为教学假设。')
+    : L('เลือกถนน แล้วเลือกรถเพื่อดูว่าเห็นอะไรและทำไมจึงเบรก', 'Choose a road, then a car to see what it sees and why it brakes.', '选择道路及车辆，观察它看见什么、为什么刹车。')
+  root.querySelectorAll('[data-set="control"]').forEach(b=>b.disabled=Object.values(world.track).every(r=>r.stopS==null))
+  root.querySelector('[data-keep-clear]').disabled=Object.values(world.track).every(r=>r.stopS==null)
+
   cardsEl.innerHTML = world.cars.map((c) => `
     <button class="car-card" type="button" data-car="${c.id}" data-style="${c.styleName}">
       <span class="car-id num">${c.id}</span>
@@ -187,6 +209,13 @@ function syncCards() {
   const sum = (f) => world.cars.reduce((n, c) => n + f(c), 0)
   const mm = String(Math.floor(world.t / 60)).padStart(2, '0'), ss = String(Math.floor(world.t % 60)).padStart(2, '0')
   const laps = sum((c) => c.laps), crashes = sum((c) => c.crashes), people = sum((c) => c.hitPeople), dogs = sum((c) => c.hitDogs)
+  const q=queues(world), passed=world.statistics.passed, stopped=(world.statistics.stoppedSeconds/world.cars.length).toFixed(1)
+  const colour={red:L('แดง','red','红'),amber:L('เหลือง','amber','黄'),green:L('เขียว','green','绿')}
+  const light={A:colour[world.light.A],B:colour[world.light.B]}
+  const line = Object.values(world.track).some(r=>r.stopS!=null)
+    ? L(`A ${light.A} · B ${light.B} · รถรอ ${q.A}/${q.B} · ผ่านเส้น ${passed} · หยุด ${stopped} วินาที/คัน`, `A ${light.A} · B ${light.B} · queued ${q.A}/${q.B} · crossings ${passed} · stopped ${stopped} s/car`, `A ${light.A} · B ${light.B} · 排队 ${q.A}/${q.B} · 通过 ${passed} · 停车 ${stopped} 秒/车`)
+    : L('ถนนนี้ไม่มีไฟจราจร ลองวงเวียน เมือง หรืออโศกเพื่อทดลองไฟ', 'No signals on this road. Choose Roundabout, City or Asok to experiment with lights.', '这条道路没有信号灯。选择环岛、城市或阿索克来试验信号控制。')
+  root.querySelector('[data-traffic-readout]').textContent=line
   totalsEl.textContent = l === 'en'
     ? `${mm}:${ss} · ${count(laps, 'lap')} · ${count(crashes, 'crash')} · ${count(people, 'person hit', 'people hit')} · ${count(dogs, 'dog hit', 'dogs hit')}`
     : l === 'zh'
@@ -196,11 +225,6 @@ function syncCards() {
 
 function syncFocus() {
   const c = world.cars[selected - 1], l = lang()
-  focusEl.querySelector('[data-focus-name]').textContent = L(
-    `รถคันที่ ${c.id} · ${STYLE_NAME[c.styleName][0]} · ${speedKmh(c)} กม./ชม.`,
-    `Car ${c.id} · ${STYLE_NAME[c.styleName][1]} · ${speedKmh(c)} km/h`,
-    `第 ${c.id} 辆车 · ${STYLE_NAME[c.styleName][2]} · ${speedKmh(c)} 公里/小时`,
-  )
   focusEl.querySelector('[data-focus-sees]').textContent = saySeen(c, l)
   const unnamed = sayUnnamed(c, world, l)
   const unnamedRow = focusEl.querySelector('[data-focus-unnamed-row]')
@@ -209,21 +233,24 @@ function syncFocus() {
   unnamedRow.querySelector('[data-focus-unnamed]').textContent = unnamed
   unnamedRow.hidden = !unnamed
   focusEl.querySelector('[data-focus-does]').textContent = sayDecision(c, world, l)
-  const blind = focusEl.querySelector('[data-blind]')
-  blind.setAttribute('aria-pressed', String(c.blind))
-  blind.innerHTML = c.blind
-    ? '<span class="th" lang="th">เปิดกล้องคืน</span><span class="en" lang="en">Uncover its camera</span><span class="zh" lang="zh-Hans">重新打开摄像头</span>'
-    : '<span class="th" lang="th">ปิดกล้องคันนี้</span><span class="en" lang="en">Cover this car’s camera</span><span class="zh" lang="zh-Hans">盖住这辆车的摄像头</span>'
   cardsEl.querySelectorAll('[data-car]').forEach((el) => el.setAttribute('aria-pressed', String(Number(el.dataset.car) === selected)))
 }
 
+function toggleBlind() {
+  const c=world.cars[selected-1];c.blind=!c.blind;c.tracks.clear();syncFocus();syncHeroName()
+}
 function syncHeroName() {
   const c = world.cars[selected - 1]
+  picker.value=String(selected)
   const range = Math.round(sightRange(c, world.weather))
+  root.querySelector('[data-hero-blind]').setAttribute('aria-pressed',String(c.blind))
+  root.querySelector('[data-hero-blind]').textContent=c.blind
+    ? L('เปิดกล้องรถคันนี้','Uncover this camera','揭开这辆车的摄像头')
+    : L('ปิดกล้องรถคันนี้','Cover this camera','盖住这辆车的摄像头')
   heroName.textContent = L(
-    `รถคันที่ ${c.id} · ${speedKmh(c)} กม./ชม. · มองเห็น ${range} ม.`,
-    `Car ${c.id} · ${speedKmh(c)} km/h · sees ${range} m`,
-    `第 ${c.id} 辆车 · ${speedKmh(c)} 公里/小时 · 看见 ${range} 米`,
+    ` ${speedKmh(c)} กม./ชม. · มองเห็น ${range} ม.`,
+    `${speedKmh(c)} km/h · sees ${range} m`,
+    `${speedKmh(c)} 公里/小时 · 看见 ${range} 米`,
   )
 }
 
@@ -243,32 +270,29 @@ function blitView(cv, c2d) {
   drawWindshield(c2d, c, world, w, h, lang())
 }
 function openDriver() { if (!dialog.open) dialog.showModal(); paintDriver() }
-root.querySelector('[data-driver-open]').addEventListener('click', openDriver)
 root.querySelector('[data-hero-full]').addEventListener('click', openDriver)
 root.querySelector('[data-hero-prev]').addEventListener('click', () => cycleCar(-1))
 root.querySelector('[data-hero-next]').addEventListener('click', () => cycleCar(1))
 root.querySelector('[data-hero-weather]').addEventListener('click', cycleWeather)
-root.querySelector('[data-hero-blind]').addEventListener('click', () => root.querySelector('[data-blind]').click())
+root.querySelector('[data-hero-blind]').addEventListener('click', () => toggleBlind())
 dialog.querySelector('[data-driver-close]').addEventListener('click', () => dialog.close())
 dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close() })
 for (const [sel, delta] of [['prev', -1], ['next', 1]]) dialog.querySelector(`[data-driver-${sel}]`).addEventListener('click', () => { cycleCar(delta); paintDriver() })
 dialog.querySelector('[data-driver-pause]').addEventListener('click', () => { playing = !playing; syncPlay(); paintDriver() })
-dialog.querySelector('[data-driver-blind]').addEventListener('click', () => root.querySelector('[data-blind]').click())
+dialog.querySelector('[data-driver-blind]').addEventListener('click', () => toggleBlind())
 dialog.querySelector('[data-driver-weather]').addEventListener('click', () => { cycleWeather(); paintDriver() })
-let driverFrameAt = 0, driverTextAt = 0, heroFrameAt = 0
+let driverFrameAt = 0, heroFrameAt = 0
 function paintHero(now) {
-  if (now - heroFrameAt < 33) return
+  if (now - heroFrameAt < 42) return
   heroFrameAt = now
   blitView(hero, hg)
 }
 function paintDriver() {
   if (!dialog.open) return
   const now = performance.now()
-  if (now - driverFrameAt < 33) return
+  if (now - driverFrameAt < 42) return
   driverFrameAt = now
   blitView(windshield, wg)
-  if (now - driverTextAt < 250) return
-  driverTextAt = now
   const c = world.cars[selected - 1], d = c.decision
   const range = Math.round(sightRange(c, world.weather))
   const sky = { day: ['กลางวัน', 'Day', '白天'], rain: ['ฝน', 'Rain', '雨'], night: ['กลางคืน', 'Night', '夜晚'], sun: ['แดดจ้า', 'Sun glare', '强光'] }[world.weather]
@@ -278,12 +302,13 @@ function paintDriver() {
   const gap = d.dist == null
     ? L('ยังไม่มีอุปสรรคที่ต้องหยุด', 'No stopping obstacle selected', '尚未选定需要停下的障碍')
     : `${L('ระยะถึงอุปสรรค', 'Gap to obstacle', '与障碍的距离')} ${d.dist.toFixed(1)} ${L('ม.', 'm', '米')}`
-  dialog.querySelector('[data-driver-math]').textContent = `${gap} · ${L('ระยะที่ต้องการ', 'preferred gap', '期望间距')} ${(d.desiredGap ?? 0).toFixed(1)} ${L('ม.', 'm', '米')} · ${L('ปรับความเร็ว', 'speed change', '速度变化')} ${(d.acc * 3.6).toFixed(1)} ${L('กม./ชม. ต่อวินาที', 'km/h each second', '公里/小时每秒')}\n${L('คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด', 'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.', '速度由距离、接近速度和安全间距算出。最谨慎的刹车请求胜出。')}`
+  dialog.querySelector('[data-driver-math]').textContent = `${gap} · ${L('ระยะที่ต้องการ', 'preferred gap', '期望间距')} ${d.desiredGap == null ? '—' : d.desiredGap.toFixed(1)} ${L('ม.', 'm', '米')} · ${L('ปรับความเร็ว', 'speed change', '速度变化')} ${(d.acc * 3.6).toFixed(1)} ${L('กม./ชม. ต่อวินาที', 'km/h each second', '公里/小时每秒')}\n${L('คำนวณจากระยะ ความเร็วที่เข้าใกล้ และระยะปลอดภัย เลือกคำขอเบรกที่ระวังที่สุด', 'Speed comes from distance, closing speed and a safety gap. The strongest braking request wins.', '速度由距离、接近速度和安全间距算出。最谨慎的刹车请求胜出。')}`
 }
 
 // ── The loop ──────────────────────────────────────────────────────────
 
 function render() {
+  if (!canvas.clientWidth) return
   k = fit(canvas)
   if (!bg || bg.width !== canvas.width) {
     colours = palette()
@@ -301,7 +326,7 @@ let last = performance.now(), acc = 0, textT = 0
 function frame(now) {
   const dt = Math.min(0.1, (now - last) / 1000)
   last = now
-  if (playing && !document.hidden && (inView || dialog.open)) {
+  if (playing && !document.hidden && (inView || heroInView || dialog.open)) {
     acc += dt * settings.speed
     while (acc >= DT) { step(world); acc -= DT }
   }
@@ -319,7 +344,7 @@ function frame(now) {
 
 new ResizeObserver(() => { bg = null }).observe(canvas)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { bg = null })
-onLang(() => { syncCards(); syncFocus() })
+onLang(() => { buildCards(); syncCards(); syncFocus(); syncHeroName() })
 
 buildCards()
 root.querySelectorAll('[data-set="people"]').forEach((b) => { b.disabled = !world.zebras.length })

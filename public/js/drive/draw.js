@@ -2,10 +2,10 @@
 // only ever what a machine sees — the cones and the boxes. The traffic light
 // is the one exception, because a red light has to look red.
 
-import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.25.0'
-import { FOV, sightRange } from './perceive.js?v=1.25.0'
-import { VEHICLES } from './sim.js?v=1.25.0'
-import { ITEMS, STREET, offset } from './street.js?v=1.25.0'
+import { WORLD, LANE, RING, ZEBRAS, LIGHT, at } from './track.js?v=1.26.0'
+import { FOV, sightRange } from './perceive.js?v=1.26.0'
+import { VEHICLES } from './sim.js?v=1.26.0'
+import { ITEMS, STREET, offset } from './street.js?v=1.26.0'
 
 const LIGHT_RGB = { red: '#e8412b', amber: '#f4c430', green: '#5fc46b' }
 
@@ -70,7 +70,7 @@ export function drawTrack(ctx, k, track, c, street) {
     ctx.fillStyle = c.mark
     for (let s = 20; s < route.len; s += 30) {
       const p = at(route, s)
-      if (p.ring) continue
+      if (p.ring || p.junction) continue
       chevron(ctx, p.x * k, p.y * k, p.h, 1.3 * k)
     }
     if (route.stopS != null) {

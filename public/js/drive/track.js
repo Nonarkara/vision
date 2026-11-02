@@ -1,3 +1,4 @@
+import { ASOK } from './asok.js?v=1.26.0'
 // The test track: two one-way loops in metres, seen from above.
 //
 //   Loop A (cars 1–3) — the outer loop, through the roundabout north → south.
@@ -109,7 +110,11 @@ export function wrap(a) {
 /** The sample at distance s (wrapping round the loop). */
 export function at(route, s) {
   const n = route.pts.length
-  return route.pts[((Math.round(s / STEP) % n) + n) % n]
+  const pos = ((s / STEP) % n + n) % n
+  const i = Math.floor(pos), t = pos - i
+  const a = route.pts[i], b = route.pts[(i + 1) % n]
+  return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t,
+    h: a.h + wrap(b.h - a.h) * t, vmax: Math.min(a.vmax, b.vmax), ring: a.ring && b.ring, junction: !!(a.junction || b.junction) }
 }
 
 /** s of the sample nearest to (x, y), anywhere on the loop. */
@@ -129,15 +134,58 @@ export function nearestS(route, x, y) {
  */
 export function alongMyLane(route, s, range, x, y, slack = 0) {
   let best = null
+  const n=route.pts.length, start=((s/STEP)%n+n)%n
+  let index=Math.floor(start)
+  const t=start-index
+  // Same interpolated positions as at(), without allocating poses or computing headings.
   for (let d = 0; d <= range; d += STEP) {
-    const p = at(route, s + d)
-    const lat = Math.hypot(p.x - x, p.y - y)
+    const a=route.pts[index],b=route.pts[(index+1)%n]
+    index=(index+1)%n
+    const lat = Math.hypot(a.x+(b.x-a.x)*t-x,a.y+(b.y-a.y)*t-y)
     if (lat < LANE * 0.62 + slack && (!best || lat < best.lateral)) best = { along: d, lateral: lat }
   }
   return best
 }
 
 export function buildTrack(layout = 'practice') {
+  if (layout === 'asok') {
+    const track = {}
+    for (const row of ASOK) {
+      const route = makeRoute(row.id, row.points, row.stop)
+      route.lightGroup = row.group
+      route.zebras = []
+      route.pts.forEach(p => { p.ring = false })
+      track[row.id] = route
+    }
+    // Keep illustrative paint and footways out of the junction's conflict area.
+    // This is computed from intersecting paths, not a surveyed Bangkok box.
+    const cells=new Map()
+    for(const r of Object.values(track))for(const p of r.pts){
+      const key=`${Math.floor(p.x/8)},${Math.floor(p.y/8)}`
+      if(!cells.has(key))cells.set(key,[])
+      cells.get(key).push({p,id:r.id})
+    }
+    for(const r of Object.values(track)){
+      r.pts.forEach(p=>{
+        if(Math.hypot(p.x-100,p.y-70)>40)return
+        const gx=Math.floor(p.x/8),gy=Math.floor(p.y/8)
+        for(let x=gx-1;x<=gx+1;x++)for(let y=gy-1;y<=gy+1;y++){
+          if((cells.get(`${x},${y}`)??[]).some(q=>q.id!==r.id && Math.abs(Math.sin(q.p.h-p.h))>.45 && Math.hypot(q.p.x-p.x,q.p.y-p.y)<LANE*2))p.junction=true
+        }
+      })
+      const entry=r.pts.findIndex((p,i)=>p.junction && Math.abs(i*STEP-r.stopS)<30)
+      if(entry>=0){
+        r.stopS=Math.max(1,entry*STEP-8)
+        let end=entry
+        r.pts.forEach((p,i)=>{if(p.junction && i>=entry)end=i})
+        r.exitS=(end+1)*STEP
+      }
+    }
+    Object.defineProperty(track, 'layout', { value: layout })
+    Object.defineProperty(track, 'zebras', { value: [] })
+    return track
+  }
+
   if (layout !== 'practice' && layout !== 'city') {
     const count = layout === 'four' ? 4 : 2
     const track = {}

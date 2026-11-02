@@ -69,7 +69,7 @@ export function noteMissingTranslation(root = document.body) {
   const note = document.createElement('p')
   note.className = 'lang-note'
   note.setAttribute('role', 'status')
-  note.innerHTML = '<span lang="zh-Hans">这一页还没有中文，下面是英文内容。中文正在逐个房间补上。</span>'
+  note.innerHTML = '<span lang="zh-Hans">中文尚未译全；未译部分显示英文。</span>'
   root.prepend(note)
 }
 

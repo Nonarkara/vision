@@ -1,15 +1,16 @@
+import { tickSignals } from './control.js?v=1.26.0'
 // The world: six cars, people at the zebras, stray dogs, one traffic light.
 // Pure state and arithmetic — no drawing, no DOM — so the same world runs in
 // the page and in the tests, and a seed makes every run repeatable.
 
-import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.25.0'
-import { perceive } from './perceive.js?v=1.25.0'
-import { decide } from './decide.js?v=1.25.0'
-import { buildStreet, stepStreet, detectable } from './street.js?v=1.25.0'
-import { rng } from './rand.js?v=1.25.0'
+import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.26.0'
+import { perceive } from './perceive.js?v=1.26.0'
+import { decide } from './decide.js?v=1.26.0'
+import { buildStreet, stepStreet, detectable } from './street.js?v=1.26.0'
+import { rng } from './rand.js?v=1.26.0'
 
 // Re-exported so anything that used to reach for sim.js still finds it.
-export { rng } from './rand.js?v=1.25.0'
+export { rng } from './rand.js?v=1.26.0'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack
@@ -64,10 +65,6 @@ export const STYLES = {
   hasty: { v0: 16.7, T: 0.6, s0: 2.0, a: 2.6, b: 3.5, range: 28, quality: 0.84, yieldWaiting: false, wary: false, sightLimit: false },
 }
 
-const LIGHT_CYCLE = [
-  { A: 'green', B: 'red', d: 9 }, { A: 'amber', B: 'red', d: 2.5 }, { A: 'red', B: 'red', d: 1.5 },
-  { A: 'red', B: 'green', d: 9 }, { A: 'red', B: 'amber', d: 2.5 }, { A: 'red', B: 'red', d: 1.5 },
-]
 
 const RATES = {
   people: { none: Infinity, few: 14, many: 6 },   // mean seconds between people at each zebra
@@ -75,14 +72,15 @@ const RATES = {
 }
 
 
-export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 'few', layout = 'practice', traffic = 6 } = {}) {
+export function createWorld({ seed = 1, weather = 'day', people = 'few', dogs = 'few', layout = 'practice', traffic = 6, control = 'fixed', keepClear = false } = {}) {
   const track = buildTrack(layout)
   // The street the road runs through. Built once per world from the same seed,
   // so a layout is the same street every time a visitor picks it.
   const street = buildStreet(track, { seed, layout })
   const world = {
     t: 0, tick: 0, rand: rng(seed), track, weather, people, dogs, layout, zebras: track.zebras,
-    light: { ...LIGHT_CYCLE[0] }, phase: 0, phaseT: 0,
+    light: { A: 'green', B: 'red' }, phase: 0, phaseT: 0, control, keepClear,
+    statistics: { passed: 0, stoppedSeconds: 0 },
     cars: [], walkers: [], nextId: 100, events: [],
     street,
     // Everything the simulated camera is allowed to put a box on. References, not
@@ -130,7 +128,7 @@ function placeCar(car) {
 export function step(world) {
   world.t += DT
   world.tick++
-  tickLight(world)
+  tickSignals(world, DT)
   spawn(world)
   const look = world.tick % LOOK_EVERY === 0
   for (const car of world.cars) {
@@ -140,6 +138,7 @@ export function step(world) {
       if (Math.hypot(o.x - car.x, o.y - car.y) > 8) car.ghost.delete(id)
     }
     if (car.frozen > 0) {
+      world.statistics.stoppedSeconds += DT
       car.frozen -= DT
       car.v = 0
       car.decision = { acc: 0, action: 'waiting', reason: car.crashReason ?? 'crashed' }
@@ -150,7 +149,10 @@ export function step(world) {
       car.decision = decide(car, world)
     }
     car.v = Math.max(0, car.v + car.decision.acc * DT)
+    const before = car.s
     car.s += car.v * DT
+    if (car.v < 0.5) world.statistics.stoppedSeconds += DT
+    if (car.route.stopS != null && before < car.route.stopS && car.s >= car.route.stopS) world.statistics.passed++
     if (car.s >= car.route.len) { car.s -= car.route.len; car.laps++ }
     placeCar(car)
   }
@@ -158,15 +160,6 @@ export function step(world) {
   stepStreet(world.street, world)
   collide(world)
   world.events = world.events.filter((e) => world.t - e.t < 2.5)
-}
-
-function tickLight(world) {
-  world.phaseT += DT
-  if (world.phaseT >= LIGHT_CYCLE[world.phase].d) {
-    world.phaseT = 0
-    world.phase = (world.phase + 1) % LIGHT_CYCLE.length
-    world.light = { ...LIGHT_CYCLE[world.phase] }
-  }
 }
 
 // ── People and dogs ─────────────────────────────────────────────────────
