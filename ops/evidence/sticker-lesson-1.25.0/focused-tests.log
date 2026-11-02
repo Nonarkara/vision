@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: lesson film serves typed HEAD, cache validation and captions without downloading the film
+ok 1 - lesson film serves typed HEAD, cache validation and captions without downloading the film
+  ---
+  duration_ms: 357.280375
+  type: 'test'
+  ...
+# Subtest: film seeks return exact prefix, suffix and open-ended byte ranges
+ok 2 - film seeks return exact prefix, suffix and open-ended byte ranges
+  ---
+  duration_ms: 434.00575
+  type: 'test'
+  ...
+# Subtest: unsatisfiable ranges fail boundedly and weak If-Range validators return a full representation
+ok 3 - unsatisfiable ranges fail boundedly and weak If-Range validators return a full representation
+  ---
+  duration_ms: 17.30575
+  type: 'test'
+  ...
+# Subtest: no line on this site is wider than the house measure of 65ch
+ok 4 - no line on this site is wider than the house measure of 65ch
+  ---
+  duration_ms: 3470.745333
+  type: 'test'
+  ...
+# Subtest: the prose itself is capped at 62ch, which is the house number
+ok 5 - the prose itself is capped at 62ch, which is the house number
+  ---
+  duration_ms: 0.972833
+  type: 'test'
+  ...
+# Subtest: the measure is applied to the text, not only to a container around it
+ok 6 - the measure is applied to the text, not only to a container around it
+  ---
+  duration_ms: 0.774708
+  type: 'test'
+  ...
+# Subtest: the room asks all three learners the same picture
+ok 7 - the room asks all three learners the same picture
+  ---
+  duration_ms: 1.333334
+  type: 'test'
+  ...
+# Subtest: the room wires the comparison through the module the tests can read
+ok 8 - the room wires the comparison through the module the tests can read
+  ---
+  duration_ms: 0.374
+  type: 'test'
+  ...
+# Subtest: there is one card per learning method, and they are the room's three
+ok 9 - there is one card per learning method, and they are the room's three
+  ---
+  duration_ms: 1.184625
+  type: 'test'
+  ...
+# Subtest: each card says what you give it and what it answers, in both languages
+ok 10 - each card says what you give it and what it answers, in both languages
+  ---
+  duration_ms: 0.628042
+  type: 'test'
+  ...
+# Subtest: the three cards ask three different things of you
+ok 11 - the three cards ask three different things of you
+  ---
+  duration_ms: 0.256
+  type: 'test'
+  ...
+# Subtest: the reinforcement learner answers with an action, not a label
+ok 12 - the reinforcement learner answers with an action, not a label
+  ---
+  duration_ms: 0.491334
+  type: 'test'
+  ...
+# Subtest: the reinforcement learner answers even with nothing learned
+ok 13 - the reinforcement learner answers even with nothing learned
+  ---
+  duration_ms: 0.215458
+  type: 'test'
+  ...
+# Subtest: the supervised card cannot answer before the learner has been taught
+ok 14 - the supervised card cannot answer before the learner has been taught
+  ---
+  duration_ms: 0.124792
+  type: 'test'
+  ...
+# Subtest: the supervised card stops asking for pictures the reader already gave
+ok 15 - the supervised card stops asking for pictures the reader already gave
+  ---
+  duration_ms: 0.449041
+  type: 'test'
+  ...
+# Subtest: the reinforcement card tells the truth about the scores it has
+ok 16 - the reinforcement card tells the truth about the scores it has
+  ---
+  duration_ms: 0.697583
+  type: 'test'
+  ...
+# Subtest: the comparison puts its ask control before the optional picture
+ok 17 - the comparison puts its ask control before the optional picture
+  ---
+  duration_ms: 0.191583
+  type: 'test'
+  ...
+# Subtest: the two actions have one name, not a copy in each place
+ok 18 - the two actions have one name, not a copy in each place
+  ---
+  duration_ms: 0.200583
+  type: 'test'
+  ...
+# Subtest: every sentence the cards can say exists in Thai as well as English
+ok 19 - every sentence the cards can say exists in Thai as well as English
+  ---
+  duration_ms: 0.732209
+  type: 'test'
+  ...
+# Subtest: the picture is never scaled up
+ok 20 - the picture is never scaled up
+  ---
+  duration_ms: 0.330167
+  type: 'test'
+  ...
+# Subtest: the payoff is reachable from the lesson that promises it
+ok 21 - the payoff is reachable from the lesson that promises it
+  ---
+  duration_ms: 0.157125
+  type: 'test'
+  ...
+# Subtest: the comparison is the room's own styling, not a new language
+ok 22 - the comparison is the room's own styling, not a new language
+  ---
+  duration_ms: 0.202708
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6615.781583

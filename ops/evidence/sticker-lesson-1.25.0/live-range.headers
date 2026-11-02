@@ -1,0 +1,20 @@
+HTTP/2 206 
+date: Mon, 02 Nov 2026 19:37:26 GMT
+content-type: video/mp4
+content-length: 32
+cache-control: public, max-age=14400
+content-security-policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; media-src 'self' blob: https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com; connect-src 'self' https://camerai1.iticfoundation.org https://camera1.iticfoundation.org https://*.ipcamlive.com; worker-src 'self' blob:; font-src 'self'; frame-src https://www.instagram.com https://instagram.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+cross-origin-opener-policy: same-origin
+etag: W/"j3hey-mvzntkir-1.25.0"
+permissions-policy: camera=(self), microphone=(), geolocation=(), payment=(), usb=()
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000
+x-content-type-options: nosniff
+content-range: bytes 0-31/32075242
+cf-cache-status: MISS
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fE%2F2S1RZnC8GIP59PxYsSWahvFYHqKTPGz3e2OsSB0lhonoucWHmEstb86YYcKP7Y7G07RsR5DIaMu3PHFnFFYRvscFmkMe%2F5g7yxGsPzj8pA11RrlZ7dKp5Io3FoxD3st1OXLRC00%2Bk3aaIeMFge%2BM2XQ%3D%3D"}]}
+server: cloudflare
+cf-ray: a54598035e165776-BKK
+alt-svc: h3=":443"; ma=86400
+

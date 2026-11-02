@@ -1,0 +1,62 @@
+{
+  "public/research.html": {
+    "release": "8f176ffe504d4f4fa3a869fb3014fcb46c7d745d6fb043e5f18b3ae1c9890955",
+    "matches_audited_tree": true,
+    "runtime": "8f176ffe504d4f4fa3a869fb3014fcb46c7d745d6fb043e5f18b3ae1c9890955",
+    "runtime_matches_release": true
+  },
+  "public/train.html": {
+    "release": "d6be4cb3305ad398b19dad8eca6963b65abcf0f44ba13060e8d1faa28e6168fb",
+    "matches_audited_tree": true,
+    "runtime": "d6be4cb3305ad398b19dad8eca6963b65abcf0f44ba13060e8d1faa28e6168fb",
+    "runtime_matches_release": true
+  },
+  "public/css/pages/research.css": {
+    "release": "c6f5add41356c04e9698022aad85cc1d03d4cc49454f41e443bb4c256a2eed03",
+    "matches_audited_tree": true,
+    "runtime": "c6f5add41356c04e9698022aad85cc1d03d4cc49454f41e443bb4c256a2eed03",
+    "runtime_matches_release": true
+  },
+  "public/css/pages/train.css": {
+    "release": "e3fb84bda0ceec84046409931876ef920a32714d6f64d7ab44098fbda6b11043",
+    "matches_audited_tree": true,
+    "runtime": "e3fb84bda0ceec84046409931876ef920a32714d6f64d7ab44098fbda6b11043",
+    "runtime_matches_release": true
+  },
+  "public/js/train/video-lesson.js": {
+    "release": "38cee588ff6917897247d7d4f7203ddcf7c023c19b7d87f323ce673e1550ecf0",
+    "matches_audited_tree": true,
+    "runtime": "38cee588ff6917897247d7d4f7203ddcf7c023c19b7d87f323ce673e1550ecf0",
+    "runtime_matches_release": true
+  },
+  "public/js/train/three-ways.js": {
+    "release": "85efb1b8823f14327b30a18e042407f48ae7cefd9218d3090e8dfba5bb46e4fc",
+    "matches_audited_tree": true,
+    "runtime": "85efb1b8823f14327b30a18e042407f48ae7cefd9218d3090e8dfba5bb46e4fc",
+    "runtime_matches_release": true
+  },
+  "server/http.js": {
+    "release": "eddf385d0661ab8bedf961555c85776b93b830d0449b5789944835c4af590a3a",
+    "matches_audited_tree": true,
+    "runtime": "eddf385d0661ab8bedf961555c85776b93b830d0449b5789944835c4af590a3a",
+    "runtime_matches_release": true
+  },
+  "package.json": {
+    "release": "01c0f81aedf7667973581e07e655e46babdcda1860f71ef404325266c7e71e72",
+    "matches_audited_tree": true,
+    "runtime": "01c0f81aedf7667973581e07e655e46babdcda1860f71ef404325266c7e71e72",
+    "runtime_matches_release": true
+  },
+  "public/media/lessons/stickers-1.25.0.mp4": {
+    "release": "32fcf7ca5ad516e4377da2fe1f27cd9adecca6d7cffa183df3d8491c203facca",
+    "matches_audited_tree": true,
+    "runtime": "32fcf7ca5ad516e4377da2fe1f27cd9adecca6d7cffa183df3d8491c203facca",
+    "runtime_matches_release": true
+  },
+  "public/media/lessons/stickers-en-1.25.0.vtt": {
+    "release": "290a9700327d5ff827bed8fc00b9d56c55fc578076b07e1ca7833973fe3ada0d",
+    "matches_audited_tree": true,
+    "runtime": "290a9700327d5ff827bed8fc00b9d56c55fc578076b07e1ca7833973fe3ada0d",
+    "runtime_matches_release": true
+  }
+}
