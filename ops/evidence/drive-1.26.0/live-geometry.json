@@ -1,0 +1,41 @@
+[
+  {
+    "decisionBottom": 802.40625,
+    "lang": "en",
+    "overflow": 0,
+    "route": "/drive",
+    "width": 390
+  },
+  {
+    "decisionBottom": 755.4140625,
+    "lang": "en",
+    "overflow": 0,
+    "route": "/drive",
+    "width": 1024
+  },
+  {
+    "decisionBottom": 836.015625,
+    "lang": "en",
+    "overflow": 0,
+    "route": "/drive",
+    "width": 1440
+  },
+  {
+    "lang": "en",
+    "overflow": 0,
+    "route": "/research",
+    "width": 390
+  },
+  {
+    "lang": "en",
+    "overflow": 0,
+    "route": "/research",
+    "width": 1024
+  },
+  {
+    "lang": "en",
+    "overflow": 0,
+    "route": "/research",
+    "width": 1440
+  }
+]

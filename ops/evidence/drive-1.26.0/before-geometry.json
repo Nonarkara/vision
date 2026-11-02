@@ -1,0 +1,77 @@
+[
+  {
+    "driveHidden": true,
+    "gate": {
+      "bottom": 1094.1484375,
+      "height": 791.703125,
+      "left": 0,
+      "right": 390,
+      "top": 302.4453125,
+      "width": 390,
+      "x": 0,
+      "y": 302.4453125
+    },
+    "head": {
+      "bottom": 302.4453125,
+      "height": 258.4453125,
+      "left": 0,
+      "right": 390,
+      "top": 44,
+      "width": 390,
+      "x": 0,
+      "y": 44
+    },
+    "height": 844,
+    "width": 390
+  },
+  {
+    "driveHidden": true,
+    "gate": {
+      "bottom": 797.546875,
+      "height": 576.3828125,
+      "left": 0,
+      "right": 1024,
+      "top": 221.1640625,
+      "width": 1024,
+      "x": 0,
+      "y": 221.1640625
+    },
+    "head": {
+      "bottom": 221.1640625,
+      "height": 177.1640625,
+      "left": 0,
+      "right": 1024,
+      "top": 44,
+      "width": 1024,
+      "x": 0,
+      "y": 44
+    },
+    "height": 900,
+    "width": 1024
+  },
+  {
+    "driveHidden": true,
+    "gate": {
+      "bottom": 836.578125,
+      "height": 586.59375,
+      "left": 0,
+      "right": 1440,
+      "top": 249.984375,
+      "width": 1440,
+      "x": 0,
+      "y": 249.984375
+    },
+    "head": {
+      "bottom": 249.984375,
+      "height": 205.984375,
+      "left": 0,
+      "right": 1440,
+      "top": 44,
+      "width": 1440,
+      "x": 0,
+      "y": 44
+    },
+    "height": 900,
+    "width": 1440
+  }
+]

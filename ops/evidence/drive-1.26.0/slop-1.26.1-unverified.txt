@@ -1,0 +1,1 @@
+Clean detached0a8f3b4, version1.26.1. The external tool remained running4m29s with zero output when inspected; it later completed with desktop and mobile page.goto35s timeouts, before cleanup. No final aggregate score was produced. Raw result:slop-1.26.1.ndjson. Manual9-view captures and independent review are recorded separately.

@@ -1,0 +1,24 @@
+/drive        desktop  carried 4 [ivory indigo gray jasper]  ivory 30.08%  indigo 7.12%  gray 8.12%  jasper 1.85%  black 34.56%  photo 0%  other 18.18%
+/drive        phone    carried 3 [ivory indigo gray]  ivory 32.06%  indigo 8%  gray 7.26%  jasper 0.02%  black 33.72%  photo 0%  other 18.66%
+/research     desktop  carried 3 [ivory indigo gray]  ivory 77.63%  indigo 13.62%  gray 1.11%  jasper 0.01%  black 4.93%  photo 0%  other 2.67%
+/research     phone    carried 3 [ivory indigo gray]  ivory 68.26%  indigo 20.68%  gray 1.79%  jasper 0.02%  black 4.55%  photo 0%  other 4.52%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/drive  (carries 4: ivory+indigo+gray+jasper)
+     618019px  rgb(16, 16, 16)        726x658 @y193  div.drive-hero
+     618019px  rgb(16, 16, 16)        726x77 @y774  div.focus.field-black
+     526849px  rgb(16, 16, 16)        726x60 @y665  div.controls.hero-controls
+     481809px  rgb(11, 15, 20)        726x409 @y255  canvas.hero-screen
+     436088px  rgb(16, 16, 16)        605x528 @y193  div.bench.instrument
+     436088px  rgb(16, 16, 16)        605x44 @y676  div.controls
+
+/research  (carries 3: ivory+indigo+gray)
+     120573px  rgb(16, 16, 16)        153x44 @y743  a.btn.primary
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      26481px  rgb(5, 18, 48)         63x35 @y382  span.num
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+ROOM SUMMARY (desktop)
+  /drive        4 hues  ivory+indigo+gray+jasper
+  /research     3 hues  ivory+indigo+gray
