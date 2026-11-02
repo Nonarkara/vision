@@ -1,0 +1,149 @@
+WEBVTT
+
+00:00.000 --> 00:03.360
+Alright, what have I done?
+
+00:03.360 --> 00:05.400
+So, there's a lot of things going on here.
+
+00:05.400 --> 00:06.400
+These are stickers.
+
+00:06.400 --> 00:12.200
+I'm here at the cafe called Missong, space here in Bangkok.
+
+00:12.200 --> 00:17.000
+So I just think that maybe I can use this opportunity where I'm just playing around with the stickers,
+
+00:17.000 --> 00:21.640
+which is one of the things I like the most when it comes to leisure stuff, to teach you
+
+00:21.640 --> 00:25.600
+a little bit about how AI actually works on categorizing data.
+
+00:25.600 --> 00:30.600
+Like we've been talking a lot about how we should be using AI in terms of making our life easier.
+
+00:30.600 --> 00:36.800
+So if you have a bucket of two thousands, no, two hundred, sticker like this, how do you categorize it?
+
+00:36.800 --> 00:39.600
+So AI would do three things for you.
+
+00:39.600 --> 00:43.000
+So first thing first, you have to tell AI how to categorize it.
+
+00:43.000 --> 00:49.600
+So for instance, on the whole issue of different stickers, AI might probably pick up some of the things that,
+
+00:49.600 --> 00:54.800
+like this for instance, pick this up, then you have to tell AI that, okay, this is category A.
+
+00:55.000 --> 00:56.000
+Winnie the Pooh.
+
+00:56.000 --> 01:01.200
+So every time I find anything that looks similar, we're going to pull them together.
+
+01:01.200 --> 01:04.000
+So you have a big pile of, Winnie the Pooh here.
+
+01:04.000 --> 01:07.000
+Or this is Boo Boo and Lulu, really cute.
+
+01:07.000 --> 01:10.500
+So you're going to have to tell AI first that this is Boo Boo and Lulu category B.
+
+01:10.500 --> 01:16.100
+So every time I find anything that looks like this, I will just put them all in the same pile like this together.
+
+01:16.100 --> 01:19.200
+So you see how fast that things could actually go.
+
+01:19.200 --> 01:27.000
+But if AI doesn't have the understanding for a fact that this could actually look like Boo Boo, right?
+
+01:27.000 --> 01:29.700
+So if that's the case, this is Lulu or Boo Boo anyway.
+
+01:29.700 --> 01:33.800
+The point is that AI will ask you and you tell that this is not this,
+
+01:33.800 --> 01:36.000
+which means that they will go into category C.
+
+01:36.000 --> 01:40.000
+And then once you keep building it up, you're using the first of all,
+
+01:40.000 --> 01:44.200
+the supervised learning where you tell AI that this is in the category A.
+
+01:44.200 --> 01:45.200
+Winnie the Pooh.
+
+01:45.200 --> 01:48.400
+This is in the category B, Boo Boo and Lulu.
+
+01:48.400 --> 01:52.600
+This is in category C, maybe all the letters and stuff.
+
+01:52.600 --> 01:57.400
+Then if the AI doesn't understand that he will ask you when we put this category in,
+
+01:57.400 --> 01:59.900
+then you can tell AI that this goes into category E.
+
+01:59.900 --> 02:03.100
+And right now we have category A all the way to category Z.
+
+02:03.100 --> 02:06.200
+And that's actually category A1 and B1, Z1, and this pool.
+
+02:06.200 --> 02:11.500
+But as you see, what AI is doing here is to learn from you, right?
+
+02:11.500 --> 02:17.600
+But because AI doesn't see Boo Boo and Lulu like you, AI see grains and patterns of colors.
+
+02:17.600 --> 02:23.100
+So you have to tell it exactly that this is a grain and color that has a tendency to be what you want.
+
+02:23.100 --> 02:27.000
+And once it categorizes for you, you can actually check and see whether this is right.
+
+02:27.000 --> 02:27.900
+I think this is right.
+
+02:27.900 --> 02:33.400
+We actually continue to reinforce the learning that this is the right category that you should put things into.
+
+02:33.400 --> 02:38.600
+And within the next few stages or sessions of learning, AI will do even faster.
+
+02:38.600 --> 02:42.900
+And I can tell by my own experiences here that even I do it with my own eyes,
+
+02:42.900 --> 02:44.900
+I get faster and faster every time, right?
+
+02:44.900 --> 02:48.200
+AI is able to learn faster and faster every time as well.
+
+02:48.200 --> 02:51.600
+So once you are able to do that, you can actually categorize this very easily
+
+02:51.600 --> 02:57.600
+and use AI to make your life better because these are repetitive tasks that machine learning can do really well.
+
+02:57.600 --> 03:00.900
+So again, there will be a lot of things that I can share with you,
+
+03:00.900 --> 03:06.500
+but I think this would be a good lesson to learn in terms of why is it that we should be using AI
+
+03:06.500 --> 03:13.000
+to do things that it can do more effectively than our eyes and brains and labor and of course time.
+
+03:13.000 --> 03:14.500
+Until then, thank you.
+

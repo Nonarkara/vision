@@ -231,3 +231,31 @@
 @media (max-width: 520px) { .learning-choices .btn { padding: 10px 12px; } }
 .learning-continue { margin: 12px 0 0; }
 .learning-continue .btn { white-space: normal; text-align: left; }
+
+/* Watch → compare → try. The film keeps its own aspect; short copy never stretches. */
+.learning-kinds { padding-block: 24px; }
+.learning-kinds > h2 { font-size: var(--subtitle); margin-bottom: 8px; }
+.learning-kinds > .prose { margin-bottom: 16px; font-size: var(--read); }
+.sticker-lesson { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px 24px; align-items: start; }
+.sticker-film { margin: 0; min-width: 0; }
+.sticker-film video { display: block; width: 100%; height: auto; aspect-ratio: 16/9; background: var(--indigo); }
+.sticker-film figcaption { margin-top: 8px; line-height: 1.4; }
+.sticker-guide { min-width: 0; }
+.sticker-guide h3 { font-size: var(--body); line-height: 1.2; margin: 0 0 12px; }
+.sticker-guide dl { margin: 0; font-size: var(--read); line-height: 1.4; }
+.sticker-guide dl > div + div { margin-top: 16px; }
+.sticker-guide dt { font-weight: 600; }
+.sticker-guide dd { margin: 4px 0 0; max-width: 48ch; }
+.sticker-context { margin-block: 16px; max-width: 65ch; }
+.learning-try-title { font-size: var(--body); margin: 20px 0 8px; }
+.learning-choices { margin-top: 0; }
+.learning-help { margin-block: 12px; }
+.learning-help summary { min-height: var(--target); padding-block: 10px; cursor: pointer; }
+.learning-cards.is-guided article { gap: 16px 24px; padding-top: 16px; align-items: start; }
+.learning-cards h3 { font-size: var(--body); margin: 4px 0 8px; }
+.learning-copy > p { margin-bottom: 0; font-size: var(--read); }
+.learning-demo .learning-objects { margin-top: 0; }
+@media (max-width: 900px) {
+  .sticker-lesson { grid-template-columns: 1fr; }
+  .sticker-guide dd { max-width: 65ch; }
+}

@@ -24,6 +24,8 @@ const TYPES = {
   '.md': 'text/markdown; charset=utf-8',
   '.webmanifest': 'application/manifest+json',
   '.xml': 'application/xml; charset=utf-8',
+  '.mp4': 'video/mp4',
+  '.vtt': 'text/vtt; charset=utf-8',
 }
 
 /** Folders under public/ that hold originals for us to process, not for visitors. */
@@ -275,6 +277,42 @@ export function createStatic({ root, version, log = () => {} }) {
     if (PRIVATE_DIRS.some((d) => here.startsWith(path.join(root, d).normalize('NFC').toLowerCase() + path.sep))) return false
     // Page templates are only ever served assembled, under their clean URL.
     if (found.full.endsWith('.html')) return false
+    // Lesson films must seek without reading the entire film into the JS heap.
+    if (path.extname(found.full) === '.mp4') {
+      const size = found.st.size
+      const etag = `W/"${size.toString(36)}-${Math.floor(found.st.mtimeMs).toString(36)}-${version}"`
+      const headers = { ...securityHeaders(), 'Content-Type': TYPES['.mp4'], 'Accept-Ranges': 'bytes', 'Cache-Control': 'public, max-age=3600', ETag: etag }
+      // If-Range needs a strong validator. Our weak ETag cannot satisfy it.
+      const range = req.headers['if-range'] ? null : req.headers.range
+      let start = 0, end = size - 1, status = 200
+      if (range) {
+        const match = /^bytes=(\d*)-(\d*)$/.exec(range)
+        if (match && (match[1] || match[2])) {
+          start = match[1] ? Number(match[1]) : Math.max(0, size - Number(match[2]))
+          end = match[1] && match[2] ? Math.min(Number(match[2]), size - 1) : size - 1
+        }
+        if (!match || (!match[1] && !match[2]) || !Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= size) {
+          res.writeHead(416, { ...headers, 'Content-Range': `bytes */${size}`, 'Content-Length': 0 })
+          res.end()
+          return true
+        }
+        status = 206
+        headers['Content-Range'] = `bytes ${start}-${end}/${size}`
+      } else if (req.headers['if-none-match'] === etag) {
+        res.writeHead(304, headers)
+        res.end()
+        return true
+      }
+      res.writeHead(status, { ...headers, 'Content-Length': size ? end - start + 1 : 0 })
+      if (req.method === 'HEAD' || !size) res.end()
+      else {
+        const stream = fs.createReadStream(found.full, { start, end })
+        stream.on('error', (error) => res.destroy(error))
+        res.on('close', () => stream.destroy())
+        stream.pipe(res)
+      }
+      return true
+    }
     // Memo by the resolved file, not the request path: `/a//b` and `/a/b` are one file, one entry.
     send(req, res, load(found.full, found.full, found.st), cacheControl('/' + path.relative(root, found.full).split(path.sep).join('/')), 200, ['js/focus/worker.js', 'js/gesture/worker.js'].includes(path.relative(root, found.full)))
     return true

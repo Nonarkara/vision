@@ -1,10 +1,10 @@
-import { t, onLang, count } from '../core/i18n.js?v=1.24.4'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.24.4'
-import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.24.4'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.24.4'
-import { threeWayState, actionLabel } from './three-ways.js?v=1.24.4'
-import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.24.4'
-import { practiceVideo } from './practice-video.js?v=1.24.4'
+import { t, onLang, count } from '../core/i18n.js?v=1.25.0'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.25.0'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.25.0'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.25.0'
+import { threeWayState, actionLabel } from './three-ways.js?v=1.25.0'
+import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.25.0'
+import { practiceVideo } from './practice-video.js?v=1.25.0'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
@@ -18,7 +18,8 @@ export function mountVideoLesson(specimen) {
     if (!sourceIds.has(src)) sourceIds.set(src, `local-${++nextSourceId}`)
     return { id: sourceIds.get(src), camera: false }
   }
-  let mode = 'supervised',
+  const requestedMethod = new URLSearchParams(location.search).get('method')
+  let mode = ['supervised', 'unsupervised', 'reinforcement'].includes(requestedMethod) ? requestedMethod : 'supervised',
     labels = [],
     frames = [],
     groups = null,

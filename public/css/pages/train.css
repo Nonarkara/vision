@@ -279,3 +279,5 @@ body main .page-head { grid-template-columns: auto minmax(0, 1fr); gap: 8px 24px
 body main .page-head h1 { font-size: var(--subtitle); max-width: none; }
 body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width: 60ch; }
 @media (max-width: 900px) { body main .page-head { grid-template-columns: minmax(0, 1fr); } }
+
+.train-sticker-link { display: inline-flex; align-items: center; min-height: var(--target); max-width: 55ch; font-size: var(--read); line-height: 1.4; }

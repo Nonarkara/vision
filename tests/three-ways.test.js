@@ -109,7 +109,7 @@ test('each card says what you give it and what it answers, in both languages', (
 test('the three cards ask three different things of you', () => {
   const gives = ['supervised', 'unsupervised', 'reinforcement'].map((w) => enText(card(w).match(/three-way-eyebrow[^>]*>([\s\S]*?)<\/p>/)[1]))
   assert.ok(gives[0].includes('right answer'), 'supervised must ask you for the right answer')
-  assert.ok(gives[1].includes('nothing'), 'unsupervised must ask you for nothing at all')
+  assert.ok(gives[1].includes('pictures without labels'), 'unsupervised needs data without answer labels')
   assert.ok(gives[2].includes('score'), 'reinforcement must ask you for a score')
   assert.equal(new Set(gives).size, 3, 'the three cards must not say the same thing')
 })

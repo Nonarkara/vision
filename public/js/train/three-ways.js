@@ -10,7 +10,7 @@
 // is what the room is for, so it has to be checkable without a browser. The
 // translator is passed in because the house's own reaches for the document,
 // and node has none.
-import { classify, groupOf, policy } from './video-learning.js?v=1.24.4'
+import { classify, groupOf, policy } from './video-learning.js?v=1.25.0'
 
 /**
  * The name of the two actions, in one place.
@@ -100,23 +100,23 @@ export function threeWayState({
         ? {
             answer: t(`กลุ่ม ${uns + 1}`, `Group ${uns + 1}`),
             need: t(
-              'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — คุณเป็นคนตั้งว่ากลุ่มนี้คืออะไร',
-              'Answers in a group name it chose — you decide what the group means',
+              'ตอบด้วยหมายเลขกลุ่มที่มีภาพคล้ายกัน — คุณเป็นคนตั้งว่ากลุ่มนี้คืออะไร',
+              'Answers with a group number based on visual similarity — you decide what the group means',
             ),
           }
         : groups
           ? {
               answer: t('พร้อมแล้ว', 'Ready'),
               need: t(
-                'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — กดถามทั้งสามเพื่อดูว่าภาพนี้ไปอยู่กลุ่มไหน',
-                'Answers in a group name it chose — press Ask all three to see which group this picture lands in',
+                'ตอบด้วยหมายเลขกลุ่มที่มีภาพคล้ายกัน — กดถามทั้งสามเพื่อดูว่าภาพนี้ไปอยู่กลุ่มไหน',
+                'Answers with a group number based on visual similarity — press Ask all three to see which group this picture lands in',
               ),
             }
           : {
               answer: t('ยังไม่รู้', 'Does not know yet'),
               need: t(
-                'ตอบด้วยชื่อกลุ่มที่มันตั้งเอง — ต้องเก็บภาพ 24 ภาพก่อน',
-                'Answers in a group name it chose — needs 24 frames first',
+                'ตอบด้วยหมายเลขกลุ่มที่มีภาพคล้ายกัน — ต้องเก็บภาพ 24 ภาพก่อน',
+                'Answers with a group number based on visual similarity — needs 24 frames first',
               ),
             },
     reinforcement: rl
