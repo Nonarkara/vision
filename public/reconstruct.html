@@ -11,17 +11,54 @@
 <main id="main">
 <div class="recon" data-reconstruct>
 
+  <div class="recon-opening">
+      <figure class="flow-fig">
+        <div class="pipe-scroll">
+          <svg class="diagram" viewBox="0 0 440 210" aria-hidden="true">
+            <path class="stroke-gray" d="M78 46 L280 96 M78 100 L300 112 M78 154 L318 132"/>
+            <rect class="fill-ivory" x="24" y="30" width="56" height="32"/>
+            <rect class="fill-ivory" x="24" y="84" width="56" height="32"/>
+            <rect class="fill-ivory" x="24" y="138" width="56" height="32"/>
+            <rect class="fill-jasper" x="280" y="92" width="10" height="10"/>
+            <rect class="fill-jasper" x="304" y="108" width="10" height="10"/>
+            <rect class="fill-jasper" x="292" y="124" width="10" height="10"/>
+            <rect class="fill-jasper" x="322" y="98" width="10" height="10"/>
+            <rect class="fill-jasper" x="338" y="118" width="10" height="10"/>
+            <rect class="fill-gray" x="360" y="70" width="10" height="10"/>
+            <rect class="fill-gray" x="378" y="86" width="10" height="10"/>
+            <rect class="fill-gray" x="368" y="102" width="10" height="10"/>
+            <text class="thai th" lang="th" x="52" y="192" text-anchor="middle">กล้อง</text>
+            <text class="en" lang="en" x="52" y="192" text-anchor="middle">cameras</text>
+            <text class="zh" lang="zh" x="52" y="192" text-anchor="middle">相机</text>
+            <text class="thai th" lang="th" x="314" y="168" text-anchor="middle">จุดกระจัดกระจาย</text>
+            <text class="en" lang="en" x="314" y="168" text-anchor="middle">sparse points</text>
+            <text class="zh" lang="zh" x="314" y="168" text-anchor="middle">稀疏点</text>
+            <text class="thai th" lang="th" x="425" y="42" text-anchor="end">ยังไม่ใช่ผิว</text>
+            <text class="en" lang="en" x="425" y="42" text-anchor="end">not a surface</text>
+            <text class="zh" lang="zh" x="425" y="42" text-anchor="end">还不是表面</text>
+          </svg>
+        </div>
+        <figcaption><span class="th" lang="th">กล้องหลายตำแหน่งมองจุดชุดเดียวกัน จุดสีแจสเปอร์คือสิ่งที่โปรแกรมยอมรับว่าเห็นมากกว่าหนึ่งครั้ง จุดเทาคือที่ว่างที่ยังไม่มีผิว</span><span class="en" lang="en">Several camera positions look at one set of points. Jasper marks a place the program accepted more than once. Grey is empty space, not a surface yet.</span><span class="zh" lang="zh">几个相机位置看着同一组点。橘红是程序接受为见过不止一次的地方。灰色是空处，还不是表面。</span></figcaption>
+      </figure>
   <header class="page-head">
     <div>
       <span class="eyebrow label"><span class="th" lang="th">สร้างภาพสามมิติ</span><span class="en" lang="en">Reconstruct</span><span class="zh" lang="zh">重建</span></span>
       <h1><span class="th" lang="th">หลายภาพ<br>รูปเดียว</span><span class="en" lang="en">Many pictures,<br>one shape</span><span class="zh" lang="zh">许多张照片，<br>一个形状</span></h1>
     </div>
     <div>
-      <p class="lede th" lang="th">โดรนบินรอบปราสาทหนึ่งรอบ แล้วกลับมาพร้อมรูปทรง โปรแกรมที่สร้างรูปทรงนั้นชื่อ COLMAP มันไม่ได้เรียนจำใบหน้า มันหามุม ตกลงว่ามุมไหนคือที่เดียวกัน หาว่ากล้องเคยอยู่ตรงไหน แล้วขยับทั้งหมดจนมันเข้ากัน ห้องนี้อธิบายสี่ขั้นนั้น แสดงรีลที่เป็นตัวอย่าง และให้คุณสะสมแบบจำลองศีรษะเล็ก ๆ บนเครื่องนี้ ภาพไม่ถูกส่งออกไป</p>
-      <p class="lede en" lang="en">A drone flew once around a castle and came home with a shape. The program that built it is COLMAP. It did not learn a face. It found corners, agreed which corners were the same place, worked out where the camera had been, and nudged all of that until it held together. This room walks those four steps, shows the reel they come from, and lets you grow a small head model on this device. The pictures stay here.</p>
-      <p class="lede zh" lang="zh">一架无人机绕城堡飞了一圈，带回一个形状。做出这个形状的程序叫 COLMAP。它没有在学习一张脸。它找出角落，认定哪些角落是同一个地方，算出相机当时在哪里，再把这些一起挪到能对上为止。这个房间讲这四步，放出那段示例短片，并让你在这台设备上长出一个小的头部模型。画面留在这里。</p>
+      <p class="lede th" lang="th">ภาพหลายมุมช่วยหาว่ากล้องและจุดต่าง ๆ อยู่ที่ไหน ดูสี่ขั้น แล้วลองสร้างเมฆจุดใบหน้าบนอุปกรณ์ของคุณ</p>
+      <p class="lede en" lang="en">Pictures from different angles help locate cameras and points. Follow four steps, then try a face-point cloud on your device.</p>
+      <p class="lede zh" lang="zh">不同角度的照片帮助定位相机和点。先看四个步骤，再在设备上试试人脸点云。</p>
+      <div class="controls recon-actions"><a class="btn" href="#steps"><span class="th" lang="th">ดูสี่ขั้น ↓</span><span class="en" lang="en">See four steps ↓</span><span class="zh" lang="zh">看四个步骤 ↓</span></a><a class="btn" href="#try"><span class="th" lang="th">ลองเมฆจุดใบหน้า ↓</span><span class="en" lang="en">Try face points ↓</span><span class="zh" lang="zh">试试人脸点云 ↓</span></a></div>
     </div>
   </header>
+  </div>
+  <details class="recon-intro"><summary><span class="th" lang="th">จากภาพปราสาทสู่รูปทรง</span><span class="en" lang="en">From castle pictures to a shape</span><span class="zh" lang="zh">从城堡照片到形状</span></summary><div class="prose">
+      <p class="th" lang="th">โดรนบินรอบปราสาทหนึ่งรอบ แล้วกลับมาพร้อมรูปทรง โปรแกรมที่สร้างรูปทรงนั้นชื่อ COLMAP มันไม่ได้เรียนจำใบหน้า มันหามุม ตกลงว่ามุมไหนคือที่เดียวกัน หาว่ากล้องเคยอยู่ตรงไหน แล้วขยับทั้งหมดจนมันเข้ากัน ห้องนี้อธิบายสี่ขั้นนั้น แสดงรีลที่เป็นตัวอย่าง และให้คุณสะสมแบบจำลองศีรษะเล็ก ๆ บนเครื่องนี้ ภาพไม่ถูกส่งออกไป</p>
+      <p class="en" lang="en">A drone flew once around a castle and came home with a shape. The program that built it is COLMAP. It did not learn a face. It found corners, agreed which corners were the same place, worked out where the camera had been, and nudged all of that until it held together. This room walks those four steps, shows the reel they come from, and lets you grow a small head model on this device. The pictures stay here.</p>
+      <p class="zh" lang="zh">一架无人机绕城堡飞了一圈，带回一个形状。做出这个形状的程序叫 COLMAP。它没有在学习一张脸。它找出角落，认定哪些角落是同一个地方，算出相机当时在哪里，再把这些一起挪到能对上为止。这个房间讲这四步，放出那段示例短片，并让你在这台设备上长出一个小的头部模型。画面留在这里。</p>
+  </div></details>
+
 
   <nav class="recon-toc" data-aria-th="สารบัญห้องนี้" data-aria-en="On this page">
     <a href="#steps"><span class="num">01</span> <span class="th" lang="th">สี่ขั้น</span><span class="en" lang="en">Four steps</span><span class="zh" lang="zh">四步</span></a>
@@ -58,34 +95,7 @@
         <p class="en" lang="en">The first estimate is rough. Bundle adjustment moves the cameras and the points together until each point, projected back into every picture, lands on the feature that claimed it. It is one large least-squares fit. The sparse cloud is the result: points, not a solid surface.</p>
         <p class="zh" lang="zh">第一次的估计是粗的。光束法平差把相机和点一起移动，直到每个点被投回每张照片时，落在声称它的那个特征上。这是一次大的最小二乘拟合。稀疏点云就是结果：是点，不是一块实心的表面。</p>
       </div>
-      <figure class="flow-fig">
-        <div class="pipe-scroll">
-          <svg class="diagram" viewBox="0 0 720 200" aria-hidden="true">
-            <path class="stroke-gray" d="M78 46 L280 96 M78 100 L300 112 M78 154 L318 132"/>
-            <rect class="fill-indigo" x="24" y="30" width="56" height="32"/>
-            <rect class="fill-indigo" x="24" y="84" width="56" height="32"/>
-            <rect class="fill-indigo" x="24" y="138" width="56" height="32"/>
-            <rect class="fill-jasper" x="280" y="92" width="10" height="10"/>
-            <rect class="fill-jasper" x="304" y="108" width="10" height="10"/>
-            <rect class="fill-jasper" x="292" y="124" width="10" height="10"/>
-            <rect class="fill-jasper" x="322" y="98" width="10" height="10"/>
-            <rect class="fill-jasper" x="338" y="118" width="10" height="10"/>
-            <rect class="fill-gray" x="360" y="70" width="10" height="10"/>
-            <rect class="fill-gray" x="378" y="86" width="10" height="10"/>
-            <rect class="fill-gray" x="368" y="102" width="10" height="10"/>
-            <text class="thai th" lang="th" x="52" y="192" text-anchor="middle">กล้อง</text>
-            <text class="en" lang="en" x="52" y="192" text-anchor="middle">cameras</text>
-            <text class="zh" lang="zh" x="52" y="192" text-anchor="middle">相机</text>
-            <text class="thai th" lang="th" x="314" y="168" text-anchor="middle">จุดกระจัดกระจาย</text>
-            <text class="en" lang="en" x="314" y="168" text-anchor="middle">sparse points</text>
-            <text class="zh" lang="zh" x="314" y="168" text-anchor="middle">稀疏点</text>
-            <text class="thai th" lang="th" x="400" y="64" text-anchor="middle">ยังไม่ใช่ผิว</text>
-            <text class="en" lang="en" x="400" y="64" text-anchor="middle">not a surface</text>
-            <text class="zh" lang="zh" x="400" y="64" text-anchor="middle">还不是表面</text>
-          </svg>
-        </div>
-        <figcaption><span class="th" lang="th">กล้องหลายตำแหน่งมองจุดชุดเดียวกัน จุดสีแจสเปอร์คือสิ่งที่โปรแกรมยอมรับว่าเห็นมากกว่าหนึ่งครั้ง จุดเทาคือที่ว่างที่ยังไม่มีผิว</span><span class="en" lang="en">Several camera positions look at one set of points. Jasper marks a place the program accepted more than once. Grey is empty space, not a surface yet.</span><span class="zh" lang="zh">几个相机位置看着同一组点。橘红是程序接受为见过不止一次的地方。灰色是空处，还不是表面。</span></figcaption>
-      </figure>
+
     </div>
   </section>
 

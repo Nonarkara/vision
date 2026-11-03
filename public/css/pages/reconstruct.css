@@ -74,3 +74,22 @@
   .stage-camera { aspect-ratio: 3 / 4; }
   .cover { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Column study: the existing geometric artifact leads; its reading band
+   follows in source order, so keyboard and eye take the same route. */
+.recon-opening { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: var(--gap); padding: 24px var(--gutter) 16px; }
+.recon-opening .flow-fig { margin: 0; }
+.recon-opening .page-head { display: block; padding: 0; }
+.recon-opening .page-head h1 { margin-bottom: 16px; }
+.recon-opening .page-head .lede { max-width: 45ch; }
+.recon-actions { margin-top: 16px; background: transparent; }
+.recon-intro { margin: 0 var(--gutter) 16px; max-width: 65ch; }
+.recon-intro summary { cursor: pointer; padding-block: 12px; }
+.recon-intro .prose p { max-width: 65ch; }
+@media (max-width: 800px) {
+  .recon-opening { grid-template-columns: 1fr; gap: 16px; padding-top: 16px; }
+}
+
+.recon-opening .pipe-scroll svg { min-width: 0; }
+.recon-opening .diagram { color: var(--ivory); }
+.recon-opening .diagram text { font-size: 18px; }

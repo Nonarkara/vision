@@ -10,19 +10,6 @@
 <main id="main">
 
   <section class="opening home-opening" aria-labelledby="title">
-    <div class="opening-text">
-      <div>
-        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์</span><span class="en" lang="en">Computer-vision classroom</span></span>
-        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์มองเห็นอย่างไร</span><span class="en" lang="en">How a computer sees</span></h1>
-      </div>
-      <div>
-        <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
-        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
-
-
-      </div>
-    </div>
-
     <div class="opening-stage bench" aria-label="The machine's eye">
       <div class="bench-caption">
         <span class="label"><span class="th" lang="th">ตาของเครื่อง</span><span class="en" lang="en">The machine's eye</span></span>
@@ -37,6 +24,19 @@
         <canvas data-eye role="img" aria-label="A live public camera, shown through the selected lens"></canvas>
         <div class="bench-state" data-eye-state>…</div>
       </div>
+    <div class="opening-text">
+      <div>
+        <span class="eyebrow label"><span class="th" lang="th">ห้องเรียนคอมพิวเตอร์วิทัศน์</span><span class="en" lang="en">Computer-vision classroom</span></span>
+        <h1 id="title"><span class="th" lang="th">คอมพิวเตอร์มองเห็นอย่างไร</span><span class="en" lang="en">How a computer sees</span></h1>
+      </div>
+      <div>
+        <p class="lede th" lang="th">เริ่มจากภาพ เปลี่ยนเป็นตัวเลข ขอบ การเคลื่อนไหว แล้วจึงเดาว่าเห็นอะไร ลองทีละขั้นกับกล้องสาธารณะของไทย กล้องของคุณ หรือรูปที่คุณเลือก</p>
+        <p class="lede en" lang="en">A picture becomes numbers, edges, motion, then a guess. Follow each step on Thailand’s public cameras, your own camera, or a photo.</p>
+      </div>
+    <div class="cta home-next">
+      <a class="btn primary" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
+    </div>
+    </div>
       <div class="controls lens-steps" role="group" aria-label="Lenses">
         <button class="btn" type="button" data-lens="picture" aria-pressed="true"><span class="num">1</span> <span class="th" lang="th">ภาพ</span><span class="en" lang="en">Picture</span></button>
         <button class="btn" type="button" data-lens="numbers" aria-pressed="false"><span class="num">2</span> <span class="th" lang="th">ตัวเลข</span><span class="en" lang="en">Numbers</span></button>
@@ -67,9 +67,6 @@
       <p class="readout lens-say" data-lens-say aria-live="polite"></p>
       <p class="micro mine-note"><span class="th" lang="th">ภาพจากกล้องของคุณประมวลผลในเบราว์เซอร์นี้เท่านั้น ไม่มีการส่งหรือบันทึกไว้ที่ไหน</span><span class="en" lang="en">Your camera's picture is processed in this browser only. Nothing is sent or saved anywhere.</span></p>
     </div>
-    <div class="cta home-next">
-      <a class="btn primary" href="/learn"><span class="th" lang="th">เริ่มเรียน →</span><span class="en" lang="en">Start learning →</span></a>
-    </div>
   </section>
 
   <section aria-labelledby="pipe-title">
@@ -81,7 +78,7 @@
     </div>
     <figure class="flow-fig pipe-figure">
       <div class="pipe-scroll">
-        <svg class="diagram flow" viewBox="0 0 1000 200">
+        <svg class="diagram flow" viewBox="0 0 1000 250">
           <a href="/learn#numbers">
             <rect class="stroke" x="58" y="30" width="64" height="46"/>
             <rect class="stroke" x="66" y="22" width="20" height="8"/>
@@ -89,12 +86,12 @@
             <path class="stroke" d="M16 40 L50 48"/>
             <path class="stroke" d="M12 53 L50 53"/>
             <path class="stroke" d="M16 66 L50 58"/>
-            <text class="big en" lang="en" x="90" y="132" text-anchor="middle">Light enters</text>
-            <text class="big thai th" lang="th" x="90" y="132" text-anchor="middle">แสงเข้ากล้อง</text>
-            <text class="en" lang="en" x="90" y="156" text-anchor="middle">a picture arrives</text>
-            <text class="thai th" lang="th" x="90" y="156" text-anchor="middle">ภาพมาถึงเครื่อง</text>
-            <text class="en" lang="en" x="90" y="182" text-anchor="middle">Chapter 01</text>
-            <text class="thai th" lang="th" x="90" y="182" text-anchor="middle">บทที่ 01</text>
+            <text class="big en" lang="en" x="90" y="128" text-anchor="middle"><tspan x="90" dy="0">Light enters</tspan></text>
+            <text class="big thai th" lang="th" x="90" y="128" text-anchor="middle"><tspan x="90" dy="0">แสงเข้ากล้อง</tspan></text>
+            <text class="en" lang="en" x="90" y="180" text-anchor="middle">a picture arrives</text>
+            <text class="thai th" lang="th" x="90" y="180" text-anchor="middle">ภาพมาถึงเครื่อง</text>
+            <text class="en" lang="en" x="90" y="234" text-anchor="middle">Chapter 01</text>
+            <text class="thai th" lang="th" x="90" y="234" text-anchor="middle">บทที่ 01</text>
           </a>
           <a href="/learn#colour">
             <rect class="stroke" x="253" y="16" width="84" height="84"/>
@@ -111,34 +108,34 @@
             <text x="278" y="31">9</text>
             <text x="299" y="31">80</text>
             <text x="320" y="31">44</text>
-            <text class="big en" lang="en" x="295" y="132" text-anchor="middle">Pixels are numbers</text>
-            <text class="big thai th" lang="th" x="295" y="132" text-anchor="middle">พิกเซลคือตัวเลข</text>
-            <text class="en" lang="en" x="295" y="156" text-anchor="middle">every dot carries a value</text>
-            <text class="thai th" lang="th" x="295" y="156" text-anchor="middle">ทุกจุดมีตัวเลขของมัน</text>
-            <text class="en" lang="en" x="295" y="182" text-anchor="middle">Chapter 02</text>
-            <text class="thai th" lang="th" x="295" y="182" text-anchor="middle">บทที่ 02</text>
+            <text class="big en" lang="en" x="295" y="128" text-anchor="middle"><tspan x="295" dy="0">Pixels are</tspan><tspan x="295" dy="24">numbers</tspan></text>
+            <text class="big thai th" lang="th" x="295" y="128" text-anchor="middle"><tspan x="295" dy="0">พิกเซลคือ</tspan><tspan x="295" dy="24">ตัวเลข</tspan></text>
+            <text class="en" lang="en" x="295" y="180" text-anchor="middle"><tspan x="295" dy="0">every dot</tspan><tspan x="295" dy="20">carries a value</tspan></text>
+            <text class="thai th" lang="th" x="295" y="180" text-anchor="middle">ทุกจุดมีตัวเลขของมัน</text>
+            <text class="en" lang="en" x="295" y="234" text-anchor="middle">Chapter 02</text>
+            <text class="thai th" lang="th" x="295" y="234" text-anchor="middle">บทที่ 02</text>
           </a>
           <a href="/learn#convolution">
             <path class="stroke" d="M432 96 L474 40 L516 96 Z"/>
             <rect class="stroke-jasper" x="459" y="53" width="30" height="30" stroke-dasharray="4 3"/>
             <path class="stroke-jasper" d="M540 96 L566 60 L592 96"/>
-            <text class="big en" lang="en" x="500" y="132" text-anchor="middle">A window finds edges</text>
-            <text class="big thai th" lang="th" x="500" y="132" text-anchor="middle">หน้าต่างเลื่อนหาขอบ</text>
-            <text class="en" lang="en" x="500" y="156" text-anchor="middle">outlines replace colour</text>
-            <text class="thai th" lang="th" x="500" y="156" text-anchor="middle">ขอบแทนสี</text>
-            <text class="en" lang="en" x="500" y="182" text-anchor="middle">Chapters 04–05</text>
-            <text class="thai th" lang="th" x="500" y="182" text-anchor="middle">บทที่ 04–05</text>
+            <text class="big en" lang="en" x="500" y="128" text-anchor="middle"><tspan x="500" dy="0">A window</tspan><tspan x="500" dy="24">finds edges</tspan></text>
+            <text class="big thai th" lang="th" x="500" y="128" text-anchor="middle"><tspan x="500" dy="0">หน้าต่างเลื่อน</tspan><tspan x="500" dy="24">หาขอบ</tspan></text>
+            <text class="en" lang="en" x="500" y="180" text-anchor="middle"><tspan x="500" dy="0">outlines replace</tspan><tspan x="500" dy="20">colour</tspan></text>
+            <text class="thai th" lang="th" x="500" y="180" text-anchor="middle">ขอบแทนสี</text>
+            <text class="en" lang="en" x="500" y="234" text-anchor="middle">Chapters 04–05</text>
+            <text class="thai th" lang="th" x="500" y="234" text-anchor="middle">บทที่ 04–05</text>
           </a>
           <a href="/learn#motion">
             <rect class="stroke" x="645" y="20" width="64" height="46"/>
             <rect class="stroke" x="665" y="42" width="64" height="46"/>
             <rect class="fill-jasper" x="701" y="58" width="26" height="28"/>
-            <text class="big en" lang="en" x="705" y="132" text-anchor="middle">Catches what moves</text>
-            <text class="big thai th" lang="th" x="705" y="132" text-anchor="middle">จับอะไรขยับ</text>
-            <text class="en" lang="en" x="705" y="156" text-anchor="middle">two frames, one difference</text>
-            <text class="thai th" lang="th" x="705" y="156" text-anchor="middle">สองภาพ เทียบความต่าง</text>
-            <text class="en" lang="en" x="705" y="182" text-anchor="middle">Chapter 06</text>
-            <text class="thai th" lang="th" x="705" y="182" text-anchor="middle">บทที่ 06</text>
+            <text class="big en" lang="en" x="705" y="128" text-anchor="middle"><tspan x="705" dy="0">Catches what</tspan><tspan x="705" dy="24">moves</tspan></text>
+            <text class="big thai th" lang="th" x="705" y="128" text-anchor="middle"><tspan x="705" dy="0">จับอะไรขยับ</tspan></text>
+            <text class="en" lang="en" x="705" y="180" text-anchor="middle"><tspan x="705" dy="0">two frames,</tspan><tspan x="705" dy="20">one difference</tspan></text>
+            <text class="thai th" lang="th" x="705" y="180" text-anchor="middle">สองภาพ เทียบความต่าง</text>
+            <text class="en" lang="en" x="705" y="234" text-anchor="middle">Chapter 06</text>
+            <text class="thai th" lang="th" x="705" y="234" text-anchor="middle">บทที่ 06</text>
           </a>
           <a href="/learn#detector">
             <rect class="stroke-jasper" x="852" y="26" width="116" height="66"/>
@@ -149,12 +146,12 @@
             <path class="stroke" d="M884 56 L894 42 L926 42 L936 56"/>
             <circle class="stroke" cx="888" cy="82" r="8"/>
             <circle class="stroke" cx="932" cy="82" r="8"/>
-            <text class="big en" lang="en" x="910" y="132" text-anchor="middle">A guess + confidence</text>
-            <text class="big thai th" lang="th" x="910" y="132" text-anchor="middle">คำเดา พร้อมความมั่นใจ</text>
-            <text class="en" lang="en" x="910" y="156" text-anchor="middle">never a certainty</text>
-            <text class="thai th" lang="th" x="910" y="156" text-anchor="middle">ไม่ใช่ความแน่นอน</text>
-            <text class="en" lang="en" x="910" y="182" text-anchor="middle">Chapter 07</text>
-            <text class="thai th" lang="th" x="910" y="182" text-anchor="middle">บทที่ 07</text>
+            <text class="big en" lang="en" x="910" y="128" text-anchor="middle"><tspan x="910" dy="0">A guess +</tspan><tspan x="910" dy="24">confidence</tspan></text>
+            <text class="big thai th" lang="th" x="910" y="128" text-anchor="middle"><tspan x="910" dy="0">คำเดา พร้อม</tspan><tspan x="910" dy="24">ความมั่นใจ</tspan></text>
+            <text class="en" lang="en" x="910" y="180" text-anchor="middle">never a certainty</text>
+            <text class="thai th" lang="th" x="910" y="180" text-anchor="middle">ไม่ใช่ความแน่นอน</text>
+            <text class="en" lang="en" x="910" y="234" text-anchor="middle">Chapter 07</text>
+            <text class="thai th" lang="th" x="910" y="234" text-anchor="middle">บทที่ 07</text>
           </a>
           <path class="stroke" d="M184 58 H201"/>
           <path class="stroke" d="M195 52 L202 58 L195 64"/>
@@ -179,16 +176,14 @@
 
   <section class="story-teaser" aria-labelledby="story-title">
     <div class="page-head">
-      <div>
-        <span class="eyebrow label"><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Why this exists</span></span>
-        <h2 id="story-title"><span class="th" lang="th">กล้องเต็มเมือง แต่ไม่มีใครดูอยู่</span><span class="en" lang="en">Cameras everywhere. Eyes nowhere.</span></h2>
-
-      </div>
       <figure class="teaser-shot">
           <img src="/img/ioc/shenzhen.jpg" alt="A control room in Shenzhen: a wall of CCTV feeds above a row of empty chairs" width="1600" height="1200" loading="lazy">
           <figcaption class="micro"><span class="th" lang="th">เซินเจิ้น · จอเต็มผนัง เก้าอี้ว่างทั้งแถว</span><span class="en" lang="en">Shenzhen · full wall, empty chairs</span></figcaption>
         </figure>
       <div>
+        <span class="eyebrow label"><span class="th" lang="th">ที่มา</span><span class="en" lang="en">Why this exists</span></span>
+        <h2 id="story-title"><span class="th" lang="th">กล้องเต็มเมือง แต่ไม่มีใครดูอยู่</span><span class="en" lang="en">Cameras everywhere. Eyes nowhere.</span></h2>
+
         <p class="lede th" lang="th">ในห้องควบคุมของเมืองหลายแห่ง ดร.นน อัครประเสริฐกุล เห็นผนังจอนับร้อยกับเจ้าหน้าที่ที่สัปหงก เล่นมือถือ หรือลุกไปพัก แล้วถามว่า เราจะรู้ได้อย่างไรว่าคนไม่ได้พลาดอะไรไป คำถามนั้นพาเขาไปศึกษาคอมพิวเตอร์วิทัศน์ด้วยตัวเอง และสร้างห้องเรียนนี้ขึ้นมา</p>
         <p class="lede en" lang="en">In city control rooms, Dr Non Arkaraprasertkul saw walls of screens and operators dozing, texting, stepping away — and asked how anyone would know what the humans missed. That question led him to teach himself computer vision, and to build this classroom.</p>
         <p class="cta"><a class="btn big" href="/story"><span class="th" lang="th">อ่านเรื่องเล่า →</span><span class="en" lang="en">Read the story →</span></a></p>
@@ -207,7 +202,7 @@
       <li><a href="/cameras"><span class="num">02</span><span class="title"><span class="th" lang="th">กล้องทุกตัว</span><span class="en" lang="en">Every camera</span></span><span class="desc"><span class="th" lang="th">แผนที่กล้องทั้งหมด เลือกกล้องไหนก็ได้ให้เครื่องวิเคราะห์ หรือนับรถทั้งประเทศพร้อมกัน</span><span class="en" lang="en">A map of them all. Point the machine at any one, or run a census across the country.</span></span></a></li>
       <li><a href="/train"><span class="num">03</span><span class="title"><span class="th" lang="th">ฝึกเครื่องด้วยตัวเอง</span><span class="en" lang="en">Train a machine yourself</span></span><span class="desc"><span class="th" lang="th">เลือกกิจกรรม ให้ตัวอย่าง แล้วลองภาพใหม่ ไม่มีกล้องก็เริ่มด้วยภาพวาดได้</span><span class="en" lang="en">Choose an activity, teach with examples, then try new pictures. Start with drawings if you have no camera.</span></span></a></li>
       <li><a href="/gesture"><span class="num">04</span><span class="title"><span class="th" lang="th">เล่นด้วยนิ้ว</span><span class="en" lang="en">Play with your fingers</span></span><span class="desc"><span class="th" lang="th">ชูนิ้วเพื่อฉลอง เล่นโน้ตเพลง หรือเปลี่ยนภาพเป็นขาวดำ พร้อมเล่น ไม่ต้องสอน</span><span class="en" lang="en">Show fingers to celebrate, play musical notes, or fade your picture to black and white. Ready-trained; no examples needed.</span></span></a></li>
-      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร เลือกสองช่องทาง สี่ช่องทาง หรือเมืองที่มีรถถึง 24 คัน และดูเหตุผลที่แต่ละคันเบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Choose two lanes, four lanes or a crowded city with up to 24 cars — and hear why each car brakes.</span></span></a></li>
+      <li><a href="/drive"><span class="num">05</span><span class="title"><span class="th" lang="th">ขับเอง: รถที่บอกว่าเห็นอะไร</span><span class="en" lang="en">Drive: cars that say what they see</span></span><span class="desc"><span class="th" lang="th">สนามทดสอบมีวงเวียน ไฟจราจร ทางม้าลาย คน และสุนัขจร เลือกสองช่องทาง สี่ช่องทาง หรือเมืองที่มีรถถึง 32 คัน และดูเหตุผลที่แต่ละคันเบรก</span><span class="en" lang="en">A test track with a roundabout, a light, zebras, people and stray dogs. Choose two lanes, four lanes or a crowded city with up to 32 cars — and hear why each car brakes.</span></span></a></li>
       <li><a href="/focus"><span class="num">EX</span><span class="title"><span class="th" lang="th">ใบหน้าและสมาธิ: ทดลองกับตัวเอง</span><span class="en" lang="en">Face &amp; focus: try it on yourself</span></span><span class="desc"><span class="th" lang="th">ยินยอมเปิดกล้อง ตั้งท่าปกติ แล้วดูช่วงที่หันออกหรือไม่เห็นใบหน้า ภาพอยู่ในอุปกรณ์ อารมณ์ให้คุณบอกเอง</span><span class="en" lang="en">Opt in, set your usual position, and review look-away and face-absent periods. Pictures stay on your device; mood notes come from you.</span></span></a></li>
       <li><a href="/games"><span class="num">06</span><span class="title"><span class="th" lang="th">เกม: คนกับเครื่อง</span><span class="en" lang="en">Games: you vs the machine</span></span><span class="desc"><span class="th" lang="th">นับรถแข่งกับเครื่อง ทายภาพจากพิกเซลน้อยที่สุด และหาทางหลอกตาเครื่อง</span><span class="en" lang="en">Out-count it, out-guess it from the fewest pixels, and find ways to fool it.</span></span></a></li>
       <li><a href="/everyday"><span class="num">07</span><span class="title"><span class="th" lang="th">ในชีวิตประจำวัน</span><span class="en" lang="en">In everyday life</span></span><span class="desc"><span class="th" lang="th">ปลดล็อกมือถือ สแกน QR ตรวจเอกซเรย์ รถช่วยเลี้ยว ทำงานอย่างไร และอะไรผิดพลาดได้</span><span class="en" lang="en">Phone unlock, QR codes, X-rays, lane keeping — how each works and what can go wrong.</span></span></a></li>

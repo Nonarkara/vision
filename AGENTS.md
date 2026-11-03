@@ -21,6 +21,10 @@ The law is in [MSH.md](MSH.md) and it is not optional:
 
 The completion report for visual work states: **Found** (element, viewport, task cost) · **Changed** (the invented spatial demand removed) · **Verified** (screenshots, measured before/after, exercised interactions, independent review) · **Remaining** (unresolved SH or unverified states — never claim a clean pass while any remain).
 
+## Glance path and grid (owner studies, 2026-11-03)
+
+Apply the owner's [glance/grid audit brief](docs/reference/glance-and-grid.md) alongside MSH. Identify the visually heaviest entry, then put its explanation and primary action on its natural exit: beside it on wide screens, after it on phones. Keep related copy together. Name the grid before coding; product instruments default to quiet columns. Preserve source/focus order, the house palette and reduced-motion behavior. Record real multilingual viewport evidence and independent review; a dramatic grid or giant title is never required just because a poster used one.
+
 ## Reading the linter's hits
 
 `slop-lint` scores heuristics, not the house. Four hits fire here for reasons that have nothing to do with the design, and one of them fires on nine of the fifteen rooms. Read a hit against this baseline, not by its name:
