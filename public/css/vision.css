@@ -1098,3 +1098,7 @@ label.btn:focus-within { outline: 3px solid currentColor; outline-offset: -3px; 
 
 /* Diagram labels occupy their own 205-unit column, never their neighbour's. */
 .pipe-figure .flow text:not(.big) { font-size: 15px; }
+
+/* Explanations remain a reading column inside a wider instrument. */
+.home-opening .lens-say,
+.home-opening + section .terms { max-width: 65ch; }
