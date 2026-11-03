@@ -1,0 +1,155 @@
+[
+  {
+    "lang": "en",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 390
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 358
+      }
+    ],
+    "width": 390
+  },
+  {
+    "lang": "en",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 546
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1024
+  },
+  {
+    "lang": "en",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 546
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1440
+  },
+  {
+    "lang": "th",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "455px",
+        "width": 390
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 358
+      }
+    ],
+    "width": 390
+  },
+  {
+    "lang": "th",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "455px",
+        "width": 455
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1024
+  },
+  {
+    "lang": "th",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "455px",
+        "width": 455
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1440
+  },
+  {
+    "lang": "zh",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 390
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 358
+      }
+    ],
+    "width": 390
+  },
+  {
+    "lang": "zh",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 546
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1024
+  },
+  {
+    "lang": "zh",
+    "overflow": 0,
+    "prose": [
+      {
+        "class": "readout lens-say",
+        "max": "546px",
+        "width": 546
+      },
+      {
+        "class": "micro terms",
+        "max": "546px",
+        "width": 546
+      }
+    ],
+    "width": 1440
+  }
+]

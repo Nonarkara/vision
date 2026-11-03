@@ -1,0 +1,554 @@
+[
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 219.375,
+        "name": "bench-view stage-view",
+        "width": 390,
+        "y": 116.796875
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 358,
+        "y": 555.5859375
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 390,
+        "y": 623.5859375
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 388.796875,
+        "name": "bench-view stage-view",
+        "width": 691.1953125,
+        "y": 121.7734375
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 267.2734375,
+        "y": 465.953125
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 454.3515625,
+        "y": 533.953125
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 546.75,
+        "name": "bench-view stage-view",
+        "width": 972,
+        "y": 98.3984375
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 375.8359375,
+        "y": 401.984375
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 454.3515625,
+        "y": 645.1484375
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/",
+    "width": 1440
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 219.375,
+        "name": "bench-view stage-view",
+        "width": 390,
+        "y": 121
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 358,
+        "y": 592.6640625
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 390,
+        "y": 660.6640625
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 388.796875,
+        "name": "bench-view stage-view",
+        "width": 691.1953125,
+        "y": 100.5
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 267.2734375,
+        "y": 383.3046875
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 323.8125,
+        "y": 489.296875
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 546.75,
+        "name": "bench-view stage-view",
+        "width": 972,
+        "y": 100.5
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 375.8359375,
+        "y": 427.359375
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 323.8125,
+        "y": 647.25
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/",
+    "width": 1440
+  },
+  {
+    "chrome": [
+      {
+        "height": 43.796875,
+        "name": "lang-note"
+      },
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 219.375,
+        "name": "bench-view stage-view",
+        "width": 390,
+        "y": 161.09375
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 358,
+        "y": 625.4765625
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 390,
+        "y": 693.4765625
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 43.796875,
+        "name": "lang-note"
+      },
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 388.796875,
+        "name": "bench-view stage-view",
+        "width": 691.1953125,
+        "y": 165.5703125
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 267.2734375,
+        "y": 509.75
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 454.3515625,
+        "y": 577.75
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 43.796875,
+        "name": "lang-note"
+      },
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 546.75,
+        "name": "bench-view stage-view",
+        "width": 972,
+        "y": 142.1953125
+      },
+      {
+        "height": 44,
+        "name": "cta home-next",
+        "width": 375.8359375,
+        "y": 445.78125
+      },
+      {
+        "height": 44,
+        "name": "controls lens-steps",
+        "width": 454.3515625,
+        "y": 688.9453125
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/",
+    "width": 1440
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 594.0859375,
+        "name": "recon-opening",
+        "width": 390,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 358,
+        "y": 578.0859375
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 376.75,
+        "name": "recon-opening",
+        "width": 1024,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 437.2265625,
+        "y": 335.34375
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 448.65625,
+        "name": "recon-opening",
+        "width": 1440,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 614.8515625,
+        "y": 385.7109375
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1440
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 558.375,
+        "name": "recon-opening",
+        "width": 390,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 358,
+        "y": 542.375
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 355.96875,
+        "name": "recon-opening",
+        "width": 1024,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 437.2265625,
+        "y": 318.2265625
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 453.46875,
+        "name": "recon-opening",
+        "width": 1440,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 614.8515625,
+        "y": 382.0078125
+      }
+    ],
+    "lang": "th",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1440
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 844,
+    "items": [
+      {
+        "height": 525.90625,
+        "name": "recon-opening",
+        "width": 390,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 358,
+        "y": 509.90625
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 390
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 354.359375,
+        "name": "recon-opening",
+        "width": 1024,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 437.2265625,
+        "y": 314.4765625
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1024
+  },
+  {
+    "chrome": [
+      {
+        "height": 44,
+        "name": "rail"
+      }
+    ],
+    "height": 900,
+    "items": [
+      {
+        "height": 451.859375,
+        "name": "recon-opening",
+        "width": 1440,
+        "y": 44
+      },
+      {
+        "height": 44,
+        "name": "controls recon-actions",
+        "width": 614.8515625,
+        "y": 377.9453125
+      }
+    ],
+    "lang": "zh",
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1440
+  }
+]

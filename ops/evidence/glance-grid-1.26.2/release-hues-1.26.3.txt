@@ -1,0 +1,26 @@
+/             desktop  carried 3 [ivory indigo gray]  ivory 15.47%  indigo 1.08%  gray 2.19%  jasper 0.2%  black 53.92%  photo 0%  other 26.5%
+/             phone    carried 4 [ivory indigo gray jasper]  ivory 34.08%  indigo 1.47%  gray 2.98%  jasper 1%  black 40.81%  photo 0%  other 18.87%
+/reconstruct  desktop  carried 4 [ivory indigo gray jasper]  ivory 81.03%  indigo 2.22%  gray 7.52%  jasper 2.5%  black 4.49%  photo 0%  other 2.19%
+/reconstruct  phone    carried 3 [ivory indigo gray]  ivory 86.74%  indigo 4.13%  gray 0.52%  jasper 0.11%  black 4.55%  photo 0%  other 3.76%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/  (carries 3: ivory+indigo+gray)
+    1288980px  rgb(16, 16, 16)        1440x851 @y44  div.opening-stage.bench
+     629127px  rgb(182, 191, 193)     972x547 @y101  div.bench-view.stage-view
+     231813px  rgb(235, 211, 162)     468x451 @y44  div.opening-text
+     223868px  rgb(16, 16, 16)        324x44 @y647  div.controls.lens-steps
+     102383px  rgb(31, 31, 31)        138x44 @y699  button.btn
+      78262px  rgb(31, 31, 31)        105x44 @y699  button.btn
+
+/reconstruct  (carries 4: ivory+indigo+gray+jasper)
+     204639px  rgb(182, 191, 193)     253x130 @y680  li
+     204639px  rgb(182, 191, 193)     253x130 @y680  li
+     204639px  rgb(182, 191, 193)     253x130 @y680  li
+     204639px  rgb(235, 83, 36)       253x130 @y680  li
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      62096px  rgb(5, 18, 48)         146x44 @y382  a.btn
+
+ROOM SUMMARY (desktop)
+  /             3 hues  ivory+indigo+gray
+  /reconstruct  4 hues  ivory+indigo+gray+jasper

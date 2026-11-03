@@ -1,0 +1,29 @@
+[
+  {
+    "overflow": 0,
+    "styles": [
+      "/css/vision.css?v=1.26.3",
+      "/css/readability.css?v=1.26.3",
+      "/css/pages/reconstruct.css?v=1.26.3"
+    ],
+    "width": 390
+  },
+  {
+    "overflow": 0,
+    "styles": [
+      "/css/vision.css?v=1.26.3",
+      "/css/readability.css?v=1.26.3",
+      "/css/pages/reconstruct.css?v=1.26.3"
+    ],
+    "width": 1024
+  },
+  {
+    "overflow": 0,
+    "styles": [
+      "/css/vision.css?v=1.26.3",
+      "/css/readability.css?v=1.26.3",
+      "/css/pages/reconstruct.css?v=1.26.3"
+    ],
+    "width": 1440
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/",
+    "width": 390
+  },
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/",
+    "width": 1024
+  },
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/",
+    "width": 1440
+  },
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2",
+      "/css/pages/reconstruct.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 390
+  },
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2",
+      "/css/pages/reconstruct.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1024
+  },
+  {
+    "css": [
+      "/css/vision.css?v=1.26.2",
+      "/css/readability.css?v=1.26.2",
+      "/css/pages/reconstruct.css?v=1.26.2"
+    ],
+    "overflow": 0,
+    "path": "/reconstruct",
+    "width": 1440
+  }
+]

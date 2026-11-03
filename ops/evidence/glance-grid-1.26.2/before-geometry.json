@@ -1,0 +1,146 @@
+[
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 33,
+        "selector": "title",
+        "y": 105
+      },
+      {
+        "height": 219,
+        "selector": "bench-view stage-view",
+        "y": 328
+      },
+      {
+        "height": 64,
+        "selector": "cta home-next",
+        "y": 872
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/",
+    "width": 390
+  },
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 145,
+        "selector": "title",
+        "y": 137
+      },
+      {
+        "height": 389,
+        "selector": "bench-view stage-view",
+        "y": 98
+      },
+      {
+        "height": 64,
+        "selector": "cta home-next",
+        "y": 470
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/",
+    "width": 1024
+  },
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 123,
+        "selector": "title",
+        "y": 111
+      },
+      {
+        "height": 547,
+        "selector": "bench-view stage-view",
+        "y": 98
+      },
+      {
+        "height": 64,
+        "selector": "cta home-next",
+        "y": 406
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/",
+    "width": 1440
+  },
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 386,
+        "selector": "page-head",
+        "y": 44
+      },
+      {
+        "height": 1859,
+        "selector": "chapter",
+        "y": 526
+      },
+      {
+        "height": 339,
+        "selector": "flow-fig",
+        "y": 2018
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/reconstruct",
+    "width": 390
+  },
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 198,
+        "selector": "page-head",
+        "y": 44
+      },
+      {
+        "height": 1233,
+        "selector": "chapter",
+        "y": 276
+      },
+      {
+        "height": 288,
+        "selector": "flow-fig",
+        "y": 1185
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/reconstruct",
+    "width": 1024
+  },
+  {
+    "chrome": 44,
+    "items": [
+      {
+        "height": 206,
+        "selector": "page-head",
+        "y": 44
+      },
+      {
+        "height": 1376,
+        "selector": "chapter",
+        "y": 284
+      },
+      {
+        "height": 354,
+        "selector": "flow-fig",
+        "y": 1257
+      }
+    ],
+    "lang": "en",
+    "overflow": 0,
+    "page": "/reconstruct",
+    "width": 1440
+  }
+]

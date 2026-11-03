@@ -1060,3 +1060,47 @@ Published clean detached 0a8f3b4 after the final MSH measurement located a726 px
 Exact release-tree deploy gate green:433/433 tests,27 pages/100 local refs,96 modules/90 resolved imports,17 required palette pairings,fresh module URLs. Independent reviewer approved EN 1440/TH 1024/ZH 390 and checked all 9 capture dimensions. Final tuning geometry:desktop EN 318/570 px,TH 343/506 px,ZH 318/420 px (choices/flow); phone358 px each;0 horizontal overflow in 9 TH/EN/ZH×390/1024/1440 captures. Source first-screen task remains visible in all 9 candidate checks. Actual public1.26.1 Drive/Research reopened atall3 widths,stamp1.26.1,0overflow/no observed console errors; public Asok 32 cars and measured318/570 px controls verified. Native keyboard/focus, camera-cover, policy/reset, expanded explanations and optional lessons preserved.
 
 Release-tree hue census passed:Drive4 desktop/3 phone hues,Research3 each. Final external slop-lint was silent forover4 minutes, then completed with desktop/mobile35s navigation timeouts and no aggregate verdict:UNVERIFIED. No invented score or whole-site visual clearance. Manual renders and independent scoped review provide the spatial evidence. Local/public health agree1.26.1/ok:true; fresh upstream catalogue3,244 entries. Exact timestamps/memory are in the saved health JSON. No private capture, permission grant, training, upstream/tunnel restart or machine-wide monitoring. Own previews/worktree/scratch cleaned after verification; other agent's gesture preview/log preserved. Detail:ops/DRIVE-MSH-2026-11-03.md; evidence:ops/evidence/drive-1.26.0/ (includes final1.26.1 files).
+
+
+### Monitoring — 2026-11-03 06:02 Bangkok (no deployment)
+
+Local/public agree 1.26.1 / ok:true, 3,244 entries, origin flooddash. loaded06:01:20.463/upstream06:01:20.019 Bangkok (about one minute old); the first scheduled post-release refresh succeeded. Memory26–27MB; relay1 cached/0 inflight/0 waiting,1 checked/last-successful camera, no resting hosts. Source classification changed view397→313/off164→248 without loss of catalogue entries; no owner-camera probing performed.
+
+App PID67314 running, last exit0 (authorised1.26.1 deployment); tunnel PID985 running/never exited. Latest tunnel connections registered normally at05:58:25–26 Bangkok; public health succeeds. No new app warnings after the old05:16 refresh failure; subsequent refreshes succeeded. Preserved services and the other agent's active gesture preview/log. No restart, recovery, UI/code change, deployment, private capture/permission, training or machine-wide monitoring. No actionable change to notify.
+
+
+### Monitoring — 2026-11-03 12:18 Bangkok (no deployment)
+
+Local/public agree1.26.1 / ok:true,3,243 entries,origin flooddash. loaded12:01:13/upstream11:57:30 Bangkok (about17/20 minutes old), within the30-minute investigation threshold. Latest12:12 refresh timed out after successful11:41,11:51 and12:01 cycles; isolated failures recover in the recent record, with no sustained stale state demonstrated. One still listing fewer than the previous monitor, unchanged view/off counts; no camera probing warranted. Memory17–19MB; relay1 cached/0 inflight/0 waiting,2 checked/last-successful cameras,no resting hosts.
+
+App PID67314 running,last exit0; tunnel PID985 running/never exited. Public health reachable; latest tunnel warning is a client-cancelled frame request at12:16, not a sustained connection failure. Preserved healthy services, existing notes and the other agent’s active gesture preview/log. No restart,recovery,deployment,UI/code change,camera capture/permission,training or machine-wide monitoring; no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 13:14 Bangkok (no deployment)
+
+Local/public agree1.26.1 / ok:true,3,241 entries,origin flooddash. loaded13:11:13/upstream13:06:54 Bangkok (about3/7 minutes old). All six refreshes since the previous timeout succeeded; brief3,186 listing recovered next cycle. No new app warnings. Memory20–22MB; relay idle,2 checked/last-successful cameras,no resting hosts.
+
+App PID67314 running,last exit0; tunnel PID985 running/never exited. One tunnel connection retried at12:46:32 and registered again two seconds later; public health reachable. Preserved services, prior monitoring notes and the other agent’s active gesture preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring; no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 14:14 Bangkok (no deployment)
+
+Local/public agree1.26.1 / ok:true,3,243 entries,origin flooddash. loaded/upstream14:11:17 Bangkok (about3 minutes old). One14:02 refresh timeout recovered on the next scheduled cycle; no sustained stale catalogue. Memory19–23MB; relay idle,2 checked/last-successful cameras,no resting hosts. App PID67314 running,last exit0; tunnel PID985 running/never exited, recent connections registered at14:03:46 and public health succeeds. Preserved services, prior notes and other agent’s active gesture preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring; no actionable change to notify.
+
+
+### 1.26.2 — 2026-11-03 · Glance path and column composition
+
+Published clean detached6840b67 after applying the owner’s glance-path/kinetic-grid studies. Home camera precedes its joined heading/explanation/action on phone and sits beside that group on desktop; source/focus order follows the composition. Lens choices fit their labels on desktop. Story preview’s photo now leads one joined reading/action group; pipeline labels have deliberate lines instead of overlapping neighbouring tracks. Reconstruct leads with its repaired existing scientific diagram and direct TH/EN/ZH choices, retaining the full introduction in native disclosure. All theory/reel/credits/consent/limitations remain. Shared fullscreen fallback repair caught by independent review and exercised by phone expansion/Escape/focus. Home’s Drive description now correctly says32 vehicles. Project instructions retain the studies’ practical criteria without importing poster ornament.
+
+Exact clean release gate433/433 tests,27pages/100refs,96modules/90resolvedimports,17requiredpalettepairings; fresh module URL check passed. Version bump first exposed mixed site.js URLs; mandatory nested-import restamp fixed it before deploy. Local/public1.26.2 ok:true,3,243 entries,loaded14:47:23/upstream14:46:33 Bangkok,memory24–26MB. Public Home/Reconstruct stamp1.26.2,0overflow at390/1024/1440,no observed console error. Nine TH/EN/ZH candidate captures per page, zero document overflow; independent source/visual review approved. Home English phone camera328→117px,next action872→556px. Chrome44px; Home Chinese retains43.8px partial-translation notice.
+
+Release-tree tools against the exact candidate: Home REVIEW(score13/3points;0stretched controls),Reconstruct OK(score9/2points;0stretches). Colour census Home3desktop/4phone,Reconstruct4desktop/3phone. Home’s remaining genuine explanatory line-length hit is addressed in1.26.3; other heuristic hits assessed in the audit. Desktop native fullscreen and zoom remain unverified; no whole-site clearance. No private camera grant/capture/training,upstream/tunnel change or other-agent edits touched. App restarted only by gated deploy. Detail:ops/GLANCE-GRID-2026-11-03.md; evidence:ops/evidence/glance-grid-1.26.2/.
+
+
+### 1.26.3 — 2026-11-03 · Readable instrument explanations
+
+Published clean detachede7e2e85 to close the final genuine Home long-line finding: dynamic lens explanation972px and pipeline glossary818px now cap at65ch. English/Chinese desktop546px;Thai dynamic line455px. No type shrink,clipping,hidden content or behavior change. Nine TH/EN/ZH captures at390/1024/1440 show0overflow; independently approved scoped CSS. Other JS edits are mandatory1.26.3 import stamps.
+
+Exact clean release gate433/433 tests,27pages/100refs,96modules/90resolvedimports,17requiredpalettepairings,fresh URLs. Public Home/Reconstruct reopened atall3widths with1.26.3 stamps,0overflow/no observed console error; public reading measure verified. Final colour censusHome3desktop/4phone,Reconstruct4desktop/3phone. Final slop-lintHome aggregate UNVERIFIED after two35s navigation timeouts; prior1.26.2 score13/3points is not substituted. Reconstruct stillOK(score9/2points;void/default-font),0stretches. Manual screenshots and independent review remain the scoped evidence.
+
+Local/public1.26.3 ok:true,3,243 retained entries,loaded14:55:54/upstream14:46:33 Bangkok,memoryabout30MB; initial refresh failed and disk-cache fallback worked, source ageabout11minutes atfollow-up,below30-minute threshold. AppPID70097/last exit0 fromgateddeploy;tunnelunchanged. No private capture/permission/training or upstream recovery. Native desktop fullscreen and zoom remain unverified; older Chinese Home prose accurately falls back toEnglish. Detail:ops/GLANCE-GRID-2026-11-03.md;evidence:ops/evidence/glance-grid-1.26.2/ (bothversions).

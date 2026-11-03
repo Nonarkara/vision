@@ -1,0 +1,26 @@
+[
+  {
+    "max": "546px",
+    "overflow": 0,
+    "path": "/",
+    "readoutWidth": 390,
+    "style": "/css/vision.css?v=1.26.3",
+    "width": 390
+  },
+  {
+    "max": "546px",
+    "overflow": 0,
+    "path": "/",
+    "readoutWidth": 546,
+    "style": "/css/vision.css?v=1.26.3",
+    "width": 1024
+  },
+  {
+    "max": "546px",
+    "overflow": 0,
+    "path": "/",
+    "readoutWidth": 546,
+    "style": "/css/vision.css?v=1.26.3",
+    "width": 1440
+  }
+]
