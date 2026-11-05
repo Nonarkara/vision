@@ -1,4 +1,4 @@
-import { ASOK } from './asok.js?v=1.27.2'
+import { ASOK } from './asok.js?v=1.27.3'
 // The test track: two one-way loops in metres, seen from above.
 //
 //   Loop A (cars 1–3) — the outer loop, through the roundabout north → south.
