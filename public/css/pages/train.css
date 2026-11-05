@@ -334,3 +334,7 @@ body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width
 .lesson-actions .controls:has([data-label-frame]) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
 .lesson-actions [data-label-frame] { min-width:0; }
 .lesson-bench { top:auto; }
+@media(min-width:901px) {
+ .lesson-actions .controls:has([data-label-frame]) { display:flex; flex-wrap:wrap; }
+ .lesson-actions [data-label-frame] { flex:0 1 auto; }
+}

@@ -1,17 +1,17 @@
-import { queues } from '../drive/control.js?v=1.27.0'
+import { queues } from '../drive/control.js?v=1.27.1'
 // Drive: six cars on a test track, each telling you what it sees and why it
 // does what it does. The simulation is in /js/drive; this file only wires it
 // to the canvas, the buttons and the car cards.
 
-import '../core/site.js?v=1.27.0'
-import { lang, count, onLang } from '../core/i18n.js?v=1.27.0'
-import { mountGate } from './captcha.js?v=1.27.0'
-import { writeGate } from '../drive/captcha.js?v=1.27.0'
-import { createWorld, step, DT } from '../drive/sim.js?v=1.27.0'
-import { drawWindshield } from '../drive/perspective.js?v=1.27.0'
-import { sightRange } from '../drive/perceive.js?v=1.27.0'
-import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.27.0'
-import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.27.0'
+import '../core/site.js?v=1.27.1'
+import { lang, count, onLang } from '../core/i18n.js?v=1.27.1'
+import { mountGate } from './captcha.js?v=1.27.1'
+import { writeGate } from '../drive/captcha.js?v=1.27.1'
+import { createWorld, step, DT } from '../drive/sim.js?v=1.27.1'
+import { drawWindshield } from '../drive/perspective.js?v=1.27.1'
+import { sightRange } from '../drive/perceive.js?v=1.27.1'
+import { palette, fit, drawTrack, drawWorld } from '../drive/draw.js?v=1.27.1'
+import { sayDecision, saySeen, sayUnnamed, speedKmh, STYLE_NAME } from '../drive/say.js?v=1.27.1'
 
 const root = document.querySelector('[data-drive]')
 const canvas = root.querySelector('[data-track]')
