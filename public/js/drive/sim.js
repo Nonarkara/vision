@@ -1,16 +1,16 @@
-import { tickSignals } from './control.js?v=1.27.1'
+import { tickSignals } from './control.js?v=1.27.2'
 // The world: six cars, people at the zebras, stray dogs, one traffic light.
 // Pure state and arithmetic — no drawing, no DOM — so the same world runs in
 // the page and in the tests, and a seed makes every run repeatable.
 
-import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.27.1'
-import { perceive } from './perceive.js?v=1.27.1'
-import { decide } from './decide.js?v=1.27.1'
-import { buildStreet, stepStreet, detectable } from './street.js?v=1.27.1'
-import { rng } from './rand.js?v=1.27.1'
+import { buildTrack, at, ZEBRAS, LANE } from './track.js?v=1.27.2'
+import { perceive } from './perceive.js?v=1.27.2'
+import { decide } from './decide.js?v=1.27.2'
+import { buildStreet, stepStreet, detectable } from './street.js?v=1.27.2'
+import { rng } from './rand.js?v=1.27.2'
 
 // Re-exported so anything that used to reach for sim.js still finds it.
-export { rng } from './rand.js?v=1.27.1'
+export { rng } from './rand.js?v=1.27.2'
 
 export const DT = 1 / 30            // physics step, seconds
 const LOOK_EVERY = 3                // perceive and decide at 10 Hz, like a real stack

@@ -1,4 +1,4 @@
-import { t, onLang } from '../core/i18n.js?v=1.27.1'
+import { t, onLang } from '../core/i18n.js?v=1.27.2'
 // One real PDF page in memory, fetched/rendered only when the paper is opened.
 let started = false, refresh = () => {}
 export async function openPaperReader() {
@@ -14,7 +14,7 @@ export async function openPaperReader() {
     $('[data-pdf-out]').disabled = !doc || zoom <= .75
     $('[data-pdf-in]').disabled = !doc || zoom >= 2
     $('[data-pdf-fit]').disabled = !doc
-    $('[data-pdf-page]').textContent = doc ? `${page} / ${doc.numPages}` : '1 / 5'
+    $('[data-pdf-page]').textContent = doc ? `${page}/${doc.numPages}` : '1/5'
   }
   async function paint() {
     if (!doc || stopped || root.closest('[hidden]')) return
@@ -73,9 +73,9 @@ export async function openPaperReader() {
   window.addEventListener('pageshow', event => { if (event.persisted) paint() })
   status.textContent = t('กำลังเปิด PDF… อ่านภาพหน้าแรกระหว่างรอได้', 'Opening PDF… The first-page preview is available while it loads.', '正在打开 PDF…加载时可先看第一页预览。')
   try {
-    const pdf = await import('/vendor/pdfjs-6.5.438/pdf.min.mjs?v=1.27.1')
+    const pdf = await import('/vendor/pdfjs-6.5.438/pdf.min.mjs?v=1.27.2')
     if (stopped) return
-    pdf.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs-6.5.438/pdf.worker.min.mjs?v=1.27.1'
+    pdf.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs-6.5.438/pdf.worker.min.mjs?v=1.27.2'
     // Glyph paths preserve the site's closed font/eval policy. No remote assets,
     // document JavaScript, PDF actions, annotation scripts or file upload.
     loading = pdf.getDocument({url:root.dataset.pdfUrl, isEvalSupported:false, disableFontFace:true, useSystemFonts:false, useWasm:false})

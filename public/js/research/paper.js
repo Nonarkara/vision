@@ -1,4 +1,4 @@
-import { openPaperReader } from './pdf-reader.js?v=1.27.1'
+import { openPaperReader } from './pdf-reader.js?v=1.27.2'
 // Two task views in the existing room; ordinary hash links retain deep links.
 const tabs = [...document.querySelectorAll('[data-research-tab]')]
 const panels = [...document.querySelectorAll('[data-research-panel]')]
