@@ -54,9 +54,9 @@ export function mountVideoLesson(specimen) {
       paint()
     })
   })
-  function status(th, en) {
-    statusText = [th, en]
-    $('[data-lesson-status]').textContent = t(th, en)
+  function status(...copy) {
+    statusText = copy
+    $('[data-lesson-status]').textContent = t(...copy)
   }
   function comparisonStatus(th, en) {
     comparisonText = [th, en]

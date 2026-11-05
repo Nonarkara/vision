@@ -26,6 +26,7 @@ const TYPES = {
   '.xml': 'application/xml; charset=utf-8',
   '.mp4': 'video/mp4',
   '.vtt': 'text/vtt; charset=utf-8',
+  '.pdf': 'application/pdf',
 }
 
 /** Folders under public/ that hold originals for us to process, not for visitors. */
