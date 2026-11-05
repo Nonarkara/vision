@@ -1,0 +1,202 @@
+{
+  "schema": 1,
+  "analysisDate": "2026-11-06",
+  "period": "2026-10-20 to 2026-11-03",
+  "studyStatus": "Artifact analysis completed; participant study proposed, not conducted.",
+  "selection": "Eight purposively selected, retained UX audit records. One author-assigned primary theme per document; not an exhaustive feedback corpus or independent qualitative coding.",
+  "participantLearningDataset": null,
+  "participantOutcomes": null,
+  "records": [
+    {
+      "id": "R1",
+      "date": "2026-10-20",
+      "source": "ops/READABILITY-2026-10-20.md",
+      "primaryTheme": "Accessibility",
+      "problem": "Inert language controls",
+      "response": "Shared navigation boot and readable multilingual text",
+      "anchor": "Shared navigation boot added to the head.",
+      "sha256": "ab3d297c9fd7aaa765196eac08f8361b150daaf7bc841d73e1b847c219f340a6"
+    },
+    {
+      "id": "R2",
+      "date": "2026-10-20",
+      "source": "ops/RESEARCH-OPENING-2026-10-20.md",
+      "primaryTheme": "Spatial composition",
+      "problem": "Catalogue counts competed with the visual lesson",
+      "response": "Lesson first; catalogue details on demand",
+      "anchor": "camera\ncatalogue counts and scattered links competed with the visual lesson.",
+      "sha256": "60fe54fae4ab1ae56c34cc7b9384287a38cef6dfde65423b97059e3298cc15c8"
+    },
+    {
+      "id": "R3",
+      "date": "2026-10-23",
+      "source": "ops/CHROME-2026-10-23.md",
+      "primaryTheme": "Spatial composition",
+      "problem": "Repeated navigation and instructions delayed the teaching action",
+      "response": "One 44px rail and action beside picture",
+      "anchor": "That action started at y=1233 on the phone",
+      "sha256": "949515062d41c317319011ad9ee50ab653702d9e88f86387f801e5d8929cc8b0"
+    },
+    {
+      "id": "R4",
+      "date": "2026-10-29",
+      "source": "ops/GESTURE-2026-10-29.md",
+      "primaryTheme": "State and action",
+      "problem": "Idle source labelled Studying; action readiness unclear",
+      "response": "Instruction derived from source and example readiness",
+      "anchor": "The next-step instruction is derived from actual picture/example readiness.",
+      "sha256": "7e5cbf830eff2e71e01fd7f28c153810efb13c18846f6b1d66dfa771215492a8"
+    },
+    {
+      "id": "R5",
+      "date": "2026-10-30",
+      "source": "ops/PAGE-BLEED-2026-10-30.md",
+      "primaryTheme": "Spatial composition",
+      "problem": "Picture separated from source/actions by bands",
+      "response": "Regroup instruments and remove empty gallery demand",
+      "anchor": "two empty thumbnail strips each reserved52px",
+      "sha256": "6a377e3243aab02916188d3440cca6b98457227cde5e3ab40e5fed0c2ccd8fdc"
+    },
+    {
+      "id": "R6",
+      "date": "2026-11-03",
+      "source": "ops/STICKER-LESSON-2026-11-03.md",
+      "primaryTheme": "Concept explanation",
+      "problem": "Need a concrete explanation of three learning methods",
+      "response": "Actual sticker-teaching film with method comparison",
+      "anchor": "194.733s",
+      "sha256": "405e18a260b3c63d1522d2d48f3f91ef2ffc892ff8d3fdbb93e2a87fbb5cff9a"
+    },
+    {
+      "id": "R7",
+      "date": "2026-11-03",
+      "source": "ops/DRIVE-MSH-2026-11-03.md",
+      "primaryTheme": "Spatial composition",
+      "problem": "Road hidden behind an unrelated teaching exercise",
+      "response": "Road first; optional exercise retained",
+      "anchor": "first-screen gate occupied792 px",
+      "sha256": "5c9d0953a05e38d43ed64023034f1fdfb9e9253a7ba8ec02780f28617e14b5fe"
+    },
+    {
+      "id": "R8",
+      "date": "2026-11-03",
+      "source": "ops/GLANCE-GRID-2026-11-03.md",
+      "primaryTheme": "Spatial composition",
+      "problem": "Picture, explanation and next action separated",
+      "response": "Picture leads to adjacent explanation and action",
+      "anchor": "next link872px down",
+      "sha256": "6c583679b02f25be68bd01a6660f075fe489c7993a49020009f689ebb86d467c"
+    }
+  ],
+  "themeCounts": {
+    "Accessibility": 1,
+    "Spatial composition": 5,
+    "State and action": 1,
+    "Concept explanation": 1
+  },
+  "geometry": [
+    {
+      "source": "R3",
+      "item": "Teach: closed top chrome",
+      "width": 390,
+      "height": 844,
+      "before": 145,
+      "after": 44,
+      "recoveredPx": 101,
+      "reductionPct": 69.7
+    },
+    {
+      "source": "R3",
+      "item": "Teach: first teaching action y",
+      "width": 390,
+      "height": 844,
+      "before": 1233,
+      "after": 672,
+      "recoveredPx": 561,
+      "reductionPct": 45.5
+    },
+    {
+      "source": "R8",
+      "item": "Home: picture y",
+      "width": 390,
+      "height": 844,
+      "before": 328,
+      "after": 117,
+      "recoveredPx": 211,
+      "reductionPct": 64.3
+    },
+    {
+      "source": "R8",
+      "item": "Home: next lesson link y",
+      "width": 390,
+      "height": 844,
+      "before": 872,
+      "after": 556,
+      "recoveredPx": 316,
+      "reductionPct": 36.2
+    }
+  ],
+  "synthetic": {
+    "source": "docs/evaluation/ssdlite-synthetic-baseline.json",
+    "generatedAt": "2026-10-20T17:50:52.093Z",
+    "sha256": "fbe7463d68c254cd79a81bd7d27d28714bdff6bebf80f7e8f20017bc87792004",
+    "completed": 100,
+    "expected": 100,
+    "complete": true,
+    "threshold": 0.3,
+    "iou": 0.5,
+    "tp": 0,
+    "fp": 35,
+    "fn": 336,
+    "precision": 0,
+    "recall": 0,
+    "medianMs": 35.39999985694885,
+    "p95Ms": 57.299999952316284,
+    "classes": {
+      "1": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 80,
+        "precision": null,
+        "recall": 0
+      },
+      "3": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 80,
+        "precision": null,
+        "recall": 0
+      },
+      "4": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 80,
+        "precision": null,
+        "recall": 0
+      },
+      "6": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 96,
+        "precision": null,
+        "recall": 0
+      },
+      "10": {
+        "tp": 0,
+        "fp": 34,
+        "fn": 0,
+        "precision": 0,
+        "recall": null
+      },
+      "76": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0,
+        "precision": 0,
+        "recall": null
+      }
+    },
+    "limitation": "Stylised sequence variants share one renderer and projection. They test regression behaviour, not accuracy or camera transfer on real roads.",
+    "interpretation": "Regression fixture result only. Not real-camera accuracy, a current device benchmark, or evidence of human learning."
+  }
+}

@@ -207,3 +207,18 @@ test('JSON avoids compression for identity clients and compresses once for gzip'
   json({ method: 'GET', headers: { 'accept-encoding': 'gzip' } }, response(), 200, null, {}, encoded)
   assert.equal(compress.mock.callCount(), 1, 'memoised responses must not compress again')
 })
+
+test('the research preprint is a real downloadable PDF and HTML framing remains forbidden', async () => {
+  const { createStatic } = await import('../server/http.js')
+  const statics = createStatic({ root: PUBLIC, version: 'paper-test' })
+  let headers, body
+  const response = { writeHead(_status, h) { headers = h }, end(value) { body = value } }
+  assert.equal(statics.serve({ method:'GET', headers:{} }, response, '/papers/mother77.pdf'), true)
+  assert.equal(headers['Content-Type'], 'application/pdf')
+  assert.equal(body.subarray(0,5).toString(), '%PDF-')
+  assert.match(headers['Content-Security-Policy'], /frame-ancestors 'none'/)
+  assert.match(headers['Content-Security-Policy'], /object-src 'none'/)
+  statics.serve({ method:'HEAD', headers:{} }, response, '/papers/mother77.pdf')
+  assert.equal(body, undefined)
+  assert.ok(headers['Content-Length'] > 1000)
+})

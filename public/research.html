@@ -3,6 +3,7 @@
 <head>
 <!--#head-->
 <link rel="stylesheet" href="/css/pages/research.css?v={{v}}">
+<link rel="stylesheet" href="/css/pages/research-paper.css?v={{v}}">
 <link rel="stylesheet" href="/css/pages/research-opening.css?v={{v}}-opening">
 <title>Research · About — งานวิจัยและเรื่องของเว็บ — Vision</title>
 <meta name="description" content="Explore four visual landmarks in computer vision, try three ways machines learn, and follow the original research. Camera catalogue details are available on demand.">
@@ -10,6 +11,11 @@
 <body>
 <!--#nav-->
 <main id="main">
+<nav class="research-tabs" role="tablist" data-aria-th="เลือกเนื้อหางานวิจัย" data-aria-en="Research views" data-aria-zh="研究内容">
+<a id="explore-tab" href="#explore" role="tab" aria-controls="explore" aria-selected="true" data-research-tab="explore"><span class="th" lang="th">สำรวจและทดลอง</span><span class="en" lang="en">Explore &amp; try</span><span class="zh" lang="zh-Hans">探索与体验</span></a>
+<a id="paper-tab" href="#paper" role="tab" aria-controls="paper" aria-selected="false" data-research-tab="paper"><span class="th" lang="th">บทความวิจัย</span><span class="en" lang="en">Preprint paper</span><span class="zh" lang="zh-Hans">研究预印本</span></a>
+</nav>
+<div id="explore" role="tabpanel" aria-labelledby="explore-tab" data-research-panel="explore">
 
   <header class="research-opening">
     <div>
@@ -575,6 +581,38 @@
 
   </details>
 
+</div>
+<section class="paper-room" id="paper" role="tabpanel" aria-labelledby="paper-tab" data-research-panel="paper">
+<header class="paper-heading">
+<h1><span class="th" lang="th">สอนคอมพิวเตอร์วิทัศน์ให้คุณแม่วัย 77 ปีได้ไหม แล้วสอนอย่างไร?</span><span class="en" lang="en">Can we teach computer vision to my mother (77)? If so, how?</span><span class="zh" lang="zh-Hans">能教 77 岁的母亲理解计算机视觉吗？该怎么教？</span></h1>
+<p><span class="th" lang="th">กรณีศึกษาระบบอายุหนึ่งเดือนที่ปรับตามความคิดเห็นผู้ใช้ พร้อมแผนศึกษากับคุณแม่ ยังไม่มีผลการเรียนรู้ของผู้เข้าร่วม</span><span class="en" lang="en">A one-month case study shaped by user feedback, with a proposed study with the author's mother. Participant learning has not yet been measured.</span><span class="zh" lang="zh-Hans">一个月来由用户反馈推动的设计案例，以及拟与作者母亲开展的研究。目前尚未测量参与者的学习成效。</span></p>
+</header>
+<div class="paper-toolbar">
+<a class="btn primary" href="/papers/mother77.pdf?v={{v}}" download><span class="th" lang="th">↓ ดาวน์โหลด PDF</span><span class="en" lang="en">↓ Download PDF</span><span class="zh" lang="zh-Hans">↓ 下载 PDF</span></a>
+<a class="btn" href="/papers/mother77.pdf?v={{v}}" target="_blank" rel="noopener"><span class="th" lang="th">เปิด PDF ↗</span><span class="en" lang="en">Open PDF ↗</span><span class="zh" lang="zh-Hans">打开 PDF ↗</span></a>
+<a href="#paper-text"><span class="th" lang="th">อ่านข้อความแทน PDF</span><span class="en" lang="en">Read as text</span><span class="zh" lang="zh-Hans">阅读文字版</span></a>
+</div>
+<p class="paper-status"><span class="th" lang="th">ฉบับร่างก่อนตีพิมพ์ 1.0 · 6 พ.ย. 2026 · 5 หน้า สองคอลัมน์ ภาษาอังกฤษ · ยังไม่ผ่านผู้ทรงคุณวุฒิ</span><span class="en" lang="en">Preprint v1.0 · 6 Nov 2026 · 5 pages, two columns, English · Not peer reviewed</span><span class="zh" lang="zh-Hans">预印本 v1.0 · 2026 年 11 月 6 日 · 英文双栏，5 页 · 未经同行评审</span></p>
+<div class="bench paper-reader" data-pdf-reader data-fullscreen-mode="viewport" data-pdf-url="/papers/mother77.pdf?v={{v}}">
+<div class="paper-reader-tools controls">
+<div class="controls" role="group" data-aria-th="เลือกหน้า PDF" data-aria-en="PDF page" data-aria-zh="PDF 页码"><button class="btn" data-pdf-prev disabled data-aria-th="หน้าก่อน" data-aria-en="Previous page" data-aria-zh="上一页">←</button><span data-pdf-page>1 / 5</span><button class="btn" data-pdf-next disabled data-aria-th="หน้าถัดไป" data-aria-en="Next page" data-aria-zh="下一页">→</button></div>
+<div class="controls" role="group" data-aria-th="ขยายเอกสาร" data-aria-en="Document zoom" data-aria-zh="文档缩放"><button class="btn" data-pdf-out disabled data-aria-th="ย่อ" data-aria-en="Zoom out" data-aria-zh="缩小">−</button><button class="btn" data-pdf-fit disabled><span class="th" lang="th">พอดีจอ</span><span class="en" lang="en">Fit</span><span class="zh" lang="zh-Hans">适应宽度</span></button><button class="btn" data-pdf-in disabled data-aria-th="ขยาย" data-aria-en="Zoom in" data-aria-zh="放大">+</button></div>
+<button class="btn" type="button" data-fullscreen>⛶ <span class="th" lang="th">เต็มจอ</span><span class="en" lang="en">Full screen</span><span class="zh" lang="zh-Hans">全屏</span></button>
+</div>
+<p class="paper-reader-status" data-pdf-status role="status"></p>
+<div class="paper-page" tabindex="0" data-aria-th="เอกสาร PDF ใช้ปุ่มลูกศรเลื่อนเมื่อขยาย หรืออ่านข้อความด้านล่าง" data-aria-en="PDF document. Use arrow keys to scroll when zoomed, or read the text below." data-aria-zh="PDF 文档。放大后可用方向键滚动，或阅读下方文字版。">
+<img data-pdf-preview src="/papers/mother77-preview.webp?v={{v}}" width="850" height="1201" alt="First page of the preprint: title, abstract and introduction in two columns">
+<canvas data-pdf-canvas hidden role="img" data-aria-th="หน้าปัจจุบันของบทความ PDF มีข้อความฉบับเต็มด้านล่าง" data-aria-en="Current PDF page. Full accessible text is available below." data-aria-zh="当前 PDF 页面。完整无障碍文字版在下方。"></canvas>
+</div>
+</div>
+<details class="paper-reading" id="paper-text"><summary><span class="th" lang="th">บทความฉบับเต็ม · ข้อความภาษาอังกฤษ</span><span class="en" lang="en">Full manuscript · English text</span><span class="zh" lang="zh-Hans">完整论文 · 英文文字版</span></summary>
+<!--#mother77-->
+</details>
+<details class="paper-materials"><summary><span class="th" lang="th">ข้อมูล วิธีวิเคราะห์ และขอบเขตหลักฐาน</span><span class="en" lang="en">Data, analysis and evidence limits</span><span class="zh" lang="zh-Hans">数据、分析与证据范围</span></summary>
+<p><span class="th" lang="th">ใช้บันทึกการตรวจแบบที่เลือกไว้ 8 ฉบับ การเปรียบเทียบหน้าจอ 4 รายการ และผลทดสอบภาพสังเคราะห์หนึ่งชุด ไม่ใช่ข้อมูลการเรียนรู้หลายปี ไม่มีคะแนนของคุณแม่ที่สร้างขึ้นมาแทนข้อมูลจริง</span><span class="en" lang="en">Eight selected audit records, four historical layout comparisons and one retained synthetic-model export. These are not years of learner data. No results for the author's mother have been invented.</span><span class="zh" lang="zh-Hans">数据来自 8 份选定的设计审查记录、4 项历史布局比较及一份保留的合成图像模型结果，并非多年学习者数据。没有虚构母亲的学习成绩。</span></p>
+<div class="controls"><a class="btn" href="/papers/mother77-data.json" download>↓ <span class="th" lang="th">ข้อมูลและค่าที่คำนวณ</span><span class="en" lang="en">Data &amp; calculations</span><span class="zh" lang="zh-Hans">数据与计算</span></a><a class="btn" href="/papers/mother77.md" download>↓ <span class="th" lang="th">ต้นฉบับข้อความ</span><span class="en" lang="en">Manuscript text</span><span class="zh" lang="zh-Hans">论文文本</span></a></div>
+</details>
+</section>
 </main>
 <!--#foot-->
 <script type="module" src="/js/pages/research.js?v={{v}}"></script>

@@ -124,7 +124,7 @@ a.training-choice { text-decoration: none; }
 .page-head { padding-top:24px; padding-bottom:20px; gap:20px; }
 .page-head h1 { font-size:var(--title); max-width:18ch; }
 .page-head .lede { font-size:1rem; line-height:1.55; max-width:52ch; }
-.video-lesson { padding:0 var(--gutter) 24px; display:grid; gap:16px; }
+.video-lesson { padding:0 var(--gutter) 24px; display:grid; gap:12px; }
 .video-lesson h2 { font-size:var(--body); margin:0; }
 .lesson-topline { display:flex; align-items:baseline; flex-wrap:wrap; gap:8px 20px; }
 /* --text, not a raw hue: this is set on the page, and --indigo is the page's own
@@ -281,3 +281,56 @@ body main .page-head .lede { font-size: var(--read); line-height: 1.5; max-width
 @media (max-width: 900px) { body main .page-head { grid-template-columns: minmax(0, 1fr); } }
 
 .train-sticker-link { display: inline-flex; align-items: center; min-height: var(--target); max-width: 55ch; font-size: var(--read); line-height: 1.4; }
+
+/* Assembly instructions: view → human action → captured evidence. Quiet columns,
+   never an enlarged instruction card. The picture and its source stay together. */
+.lesson-route { display:flex; flex-wrap:wrap; gap:6px 16px; padding:0; margin:0; list-style:none; font-size:var(--fine); line-height:1.4; }
+.lesson-route li { display:flex; align-items:baseline; gap:5px; }
+.lesson-route li > span { background:var(--quiet); color:var(--quiet-text); padding:2px 6px; font-family:var(--mono); }
+.lesson-route [aria-current] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
+.lesson-bench .lesson-prediction { padding:8px 12px; min-height:0; }
+.lesson-bench .lesson-scenes { background:transparent; color:var(--ivory); padding:8px 12px; }
+.lesson-bench .lesson-scenes > p { display:block; }
+.lesson-bench .lesson-scenes .controls { padding:0; }
+.lesson-bench .lesson-source-picker { margin:0 12px; color:var(--ivory); }
+.lesson-bench .lesson-heading { grid-template-columns:1fr; gap:8px; }
+.lesson-bench .lesson-heading p { max-width:65ch; font-size:var(--micro); }
+.lesson-bench .lesson-source-picker summary { font-size:var(--micro); }
+.lesson-capture { display:flex; align-items:center; gap:12px; margin:0; }
+.lesson-capture[hidden] { display:none; }
+.lesson-capture canvas { width:112px; height:auto; flex:none; background:var(--quiet); }
+.lesson-capture figcaption { padding:0; max-width:28ch; font-size:var(--fine); line-height:1.4; }
+.lesson-actions .controls .btn { flex:0 1 auto; }
+.lesson-actions [data-label-frame] { min-height:var(--target); padding:10px 12px; }
+.lesson-actions [data-label-frame] strong { font-size:var(--read); }
+.lesson-actions [data-label-frame] small { font-family:var(--sans); }
+.lesson-actions .lesson-samples { margin-top:0; }
+.lesson-grid { grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr); gap:24px; }
+.lesson-methods .training-choice { padding:8px 12px; }
+@media(max-width:900px) {
+ .lesson-grid { grid-template-columns:1fr; gap:12px; }
+
+ .lesson-bench .bench-view { height:auto; aspect-ratio:16/9; }
+ .lesson-bench .lesson-source-picker { border:0; }
+ .lesson-bench .lesson-source-picker > summary { min-height:44px; padding-block:8px; }
+}
+
+.lesson-bench { position:relative; } /* Anchor the fullscreen control to its own picture. */
+.lesson-actions :is([data-lesson-collect],[data-lesson-act]) { justify-self:start; max-width:100%; white-space:normal; }
+.lesson-actions p { max-width:65ch; }
+.lesson-bench .lesson-prediction:empty { display:none; }
+@media(max-width:900px) {
+ .lesson-bench .bench-caption { display:flex; padding:8px 120px 8px 12px; min-height:44px; }
+ .lesson-bench .bench-caption > [data-lesson-source] { display:none; }
+ .lesson-bench .lesson-scenes { padding-block:6px; }
+ .lesson-route { gap:4px 10px; }
+}
+
+.lesson-actions > .lesson-source-picker { font-size:var(--read); }
+.lesson-actions .lesson-source-picker .lesson-heading { grid-template-columns:1fr; gap:8px; }
+.lesson-actions .lesson-source-picker p { font-size:var(--micro); }
+.lesson-prediction[hidden] { display:none; }
+
+.lesson-actions .controls:has([data-label-frame]) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.lesson-actions [data-label-frame] { min-width:0; }
+.lesson-bench { top:auto; }

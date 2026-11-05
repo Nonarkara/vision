@@ -1,10 +1,11 @@
-import { t, onLang, count } from '../core/i18n.js?v=1.26.3'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.26.3'
-import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.26.3'
-import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.26.3'
-import { threeWayState, actionLabel } from './three-ways.js?v=1.26.3'
-import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.26.3'
-import { practiceVideo } from './practice-video.js?v=1.26.3'
+import { lessonGuide } from './lesson-guide.js?v=1.27.0'
+import { t, onLang, count } from '../core/i18n.js?v=1.27.0'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.27.0'
+import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.27.0'
+import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.27.0'
+import { threeWayState, actionLabel } from './three-ways.js?v=1.27.0'
+import { frameKey, testEligibility, testSummary } from './holdout.js?v=1.27.0'
+import { practiceVideo } from './practice-video.js?v=1.27.0'
 
 export function mountVideoLesson(specimen) {
   const root = document.querySelector('[data-video-lesson]'),
@@ -31,6 +32,7 @@ export function mountVideoLesson(specimen) {
     job = 0,
     review = null,
     visible = true,
+    sourceReady = false,
     lastResult = '',
     prediction = null,
     rounds = 0,
@@ -42,7 +44,7 @@ export function mountVideoLesson(specimen) {
     // asking must never cancel a lesson that is already running.
     lastAsk = null,
     askJob = 0
-  const names = [t('ถนนรถแน่น', 'Busy road'), t('ถนนโล่ง', 'Quiet road')],
+  const names = [t('ถนนรถแน่น', 'Busy road', '繁忙道路'), t('ถนนโล่ง', 'Quiet road', '清静道路')],
     named = [false, false]
   root.querySelectorAll('[data-lesson-name]').forEach((el, i) => {
     el.value = names[i]
@@ -84,6 +86,7 @@ export function mountVideoLesson(specimen) {
   })
   observer.observe(root)
   function paint() {
+    sourceReady = !!specimen.source?.ready
     root
       .querySelectorAll('[data-method]')
       .forEach((b) =>
@@ -95,11 +98,11 @@ export function mountVideoLesson(specimen) {
     const counts = [0, 1].map((y) => labels.filter((s) => s.y === y).length)
     root.querySelectorAll('[data-label-frame]').forEach((b) => {
       const y = Number(b.dataset.labelFrame)
-      b.disabled = busy || !!review || counts[y] >= 30
+      b.disabled = !sourceReady || busy || !!review || counts[y] >= 30
       const title = document.createElement('strong')
-      title.textContent = names[y]
+      title.textContent = t('บันทึก ', 'Save ', '保存 ') + names[y]
       const progress = document.createElement('small')
-      progress.textContent = t(`+ เพิ่มภาพ · ${counts[y]} / 3 ภาพเริ่มต้น`, `+ Add example · ${counts[y]} / 3 to start`)
+      progress.textContent = t(`เก็บแล้ว ${counts[y]} / 3 ภาพ`, `${counts[y]} / 3 pictures saved`, `已保存 ${counts[y]} / 3 张`)
       if (counts[y] >= 3) progress.textContent = t(`+ เพิ่มอีก · เก็บแล้ว ${counts[y]} ภาพ`, `+ Add more · ${count(counts[y], 'example')} saved`)
       b.replaceChildren(title, progress)
     })
@@ -110,51 +113,33 @@ export function mountVideoLesson(specimen) {
     paintThreeWays()
     paintTest()
     $('[data-lesson-learn]').disabled = busy || !!review || counts.some((n) => n < 3)
-    $('[data-lesson-collect]').disabled = busy
-    $('[data-three-ask]').disabled = busy
-    $('[data-lesson-act]').disabled = busy || !!pending
+    $('[data-lesson-collect]').disabled = busy || !sourceReady
+    $('[data-three-ask]').disabled = busy || !sourceReady
+    $('[data-lesson-act]').disabled = busy || !!pending || !sourceReady
     root
       .querySelectorAll('[data-reward]')
       .forEach((b) => (b.disabled = !pending))
-    $('[data-lesson-step]').textContent =
-      mode === 'supervised'
-        ? t(
-            `${learned ? 'ลองกับภาพใหม่' : 'บอกคำตอบที่ถูกต้อง'}`,
-            `${learned ? 'Test on new frames' : 'Show it the right answer'}`,
-          )
-        : mode === 'unsupervised'
-          ? t(
-              `${groups ? 'สำรวจกลุ่มที่พบ' : 'เก็บภาพโดยไม่ตั้งชื่อ'}`,
-              `${groups ? 'Explore its groups' : 'Collect without labels'}`,
-            )
-          : t(`ให้รางวัลกับการเลือก`, `Reward its choices`)
-    $('[data-lesson-help]').textContent =
-      mode === 'supervised'
-        ? t(
-            learned
-              ? 'สอนแล้ว! เปลี่ยนฉากรถแน่นหรือถนนโล่ง แล้วดูคำทายบนวิดีโอ ถ้าผิด ให้เพิ่มตัวอย่างแล้วกดเรียนอีกครั้ง'
-              : counts[0] < 3
-                ? `กดปุ่ม “${names[0]}” เพื่อเก็บภาพที่ตรงกันอีก ${3 - counts[0]} ภาพ${specimen.source?.kind === 'practice' ? ' เลือกฉากที่ตรงกันใต้จอ' : ''}`
-                : counts[1] < 3
-                  ? `เปลี่ยนเป็นอีกฉากใต้จอ แล้วกดปุ่ม “${names[1]}” เพื่อเก็บอีก ${3 - counts[1]} ภาพ`
-                  : 'พร้อมแล้ว! กด “เรียนจากคำตอบของฉัน” แล้วสลับฉากเพื่อทดสอบ',
-            learned
-              ? 'You taught it! Switch between busy and quiet scenes and watch its guess. If it is wrong, add examples and press Learn again.'
-              : counts[0] < 3
-                ? `Save ${count(3 - counts[0], "more picture", "more pictures")} of “${names[0]}” with its button.${specimen.source?.kind === 'practice' ? ' Choose a matching scene below.' : ''}`
-                : counts[1] < 3
-                  ? `Switch to the other scene below the video. Save ${count(3 - counts[1], "more picture", "more pictures")} of “${names[1]}” with its button.`
-                  : 'Ready! Press “Learn from my answers”, then switch scenes to test it.',
-          )
-        : mode === 'unsupervised'
-          ? t(
-              'เครื่องจัดภาพที่คล้ายกันไว้ด้วยกัน คุณค่อยดูว่ากลุ่มนั้นหมายถึงอะไร อาจแยกตามแสงแทนจำนวนรถ',
-              'It puts similar pictures together. You decide what the groups mean afterwards. It might group by lighting instead of traffic.',
-            )
-          : t(
-              'นี่คือการลองแล้วเรียนจากรางวัล คุณให้คะแนนการกระทำ ไม่ได้ตั้งชื่อภาพ การลองครั้งต่อไปใช้คะแนนที่เคยได้',
-              'This is trial and reward. You rate an action, rather than name a picture. Future choices use the rewards it received.',
-            )
+    const guide = lessonGuide({ mode, counts, learned, groups, pending, rounds, collecting, practice: specimen.source?.kind === 'practice', names, testPending, lastTest, review, sourceReady, t })
+    $('[data-lesson-step]').textContent = guide.title
+    $('[data-lesson-help]').textContent = guide.help
+    const route = $('[data-lesson-route]')
+    route.setAttribute('aria-label', t('ขั้นตอนบทเรียน', 'Lesson steps', '课程步骤'))
+    route.replaceChildren(...guide.steps.map((text, i) => {
+      const li = document.createElement('li')
+      if (i === guide.step) li.setAttribute('aria-current', 'step')
+      const number = document.createElement('span')
+      number.textContent = String(i + 1)
+      number.setAttribute('aria-hidden', 'true')
+      li.append(number, text)
+      return li
+    }))
+    $('[data-lesson-capture]').hidden = mode !== 'supervised' || !labels.length
+    if (mode === 'supervised' && labels.length) {
+      const latest = labels.at(-1), canvas = $('[data-capture-view]')
+      canvas.width = latest.canvas.width; canvas.height = latest.canvas.height
+      canvas.getContext('2d').drawImage(latest.canvas, 0, 0)
+      $('[data-capture-caption]').textContent = t('บันทึกภาพนี้พร้อมคำตอบ: ', 'This picture was saved with your answer: ', '这张图片已连同你的答案保存：') + names[latest.y]
+    }
     $('[data-lesson-limit]').textContent =
       mode === 'supervised'
         ? t(
@@ -246,7 +231,7 @@ export function mountVideoLesson(specimen) {
     }
   }
   function paintResult() {
-    let text = t('ยังไม่ได้สอน', 'Waiting for your lesson'),
+    let text = t('ยังไม่ได้สอน', 'No answer yet'),
       explain = t(
         mode === 'supervised' ? 'เพิ่มตัวอย่างด้วยปุ่มสอน กดเรียน แล้วคำทายจะปรากฏตรงนี้' : mode === 'unsupervised' ? 'กดเก็บภาพ แล้วกลุ่มที่พบจะปรากฏตรงนี้' : 'กดลองทำ แล้วให้คะแนนการกระทำที่แสดงตรงนี้',
         mode === 'supervised' ? 'Add examples with the buttons. After Learn, its guess appears here.' : mode === 'unsupervised' ? 'Collect frames, then its group will appear here.' : 'Press Try an action, then rate the action shown here.',
@@ -269,6 +254,7 @@ export function mountVideoLesson(specimen) {
     }
     $('[data-lesson-result]').textContent = text
     $('[data-lesson-explain]').textContent = explain
+    $('[data-lesson-explain]').hidden = !review && !prediction
   }
   function cancel() {
     job++
@@ -369,8 +355,9 @@ export function mountVideoLesson(specimen) {
         learned = false
         prediction = null
         status(
-          'เพิ่มภาพแล้ว เก็บอีกกลุ่มด้วย แล้วกดเรียน',
-          'Frame added. Collect the other group too, then press Learn.',
+          'บันทึกภาพแล้ว ทำตามขั้นตอนถัดไปด้านบน',
+          'Picture saved. Follow the next numbered step above.',
+          '图片已保存。请按上方的下一步操作。',
         )
       } catch {
         status(
@@ -399,7 +386,7 @@ export function mountVideoLesson(specimen) {
   function paintTest() {
     const panel = $('[data-lesson-test-panel]')
     panel.hidden = mode !== 'supervised' || !learned
-    $('[data-lesson-test]').disabled = !learned || busy || !!testPending || tests.length >= 100
+    $('[data-lesson-test]').disabled = !sourceReady || !learned || busy || !!testPending || tests.length >= 100
     $('[data-test-review]').hidden = !testPending
     const picture = $('[data-test-view]')
     picture.hidden = !review || mode !== 'supervised'
@@ -654,8 +641,9 @@ export function mountVideoLesson(specimen) {
   async function tick() {
     if (stopped) return
     try {
-      const src = specimen.source,
-        ready =
+      const src = specimen.source
+      if (!!src?.ready !== sourceReady) paint()
+      const ready =
           mode === 'supervised'
             ? learned
             : mode === 'unsupervised'
@@ -717,7 +705,7 @@ export function mountVideoLesson(specimen) {
     if (comparisonText) comparisonStatus(...comparisonText)
     for (let i = 0; i < 2; i++)
       if (!named[i]) {
-        names[i] = i ? t('ถนนโล่ง', 'Quiet road') : t('ถนนรถแน่น', 'Busy road')
+        names[i] = i ? t('ถนนโล่ง', 'Quiet road', '清静道路') : t('ถนนรถแน่น', 'Busy road', '繁忙道路')
         root.querySelector(`[data-lesson-name="${i}"]`).value = names[i]
       }
     prediction = null
