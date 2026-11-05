@@ -33,6 +33,7 @@ export function mountVideoLesson(specimen) {
     review = null,
     visible = true,
     sourceReady = false,
+    savingGroup = null,
     lastResult = '',
     prediction = null,
     rounds = 0,
@@ -104,6 +105,7 @@ export function mountVideoLesson(specimen) {
       const progress = document.createElement('small')
       progress.textContent = t(`เก็บแล้ว ${counts[y]} / 3 ภาพ`, `${counts[y]} / 3 pictures saved`, `已保存 ${counts[y]} / 3 张`)
       if (counts[y] >= 3) progress.textContent = t(`+ เพิ่มอีก · เก็บแล้ว ${counts[y]} ภาพ`, `+ Add more · ${count(counts[y], 'example')} saved`)
+      if (busy && savingGroup === y) progress.textContent = t('กำลังบันทึกภาพนี้…', 'Saving this picture…', '正在保存这张图片…')
       b.replaceChildren(title, progress)
     })
     $('[data-lesson-counts]').textContent = names
@@ -259,6 +261,7 @@ export function mountVideoLesson(specimen) {
   function cancel() {
     job++
     collecting = false
+    savingGroup = null
     busy = false
     pending = null
     testPending = null
@@ -341,6 +344,7 @@ export function mountVideoLesson(specimen) {
       if (busy) return
       const y = Number(b.dataset.labelFrame),
         ticket = ++job
+      savingGroup = y
       busy = true
       paint()
       try {
@@ -366,6 +370,7 @@ export function mountVideoLesson(specimen) {
         )
       } finally {
         if (ticket === job) {
+          savingGroup = null
           busy = false
           paint()
         }

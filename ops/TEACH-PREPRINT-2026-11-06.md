@@ -24,7 +24,7 @@ External-source instructions no longer point to nonexistent practice controls.
 
 A real initial-navigation failure exposed Save before its first picture was
 ready. Capture/Ask/collection/action/test now wait for source readiness and
-repaint on its transition. Held-picture judgment remains possible when a live
+repaint on its transition. The pressed Save button says Saving this picture while its snapshot is processed, so loading feedback does not live only below the phone fold. Held-picture judgment remains possible when a live
 source stops. New guide copy is TH/EN/ZH; older untranslated text retains the
 honest Chinese fallback notice. No camera permission or private camera capture.
 
