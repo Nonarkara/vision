@@ -1,0 +1,36 @@
+/train        desktop  carried 3 [ivory indigo gray]  ivory 57.83%  indigo 3.16%  gray 8.86%  jasper 0.02%  black 15.62%  photo 0%  other 14.28%
+/train        phone    carried 3 [ivory indigo gray]  ivory 45.2%  indigo 3.04%  gray 8.22%  jasper 0.02%  black 28.27%  photo 0%  other 14.81%
+/research     desktop  carried 3 [ivory indigo gray]  ivory 77.04%  indigo 13.59%  gray 1.89%  jasper 0.01%  black 4.93%  photo 0%  other 2.5%
+/research     phone    carried 3 [ivory indigo gray]  ivory 66.17%  indigo 20.85%  gray 3.87%  jasper 0.02%  black 4.55%  photo 0%  other 4.35%
+/research#paper desktop  carried 3 [ivory indigo gray]  ivory 62.28%  indigo 2.19%  gray 25.07%  jasper 0.01%  black 6.58%  photo 0%  other 3.82%
+/research#paper phone    carried 3 [ivory indigo gray]  ivory 66.47%  indigo 3.02%  gray 8.89%  jasper 0.02%  black 11.46%  photo 0%  other 9.92%
+
+THE BIGGEST PAINTED SURFACES ON THE FIRST SCREEN (desktop)
+
+/train  (carries 3: ivory+indigo+gray)
+     582238px  rgb(16, 16, 16)        735x550 @y242  div.bench.lesson-bench
+     529538px  rgb(16, 16, 16)        588x130 @y820  div.specimen-bar.field-black
+     517609px  rgb(182, 191, 193)     735x414 @y290  div.bench-view
+     180021px  rgb(247, 245, 239)     290x44 @y576  input.field-input
+     180021px  rgb(247, 245, 239)     290x44 @y576  input.field-input
+     111904px  rgb(5, 18, 48)         136x49 @y772  button.btn
+
+/research  (carries 3: ivory+indigo+gray)
+     129533px  rgb(16, 16, 16)        153x44 @y802  a.btn.primary
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      30193px  rgb(5, 18, 48)         63x35 @y441  span.num
+      19017px  rgb(182, 191, 193)     187x58 @y44  a
+       3020px  rgb(235, 211, 162)     69x44 @y0  summary
+
+/research#paper  (carries 3: ivory+indigo+gray)
+    1173719px  rgb(182, 191, 193)     1348x570 @y301  div.bench.paper-reader
+    1173719px  rgb(182, 191, 193)     1348x489 @y382  div.paper-page
+     186377px  rgb(182, 191, 193)     488x30 @y353  p.paper-reader-status
+     154444px  rgb(16, 16, 16)        438x52 @y301  div.paper-reader-tools.controls
+      63360px  rgb(16, 16, 16)        1440x44 @y0  header.rail
+      36090px  rgb(16, 16, 16)        142x44 @y211  a.btn.primary
+
+ROOM SUMMARY (desktop)
+  /train        3 hues  ivory+indigo+gray
+  /research     3 hues  ivory+indigo+gray
+  /research#paper 3 hues  ivory+indigo+gray

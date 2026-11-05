@@ -1,4 +1,4 @@
-# Teach and preprint — 1.27.0 · 6 November 2026
+# Teach and preprint — 1.27.0–1.27.3 · 6 November 2026
 
 Scope: an assembly-instruction teaching flow in `/train`, plus the requested
 Research preprint tab. This is not a claim that every room has been newly
@@ -106,11 +106,30 @@ Remaining/unverified: the user/mother study is proposed; human learning and
 home safety are unmeasured. The paper is an English author-review preprint,
 not peer reviewed or a tagged PDF accessibility certification. Text alternative
 is available. No new whole-site, native desktop fullscreen or enlarged-text
-certification is claimed. Automated slop-lint could not launch its headless
-Chromium within180s; no aggregate linter score is claimed. Real screenshots and
-independent manual reviews provide the scoped layout evidence. New hue/browser
-instrument census is not claimed; established declarations/pairings remain
-under the palette release gate.
+certification is claimed.
+
+## Follow-up measurements on shipped source
+
+1.27.1 content-sizes desktop Save buttons: English160/170px, Thai149/129px,
+Chinese129/129px, replacing a290px button for129px of content. Phone buttons
+retain175px each. All nine live language/viewport combinations have no document
+overflow. 1.27.2 groups PDF controls into one52px toolbar in all three languages;
+the phone previously needed100px. Fullscreen stays beside zoom; 44px targets,
+readable labels, page navigation and Fit remain.
+
+The initially failed automated instruments were rerun successfully against the
+stable detached1.27.2 source. Slop-lint: Teach REVIEW score22/5points (known house
+font, functional symbols, Thai sizing and paper-ground hits); paper OK score9/
+2points (functional symbols). Both report zero stretched controls at desktop
+and phone. Scoped hue census of /train, /research and /research#paper carries
+at least three house hues at both widths. Archived raw outputs identify their
+source version; they are not claimed as byte-identical1.27.3 runs.
+
+1.27.3 changes only the unsupervised initial state: automatic collection does
+not ask the reader to choose scenes. Busy/Quiet/Auto returns after groups exist.
+At390 English the complete Collect button now ends773.1px rather than852.6px,
+with no document overflow. The initial, progress and grouped states are checked
+on the public release:24frames produced groups of10 and14, and scene choices returned. Independent lifecycle/screenshot review approved. No earned exploration control is removed.
 
 Exact-release gate/deployment/public verification are recorded in
 `ops/AWAY-STATUS.md` after publication, not inferred from this draft record.

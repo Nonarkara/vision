@@ -1104,3 +1104,149 @@ Published clean detachede7e2e85 to close the final genuine Home long-line findin
 Exact clean release gate433/433 tests,27pages/100refs,96modules/90resolvedimports,17requiredpalettepairings,fresh URLs. Public Home/Reconstruct reopened atall3widths with1.26.3 stamps,0overflow/no observed console error; public reading measure verified. Final colour censusHome3desktop/4phone,Reconstruct4desktop/3phone. Final slop-lintHome aggregate UNVERIFIED after two35s navigation timeouts; prior1.26.2 score13/3points is not substituted. Reconstruct stillOK(score9/2points;void/default-font),0stretches. Manual screenshots and independent review remain the scoped evidence.
 
 Local/public1.26.3 ok:true,3,243 retained entries,loaded14:55:54/upstream14:46:33 Bangkok,memoryabout30MB; initial refresh failed and disk-cache fallback worked, source ageabout11minutes atfollow-up,below30-minute threshold. AppPID70097/last exit0 fromgateddeploy;tunnelunchanged. No private capture/permission/training or upstream recovery. Native desktop fullscreen and zoom remain unverified; older Chinese Home prose accurately falls back toEnglish. Detail:ops/GLANCE-GRID-2026-11-03.md;evidence:ops/evidence/glance-grid-1.26.2/ (bothversions).
+
+
+### Monitoring — 2026-11-03 15:15 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,242 entries,origin flooddash. loaded/upstream15:05:56 Bangkok (about9minutes old). First scheduled post-release refresh succeeded after the initial disk-cache fallback; no sustained stale catalogue or new app warning. Memory12–14MB; relay idle,2 checked/last-successful cameras,no resting hosts. AppPID70097 running,last exit0 after the authorised release;tunnelPID985 running/never exited. One tunnel connection retried at15:06:34 and registered again at15:06:56;public health reachable. Preserved services and other agent’s active gesture preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 16:12 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded16:05:54/upstream16:01:03 Bangkok (about7/11minutes old). All scheduled refreshes since the previous monitor succeeded; app/tunnel error logs unchanged. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory20–21MB;relay idle,unchanged2 checked/last-successful cameras,no resting hosts. Preserved services,prior notes and other agent’s active gesture preview/log. No restart,recovery,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 17:21 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream17:15:57 Bangkok (about5minutes old); all recent scheduled refreshes succeeded. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,3 checked cameras (2 last-successful/1 last-failed),no resting hosts. No new catalogue warnings; tunnel’s16:28 client-cancelled frame requests are not a sustained service failure. Public health reachable. Preserved services and existing/other-agent edits. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 18:23 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded18:15:54/upstream18:12:25 Bangkok (about7/10minutes old); all recent scheduled refreshes succeeded. Brief3,242 listing recovered next cycle. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–18MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. No new app warning. Tunnel connections re-registered at17:27:05–18;public health reachable, no sustained outage. Preserved services,prior notes and other agent’s active preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 19:20 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream19:15:56 Bangkok (about4minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory16–17MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. Recent tunnel retries at18:39 re-registered within seconds;public health reachable,no sustained outage. Preserved services,prior notes and other agent’s active preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 20:23 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream20:15:58 Bangkok (about7minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. Latest tunnel connection retry at19:55:23 re-registered six seconds later;public health reachable,no sustained outage. Preserved services,prior notes and other agent’s active preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 21:26 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded21:15:54/upstream21:12:08 Bangkok (about10/13minutes old),within refresh tolerance. Recent scheduled refreshes succeeded;brief3,242 listing recovered next cycle. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory16–18MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. App/tunnel error logs unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 22:21 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream22:15:56 Bangkok (about5minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. Latest tunnel warning is a21:30 client-cancelled page request;public health reachable,no sustained outage. Preserved services,prior notes and other agent’s active preview/log. No recovery,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-03 23:24 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream23:15:56 Bangkok (about8minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory20–21MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. Tunnel upgrade advisory at22:37 is not a demonstrated fault;public health reachable,healthy connections preserved. Prior notes and other agent’s active preview/log preserved. No recovery,upgrade,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 00:22 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded00:15:54/upstream00:14:47 Bangkok (about6/7minutes old); all recent scheduled refreshes succeeded. Brief3,242 listing recovered next cycle. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory19–21MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. App/tunnel warning logs unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No recovery,upgrade,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 01:21 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded01:15:54/upstream01:12:02 Bangkok (about5/9minutes old); recent scheduled refreshes succeeded. Brief3,242 listing recovered next cycle. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. App/tunnel warning logs unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No recovery,upgrade,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 02:28 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,244 entries,origin flooddash. loaded/upstream02:25:56 Bangkok (about2minutes old); recent scheduled refreshes succeeded. Brief3,242 listing recovered next cycle. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory16–18MB;relay idle,unchanged3 checked cameras (2 last-successful/1 last-failed),no resting hosts. App/tunnel warning logs unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No recovery,upgrade,restart,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 21:52 Bangkok (no deployment)
+
+Local/public agree 1.26.3 / ok:true, 3,243 entries, origin flooddash. Loaded21:45:55/upstream21:44:27 Bangkok (about6/7minutes old); all eight recent scheduled refreshes succeeded, no new app warning since the previous monitor. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory16–18MB;relay idle,3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel logged a DNS-refresh timeout at21:44:10, then all four connections registered at21:44:17; public health succeeds. No sustained failure warranting recovery or machine-wide DNS work. Preserved services,prior notes and other agent’s active preview/log. No restart,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 22:52 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded22:45:55/upstream22:42:59 Bangkok (about6/9minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–20MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel connection re-registered at22:14:11,followed by a DNS-refresh timeout;current public health succeeds. Upgrade advisory is not a demonstrated fault;no sustained outage or machine-wide DNS intervention warranted. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-04 23:53 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded23:45:55/upstream23:41:18 Bangkok (about7/11minutes old); all recent scheduled refreshes succeeded. Brief3,241 listing recovered next cycle,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory19–21MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel connection retried at22:59:11 and registered six seconds later;public health succeeds,no sustained outage. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 00:51 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded00:45:55/upstream00:41:25 Bangkok (about5/9minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory16–18MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 01:53 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded01:45:55/upstream01:42:16 Bangkok (about7/11minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory15–17MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 02:48 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded02:45:55/upstream02:41:58 Bangkok (about2/6minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 03:50 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded/upstream03:45:57 Bangkok (about4minutes old). Isolated03:26 refresh timeout recovered on the next cycle;brief3,186 listing at03:35 recovered at03:45. No sustained stale state. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory15–17MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 04:48 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded/upstream04:45:57 Bangkok (about2minutes old); all recent scheduled refreshes succeeded. Brief3,241 listing recovered next cycle,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 05:58 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded/upstream05:55:59 Bangkok (about2minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory23–32MB across the two samples;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 07:02 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded06:55:59/upstream06:51:32 Bangkok (about6/11minutes old); all recent scheduled refreshes succeeded,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 08:01 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded07:55:56/upstream07:52:23 Bangkok (about5/9minutes old); all recent scheduled refreshes succeeded. Brief3,240 listing recovered next cycle,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory20–21MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 09:00 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded08:55:56/upstream08:52:21 Bangkok (about4/7minutes old); all recent scheduled refreshes succeeded. Brief3,241 listing recovered next cycle,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory15–17MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### Monitoring — 2026-11-05 10:01 Bangkok (no deployment)
+
+Local/public agree1.26.3 / ok:true,3,243 entries,origin flooddash. loaded09:55:56/upstream09:52:22 Bangkok (about5/9minutes old); all recent scheduled refreshes succeeded. Brief3,241 listing recovered next cycle,no new app warning. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory17–19MB;relay idle,unchanged3 checked cameras (1 last-successful/2 last-failed),no resting hosts. Tunnel error log unchanged;public health reachable. Preserved services,prior notes and other agent’s active preview/log. No restart,recovery,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+### Monitoring — 2026-11-05 23:44 Bangkok (no deployment)
+
+Local/public agree 1.26.3 / ok:true, 3,244 entries, origin flooddash. Loaded/upstream23:35:57 Bangkok (about8minutes old); all twelve recent scheduled refreshes succeeded, no new app warning since05Nov03:26 Bangkok. AppPID70097 running,last exit0;tunnelPID985 running/never exited. Memory20–22MB;relay idle,6 checked cameras (3 last-successful/3 last-failed),no resting hosts. Tunnel connection retried18:22 and registered five seconds later;current public health succeeds. Upgrade advisory alone warrants no intervention. Preserved services,prior notes and other agent’s preview log. No restart,upgrade,deployment,UI/code change,camera probing/capture/permission,training or machine-wide monitoring;no actionable change to notify.
+
+
+### 1.27.0 — 2026-11-06 Bangkok · a33f9ff
+
+Shipped Teach's state-derived assembly instructions, exact saved snapshot/label, source-readiness guards and local saving feedback; published the five-page two-column English preprint with ten references, data ledger, reflowable text and local PDF reader. Owner correction incorporated: approximately one month of feedback-led iteration; mother's learning study proposed, no participant outcomes invented. Exact detached release gate:441/441 tests,27pages,105local references,99modules/93resolved imports,17palette pairings; module URL check passed. Local/public health agreed1.27.0; downloaded public PDF matched49350-byte release file. Scoped viewport/source/data review documented in ops/TEACH-PREPRINT-2026-11-06.md. No private camera/permission or unbounded training.
+
+### 1.27.1 — 2026-11-06 Bangkok · 7dec14a
+
+Content-sized desktop Save controls rather than stretching their row. Detached release deployment gate again441tests/27pages/105refs/99modules/93imports/17pairings. Live Teach screenshots in TH/EN/ZH at390,1024,1440 show no document overflow; actual Chinese saving status verified. Phone targets retained. Independent reviewer approved.
+
+### 1.27.2 — 2026-11-06 Bangkok · ac3ec82
+
+Removed PDF toolbar's empty row:52px in all languages rather than100px on phone, retaining44px targets, labels, zoom/Fit/fullscreen. Detached release gate441tests/27pages/105refs/99modules/93imports/17pairings. Nine candidate language/viewport screenshots dimension-checked; live English reader at390/1024/1440 rendered realPDF without overflow/errors. Stable-source scoped lint: Teach REVIEW22/5points, paper OK9/2points; zero stretched controls. Scoped hue census carries at least three house hues. Independent review approved; raw outputs archived in ops/evidence/preprint-1.27.0/.
+
+### 1.27.3 — 2026-11-06 Bangkok · 4fc9db8
+
+Staged unsupervised scene choices after automatic collection, where they support exploration. Phone390 Collect now ends773.1px versus852.6px; public bounded24-frame collection produced10/14 groups and restored scene choices; no overflow/errors. Final detached release gate441tests/27pages/105refs/99modules/93imports/17pairings; changed-module URL gate passed. Independent lifecycle/screenshot review approved. Public preprint renders page1/5, stamp1.27.3,0overflow/errors; public PDF SHA256e8f43cf434aadc707fa21f7313cfcf8899f5e16a0ff435119dfd2f750f34b0a7 matches repository. Local/public health ok:true1.27.3,3244entries,loaded18:20:49/upstream18:18:06UTC5Nov (fresh at check); relay idle,memory43–44MB. AppPID90924; tunnelPID985 unchanged/running/never exited. Other agent's gesture log preserved. Remaining: human comprehension/home-safety effectiveness unmeasured; proposed study, English preprint not peer reviewed, no whole-site or PDF/UA certification claim.

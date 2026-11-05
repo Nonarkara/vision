@@ -1,0 +1,59 @@
+[
+  {
+    "h": 844,
+    "lang": "en",
+    "overflow": 0,
+    "pdf": "/papers/mother77.pdf?v=1.27.2",
+    "stamp": "/css/pages/research-paper.css?v=1.27.2",
+    "status": "Page 1 of 5 · fit width",
+    "toolbar": {
+      "bottom": 466.734375,
+      "height": 52,
+      "left": 16,
+      "right": 340.40625,
+      "top": 414.734375,
+      "width": 324.40625,
+      "x": 16,
+      "y": 414.734375
+    },
+    "w": 390
+  },
+  {
+    "h": 900,
+    "lang": "en",
+    "overflow": 0,
+    "pdf": "/papers/mother77.pdf?v=1.27.2",
+    "stamp": "/css/pages/research-paper.css?v=1.27.2",
+    "status": "Page 1 of 5 · fit width",
+    "toolbar": {
+      "bottom": 331.59375,
+      "height": 52,
+      "left": 32.765625,
+      "right": 508.6875,
+      "top": 279.59375,
+      "width": 475.921875,
+      "x": 32.765625,
+      "y": 279.59375
+    },
+    "w": 1024
+  },
+  {
+    "h": 900,
+    "lang": "en",
+    "overflow": 0,
+    "pdf": "/papers/mother77.pdf?v=1.27.2",
+    "stamp": "/css/pages/research-paper.css?v=1.27.2",
+    "status": "Page 1 of 5 · fit width",
+    "toolbar": {
+      "bottom": 342.8828125,
+      "height": 52,
+      "left": 46.078125,
+      "right": 525.0234375,
+      "top": 290.8828125,
+      "width": 478.9453125,
+      "x": 46.078125,
+      "y": 290.8828125
+    },
+    "w": 1440
+  }
+]
