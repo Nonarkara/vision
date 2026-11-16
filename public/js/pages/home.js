@@ -4,11 +4,29 @@ import '../core/site.js?v=1.27.3'
 import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.27.3'
 import { loadCatalog, isReadable } from '../core/catalog.js?v=1.27.3'
 import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.27.3'
-import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.27.3'
 import { onSpotted } from '../cv/spotted.js?v=1.27.3'
 import { cocoName } from '../ml/labels.js?v=1.27.3'
 import { detectorFailureSentence } from '../ml/failure.js?v=1.27.3'
+
+// On a short landscape screen the translation notice is a 44px band above the
+// rail, and the picture cap does not know about it. The notice joins the rail's
+// own row there, and goes back above the rail everywhere else.
+const shortLandscape = matchMedia('(max-width: 900px) and (max-height: 520px)')
+function parkTranslationNote() {
+  const note = document.querySelector('.lang-note')
+  const nav = document.querySelector('.room-navigation')
+  if (!note || !nav) return
+  if (shortLandscape.matches) {
+    if (note.parentElement !== nav) nav.prepend(note)
+  } else if (note.parentElement !== document.body) {
+    document.body.prepend(note)
+  }
+}
+parkTranslationNote()
+onLang(parkTranslationNote)
+shortLandscape.addEventListener('change', parkTranslationNote)
 
 const canvas = document.querySelector('[data-eye]')
 const stateEl = document.querySelector('[data-eye-state]')
@@ -117,7 +135,7 @@ document.addEventListener('modelprogress', (e) => {
   if (lens === 'objects') say()
 })
 
-runLens(canvas, () => specimen.source, () => ({ name: lens }), {
+runLens(canvas, () => specimen.source, () => ({ name: lens, opts: { fit: 'cover' } }), {
   fps: 12,
   state: lensState,
   onFrame: (rect, state, src) => {

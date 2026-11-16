@@ -1,6 +1,6 @@
 import { lessonGuide } from './lesson-guide.js?v=1.27.3'
 import { t, onLang, count } from '../core/i18n.js?v=1.27.3'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { snapshot, shrink, embed, isBusy, isLoaded } from './eye.js?v=1.27.3'
 import { classify, cluster, groupOf, policy } from './video-learning.js?v=1.27.3'
 import { threeWayState, actionLabel } from './three-ways.js?v=1.27.3'

@@ -4,7 +4,7 @@
 
 import { t, pct } from '../core/i18n.js?v=1.27.3'
 import * as ops from '../cv/ops.js?v=1.27.3'
-import { edges as edgesLens, motion as motionLens, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { edges as edgesLens, motion as motionLens, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { clear, containRect } from '../cv/draw.js?v=1.27.3'
 import { runBench, blit, slider, choice, parts, writer, pointIn } from './bench.js?v=1.27.3'
 

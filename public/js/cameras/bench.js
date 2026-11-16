@@ -6,7 +6,7 @@
 import { t, lang, onLang } from '../core/i18n.js?v=1.27.3'
 import { createSpecimen, startSpecimen, specimenBarHtml } from '../core/specimen.js?v=1.27.3'
 import { SourceError } from '../core/source.js?v=1.27.3'
-import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, LENS_TEXT, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { cocoName } from '../ml/labels.js?v=1.27.3'
 
 const MIN_SCORE = 0.3

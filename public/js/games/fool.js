@@ -4,7 +4,7 @@
 // of the lens — so you do. Captures live in this tab's memory and nowhere else.
 
 import { t, bi, n, lang, onLang } from '../core/i18n.js?v=1.27.3'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { drawDetections } from '../cv/draw.js?v=1.27.3'
 import { cocoName } from '../ml/labels.js?v=1.27.3'
 import { detect } from '../ml/detector.js?v=1.27.3'
