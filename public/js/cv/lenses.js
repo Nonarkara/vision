@@ -42,18 +42,18 @@ export function createLensState() {
   return { prevGray: null, prevAt: 0, frameAt: 0, motion: null, detections: [], detecting: false, detectedAt: 0, detectMs: 0, error: null, minScore: 0.3 }
 }
 
-export function picture(ctx, src) {
+export function picture(ctx, src, _state, { fit = 'contain' } = {}) {
   clear(ctx)
-  return src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height)
+  return src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height, fit)
 }
 
 /** The grid of numbers. Cells get their digits once they are big enough to read. */
-export function numbers(ctx, src, state, { cols = 40, values = 'luma' } = {}) {
+export function numbers(ctx, src, state, { cols = 40, values = 'luma', fit = 'contain' } = {}) {
   const img = src.grab(cols)
   if (!img) return null
   clear(ctx)
   const W = ctx.canvas.width, H = ctx.canvas.height
-  const cell = Math.min(W / img.width, H / img.height)
+  const cell = (fit === 'cover' ? Math.max : Math.min)(W / img.width, H / img.height)
   const ox = (W - cell * img.width) / 2, oy = (H - cell * img.height) / 2
   const dpr = W / Math.max(1, ctx.canvas.clientWidth)
   const showDigits = cell >= 20 * dpr
@@ -79,7 +79,7 @@ export function numbers(ctx, src, state, { cols = 40, values = 'luma' } = {}) {
 }
 
 /** Edge strength as Ivory Buff light on black. */
-export function edges(ctx, src, state, { width = 360, gain = 1 } = {}) {
+export function edges(ctx, src, state, { width = 360, gain = 1, fit = 'contain' } = {}) {
   const img = src.grab(width)
   if (!img) return null
   const gray = ops.toGray(img)
@@ -90,20 +90,32 @@ export function edges(ctx, src, state, { width = 360, gain = 1 } = {}) {
     const v = Math.min(1, (mag[i] * gain) / 255)
     out.data[p] = nr * v; out.data[p + 1] = ng * v; out.data[p + 2] = nb * v; out.data[p + 3] = 255
   }
-  return paintImageData(ctx, out, { smooth: true })
+  if (fit !== 'cover') return paintImageData(ctx, out, { smooth: true })
+  const W = ctx.canvas.width, H = ctx.canvas.height
+  const s = Math.max(W / out.width, H / out.height)
+  const w = out.width * s, h = out.height * s
+  const x = (W - w) / 2, y = (H - h) / 2
+  const tmp = document.createElement('canvas')
+  tmp.width = out.width
+  tmp.height = out.height
+  tmp.getContext('2d').putImageData(out, 0, 0)
+  clear(ctx)
+  ctx.imageSmoothingEnabled = true
+  ctx.drawImage(tmp, x, y, w, h)
+  return { x, y, w, h }
 }
 
 /**
  * Frame differencing. For a still camera the "previous frame" is the last
  * relayed picture, seconds apart — so this lens says when it is waiting.
  */
-export function motion(ctx, src, state, { width = 192, delta = 22, minArea = 10 } = {}) {
+export function motion(ctx, src, state, { width = 192, delta = 22, minArea = 10, fit = 'contain' } = {}) {
   const img = src.grab(width)
   if (!img) return null
   const gray = ops.toGray(img)
   const fresh = src.frameAt !== state.frameAt || src.moving
   clear(ctx)
-  const rect = src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height)
+  const rect = src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height, fit)
   ctx.fillStyle = 'rgba(16,16,16,0.55)'
   ctx.fillRect(rect.x, rect.y, rect.w, rect.h)
   if (state.prevGray && state.prevGray.length === gray.length && fresh) {
@@ -148,9 +160,9 @@ export const DETECT_FLOOR = 0.05
  * the current frame with the most recent boxes, and starts a new detection
  * when the last one has finished and the frame is new enough.
  */
-export function objects(ctx, src, state, { every = 700, onResult = null } = {}) {
+export function objects(ctx, src, state, { every = 700, onResult = null, fit = 'contain' } = {}) {
   clear(ctx)
-  const rect = src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height)
+  const rect = src.drawTo(ctx, ctx.canvas.width, ctx.canvas.height, fit)
   if (!rect) return null
   const due = src.moving ? performance.now() - state.detectedAt > every : state.detectedFrame !== src.frameAt
   state.source = src

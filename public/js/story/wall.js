@@ -8,7 +8,7 @@
 
 import { loadCatalog, pickReadable, camName, sourceName } from '../core/catalog.js?v=1.27.3'
 import { openCamera, openWebcam, SourceError } from '../core/source.js?v=1.27.3'
-import { runLens, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { t, esc, pct, onLang } from '../core/i18n.js?v=1.27.3'
 
 const SCREENS = 6

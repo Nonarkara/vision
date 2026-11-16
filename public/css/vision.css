@@ -1069,8 +1069,8 @@ body.home {
   align-items: stretch;
   background: var(--ground);
 }
-.home-stage { display: flex; flex-direction: column; min-width: 0; background: var(--ground); }
-.home-stage > .stage-view { flex: none; }
+.home-stage { display: flex; flex-direction: column; min-width: 0; min-height: 0; height: 100%; background: var(--black); }
+.home-stage > .stage-view { flex: 1 1 auto; min-height: 0; }
 body.home .opening.home-opening .opening-text {
   justify-content: flex-start;
   gap: 8px;
@@ -1082,7 +1082,11 @@ body.home .opening.home-opening .opening-text {
 .home-opening .home-instrument { align-self: stretch; gap: 2px; }
 body.home .opening.home-opening h1 { margin: 0; font-size: clamp(1.4rem, 1.2vw + 0.8rem, 2rem); line-height: 1.08; max-width: 22ch; }
 .home-opening .eyebrow { margin: 0; }
-.home-opening .stage-view { flex: none; align-self: start; width: 100%; aspect-ratio: 16 / 9; height: auto; min-height: 0; }
+/* The picture takes the column the text already sized. A locked 16:9 left a
+   paper band under the frame; cover fills that height without widening the
+   column, so the four source labels stay on one row. */
+.home-opening .stage-view { flex: 1 1 auto; align-self: stretch; width: 100%; height: 100%; aspect-ratio: auto; min-height: 0; }
+.home-opening .stage-view canvas { object-fit: cover; }
 .home-opening .mine-note { padding: 0; margin: 2px 0 0; max-width: 62ch; color: var(--text); }
 .story-teaser .page-head { grid-template-columns: minmax(240px, .8fr) minmax(0, 1.2fr); }
 .story-teaser .page-head > div { min-width: 0; max-width: 65ch; }
@@ -1099,17 +1103,9 @@ body.home .opening.home-opening h1 { margin: 0; font-size: clamp(1.4rem, 1.2vw +
   body.home .opening.home-opening .opening-text { gap: 10px; padding: 8px 12px 14px; }
   /* The picture stays 16:9. Steps and the source are the strip under it;
      the pitch follows, so a title does not sit on top of the camera. */
+  .home-opening .home-stage { height: auto; }
   .home-opening .home-instrument { order: -1; }
-  .home-opening .stage-view { align-self: stretch; }
-  .home-opening .bench-caption:first-child {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 2px 8px;
-    padding: 4px 10px;
-  }
-  .home-opening .bench-caption:first-child .spotted { margin: 0; min-width: 0; }
-  .home-opening .bench-caption:first-child [data-clock] { grid-column: 3; grid-row: 1; }
+  .home-opening .stage-view { flex: none; height: auto; aspect-ratio: 16 / 9; }
   .home-opening .lens-steps { flex-wrap: nowrap; }
   .home-opening .lens-steps .btn { flex: 1 1 0; min-width: 0; padding: 0 2px; }
   body.home .opening.home-opening h1 { font-size: clamp(1.45rem, 6.2vw, 1.85rem); max-width: none; }
@@ -1165,6 +1161,51 @@ body.home .opening.home-opening h1 { margin: 0; font-size: clamp(1.4rem, 1.2vw +
   .home-opening .specimen-line .controls { display: grid; grid-template-columns: 1fr 1fr; }
   .home-opening .specimen-line .controls .btn { min-width: 0; }
 }
+/* A phone turned sideways is still the max-width: 900px stack, and a 16:9
+   picture of that width is taller than the screen. Two columns again, with
+   the picture capped to the screen so the sentence and Start learning share it. */
+@media (max-width: 900px) and (max-height: 520px) {
+  .home-opening .opening-stage:not(:fullscreen):not(.is-expanded) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(15rem, 1fr);
+    align-items: start;
+    background: var(--ground);
+  }
+  .home-opening .home-stage {
+    height: auto;
+    max-height: calc(100svh - var(--rail-height));
+    align-self: stretch;
+    background: var(--black);
+  }
+  .home-opening .stage-view {
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    min-height: 0;
+    max-height: calc(100svh - var(--rail-height) - 40px);
+  }
+  body.home .opening.home-opening .opening-text {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 8px 12px 8px;
+    gap: 4px;
+  }
+  .home-opening .home-pitch,
+  .home-opening .home-instrument { display: contents; }
+  .home-opening .lens-steps { order: 1; }
+  .home-opening .lens-line { order: 2; }
+  .home-opening .specimen-line { display: contents; }
+  .home-opening .specimen-line .controls { order: 3; }
+  .home-opening .lens-say { order: 4; }
+  .home-opening .home-next { order: 5; }
+  .home-opening .eyebrow { order: 6; }
+  .home-opening h1 { order: 7; }
+  .home-opening .lede { order: 8; }
+  .home-opening .mine-note { order: 9; }
+  .home-opening .home-source-info { order: 10; }
+}
 .home-opening .lens-steps { flex-wrap: nowrap; background: transparent; gap: 2px; justify-content: stretch; align-self: stretch; width: 100%; }
 .home-opening .lens-steps .btn {
   flex: 1 1 0;
@@ -1183,8 +1224,10 @@ body.home .opening.home-opening h1 { margin: 0; font-size: clamp(1.4rem, 1.2vw +
 .home-opening .opening-text .home-next { margin: 2px 0 0; padding: 0; }
 .home-opening .opening-text { background: var(--ground); color: var(--text); }
 body.home .opening.home-opening .lede { margin: 0; max-width: 42ch; font-size: 0.9375rem; line-height: 1.35; }
-/* Full screen keeps the steps and the source. Only the classroom pitch
-   leaves, because the picture is now the whole screen. */
+/* Full screen keeps the steps and the source in one strip, and the picture
+   fills whatever height that strip leaves. The plain `.opening-text` rule
+   sets min-height: 100% at a higher specificity than a stage-only selector,
+   which collapsed the picture to its minimum and laid the strip across it. */
 .home-opening .opening-stage:is(:fullscreen, .is-expanded) {
   display: flex;
   flex-direction: column;
@@ -1193,28 +1236,39 @@ body.home .opening.home-opening .lede { margin: 0; max-width: 42ch; font-size: 0
   height: 100dvh;
 }
 .home-opening .opening-stage:is(:fullscreen, .is-expanded) .home-pitch { display: none; }
-.home-opening .opening-stage:is(:fullscreen, .is-expanded) .opening-text {
+/* The strip is the steps, the source and Exit. The sentence and the privacy
+   line stay on the page; in full screen they would take the picture's height. */
+body.home .opening.home-opening .opening-stage:is(:fullscreen, .is-expanded) :is(.lens-say, .mine-note, .home-source-info) {
+  display: none;
+}
+body.home .opening.home-opening .opening-stage:is(:fullscreen, .is-expanded) .opening-text {
   display: flex;
-  background: transparent;
+  order: -1;
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  background: var(--black);
   color: var(--white);
   padding: 0 0 8px;
   gap: 0;
   min-height: 0;
 }
-.home-opening .opening-stage:is(:fullscreen, .is-expanded) .home-stage {
+body.home .opening.home-opening .opening-stage:is(:fullscreen, .is-expanded) .home-stage {
+  order: 1;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  height: auto;
   width: 100%;
   background: var(--black);
 }
-.home-opening .opening-stage:is(:fullscreen, .is-expanded) .stage-view {
+body.home .opening.home-opening .opening-stage:is(:fullscreen, .is-expanded) .stage-view {
   flex: 1 1 auto;
   align-self: stretch;
   aspect-ratio: auto;
   height: auto;
-  min-height: 160px;
+  min-height: 0;
 }
 .home-opening .opening-stage:is(:fullscreen, .is-expanded) :is(.lens-say, .mine-note, .who, .home-source-credit, .home-source-credit > summary) {
   color: var(--ivory);
@@ -1253,7 +1307,7 @@ body.home .opening.home-opening .lede { margin: 0; max-width: 42ch; font-size: 0
     grid-column: 2;
     grid-row: 1;
     justify-content: flex-end;
-    padding-inline-end: 16px;
+    padding-inline-end: 14px;
   }
   body.home .lang-toggle { padding-inline-end: 0; }
 }

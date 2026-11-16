@@ -4,7 +4,7 @@ import '../core/site.js?v=1.27.3'
 import { t, lang, n, count, onLang } from '../core/i18n.js?v=1.27.3'
 import { loadCatalog, isReadable } from '../core/catalog.js?v=1.27.3'
 import { createSpecimen, startSpecimen } from '../core/specimen.js?v=1.27.3'
-import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.27.3'
+import { runLens, LENS_TEXT, LENS_ORDER, createLensState } from '../cv/lenses.js?v=1.27.4'
 import { outlineEdges, mountSaw } from '../cv/feedback.js?v=1.27.3'
 import { onSpotted } from '../cv/spotted.js?v=1.27.3'
 import { cocoName } from '../ml/labels.js?v=1.27.3'
@@ -117,7 +117,7 @@ document.addEventListener('modelprogress', (e) => {
   if (lens === 'objects') say()
 })
 
-runLens(canvas, () => specimen.source, () => ({ name: lens }), {
+runLens(canvas, () => specimen.source, () => ({ name: lens, opts: { fit: 'cover' } }), {
   fps: 12,
   state: lensState,
   onFrame: (rect, state, src) => {

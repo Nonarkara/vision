@@ -4,7 +4,7 @@
 
 import { t, n, pct } from '../core/i18n.js?v=1.27.3'
 import * as ops from '../cv/ops.js?v=1.27.3'
-import { numbers as numbersLens } from '../cv/lenses.js?v=1.27.3'
+import { numbers as numbersLens } from '../cv/lenses.js?v=1.27.4'
 import { clear, containRect, fitCanvas, GRAY, IVORY } from '../cv/draw.js?v=1.27.3'
 import { runBench, blit, slider, choice, parts, writer, tag } from './bench.js?v=1.27.3'
 
